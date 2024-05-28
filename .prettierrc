@@ -1,0 +1,15 @@
+{
+  "printWidth": 120,
+  "tabWidth": 4,
+  "singleQuote": true,
+  "semi": true,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": ["*.html", "*.json", ".eslintrc", ".prettierrc", "*.yml"],
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
+}

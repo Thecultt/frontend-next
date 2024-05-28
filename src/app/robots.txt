@@ -1,0 +1,62 @@
+User-agent: Yandex
+Disallow: /search*
+Disallow: /*mindbox*
+Disallow: /favorites/
+Disallow: /?code*
+Disallow: /order
+Disallow: /*amp*
+Disallow: /*etext*
+Disallow: /*advert*
+Allow: /*.js
+Allow: /*.css
+Allow: /*.ico
+Allow: /*.svg
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.png
+Allow: /*.webp
+Clean-param: utm_source&utm_campaign&utm_content&utm_medium&utm_term /
+Clean-param: ymclid&yclid&gclid /
+Clean-param: _openstat /
+
+User-agent: Googlebot
+Disallow: /search*
+Disallow: /*mindbox*
+Disallow: /favorites/
+Disallow: /?code*
+Disallow: /order
+Disallow: /*amp*
+Disallow: /*etext*
+Disallow: /*advert*
+Allow: /*.js
+Allow: /*.css
+Allow: /*.ico
+Allow: /*.svg
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.png
+Allow: /*.webp
+
+User-agent: *
+Disallow: /search*
+Disallow: /*mindbox*
+Disallow: /favorites/
+Disallow: /?code*
+Disallow: /order
+Disallow: /*amp*
+Disallow: /*etext*
+Disallow: /*advert*
+Allow: /*.js
+Allow: /*.css
+Allow: /*.ico
+Allow: /*.svg
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.png
+Allow: /*.webp
+
+User-agent: Googlebot-image
+Disallow:
