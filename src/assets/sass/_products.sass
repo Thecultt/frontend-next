@@ -1,0 +1,297 @@
+// product
+.product
+	&-block
+		position: relative
+
+		width: 230px
+		height: 465px
+
+		display: flex
+		flex-direction: column
+		align-items: center
+
+		padding: 7px
+		// background-color: #F8F8F8
+		text-align: center
+
+		overflow: hidden
+
+		+borderRadius
+
+		&:hover &-cover
+			height: 260px
+
+		&:hover &-cover-image
+			background-position: center 70%
+
+		&:hover &-cover-arrow
+			opacity: 1
+
+		&:hover &-text__btn
+			bottom: 10px
+
+		&-cover
+			position: relative
+
+			width: 100%
+			height: 290px
+
+			+transition
+
+			&__boutique
+				margin-right: 5px
+
+				position: absolute
+
+				top: 8px
+				left: 6px
+
+				padding: 5px 12px
+				font-size: 12px
+
+				border-radius: 6px
+				// border: 1px solid $mainColor
+				color: $black
+
+				background-color: $lightBackgroundColor
+
+				&.green
+					color: $mainColor
+
+			&-arrow
+				cursor: pointer
+				position: absolute
+
+				top: 50%
+
+				opacity: 0
+
+				+transition
+
+				&.prev
+					left: 12px
+
+				&.next
+					right: 12px
+
+			&-favorite
+				cursor: pointer
+
+				position: absolute
+
+				z-index: 5
+
+				top: 12px
+				right: 12px
+
+				&.active > &__count
+					color: $mainColor
+
+				&:hover svg
+					fill: $black
+
+				&:hover &__count
+					color: $black
+
+				& > svg
+					fill: $gray
+					+transition
+
+				&__count
+					display: block
+					user-select: none
+					font-size: 12px
+					color: $gray
+
+					+transition
+
+			&-dots
+				display: flex
+
+				position: absolute
+
+				bottom: 8px
+				left: 50%
+
+				transform: translateX(-50%)
+
+				&-item
+					cursor: pointer
+					margin: 0 4px
+
+					height: 6px
+					width: 6px
+
+					background-color: #D9D9D9
+
+					border-radius: 50%
+
+					&.active
+						background-color: $mainColor
+
+			&-image
+				display: block
+
+				width: 100%
+				height: 100%
+
+				border-radius: 9px
+
+				background-size: cover
+				background-position: center 30%
+				background-repeat: no-repeat
+
+		&-text
+			width: 100%
+
+			display: flex
+			flex-direction: column
+			align-items: center
+
+			margin-top: 5px
+
+			&__brand
+				font-size: 12px
+				margin-bottom: 5px
+
+			&__model
+				font-size: 16px
+				margin-bottom: 5px
+
+				height: 40px
+
+				+ManropeMedium
+
+			&-state
+				display: inline-flex
+				align-items: center
+				margin-bottom: 5px
+
+				+ManropeRegular
+
+				&__subtitle
+					font-size: 14px
+					padding-right: 5px
+					margin-right: 5px
+
+					border-right: 1px solid #D9D9D9
+
+				&__title
+					display: flex
+					align-items: center
+
+					font-size: 14px
+
+					color: $mainColor
+
+					& > svg
+						cursor: pointer
+
+						width: 14px
+						margin-right: 5px
+
+			&__price
+				font-size: 17px
+				margin-bottom: 5px
+
+				+ManropeRegular
+
+			&__outstock
+				margin-top: 12px
+
+				display: inline-flex
+				align-items: center
+
+				font-size: 15px
+
+				& > svg
+					cursor: pointer
+
+					width: 15px
+					margin-left: 5px
+
+			&__btn
+				cursor: pointer
+
+				position: absolute
+
+				width: calc( 100% - 15px )
+
+				left: 50%
+				transform: translateX(-50%)
+
+				bottom: -40px
+
+				padding: 8px 18px
+				font-size: 14px
+				background-color: $mainColor
+				border: 1px solid $mainColor
+				color: $white
+				border-radius: 9px
+
+				+ManropeRegular
+				+transition
+
+				&:hover
+					background-color: $hoverMainColor
+
+				&.regular
+					width: calc( 100% - 15px )
+
+					color: $mainColor
+					background-color: transparent
+					border: 1px solid $mainColor
+
+					&:hover
+						color: $black
+						background-color: transparent
+						border: 1px solid $black
+
+				&.disabled
+					pointer-events: none
+
+@media screen and ( max-width: 500px )
+	// product
+	.product
+		&-block
+			height: 400px
+
+			&-cover
+				height: 230px
+
+				&-image
+					background-position: center 50%
+
+				&-arrow, &-dots
+					display: none
+
+			&:hover &-cover
+				height: 230px
+
+			&:hover &-cover-image
+				background-position: center 50%
+
+			&-text
+				&__model
+					font-size: 15px
+
+				&-state
+					justify-content: center
+
+					&__subtitle
+						font-size: 13px
+
+					&__title
+						font-size: 13px
+
+						& > svg
+							display: none
+
+				&__price
+					font-size: 15px
+
+				&-yandex-split
+					transform: scale(.85)
+
+				&__btn
+					display: none

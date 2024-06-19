@@ -1,0 +1,675 @@
+// sell-admin
+.sell-admin
+	margin: 50px 0
+	
+// sell
+.sell
+	margin: 30px 0
+
+	+open
+
+	&-wrapper
+		display: flex
+		align-items: flex-start
+
+	&-steps
+		top: 130px
+		position: sticky
+
+		width: 230px
+		min-width: 230px
+
+		&-item
+			display: flex
+			align-items: center
+
+			margin-bottom: 20px
+
+			+transition
+
+			&:last-child &-circle::before
+				display: none
+
+			&.success &__title
+				color: $mainColor
+
+			&.success &-circle
+				border: none
+
+			&.active &__title
+				color: $black
+
+			&.active &-circle
+				border: 1px solid $black
+
+			&-circle
+				position: relative
+
+				width: 20px
+				height: 20px
+
+				border-radius: 50%
+
+				border: 1px solid $gray
+
+				+transition
+
+				&::before
+					content: ""
+					position: absolute
+
+					height: 25px
+					width: 1px
+
+					bottom: -25px
+					left: 50%
+					transform: translateX(calc( -50% + 1px ))
+
+					border-left: 1px dashed $gray
+
+			&__title
+				margin-left: 10px
+
+				font-size: 15px
+				color: $gray
+
+				+transition
+
+		// media
+		&-item-media
+			position: relative
+
+			width: 36px
+			min-width: 36px
+			height: 36px
+
+			display: flex
+			justify-content: center
+			align-items: center
+
+			background-color: $lightBackgroundColor
+			border-radius: 50%
+
+			margin-right: 30px
+
+			&:last-child
+				margin-right: 0
+
+				&::before
+					display: none
+
+			&.active
+				background-color: $mainColor
+				color: $white
+
+			&::before
+				content: ""
+				position: absolute
+
+				display: block
+
+				width: 25px
+				height: 2px
+
+				right: -28px
+				top: 50%
+				transform: translateY(-50%)
+
+				border-bottom: 1px dashed $gray
+
+			&__title
+				font-size: 14px
+
+	&-block
+		width: 640px
+
+		&__back
+			cursor: pointer
+
+			display: inline-flex
+			align-items: center
+
+			background-color: transparent
+			border: none
+			font-size: 16px
+
+			margin-bottom: 20px
+
+			& > svg
+				margin-right: 5px
+
+		&__title
+			font-size: 17px
+			margin-bottom: 10px
+
+		&__subtitle
+			font-size: 14px
+			margin-bottom: 15px
+
+			& > a
+				text-decoration: underline
+
+		&__btn
+			width: 175px
+
+			margin-top: 25px
+
+		&-select
+			margin-bottom: 18px
+
+			&:last-child
+				margin-bottom: 0
+
+			&__title
+				position: relative
+
+				display: flex
+				align-items: center
+
+				font-size: 16px
+				margin-bottom: 10px
+
+				& > svg
+					cursor: pointer
+					margin-left: 5px
+
+					&:hover + .message-info-wrapper
+						opacity: 1
+						pointer-events: auto
+
+		&-input-wrapper
+			display: flex
+			justify-content: space-between
+			flex-wrap: wrap
+
+		&-input
+			margin-bottom: 15px
+
+		&-cooperation-wrapper
+			width: 100%
+			display: flex
+			justify-content: space-between
+
+			margin-left: 50px
+
+		&-cooperation
+			margin-bottom: 200px
+
+			&-type-block-wrapper
+				display: flex
+
+			&-type-block
+				cursor: pointer
+
+				width: 305px
+
+				padding: 30px
+				background-color: $lightBackgroundColor
+
+				border: 1px solid transparent
+
+				margin-right: 15px
+
+				text-align: left
+
+				+borderRadius
+				+transition
+
+				&:last-child
+					margin-right: 0
+
+				&.active
+					border: 1px solid $mainColor
+					+boxShadow
+
+				&__title
+					font-size: 17px
+					margin-bottom: 5px
+
+				&__description
+					font-size: 14px
+
+			&-concierge-service
+				display: flex
+				flex-direction: column
+				justify-content: flex-end
+
+				padding: 30px 15px
+
+				width: 290px
+				height: 400px
+
+				color: $lightBackgroundColor
+
+				+backgroundSetting
+				+borderRadius
+
+				&__title
+					font-size: 17px
+					margin-bottom: 5px
+
+				&__subtitle
+					font-size: 14px
+					margin-bottom: 15px
+
+				&__link
+					display: inline-block
+					color: $lightBackgroundColor
+					text-decoration: underline
+					font-size: 16px
+
+		&-info
+			margin-left: 110px
+
+		&-images
+			margin-left: 110px
+
+			&-block-wrapper
+				display: flex
+				flex-wrap: wrap
+				justify-content: space-between
+
+			&-block
+				width: 100%
+
+				cursor: pointer
+
+				display: inline-flex
+				justify-content: space-between
+
+				height: 430px
+
+				margin-bottom: 15px
+
+				&:last-child
+					margin-bottom: 0
+
+				&.disabled
+					opacity: 0.5
+					pointer-events: none
+					user-select: none
+
+				&.disabled &-text
+					background-color: transparent
+					border: 1px solid $gray
+
+				&.loading
+					pointer-events: none
+					user-select: none
+
+				&-text
+					width: calc(50% - 5px)
+
+					text-align: center
+
+					overflow: hidden
+
+					background-color: $lightBackgroundColor
+					border: 1px solid $lightBackgroundColor
+
+					will-change: transform
+
+					transition: transform .3s
+
+					+borderRadius
+					+backgroundSetting
+
+					&.fill &__title
+						color: $white
+
+					&.fill &__description
+						color: $white
+
+					&.fill &-icon
+						& path, rect
+							stroke: $white
+
+					&:hover
+						+transformHover
+
+					&:active
+						+transformClick
+
+					&__loader
+						position: absolute
+
+						top: 15px
+						left: 15px
+
+						width: 25px
+						height: 25px
+
+						z-index: 20
+
+						border: 2px solid $mainColor
+						border-bottom-color: transparent
+						border-radius: 50%
+						display: inline-block
+						box-sizing: border-box
+						animation: rotation 1s linear infinite
+
+					&-plaecholder
+						z-index: -1
+
+						position: absolute
+						top: 0
+						left: 0
+
+						width: 100%
+						height: 100%
+
+						background-color: $blackTransparent
+
+					&-icon
+						margin-top: 170px
+
+						& path, rect
+							stroke: $gray
+
+					&__title
+						margin-top: 25px
+						color: $mainColor
+
+						user-select: none
+
+					&__description
+						margin-top: 110px
+						font-size: 18px
+						color: $gray
+
+						user-select: none
+
+				&-cover
+					width: calc(50% - 5px)
+
+					display: flex
+					flex-direction: column
+					justify-content: flex-end
+
+					padding: 20px 40px
+
+					text-align: center
+
+					color: $lightBackgroundColor
+
+					+borderRadius
+					+backgroundSetting
+
+					&__title
+						font-size: 22px
+						margin-bottom: 5px
+
+						+ManropeSemiBold
+
+					&__description
+						font-size: 14px
+
+			&-more
+				display: flex
+				justify-content: space-between
+
+				// &-block
+				// 	width: calc( 50% - 7.5px )
+				// 	height: 430px
+
+				// 	text-align: center
+
+				// 	background-color: $lightBackgroundColor
+
+				// 	will-change: transform
+
+				// 	+borderRadius
+				// 	+transition
+
+				// 	&:hover
+				// 		+transformHover
+
+				// 	&:active
+				// 		+transformClick
+
+				// 	&-icon
+				// 		margin-top: 170px
+
+				// 	&__title
+				// 		margin-top: 25px
+				// 		color: $mainColor
+
+				// 		user-select: none
+
+				// 	&__description
+				// 		margin-top: 110px
+				// 		font-size: 18px
+				// 		color: $gray
+
+				// 		user-select: none
+
+		&-contact
+			margin-left: 110px
+
+		&-delivery
+			margin-left: 110px
+
+			&-types
+				margin: 20px 0
+				width: 100%
+
+				display: flex
+				justify-content: space-between
+
+				&-block
+					cursor: pointer
+
+					padding: 20px 15px
+
+					display: flex
+					flex-direction: column
+					justify-content: center
+					align-items: center
+
+					text-align: center
+
+					width: 49%
+					background-color: $lightBackgroundColor
+					border: 1px solid $lightBackgroundColor
+
+					transition: border .3s
+
+					+borderRadius
+
+					&.full
+						width: 100%
+
+					&.full &__subtitle
+						width: 75%
+
+					&.active
+						border: 1px solid $mainColor
+						+boxShadow
+
+					& > svg
+						margin-bottom: 10px
+
+					&__title
+						font-size: 17px
+						margin-bottom: 3px
+
+					&__subtitle
+						font-size: 14px
+
+			&-message
+				display: flex
+				align-items: center
+
+				background-color: $lightBackgroundColor
+				border: 1px solid $mainColor
+
+				padding: 12px
+
+				border-radius: 12px
+
+				& > svg
+					margin-right: 5px
+
+				&__text
+					font-size: 11px
+					color: $mainColor
+
+			&-form
+				width: 100%
+
+				&__title
+					font-size: 17px
+					margin-bottom: 15px
+
+	&-success
+		width: 420px
+		text-align: center
+
+		&__title
+			font-size: 22px
+
+			margin-bottom: 15px
+
+		&__description
+			font-size: 14px
+			margin-bottom: 30px
+
+		&__link
+			width: 100%
+
+/* MEDIA */
+@media screen and (max-width: 1250px)
+	.sell
+		&-wrapper
+			flex-direction: column
+			align-items: center
+
+		&-steps
+			position: static
+
+			display: flex
+			align-items: center
+			justify-content: center
+
+			margin-bottom: 15px
+
+		&-block
+			display: flex
+			flex-direction: column
+
+			width: 100%
+
+			&__back
+				margin-bottom: 15px
+
+			&__title, &__subtitle
+				text-align: center
+
+			&-input-wrapper-wrapper
+				width: 100%
+
+				padding: 15px
+				border-radius: 12px
+				background-color: $lightBackgroundColor
+
+			&-input
+				width: 100% !important
+
+			&__btn
+				margin-top: 15px
+				width: 100%
+
+			&-cooperation-wrapper
+				flex-direction: column
+
+				margin-left: 0
+
+			&-cooperation
+				margin-bottom: 25px
+
+				&-type-block-wrapper
+					width: 100%
+					flex-direction: column
+
+				&-type-block
+					width: 100%
+					margin-bottom: 10px
+
+					&:last-child
+						margin-bottom: 0
+
+				&-concierge-service
+					width: 100%
+
+			&-info, &-images, &-contact, &-delivery
+				margin-left: 0
+
+			&-delivery
+				&-types
+					margin-top: 20px
+
+@media screen and (max-width: 600px)
+	.sell
+		&-success
+			width: 100%
+
+			&__title
+				font-size: 17px
+
+@media screen and (max-width: 500px)
+	.sell
+		&-block
+			&-images
+				&-block
+					height: 260px
+
+					&-cover
+						padding: 15px 5px
+
+						&__title
+							font-weight: 400
+							font-size: 16px
+
+						&__description
+							font-size: 11px
+
+					&-text
+						display: flex
+						flex-direction: column
+						align-items: center
+
+						&-icon
+							margin-top: 80px
+
+						&__title
+							margin-top: 10px
+
+							width: 100px
+
+							font-size: 15px
+							text-decoration: underline
+
+						&__description
+							margin-top: 40px
+							font-size: 12px
+
+			&-delivery
+				&-types
+					flex-direction: column
+
+					&-block
+						width: 100%
+						margin-bottom: 15px
+
+						&:last-child
+							margin-bottom: 0
+
+@media screen and (max-width: 400px)
+	.sell
+		&-steps
+			&-item-media
+				margin-right: 15px
+
+				&::before
+					width: 15px
+					right: -17px

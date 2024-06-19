@@ -1,0 +1,162 @@
+// buyer-thecultt-product
+.buyer-thecultt-product
+	margin: 60px 0
+
+	+open
+
+	&-wrapper
+		position: relative
+
+		display: flex
+		justify-content: space-between
+		align-items: center
+
+	&__back
+		position: absolute
+
+		left: 0
+		top: 0
+
+		cursor: pointer
+		display: flex
+		align-items: center
+
+		font-size: 14px
+		border: none
+		background-color: transparent
+
+		& > svg
+			margin-right: 15px
+
+	&-info
+		display: flex
+		align-items: center
+
+		width: 660px
+
+		padding: 15px
+		background-color: $white
+
+		border-radius: 18px
+
+		+open
+
+		&-image
+			width: 250px
+			min-width: 250px
+			height: 250px
+
+			background-size: contain
+			background-repeat: no-repeat
+			background-position: center center
+
+			overflow: hidden
+
+			border-radius: 12px
+
+		&-text
+			margin: 0 15px
+
+			&__title
+				font-size: 22px
+				margin-bottom: 5px
+
+			&__price
+				font-size: 14px
+				margin-bottom: 10px
+
+			&__description
+				font-size: 14px
+				margin-bottom: 25px
+
+			&-buyer
+				&__title
+					font-size: 14px
+
+				&__description
+					font-size: 14px
+
+				&__subtitle
+					color: $gray
+					font-size: 14px
+
+	&-form
+		width: 430px
+		background-color: $white
+		padding: 25px
+
+		border-radius: 18px
+
+		+open
+
+		&__title
+			font-size: 22px
+			margin-bottom: 10px
+
+		&__description
+			font-size: 14px
+			margin-bottom: 15px
+
+		&-input
+			margin-bottom: 15px
+
+		&__btn
+			width: 100%
+
+	&-success
+		text-align: center
+
+		&__title
+			font-size: 22px
+			color: $mainColor
+			margin-bottom: 10px
+
+		&__subtitle
+			font-size: 18px
+
+/* MEDIA */
+@media screen and (max-width: 1200px)
+	.buyer-thecultt-product
+		margin: 20px 0
+
+		&-wrapper
+			flex-direction: column
+			align-items: flex-start
+
+		&__back
+			position: static
+			margin-bottom: 20px
+
+		&-info
+			width: 100%
+			margin-bottom: 15px
+
+			flex-direction: column
+
+			&-text
+				margin: 0
+
+				&__title
+					font-size: 18px
+
+				&-buyer
+					&__title, &__description, &__subtitle
+						font-size: 12px
+
+		&-form
+			width: 100%
+
+			+boxShadow
+
+			&__title
+				font-size: 18px
+
+			&__description
+				font-size: 14px
+
+		&-success
+			&__title
+				font-size: 17px
+
+			&__subtitle
+				font-size: 14px

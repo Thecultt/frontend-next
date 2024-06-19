@@ -1,0 +1,1 @@
+export const MINDBOX_SECRET_KEY = process.env.NEXT_PUBLIC_MINDBOX_SECRET_KEY;

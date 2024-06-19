@@ -1,0 +1,402 @@
+// buyer_thecultt
+.buyer-thecultt
+	margin: 30px 0
+
+	+open
+
+	&-custom-form
+		width: 600px
+		text-align: center
+
+		&__title
+			font-size: 22px
+			margin-bottom: 5px
+
+		&__description
+			font-size: 18px
+			margin-bottom: 15px
+
+		&-input-wrapper
+			display: flex
+			justify-content: space-between
+			flex-wrap: wrap
+
+		&-input
+			margin-bottom: 15px
+
+		&__btn
+			width: 420px
+
+	&-main
+		display: flex
+
+		background-color: $lightBackgroundColor
+		overflow: hidden
+
+		border-radius: 24px
+
+		&-text
+			width: 55%
+
+			padding: 100px 65px
+
+			&__title
+				font-size: 22px
+				margin-bottom: 10px
+
+			&__description
+				font-size: 18px
+				margin-bottom: 25px
+
+		&-image
+			width: 45%
+
+			+backgroundSetting
+
+	&-steps
+		margin-top: 85px
+
+		display: flex
+		flex-direction: column
+		align-items: center
+
+		&__title
+			text-align: center
+			font-size: 26px
+			margin-bottom: 40px
+
+		&-arrow
+			margin: 25px 0
+			width: 50%
+
+			& > svg
+				width: 100%
+
+		&-block-wrapper
+			width: 100%
+
+			display: flex
+			justify-content: center
+
+			& > svg
+				margin: 75px 25px 0 25px
+
+		&-block
+			width: 430px
+
+			display: flex
+			flex-direction: column
+			align-items: center
+			text-align: center
+
+			&__number
+				display: flex
+				justify-content: center
+				align-items: center
+
+				width: 50px
+				height: 50px
+
+				background-color: $white
+
+				font-size: 16px
+
+				border-radius: 50%
+
+				margin-bottom: 20px
+
+			&__title
+				font-size: 22px
+				margin-bottom: 12px
+
+			&__description
+				font-size: 18px
+
+			&-arrow-media
+				display: none
+
+	&-category
+		margin: 60px 0
+
+		display: flex
+		flex-direction: column
+		align-items: center
+
+		text-align: center
+
+		&__title
+			font-size: 26px
+			text-align: center
+			margin-bottom: 40px
+
+		&-brands
+			width: 100%
+
+			display: flex
+			justify-content: center
+			flex-wrap: wrap
+
+			margin-bottom: 40px
+
+			&__brand
+				cursor: pointer
+
+				display: flex
+				align-items: center
+				justify-content: center
+				flex-wrap: wrap
+
+				min-width: 200px
+				height: 60px
+
+				padding: 0 15px
+
+				background-color: $lightBackgroundColor
+
+				font-size: 18px
+
+				border-radius: 12px
+
+				margin-right: 12px
+				margin-bottom: 12px
+
+				border: 1px solid $lightBackgroundColor
+
+				+transition
+
+				&.active
+					border: 1px solid $mainColor
+
+				&:last-child
+					margin-right: 0
+
+		&-products-wrapper
+			width: 100%
+
+			display: flex
+			flex-wrap: wrap
+			justify-content: center
+
+		&-product
+			display: block
+
+			width: calc( 100% / 4 - 25px )
+
+			background-color: $white
+			padding: 16px
+
+			border-radius: 24px
+
+			text-align: center
+
+			margin: 0 12.5px 25px 12.5px
+
+			+open
+
+			&-image
+				width: 100%
+
+				height: 250px
+
+				background-size: contain
+				background-repeat: no-repeat
+				background-position: center center
+
+				overflow: hidden
+
+				border-radius: 12px
+
+				margin-bottom: 16px
+
+			&__title
+				font-size: 18px
+
+		&__view
+			cursor: pointer
+			font-size: 14px
+			border: none
+			border-bottom: 1px solid $mainColor
+			color: $mainColor
+			background-color: transparent
+
+			user-select: none
+
+			margin-bottom: 30px
+
+		&__subtext
+			font-size: 14px
+			color: $gray
+
+			margin-bottom: 25px
+
+		&__subtitle
+			width: 600px
+			font-size: 18px
+
+			margin-bottom: 25px
+
+	&-faq
+		margin: 60px 0
+
+		&__title
+			font-size: 26px
+			text-align: center
+
+			margin-bottom: 55px
+
+		&-items-wrapper
+			margin: 0 auto
+			width: 900px
+
+			padding: 32px
+			background-color: $lightBackgroundColor
+			border-radius: 24px
+
+		&-item
+			padding-bottom: 30px
+			border-bottom: 1px solid $gray
+			margin-bottom: 30px
+
+			&:last-child
+				padding-bottom: 0
+				border-bottom: none
+				margin-bottom: 55px
+
+			&__title
+				font-size: 22px
+				margin-bottom: 12px
+
+			&__description
+				font-size: 18px
+
+/* MEDIA */
+@media screen and (max-width: 1200px)
+	.buyer-thecultt
+		margin: 25px 0
+
+		&-custom-form
+			text-align: left
+
+			&__title
+				font-size: 18px
+
+			&__description
+				font-size: 14px
+
+			&-input
+				width: 100% !important
+
+			&__btn
+				width: 100%
+
+		&-main
+			flex-direction: column
+			margin-bottom: 25px
+
+			+backgroundSetting
+
+			&-text
+				width: 100%
+
+				padding: 25px 15px
+
+				text-align: center
+
+				&__title
+					color: $white
+					font-size: 22px
+					margin-bottom: 8px
+
+				&__description
+					color: $white
+					font-size: 14px
+					margin-bottom: 25px
+
+			&-image
+				display: none
+
+		&-steps
+			margin: 40px 0
+
+			&__title
+				font-size: 22px
+
+			&-block-wrapper
+				flex-direction: column
+				align-items: center
+
+			&-arrow, &-block-arrow
+				display: none
+
+			&-block
+				width: 100%
+
+				&-arrow-media
+					margin: 25px 0
+					display: block
+
+				&__title
+					font-size: 17px
+
+				&__description
+					font-size: 14px
+
+		&-category
+			&__title
+				font-size: 22px
+				margin-bottom: 25px
+
+			&-brands
+				justify-content: space-between
+
+				margin-bottom: 15px
+
+				&__brand
+					padding: 0
+
+					min-width: calc( 50% - 5px )
+					width: calc( 50% - 5px )
+
+					margin: 0 0 15px 0
+
+			&-products-wrapper
+				justify-content: space-between
+
+			&-product
+				width: calc( 50% - 5px )
+
+				margin: 0 0 10px 0
+
+			&__subtitle
+				width: 95%
+				font-size: 14px
+
+		&-faq
+			&__title
+				font-size: 22px
+				margin-bottom: 25px
+
+			&-item
+				margin-bottom: 20px
+				padding-bottom: 20px
+
+				&__title
+					font-size: 17px
+					margin-bottom: 12px
+
+				&__description
+					font-size: 14px
+
+				&__btn
+					width: 100%
+
+@media screen and (max-width: 950px)
+	.buyer-thecultt
+		&-faq
+			&-items-wrapper
+				width: 100%
+
+@media screen and (max-width: 750px)
+	.buyer-thecultt
+		&-custom-form
+			width: 100%

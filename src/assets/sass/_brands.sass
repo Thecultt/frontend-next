@@ -1,0 +1,138 @@
+// brands
+.brands
+	margin: 30px 0
+
+	+open
+
+	&-wrapper
+		margin: 0 auto
+
+	&-search
+		&-alphabet
+			display: flex
+			justify-content: space-between
+			align-items: center
+
+			width: 800px
+			margin: 0 auto 40px auto
+
+			background-color: $lightBackgroundColor
+
+			+borderRadius
+
+			&__btn
+				padding-left: 7.5px
+				padding-right: 7.5px
+				padding-top: 15px
+				padding-bottom: 15px
+
+				cursor: pointer
+
+				font-size: 20px
+
+				border: none
+				background-color: transparent
+
+				+ManropeMedium
+				+transition
+
+				&.active
+					color: $gray
+
+				&:first-child
+					padding-left: 15px
+
+				&:last-child
+					padding-right: 15px
+
+				&:hover
+					color: $gray
+
+		&-input
+			width: 420px
+			margin: 0 auto 40px auto
+
+	&-list
+		width: 700px
+		margin: 0 auto
+
+		&-block
+			display: flex
+
+			margin-bottom: 60px
+
+			&__title
+				width: 30px
+				text-align: center
+
+				font-size: 26px
+				margin-right: 70px
+
+				+ManropeRegular
+
+			&-items-wrapper
+				width: 100%
+
+				display: flex
+				flex-wrap: wrap
+
+			&__item
+				width: 33%
+
+				display: flex
+				flex-direction: column
+				align-items: flex-start
+
+				margin-bottom: 15px
+
+				&:hover
+					text-decoration: underline
+
+/* MEDIA */
+@media screen and (max-width: 900px)
+	.brands
+		margin: 25px 0
+
+		&-search
+			&-alphabet
+				width: 100%
+				margin: 0 auto 20px auto
+
+				flex-wrap: wrap
+
+				&__btn
+					padding-left: 5px
+					padding-right: 5px
+
+					padding-top: 7.5px
+					padding-bottom: 7.5px
+
+					&:first-child
+						padding-left: 5px
+
+					&:last-child
+						padding-right: 5px
+
+			&-input
+				width: 100%
+
+		&-list
+			width: 100%
+
+			&-block
+				flex-direction: column
+				margin-bottom: 15px
+
+				&__title
+					width: 100%
+					text-align: left
+
+					margin-right: 0
+					padding: 10px 20px
+					background-color: $lightBackgroundColor
+					font-size: 22px
+					border-radius: 12px
+					margin-bottom: 15px
+
+				&__item
+					width: 50%

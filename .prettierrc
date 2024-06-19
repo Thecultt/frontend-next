@@ -4,6 +4,7 @@
   "singleQuote": true,
   "semi": true,
   "trailingComma": "all",
+  "endOfLine": "auto",
   "overrides": [
     {
       "files": ["*.html", "*.json", ".eslintrc", ".prettierrc", "*.yml"],

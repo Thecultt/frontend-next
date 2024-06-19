@@ -1,0 +1,217 @@
+// header-cart
+.header-block-cart
+	&-wrapper
+		position: relative
+
+		z-index: 15
+
+	&__icon
+		display: block
+
+		cursor: pointer
+		border: none
+
+		will-change: transform
+
+		margin-right: 15px
+
+		background-color: transparent
+
+		+transition
+
+		&:last-child
+			margin-right: 0
+
+		&:hover
+			+transformHover
+
+		&:active
+			+transformClick
+
+		& > svg
+			& > path
+				stroke: #202020
+				+transition
+
+		&.active > svg
+			& > path
+				stroke: #285141
+
+	&__count
+		cursor: pointer
+
+		display: flex
+		justify-content: center
+		align-items: center
+
+		border-radius: 50%
+
+		position: absolute
+
+		top: -3px
+		right: 10px
+
+		width: 20px
+		height: 20px
+
+		font-size: 12px
+
+		color: $white
+		background-color: $mainColor
+
+		+ManropeRegular
+
+	&-modal
+		display: inline-block
+
+		position: absolute
+
+		will-change: top
+
+		width: 380px
+		max-height: 80vh
+		overflow-x: auto
+
+		top: 65px
+		right: 0
+
+		opacity: 0
+		z-index: 10
+		pointer-events: none
+
+		padding: 20px 25px
+
+		background-color: #F7F4F0
+		box-shadow: 0px 0px 288px rgba(0, 0, 0, 0.04), 0px 0px 168.667px rgba(0, 0, 0, 0.0303704), 0px 0px 91.7333px rgba(0, 0, 0, 0.0242963), 0px 0px 46.8px rgba(0, 0, 0, 0.02), 0px 0px 23.4667px rgba(0, 0, 0, 0.0157037), 0px 0px 11.3333px rgba(0, 0, 0, 0.00962963)
+		border-radius: 6px
+
+		+transition
+
+		&-close
+			cursor: pointer
+			position: absolute
+
+			top: 20px
+			right: 25px
+
+		&.active
+			opacity: 1
+			pointer-events: auto
+			top: 60px
+
+		&__title
+			font-size: 22px
+			margin-bottom: 15px
+
+			+ManropeMedium
+
+		&-items-wrapper
+			border-bottom: .3px dashed #D9D9D9
+
+		&-item
+			display: flex
+			justify-content: space-between
+			align-items: center
+
+			margin-bottom: 15px
+
+			&.disabled &-content
+				opacity: 0.5
+
+			&.notAvailability &-content-check
+				pointer-events: none
+				filter: grayscale(100%)
+				opacity: 0.5
+
+			&-content
+				display: flex
+				align-items: center
+
+				will-change: opacity
+
+				+transition
+
+				&-check
+					cursor: pointer
+
+					margin-right: 10px
+
+					height: 18px
+					width: 18px
+
+				&-image
+					border-radius: 6px
+
+					width: 70px
+					height: 100px
+
+					+backgroundSetting
+
+				&-text
+					margin-left: 15px
+
+					&__brand
+						font-size: 14px
+						margin-bottom: 5px
+
+					&__model
+						font-size: 16px
+
+						+ManropeMedium
+
+					&__sum
+						font-size: 17px
+						+ManropeSemiBold
+
+					&__linkvailability
+						color: $red
+						font-size: 15px
+
+			&-remove
+				cursor: pointer
+
+				&:hover > svg
+					stroke: $red
+
+				& > svg
+					stroke: $black
+
+					+transition
+
+		&-btn
+			margin-top: 15px
+
+			&-title
+				display: flex
+				justify-content: space-between
+				align-items: center
+
+				&__description, &__sum
+					font-size: 17px
+					+ManropeSemiBold
+
+			&__btn
+				margin-top: 15px
+
+				width: 100%
+
+			&-more
+				margin-top: 15px
+
+				display: flex
+				justify-content: space-between
+
+				&__btn
+					width: calc( 50% - 7.5px )
+
+					padding: 15px
+
+		&-null
+			text-align: center
+
+			&__title
+				padding: 25px 0 40px 0
+				font-size: 18px
+
+			&__btn
+				width: 100%

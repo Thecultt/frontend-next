@@ -1,0 +1,289 @@
+// footer
+.footer
+	margin-top: auto
+
+	width: 100%
+	padding: 25px 0
+
+	background-color: $lightBackgroundColor
+
+	+open
+
+	&.transparent
+		background-color: transparent
+
+		margin-bottom: 100px
+
+	&-email
+		background-color: $mainColor
+		color: $white
+
+		&-wrapper
+			padding: 50px 0
+
+			display: flex
+			justify-content: space-between
+			align-items: center
+
+		&-text
+			width: 700px
+
+			&__title
+				font-size: 22px
+				margin-bottom: 8px
+
+			&__subtitle
+				font-size: 18px
+
+		&-form
+			width: 430px
+
+			&-input
+				position: relative
+
+				&__field
+					overflow: hidden
+
+					position: relative
+					cursor: text
+					width: 100%
+					border: none
+					background-color: $lightBackgroundColor
+					font-size: 16px
+					border-radius: 12px
+					padding: 18px 14px
+					outline: none
+
+					+transition
+
+				&__btn
+					cursor: pointer
+					border: none
+
+					background-color: transparent
+
+					position: absolute
+					top: 50%
+					transform: translateY(-50%)
+					right: 25px
+
+			&-radio
+				margin-top: 8px
+
+				display: flex
+				align-items: center
+
+				&-item
+					display: flex
+					align-items: center
+
+					position: relative
+
+					&:first-child
+						margin-right: 18px
+
+					&__field
+						position: absolute
+						z-index: -1
+						opacity: 0
+
+					&__label
+						cursor: pointer
+						display: inline-flex
+						align-items: center
+						user-select: none
+						+transition
+
+						&__text
+							color: $white
+							font-size: 14px
+							line-height: 1.7em
+
+					&__label::before
+						content: ''
+						display: inline-block
+
+						min-width: 18px
+						height: 18px
+
+						border: 2px solid $white
+						border-radius: 50%
+						background-repeat: no-repeat
+						background-position: 4px 5px
+						background-size: 9.3px 9.5px
+						margin-right: 10px
+
+						+transition
+
+					& > input[type=radio]:checked + &__label::before
+						background-image: url("data:image/svg+xml,%3Csvg width='13' height='9' viewBox='0 0 13 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.83203 3.49935L5.33203 6.99935L11.1654 1.16602' stroke='%23F1EDE8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A")
+
+			&__subtitle
+				margin-top: 8px
+				font-size: 14px
+
+				& > a
+					color: $white
+					border-bottom: 1px solid $white
+
+	&-logo
+		display: inline-block
+		margin-bottom: 15px
+
+	&-block
+		display: flex
+		justify-content: space-between
+
+		&-menu
+			display: flex
+
+			&-block
+				margin-right: 60px
+
+				&:last-child
+					margin-right: 0
+
+				&__title
+					font-size: 17px
+					margin-bottom: 15px
+
+				&__link
+					display: block
+					font-size: 14px
+					margin-bottom: 15px
+
+					+transition
+
+					&:last-child
+						margin-bottom: 0
+
+					&:hover
+						color: $mainColor
+
+			&-block-media
+				padding-bottom: 15px
+				border-bottom: 1px solid #D9D9D9
+				margin-bottom: 15px
+
+				&-top
+					display: flex
+					justify-content: space-between
+					align-items: center
+
+					&__title
+						font-size: 16px
+
+					&-icon
+						+transition
+
+						&.open
+							transform: rotate(90deg)
+
+				&-bottom
+					margin-top: 15px
+
+		&-telegram
+			width: 340px
+
+			&__title
+				font-size: 17px
+				margin-bottom: 12px
+
+			&__subtitle
+				font-size: 14px
+				margin-bottom: 20px
+
+			&__btn
+				& > svg
+					margin-left: 0
+					margin-right: 10px
+
+		&-telegram-media
+			display: flex
+			justify-content: center
+
+		&-bottom
+			margin-top: 30px
+			padding-top: 15px
+
+			border-top: 1px solid #D9D9D9
+
+			&__copyright
+				color: $gray
+				font-size: 14px
+
+			&-link
+				&__link
+					color: $gray
+					font-size: 14px
+
+					margin-right: 20px
+
+					+transition
+
+					&:hover
+						color: $black
+
+					&:last-child
+						margin-right: 0
+
+@media screen and ( max-width: 1200px )
+	.footer
+		padding: 15px 0
+
+		&-email
+			&-wrapper
+				padding: 15px 0
+
+				flex-direction: column
+				align-items: flex-start
+
+			&-text
+				width: 100%
+				margin-bottom: 25px
+
+				&__subtitle
+					font-size: 14px
+
+			&-form
+				width: 100%
+
+				&__subtitle
+					font-size: 12px
+
+		&-logo
+			display: none
+
+		&-block
+			flex-direction: column
+
+			&-menu
+				flex-direction: column
+
+				&-block
+					margin-right: 0
+
+					padding-bottom: 15px
+					border-bottom: 1px solid #D9D9D9
+					margin-bottom: 15px
+
+					&:last-child
+						margin-bottom: 0
+						padding: 0
+						border: none
+
+			&-telegram
+				display: none
+
+			&-bottom
+				margin-top: 0
+				border: none
+				text-align: center
+
+				&-link
+					margin-top: 0
+
+					&__link
+						display: block
+						margin-top: 15px
+						margin-right: 0
