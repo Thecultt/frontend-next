@@ -1,0 +1,52 @@
+// public favorites
+.public-favorites
+	+open
+
+	&-wrapper
+		display: flex
+		justify-content: space-between
+		align-items: flex-start
+
+		padding: 50px 0
+
+	&-name
+		width: 270px
+		text-align: center
+		background-color: $lightBackgroundColor
+		padding: 15px
+		border-radius: 12px
+		font-size: 16px
+
+		&__title
+			font-weight: 600
+
+	&-products
+		width: calc( 100% - 335px )
+		display: flex
+		flex-wrap: wrap
+
+		&-block
+			width: calc( 25% - 15px )
+			margin-right: 15px
+			margin-bottom: 15px
+
+/* MEDIA */
+@media screen and (max-width: 1200px)
+	.public-favorites
+		&-wrapper
+			padding: 15px 0
+			
+			flex-direction: column
+
+		&-name
+			width: 100%
+
+			margin-bottom: 15px
+
+		&-products
+			width: 100%
+			justify-content: space-between
+
+			&-block
+				width: calc( 50% - 2.5px )
+				margin-right: 0

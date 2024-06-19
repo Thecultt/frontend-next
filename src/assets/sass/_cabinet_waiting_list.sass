@@ -1,0 +1,294 @@
+// cabinet waiting list
+.cabinet-waiting-list
+	+open
+
+	&-form
+		width: 600px
+
+		&__title
+			text-align: center
+			margin-bottom: 10px
+
+			+ManropeMedium
+
+		&__description
+			text-align: center
+
+			margin: 0 auto 15px auto
+
+			width: 75%
+
+			font-size: 15px
+			+ManropeMedium
+
+		&-auth-message
+			text-align: left
+
+			display: flex
+			align-items: center
+
+			padding: 10px 30px
+
+			background-color: $backgroundColor
+
+			border-radius: 12px
+
+			margin-bottom: 15px
+
+			&-text
+				margin-left: 15px
+
+				font-size: 14px
+
+				&__link
+					color: $mainColor
+
+					& > a
+						color: $mainColor
+						text-decoration: underline
+
+		&-content
+			display: flex
+			flex-wrap: wrap
+			justify-content: space-between
+
+			+transition
+
+			&.disabled
+				pointer-events: none
+				user-select: none
+
+				opacity: 0.5
+
+			&-input
+				margin-bottom: 15px
+
+			&-select
+				margin-bottom: 15px
+
+			&__btn
+				margin: 25px auto 0 auto
+				width: 75%
+
+	&-success
+		display: flex
+		flex-direction: column
+		align-items: center
+
+		text-align: center
+
+		width: 420px
+
+		&__icon
+			margin-bottom: 15px
+
+		&__title
+			margin-bottom: 15px
+			+ManropeMedium
+
+		&__description
+			margin: 0 auto 25px auto
+
+			font-size: 14px
+
+		&__btn
+			width: 75%
+
+	&-delete
+		text-align: center
+
+		width: 420px
+
+		&__title
+			font-size: 22px
+			margin-bottom: 10px
+
+			+ManropeMedium
+
+		&__description
+			margin: 0 auto 25px auto
+
+			font-size: 14px
+
+		&-btn
+			display: flex
+			align-items: center
+			justify-content: space-between
+
+			&__btn
+				width: calc( 50% - 12.5px )
+
+	&-items-wrapper
+		margin-top: 15px
+
+	&-item-wrapper
+		background-color: $lightBackgroundColor
+		padding: 10px
+
+		+borderRadius
+
+		margin-bottom: 15px
+
+		&:last-child
+			margin-bottom: 0
+
+	&-item
+		position: relative
+		border: 1px solid $gray
+
+		padding: 18px
+
+		+borderRadius
+		+open
+
+		&__remove
+			position: absolute
+
+			cursor: pointer
+
+			top: 18px
+			right: 18px
+
+			font-size: 16px
+			background-color: transparent
+			border: none
+			text-decoration: underline
+
+			+ManropeMedium
+			+transition
+
+			&:hover
+				color: $mainColor
+
+		&-title
+			display: flex
+			align-items: center
+
+			&__title
+				font-size: 22px
+				+ManropeSemiBold
+
+			&__subtitle
+				color: $mainColor
+				font-size: 17px
+
+				margin-left: 25px
+
+				text-decoration: underline
+
+				+ManropeMedium
+
+				&.disabled
+					pointer-events: none
+					color: $gray
+					text-decoration: none
+
+		&-info
+			margin-top: 15px
+
+			&-item
+				display: flex
+				align-items: center
+
+				margin-bottom: 10px
+
+				&:last-child
+					margin-bottom: 0
+
+				&__title
+					color: $gray
+					width: 145px
+
+					+ManropeMedium
+
+				&__value
+					margin-left: 50px
+
+					+ManropeMedium
+
+	&-null__title
+		margin-top: 30px
+		font-size: 16px
+
+/* MEDIA */
+@media screen and (max-width: 900px)
+	.cabinet-waiting-list
+		&__linkdd
+			width: 100%
+
+		&-item-wrapper
+			padding: 15px
+
+		&-item
+			border: none
+			padding: 0
+
+			&__remove
+				top: 0
+				right: 0
+
+			&-title
+				flex-direction: column
+				align-items: flex-start
+
+				&__title
+					font-size: 18px
+
+				&__subtitle
+					margin-top: 10px
+					margin-left: 0
+					font-size: 14px
+
+			&-info
+				&-item
+					flex-direction: column
+					align-items: flex-start
+
+					&__title
+						display: none
+
+					&__value
+						margin-left: 0
+
+		&-form
+			width: 100%
+
+			&__title
+				font-size: 18px
+
+			&__description
+				font-size: 14px
+				width: 100%
+
+			&-content
+				&-input, &-select
+					width: 100% !important
+
+				&__btn
+					width: 100%
+
+@media screen and (max-width: 600px)
+	.cabinet-waiting-list
+		&-success
+			width: 100%
+
+			&__title
+				font-size: 17px
+
+			&__description
+				font-size: 16px
+
+			&__btn
+				width: 100%
+
+		&-delete
+			width: 100%
+
+			&-btn
+				flex-direction: column
+
+				&__btn
+					width: 100%
+
+					&:first-child
+						margin-bottom: 10px

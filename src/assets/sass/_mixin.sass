@@ -1,0 +1,61 @@
+// mixin
+@mixin ManropeRegular
+	font-family: var(--font-manrope)
+	font-weight: 400
+
+@mixin ManropeMedium
+	font-family: var(--font-manrope)
+	font-weight: 500
+
+@mixin ManropeSemiBold
+	font-family: var(--font-manrope)
+	font-weight: 600
+
+@mixin backgroundSetting
+	background-size: cover
+	background-position: center center
+	background-repeat: no-repeat
+
+@mixin disabledImage
+	user-select: none
+	pointer-events: none
+
+@mixin transition
+	transition: .2s ease
+
+@mixin transition04s
+	transition: .4s ease
+
+@mixin transformHover
+	transform: scale3d(1.02, 1.02, 1.02)
+
+@mixin transformClick
+	transform: scale3d(0.95, 0.95, 0.95)
+
+@mixin boxShadow
+	box-shadow: 0px 16px 67px rgba(0, 0, 0, 0.08), 0px 10.3704px 39.2384px rgba(0, 0, 0, 0.0607407), 0px 6.16296px 21.3407px rgba(0, 0, 0, 0.0485926), 0px 3.2px 10.8875px rgba(0, 0, 0, 0.04), 0px 1.3037px 5.45926px rgba(0, 0, 0, 0.0314074), 0px 0.296296px 2.63657px rgba(0, 0, 0, 0.0192593)
+
+@mixin borderRadius
+	border-radius: 12px
+
+// animations mixin
+@mixin openPopup
+	animation: openPopup .3s
+
+@mixin closePopup
+	animation: closePopup .3s
+
+@mixin open
+	animation: open .3s
+
+@mixin close
+	animation: close .3s
+
+@mixin buttonReset
+	display: inline-block
+	padding: 0
+	border: none
+	font: inherit
+	color: inherit
+	background-color: transparent
+	cursor: pointer

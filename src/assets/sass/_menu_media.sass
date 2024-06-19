@@ -1,0 +1,67 @@
+// menu media
+.menu-media
+	position: fixed
+	z-index: 20
+
+	display: none
+	justify-content: space-between
+	align-items: center
+
+	background-color: $lightBackgroundColor
+
+	padding: 10px 20px
+
+	width: calc( 100% - 20px )
+
+	left: 50%
+	transform: translateX(-50%)
+
+	box-shadow: 0px 0.3148437440395355px 1.83984375px 0px rgba(241, 237, 232, 0.11), 0px 1.3562500476837158px 3.46875px 0px rgba(241, 237, 232, 0.19), 0px 3.26953125px 5.80078125px 0px rgba(241, 237, 232, 0.24), 0px 6.199999809265137px 9.75px 0px rgba(241, 237, 232, 0.28), 0px 10.29296875px 16.23046875px 0px rgba(241, 237, 232, 0.33), 0px -15.6899995803833px 26.15625px 0px rgba(241, 237, 232, 0.38), 0px -22.549999237060547px 40.44140625px 0px rgba(241, 237, 232, 0.46), 0px -31px 60px 0px rgba(241, 237, 232, 0.57)
+
+	bottom: -60px
+	opacity: 0
+	pointer-events: none
+
+	+borderRadius
+	+transition
+
+	&.active
+		bottom: 5px
+		opacity: 1
+		pointer-events: auto
+
+	&__btn
+		font-size: 10px
+
+		display: flex
+		justify-content: center
+		align-items: center
+
+		flex-direction: column
+
+		border: none
+		background-color: transparent
+
+		color: $black
+
+		margin-bottom: 70px
+
+		+transition
+		+ManropeRegular
+
+		&.active
+			color: $gray
+
+		&.main
+			background-color: $mainColor
+			color: $white
+
+			border-radius: 9px
+			padding: 6px 18px
+
+			& > svg
+				margin-bottom: 5px
+
+@media screen and ( max-width: 500px )
+	.menu-media
+		display: flex

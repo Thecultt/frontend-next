@@ -1,0 +1,317 @@
+// cabinet history orders
+.cabinet-history-orders
+	width: calc(100% - 310px)
+
+	+open
+
+	&-item-wrapper
+		background-color: $lightBackgroundColor
+		padding: 10px
+
+		+borderRadius
+
+		margin-bottom: 15px
+
+		&:last-child
+			margin-bottom: 0
+
+	&-item
+		position: relative
+		border: 1px solid $gray
+
+		cursor: pointer
+
+		padding: 18px
+
+		+borderRadius
+
+		&-topinfo
+			display: flex
+			justify-content: space-between
+			align-items: center
+
+			&-block
+				display: flex
+				align-items: center
+
+				&__title
+					font-size: 17px
+
+					+ManropeSemiBold
+
+				&__date, &__sum
+					margin-left: 25px
+					font-size: 17px
+
+				&__date
+					+ManropeMedium
+
+				&__sum
+					+ManropeRegular
+
+				&__status__media
+					position: relative
+
+					display: none
+					align-items: center
+					user-select: none
+
+					font-size: 17px
+
+					+ManropeMedium
+
+					&.green
+						color: $mainColor
+
+					&.red
+						color: $red
+
+					& > svg
+						cursor: pointer
+						margin-left: 5px
+
+						&:hover + .message-info-wrapper
+							opacity: 1
+							pointer-events: auto
+
+				&__status
+					position: relative
+
+					display: inline-flex
+					align-items: center
+					user-select: none
+
+					font-size: 17px
+
+					+ManropeMedium
+
+					&.green
+						color: $mainColor
+
+					&.red
+						color: $red
+
+					& > svg
+						cursor: pointer
+						margin-left: 5px
+
+						& + .message-info-wrapper
+							right: -25px
+
+						&:hover + .message-info-wrapper
+							opacity: 1
+							pointer-events: auto
+
+				&-icon
+					display: inline-flex
+					align-items: center
+
+					margin-left: 10px
+
+					+transition
+
+					&.rotate
+						transform: rotate(180deg)
+
+		&-info
+			&-blocks-wrapper
+				display: flex
+				flex-wrap: wrap
+
+			&-block
+				margin-top: 20px
+				margin-right: 80px
+
+				&__title
+					font-size: 17px
+
+					margin-bottom: 10px
+
+					+ManropeSemiBold
+
+				&__subtitle
+					display: flex
+					align-items: center
+
+					margin-bottom: 10px
+
+					+ManropeMedium
+
+					&:last-child
+						margin-bottom: 0
+
+					& > span
+						color: $gray
+						margin-right: 7px
+
+					& > .payment
+						display: flex
+						align-items: center
+						color: $mainColor
+
+						+ManropeMedium
+
+						& > svg
+							margin-left: 5px
+
+			&-product-wrapper
+				display: flex
+				align-items: center
+				flex-wrap: wrap
+
+				margin-top: 20px
+
+			&-product
+				width: 380px
+				display: flex
+
+				padding: 10px
+				border: 1px dashed $gray
+
+				margin-right: 15px
+
+				margin-bottom: 15px
+
+				+borderRadius
+
+				&:last-child
+					margin-left: 0
+
+				&-image
+					width: 120px
+
+					border-radius: 6px
+
+					+backgroundSetting
+
+				&-text
+					padding: 5px 0
+					margin-left: 15px
+
+					&__brand
+						font-size: 14px
+
+					&__model
+						font-size: 18px
+
+					&__option
+						font-size: 14px
+
+						display: flex
+						align-items: center
+
+						+ManropeMedium
+
+						& > span
+							color: $gray
+							margin-right: 7px
+
+					&-state
+						display: flex
+						align-items: center
+
+						margin: 5px 0
+
+						&__subtitle
+							font-size: 14px
+							padding-right: 5px
+							margin-right: 5px
+
+							border-right: 1px solid #D9D9D9
+
+						&__title
+							display: flex
+							align-items: center
+
+							font-size: 14px
+
+							color: $mainColor
+
+							+ManropeMedium
+
+							& > svg
+								cursor: pointer
+
+								width: 14px
+								margin-right: 5px
+
+					&__price
+						font-size: 18px
+
+						+ManropeMedium
+
+	&-null
+		&__title
+			font-size: 16px
+			margin-bottom: 30px
+
+/* MEDIA */
+@media screen and (max-width: 1200px)
+	.cabinet-history-orders
+		width: 100%
+
+@media screen and (max-width: 900px)
+	.cabinet-history-orders
+		&-item-wrapper
+			padding: 0
+
+		&-item
+			padding: 15px
+			border: none
+
+			&-topinfo
+				&-block
+					align-items: flex-start
+					flex-direction: column
+
+					&__date
+						order: 1
+						color: $gray
+						font-size: 14px
+
+						margin-left: 0
+						margin-bottom: 5px
+
+					&__title
+						order: 2
+						font-size: 15px
+
+					&__sum
+						margin-top: 10px
+
+						order: 4
+						font-size: 17px
+						font-weight: 500
+						margin-left: 0
+
+					&__status
+						display: none
+
+					&__status__media
+						margin-top: 10px
+						display: inline-flex
+						font-size: 15px
+
+						order: 3
+
+			&-info
+				&-block
+					width: 100%
+
+					margin-right: 0
+
+					&__title
+						font-size: 16px
+
+					&__subtitle
+						width: 100%
+
+						display: flex
+						justify-content: space-between
+						flex-wrap: wrap
+
+						font-size: 14px
+
+				&-product
+					width: 100%
+					margin-right: 0
