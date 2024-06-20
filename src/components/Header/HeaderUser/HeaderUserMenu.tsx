@@ -48,10 +48,10 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
                     </>
                 ) : (
                     <>
-                        <Link href="/#reglog" className="header-block-user-menu-block__link">
+                        <Link href="#reglog" className="header-block-user-menu-block__link">
                             Войти
                         </Link>
-                        <Link href="/#reglog" className="header-block-user-menu-block__link">
+                        <Link href="#reglog" className="header-block-user-menu-block__link">
                             Зарегистрироваться
                         </Link>
                     </>

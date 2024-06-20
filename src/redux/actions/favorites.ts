@@ -64,6 +64,7 @@ export const sendSaveFavorite = (item: Product) => async (dispatch: Dispatch<Fav
         dispatch(fetchFavorites() as any);
     } else {
         window.location.hash = 'reglog';
+        window.location.reload();
     }
 };
 

@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
+import { useSearchParams } from 'next/navigation';
 import omitBy from 'lodash.omitby';
 
 import { UTM_KEYS, LS_KEYS } from '@/constants/keys';
 import { localStorageService } from '@/services/storage';
-import { useSearchParams } from 'next/navigation';
 
 export const useAppUtm = () => {
     const query = useSearchParams();

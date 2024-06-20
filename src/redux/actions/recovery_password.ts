@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { Dispatch } from 'react';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 import { LS_KEYS } from '@/constants/keys';
 import { localStorageService } from '@/services/storage';
+import { getPath } from '@/functions/getPath';
+import { ReglogStateTypesNotLogin } from '@/types/reglog';
 
 import { RecoveryPasswordActions, RecoveryPasswordActionTypes } from '../types/IRecoveryPassword';
 
-export const sendRecoveryPassword = (email: string, isRedirect?: boolean) => {
+export const sendRecoveryPassword = (email: string, isRedirect?: boolean, router?: AppRouterInstance) => {
     return async (dispatch: Dispatch<RecoveryPasswordActions>) => {
         dispatch({
             type: RecoveryPasswordActionTypes.SET_RECOVERY_PASSWORD_IS_SEND,
@@ -17,20 +20,20 @@ export const sendRecoveryPassword = (email: string, isRedirect?: boolean) => {
             .post(`${process.env.NEXT_PUBLIC_API_DOMEN}/reset_password/`, {
                 email,
             })
-            .then(({ data }) => {
-                const redirectReglog = localStorageService?.getItem<string>(LS_KEYS.redirectReglog, '');
-                if (redirectReglog) {
-                    window.location.href = redirectReglog;
+            .then(() => {
+                if (isRedirect) {
+                    const { pathname, search } = window.location;
+                    router?.replace(
+                        getPath({ pathname, search, hash: ReglogStateTypesNotLogin.RECOVERY_PASSWORD_SUCCESS }),
+                    );
                 }
-
-                if (isRedirect) window.location.hash = 'recovery_password_success';
 
                 dispatch({
                     type: RecoveryPasswordActionTypes.SET_RECOVERY_PASSWORD_IS_SEND,
                     payload: false,
                 });
             })
-            .catch(({ response }) => {
+            .catch(() => {
                 dispatch({
                     type: RecoveryPasswordActionTypes.SET_RECOVERY_PASSWORD_IS_SEND,
                     payload: false,
@@ -57,8 +60,7 @@ export const sendRecoveryPasswordConfirmed = (password: string, code: string) =>
             .then(({ data }) => {
                 localStorageService?.setItem(LS_KEYS.accessToken, data.access as string, { value: 1, unit: 'month' });
 
-                window.location.hash = '';
-                window.location.reload();
+                window.location.href = '/';
 
                 dispatch({
                     type: RecoveryPasswordActionTypes.SET_RECOVERY_PASSWORD_IS_SEND,

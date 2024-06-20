@@ -30,9 +30,10 @@ export const sendRegister = (info: {
                 },
             });
 
+            const redirectReglog = localStorageService?.getItem<string>(LS_KEYS.redirectReglog, '');
+
             if (info.promoCheckbox) {
                 try {
-                    const redirectReglog = localStorageService?.getItem<string>(LS_KEYS.redirectReglog, '');
                     const mindboxOperation =
                         redirectReglog === '/order'
                             ? 'KlientImportPriPodpiskeVZakaze'
@@ -81,10 +82,8 @@ export const sendRegister = (info: {
                 }
             }
 
-            const redirectReglog = localStorageService?.getItem<string>(LS_KEYS.redirectReglog, '');
             if (redirectReglog) {
-                window.location.href = redirectReglog;
-                window.location.hash = 'welcome';
+                window.location.href = `${redirectReglog}#welcome`;
             } else {
                 window.location.hash = 'welcome';
                 window.location.reload();

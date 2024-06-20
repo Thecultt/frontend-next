@@ -20,7 +20,7 @@ import { fetchProductsFilters } from '@/redux/actions/products_filters';
 import { fetchSelections } from '@/redux/actions/selections';
 import { fetchUser } from '@/redux/actions/user';
 import NoSsr from '@/components/NoSsr/NoSsr';
-import { Footer, Header } from '@/components';
+import { Footer, Header, Reglog } from '@/components';
 import { useAppUtm } from '@/hooks/useAppUtm';
 import { useReplaceLS } from '@/hooks/useReplaceLS';
 
@@ -102,10 +102,9 @@ const App = ({ children }: { children: React.ReactNode }) => {
         <div className="wrapper" id="wrapper">
             <NoSsr>
                 <Header />
-
+                <Reglog />
                 {/* TODO
                     <NotificationsServer />
-                    <Reglog />
                     <WaitingListCreate />
                     <WaitingListDelete />
                 */}

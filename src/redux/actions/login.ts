@@ -8,7 +8,7 @@ import { sendMindbox } from '@/functions/mindbox';
 
 import { LoginActions, LoginActionTypes } from '../types/ILogin';
 
-export const sendLogin = (data: { username: string | null; password: string }, onChangeSuccess?: () => void) => {
+export const sendLogin = (data: { username: string | null; password: string }) => {
     return async (dispatch: Dispatch<LoginActions>) => {
         dispatch({
             type: LoginActionTypes.SET_LOGIN_IS_SEND,
@@ -28,9 +28,9 @@ export const sendLogin = (data: { username: string | null; password: string }, o
                     },
                 });
 
-                const ym = window.ym || (window.ym = []);
-
-                ym(68184745, 'reachGoal', 'login_password');
+                // TODO
+                // const ym = window.ym || (window.ym = []);
+                // ym(68184745, 'reachGoal', 'login_password');
 
                 try {
                     sendMindbox('Website.AuthorizeCustomer', {
@@ -95,13 +95,6 @@ export const sendLogin = (data: { username: string | null; password: string }, o
                     window.location.hash = '';
                     window.location.reload();
                 }
-
-                // if (onChangeSuccess) {
-                // 	onChangeSuccess()
-                // } else {
-                // 	window.location.hash = ""
-                // 	window.location.reload()
-                // }
 
                 dispatch({
                     type: LoginActionTypes.SET_LOGIN_IS_SEND,
