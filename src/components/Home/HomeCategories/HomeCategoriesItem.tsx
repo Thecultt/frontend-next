@@ -1,17 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
 
+import { APP_ROUTE } from '@/constants/routes';
 import { CategoriesItem } from './HomeCategories';
 
 const HomeCategoriesItem: React.FC<CategoriesItem> = ({ image, title }) => {
     let url = '';
 
     if (title === 'Ремни' || title === 'Платки и шарфы') {
-        url = `/catalog?categories=Аксессуары${title === 'Платки и шарфы' ? `&types=Платки&types=Платки+и+шарфы&types=Шарфы` : `&types=${title}`}`;
+        url = `${APP_ROUTE.catalog}?categories=Аксессуары${title === 'Платки и шарфы' ? `&types=Платки&types=Платки+и+шарфы&types=Шарфы` : `&types=${title}`}`;
     } else if (title === 'Часы') {
-        url = `/catalog?categories=Украшения&types=${title}`;
+        url = `${APP_ROUTE.catalog}?categories=Украшения&types=${title}`;
     } else {
-        url = `/catalog?categories=${title}`;
+        url = `${APP_ROUTE.catalog}?categories=${title}`;
     }
 
     return (

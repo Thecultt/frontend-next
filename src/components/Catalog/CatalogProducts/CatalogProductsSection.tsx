@@ -9,6 +9,7 @@ import { sendSaveFavorite, sendRemoveFavorite } from '@/redux/actions/favorites'
 import { ProductBlock } from '@/components';
 import { Product } from '@/models/IProduct';
 import { CartItem } from '@/models/ICartItem';
+import { APP_ROUTE } from '@/constants/routes';
 
 interface CatalogProductsSectionProps {
     title: string;
@@ -97,7 +98,7 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
     return (
         <div className="container">
             <div className="catalog-product-section">
-                <Link href="/catalog" className="catalog-product-section__title">
+                <Link href={APP_ROUTE.catalog} className="catalog-product-section__title">
                     {title}
                 </Link>
 

@@ -14,6 +14,7 @@ import { useAuthUser } from '@/hooks/useAuthUser';
 import { useLS } from '@/hooks/useLS';
 import { LS_KEYS, KEYBOARD } from '@/constants/keys';
 import { CATEGORIES, SELECTIONS_IDS, SORT } from '@/constants/catalog';
+import { APP_ROUTE } from '@/constants/routes';
 
 import Logo from '@/assets/images/logo.svg';
 import HeaderHoverImageBag from '@/assets/images/header/header-image-hover-menu-bag.jpg';
@@ -216,7 +217,7 @@ const Header: React.FC = () => {
                       search: search.value,
                       sort: SORT.a,
                   })
-                : '/catalog',
+                : APP_ROUTE.catalog,
         );
     };
 
