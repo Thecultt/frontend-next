@@ -26,7 +26,9 @@ const Catalog: React.FC = () => {
 
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
 
-    const { filters, currentPage, typeFetch, lastSearchString } = useTypedSelector(({ products }) => products);
+    const { filters, currentPage, typeFetch, lastSearchString, catalogScroll } = useTypedSelector(
+        ({ products }) => products,
+    );
     const { isLoaded: isLoadedFilters } = useTypedSelector(({ products_filters }) => products_filters);
 
     const [isFirstRender, setIsFirstRender] = React.useState(true);
@@ -35,8 +37,10 @@ const Catalog: React.FC = () => {
     React.useEffect(() => {
         if (filters.isParse) {
             if (isFirstRender && lastSearchString === search) {
+                setTimeout(() => {
+                    window.scrollTo(0, catalogScroll);
+                }, 100);
                 setIsFirstRender(false);
-
                 return;
             }
 
@@ -70,12 +74,9 @@ const Catalog: React.FC = () => {
         currentPage,
     ]);
 
-    React.useEffect(
-        () => () => {
-            dispatch(setLastSearchString(search));
-        },
-        [search],
-    );
+    React.useEffect(() => {
+        dispatch(setLastSearchString(search));
+    }, [search]);
 
     useCatalogScroll();
 

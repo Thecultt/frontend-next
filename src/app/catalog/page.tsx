@@ -3,9 +3,10 @@ import { Metadata } from 'next/types';
 
 import NoSsr from '@/components/NoSsr/NoSsr';
 import { Catalog } from '@/screens';
+import { APP_TITLE } from '@/constants/app';
 
 export const metadata: Metadata = {
-    title: 'Ресейл-платформа культовых сумок | THECULTT',
+    title: APP_TITLE,
 };
 
 const CatalogPage = () => (

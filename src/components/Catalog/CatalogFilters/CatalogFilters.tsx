@@ -134,39 +134,39 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
             dispatch(setFiltersCatalog(filters));
         }
 
-        return () => {
-            dispatch(setCurrentPageProduct(1));
-            dispatch(
-                setFiltersCatalog({
-                    isParse: false,
+        // return () => {
+        //     dispatch(setCurrentPageProduct(1));
+        //     dispatch(
+        //         setFiltersCatalog({
+        //             isParse: false,
 
-                    search: '',
+        //             search: '',
 
-                    price: {
-                        min: 0,
-                        max: 0,
-                    },
+        //             price: {
+        //                 min: 0,
+        //                 max: 0,
+        //             },
 
-                    conditions: {},
-                    categories: {},
-                    types: {},
-                    brands: {},
-                    models: {},
-                    colors: {},
-                    sex: {},
-                    availability: {},
-                    size: {},
-                    selection: null,
+        //             conditions: {},
+        //             categories: {},
+        //             types: {},
+        //             brands: {},
+        //             models: {},
+        //             colors: {},
+        //             sex: {},
+        //             availability: {},
+        //             size: {},
+        //             selection: null,
 
-                    boutique: false,
-                    price_drop: false,
+        //             boutique: false,
+        //             price_drop: false,
 
-                    glass_frame: {},
+        //             glass_frame: {},
 
-                    sort: SORT.a,
-                }),
-            );
-        };
+        //             sort: SORT.a,
+        //         }),
+        //     );
+        // };
     }, [query, isLoadedProductsFilters]);
 
     React.useEffect(() => {
