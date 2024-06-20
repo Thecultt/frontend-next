@@ -1,5 +1,6 @@
 import qs from 'qs';
 import { SortType } from '@/redux/types/IProducts';
+import { APP_ROUTE } from '@/constants/routes';
 
 interface IUrlFilters {
     search?: string;
@@ -27,5 +28,5 @@ export const getCatalogFiltersUrl = (filters: IUrlFilters) => {
         arrayFormat: 'repeat',
         skipNulls: true,
     });
-    return `/catalog?${url}`;
+    return `${APP_ROUTE.catalog}?${url}`;
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import NotfoundImage from '@/assets/images/notfound.jpg';
+import { APP_ROUTE } from '@/constants/routes';
 
 const NotFound: React.FC = () => (
     <section className="not-found">
@@ -10,7 +11,7 @@ const NotFound: React.FC = () => (
                     <h2 className="not-found-text__title">Ошибка 404</h2>
                     <p className="not-found-text__subtitle">Страница не найдена</p>
 
-                    <a href="/catalog" className="not-found-text__link">
+                    <a href={APP_ROUTE.catalog} className="not-found-text__link">
                         Перейти в каталог
                     </a>
                 </div>

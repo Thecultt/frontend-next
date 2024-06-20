@@ -80,9 +80,7 @@ const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
                         <p className="header-block-cart-modal-item-content-text__model">{name}</p>
                         {availability ? (
                             is_trial ? (
-                                <p className="header-block-cart-modal-item-content-text__linkvailability">
-                                    На примерке
-                                </p>
+                                <p className="header-block-cart-modal-item-content-text__availability">На примерке</p>
                             ) : (
                                 <p className="header-block-cart-modal-item-content-text__sum">
                                     <NumericFormat
@@ -101,7 +99,7 @@ const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
                                 </p>
                             )
                         ) : (
-                            <p className="header-block-cart-modal-item-content-text__linkvailability">Нет в наличии</p>
+                            <p className="header-block-cart-modal-item-content-text__availability">Нет в наличии</p>
                         )}
                     </div>
                 </Link>

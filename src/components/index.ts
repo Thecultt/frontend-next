@@ -87,6 +87,36 @@ export { default as ReglogRecoveryPasswordSuccess } from './Reglog/ReglogRecover
 export { default as ReglogRecoveryPasswordConfirmed } from './Reglog/ReglogRecoveryPasswordConfirmed/ReglogRecoveryPasswordConfirmed';
 
 // Catalog
+// CatalogBanner
+export { default as CatalogBanner } from './Catalog/CatalogBanner/CatalogBanner';
+// CatalogBannerMedia
+export { default as CatalogBannerMedia } from './Catalog/CatalogBannerMedia/CatalogBannerMedia';
+// CatalogFiltersTop
+export { default as CatalogFiltersTop } from './Catalog/CatalogFiltersTop/CatalogFiltersTop';
+export { default as CatalogFiltersTopBoutique } from './Catalog/CatalogFiltersTop/CatalogFiltersTopBoutique';
+export { default as CatalogFiltersTopSort } from './Catalog/CatalogFiltersTop/CatalogFiltersTopSort';
+export { default as CatalogFiltersTopSortMedia } from './Catalog/CatalogFiltersTop/CatalogFiltersTopSortMedia';
+// CatalogFilters
+export { default as CatalogFilters } from './Catalog/CatalogFilters/CatalogFilters';
+export { default as CatalogFiltersAvailability } from './Catalog/CatalogFilters/CatalogFiltersAvailability';
+export { default as CatalogFiltersBlockWrapper } from './Catalog/CatalogFilters/CatalogFiltersBlockWrapper';
+export { default as CatalogFiltersBoutiqueMedia } from './Catalog/CatalogFilters/CatalogFiltersBoutiqueMedia';
+export { default as CatalogFiltersBrands } from './Catalog/CatalogFilters/CatalogFiltersBrands';
+export { default as CatalogFiltersCategories } from './Catalog/CatalogFilters/CatalogFiltersCategories';
+export { default as CatalogFiltersColors } from './Catalog/CatalogFilters/CatalogFiltersColors';
+export { default as CatalogFiltersConditions } from './Catalog/CatalogFilters/CatalogFiltersConditions';
+export { default as CatalogFiltersGlassFrame } from './Catalog/CatalogFilters/CatalogFiltersGlassFrame';
+export { default as CatalogFiltersModels } from './Catalog/CatalogFilters/CatalogFiltersModels';
+export { default as CatalogFiltersPrice } from './Catalog/CatalogFilters/CatalogFiltersPrice';
+export { default as CatalogFiltersPriceDrop } from './Catalog/CatalogFilters/CatalogFiltersPriceDrop';
+export { default as CatalogFiltersSelections } from './Catalog/CatalogFilters/CatalogFiltersSelections';
+export { default as CatalogFiltersSex } from './Catalog/CatalogFilters/CatalogFiltersSex';
+export { default as CatalogFiltersSize } from './Catalog/CatalogFilters/CatalogFiltersSize';
+export { default as CatalogFiltersTypes } from './Catalog/CatalogFilters/CatalogFiltersTypes';
+// CatalogProducts
+export { default as CatalogProducts } from './Catalog/CatalogProducts/CatalogProducts';
+export { default as CatalogProductsNull } from './Catalog/CatalogProducts/CatalogProductsNull';
+export { default as CatalogProductsPagination } from './Catalog/CatalogProducts/CatalogProductsPagination';
 export { default as CatalogProductsSection } from './Catalog/CatalogProducts/CatalogProductsSection';
 
 // SubscribeEmail

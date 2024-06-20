@@ -19,7 +19,7 @@
 		&-text
 			padding: 90px 85px
 
-			width: calc(100% - 540px)
+			width: calc( 100% - 540px )
 			text-align: center
 
 			&__title
@@ -44,7 +44,7 @@
 					display: flex
 					justify-content: space-between
 
-					margin-bottom: 30px
+					margin-bottom: 15px
 
 					&-block
 						width: calc( 50% - 12.5px )
@@ -54,6 +54,12 @@
 							font-size: 16px
 							font-weight: 500
 							margin-bottom: 8px
+
+				&__and
+					display: block
+					font-weight: 700
+					font-size: 16px
+					margin-bottom: 15px
 
 		&-image
 			width: 480px
@@ -93,7 +99,7 @@
 						margin-bottom: 5px
 
 					&__subtitle
-						font-size: 18px
+						font-size: 16px
 
 	&-cooperation
 		margin: 80px 0
@@ -155,7 +161,7 @@
 				margin-bottom: 15px
 
 			&__description
-				font-size: 18px
+				font-size: 16px
 				margin-bottom: 25px
 
 		&-image
@@ -243,7 +249,7 @@
 				margin-bottom: 15px
 
 			&__description
-				font-size: 18px
+				font-size: 16px
 				margin-bottom: 25px
 
 		&-image
@@ -264,6 +270,10 @@
 				width: 40%
 
 				&-block
+					display: flex
+					flex-direction: column
+					justify-content: space-between
+
 					background-color: $lightBackgroundColor
 					padding: 25px
 					border-radius: 24px
@@ -273,12 +283,22 @@
 					&:last-child
 						height: calc( 100% - 205px )
 
-					&__title
-						font-size: 22px
-						margin-bottom: 8px
+					&-text
+						&__title
+							font-size: 22px
+							margin-bottom: 8px
 
-					&__description
-						font-size: 18px
+						&__description
+							font-size: 16px
+
+					&__link
+						font-weight: 700
+
+						margin-top: 15px
+
+						font-size: 16px
+						text-decoration: underline
+						color: $mainColor
 
 			&-block
 				width: calc( 60% - 25px )
@@ -292,7 +312,7 @@
 					margin-bottom: 8px
 
 				&__description
-					font-size: 18px
+					font-size: 16px
 
 				&-table
 					margin-top: 8px
@@ -331,7 +351,7 @@
 									text-align: center
 
 									width: 50%
-									font-size: 18px
+									font-size: 16px
 
 						&__subtitle
 							font-size: 14px
@@ -352,7 +372,7 @@
 				margin-bottom: 8px
 
 			&__description
-				font-size: 18px
+				font-size: 16px
 				margin-bottom: 25px
 
 		&-block
@@ -426,6 +446,8 @@
 			&__link
 				margin-top: 15px
 
+				font-weight: 700
+
 				font-size: 16px
 				text-decoration: underline
 				color: $mainColor
@@ -448,7 +470,7 @@
 @media screen and (max-width: 1200px)
 	.sell-info
 		&__title
-			font-size: 18px
+			font-size: 16px
 
 		&__subtitle
 			font-size: 16px
@@ -558,7 +580,7 @@
 				order: 2
 
 				&__title
-					font-size: 18px
+					font-size: 16px
 					margin-bottom: 8px
 
 				&__description
@@ -602,13 +624,21 @@
 					margin-top: 10px
 					text-align: center
 
+		&-categories > &__title
+			font-size: 26px
+
 		&-categories
 			&-blocks
-				justify-content: space-between
+				justify-content: center
 				flex-wrap: wrap
 
 				&-block
+					display: flex
+					justify-content: center
+
 					width: calc( 50% - 10px )
+
+					margin: 0 0 15px 0
 
 		&-process
 			flex-direction: column
@@ -631,7 +661,7 @@
 				order: 2
 
 				&__title
-					font-size: 18px
+					font-size: 16px
 					margin-bottom: 8px
 
 				&__description
@@ -650,11 +680,12 @@
 						width: 100%
 						margin-bottom: 12px
 
-						&__title
-							font-size: 17px
+						&-text
+							&__title
+								font-size: 17px
 
-						&__description
-							font-size: 14px
+							&__description
+								font-size: 14px
 
 				&-block
 					padding: 16px
@@ -731,7 +762,7 @@
 				margin-bottom: 25px
 
 				&__title
-					font-size: 18px
+					font-size: 16px
 					margin-bottom: 8px
 
 				&__description
@@ -898,7 +929,7 @@
 // 					right: -180px
 
 // 			&__title
-// 				font-size: 18px
+// 				font-size: 16px
 // 				margin-bottom: 10px
 
 // 				+ManropeRegular

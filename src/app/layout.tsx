@@ -23,6 +23,7 @@ import NoSsr from '@/components/NoSsr/NoSsr';
 import { Footer, Header, Reglog } from '@/components';
 import { useAppUtm } from '@/hooks/useAppUtm';
 import { useReplaceLS } from '@/hooks/useReplaceLS';
+import { APP_ROUTE } from '@/constants/routes';
 
 import 'react-dots-loader/index.css';
 import '@/assets/sass/style.sass';
@@ -73,7 +74,7 @@ const App = ({ children }: { children: React.ReactNode }) => {
             dispatch(fetchProductsFilters() as any);
         }
 
-        if (!isLoadedProducts) {
+        if (!isLoadedProducts && pathname !== APP_ROUTE.catalog) {
             dispatch(fetchFirstProductsCatalog() as any);
         }
 
