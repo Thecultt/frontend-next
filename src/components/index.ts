@@ -119,6 +119,33 @@ export { default as CatalogProductsNull } from './Catalog/CatalogProducts/Catalo
 export { default as CatalogProductsPagination } from './Catalog/CatalogProducts/CatalogProductsPagination';
 export { default as CatalogProductsSection } from './Catalog/CatalogProducts/CatalogProductsSection';
 
+// Product
+export { default as ProductCover } from './Product/ProductCover';
+export { default as ProductExchange } from './Product/ProductExchange';
+// ProductInfo
+export { default as ProductInfo } from './Product/ProductInfo/ProductInfo';
+export { default as ProductInfoAuth } from './Product/ProductInfo/ProductInfoAuth';
+export { default as ProductInfoBreadCrumbs } from './Product/ProductInfo/ProductInfoBreadCrumbs';
+export { default as ProductInfoDescription } from './Product/ProductInfo/ProductInfoDescription';
+export { default as ProductInfoExchange } from './Product/ProductInfo/ProductInfoExchange';
+export { default as ProductInfoParameters } from './Product/ProductInfo/ProductInfoParameters';
+export { default as ProductInfoParametersSize } from './Product/ProductInfo/ProductInfoParametersSize';
+export { default as ProductInfoState } from './Product/ProductInfo/ProductInfoState';
+// ProductInfoTitle
+export { default as ProductInfoTitle } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitle';
+// ProductInfoTitleBoutique
+export { default as ProductInfoTitleBoutique } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleBoutique/ProductInfoTitleBoutique';
+export { default as ProductInfoTitleBoutiquePopup } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleBoutique/ProductInfoTitleBoutiquePopup';
+// ProductInfoTitlePartner
+export { default as ProductInfoTitlePartner } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitlePartner/ProductInfoTitlePartner';
+export { default as ProductInfoTitlePartnerPopup } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitlePartner/ProductInfoTitlePartnerPopup';
+// ProductInfoTitleSplit
+export { default as ProductInfoTitleSplit } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleSplit/ProductInfoTitleSplit';
+export { default as ProductInfoTitleSplitPopup } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleSplit/ProductInfoTitleSplitPopup';
+// ProductInfoTabs
+export { default as ProductInfoTabs } from './Product/ProductInfo/ProductInfoTabs/ProductInfoTabs';
+export { default as ProductInfoTabsItem } from './Product/ProductInfo/ProductInfoTabs/ProductInfoTabsItem';
+
 // SubscribeEmail
 export { default as SubscribeEmailForm } from './SubscribeEmail/SubscribeEmailForm';
 
