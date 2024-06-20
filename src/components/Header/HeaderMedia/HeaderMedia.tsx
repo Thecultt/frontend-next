@@ -126,7 +126,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                     </Link>
 
                     <div className="header-media-icon-group">
-                        <Link href={isLoggedIn ? '/cabinet/setting' : `/#reglog`} className="header-media-icon">
+                        <Link href={isLoggedIn ? '/cabinet/setting' : '#reglog'} className="header-media-icon">
                             <svg
                                 width="24"
                                 height="24"

@@ -26,9 +26,9 @@ export const sendCheckEmail =
 
         let nextPopupType = ReglogStateTypesNotLogin.LOGIN;
 
-        const ym = window?.ym || (window.ym = []);
-
-        ym(68184745, 'reachGoal', 'login_email');
+        // TODO
+        // const ym = window?.ym || (window.ym = []);
+        // ym(68184745, 'reachGoal', 'login_email');
 
         await axios
             .post(`${process.env.NEXT_PUBLIC_API_DOMEN}/email_check/`, { email })

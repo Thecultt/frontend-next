@@ -64,6 +64,28 @@ export { default as HomeAbout } from './Home/HomeAbout/HomeAbout';
 // HomeWaiting
 export { default as HomeWaiting } from './Home/HomeWaiting/HomeWaiting';
 
+// Reglog
+export { default as Reglog } from './Reglog/Reglog';
+// ReglogCheckEmail
+export { default as ReglogCheckEmail } from './Reglog/ReglogCheckEmail/ReglogCheckEmail';
+// ReglogLogin
+export { default as ReglogLogin } from './Reglog/ReglogLogin/ReglogLogin';
+// ReglogRegister
+export { default as ReglogRegister } from './Reglog/ReglogRegister/ReglogRegister';
+// ReglogWelcome
+export { default as ReglogWelcome } from './Reglog/ReglogWelcome/ReglogWelcome';
+// ReglogOldUserNewPassword
+export { default as ReglogOldUserNewPassword } from './Reglog/ReglogOldUserNewPassword/ReglogOldUserNewPassword';
+// ReglogWarningBlockedEmailRegister
+export { default as ReglogWarningBlockedEmailRegister } from './Reglog/ReglogWarningBlockedEmailRegister/ReglogWarningBlockedEmailRegister';
+// ReglogWarningBlockedEmailLogin
+export { default as ReglogWarningBlockedEmailLogin } from './Reglog/ReglogWarningBlockedEmailLogin/ReglogWarningBlockedEmailLogin';
+// ReglogRecoveryPassword
+export { default as ReglogRecoveryPassword } from './Reglog/ReglogRecoveryPassword/ReglogRecoveryPassword';
+export { default as ReglogRecoveryPasswordSuccess } from './Reglog/ReglogRecoveryPassword/ReglogRecoveryPasswordSuccess';
+// ReglogRecoveryPasswordConfirmed
+export { default as ReglogRecoveryPasswordConfirmed } from './Reglog/ReglogRecoveryPasswordConfirmed/ReglogRecoveryPasswordConfirmed';
+
 // Catalog
 export { default as CatalogProductsSection } from './Catalog/CatalogProducts/CatalogProductsSection';
 
