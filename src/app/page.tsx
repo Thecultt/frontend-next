@@ -5,7 +5,7 @@ export const metadata: Metadata = {
 };
 
 const Home = () => {
-    return <main>home</main>;
+    return <main>Next</main>;
 };
 
 export default Home;
