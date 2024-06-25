@@ -4,14 +4,14 @@
 		position: relative
 
 		width: 230px
-		height: 465px
+		height: 425px
 
 		display: flex
 		flex-direction: column
 		align-items: center
 
 		padding: 7px
-		// background-color: #F8F8F8
+		// background-color: $cardBackgroundColor
 		text-align: center
 
 		overflow: hidden
@@ -19,7 +19,7 @@
 		+borderRadius
 
 		&:hover &-cover
-			height: 260px
+			height: 230px
 
 		&:hover &-cover-image
 			background-position: center 70%
@@ -148,7 +148,7 @@
 			flex-direction: column
 			align-items: center
 
-			margin-top: 5px
+			margin-top: 8px
 
 			&__brand
 				font-size: 12px
@@ -190,11 +190,25 @@
 						width: 14px
 						margin-right: 5px
 
-			&__price
-				font-size: 17px
+			&-price
+				display: flex
+				align-items: center
+				justify-content: center
+
 				margin-bottom: 5px
 
-				+ManropeRegular
+				&__price
+					font-size: 17px
+
+					+ManropeRegular
+
+				&__oldprice
+					margin-left: 8px
+					font-size: 16px
+					color: $gray
+					text-decoration: line-through
+
+					+ManropeRegular
 
 			&__outstock
 				margin-top: 12px

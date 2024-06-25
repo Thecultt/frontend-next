@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { NumericFormat } from 'react-number-format';
 
 import { getClassNames } from '@/functions/getClassNames';
 import { CartItem } from '@/models/ICartItem';
@@ -83,19 +82,7 @@ const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
                                 <p className="header-block-cart-modal-item-content-text__availability">На примерке</p>
                             ) : (
                                 <p className="header-block-cart-modal-item-content-text__sum">
-                                    <NumericFormat
-                                        value={price}
-                                        displayType={'text'}
-                                        thousandSeparator={' '}
-                                        renderText={(formattedValue: string) => (
-                                            <>
-                                                {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                                    ? formattedValue
-                                                    : parseInt(formattedValue.split(' ').join(''))}
-                                            </>
-                                        )}
-                                    />{' '}
-                                    ₽
+                                    {price.toLocaleString('ru-RU')}₽
                                 </p>
                             )
                         ) : (

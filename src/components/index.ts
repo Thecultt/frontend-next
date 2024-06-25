@@ -142,6 +142,8 @@ export { default as ProductInfoTitlePartnerPopup } from './Product/ProductInfo/P
 // ProductInfoTitleSplit
 export { default as ProductInfoTitleSplit } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleSplit/ProductInfoTitleSplit';
 export { default as ProductInfoTitleSplitPopup } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleSplit/ProductInfoTitleSplitPopup';
+// ProductInfoTitleSale
+export { default as ProductInfoTitleSale } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleSale/ProductInfoTitleSale';
 // ProductInfoTabs
 export { default as ProductInfoTabs } from './Product/ProductInfo/ProductInfoTabs/ProductInfoTabs';
 export { default as ProductInfoTabsItem } from './Product/ProductInfo/ProductInfoTabs/ProductInfoTabsItem';

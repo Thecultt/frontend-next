@@ -1,5 +1,4 @@
 import React from 'react';
-import { NumericFormat } from 'react-number-format';
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 
@@ -8,7 +7,12 @@ import { CartItem } from '@/models/ICartItem';
 import { addCartItem, setCartIsVisibleMessage } from '@/redux/actions/cart';
 import { sendSaveFavorite, sendRemoveFavorite } from '@/redux/actions/favorites';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { ProductInfoTitleBoutique, ProductInfoTitlePartner, ProductInfoTitleSplit } from '@/components';
+import {
+    ProductInfoTitleBoutique,
+    ProductInfoTitlePartner,
+    ProductInfoTitleSplit,
+    ProductInfoTitleSale,
+} from '@/components';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { CATEGORY_NAMES } from '@/constants/catalog';
 import { useWaitingData } from '@/hooks/catalog/useWaitingData';
@@ -21,6 +25,8 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
     category,
     name,
     price,
+    old_price,
+    price_drop,
     availability,
     subcategory,
     shoe_size,
@@ -60,6 +66,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 id,
                 article,
                 price,
+                old_price,
                 store_price,
                 condition,
                 manufacturer,
@@ -85,6 +92,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 id,
                 article,
                 price,
+                old_price,
                 store_price,
                 condition,
                 manufacturer,
@@ -134,29 +142,25 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                     {manufacturer}
                 </Link>
 
-                {from_boutique ? <ProductInfoTitleBoutique /> : null}
+                <div className="product-content-info-title-badges">
+                    {from_boutique ? <ProductInfoTitleBoutique /> : null}
 
-                {from_parnter ? <ProductInfoTitlePartner /> : null}
+                    {from_parnter ? <ProductInfoTitlePartner /> : null}
+
+                    {price_drop ? <ProductInfoTitleSale /> : null}
+                </div>
 
                 <div className="product-content-info-title-price">
-                    <h3 className="product-content-info-title-price__price">
-                        <NumericFormat
-                            value={price}
-                            displayType={'text'}
-                            thousandSeparator={' '}
-                            renderText={(formattedValue: string) => (
-                                <>
-                                    {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                        ? formattedValue
-                                        : parseInt(formattedValue.split(' ').join(''))}
-                                </>
-                            )}
-                        />{' '}
-                        ₽
-                    </h3>
+                    <h3 className="product-content-info-title-price__price">{price.toLocaleString('ru-RU')}₽</h3>
 
-                    {price < 150000 ? <ProductInfoTitleSplit price={price} /> : null}
+                    {old_price ? (
+                        <p className="product-content-info-title-price__oldprice">
+                            {old_price.toLocaleString('ru-RU')}₽
+                        </p>
+                    ) : null}
                 </div>
+
+                {price < 150000 ? <ProductInfoTitleSplit price={price} /> : null}
 
                 {is_trial ? (
                     <p className="product-content-info-title__notavailable">На примерке</p>

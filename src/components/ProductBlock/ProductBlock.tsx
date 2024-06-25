@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { NumericFormat } from 'react-number-format';
 
 import { getClassNames } from '@/functions/getClassNames';
 import { useWaitingData } from '@/hooks/catalog/useWaitingData';
@@ -27,6 +26,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
     condition,
     name,
     price,
+    old_price,
     addClass,
     addCart,
     isCart,
@@ -166,8 +166,6 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 
             <div className="product-block-text">
                 <Link href={`/product/${article}`}>
-                    <p className="product-block-text__brand">{manufacturer}</p>
-
                     <h3 className="product-block-text__model">{name}</h3>
                 </Link>
 
@@ -198,21 +196,15 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
                                 </span>
                             </div>
 
-                            <h3 className="product-block-text__price">
-                                <NumericFormat
-                                    value={price}
-                                    displayType={'text'}
-                                    thousandSeparator={' '}
-                                    renderText={(formattedValue: string) => (
-                                        <>
-                                            {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                                ? formattedValue
-                                                : parseInt(formattedValue.split(' ').join(''))}
-                                        </>
-                                    )}
-                                />{' '}
-                                ₽
-                            </h3>
+                            <div className="product-block-text-price">
+                                <h3 className="product-block-text-price__price">{price.toLocaleString('ru-RU')}₽</h3>
+
+                                {old_price ? (
+                                    <p className="product-block-text-price__oldprice">
+                                        {old_price.toLocaleString('ru-RU')}₽
+                                    </p>
+                                ) : null}
+                            </div>
 
                             <div className="product-block-text-yandex-split">
                                 {/* @ts-ignore */}

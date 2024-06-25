@@ -10,7 +10,7 @@ const ProductInfoTitleSplit: React.FC<ProductInfoTitleSplitProps> = ({ price }) 
     const [isStateSplitPopup, setIsStateSplitPopup] = React.useState(false);
 
     return (
-        <div className="product-content-info-title-price-split">
+        <div className="product-content-info-title-split">
             {/* @ts-ignore */}
             <yandex-pay-badge
                 type="bnpl"
