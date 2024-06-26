@@ -71,22 +71,23 @@ const CatalogBanner: React.FC = React.memo(() => {
             <div
                 className="catalog-banner-image"
                 style={{
-                    backgroundImage: `url("${CatalogBannerImageItbag.src}")`,
+                    backgroundImage:
+                        'url("https://storage.yandexcloud.net/prod-cultt-banner/4/vjV7bKViGmD432RLEDaB8D8Y3GjiklBXktYFrjy6.jpg")',
                 }}
             />
             <div className="catalog-banner-text">
-                <h3 className="catalog-banner-text__title">Лучшие it-bags этого года</h3>
+                <h3 className="catalog-banner-text__title">Летние сумки</h3>
                 <p className="catalog-banner-text__description">
-                    Самые узнаваемые дизайнерские сумки, которые носят селебрити и инфлюенсеры
+                    Мастхэвы, без которых мы не представляем свой летний гардероб
                 </p>
                 <Link
                     href={getCatalogFiltersUrl({
-                        selection: SELECTIONS_IDS.itBags,
+                        selection: SELECTIONS_IDS.summerBags,
                         sort: 'popular',
                     })}
                     className="btn catalog-banner-text__btn"
                 >
-                    Выбрать it-bag
+                    Смотреть подборку
                 </Link>
             </div>
         </div>

@@ -21,6 +21,10 @@ export const sendRecoveryPassword = (email: string, isRedirect?: boolean, router
                 email,
             })
             .then(() => {
+                // TODO
+                // const ym = window.ym || (window.ym = []);
+                // ym(68184745, 'reachGoal', 'forgot_password');
+
                 if (isRedirect) {
                     const { pathname, search } = window.location;
                     router?.replace(

@@ -71,7 +71,7 @@ export const sendRegister = (info: {
                             subscriptions: [
                                 {
                                     pointOfContact: 'Email',
-                                    isSubscribed: true,
+                                    isSubscribed: info.promoCheckbox,
                                 },
                             ],
                         },
