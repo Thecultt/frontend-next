@@ -35,8 +35,8 @@ const CatalogProducts: React.FC = () => {
     };
 
     const onClickProduct = (item: any, index: number) => {
-        window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
-        window.dataLayer.push({
+        window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.
+        window?.dataLayer?.push({
             event: 'select_item',
             ecommerce: {
                 timestamp: Math.floor(Date.now() / 1000),
