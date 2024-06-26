@@ -151,6 +151,10 @@ export { default as ProductInfoTabsItem } from './Product/ProductInfo/ProductInf
 // SubscribeEmail
 export { default as SubscribeEmailForm } from './SubscribeEmail/SubscribeEmailForm';
 
+// Selections
+export { SelectionsSlider } from './Selections/SelectionsSlider/SelectionsSlider';
+export { SelectionsBanners } from './Selections/SelectionsBanners/SelectionsBanners';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';

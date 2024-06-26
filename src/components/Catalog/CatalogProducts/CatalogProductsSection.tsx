@@ -96,100 +96,98 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
     };
 
     return (
-        <div className="container">
-            <div className="catalog-product-section">
-                <Link href={APP_ROUTE.catalog} className="catalog-product-section__title">
-                    {title}
-                </Link>
+        <div className="catalog-product-section">
+            <Link href={APP_ROUTE.catalog} className="catalog-product-section__title">
+                {title}
+            </Link>
 
-                <div className="catalog-product-section-slider-wrapper">
-                    <button className="catalog-product-section-slider-arrow prev" onClick={onClickPrev}>
-                        <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect y="0.476562" width="40" height="40" rx="20" fill="white" />
-                            <path
-                                d="M24 12.4766L16 20.4766L24 28.4766"
-                                stroke="#202020"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                    </button>
+            <div className="catalog-product-section-slider-wrapper">
+                <button className="catalog-product-section-slider-arrow prev" onClick={onClickPrev}>
+                    <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect y="0.476562" width="40" height="40" rx="20" fill="white" />
+                        <path
+                            d="M24 12.4766L16 20.4766L24 28.4766"
+                            stroke="#202020"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+                </button>
 
-                    <Slider {...settings} className="catalog-product-section-slider" ref={SliderRef}>
-                        {itemByArticleSimilar.length
-                            ? itemByArticleSimilar.map((item, index) =>
-                                  item.availability && !item.is_trial && item.images.length && item.price ? (
-                                      <ProductBlock
-                                          addClass="catalog-product-block"
-                                          key={`catalog-product-block-${index}`}
-                                          addCart={() =>
-                                              addCart({
-                                                  id: item.id,
-                                                  checked: true,
-                                                  article: item.article,
-                                                  manufacturer: item.manufacturer,
-                                                  category: item.category,
-                                                  subcategory: item.subcategory,
-                                                  name: item.name,
-                                                  image: item.images[0],
-                                                  price: item.price,
-                                                  availability: item.availability,
-                                                  is_trial: item.is_trial,
-                                              })
-                                          }
-                                          onClickProduct={() => onClickProduct(item, index)}
-                                          isCart={cartItems[item.article] ? true : false}
-                                          addFavorite={() => addFavorite(item)}
-                                          removeFavorite={() => removeFavorite(item)}
-                                          isFavorite={favoritesItems[item.id] ? true : false}
-                                          {...item}
-                                      />
-                                  ) : null,
-                              )
-                            : items.map((item, index) =>
-                                  item.availability && !item.is_trial && item.images.length && item.price ? (
-                                      <ProductBlock
-                                          addClass="catalog-product-block"
-                                          key={`catalog-product-block-${index}`}
-                                          addCart={() =>
-                                              addCart({
-                                                  id: item.id,
-                                                  checked: true,
-                                                  article: item.article,
-                                                  manufacturer: item.manufacturer,
-                                                  category: item.category,
-                                                  subcategory: item.subcategory,
-                                                  name: item.name,
-                                                  image: item.images[0],
-                                                  price: item.price,
-                                                  availability: item.availability,
-                                                  is_trial: item.is_trial,
-                                              })
-                                          }
-                                          onClickProduct={() => onClickProduct(item, index)}
-                                          isCart={cartItems[item.article] ? true : false}
-                                          addFavorite={() => addFavorite(item)}
-                                          removeFavorite={() => removeFavorite(item)}
-                                          isFavorite={favoritesItems[item.id] ? true : false}
-                                          {...item}
-                                      />
-                                  ) : null,
-                              )}
-                    </Slider>
+                <Slider {...settings} className="catalog-product-section-slider" ref={SliderRef}>
+                    {itemByArticleSimilar.length
+                        ? itemByArticleSimilar.map((item, index) =>
+                              item.availability && !item.is_trial && item.images.length && item.price ? (
+                                  <ProductBlock
+                                      addClass="catalog-product-block"
+                                      key={`catalog-product-block-${index}`}
+                                      addCart={() =>
+                                          addCart({
+                                              id: item.id,
+                                              checked: true,
+                                              article: item.article,
+                                              manufacturer: item.manufacturer,
+                                              category: item.category,
+                                              subcategory: item.subcategory,
+                                              name: item.name,
+                                              image: item.images[0],
+                                              price: item.price,
+                                              availability: item.availability,
+                                              is_trial: item.is_trial,
+                                          })
+                                      }
+                                      onClickProduct={() => onClickProduct(item, index)}
+                                      isCart={cartItems[item.article] ? true : false}
+                                      addFavorite={() => addFavorite(item)}
+                                      removeFavorite={() => removeFavorite(item)}
+                                      isFavorite={favoritesItems[item.id] ? true : false}
+                                      {...item}
+                                  />
+                              ) : null,
+                          )
+                        : items.map((item, index) =>
+                              item.availability && !item.is_trial && item.images.length && item.price ? (
+                                  <ProductBlock
+                                      addClass="catalog-product-block"
+                                      key={`catalog-product-block-${index}`}
+                                      addCart={() =>
+                                          addCart({
+                                              id: item.id,
+                                              checked: true,
+                                              article: item.article,
+                                              manufacturer: item.manufacturer,
+                                              category: item.category,
+                                              subcategory: item.subcategory,
+                                              name: item.name,
+                                              image: item.images[0],
+                                              price: item.price,
+                                              availability: item.availability,
+                                              is_trial: item.is_trial,
+                                          })
+                                      }
+                                      onClickProduct={() => onClickProduct(item, index)}
+                                      isCart={cartItems[item.article] ? true : false}
+                                      addFavorite={() => addFavorite(item)}
+                                      removeFavorite={() => removeFavorite(item)}
+                                      isFavorite={favoritesItems[item.id] ? true : false}
+                                      {...item}
+                                  />
+                              ) : null,
+                          )}
+                </Slider>
 
-                    <button className="catalog-product-section-slider-arrow next" onClick={onClickNext}>
-                        <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect y="0.476562" width="40" height="40" rx="20" fill="white" />
-                            <path d="M16 28.4766L24 20.4766L16 12.4766" fill="white" />
-                            <path
-                                d="M16 28.4766L24 20.4766L16 12.4766"
-                                stroke="#202020"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                    </button>
-                </div>
+                <button className="catalog-product-section-slider-arrow next" onClick={onClickNext}>
+                    <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect y="0.476562" width="40" height="40" rx="20" fill="white" />
+                        <path d="M16 28.4766L24 20.4766L16 12.4766" fill="white" />
+                        <path
+                            d="M16 28.4766L24 20.4766L16 12.4766"
+                            stroke="#202020"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+                </button>
             </div>
         </div>
     );

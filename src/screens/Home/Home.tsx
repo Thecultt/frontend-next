@@ -11,34 +11,29 @@ import {
     HomeAbout,
     HomeWaiting,
     CatalogProductsSection,
+    SelectionsSlider,
+    SelectionsBanners,
 } from '@/components';
 
-const Home: React.FC = () => {
-    return (
-        <>
-            <HomeMainBanner />
-
-            <section className="home">
-                <div className="container">
-                    <div className="home-wrapper">
-                        <HomeCategories />
-
-                        <CatalogProductsSection title="Новинки" />
-
-                        <HomeVisit />
-
-                        <HomeSell />
-
-                        <HomeSellPartners />
-
-                        <HomeAbout />
-
-                        <HomeWaiting />
-                    </div>
+const Home: React.FC = () => (
+    <>
+        <HomeMainBanner />
+        <section className="home">
+            <div className="container">
+                <div className="home-wrapper">
+                    <HomeCategories />
+                    <SelectionsSlider />
+                    <CatalogProductsSection title="Новинки" />
+                    <SelectionsBanners />
+                    <HomeVisit />
+                    <HomeSell />
+                    <HomeSellPartners />
+                    <HomeAbout />
+                    <HomeWaiting />
                 </div>
-            </section>
-        </>
-    );
-};
+            </div>
+        </section>
+    </>
+);
 
 export default Home;

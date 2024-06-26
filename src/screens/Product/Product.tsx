@@ -53,7 +53,9 @@ const Product: React.FC = () => {
                     </div>
                 </section>
 
-                <CatalogProductsSection title="Может быть интересно" />
+                <div className="container">
+                    <CatalogProductsSection title="Может быть интересно" />
+                </div>
 
                 <ProductExchange />
             </>

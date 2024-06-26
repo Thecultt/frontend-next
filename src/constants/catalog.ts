@@ -19,4 +19,5 @@ export const SORT: Record<SortType, SortType> = {
 export const SELECTIONS_IDS = {
     summerBags: 4,
     itBags: 5,
+    investmentsBags: 6,
 } as const;
