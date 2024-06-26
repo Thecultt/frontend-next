@@ -19,6 +19,7 @@ export { default as NotificationsServer } from './UI/NotificationsServer/Notific
 export { default as NotificationsServerError } from './UI/NotificationsServer/NotificationsServerError';
 export { default as NotificationsServerSuccess } from './UI/NotificationsServer/NotificationsServerSuccess';
 export { Spinner } from './UI/Spinner';
+export { NavLink } from './UI/NavLink/NavLink';
 
 // MenuMedia
 export { default as MenuMedia } from './MenuMedia/MenuMedia';

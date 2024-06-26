@@ -3,12 +3,11 @@ import Link from 'next/link';
 
 import { getClassNames } from '@/functions/getClassNames';
 import { useAuthUser } from '@/hooks/useAuthUser';
+import { NavLink } from '@/components';
 
 interface HeaderUserMenuInterface {
     state: boolean;
 }
-
-// TODO NavLink
 
 const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
     const { isLoggedIn, logout } = useAuthUser();
@@ -22,29 +21,21 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
             <div className="header-block-user-menu-block">
                 {isLoggedIn ? (
                     <>
-                        <Link
-                            href="/cabinet/history"
-                            className="header-block-user-menu-block__link"
-                            // className={({ isActive }) =>
-                            //     getClassNames('header-block-user-menu-block__link', {
-                            //         active: isActive,
-                            //     })
-                            // }
-                        >
+                        <NavLink href="/cabinet/history" className="header-block-user-menu-block__link">
                             История заказов
-                        </Link>
-                        <Link href="/cabinet/sells" className="header-block-user-menu-block__link">
+                        </NavLink>
+                        <NavLink href="/cabinet/sells" className="header-block-user-menu-block__link">
                             Мои продажи
-                        </Link>
-                        <Link href="/cabinet/favorites" className="header-block-user-menu-block__link">
+                        </NavLink>
+                        <NavLink href="/cabinet/favorites" className="header-block-user-menu-block__link">
                             Избранное
-                        </Link>
-                        <Link href="/cabinet/waiting" className="header-block-user-menu-block__link">
+                        </NavLink>
+                        <NavLink href="/cabinet/waiting" className="header-block-user-menu-block__link">
                             Лист ожидания
-                        </Link>
-                        <Link href="/cabinet/setting" className="header-block-user-menu-block__link">
+                        </NavLink>
+                        <NavLink href="/cabinet/setting" className="header-block-user-menu-block__link">
                             Профиль
-                        </Link>
+                        </NavLink>
                     </>
                 ) : (
                     <>
@@ -63,11 +54,11 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
                     Вопросы и ответы
                 </Link>
 
-                {isLoggedIn ? (
+                {isLoggedIn && (
                     <span className="header-block-user-menu-block__link" onClick={logout}>
                         Выйти
                     </span>
-                ) : null}
+                )}
             </div>
         </div>
     );
