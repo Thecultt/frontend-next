@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
@@ -24,7 +25,7 @@ const NotificationsServer: React.FC = () => {
         dispatch(setIsNotificationServerError(false) as any);
     };
 
-    return (
+    return createPortal(
         <div
             className={getClassNames('notifications-server', {
                 active: isNotificationServerError || isNotificationServerSuccess,
@@ -40,7 +41,8 @@ const NotificationsServer: React.FC = () => {
                 text={notificationServerErrorText}
                 onClickClose={onClickCloseError}
             />
-        </div>
+        </div>,
+        document.body,
     );
 };
 

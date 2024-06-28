@@ -13,7 +13,7 @@ import { fetchProductsFilters } from '@/redux/actions/products_filters';
 import { fetchSelections } from '@/redux/actions/selections';
 import { fetchUser } from '@/redux/actions/user';
 import NoSsr from '@/components/NoSsr/NoSsr';
-import { Footer, Header, Reglog } from '@/components';
+import { Footer, Header, NotificationsServer, Reglog } from '@/components';
 import { useAppUtm } from '@/hooks/useAppUtm';
 import { useReplaceLS } from '@/hooks/useReplaceLS';
 import { APP_ROUTE } from '@/constants/routes';
@@ -67,22 +67,26 @@ export const App = ({ children }: { children: React.ReactNode }) => {
     useReplaceLS();
 
     return (
-        <div className="wrapper" id="wrapper">
+        <>
             <NoSsr>
-                <Header />
                 <Reglog />
+                <NotificationsServer />
                 {/* TODO
-                    <NotificationsServer />
                     <WaitingListCreate />
                     <WaitingListDelete />
                 */}
             </NoSsr>
+            <div className="wrapper" id="wrapper">
+                <NoSsr>
+                    <Header />
+                </NoSsr>
 
-            {children}
+                {children}
 
-            <NoSsr>
-                <Footer />
-            </NoSsr>
-        </div>
+                <NoSsr>
+                    <Footer />
+                </NoSsr>
+            </div>
+        </>
     );
 };
