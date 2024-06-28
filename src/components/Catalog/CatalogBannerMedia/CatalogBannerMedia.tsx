@@ -8,7 +8,6 @@ import { SELECTIONS_IDS } from '@/constants/catalog';
 
 import CatalogBannerImageBoutiqueMedia from '@/assets/images/catalog/catalog-banner-boutique-media.jpg';
 import CatalogBannerImagePriceDropMedia from '@/assets/images/catalog/catalog-banner-price-drop-media.jpg';
-import CatalogBannerImageItbagMedia from '@/assets/images/catalog/catalog-banner-price-itbag-media.jpg';
 import CatalogBannerImagePopularMedia from '@/assets/images/catalog/catalog-banner-popular-media.jpg';
 
 const CatalogBannerMedia: React.FC = () => {

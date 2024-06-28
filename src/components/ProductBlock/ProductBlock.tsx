@@ -5,6 +5,7 @@ import { getClassNames } from '@/functions/getClassNames';
 import { useWaitingData } from '@/hooks/catalog/useWaitingData';
 import { Product } from '@/models/IProduct';
 import { WaitingPopupType } from '@/types/waiting';
+import { APP_ROUTE } from '@/constants/routes';
 
 const totalImageLength = 5;
 
@@ -154,7 +155,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
                         ))}
                 </div>
 
-                <Link className="product-block-cover-link" href={`/product/${article}`}>
+                <Link className="product-block-cover-link" href={`${APP_ROUTE.product}/${article}`}>
                     <div
                         className="product-block-cover-image"
                         style={{
@@ -165,13 +166,13 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
             </div>
 
             <div className="product-block-text">
-                <Link href={`/product/${article}`}>
+                <Link href={`${APP_ROUTE.product}/${article}`}>
                     <h3 className="product-block-text__model">{name}</h3>
                 </Link>
 
                 {availability && !is_trial ? (
                     <>
-                        <Link href={`/product/${article}`}>
+                        <Link href={`${APP_ROUTE.product}/${article}`}>
                             <div className="product-block-text-state">
                                 <span className="product-block-text-state__subtitle">Состояние</span>
 

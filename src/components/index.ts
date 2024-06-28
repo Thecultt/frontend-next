@@ -156,6 +156,15 @@ export { default as SubscribeEmailForm } from './SubscribeEmail/SubscribeEmailFo
 export { SelectionsSlider } from './Selections/SelectionsSlider/SelectionsSlider';
 export { SelectionsBanners } from './Selections/SelectionsBanners/SelectionsBanners';
 
+// Cabinet
+export { default as CabinetMenu } from './Cabinet/CabinetMenu';
+export { default as CabinetMenuMedia } from './Cabinet/CabinetMenuMedia';
+
+// CabinetHistoryOrders
+export { default as CabinetHistoryOrdersItem } from './Cabinet/CabinetHistoryOrders/CabinetHistoryOrdersItem';
+export { default as CabinetHistoryOrdersItemProduct } from './Cabinet/CabinetHistoryOrders/CabinetHistoryOrdersItemProduct';
+export { default as CabinetHistoryOrdersNull } from './Cabinet/CabinetHistoryOrders/CabinetHistoryOrdersNull';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';
