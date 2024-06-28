@@ -1,4 +1,5 @@
 export const MEDIA_SIZES_NUMBERS = {
+    mobile: 500,
     tablet: 1200,
     tabletExtra: 1250,
 } as const;

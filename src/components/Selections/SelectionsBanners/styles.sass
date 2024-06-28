@@ -170,3 +170,87 @@
         @media screen and (max-width: 1200px)
             width: 100%
             margin-left: none
+
+.selections-banners-influencer
+    width: 100%
+    background-color: $lightBackgroundColor
+    border-radius: 32px
+    display: flex
+    flex-wrap: nowrap
+    +boxShadow
+    overflow: hidden
+    margin-bottom: 50px
+    position: relative
+
+    @media screen and (max-width: 1200px)
+        margin-bottom: 25px
+        box-shadow: none
+        flex-direction: column-reverse
+        align-items: center
+        padding: 8px
+        border-radius: 24px
+
+    &__bookmark
+        position: absolute
+        top: 0
+        left: 66px
+
+        @media screen and (max-width: 1200px)
+            left: unset
+            right: 10px
+
+    &__content
+        width: 100%
+        padding: 70px 200px 70px 230px
+        display: flex
+        flex-direction: column
+
+        @media screen and (max-width: 1200px)
+            padding: 0
+            align-items: center
+            text-align: center
+
+    &__title
+        +ManropeSemiBold
+        font-size: 32px
+        line-height: 38px
+        color: $black
+        margin-bottom: 16px
+
+        @media screen and (max-width: 1200px)
+            margin-bottom: 8px
+            font-size: 20px
+            line-height: 26px
+
+    &__description
+        +ManropeRegular
+        font-size: 16px
+        line-height: 140%
+        color: $black
+        margin-bottom: 66px
+
+        @media screen and (max-width: 1200px)
+            margin-bottom: 16px
+            font-size: 14px
+
+    &__cover
+        width: 345px
+        height: auto
+        flex-shrink: 0
+        position: relative
+        background-position: 90% center
+        background-size: cover
+        background-repeat: no-repeat
+
+        @media screen and (max-width: 1200px)
+            width: 170px
+            height: 170px
+            border-radius: 50%
+            overflow: hidden
+            margin-bottom: 8px
+
+    &__button
+        width: fit-content
+
+        @media screen and (max-width: 1200px)
+            width: 100%

@@ -27,7 +27,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
     name,
     price,
     old_price,
-    addClass,
+    addClass = '',
     addCart,
     isCart,
     onClickProduct,
@@ -154,7 +154,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
                         ))}
                 </div>
 
-                <Link href={`/product/${article}`}>
+                <Link className="product-block-cover-link" href={`/product/${article}`}>
                     <div
                         className="product-block-cover-image"
                         style={{

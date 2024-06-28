@@ -1,16 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import Slider from 'react-slick';
+import { useMediaQuery } from 'usehooks-ts';
 
 import { getClassNames } from '@/functions/getClassNames';
-import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { CATEGORIES, SORT } from '@/constants/catalog';
+import { MEDIA_SIZES } from '@/constants/styles';
 
-import HomeMainBannerImageNew from '@/assets/images/home/home-main-banner-new.jpg';
-import HomeMainBannerImageBoutique from '@/assets/images/home/home-main-banner-boutique.jpg';
-import HomeMainBannerImageConcierge from '@/assets/images/home/home-main-banner-concierge.jpg';
+import { MAIN_BANNER_SLIDES } from './constants';
 
 const HomeMainBanner: React.FC = () => {
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.mobile})`);
     const SliderRef = React.useRef<any>(null);
 
     const [currentSlide, setCurrentSlide] = React.useState<number>(0);
@@ -41,7 +40,7 @@ const HomeMainBanner: React.FC = () => {
         SliderRef.current.slickNext();
     };
 
-    const slideCount = SliderRef?.current?.innerSlider?.state?.slideCount;
+    const slideCount = MAIN_BANNER_SLIDES.length;
 
     const onClickGoToSlide = (index: number) => {
         SliderRef.current.slickGoTo(index);
@@ -65,151 +64,31 @@ const HomeMainBanner: React.FC = () => {
                     </button>
 
                     <Slider {...settings} className="home-main-banner-slider" ref={SliderRef}>
-                        <div className="home-main-banner-slider-item-wrapper">
-                            <div
-                                className="home-main-banner-slider-item"
-                                style={{
-                                    backgroundImage: `url("${HomeMainBannerImageNew.src}")`,
-                                }}
-                            >
-                                <div className="home-main-banner-slider-item-text">
-                                    <h2 className="home-main-banner-slider-item-text__title">Главные новинки недели</h2>
+                        {MAIN_BANNER_SLIDES.map((slide, index) => (
+                            <div key={index} className="home-main-banner-slider-item-wrapper">
+                                <div
+                                    className="home-main-banner-slider-item"
+                                    style={{
+                                        backgroundImage: `url("${isMobile ? slide.image.mobile || slide.image.desktop : slide.image.desktop}")`,
+                                    }}
+                                >
+                                    <div className="home-main-banner-slider-item-text">
+                                        <h2 className="home-main-banner-slider-item-text__title">{slide.title}</h2>
 
-                                    <p className="home-main-banner-slider-item-text__description">
-                                        Новые лоты Hermes, Chanel, Celine,
-                                        <br />
-                                        Louis Vuitton, Prada и Saint Laurent
-                                    </p>
+                                        <p className="home-main-banner-slider-item-text__description">
+                                            {slide.description}
+                                        </p>
 
-                                    <Link
-                                        href={getCatalogFiltersUrl({
-                                            boutique: false,
-                                            categories: CATEGORIES,
-                                            availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                                            price_drop: false,
-                                            page: 1,
-                                            sort: SORT.a,
-                                        })}
-                                        className="home-main-banner-slider-item-text__btn color"
-                                    >
-                                        Смотреть
-                                    </Link>
+                                        <Link
+                                            href={slide.link.href}
+                                            className="home-main-banner-slider-item-text__btn color"
+                                        >
+                                            {slide.link.title}
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div className="home-main-banner-slider-item-wrapper">
-                            <div
-                                className="home-main-banner-slider-item"
-                                style={{
-                                    backgroundImage: `url("${HomeMainBannerImageBoutique.src}")`,
-                                }}
-                            >
-                                <div className="home-main-banner-slider-item-text">
-                                    <h2 className="home-main-banner-slider-item-text__title">
-                                        Коллекция THE CULTT из бутика
-                                    </h2>
-
-                                    <p className="home-main-banner-slider-item-text__description">
-                                        Лоты, доставленные напрямую из бутика-партнера или от частного байера — в таком
-                                        состоянии, в каком вы бы купили их в магазине бренда.
-                                    </p>
-
-                                    <Link
-                                        href={getCatalogFiltersUrl({
-                                            boutique: true,
-                                            categories: CATEGORIES,
-                                            availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                                            price_drop: false,
-                                            page: 1,
-                                            sort: SORT.a,
-                                        })}
-                                        className="home-main-banner-slider-item-text__btn color"
-                                    >
-                                        Смотреть подборку
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="home-main-banner-slider-item-wrapper">
-                            <div
-                                className="home-main-banner-slider-item"
-                                style={{
-                                    backgroundImage: `url("${HomeMainBannerImageConcierge.src}")`,
-                                }}
-                            >
-                                <div className="home-main-banner-slider-item-text">
-                                    <h2 className="home-main-banner-slider-item-text__title">
-                                        Разгрузите гардероб с VIP-сервисом ТНЕ CULTT
-                                    </h2>
-
-                                    <p className="home-main-banner-slider-item-text__description">
-                                        Нужно продать 7 и более лотов? Закажите бесплатный VIP-сервис. Вам не нужно
-                                        заполнять заявки, фотографировать вещи, искать покупателей - все это мы берем на
-                                        себя.
-                                    </p>
-
-                                    <Link href="/vipservice" className="home-main-banner-slider-item-text__btn color">
-                                        Узнать больше
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* <div className='home-main-banner-slider-item-wrapper'>
-							<div className='home-main-banner-slider-item' style={{ backgroundImage: `url("${HomeMainBannerImage1}")` }}>
-								<div className="home-main-banner-slider-item-text">
-									<h2 className="home-main-banner-slider-item-text__title">
-										Продавайте, покупайте, обменивайте <br /> сумки, обувь и аксессуары
-									</h2>
-
-									<p className="home-main-banner-slider-item-text__description">
-										Станьте частью культуры нового потребления
-									</p>
-
-									<a href="/sell" className="home-main-banner-slider-item-text__btn">
-										Продать
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<div className='home-main-banner-slider-item-wrapper'>
-							<div className='home-main-banner-slider-item' style={{ backgroundImage: `url("${HomeMainBannerImage2}")` }}>
-								<div className="home-main-banner-slider-item-text">
-									<h2 className="home-main-banner-slider-item-text__title">
-										Покупайте КУЛЬТовые лоты
-									</h2>
-
-									<p className="home-main-banner-slider-item-text__description">
-										Дарите им вторую жизнь
-									</p>
-
-									<a href="/catalog" className="home-main-banner-slider-item-text__btn">
-										Перейти в каталог
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<div className='home-main-banner-slider-item-wrapper'>
-							<div className='home-main-banner-slider-item' style={{ backgroundImage: `url("${HomeMainBannerImage3}")` }}>
-								<div className="home-main-banner-slider-item-text">
-									<h2 className="home-main-banner-slider-item-text__title">
-										Будьте разной — меняйте сумки с THE CULTT
-									</h2>
-
-									<p className="home-main-banner-slider-item-text__description">
-										Запускайте круговорот сумок и меняйте свой гардероб
-									</p>
-
-									<a href="/exchange" className="home-main-banner-slider-item-text__btn">
-										Подробнее
-									</a>
-								</div>
-							</div>
-						</div> */}
+                        ))}
                     </Slider>
 
                     <button className="home-main-banner-arrow next" onClick={onClickNext}>

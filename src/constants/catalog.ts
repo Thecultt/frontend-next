@@ -20,4 +20,5 @@ export const SELECTIONS_IDS = {
     summerBags: 4,
     itBags: 5,
     investmentsBags: 6,
+    juliaKatkalo: 12,
 } as const;

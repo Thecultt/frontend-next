@@ -570,8 +570,9 @@
 	&-product-blocks-wrapper
 		width: 100%
 
-		display: inline-flex
-		flex-wrap: wrap
+		display: grid
+		grid-template-columns: repeat(4, 1fr)
+		gap: 25px 10px
 
 		+transition
 		+open
@@ -581,15 +582,31 @@
 
 	&-product
 		&-block
-			width: calc( 100% / 4 - 7.5px )
-			margin-bottom: 25px
-
-			margin-right: 10px
+			width: 100%
+			height: auto !important
 
 			+open
 
 			&:nth-child(4n+4)
 				margin-right: 0
+
+			.product-block-cover
+				height: auto !important
+				padding-top: 150%
+
+			.product-block-cover-link
+				position: absolute
+				left: 0
+				top: 0
+				width: 100%
+				height: 100%
+
+			.product-block-cover-image
+				background-position: center 0 !important
+
+			@media (hover: hover)
+				&:hover .product-block-cover
+					padding-top: calc(150% - 60px)
 
 		&-null
 			width: 100%
@@ -721,7 +738,7 @@
 					&.next
 						right: -15px
 
-				& .catalog-product-block
+				& .catalog-slider-product-block
 					width: calc( 100% - 10px )
 					margin-right: 0
 					margin-bottom: 0
@@ -835,16 +852,17 @@
 						// display: none
 
 			&-blocks-wrapper
-				justify-content: space-between
-
-			&-block
-				width: calc( 50% - 2.5px )
-				margin-right: 0
-				margin-bottom: 10px
+				grid-template-columns: repeat(3, 1fr)
 
 			&-pagination
 				&__btn
 					width: 100%
+
+@media screen and ( max-width: 800px )
+	.catalog
+		&-product-blocks-wrapper
+			grid-template-columns: repeat(2, 1fr)
+			gap: 10px 5px
 
 @media screen and ( max-width: 600px )
 	.catalog
