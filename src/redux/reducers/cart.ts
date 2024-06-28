@@ -28,6 +28,8 @@ const cart = (state = initialState, action: CartActions) => {
     if (action.type === CartActionTypes.ADD_CART_ITEMS) {
         const newItems = state.items;
         newItems[action.payload.article] = action.payload;
+        console.log('items', newItems);
+        console.log('localStorageService', localStorageService);
         localStorageService?.setItem(LS_KEYS.cart, newItems);
 
         return {
@@ -39,8 +41,6 @@ const cart = (state = initialState, action: CartActions) => {
     if (action.type === CartActionTypes.CHANGE_CART_ITEMS) {
         const newItems = state.items;
         newItems[action.payload.article] = action.payload.data;
-        console.log('items', newItems);
-        console.log('localStorageService', localStorageService);
         localStorageService?.setItem(LS_KEYS.cart, newItems);
 
         return {
