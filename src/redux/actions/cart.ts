@@ -64,28 +64,6 @@ export const addCartItem = (item: CartItem) => {
         },
     });
 
-    // window.mindbox("async", {
-    // 	operation: "Website.SetCart",
-    // 	data: {
-    // 		addProductToList: {
-    // 			product: {
-    // 				ids: {
-    // 					website: item.id
-    // 				}
-    // 			},
-    // 			productGroup: {
-    // 				ids: {
-    // 					website: item.id
-    // 				}
-    // 			},
-    // 			pricePerItem: item.price
-    // 		},
-    // 		customer: {
-    // 			email: `${localStorage.getItem("email")}`
-    // 		}
-    // 	}
-    // });
-
     sendMindbox('Website.SetCart', {
         addProductToList: {
             product: {
@@ -104,54 +82,6 @@ export const addCartItem = (item: CartItem) => {
             email: `${localStorageService?.getItem<string>(LS_KEYS.email, '')}`,
         },
     });
-
-    // const cart = JSON.parse(localStorage.getItem("cart") as string);
-
-    // if (cart) {
-    // 	window.mindbox("async", {
-    // 		operation: "Website.SetCart",
-    // 		data: {
-    // 			productList: [
-    // 				...Object.keys(cart).map((article: any) => (
-    // 					{
-    // 						product: {
-    // 							ids: {
-    // 								website: `${cart[article].id}`
-    // 							}
-    // 						},
-    // 						count: "1",
-    // 						pricePerItem: cart[article].price
-    // 					}
-    // 				)),
-    // 				{
-    // 					product: {
-    // 						ids: {
-    // 							website: `${item.id}`
-    // 						}
-    // 					},
-    // 					count: "1",
-    // 					pricePerItem: item.price
-    // 				}]
-    // 		}
-    // 	});
-    // } else {
-    // 	window.mindbox("async", {
-    // 		operation: "Website.SetCart",
-    // 		data: {
-    // 			productList: [
-    // 				{
-    // 					product: {
-    // 						ids: {
-    // 							website: `${item.id}`
-    // 						}
-    // 					},
-    // 					count: "1",
-    // 					pricePerItem: item.price
-    // 				}
-    // 			]
-    // 		}
-    // 	});
-    // }
 
     return {
         type: CartActionTypes.ADD_CART_ITEMS,
@@ -208,29 +138,6 @@ export const removeCartItem = (id: string, item: CartItem) => {
         },
         executionDateTimeUtc: new Date(),
     });
-
-    // window.mindbox("async", {
-    // 	operation: "Website.ClearCart",
-    // 	data: {
-    // 		customer: {
-    // 			email: `${localStorage.getItem("email")}`
-    // 		},
-    // 		removeProductFromList: {
-    // 			product: {
-    // 				ids: {
-    // 					website: item.id
-    // 				}
-    // 			},
-    // 			productGroup: {
-    // 				ids: {
-    // 					website: item.id
-    // 				}
-    // 			},
-    // 			pricePerItem: item.price
-    // 		},
-    // 		executionDateTimeUtc: new Date()
-    // 	}
-    // });
 
     return {
         type: CartActionTypes.REMOVE_CART_ITEMS,
