@@ -1,4 +1,6 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
+
 import { getClassNames } from '@/functions/getClassNames';
 
 interface PopupProps {
@@ -18,13 +20,8 @@ const Popup: React.FC<PopupProps> = ({ state, setState, stateContent, children }
     React.useEffect(() => {
         if (state) {
             document.body.style.overflowY = 'hidden';
-            // document.body.style.width = "100%";
-            // document.body.style.left = "0";
-            // document.body.style.overflowY = "scroll";
-            // document.body.style.position = "fixed";
         } else {
             document.body.style.overflowY = 'scroll';
-            // document.body.style.position = "static";
         }
     }, [state]);
 
@@ -46,7 +43,7 @@ const Popup: React.FC<PopupProps> = ({ state, setState, stateContent, children }
         }
     };
 
-    return (
+    return createPortal(
         <div
             className={getClassNames('popup', {
                 active: state,
@@ -84,7 +81,8 @@ const Popup: React.FC<PopupProps> = ({ state, setState, stateContent, children }
 
                 {children}
             </div>
-        </div>
+        </div>,
+        document.body,
     );
 };
 
