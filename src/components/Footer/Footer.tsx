@@ -10,6 +10,7 @@ import { FooterMenuBlock, FooterEmailSubscribe } from '@/components';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { getClassNames } from '@/functions/getClassNames';
 import { WaitingPopupType } from '@/types/waiting';
+import { APP_ROUTE } from '@/constants/routes';
 
 interface FooterProps {
     transparent?: boolean;
@@ -124,7 +125,7 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
             >
                 <div className="container">
                     <div className="footer-wrapper">
-                        <Link href="/" className="footer-logo">
+                        <Link href={APP_ROUTE.home} className="footer-logo">
                             <img src={Logo.src} alt="TheCultt" className="footer-logo__image" />
                         </Link>
 

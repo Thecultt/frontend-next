@@ -249,7 +249,7 @@ const Header: React.FC = () => {
                         <div className="header-wrapper">
                             <div className="header-wrapper-block">
                                 <div className="header-block">
-                                    <Link href="/" className="header-block-logo">
+                                    <Link href={APP_ROUTE.home} className="header-block-logo">
                                         <img src={Logo.src} alt="THECULTT" className="header-block-logo__image" />
                                     </Link>
 

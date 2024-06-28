@@ -9,3 +9,6 @@ export { default as Catalog } from './Catalog/Catalog';
 
 // Product
 export { default as Product } from './Product/Product';
+
+// Cabinet
+export { default as CabinetHistoryOrders } from './Cabinet/CabinetHistoryOrders';

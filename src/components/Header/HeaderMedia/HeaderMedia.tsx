@@ -7,6 +7,7 @@ import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { HeaderMediaLinkTab, Footer } from '@/components';
 import { CATEGORIES, SORT } from '@/constants/catalog';
 import { useAuthUser } from '@/hooks/useAuthUser';
+import { APP_ROUTE } from '@/constants/routes';
 
 import Logo from '@/assets/images/logo.svg';
 
@@ -121,7 +122,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                         </div>
                     </div>
 
-                    <Link href="/" className="header-media-logo">
+                    <Link href={APP_ROUTE.home} className="header-media-logo">
                         <img src={Logo.src} alt="THECULTT" className="header-media-logo__image" />
                     </Link>
 

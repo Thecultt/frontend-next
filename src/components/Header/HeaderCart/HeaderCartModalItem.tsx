@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { getClassNames } from '@/functions/getClassNames';
 import { CartItem } from '@/models/ICartItem';
+import { APP_ROUTE } from '@/constants/routes';
 
 interface HeaderCartModalItemProps extends CartItem {
     hiddenCheck?: boolean;
@@ -64,7 +65,7 @@ const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
                     </div>
                 )}
 
-                <Link href={`/product/${article}`}>
+                <Link href={`${APP_ROUTE.product}/${article}`}>
                     <div
                         className="header-block-cart-modal-item-content-image"
                         style={{
@@ -73,7 +74,7 @@ const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
                     ></div>
                 </Link>
 
-                <Link href={`/product/${article}`}>
+                <Link href={`${APP_ROUTE.product}/${article}`}>
                     <div className="header-block-cart-modal-item-content-text">
                         <p className="header-block-cart-modal-item-content-text__brand">{manufacturer}</p>
                         <p className="header-block-cart-modal-item-content-text__model">{name}</p>
