@@ -171,6 +171,10 @@ export { default as CabinetSellsListItem } from './Cabinet/CabinetSellsList/Cabi
 export { default as CabinetSellsListPaymentInfoMessage } from './Cabinet/CabinetSellsList/CabinetSellsListPaymentInfo/CabinetSellsListPaymentInfoMessage';
 export { default as CabinetSellsListPaymentInfoPopupForm } from './Cabinet/CabinetSellsList/CabinetSellsListPaymentInfo/CabinetSellsListPaymentInfoPopupForm';
 
+// CabinetFavorites
+export { default as CabinetFavoritesNull } from './Cabinet/CabinetFavorites/CabinetFavoritesNull';
+export { default as CabinetFavoritesShare } from './Cabinet/CabinetFavorites/CabinetFavoritesShare';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';
