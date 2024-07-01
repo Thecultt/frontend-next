@@ -5,6 +5,7 @@ import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { Loader, RenderInput, RenderRadioSelect } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
+import { APP_ROUTE } from '@/constants/routes';
 
 import validate from './validate';
 
@@ -70,7 +71,7 @@ const SubscribeEmailForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
             <p className="subscribe-email-text-form__text">
                 Подписываясь на рассылку, вы соглашаетесь с условиями{' '}
-                <Link href="/help/user-agreement">пользовательского соглашения</Link>
+                <Link href={APP_ROUTE.help.userAgreement}>пользовательского соглашения</Link>
             </p>
         </form>
     );

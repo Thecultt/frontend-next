@@ -130,6 +130,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                     <div className="header-media-icon-group">
                         <Link
                             href={isLoggedIn ? APP_ROUTE.cabinet.setting : `#${ReglogStateTypesNotLogin.REGLOG}`}
+                            scroll={false}
                             className="header-media-icon"
                         >
                             <svg
@@ -149,7 +150,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                             </svg>
                         </Link>
 
-                        <Link href="/cart" className="header-media-icon">
+                        <Link href={APP_ROUTE.cart} className="header-media-icon">
                             {Object.keys(items).length ? (
                                 <span className="header-media-icon__count">{Object.keys(items).length}</span>
                             ) : null}
@@ -296,15 +297,27 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                             </HeaderMediaLinkTab>
                         ))}
 
-                        <Link href="/concierge" className="header-media-modal-menu-links-link" onClick={toggleState}>
+                        <Link
+                            href={APP_ROUTE.concierge.root}
+                            className="header-media-modal-menu-links-link"
+                            onClick={toggleState}
+                        >
                             Консьерж
                         </Link>
 
-                        <Link href="/brands" className="header-media-modal-menu-links-link" onClick={toggleState}>
+                        <Link
+                            href={APP_ROUTE.brands}
+                            className="header-media-modal-menu-links-link"
+                            onClick={toggleState}
+                        >
                             Бренды
                         </Link>
 
-                        <Link href="/auth" className="header-media-modal-menu-links-link" onClick={toggleState}>
+                        <Link
+                            href={APP_ROUTE.auth}
+                            className="header-media-modal-menu-links-link"
+                            onClick={toggleState}
+                        >
                             Подлинность
                         </Link>
 
@@ -329,35 +342,51 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 
                         <HeaderMediaLinkTab title="Личный кабинет">
                             <Link
-                                href="/cabinet/setting"
+                                href={
+                                    isLoggedIn
+                                        ? APP_ROUTE.cabinet.setting
+                                        : `/?redirect=${APP_ROUTE.cabinet.setting}#${ReglogStateTypesNotLogin.REGLOG}`
+                                }
                                 className="header-media-modal-menu-links__link"
                                 onClick={toggleState}
                             >
                                 Профиль
                             </Link>
                             <Link
-                                href={isLoggedIn ? '/cabinet/sell' : 'sell'}
+                                href={APP_ROUTE.sell[isLoggedIn ? 'create' : 'info']}
                                 className="header-media-modal-menu-links__link"
                                 onClick={toggleState}
                             >
                                 Мои продажи
                             </Link>
                             <Link
-                                href="/cabinet/history"
+                                href={
+                                    isLoggedIn
+                                        ? APP_ROUTE.cabinet.history
+                                        : `/?redirect=${APP_ROUTE.cabinet.setting}#${ReglogStateTypesNotLogin.REGLOG}`
+                                }
                                 className="header-media-modal-menu-links__link"
                                 onClick={toggleState}
                             >
                                 История заказов
                             </Link>
                             <Link
-                                href="/cabinet/favorites"
+                                href={
+                                    isLoggedIn
+                                        ? APP_ROUTE.cabinet.favorites
+                                        : `/?redirect=${APP_ROUTE.cabinet.setting}#${ReglogStateTypesNotLogin.REGLOG}`
+                                }
                                 className="header-media-modal-menu-links__link"
                                 onClick={toggleState}
                             >
                                 Избранное
                             </Link>
                             <Link
-                                href="/cabinet/waiting"
+                                href={
+                                    isLoggedIn
+                                        ? APP_ROUTE.cabinet.waiting
+                                        : `/?redirect=${APP_ROUTE.cabinet.setting}#${ReglogStateTypesNotLogin.REGLOG}`
+                                }
                                 className="header-media-modal-menu-links__link"
                                 onClick={toggleState}
                             >
@@ -366,18 +395,22 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                         </HeaderMediaLinkTab>
 
                         <HeaderMediaLinkTab title="Сервисы для продажи">
-                            <Link href="/sell" className="header-media-modal-menu-links__link" onClick={toggleState}>
+                            <Link
+                                href={APP_ROUTE.sell.info}
+                                className="header-media-modal-menu-links__link"
+                                onClick={toggleState}
+                            >
                                 Продажа
                             </Link>
                             <Link
-                                href="/exchange"
+                                href={APP_ROUTE.exchange}
                                 className="header-media-modal-menu-links__link"
                                 onClick={toggleState}
                             >
                                 Обмен
                             </Link>
                             <Link
-                                href="/vipservice"
+                                href={APP_ROUTE.vipService}
                                 className="header-media-modal-menu-links__link"
                                 onClick={toggleState}
                             >
@@ -388,7 +421,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 
                     <div className="header-media-modal-menu-btn">
                         <Link
-                            href={isLoggedIn ? '/cabinet/sell' : 'sell'}
+                            href={APP_ROUTE.sell[isLoggedIn ? 'create' : 'info']}
                             className="btn header-media-modal-menu-btn__btn"
                             onClick={() => {
                                 window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.

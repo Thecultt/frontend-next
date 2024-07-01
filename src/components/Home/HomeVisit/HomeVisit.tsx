@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 
+import { APP_ROUTE } from '@/constants/routes';
+
 import VisitImage from '@/assets/images/home/home-visit.jpg';
 import VisitImageMedia from '@/assets/images/home/home-visit-media.jpg';
 
@@ -16,7 +18,7 @@ const HomeVisit: React.FC = () => {
                         экспертом, чтобы узнать, сколько вы сможете заработать на своих украшениях.
                     </p>
 
-                    <Link href="/visit" className="btn home-visit-text__btn">
+                    <Link href={APP_ROUTE.visit} className="btn home-visit-text__btn">
                         Перейти
                     </Link>
                 </div>
@@ -38,7 +40,7 @@ const HomeVisit: React.FC = () => {
                         экспертом, чтобы узнать, сколько вы сможете заработать на своих украшениях.
                     </p>
 
-                    <Link href="/visit" className="btn-regular white home-visit-media-text__btn">
+                    <Link href={APP_ROUTE.visit} className="btn-regular white home-visit-media-text__btn">
                         Перейти
                     </Link>
                 </div>

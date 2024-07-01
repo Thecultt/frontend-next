@@ -1,4 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
+
+import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 
 const ProductInfoTitleBoutiquePopup: React.FC = () => {
     return (
@@ -10,9 +13,12 @@ const ProductInfoTitleBoutiquePopup: React.FC = () => {
                 байера — в таком состоянии, в каком вы бы купили его в бутике бренда.
             </p>
 
-            <a href="/catalog?boutique=true" className="btn product-content-info-title-boutique-popup__btn">
+            <Link
+                href={getCatalogFiltersUrl({ boutique: true })}
+                className="btn product-content-info-title-boutique-popup__btn"
+            >
                 Смотреть все
-            </a>
+            </Link>
         </div>
     );
 };

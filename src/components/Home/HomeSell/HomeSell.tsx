@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
+import { APP_ROUTE } from '@/constants/routes';
 import HomeSellImage from '@/assets/images/home/home-sell.jpg';
 
 const HomeSell: React.FC = () => {
@@ -20,7 +21,7 @@ const HomeSell: React.FC = () => {
                 </p>
 
                 <Link
-                    href="/sell"
+                    href={APP_ROUTE.sell.info}
                     className="btn home-sell-text__btn"
                     onClick={() => {
                         window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.

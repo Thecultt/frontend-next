@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useMediaQuery } from 'usehooks-ts';
 
 import { MEDIA_SIZES } from '@/constants/styles';
+import { APP_ROUTE } from '@/constants/routes';
 
 import HomeAboutImage from '@/assets/images/home/home-about.jpg';
 import HomeAboutImageMedia from '@/assets/images/home/home-about-media.jpg';
@@ -30,7 +31,7 @@ const HomeAbout: React.FC = () => {
                             истории. Вместе мы формируем КУЛЬТуру нового потребления.
                         </p>
 
-                        <Link href="/about" className="home-about-text__btn">
+                        <Link href={APP_ROUTE.about} className="home-about-text__btn">
                             Перейти
                         </Link>
                     </div>
@@ -49,7 +50,7 @@ const HomeAbout: React.FC = () => {
                             истории. Вместе мы формируем КУЛЬТуру нового потребления.
                         </p>
 
-                        <Link href="/about" className="home-about-text__btn">
+                        <Link href={APP_ROUTE.about} className="home-about-text__btn">
                             Перейти
                         </Link>
                     </div>

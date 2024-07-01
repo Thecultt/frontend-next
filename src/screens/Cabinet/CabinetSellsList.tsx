@@ -44,7 +44,7 @@ const CabinetSellsList: React.FC = () => {
             <CabinetSellsListPaymentInfoMessage />
 
             <div className="cabinet-sells-list-top">
-                <Link href={APP_ROUTE.cabinet.sell} className="btn cabinet-sells-list-top__add">
+                <Link href={APP_ROUTE.sell.create} className="btn cabinet-sells-list-top__add">
                     Оставить заявку
                     <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path

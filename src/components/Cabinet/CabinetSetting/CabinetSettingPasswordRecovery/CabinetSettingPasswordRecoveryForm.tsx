@@ -1,7 +1,8 @@
 import React from 'react';
+import Link from 'next/link';
 
 import { Input } from '@/components';
-import Link from 'next/link';
+import { APP_ROUTE } from '@/constants/routes';
 
 const CabinetSettingPasswordRecoveryForm: React.FC = () => {
     return (
@@ -27,7 +28,7 @@ const CabinetSettingPasswordRecoveryForm: React.FC = () => {
                     <Input type="text" name="" label="Повторите пароль" />
                 </div>
 
-                <Link href="/" className="cabinet-setting-password-recovery-form-content__link">
+                <Link href={APP_ROUTE.home} className="cabinet-setting-password-recovery-form-content__link">
                     Забыли пароль?
                 </Link>
 

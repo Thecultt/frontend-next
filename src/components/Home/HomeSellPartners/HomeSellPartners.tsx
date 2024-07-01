@@ -1,6 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 
+import { APP_ROUTE } from '@/constants/routes';
+import { CabinetSellTypes } from '@/redux/types/ICabinetSell';
+
 const HomeSellPartners: React.FC = () => {
     return (
         <div className="home-sell-partners">
@@ -12,7 +15,10 @@ const HomeSellPartners: React.FC = () => {
                     вещи. Его можно будет потратить при покупке любого товара на THE CULTT.
                 </p>
 
-                <Link href="/cabinet/sell?type=exchange" className="btn home-sell-partners-block__btn">
+                <Link
+                    href={`${APP_ROUTE.sell.create}?type=${CabinetSellTypes.EXCHANGE}`}
+                    className="btn home-sell-partners-block__btn"
+                >
                     Подробнее
                 </Link>
             </div>
@@ -25,7 +31,7 @@ const HomeSellPartners: React.FC = () => {
                     аксессуары. Это сэкономит время, силы и даже нервы.
                 </p>
 
-                <Link href="/vipservice" className="btn home-sell-partners-block__btn">
+                <Link href={APP_ROUTE.vipService} className="btn home-sell-partners-block__btn">
                     Подробнее
                 </Link>
             </div>

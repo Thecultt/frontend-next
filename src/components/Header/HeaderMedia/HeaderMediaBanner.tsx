@@ -1,11 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 
+import { APP_ROUTE } from '@/constants/routes';
 import HeaderMediaMenuBannerConcierge from '@/assets/images/header-media-menu-banner-concierge.jpg';
 
 const HeaderMediaBanner: React.FC = () => {
     return (
-        <Link href="/vipservice" className="header-media-modal-menu-banner">
+        <Link href={APP_ROUTE.vipService} className="header-media-modal-menu-banner">
             <div
                 className="header-media-modal-menu-banner-image"
                 style={{
