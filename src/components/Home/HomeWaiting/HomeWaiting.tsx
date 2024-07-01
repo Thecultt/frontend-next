@@ -15,7 +15,12 @@ const HomeWaiting: React.FC = () => {
                     Подпишитесь на товар, и мы уведомим вас, когда он будет в наличии.
                 </p>
 
-                <Link href={`#${WaitingPopupType.Form}`} className="btn home-waiting-text__btn">
+                <Link
+                    href={`#${WaitingPopupType.Form}`}
+                    className="btn home-waiting-text__btn"
+                    scroll={false}
+                    prefetch={false}
+                >
                     Оставить заявку
                 </Link>
             </div>

@@ -8,6 +8,7 @@ import { HeaderMediaLinkTab, Footer } from '@/components';
 import { CATEGORIES, SORT } from '@/constants/catalog';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { APP_ROUTE } from '@/constants/routes';
+import { ReglogStateTypesNotLogin } from '@/types/reglog';
 
 import Logo from '@/assets/images/logo.svg';
 
@@ -127,7 +128,10 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                     </Link>
 
                     <div className="header-media-icon-group">
-                        <Link href={isLoggedIn ? '/cabinet/setting' : '#reglog'} className="header-media-icon">
+                        <Link
+                            href={isLoggedIn ? APP_ROUTE.cabinet.setting : `#${ReglogStateTypesNotLogin.REGLOG}`}
+                            className="header-media-icon"
+                        >
                             <svg
                                 width="24"
                                 height="24"

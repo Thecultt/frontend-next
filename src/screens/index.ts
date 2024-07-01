@@ -14,3 +14,4 @@ export { default as Product } from './Product/Product';
 export { default as CabinetHistoryOrders } from './Cabinet/CabinetHistoryOrders';
 export { default as CabinetSellsList } from './Cabinet/CabinetSellsList';
 export { default as CabinetFavorites } from './Cabinet/CabinetFavorites';
+export { default as CabinetWaitingList } from './Cabinet/CabinetWaitingList';

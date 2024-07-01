@@ -175,6 +175,9 @@ export { default as CabinetSellsListPaymentInfoPopupForm } from './Cabinet/Cabin
 export { default as CabinetFavoritesNull } from './Cabinet/CabinetFavorites/CabinetFavoritesNull';
 export { default as CabinetFavoritesShare } from './Cabinet/CabinetFavorites/CabinetFavoritesShare';
 
+// CabinetWaitingList
+export { default as CabinetWaitingListItem } from './Cabinet/CabinetWaitingList/CabinetWaitingListItem';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';

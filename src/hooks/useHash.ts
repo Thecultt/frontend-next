@@ -20,11 +20,11 @@ export const useHash = () => {
     const isClient = useIsClient();
 
     const changeHash = (newHash: string) => {
-        router.replace(getPath({ pathname, search, hash: newHash }));
+        router.replace(getPath({ pathname, search, hash: newHash }), { scroll: false });
     };
 
     const removeHash = () => {
-        router.replace(getPath({ pathname, search }));
+        router.replace(getPath({ pathname, search }), { scroll: false });
     };
 
     React.useEffect(() => {

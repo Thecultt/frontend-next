@@ -46,7 +46,12 @@ const ReglogLogin: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, i
                         Продолжить
                     </button>
                 )}
-                <Link href="#recovery_password" className="reglog-content-form-btn__link">
+                <Link
+                    href="#recovery_password"
+                    className="reglog-content-form-btn__link"
+                    scroll={false}
+                    prefetch={false}
+                >
                     Забыли пароль?
                 </Link>
             </div>

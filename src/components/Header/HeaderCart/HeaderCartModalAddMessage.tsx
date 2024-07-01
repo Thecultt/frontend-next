@@ -8,6 +8,7 @@ import { HeaderCartModalItem } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { CartItem } from '@/models/ICartItem';
+import { ReglogStateTypesNotLogin } from '@/types/reglog';
 
 interface HeaderCartModalAddMessageProps {
     state: boolean;
@@ -78,9 +79,11 @@ const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ s
                 </button>
 
                 <Link
-                    href={isLoadedUser ? '/order' : '/?redirect=/order#reglog'}
+                    href={isLoadedUser ? '/order' : `/?redirect=/order#${ReglogStateTypesNotLogin.REGLOG}`}
                     className="btn header-block-cart-modal-btn-more__btn"
                     onClick={setState}
+                    scroll={false}
+                    prefetch={false}
                 >
                     Оформить
                 </Link>

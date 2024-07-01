@@ -36,7 +36,12 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
                     <Link href="/help-delivery" className="footer-block-menu-block__link">
                         Доставка и оплата
                     </Link>
-                    <Link href={`#${WaitingPopupType.Form}`} className="footer-block-menu-block__link">
+                    <Link
+                        href={`#${WaitingPopupType.Form}`}
+                        className="footer-block-menu-block__link"
+                        scroll={false}
+                        prefetch={false}
+                    >
                         Лист ожидания
                     </Link>
                     <Link href="/brands" className="footer-block-menu-block__link">
