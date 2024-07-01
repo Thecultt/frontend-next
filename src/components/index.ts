@@ -165,6 +165,12 @@ export { default as CabinetHistoryOrdersItem } from './Cabinet/CabinetHistoryOrd
 export { default as CabinetHistoryOrdersItemProduct } from './Cabinet/CabinetHistoryOrders/CabinetHistoryOrdersItemProduct';
 export { default as CabinetHistoryOrdersNull } from './Cabinet/CabinetHistoryOrders/CabinetHistoryOrdersNull';
 
+// CabinetSellsList
+export { default as CabinetSellsListItem } from './Cabinet/CabinetSellsList/CabinetSellsListItem';
+// CabinetSellsListPaymentInfo
+export { default as CabinetSellsListPaymentInfoMessage } from './Cabinet/CabinetSellsList/CabinetSellsListPaymentInfo/CabinetSellsListPaymentInfoMessage';
+export { default as CabinetSellsListPaymentInfoPopupForm } from './Cabinet/CabinetSellsList/CabinetSellsListPaymentInfo/CabinetSellsListPaymentInfoPopupForm';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';

@@ -10,5 +10,6 @@ export const APP_ROUTE = {
         favorites: '/cabinet/favorites',
         waiting: '/cabinet/waiting',
         setting: '/cabinet/setting',
+        sell: '/cabinet/sell',
     },
 } as const;
