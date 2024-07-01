@@ -178,6 +178,20 @@ export { default as CabinetFavoritesShare } from './Cabinet/CabinetFavorites/Cab
 // CabinetWaitingList
 export { default as CabinetWaitingListItem } from './Cabinet/CabinetWaitingList/CabinetWaitingListItem';
 
+// CabinetSetting
+export { default as CabinetSettingBrandBlock } from './Cabinet/CabinetSetting/CabinetSettingBrandBlock';
+// CabinetSettingInfoBlock
+export { default as CabinetSettingInfoBlock } from './Cabinet/CabinetSetting/CabinetSettingInfoBlock/CabinetSettingInfoBlock';
+// CabinetSettingContactBlock
+export { default as CabinetSettingContactBlock } from './Cabinet/CabinetSetting/CabinetSettingContactBlock/CabinetSettingContactBlock';
+// CabinetSettingPasswordRecovery
+export { default as CabinetSettingPasswordRecovery } from './Cabinet/CabinetSetting/CabinetSettingPasswordRecovery/CabinetSettingPasswordRecovery';
+export { default as CabinetSettingPasswordRecoveryForm } from './Cabinet/CabinetSetting/CabinetSettingPasswordRecovery/CabinetSettingPasswordRecoveryForm';
+// CabinetSettingAddressBlock
+export { default as CabinetSettingAddressBlock } from './Cabinet/CabinetSetting/CabinetSettingAddressBlock/CabinetSettingAddressBlock';
+// CabinetSettingPaymentBlock
+export { default as CabinetSettingPaymentBlock } from './Cabinet/CabinetSetting/CabinetSettingPaymentBlock/CabinetSettingPaymentBlock';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';

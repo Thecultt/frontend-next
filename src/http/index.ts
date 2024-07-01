@@ -45,7 +45,9 @@ $api.interceptors.response.use(
                     // return $api.request(originalRequest);
 
                     localStorageService?.removeItem(LS_KEYS.accessToken);
-                    window.location.href = APP_ROUTE.home;
+                    if (window.location.href !== APP_ROUTE.home) {
+                        window.location.href = APP_ROUTE.home;
+                    }
                 } catch (e) {
                     // if (localStorage.getItem("accessToken")) {
                     // 	await $api.post("/users/revoke")
