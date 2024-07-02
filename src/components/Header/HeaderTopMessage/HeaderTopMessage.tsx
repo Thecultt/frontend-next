@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 
 import { LS_KEYS } from '@/constants/keys';
 import { useLS } from '@/hooks/useLS';
+import { APP_ROUTE } from '@/constants/routes';
 
 const HeaderTopMessage: React.FC = () => {
     const pathname = usePathname();
@@ -15,7 +16,7 @@ const HeaderTopMessage: React.FC = () => {
 
     return (
         <div className="header-top-message">
-            <Link href="/visit" className="header-top-message-link" onClick={onClose}>
+            <Link href={APP_ROUTE.visit} className="header-top-message-link" onClick={onClose}>
                 <div className="container">
                     <div className="header-top-message-link-wrapper">
                         <p className="header-top-message-link__text">Визит в THE CULTT</p>

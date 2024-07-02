@@ -126,7 +126,12 @@ const Reglog: React.FC = () => {
     return (
         <Popup state={state} setState={closeFunc} stateContent={!isChange}>
             {visibleBackTypes.includes(type) && (
-                <Link href="#reglog" className="reglog-content-form-back">
+                <Link
+                    href={`#${ReglogStateTypesNotLogin.REGLOG}`}
+                    className="reglog-content-form-back"
+                    scroll={false}
+                    prefetch={false}
+                >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M15 18L9 12L15 6"

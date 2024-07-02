@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { getClassNames } from '@/functions/getClassNames';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
+import { APP_ROUTE } from '@/constants/routes';
 
 import { HeaderHoverMenuCategory } from '../Header';
 
@@ -132,7 +133,7 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
 
                                     <Link
                                         onClick={onClose}
-                                        href="/brands"
+                                        href={APP_ROUTE.brands}
                                         className="header-hover-menu-list-coll__item last"
                                     >
                                         Все бренды

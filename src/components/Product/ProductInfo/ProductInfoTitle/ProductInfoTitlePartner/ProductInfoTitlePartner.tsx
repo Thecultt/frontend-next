@@ -6,9 +6,9 @@ const ProductInfoTitlePartner: React.FC = () => {
     const [isStatePopup, setIsStatePopup] = React.useState<boolean>(false);
 
     return (
-        <div className="product-content-info-title-boutique">
-            <div className="product-content-info-title-boutique-badge" onClick={() => setIsStatePopup(true)}>
-                <span className="product-content-info-title-boutique-badge__text">От партнеров</span>
+        <div className="product-content-info-title-badges-badge">
+            <div className="product-content-info-title-badges-badge-label" onClick={() => setIsStatePopup(true)}>
+                <span className="product-content-info-title-badges-badge-label__text">От партнеров</span>
 
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

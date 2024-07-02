@@ -7,6 +7,8 @@ import { changeCheckCartItem, removeCartItem } from '@/redux/actions/cart';
 import { HeaderCartModalItem } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { useAuthUser } from '@/hooks/useAuthUser';
+import { ReglogStateTypesNotLogin } from '@/types/reglog';
+import { APP_ROUTE } from '@/constants/routes';
 
 interface HeaderCartModalProps {
     state: boolean;
@@ -118,11 +120,17 @@ const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) =>
                         </div>
 
                         <Link
-                            href={isLoadedUser ? '/order' : '/?redirect=/order#reglog'}
+                            href={
+                                isLoadedUser
+                                    ? APP_ROUTE.order
+                                    : `/?redirect=${APP_ROUTE.order}#${ReglogStateTypesNotLogin.REGLOG}`
+                            }
                             className={getClassNames('btn header-block-cart-modal-btn__btn', {
                                 disabled: !Object.keys(items).filter((key) => items[key].checked).length,
                             })}
                             onClick={isLoadedUser ? setState : undefined}
+                            scroll={false}
+                            prefetch={false}
                         >
                             Перейти к заказу
                         </Link>

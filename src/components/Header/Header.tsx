@@ -249,7 +249,7 @@ const Header: React.FC = () => {
                         <div className="header-wrapper">
                             <div className="header-wrapper-block">
                                 <div className="header-block">
-                                    <Link href="/" className="header-block-logo">
+                                    <Link href={APP_ROUTE.home} className="header-block-logo">
                                         <img src={Logo.src} alt="THECULTT" className="header-block-logo__image" />
                                     </Link>
 
@@ -265,7 +265,7 @@ const Header: React.FC = () => {
                                 <div className="header-block">
                                     <div className="header-block-btn">
                                         <Link
-                                            href={isLoggedIn ? '/cabinet/sell' : 'sell'}
+                                            href={APP_ROUTE.sell[isLoggedIn ? 'create' : 'info']}
                                             className="header-block-btn__btn"
                                             onClick={() => {
                                                 window?.dataLayer?.push({
@@ -282,7 +282,7 @@ const Header: React.FC = () => {
                                             Продать
                                         </Link>
                                         <Link
-                                            href="/exchange"
+                                            href={APP_ROUTE.exchange}
                                             className="header-block-btn__btn regular"
                                             onClick={() => {
                                                 window?.dataLayer?.push({
@@ -391,15 +391,15 @@ const Header: React.FC = () => {
                                     </Link>
                                 ))}
 
-                                <Link href="/concierge" className="header-menu__link">
+                                <Link href={APP_ROUTE.concierge.root} className="header-menu__link">
                                     Консьерж
                                 </Link>
 
-                                <Link href="/brands" className="header-menu__link">
+                                <Link href={APP_ROUTE.brands} className="header-menu__link">
                                     Бренды
                                 </Link>
 
-                                <Link href="/auth" className="header-menu__link">
+                                <Link href={APP_ROUTE.auth} className="header-menu__link">
                                     Подлинность
                                 </Link>
                                 {/*

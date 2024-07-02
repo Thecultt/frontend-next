@@ -4,7 +4,7 @@ import { HeaderUserMenu } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 
 const HeaderUser: React.FC = () => {
-    const [state, setState] = React.useState<boolean>(false);
+    const [state, setState] = React.useState(false);
 
     const PopupRef = React.useRef<HTMLDivElement>(null);
 
@@ -22,8 +22,12 @@ const HeaderUser: React.FC = () => {
     //     setState(false);
     // }, [pathname]);
 
-    const toggleClickModarUser = () => {
+    const toggleClickModalUser = () => {
         setState(!state);
+    };
+
+    const closeModalUser = () => {
+        setState(false);
     };
 
     const togglePopup = (e: any) => {
@@ -38,7 +42,7 @@ const HeaderUser: React.FC = () => {
                 className={getClassNames('header-block-user__icon', {
                     active: state,
                 })}
-                onClick={toggleClickModarUser}
+                onClick={toggleClickModalUser}
             >
                 <svg width="38" height="38" viewBox="0 0 189 188" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="0.487061" y="0.00390625" width="188.026" height="187.885" rx="93.9425" fill="#F7F4F0" />
@@ -57,7 +61,7 @@ const HeaderUser: React.FC = () => {
                 </svg>
             </button>
 
-            <HeaderUserMenu state={state} />
+            <HeaderUserMenu state={state} onClose={closeModalUser} />
         </div>
     );
 };

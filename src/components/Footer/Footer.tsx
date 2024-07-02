@@ -10,6 +10,7 @@ import { FooterMenuBlock, FooterEmailSubscribe } from '@/components';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { getClassNames } from '@/functions/getClassNames';
 import { WaitingPopupType } from '@/types/waiting';
+import { APP_ROUTE } from '@/constants/routes';
 
 interface FooterProps {
     transparent?: boolean;
@@ -26,19 +27,24 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
             title: 'Покупателям',
             children: (
                 <>
-                    <Link href="/auth" className="footer-block-menu-block__link">
+                    <Link href={APP_ROUTE.auth} className="footer-block-menu-block__link">
                         Гарантия подлинности
                     </Link>
-                    <Link href="/help-return" className="footer-block-menu-block__link">
+                    <Link href={APP_ROUTE.help.return} className="footer-block-menu-block__link">
                         Возврат
                     </Link>
-                    <Link href="/help-delivery" className="footer-block-menu-block__link">
+                    <Link href={APP_ROUTE.help.delivery} className="footer-block-menu-block__link">
                         Доставка и оплата
                     </Link>
-                    <Link href={`#${WaitingPopupType.Form}`} className="footer-block-menu-block__link">
+                    <Link
+                        href={`#${WaitingPopupType.Form}`}
+                        className="footer-block-menu-block__link"
+                        scroll={false}
+                        prefetch={false}
+                    >
                         Лист ожидания
                     </Link>
-                    <Link href="/brands" className="footer-block-menu-block__link">
+                    <Link href={APP_ROUTE.brands} className="footer-block-menu-block__link">
                         Бренды
                     </Link>
                 </>
@@ -48,16 +54,16 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
             title: 'Продавцам',
             children: (
                 <>
-                    <Link href="/sell" className="footer-block-menu-block__link">
+                    <Link href={APP_ROUTE.sell.info} className="footer-block-menu-block__link">
                         Продать товар
                     </Link>
-                    <Link href="/exchange" className="footer-block-menu-block__link">
+                    <Link href={APP_ROUTE.exchange} className="footer-block-menu-block__link">
                         Обменять товар
                     </Link>
-                    <Link href="/vipservice" className="footer-block-menu-block__link">
+                    <Link href={APP_ROUTE.vipService} className="footer-block-menu-block__link">
                         VIP-сервис
                     </Link>
-                    <Link href="/sell/brands" className="footer-block-menu-block__link">
+                    <Link href={APP_ROUTE.sell.infoBrands} className="footer-block-menu-block__link">
                         Бренд-лист
                     </Link>
                 </>
@@ -67,7 +73,7 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
             title: 'О компании',
             children: (
                 <>
-                    <Link href="/about" className="footer-block-menu-block__link">
+                    <Link href={APP_ROUTE.about} className="footer-block-menu-block__link">
                         О компании
                     </Link>
                     <a
@@ -99,13 +105,13 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
             title: 'Связь с нами',
             children: (
                 <>
-                    <Link href="/help/all" className="footer-block-menu-block__link">
+                    <Link href={APP_ROUTE.help.all} className="footer-block-menu-block__link">
                         Вопросы и ответы
                     </Link>
-                    <Link href="/contact" className="footer-block-menu-block__link">
+                    <Link href={APP_ROUTE.contact} className="footer-block-menu-block__link">
                         Контакты
                     </Link>
-                    <Link href="/visit" className="footer-block-menu-block__link">
+                    <Link href={APP_ROUTE.visit} className="footer-block-menu-block__link">
                         Попасть в офис
                     </Link>
                 </>
@@ -124,7 +130,7 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
             >
                 <div className="container">
                     <div className="footer-wrapper">
-                        <Link href="/" className="footer-logo">
+                        <Link href={APP_ROUTE.home} className="footer-logo">
                             <img src={Logo.src} alt="TheCultt" className="footer-logo__image" />
                         </Link>
 

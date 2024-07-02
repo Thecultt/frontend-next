@@ -4,6 +4,7 @@ import store from '@/redux/store';
 import { setIsNotificationServerError } from '@/redux/actions/notifications_server';
 import { localStorageService } from '@/services/storage';
 import { LS_KEYS } from '@/constants/keys';
+import { APP_ROUTE } from '@/constants/routes';
 
 const $api = axios.create({
     withCredentials: false,
@@ -44,7 +45,9 @@ $api.interceptors.response.use(
                     // return $api.request(originalRequest);
 
                     localStorageService?.removeItem(LS_KEYS.accessToken);
-                    window.location.reload();
+                    if (window.location.href !== APP_ROUTE.home) {
+                        window.location.href = APP_ROUTE.home;
+                    }
                 } catch (e) {
                     // if (localStorage.getItem("accessToken")) {
                     // 	await $api.post("/users/revoke")

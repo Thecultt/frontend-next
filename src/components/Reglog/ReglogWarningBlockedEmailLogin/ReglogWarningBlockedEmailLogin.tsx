@@ -1,4 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
+
+import { ReglogStateTypesNotLogin } from '@/types/reglog';
 
 const ReglogWarningBlockedEmailLogin: React.FC = () => {
     return (
@@ -26,13 +29,23 @@ const ReglogWarningBlockedEmailLogin: React.FC = () => {
             </p>
 
             <div className="reglog-content-text-btns">
-                <a href="#reglog" className="btn reglog-content-text-btns__btn">
+                <Link
+                    href={`#${ReglogStateTypesNotLogin.REGLOG}`}
+                    className="btn reglog-content-text-btns__btn"
+                    scroll={false}
+                    prefetch={false}
+                >
                     Назад
-                </a>
+                </Link>
 
-                <a href="#login" className="btn-regular reglog-content-text-btns__btn">
+                <Link
+                    href={`#${ReglogStateTypesNotLogin.LOGIN}`}
+                    className="btn-regular reglog-content-text-btns__btn"
+                    scroll={false}
+                    prefetch={false}
+                >
                     Согласен
-                </a>
+                </Link>
             </div>
         </div>
     );
