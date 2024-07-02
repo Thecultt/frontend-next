@@ -144,9 +144,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 
                 <div className="product-content-info-title-badges">
                     {from_boutique ? <ProductInfoTitleBoutique /> : null}
-
                     {from_parnter ? <ProductInfoTitlePartner /> : null}
-
                     {price_drop ? <ProductInfoTitleSale /> : null}
                 </div>
 

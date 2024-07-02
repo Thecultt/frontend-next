@@ -41,8 +41,8 @@ const CabinetHistoryOrders: React.FC = () => {
     // const { order: { payment_type, id, cost, products, client_name, client_phone, delivery_type, delivery_address, yandex_split_link } } = useTypedSelector(({ order }) => order)
 
     const successPayment = (orderId: number) => {
-        // window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
-        // window.dataLayer.push({
+        // window?.dataLayer?.push({ ecommerce: null });  // Clear the previous ecommerce object.
+        // window?.dataLayer?.push({
         // 	event: "purchase",
         // 	ecommerce: {
         // 		timestamp: Math.floor(Date.now() / 1000),

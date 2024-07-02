@@ -1,5 +1,5 @@
 import React from 'react';
-import { createPortal } from 'react-dom';
+// import { createPortal } from 'react-dom';
 
 import { getClassNames } from '@/functions/getClassNames';
 
@@ -43,7 +43,9 @@ const Popup: React.FC<PopupProps> = ({ state, setState, stateContent, children }
         }
     };
 
-    return createPortal(
+    // TODO Portal
+
+    return (
         <div
             className={getClassNames('popup', {
                 active: state,
@@ -81,8 +83,7 @@ const Popup: React.FC<PopupProps> = ({ state, setState, stateContent, children }
 
                 {children}
             </div>
-        </div>,
-        document.body,
+        </div>
     );
 };
 
