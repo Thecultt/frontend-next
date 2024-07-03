@@ -4,6 +4,9 @@ export { default as NotFound } from './NotFound/NotFound';
 // Home
 export { default as Home } from './Home/Home';
 
+// Auth
+export { default as Auth } from './Auth/Auth';
+
 // Catalog
 export { default as Catalog } from './Catalog/Catalog';
 
