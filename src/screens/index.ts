@@ -23,5 +23,8 @@ export { default as SellCreate } from './SellCreate/SellCreate';
 // SellInfo
 export { default as SellInfo } from './SellInfo/SellInfo';
 
+// SellInfoBrands
+export { default as SellInfoBrands } from './SellInfoBrands/SellInfoBrands';
+
 // Exchange
 export { default as Exchange } from './Exchange/Exchange';
