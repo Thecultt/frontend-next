@@ -5,6 +5,7 @@ import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { Loader, RenderInput } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
+import { ReglogStateTypesNotLogin } from '@/types/reglog';
 
 import validate from './validate';
 
@@ -47,7 +48,7 @@ const ReglogLogin: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, i
                     </button>
                 )}
                 <Link
-                    href="#recovery_password"
+                    href={`#${ReglogStateTypesNotLogin.RECOVERY_PASSWORD}`}
                     className="reglog-content-form-btn__link"
                     scroll={false}
                     prefetch={false}

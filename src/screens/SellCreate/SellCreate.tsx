@@ -23,7 +23,7 @@ import {
     SellProduct,
 } from '@/components';
 import { sendMindbox } from '@/functions/mindbox';
-import { APP_ROUTE } from '@/constants/routes';
+import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
 
 const SellCreate: React.FC = () => {
     const dispatch = useDispatch();
@@ -276,7 +276,7 @@ const SellCreate: React.FC = () => {
                                     выбрать дату и время посещения.
                                 </p>
                                 <a
-                                    href="https://calendly.com/thecultt_2023/visitsellers"
+                                    href={EXTERNAL_LINKS.calendly}
                                     target="_blank"
                                     className="btn sell-success__link"
                                     rel="noreferrer"

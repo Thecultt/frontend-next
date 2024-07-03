@@ -20,5 +20,8 @@ export { default as CabinetSetting } from './Cabinet/CabinetSetting';
 // SellCreate
 export { default as SellCreate } from './SellCreate/SellCreate';
 
+// SellInfo
+export { default as SellInfo } from './SellInfo/SellInfo';
+
 // Exchange
 export { default as Exchange } from './Exchange/Exchange';
