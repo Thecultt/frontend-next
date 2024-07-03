@@ -11,8 +11,6 @@ import { fetchWaitingList } from '@/redux/actions/waiting';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { WaitingPopupType } from '@/types/waiting';
 
-// TODO WaitingListCreate/WaitingListDelete
-
 const CabinetWaitingList: React.FC = () => {
     const dispatch = useDispatch();
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
