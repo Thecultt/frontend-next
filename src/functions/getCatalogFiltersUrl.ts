@@ -2,7 +2,7 @@ import qs from 'qs';
 import { SortType } from '@/redux/types/IProducts';
 import { APP_ROUTE } from '@/constants/routes';
 
-interface IUrlFilters {
+export interface IUrlFilters {
     search?: string;
     minPrice?: number;
     maxPrice?: number;

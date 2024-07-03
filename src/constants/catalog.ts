@@ -5,7 +5,7 @@ export const CATEGORY_NAMES = {
     accessories: 'Аксессуары',
     shoes: 'Обувь',
     decorations: 'Украшения',
-} as const;
+};
 
 export const CATEGORIES = Object.values(CATEGORY_NAMES);
 

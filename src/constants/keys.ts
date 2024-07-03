@@ -27,3 +27,8 @@ export const LS_KEYS = {
 export const KEYBOARD = {
     enter: 'Enter',
 };
+
+export const SEARCH_PARAMS_KEYS = {
+    id: 'id',
+    redirect: 'redirect',
+};

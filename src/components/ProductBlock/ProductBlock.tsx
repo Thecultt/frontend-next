@@ -6,6 +6,7 @@ import { useWaitingData } from '@/hooks/catalog/useWaitingData';
 import { Product } from '@/models/IProduct';
 import { WaitingPopupType } from '@/types/waiting';
 import { APP_ROUTE } from '@/constants/routes';
+import { useHash } from '@/hooks/useHash';
 
 const totalImageLength = 5;
 
@@ -45,11 +46,13 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
     from_parnter,
     price_drop,
 }) => {
-    const [isCartLocal, setIsCartLocal] = React.useState<boolean>(isCart);
-    const [isFavoriteLocal, setIsFavoriteLocal] = React.useState<boolean>(false);
-    const [currentIndexImage, setCurrentIndexImage] = React.useState<number>(0);
+    const [isCartLocal, setIsCartLocal] = React.useState(isCart);
+    const [isFavoriteLocal, setIsFavoriteLocal] = React.useState(false);
+    const [currentIndexImage, setCurrentIndexImage] = React.useState(0);
 
     const { setWaitingData } = useWaitingData();
+
+    const { changeHash } = useHash();
 
     React.useEffect(() => {
         setCurrentIndexImage(0);
@@ -80,7 +83,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
             size: size || shoe_size,
         });
 
-        window.location.hash = WaitingPopupType.Form;
+        changeHash(WaitingPopupType.Form);
     };
 
     return (
