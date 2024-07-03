@@ -7,6 +7,9 @@ export { default as Home } from './Home/Home';
 // Auth
 export { default as Auth } from './Auth/Auth';
 
+// Brands
+export { default as Brands } from './Brands/Brands';
+
 // Catalog
 export { default as Catalog } from './Catalog/Catalog';
 

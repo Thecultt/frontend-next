@@ -87,6 +87,12 @@ export { default as ReglogRecoveryPasswordSuccess } from './Reglog/ReglogRecover
 // ReglogRecoveryPasswordConfirmed
 export { default as ReglogRecoveryPasswordConfirmed } from './Reglog/ReglogRecoveryPasswordConfirmed/ReglogRecoveryPasswordConfirmed';
 
+// Brands
+export { default as BrandsSearch } from './Brands/BrandsSearch';
+// BrandsList
+export { default as BrandsList } from './Brands/BrandsList/BrandsList';
+export { default as BrandsListBlock } from './Brands/BrandsList/BrandsListBlock';
+
 // Catalog
 // CatalogBanner
 export { default as CatalogBanner } from './Catalog/CatalogBanner/CatalogBanner';
