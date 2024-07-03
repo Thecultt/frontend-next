@@ -210,6 +210,15 @@ export { default as SellContact } from './Sell/SellContact/SellContact';
 export { default as SellDelivery } from './Sell/SellDelivery/SellDelivery';
 export { default as SellDeliveryTypes } from './Sell/SellDelivery/SellDeliveryTypes';
 
+// WaitingListCreate
+export { default as WaitingListCreate } from './WaitingList/WaitingListCreate/WaitingListCreate';
+export { default as WaitingListCreateForm } from './WaitingList/WaitingListCreate/WaitingListCreateForm';
+export { default as WaitingListCreateSuccess } from './WaitingList/WaitingListCreate/WaitingListCreateSuccess';
+
+// WaitingListDelete
+export { default as WaitingListDelete } from './WaitingList/WaitingListDelete/WaitingListDelete';
+export { default as WaitingListDeleteConfirm } from './WaitingList/WaitingListDelete/WaitingListDeleteConfirm';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';

@@ -13,7 +13,7 @@ import { fetchProductsFilters } from '@/redux/actions/products_filters';
 import { fetchSelections } from '@/redux/actions/selections';
 import { fetchUser } from '@/redux/actions/user';
 import NoSsr from '@/components/NoSsr/NoSsr';
-import { Footer, Header, NotificationsServer, Reglog } from '@/components';
+import { Footer, Header, NotificationsServer, Reglog, WaitingListCreate, WaitingListDelete } from '@/components';
 import { useAppUtm } from '@/hooks/useAppUtm';
 import { useReplaceLS } from '@/hooks/useReplaceLS';
 import { APP_ROUTE } from '@/constants/routes';
@@ -71,10 +71,8 @@ export const App = ({ children }: { children: React.ReactNode }) => {
             <NoSsr>
                 <Reglog />
                 <NotificationsServer />
-                {/* TODO
-                    <WaitingListCreate />
-                    <WaitingListDelete />
-                */}
+                <WaitingListCreate />
+                <WaitingListDelete />
             </NoSsr>
             <div className="wrapper" id="wrapper">
                 <NoSsr>

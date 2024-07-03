@@ -17,6 +17,7 @@ import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { CATEGORY_NAMES } from '@/constants/catalog';
 import { useWaitingData } from '@/hooks/catalog/useWaitingData';
 import { WaitingPopupType } from '@/types/waiting';
+import { useHash } from '@/hooks/useHash';
 
 const ProductInfoTitle: React.FC<ProductPage> = ({
     id,
@@ -39,6 +40,8 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
     from_parnter,
 }) => {
     const dispatch = useDispatch();
+
+    const { changeHash } = useHash();
 
     const cartItems = useTypedSelector(({ cart }) => cart.items);
     const favoritesItems = useTypedSelector(({ favorites }) => favorites.items);
@@ -121,7 +124,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
             size: size || shoe_size,
         });
 
-        window.location.hash = WaitingPopupType.Form;
+        changeHash(WaitingPopupType.Form);
     };
 
     return (

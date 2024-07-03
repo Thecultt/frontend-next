@@ -4,7 +4,6 @@ import $api from '@/http';
 import { WaitingListItem } from '@/models/IWaitingListItem';
 import { localStorageService } from '@/services/storage';
 import { LS_KEYS } from '@/constants/keys';
-import { WaitingPopupType } from '@/types/waiting';
 
 import { WaitingActionTypes, WaitingActions } from '../types/IWaiting';
 
@@ -18,7 +17,10 @@ export const fetchWaitingList = () => async (dispatch: Dispatch<WaitingActions>)
 };
 
 export const sendNewWaitingListItem =
-    (item: { category: string; subcategory: string; brand: string; model_name: string; size: string }) =>
+    (
+        item: { category: string; subcategory: string; brand: string; model_name: string; size: string },
+        onSuccess?: () => void,
+    ) =>
     async (dispatch: Dispatch<any>) => {
         const data: any = await $api.post(`/waitinglist_request/`, item);
 
@@ -35,12 +37,12 @@ export const sendNewWaitingListItem =
         });
 
         localStorageService?.removeItem(LS_KEYS.waiting);
-        window.location.hash = WaitingPopupType.Success;
+        onSuccess?.();
     };
 
-export const sendDeleteWaitingListItem = (id: string) => async (dispatch: Dispatch<any>) => {
+export const sendDeleteWaitingListItem = (id: string, onSuccess?: () => void) => async (dispatch: Dispatch<any>) => {
     await $api.delete(`/delete_waitinglist_request/${id}`);
 
     dispatch(fetchWaitingList());
-    window.location.hash = '';
+    onSuccess?.();
 };

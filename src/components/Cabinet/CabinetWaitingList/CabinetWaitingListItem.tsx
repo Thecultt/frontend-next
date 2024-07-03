@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Link from 'next/link';
 
 import { getClassNames } from '@/functions/getClassNames';
 import { WaitingListItem } from '@/models/IWaitingListItem';
 import { APP_ROUTE } from '@/constants/routes';
+import { IUrlFilters, getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 
 const CabinetWaitingListItem: React.FC<WaitingListItem> = ({
     num,
@@ -15,19 +16,26 @@ const CabinetWaitingListItem: React.FC<WaitingListItem> = ({
     size,
     num_products,
 }) => {
-    const params: { [key: string]: string } = {};
+    const getCatalogLink = useCallback(() => {
+        const params: IUrlFilters = {
+            categories: [category],
+            availability: ['Доступно'],
+        };
 
-    const [paramsString, setParamsString] = React.useState<string>();
+        if (subcategory !== '' && subcategory) {
+            params['types'] = [subcategory];
+        }
 
-    React.useEffect(() => {
-        params['categories'] = category;
+        if (brand !== '' && brand) {
+            params['brands'] = [brand];
+        }
 
-        if (subcategory !== '' && subcategory) params['types'] = subcategory;
-        if (brand !== '' && brand) params['brands'] = brand;
-        if (model_name !== '' && model_name) params['models'] = model_name;
+        if (model_name !== '' && model_name) {
+            params['models'] = [model_name];
+        }
 
-        setParamsString(new URLSearchParams(params).toString());
-    }, []);
+        return getCatalogFiltersUrl(params);
+    }, [brand, category, model_name, subcategory]);
 
     return (
         <div className="cabinet-waiting-list-item-wrapper">
@@ -45,7 +53,7 @@ const CabinetWaitingListItem: React.FC<WaitingListItem> = ({
                     <h3 className="cabinet-waiting-list-item-title__title">Подписка №{num}</h3>
 
                     <Link
-                        href={`${APP_ROUTE.catalog}?${paramsString}`}
+                        href={getCatalogLink()}
                         className={getClassNames('cabinet-waiting-list-item-title__subtitle', {
                             disabled: !num_products,
                         })}

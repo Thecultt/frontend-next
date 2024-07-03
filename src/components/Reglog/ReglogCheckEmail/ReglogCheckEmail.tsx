@@ -1,9 +1,12 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
+import { useSearchParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { Loader, RenderInput } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
+import { SEARCH_PARAMS_KEYS } from '@/constants/keys';
+import { APP_ROUTE } from '@/constants/routes';
 
 import validate from './validate';
 
@@ -13,6 +16,9 @@ const ReglogCheckEmail: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     invalid,
     submitting,
 }) => {
+    const searchParams = useSearchParams();
+    const redirectParam = searchParams.get(SEARCH_PARAMS_KEYS.redirect);
+
     const { isSend, email } = useTypedSelector(({ check_email }) => check_email);
 
     React.useEffect(() => {
@@ -25,7 +31,7 @@ const ReglogCheckEmail: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
     return (
         <form className="reglog-content-form reglog-content-form-register" onSubmit={handleSubmit}>
-            {new URLSearchParams(window.location.search).get('redirect') === '/order' ? (
+            {redirectParam === APP_ROUTE.order ? (
                 <>
                     <h3 className="reglog-content-form__title">Войдите в аккаунт, чтобы продолжить</h3>
 

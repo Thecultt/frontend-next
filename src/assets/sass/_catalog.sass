@@ -584,6 +584,7 @@
 		&-block
 			width: 100%
 			height: auto !important
+			transition: padding .2s ease
 
 			+open
 
@@ -605,6 +606,9 @@
 				background-position: center 0 !important
 
 			@media (hover: hover)
+				&:hover
+					padding-bottom: 67px
+
 				&:hover .product-block-cover
 					padding-top: calc(150% - 60px)
 
