@@ -219,6 +219,18 @@ export { default as WaitingListCreateSuccess } from './WaitingList/WaitingListCr
 export { default as WaitingListDelete } from './WaitingList/WaitingListDelete/WaitingListDelete';
 export { default as WaitingListDeleteConfirm } from './WaitingList/WaitingListDelete/WaitingListDeleteConfirm';
 
+// SellInfo
+export { default as SellInfoMain } from './SellInfo/SellInfoMain';
+export { default as SellInfoSteps } from './SellInfo/SellInfoSteps';
+export { default as SellInfoCooperation } from './SellInfo/SellInfoCooperation';
+export { default as SellInfoVipService } from './SellInfo/SellInfoVipService';
+export { default as SellInfoService } from './SellInfo/SellInfoService';
+export { default as SellInfoCategories } from './SellInfo/SellInfoCategories';
+export { default as SellInfoProcess } from './SellInfo/SellInfoProcess';
+export { default as SellInfoCommission } from './SellInfo/SellInfoCommission';
+export { default as SellInfoCommissionService } from './SellInfo/SellInfoCommissionService';
+export { default as SellInfoLots } from './SellInfo/SellInfoLots';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';

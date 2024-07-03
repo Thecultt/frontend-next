@@ -1,11 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, Field } from 'redux-form';
+import Link from 'next/link';
 
 import { CabinetSellStepKeys } from '@/redux/types/ICabinetSell';
 import { setCabinetSellCurrentStep } from '@/redux/actions/cabinet_sell';
 import { SellBackBtn, RenderInput } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
+import { APP_ROUTE } from '@/constants/routes';
 
 import validate from './validate';
 
@@ -25,9 +27,9 @@ const SellProduct: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, i
             <h3 className="sell-block__title">Выбор товара для обмена</h3>
             <p className="sell-block__subtitle">
                 1. Перейдите в{' '}
-                <a href="/catalog" target="_blank">
+                <Link href={APP_ROUTE.catalog} target="_blank" rel="noreferrer">
                     Каталог
-                </a>{' '}
+                </Link>{' '}
                 в новой вкладке. <br />
                 2. Выберите товар на который вы хотели бы обменять свой старый лот. <br />
                 3. Скопируйте ссылку на товар и вставьте в поле для ввода ниже. <br />

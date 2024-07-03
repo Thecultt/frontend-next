@@ -24,6 +24,7 @@ export const APP_ROUTE = {
         return: '/help-return',
         publicOffer: '/help/public-offer',
         userAgreement: '/help/user-agreement',
+        sellers: '/help/sellers',
     },
     sell: {
         create: '/sell-create',
@@ -38,3 +39,7 @@ export const APP_ROUTE = {
         setting: '/cabinet/setting',
     },
 } as const;
+
+export const EXTERNAL_LINKS = {
+    calendly: 'https://calendly.com/thecultt_2023/visitsellers',
+};
