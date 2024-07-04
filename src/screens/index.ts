@@ -34,3 +34,6 @@ export { default as SellInfoBrands } from './SellInfoBrands/SellInfoBrands';
 
 // Exchange
 export { default as Exchange } from './Exchange/Exchange';
+
+// VipService
+export { default as VipService } from './VipService/VipService';
