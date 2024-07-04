@@ -237,6 +237,10 @@ export { default as SellInfoCommission } from './SellInfo/SellInfoCommission';
 export { default as SellInfoCommissionService } from './SellInfo/SellInfoCommissionService';
 export { default as SellInfoLots } from './SellInfo/SellInfoLots';
 
+// VipService
+export { default as VipServiceFormBottom } from './VipService/VipServiceFormBottom';
+export { default as VipServiceFormTop } from './VipService/VipServiceFormTop';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';
