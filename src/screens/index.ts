@@ -10,6 +10,9 @@ export { default as Auth } from './Auth/Auth';
 // About
 export { default as About } from './About/About';
 
+// About
+export { default as AlyonaDoletskaya } from './AlyonaDoletskaya/AlyonaDoletskaya';
+
 // Brands
 export { default as Brands } from './Brands/Brands';
 
