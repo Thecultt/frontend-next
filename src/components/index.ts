@@ -241,6 +241,9 @@ export { default as SellInfoLots } from './SellInfo/SellInfoLots';
 export { default as VipServiceFormBottom } from './VipService/VipServiceFormBottom';
 export { default as VipServiceFormTop } from './VipService/VipServiceFormTop';
 
+// AlyonaDoletskaya
+export { default as AlyonaDoletskayaProductSection } from './AlyonaDoletskaya/AlyonaDoletskayaProductSection/AlyonaDoletskayaProductSection';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';

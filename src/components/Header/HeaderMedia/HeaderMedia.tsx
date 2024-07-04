@@ -329,7 +329,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                             href={getCatalogFiltersUrl({
                                 boutique: false,
                                 price_drop: true,
-                                categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
+                                categories: CATEGORIES,
                                 availability: ['Доступно', 'На примерке'],
                                 page: 1,
                                 sort: 'popular',
