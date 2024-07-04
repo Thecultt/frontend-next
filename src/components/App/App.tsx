@@ -14,9 +14,9 @@ import { fetchSelections } from '@/redux/actions/selections';
 import { fetchUser } from '@/redux/actions/user';
 import NoSsr from '@/components/NoSsr/NoSsr';
 import { Footer, Header, NotificationsServer, Reglog, WaitingListCreate, WaitingListDelete } from '@/components';
-import { useAppUtm } from '@/hooks/useAppUtm';
 import { useReplaceLS } from '@/hooks/useReplaceLS';
 import { APP_ROUTE } from '@/constants/routes';
+import { ClientOnly } from './ClientOnly';
 
 export const App = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useDispatch();
@@ -63,12 +63,12 @@ export const App = ({ children }: { children: React.ReactNode }) => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
-    useAppUtm();
     useReplaceLS();
 
     return (
         <>
             <NoSsr>
+                <ClientOnly />
                 <Reglog />
                 <NotificationsServer />
                 <WaitingListCreate />

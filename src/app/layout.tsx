@@ -1,16 +1,15 @@
-'use client';
-
 import React from 'react';
-import { Provider } from 'react-redux';
 import { compose } from 'redux';
 import { Manrope } from 'next/font/google';
 import Script from 'next/script';
+import { Metadata, Viewport } from 'next/types';
 
 import 'dayjs/locale/ru';
 import dayjs from 'dayjs';
 
 import { App } from '@/components/App/App';
-import store from '@/redux/store';
+import { Providers } from '@/providers/Providers';
+import { APP_TITLE } from '@/constants/app';
 
 import 'react-dots-loader/index.css';
 import '@/assets/sass/style.sass';
@@ -38,24 +37,31 @@ const manropeFont = Manrope({
     display: 'swap',
 });
 
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+};
+
+// Default meta data
+export const metadata: Metadata = {
+    title: APP_TITLE,
+};
+
 // TODO add metrics and external scripts
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
     <html lang="ru" className={manropeFont.variable}>
-        <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        </head>
         <body>
-            <Provider store={store}>
-                <React.Suspense>
-                    <App>{children}</App>
-                </React.Suspense>
-            </Provider>
+            <Providers>
+                <App>{children}</App>
+            </Providers>
 
+            {/* TODO вынести в Scripts */}
             <Script
                 src="https://pay.yandex.ru/sdk/v1/pay.js"
                 strategy="lazyOnload"
-                onLoad={() => console.log('Yandex pay loaded')}
+                // onLoad={() => console.log('Yandex pay loaded')}
             />
         </body>
     </html>
