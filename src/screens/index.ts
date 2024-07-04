@@ -7,6 +7,9 @@ export { default as Home } from './Home/Home';
 // Auth
 export { default as Auth } from './Auth/Auth';
 
+// About
+export { default as About } from './About/About';
+
 // Brands
 export { default as Brands } from './Brands/Brands';
 
