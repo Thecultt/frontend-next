@@ -23,8 +23,8 @@ export const APP_ROUTE = {
         all: '/help/all',
         delivery: '/help-delivery',
         return: '/help-return',
-        publicOffer: '/help/public-offer',
-        userAgreement: '/help/user-agreement',
+        publicOffer: '/public-offer',
+        userAgreement: '/user-agreement',
         sellers: '/help/sellers',
     },
     sell: {

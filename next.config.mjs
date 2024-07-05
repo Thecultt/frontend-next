@@ -17,6 +17,16 @@ const nextConfig = {
                 destination: '/help/all',
                 permanent: true,
             },
+            {
+                source: '/help/public-offerte',
+                destination: '/public-offer',
+                permanent: true,
+            },
+            {
+                source: '/help/user-agreement',
+                destination: '/user-agreement',
+                permanent: true,
+            },
         ];
     },
 };

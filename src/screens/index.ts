@@ -50,3 +50,7 @@ export { default as VipService } from './VipService/VipService';
 
 // Faq
 export { default as Faq } from './Faq/Faq';
+export { default as FaqPublicOfferte } from './Faq/FaqPublicOfferte';
+export { default as FaqUserAgreement } from './Faq/FaqUserAgreement';
+export { default as FaqDelivery } from './Faq/FaqDelivery';
+export { default as FaqReturn } from './Faq/FaqReturn';
