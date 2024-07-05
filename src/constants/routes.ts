@@ -42,4 +42,5 @@ export const APP_ROUTE = {
 
 export const EXTERNAL_LINKS = {
     calendly: 'https://calendly.com/thecultt_2023/visitsellers',
+    advertisingConsent: 'https://drive.google.com/file/d/1boXYWorAMhCifykbhO3UPu4iybSrEZNB/view',
 };

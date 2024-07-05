@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
+import { EXTERNAL_LINKS } from '@/constants/routes';
 import validate from './validate';
 
 const FooterEmailSubscribeForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
@@ -85,7 +86,7 @@ const FooterEmailSubscribeForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
             <p className="footer-email-form__subtitle">
                 Подписываясь на рассылку,{' '}
-                <a href="https://drive.google.com/file/d/1boXYWorAMhCifykbhO3UPu4iybSrEZNB/view">
+                <a href={EXTERNAL_LINKS.advertisingConsent} target="_blank" rel="noreferrer">
                     вы соглашаетесь получать
                 </a>{' '}
                 информационные письма и персональные предложения на указанную почту.

@@ -5,6 +5,7 @@ import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { RenderInput, RenderCheckbox, Loader } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { useHash } from '@/hooks/useHash';
+import { EXTERNAL_LINKS } from '@/constants/routes';
 
 import { validate } from './validate';
 
@@ -88,7 +89,7 @@ const ReglogRegister: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                             component={RenderCheckbox}
                             name="promoCheckbox"
                             label={`
-								Согласен (-а) <a href="https://drive.google.com/file/d/1boXYWorAMhCifykbhO3UPu4iybSrEZNB/view">получать</a> информационные письма и персональные предложения на указанную почту
+								Согласен (-а) <a href="${EXTERNAL_LINKS.advertisingConsent}" target="_blank" rel="noreferrer">получать</a> информационные письма и персональные предложения на указанную почту
 							`}
                             small
                         />

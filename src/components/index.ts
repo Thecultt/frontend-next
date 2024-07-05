@@ -244,6 +244,20 @@ export { default as VipServiceFormTop } from './VipService/VipServiceFormTop';
 // AlyonaDoletskaya
 export { default as AlyonaDoletskayaProductSection } from './AlyonaDoletskaya/AlyonaDoletskayaProductSection/AlyonaDoletskayaProductSection';
 
+// Concierge
+// ConciergeMain
+export { default as ConciergeMainBanner } from './Concierge/ConciergeMain/ConciergeMainBanner';
+export { default as ConciergeMainCustomForm } from './Concierge/ConciergeMain/ConciergeMainCustomForm';
+export { default as ConciergeMainFaq } from './Concierge/ConciergeMain/ConciergeMainFaq';
+export { default as ConciergeMainSteps } from './Concierge/ConciergeMain/ConciergeMainSteps';
+// ConciergeMainCategory
+export { default as ConciergeMainCategory } from './Concierge/ConciergeMain/ConciergeMainCategory/ConciergeMainCategory';
+export { default as ConciergeMainCategoryBrands } from './Concierge/ConciergeMain/ConciergeMainCategory/ConciergeMainCategoryBrands';
+export { default as ConciergeMainCategoryProduct } from './Concierge/ConciergeMain/ConciergeMainCategory/ConciergeMainCategoryProduct';
+// ConciergeProduct
+export { default as ConciergeProductForm } from './Concierge/ConciergeProduct/ConciergeProductForm';
+export { default as ConciergeProductInfo } from './Concierge/ConciergeProduct/ConciergeProductInfo';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';
