@@ -16,6 +16,7 @@ import NoSsr from '@/components/NoSsr/NoSsr';
 import { Footer, Header, NotificationsServer, Reglog, WaitingListCreate, WaitingListDelete } from '@/components';
 import { useReplaceLS } from '@/hooks/useReplaceLS';
 import { APP_ROUTE } from '@/constants/routes';
+
 import { ClientOnly } from './ClientOnly';
 
 export const App = ({ children }: { children: React.ReactNode }) => {

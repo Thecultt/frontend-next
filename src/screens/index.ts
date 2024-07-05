@@ -41,5 +41,9 @@ export { default as SellInfoBrands } from './SellInfoBrands/SellInfoBrands';
 // Exchange
 export { default as Exchange } from './Exchange/Exchange';
 
+// Concierge
+export { default as ConciergeMain } from './Concierge/ConciergeMain';
+export { default as ConciergeProduct } from './Concierge/ConciergeProduct';
+
 // VipService
 export { default as VipService } from './VipService/VipService';
