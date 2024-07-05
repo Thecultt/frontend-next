@@ -10,7 +10,7 @@ import { FooterMenuBlock, FooterEmailSubscribe } from '@/components';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { getClassNames } from '@/functions/getClassNames';
 import { WaitingPopupType } from '@/types/waiting';
-import { APP_ROUTE } from '@/constants/routes';
+import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
 
 interface FooterProps {
     transparent?: boolean;
@@ -77,7 +77,7 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
                         О компании
                     </Link>
                     <a
-                        href="https://www.notion.so/9a26fcf2ac2049feb782bcd967eed574"
+                        href={EXTERNAL_LINKS.career}
                         className="footer-block-menu-block__link"
                         target="_blank"
                         rel="noreferrer"
@@ -91,7 +91,7 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
                         Устойчивое развитие
                     </a> */}
                     <a
-                        href="https://resalereport2023.ru"
+                        href={EXTERNAL_LINKS.resaleReport}
                         className="footer-block-menu-block__link"
                         target="_blank"
                         rel="noreferrer"
