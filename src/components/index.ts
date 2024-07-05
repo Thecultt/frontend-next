@@ -258,6 +258,14 @@ export { default as ConciergeMainCategoryProduct } from './Concierge/ConciergeMa
 export { default as ConciergeProductForm } from './Concierge/ConciergeProduct/ConciergeProductForm';
 export { default as ConciergeProductInfo } from './Concierge/ConciergeProduct/ConciergeProductInfo';
 
+// Faq
+export { default as FaqAll } from './Faq/FaqAll';
+export { default as FaqBreadCrumbs } from './Faq/FaqBreadCrumbs';
+export { default as FaqBuyers } from './Faq/FaqBuyers';
+export { default as FaqSellers } from './Faq/FaqSellers';
+export { default as FaqTabItem } from './Faq/FaqTabItem';
+export { default as FaqTheCultt } from './Faq/FaqTheCultt';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';

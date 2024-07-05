@@ -47,3 +47,6 @@ export { default as ConciergeProduct } from './Concierge/ConciergeProduct';
 
 // VipService
 export { default as VipService } from './VipService/VipService';
+
+// Faq
+export { default as Faq } from './Faq/Faq';
