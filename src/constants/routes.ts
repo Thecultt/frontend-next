@@ -43,6 +43,7 @@ export const APP_ROUTE = {
 
 export const EXTERNAL_LINKS = {
     calendly: 'https://calendly.com/thecultt_2023/visitsellers',
+    clientVisit: 'https://calendly.com/thecultt/visit',
     advertisingConsent: 'https://drive.google.com/file/d/1boXYWorAMhCifykbhO3UPu4iybSrEZNB/view',
     resaleReport: 'https://resalereport2023.ru',
     career: 'https://www.notion.so/9a26fcf2ac2049feb782bcd967eed574',

@@ -19,6 +19,9 @@ export { default as Brands } from './Brands/Brands';
 // Catalog
 export { default as Catalog } from './Catalog/Catalog';
 
+// Contact
+export { default as Contact } from './Contact/Contact';
+
 // Product
 export { default as Product } from './Product/Product';
 
