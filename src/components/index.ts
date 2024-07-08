@@ -266,6 +266,9 @@ export { default as FaqSellers } from './Faq/FaqSellers';
 export { default as FaqTabItem } from './Faq/FaqTabItem';
 export { default as FaqTheCultt } from './Faq/FaqTheCultt';
 
+// Cart
+export { default as CartItemBlock } from './Cart/CartItemBlock';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';

@@ -63,3 +63,6 @@ export { default as PublicFavorites } from './PublicFavorites/PublicFavorites';
 
 // SubscribeEmail
 export { default as SubscribeEmail } from './SubscribeEmail/SubscribeEmail';
+
+// Cart
+export { default as Cart } from './Cart/Cart';
