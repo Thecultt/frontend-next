@@ -60,3 +60,6 @@ export { default as FaqReturn } from './Faq/FaqReturn';
 
 // PublicFavorites
 export { default as PublicFavorites } from './PublicFavorites/PublicFavorites';
+
+// SubscribeEmail
+export { default as SubscribeEmail } from './SubscribeEmail/SubscribeEmail';
