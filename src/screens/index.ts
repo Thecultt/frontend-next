@@ -54,3 +54,6 @@ export { default as FaqPublicOfferte } from './Faq/FaqPublicOfferte';
 export { default as FaqUserAgreement } from './Faq/FaqUserAgreement';
 export { default as FaqDelivery } from './Faq/FaqDelivery';
 export { default as FaqReturn } from './Faq/FaqReturn';
+
+// PublicFavorites
+export { default as PublicFavorites } from './PublicFavorites/PublicFavorites';
