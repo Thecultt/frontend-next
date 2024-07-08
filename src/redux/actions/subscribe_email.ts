@@ -13,31 +13,9 @@ export const sendSubscribeEmail = (data: { email: string; type: string }) => {
         try {
             await sendMindbox('KlientImportPriPodpiskeZaGuide', {
                 customer: {
-                    // "discountCard": {
-                    // 	"ids": {
-                    // 		"number": "<Номер дисконтной карты>"
-                    // 	}
-                    // },
-                    // "birthDate": "<Дата рождения>",
-                    // "sex": "<Пол>",
-                    // "timeZone": "<Часовой пояс>",
-                    // "lastName": "<Фамилия>",
-                    // "firstName": "<Имя>",
-                    // "middleName": "<Отчество>",
-                    // "fullName": "<ФИО>",
-                    // "area": {
-                    // 	"ids": {
-                    // 		"externalId": "<Внешний идентификатор зоны>"
-                    // 	}
-                    // },
                     email: data.email,
-                    // "mobilePhone": "<Мобильный телефон>",
-                    // "ids": {
-                    // 	"websiteID": "<Идентификатор на сайте>"
-                    // },
                     customFields: {
                         tipKlienta: data.type,
-                        // "gorod": "<Город>",
                         istochnikPodpiski: 'FormaSGaidom',
                     },
                     subscriptions: [
