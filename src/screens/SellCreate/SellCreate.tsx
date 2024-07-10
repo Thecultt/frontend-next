@@ -276,7 +276,7 @@ const SellCreate: React.FC = () => {
                                     выбрать дату и время посещения.
                                 </p>
                                 <a
-                                    href={EXTERNAL_LINKS.calendly}
+                                    href={EXTERNAL_LINKS.sellerVisit}
                                     target="_blank"
                                     className="btn sell-success__link"
                                     rel="noreferrer"

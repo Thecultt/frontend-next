@@ -72,3 +72,6 @@ export { default as Order } from './Order/Order';
 
 // OrderDetails
 export { default as OrderDetails } from './OrderDetails/OrderDetails';
+
+// Visit
+export { default as Visit } from './Visit/Visit';

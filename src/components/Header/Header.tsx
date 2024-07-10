@@ -11,8 +11,7 @@ import { setHeaderSearchValue, fetchHeaderSearchItems } from '@/redux/actions/he
 import { useDebounce } from '@/hooks/useDebounce';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { useAuthUser } from '@/hooks/useAuthUser';
-import { useLS } from '@/hooks/useLS';
-import { LS_KEYS, KEYBOARD } from '@/constants/keys';
+import { KEYBOARD } from '@/constants/keys';
 import { CATEGORIES, SELECTIONS_IDS, SORT } from '@/constants/catalog';
 import { APP_ROUTE } from '@/constants/routes';
 
@@ -31,15 +30,10 @@ export interface HeaderHoverMenuCategory {
     brands: string[];
     fullTextView: string;
     image: string;
+    imageClass: string;
 }
 
-const categories: {
-    title: string;
-    types: string[];
-    brands: string[];
-    fullTextView: string;
-    image: string;
-}[] = [
+const categories: HeaderHoverMenuCategory[] = [
     {
         title: 'Сумки',
         types: [
@@ -72,6 +66,7 @@ const categories: {
         ],
         fullTextView: 'Все сумки',
         image: HeaderHoverImageBag.src,
+        imageClass: 'header-hover-menu-bags-image',
     },
     {
         title: 'Аксессуары',
@@ -105,6 +100,7 @@ const categories: {
         ],
         fullTextView: 'Все аксессуары',
         image: HeaderHoverImageAccessories.src,
+        imageClass: 'header-hover-menu-accessories-image',
     },
     {
         title: 'Обувь',
@@ -141,6 +137,7 @@ const categories: {
         ],
         fullTextView: 'Вся обувь',
         image: HeaderHoverImageShoes.src,
+        imageClass: 'header-hover-menu-shoes-image',
     },
     {
         title: 'Украшения',
@@ -164,6 +161,7 @@ const categories: {
         ],
         fullTextView: 'Все украшения',
         image: HeaderHoverImageDecoration.src,
+        imageClass: 'header-hover-menu-decoration-image',
     },
 ];
 
@@ -179,8 +177,6 @@ const Header: React.FC = () => {
     const [isOpenHoverMenu, setIsOpenHoverMenu] = React.useState(false);
     const [isOpenSearch, setIsOpenSearch] = React.useState(false);
     const [isSelectionsMenuVisible, setIsSelectionsMenuVisible] = React.useState(false);
-
-    const [headerVisitMessageClosed] = useLS(LS_KEYS.headerVisitMessage, false);
 
     const { search } = useTypedSelector(({ header }) => header);
     const debouncedValue = useDebounce(search.value);
@@ -241,7 +237,7 @@ const Header: React.FC = () => {
 
     return (
         <div className="header-global-wrapper">
-            {!headerVisitMessageClosed ? <HeaderTopMessage /> : null}
+            <HeaderTopMessage />
 
             <div className="header-container">
                 <header className="header">

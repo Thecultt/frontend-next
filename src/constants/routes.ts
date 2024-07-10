@@ -42,7 +42,7 @@ export const APP_ROUTE = {
 } as const;
 
 export const EXTERNAL_LINKS = {
-    calendly: 'https://calendly.com/thecultt_2023/visitsellers',
+    sellerVisit: 'https://calendly.com/thecultt_2023/visitsellers',
     clientVisit: 'https://calendly.com/thecultt/visit',
     advertisingConsent: 'https://drive.google.com/file/d/1boXYWorAMhCifykbhO3UPu4iybSrEZNB/view',
     resaleReport: 'https://resalereport2023.ru',

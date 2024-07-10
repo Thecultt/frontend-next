@@ -83,7 +83,7 @@ export const App = ({ children }: { children: React.ReactNode }) => {
                 {children}
 
                 <NoSsr>
-                    <Footer />
+                    <Footer subscribeBlockId="footer-email" />
                 </NoSsr>
             </div>
         </>

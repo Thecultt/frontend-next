@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { VISIT_AVAILABLE } from '@/constants/app';
 import { getClassNames } from '@/functions/getClassNames';
 
 interface SellDeliveryTypesProps {
@@ -15,6 +16,12 @@ const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
     currentTypeDelivery,
     setCurrentTypeDelivery,
 }) => {
+    React.useEffect(() => {
+        if (!VISIT_AVAILABLE && currentTypeDelivery === 'Лично в офис') {
+            setCurrentTypeDelivery('Курьер');
+        }
+    }, [currentTypeDelivery]);
+
     return (
         <div className="sell-block-delivery-types">
             {currentCity.toLocaleLowerCase().indexOf('москва') !== -1 ? (
@@ -42,8 +49,15 @@ const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
                     <div
                         className={getClassNames('sell-block-delivery-types-block', {
                             active: currentTypeDelivery === 'Лично в офис',
+                            disabled: !VISIT_AVAILABLE,
                         })}
-                        onClick={() => setCurrentTypeDelivery('Лично в офис')}
+                        onClick={() => {
+                            if (!VISIT_AVAILABLE) {
+                                return;
+                            }
+
+                            setCurrentTypeDelivery('Лично в офис');
+                        }}
                     >
                         <svg width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -63,7 +77,9 @@ const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
                         <h5 className="sell-block-delivery-types-block__title">Лично в офис</h5>
 
                         <p className="sell-block-delivery-types-block__subtitle">
-                            Забронируйте дату и время для посещения нашего офиса.
+                            {VISIT_AVAILABLE
+                                ? 'Забронируйте дату и время для посещения нашего офиса.'
+                                : 'В данный момент недоступно'}
                         </p>
                     </div>
                 </>

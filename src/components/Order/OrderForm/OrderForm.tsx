@@ -85,33 +85,32 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     React.useEffect(() => {
         if (isLoggedIn && isLoaded) {
             initialize({
+                email: user.email || '',
                 name: `${user.lastname ? `${user.lastname} ` : ''}${user.name ? `${user.name} ` : ''}${user.middlename ? `${user.middlename} ` : ''}`,
                 phone: user.phone,
             });
+        } else {
+            initialize({
+                promo: true,
+            });
         }
-
-        initialize({
-            promo: true,
-        });
     }, [isLoggedIn, isLoaded]);
 
     return (
         <form className="order-form" onSubmit={handleSubmit}>
             <OrderFormContact emailValue={emailValue} />
 
-            {indexForm >= 1 ? <OrderFormCountry /> : null}
+            {indexForm >= 1 && <OrderFormCountry />}
 
-            {indexForm >= 2 ? <OrderFormDelivery /> : null}
+            {indexForm >= 2 && <OrderFormDelivery />}
 
-            {indexForm >= 3 && deliveryValue !== 'Самовывоз' ? <OrderFormAddress /> : null}
+            {indexForm >= 3 && deliveryValue !== 'Самовывоз' && <OrderFormAddress />}
 
-            {indexForm >= 4 ? (
-                deliveryValue !== 'Доставка с примеркой (по Москве)' ? (
-                    <OrderFormPayments paymentValue={paymentValue} />
-                ) : null
-            ) : deliveryValue == 'Самовывоз' ? (
-                <OrderFormPayments paymentValue={paymentValue} />
-            ) : null}
+            {indexForm >= 4
+                ? deliveryValue !== 'Доставка с примеркой (по Москве)' && (
+                      <OrderFormPayments paymentValue={paymentValue} />
+                  )
+                : deliveryValue == 'Самовывоз' && <OrderFormPayments paymentValue={paymentValue} />}
         </form>
     );
 };

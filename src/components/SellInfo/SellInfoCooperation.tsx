@@ -115,7 +115,7 @@ const SellInfoCooperation: React.FC = () => {
                     <h3 className="sell-info-cooperation-types-block__title">В офисе</h3>
 
                     <a
-                        href={EXTERNAL_LINKS.calendly}
+                        href={EXTERNAL_LINKS.sellerVisit}
                         onClick={() => pushDataLayer('send_application_click', { application_method_type: 'Office' })}
                         className="sell-info-cooperation-types-block__btn"
                         target="_blank"

@@ -7,19 +7,13 @@ import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { fetchHistoryOrders } from '@/redux/actions/history_orders';
 import { CabinetHistoryOrdersItem, CabinetHistoryOrdersNull, PageLoader } from '@/components';
 import { sendSubmitOrder } from '@/redux/actions/order';
-
-// TODO orderPay
-// import orderPay from '@/components/Order/orderPay';
+import orderPay from '@/components/Order/orderPay';
 
 const CabinetHistoryOrders: React.FC = () => {
     const dispatch = useDispatch();
 
     const { isLoaded } = useTypedSelector(({ history_orders }) => history_orders);
     const historyOrdersItems = useTypedSelector(({ history_orders }) => history_orders.items);
-
-    React.useEffect(() => {
-        dispatch(fetchHistoryOrders() as any);
-    }, []);
 
     // TODO вынести статусы заказа в const/enum
     const statuses: { [key: string]: string } = {
@@ -81,20 +75,23 @@ const CabinetHistoryOrders: React.FC = () => {
         num: string;
         products: { model_name: string; price: number }[];
     }) => {
-        // TODO orderPay
-        // orderPay({
-        //     type: payment_type,
-        //     orderId: id,
-        //     totalPrice: parseInt(cost),
-        //     deliveryPrice: parseInt(delivery_price),
-        //     products: products.map((product) => ({
-        //         name: product.model_name,
-        //         price: product.price,
-        //     })),
-        //     orderNum: num,
-        //     onSuccessCallback: () => successPayment(id),
-        // });
+        orderPay({
+            type: payment_type,
+            orderId: id,
+            totalPrice: parseInt(cost),
+            deliveryPrice: parseInt(delivery_price),
+            products: products.map((product) => ({
+                name: product.model_name,
+                price: product.price,
+            })),
+            orderNum: num,
+            onSuccessCallback: () => successPayment(id),
+        });
     };
+
+    React.useEffect(() => {
+        dispatch(fetchHistoryOrders() as any);
+    }, []);
 
     if (!isLoaded) {
         return <PageLoader />;

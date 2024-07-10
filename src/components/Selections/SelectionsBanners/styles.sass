@@ -45,17 +45,14 @@
     &__cover
         width: 345px
         height: 100%
-        position: relative
         flex-shrink: 0
+        background-size: 160%
+        background-repeat: no-repeat
+        background-position: 55% 35%
 
         @media screen and (max-width: 1200px)
             width: 100%
             height: 256px
-
-    &__image
-        width: 100%
-        height: 100%
-        object-fit: cover
 
     &__content
         width: 100%
@@ -114,18 +111,15 @@
         width: 162px
         height: 100%
         min-height: 172px
-        position: relative
         flex-shrink: 0
+        background-size: cover
+        background-repeat: no-repeat
+        background-position: center
 
         @media screen and (max-width: 1200px)
             width: 100%
             height: 120px
             min-height: 120px
-
-    &__image
-        width: 100%
-        height: 100%
-        object-fit: cover
 
     &__content
         padding: 16px 0
@@ -254,3 +248,7 @@
 
         @media screen and (max-width: 1200px)
             width: 100%
+
+.selection-it-bags-banner
+    &__cover
+        background-position: 46% center

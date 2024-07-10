@@ -14,9 +14,10 @@ import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
 
 interface FooterProps {
     transparent?: boolean;
+    subscribeBlockId?: string;
 }
 
-const Footer: React.FC<FooterProps> = ({ transparent }) => {
+const Footer: React.FC<FooterProps> = ({ transparent, subscribeBlockId }) => {
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
 
     const blocks: {
@@ -121,7 +122,7 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
 
     return (
         <>
-            <FooterEmailSubscribe />
+            <FooterEmailSubscribe id={subscribeBlockId} />
 
             <footer
                 className={getClassNames('footer', {
