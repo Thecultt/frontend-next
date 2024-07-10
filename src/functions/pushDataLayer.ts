@@ -1,9 +1,15 @@
-export const pushDataLayer = <T>(event: string, data?: { [key: string]: T }) => {
-    window?.dataLayer?.push({
-        ecommerce: null,
-    }); // Clear the previous ecommerce object.
+// TODO events to enum
 
-    window?.dataLayer?.push({
+export const pushDataLayer = (event: string, data?: object) => {
+    if (typeof window === 'undefined' || !window.dataLayer) {
+        console.error('pushDataLayer: window = undefined or window.dataLayer not found');
+        return;
+    }
+
+    window.dataLayer.push({
+        ecommerce: null,
+    });
+    window.dataLayer.push({
         event,
         ecommerce: {
             timestamp: Math.floor(Date.now() / 1000),

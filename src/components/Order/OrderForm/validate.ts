@@ -4,7 +4,7 @@ export interface Values {
     email: string;
     name: string;
     phone: string;
-    contry: string;
+    country: string;
     city: string;
     delivery: string;
     street: string;
@@ -17,7 +17,7 @@ interface Errors {
     email?: string;
     name?: string;
     phone?: string;
-    contry?: string;
+    country?: string;
     city?: string;
     delivery?: string;
     street?: string;
@@ -28,6 +28,8 @@ interface Errors {
 
 const validate = (values: Values) => {
     const errors: Errors = {};
+
+    console.log(values);
 
     if (!values.email) {
         errors.email = 'Поле не может быть пустым';
@@ -55,12 +57,12 @@ const validate = (values: Values) => {
         errors.phone = `Не менее ${MIN_INPUT_SYMBOLS} символов`;
     }
 
-    if (!values.contry) {
-        errors.contry = 'Поле не может быть пустым';
-    } else if (values.contry.length > MAX_INPUT_SYMBOLS) {
-        errors.contry = `Не более ${MAX_INPUT_SYMBOLS} символов`;
-    } else if (values.contry.length < MIN_INPUT_SYMBOLS) {
-        errors.contry = `Не менее ${MIN_INPUT_SYMBOLS} символов`;
+    if (!values.country) {
+        errors.country = 'Поле не может быть пустым';
+    } else if (values.country.length > MAX_INPUT_SYMBOLS) {
+        errors.country = `Не более ${MAX_INPUT_SYMBOLS} символов`;
+    } else if (values.country.length < MIN_INPUT_SYMBOLS) {
+        errors.country = `Не менее ${MIN_INPUT_SYMBOLS} символов`;
     }
 
     if (!values.city) {
@@ -75,17 +77,22 @@ const validate = (values: Values) => {
         errors.delivery = 'Поле не может быть пустым';
     }
 
-    if (!values.street) {
-        errors.street = 'Поле не может быть пустым';
-    }
+    // TODO Самовывоз в enum/const
+    if (values.delivery !== 'Самовывоз') {
+        if (!values.street) {
+            errors.street = 'Поле не может быть пустым';
+        }
 
-    if (!values.house) {
-        errors.house = 'Поле не может быть пустым';
+        if (!values.house) {
+            errors.house = 'Поле не может быть пустым';
+        }
     }
 
     if (!values.payment) {
         errors.payment = 'Поле не может быть пустым';
     }
+
+    console.log('errors', errors);
 
     return errors;
 };

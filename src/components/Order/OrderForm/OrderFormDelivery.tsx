@@ -3,12 +3,9 @@ import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
 
 import { setOrderCurrentDelivery } from '@/redux/actions/order';
-
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useAuthUser } from '@/hooks/useAuthUser';
-
 import { getClassNames } from '@/functions/getClassNames';
-
 import { RenderRadioSelect } from '@/components';
 
 const deliveryItemsRussiaMoscow: {
@@ -38,7 +35,7 @@ const deliveryItemsRussiaMoscow: {
     {
         title: 'Самовывоз',
         description:
-            'Самовывоз из офиса осуществляется по адресу: Трубная 25с3 (3 этаж, офис THE CULTT) ежедневно с 11 до 20:00. Оплаченный заказ может храниться до 7 дней.',
+            'Самовывоз из офиса осуществляется по адресу: Трубная 23с2, (3 этаж, офис THE CULTT) ежедневно с 10:00 до 20:00. Оплаченный заказ может храниться до 7 дней.',
         price: 0,
         id: 1,
     },

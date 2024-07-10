@@ -30,3 +30,43 @@
 			border: none
 
 			z-index: 10
+
+.header-top-message-subscribe
+	width: 100%
+	background-color: #F2F5F4
+	padding: 12px 0
+	cursor: pointer
+
+	&__wrapper
+		display: flex
+		align-items: center
+		justify-content: space-between
+		gap: 4px
+
+	&__content
+		flex: 1
+		display: flex
+		justify-content: center
+		align-items: center
+		gap: 4px
+
+	&__icon
+		flex-shrink: 0
+
+	&__title
+		+ManropeSemiBold
+		color: $mainColor
+		font-size: 16px
+		text-align: left
+		text-decoration: underline
+
+		@media screen and (max-width: 1200px)
+			font-size: 14px
+			text-decoration: none
+
+	&__close
+		+buttonReset
+		flex-shrink: 0
+		display: flex
+		justify-content: center
+		align-items: center

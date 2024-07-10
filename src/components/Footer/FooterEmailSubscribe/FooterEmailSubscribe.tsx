@@ -3,7 +3,11 @@ import React from 'react';
 import { FooterEmailSubscribeForm } from '@/components';
 import { sendMindbox } from '@/functions/mindbox';
 
-const FooterEmailSubscribe: React.FC = () => {
+interface Props {
+    id?: string;
+}
+
+const FooterEmailSubscribe: React.FC<Props> = ({ id }) => {
     const [isSubmit, setIsSubmit] = React.useState(false);
 
     const onSubmit = async (data: any) => {
@@ -31,7 +35,7 @@ const FooterEmailSubscribe: React.FC = () => {
     };
 
     return (
-        <div className="footer-email">
+        <div className="footer-email" id={id}>
             <div className="container">
                 {isSubmit ? (
                     <div className="footer-email-wrapper">
@@ -46,12 +50,10 @@ const FooterEmailSubscribe: React.FC = () => {
                 ) : (
                     <div className="footer-email-wrapper">
                         <div className="footer-email-text">
-                            <h4 className="footer-email-text__title">
-                                Дарим бонус 2000₽ за подписку на email рассылки
-                            </h4>
+                            <h4 className="footer-email-text__title">Подпишитесь и получите 2000₽ на первую покупку</h4>
                             <p className="footer-email-text__subtitle">
-                                Подпишитесь на рассылку THE CULTT и получайте полезные письма и предложения для
-                                покупателей и продавцов.
+                                Истории культовых сумок и брендов, специальные предложения и промокод на 2000₽ для новых
+                                подписчиков — в рассылке THE CULTT
                             </p>
                         </div>
 
