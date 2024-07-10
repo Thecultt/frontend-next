@@ -198,6 +198,23 @@ export { default as CabinetSettingAddressBlock } from './Cabinet/CabinetSetting/
 // CabinetSettingPaymentBlock
 export { default as CabinetSettingPaymentBlock } from './Cabinet/CabinetSetting/CabinetSettingPaymentBlock/CabinetSettingPaymentBlock';
 
+// Order
+// OrderForm
+export { default as OrderForm } from './Order/OrderForm/OrderForm';
+export { default as OrderFormAddress } from './Order/OrderForm/OrderFormAddress';
+export { default as OrderFormContact } from './Order/OrderForm/OrderFormContact';
+export { default as OrderFormCountry } from './Order/OrderForm/OrderFormCountry';
+export { default as OrderFormDelivery } from './Order/OrderForm/OrderFormDelivery';
+export { default as OrderFormPayments } from './Order/OrderForm/OrderFormPayments';
+// OrderProducts
+export { default as OrderProducts } from './Order/OrderProducts/OrderProducts';
+export { default as OrderProductsItem } from './Order/OrderProducts/OrderProductsItem';
+export { default as OrderProductsPromocode } from './Order/OrderProducts/OrderProductsPromocode';
+// OrderStatus
+export { default as OrderStatusError } from './Order/OrderStatus/OrderStatusError';
+export { default as OrderStatusProduct } from './Order/OrderStatus/OrderStatusProduct';
+export { default as OrderStatusSuccess } from './Order/OrderStatus/OrderStatusSuccess';
+
 // Sell
 export { default as SellBackBtn } from './Sell/SellBackBtn';
 export { default as SellSteps } from './Sell/SellSteps';
