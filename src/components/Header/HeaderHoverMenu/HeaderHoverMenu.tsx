@@ -6,6 +6,7 @@ import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { APP_ROUTE } from '@/constants/routes';
 
 import { HeaderHoverMenuCategory } from '../Header';
+import './styles.sass';
 
 interface HeaderHoverMenuProps extends HeaderHoverMenuCategory {
     isOpenHoverMenu: boolean;
@@ -19,6 +20,7 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
     brands,
     fullTextView,
     image,
+    imageClass,
     isOpenHoverMenu,
     onOpen,
     onClose,
@@ -143,7 +145,10 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
                         </div>
                     </div>
 
-                    <div className="header-hover-menu-image" style={{ backgroundImage: `url("${image}")` }}></div>
+                    <div
+                        className={`header-hover-menu-image ${imageClass}`}
+                        style={{ backgroundImage: `url("${image}")` }}
+                    />
                 </nav>
             </div>
         </div>

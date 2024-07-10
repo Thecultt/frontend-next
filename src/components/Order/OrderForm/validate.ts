@@ -29,8 +29,6 @@ interface Errors {
 const validate = (values: Values) => {
     const errors: Errors = {};
 
-    console.log(values);
-
     if (!values.email) {
         errors.email = 'Поле не может быть пустым';
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$/i.test(values.email)) {
@@ -91,8 +89,6 @@ const validate = (values: Values) => {
     if (!values.payment) {
         errors.payment = 'Поле не может быть пустым';
     }
-
-    console.log('errors', errors);
 
     return errors;
 };

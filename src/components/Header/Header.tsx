@@ -30,15 +30,10 @@ export interface HeaderHoverMenuCategory {
     brands: string[];
     fullTextView: string;
     image: string;
+    imageClass: string;
 }
 
-const categories: {
-    title: string;
-    types: string[];
-    brands: string[];
-    fullTextView: string;
-    image: string;
-}[] = [
+const categories: HeaderHoverMenuCategory[] = [
     {
         title: 'Сумки',
         types: [
@@ -71,6 +66,7 @@ const categories: {
         ],
         fullTextView: 'Все сумки',
         image: HeaderHoverImageBag.src,
+        imageClass: 'header-hover-menu-bags-image',
     },
     {
         title: 'Аксессуары',
@@ -104,6 +100,7 @@ const categories: {
         ],
         fullTextView: 'Все аксессуары',
         image: HeaderHoverImageAccessories.src,
+        imageClass: 'header-hover-menu-accessories-image',
     },
     {
         title: 'Обувь',
@@ -140,6 +137,7 @@ const categories: {
         ],
         fullTextView: 'Вся обувь',
         image: HeaderHoverImageShoes.src,
+        imageClass: 'header-hover-menu-shoes-image',
     },
     {
         title: 'Украшения',
@@ -163,6 +161,7 @@ const categories: {
         ],
         fullTextView: 'Все украшения',
         image: HeaderHoverImageDecoration.src,
+        imageClass: 'header-hover-menu-decoration-image',
     },
 ];
 
