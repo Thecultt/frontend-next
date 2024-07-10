@@ -120,11 +120,7 @@ const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) =>
                         </div>
 
                         <Link
-                            href={
-                                isLoadedUser
-                                    ? APP_ROUTE.order
-                                    : `/?redirect=${APP_ROUTE.order}#${ReglogStateTypesNotLogin.REGLOG}`
-                            }
+                            href={APP_ROUTE.order}
                             className={getClassNames('btn header-block-cart-modal-btn__btn', {
                                 disabled: !Object.keys(items).filter((key) => items[key].checked).length,
                             })}

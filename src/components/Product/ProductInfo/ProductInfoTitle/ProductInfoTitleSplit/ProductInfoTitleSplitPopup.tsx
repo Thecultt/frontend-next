@@ -39,7 +39,7 @@ const ProductInfoTitleSplitPopup: React.FC<ProductInfoTitleSplitPopupProps> = ({
                     // Не получилось создать платежную сессию.
                 });
 
-            setInitWidget(() => true);
+            setInitWidget(true);
         }
     }, []);
 

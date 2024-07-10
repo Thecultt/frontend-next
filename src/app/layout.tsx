@@ -63,6 +63,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
                 strategy="lazyOnload"
                 // onLoad={() => console.log('Yandex pay loaded')}
             />
+
+            <Script src="https://widget.cloudpayments.ru/bundles/cloudpayments.js" strategy="lazyOnload" />
         </body>
     </html>
 );

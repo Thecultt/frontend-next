@@ -66,3 +66,9 @@ export { default as SubscribeEmail } from './SubscribeEmail/SubscribeEmail';
 
 // Cart
 export { default as Cart } from './Cart/Cart';
+
+// Order
+export { default as Order } from './Order/Order';
+
+// OrderDetails
+export { default as OrderDetails } from './OrderDetails/OrderDetails';

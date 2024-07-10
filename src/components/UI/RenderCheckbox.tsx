@@ -7,9 +7,10 @@ import { getClassNames } from '@/functions/getClassNames';
 interface CheckboxProps extends WrappedFieldProps {
     label: string;
     small?: boolean;
+    gray?: boolean;
 }
 
-const RenderCheckbox: React.FC<CheckboxProps> = ({ label, input, small }) => {
+const RenderCheckbox: React.FC<CheckboxProps> = ({ label, input, small, gray }) => {
     const id = v4();
 
     return (
@@ -20,8 +21,9 @@ const RenderCheckbox: React.FC<CheckboxProps> = ({ label, input, small }) => {
                 type="checkbox"
                 className={getClassNames('checkbox', {
                     small: !!small,
+                    gray: !!gray,
                 })}
-                defaultChecked={true}
+                // defaultChecked={true}
                 // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 //     onChange && onChange(e.target.checked)
                 // }
@@ -32,6 +34,7 @@ const RenderCheckbox: React.FC<CheckboxProps> = ({ label, input, small }) => {
                 htmlFor={id}
                 className={getClassNames('checkbox__label', {
                     small: !!small,
+                    gray: !!gray,
                 })}
             >
                 <p className="checkbox__label__text" dangerouslySetInnerHTML={{ __html: label }}></p>

@@ -381,6 +381,9 @@ button
 		&.small &__text
 			font-size: 12px
 
+		&.gray &__text
+			color: $gray
+
 		&__text
 			color: $black
 			font-size: 14px
@@ -404,27 +407,50 @@ button
 				&:last-child
 					margin-right: 10px
 
-	&__label::before
-		content: ''
-		display: inline-block
+		&.gray
+			&::before
+				content: ''
+				display: inline-block
 
-		min-width: 21px
-		height: 21px
+				min-width: 18px
+				height: 18px
 
-		border: 1px solid $gray
-		border-radius: 50%
-		background-repeat: no-repeat
-		background-position: 5.3px 6.5px
-		background-size: 10px 10px
-		margin-right: 10px
+				border: 1px solid $gray
+				border-radius: 4px
+				background-repeat: no-repeat
+				background-position: 4px 4.5px
+				background-size: 10px 10px
+				margin-right: 10px
 
-		+transition
+				+transition
 
-	&:checked+label::before
+		&::before
+			content: ''
+			display: inline-block
+
+			min-width: 21px
+			height: 21px
+
+			border: 1px solid $gray
+			border-radius: 50%
+			background-repeat: no-repeat
+			background-position: 5.3px 6.5px
+			background-size: 10px 10px
+			margin-right: 10px
+
+			+transition
+
+	&:checked+&__label::before
 		background-image: url("data:image/svg+xml,%3Csvg width='13' height='9' viewBox='0 0 13 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.83203 3.49935L5.33203 6.99935L11.1654 1.16602' stroke='%23F1EDE8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A")
 
 		background-color: $mainColor
 		border: 1px solid $mainColor
+
+	&:checked+&__label.gray::before
+		background-image: url("data:image/svg+xml,%3Csvg width='8' height='6' viewBox='0 0 8 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.5 2.5625L3.125 5.1875L7.5 0.8125' stroke='%23202020' stroke-linecap='round'/%3E%3C/svg%3E%0A")
+
+		background-color: transparent
+		border: 1px solid $gray
 
 // radio 
 .radio

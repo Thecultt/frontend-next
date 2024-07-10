@@ -80,11 +80,7 @@ const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ s
                 </button>
 
                 <Link
-                    href={
-                        isLoadedUser
-                            ? APP_ROUTE.order
-                            : `/?redirect=${APP_ROUTE.order}#${ReglogStateTypesNotLogin.REGLOG}`
-                    }
+                    href={APP_ROUTE.order}
                     className="btn header-block-cart-modal-btn-more__btn"
                     onClick={setState}
                     scroll={false}

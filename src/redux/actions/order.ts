@@ -245,7 +245,10 @@ export const setOrderIsValid = (status: boolean) => ({
 export const sendCreateOrder =
     (
         data: {
-            mail: string;
+            isLoggedIn: boolean;
+
+            email: string;
+
             name: string;
             phone: string;
 
@@ -286,15 +289,8 @@ export const sendCreateOrder =
                 }
             })
             .catch(({ response }) => {
-                if (response.data.message) dispatch(setIsNotificationServerError(true, response.data.message) as any);
+                if (response?.data?.message) dispatch(setIsNotificationServerError(true, response.data.message) as any);
             });
-        // const res = await $api.post(`create_order/`, newData)
-
-        // if (res.data.link) {
-        // 	window.location.href = res.data.link
-        // } else {
-        // 	onComplete(res.data.order_id, res.data.order_num)
-        // }
     };
 
 export const sendSubmitOrder = (order_id: number) => async (dispatch: Dispatch<OrderStateActions>) => {
