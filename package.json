@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npx env-cmd -f ./.env.dev next dev",
+    "build:dev": "npx env-cmd -f ./.env.dev next build",
+    "build:prod": "npx env-cmd -f ./.env.prod next build",
     "start": "next start",
+    "start:prod": "next start -p 3001",
     "lint": "next lint --quiet",
     "lint:types": "npx tsc --noEmit",
     "prettier": "prettier --write .",
