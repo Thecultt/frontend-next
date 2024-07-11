@@ -1,6 +1,7 @@
 import React from 'react';
 
 import LogoSplit from '@/assets/images/logo-split.svg';
+import { BaseImage } from '@/components';
 
 interface ProductInfoTitleSplitPopupProps {
     price: number;
@@ -45,7 +46,7 @@ const ProductInfoTitleSplitPopup: React.FC<ProductInfoTitleSplitPopupProps> = ({
 
     return (
         <div className="product-content-info-split-popup">
-            <img src={LogoSplit.src} alt="Яндекс Сплит" className="product-content-info-split-popup__logo" />
+            <BaseImage src={LogoSplit.src} alt="Яндекс Сплит" className="product-content-info-split-popup__logo" />
 
             <p className="product-content-info-split-popup__title">Разделите оплату на несколько месяцев в сплит</p>
 

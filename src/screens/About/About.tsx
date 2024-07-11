@@ -1,4 +1,8 @@
+'use client';
+
 import React from 'react';
+
+import { BaseImage } from '@/components';
 
 import AboutMainImage from '@/assets/images/about/about-image-1.jpg';
 import AboutCulttImage from '@/assets/images/about/about-image-2.jpg';
@@ -138,42 +142,42 @@ const About: React.FC = () => (
                             className="about-media-logos-item hover-scale"
                             target="__blank"
                         >
-                            <img src={ElleLogo.src} alt="" className="about-media-logos-item__image" />
+                            <BaseImage src={ElleLogo.src} alt="" className="about-media-logos-item__image" />
                         </a>
                         <a
                             href="https://www.forbes.ru/svoi-biznes/464469-10-samyh-perspektivnyh-rossijskih-deatelej-mody-i-dizajna-moloze-30-let-2022"
                             className="about-media-logos-item hover-scale"
                             target="__blank"
                         >
-                            <img src={ForbesLogo.src} alt="" className="about-media-logos-item__image" />
+                            <BaseImage src={ForbesLogo.src} alt="" className="about-media-logos-item__image" />
                         </a>
                         <a
                             href="https://www.buro247.ru/news/style/29-mar-2022-the-cultt-retail-project-sale-sunglass.html"
                             className="about-media-logos-item hover-scale"
                             target="__blank"
                         >
-                            <img src={BuroLogo.src} alt="" className="about-media-logos-item__image" />
+                            <BaseImage src={BuroLogo.src} alt="" className="about-media-logos-item__image" />
                         </a>
                         <a
                             href="https://incrussia.ru/concoct/the-cultt/"
                             className="about-media-logos-item hover-scale"
                             target="__blank"
                         >
-                            <img src={IncLogo.src} alt="" className="about-media-logos-item__image" />
+                            <BaseImage src={IncLogo.src} alt="" className="about-media-logos-item__image" />
                         </a>
                         <a
                             href="https://style.rbc.ru/items/624d9ce59a7947597b47b5e7"
                             className="about-media-logos-item hover-scale"
                             target="__blank"
                         >
-                            <img src={RbkLogo.src} alt="" className="about-media-logos-item__image" />
+                            <BaseImage src={RbkLogo.src} alt="" className="about-media-logos-item__image" />
                         </a>
                         <a
                             href="https://theblueprint.ru/fashion/industry/ritejl-proekty"
                             className="about-media-logos-item hover-scale"
                             target="__blank"
                         >
-                            <img src={BluepintLogo.src} alt="" className="about-media-logos-item__image" />
+                            <BaseImage src={BluepintLogo.src} alt="" className="about-media-logos-item__image" />
                         </a>
                     </div>
                 </div>

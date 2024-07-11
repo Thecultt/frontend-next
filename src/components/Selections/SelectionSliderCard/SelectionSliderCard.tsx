@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { ISelection } from '@/models/ISelection';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
+import { BaseImage } from '@/components';
 
 import './styles.sass';
 
@@ -23,7 +24,7 @@ export const SelectionSliderCard: React.FC<Props> = ({ data }) => {
         >
             <div className="selection-slider-card__cover">
                 {!!background_image && !!title && (
-                    <img src={background_image} className="selection-slider-card__image" alt={title} />
+                    <BaseImage src={background_image} className="selection-slider-card__image" alt={title} cover />
                 )}
             </div>
             <h3 className="selection-slider-card__title">{title}</h3>

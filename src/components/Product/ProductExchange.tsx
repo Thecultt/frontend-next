@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { APP_ROUTE } from '@/constants/routes';
 import ExchangeMainImage from '@/assets/images/exchange/exchange-main-image.png';
+import { BaseImage } from '../UI/BaseImage/BaseImage';
 
 const ProductExchange: React.FC = () => {
     return (
@@ -21,7 +22,7 @@ const ProductExchange: React.FC = () => {
                     </Link>
                 </div>
 
-                <img alt="" src={ExchangeMainImage.src} className="product-exchange__image" />
+                <BaseImage alt="" src={ExchangeMainImage.src} className="product-exchange__image" />
             </div>
         </div>
     );

@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 
 import { APP_ROUTE } from '@/constants/routes';
+import { BaseImage } from '@/components';
+
 import SellInfoServiceIphone from '@/assets/images/sell-info/sell-info-service-iphone.jpg';
 
 const SellInfoService: React.FC = () => {
@@ -76,7 +78,7 @@ const SellInfoService: React.FC = () => {
                     </div>
                 </div>
 
-                <img src={SellInfoServiceIphone.src} alt="" className="sell-info-service__iphone" />
+                <BaseImage src={SellInfoServiceIphone.src} alt="" className="sell-info-service__iphone" />
 
                 <div className="sell-info-service-blocks">
                     <div className="sell-info-service-blocks-block">

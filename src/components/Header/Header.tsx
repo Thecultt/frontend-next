@@ -6,7 +6,15 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { HeaderTopMessage, HeaderCart, HeaderUser, HeaderHoverMenu, HeaderSearchBox, HeaderMedia } from '@/components';
+import {
+    HeaderTopMessage,
+    HeaderCart,
+    HeaderUser,
+    HeaderHoverMenu,
+    HeaderSearchBox,
+    HeaderMedia,
+    BaseImage,
+} from '@/components';
 import { setHeaderSearchValue, fetchHeaderSearchItems } from '@/redux/actions/header';
 import { useDebounce } from '@/hooks/useDebounce';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
@@ -246,7 +254,11 @@ const Header: React.FC = () => {
                             <div className="header-wrapper-block">
                                 <div className="header-block">
                                     <Link href={APP_ROUTE.home} className="header-block-logo">
-                                        <img src={Logo.src} alt="THECULTT" className="header-block-logo__image" />
+                                        <BaseImage
+                                            src={Logo.src}
+                                            alt="THECULTT LOGO"
+                                            className="header-block-logo__image"
+                                        />
                                     </Link>
 
                                     <HeaderSearchInput

@@ -1,7 +1,10 @@
+'use client';
+
 import React from 'react';
 
 import NotfoundImage from '@/assets/images/notfound.jpg';
 import { APP_ROUTE } from '@/constants/routes';
+import { BaseImage } from '@/components';
 
 const NotFound: React.FC = () => (
     <section className="not-found">
@@ -16,7 +19,7 @@ const NotFound: React.FC = () => (
                     </a>
                 </div>
 
-                <img src={NotfoundImage.src} alt="Not found" className="not-found__image" />
+                <BaseImage src={NotfoundImage.src} alt="Not found" className="not-found__image" priority />
             </div>
         </div>
     </section>
