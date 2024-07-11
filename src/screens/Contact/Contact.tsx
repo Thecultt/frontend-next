@@ -251,8 +251,8 @@ const Contact: React.FC = () => (
                     <div className="contact-block-office hover-scale">
                         <h3 className="contact-block-office__title">Адрес офиса</h3>
                         <p className="contact-block-office__description">
-                            Мы находимся по адресу Трубная 25с3 (3 этаж, офис THE CULTT) ежедневно с 10:00 до 21:00. Для
-                            посещения необходима регистрация!
+                            Мы находимся по адресу {CONTACTS.address} (3 этаж, офис THE CULTT) ежедневно с 10:00 до
+                            21:00. Для посещения необходима регистрация!
                         </p>
                         <a
                             href={EXTERNAL_LINKS.clientVisit}

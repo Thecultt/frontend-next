@@ -3,6 +3,7 @@
 import React from 'react';
 
 import { FaqBreadCrumbs } from '@/components';
+import { CONTACTS } from '@/constants/contacts';
 
 const Faq: React.FC = () => {
     return (
@@ -145,7 +146,7 @@ const Faq: React.FC = () => {
                                 </ul>
 
                                 <p>
-                                    Адрес для возврата: Россия, город Москва, улица Трубная 25с3.
+                                    Адрес для возврата: Россия, город Москва, улица {CONTACTS.address}.
                                     <br />
                                     Контактный номер: +7 499 992 80 47
                                 </p>
@@ -356,7 +357,7 @@ const Faq: React.FC = () => {
 									<p>
 										<b>
 											Адрес для возврата: Россия, город
-											Москва, улица Трубная 25с3.
+											Москва, улица {CONTACTS.address}.
 										</b>
 									</p>
 									<p>

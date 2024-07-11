@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { VISIT_AVAILABLE } from '@/constants/app';
 import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
+import { CONTACTS } from '@/constants/contacts';
 
 import VisitImage from '@/assets/images/visit.jpg';
 
@@ -157,8 +158,8 @@ const Visit: React.FC = () => (
                         <div className="visit-office-block">
                             <h2 className="visit-office-block__title">Адрес офиса</h2>
                             <p className="visit-office-block__subtitle">
-                                Мы находимся по адресу Трубная 25с3 (3 этаж, офис THE CULTT) ежедневно с 10:00 до 21:00.
-                                Для посещения необходима регистрация!
+                                Мы находимся по адресу {CONTACTS.address} (3 этаж, офис THE CULTT) ежедневно с 10:00 до
+                                21:00. Для посещения необходима регистрация!
                             </p>
 
                             <div className="visit-office-block-btn">

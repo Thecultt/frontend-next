@@ -3,6 +3,7 @@
 import React from 'react';
 
 import { FaqBreadCrumbs } from '@/components';
+import { CONTACTS } from '@/constants/contacts';
 
 const Faq: React.FC = () => (
     <section className="faq">
@@ -72,7 +73,7 @@ const Faq: React.FC = () => (
                                 </b>
                             </p>
 
-                            <p>Мы находимся по адресу: Москва, ул. Трубная 25с3.</p>
+                            <p>Мы находимся по адресу: Москва, ул. {CONTACTS.address}.</p>
 
                             <p>
                                 ВАЖНО: При оформлении самовывоза возврат доступен только в течение 7 дней после оплаты.

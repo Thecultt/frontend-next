@@ -3,6 +3,7 @@ import React from 'react';
 import { FaqTabItem } from '@/components';
 import { WaitingPopupType } from '@/types/waiting';
 import { APP_PROD_DOMAIN } from '@/constants/app';
+import { CONTACTS } from '@/constants/contacts';
 
 const tabs: { title: string; description: string }[] = [
     {
@@ -64,7 +65,7 @@ const tabs: { title: string; description: string }[] = [
 		<br />
 		- для всех оплаченных на сайте заказов по России*;
 		<br />
-		- для оплаченных и оформленных заказов с самовывозом. Заказ можно забрать по адресу: Москва, ул. Трубная 25с3.
+		- для оплаченных и оформленных заказов с самовывозом. Заказ можно забрать по адресу: Москва, ул. ${CONTACTS.address}.
 		<br />
 		* Заказы с доставкой по Москве отправляются собственным курьером платформы THE CULTT, сроки доставки — 1–3 дня. Заказы с доставкой по России отправляются с помощью курьерской службы СДЭК до удобного вам адреса или пункта самовывоза. Срок доставки — 2–10 дней в зависимости от вашего региона.
 		<br />
