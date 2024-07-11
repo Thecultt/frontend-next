@@ -5,7 +5,7 @@ import { useMediaQuery } from 'usehooks-ts';
 
 import { MEDIA_SIZES } from '@/constants/styles';
 import { APP_ROUTE } from '@/constants/routes';
-import { Select } from '@/components';
+import { BaseImage, Select } from '@/components';
 import { Conditions } from '@/types/product';
 
 import SellInfoMainImage from '@/assets/images/sell-info/sell-info-main.jpg';
@@ -121,7 +121,7 @@ const SellInfoMain: React.FC = () => {
             <div className="sell-info-main-text">
                 <h2 className="sell-info-main-text__title">
                     Продайте свои товары с
-                    <img src={Logo.src} alt="THE CULTT" />
+                    <BaseImage src={Logo.src} alt="THE CULTT logo" className="sell-info-main-text__image" />
                 </h2>
 
                 <div className="sell-info-main-text-form">

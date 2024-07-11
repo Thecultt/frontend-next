@@ -1,8 +1,11 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 
 import { APP_ROUTE } from '@/constants/routes';
 import { CabinetSellTypes } from '@/redux/types/ICabinetSell';
+import { BaseImage } from '@/components';
 
 import ExchangeMainImage from '@/assets/images/exchange/exchange-main-image.png';
 import ExchangeStepsImage1 from '@/assets/images/exchange/exchange-steps-image-1.png';
@@ -47,7 +50,7 @@ const Exchange: React.FC = () => (
 
                     <div className="exchange-steps-blocks-wrapper">
                         <div className="exchange-steps-block">
-                            <img src={ExchangeStepsImage1.src} alt="" className="exchange-steps-block__image" />
+                            <BaseImage src={ExchangeStepsImage1.src} alt="" className="exchange-steps-block__image" />
 
                             <h3 className="exchange-steps-block__title">Шаг 1</h3>
                             <p className="exchange-steps-block__description">
@@ -56,7 +59,7 @@ const Exchange: React.FC = () => (
                         </div>
 
                         <div className="exchange-steps-block">
-                            <img src={ExchangeStepsImage2.src} alt="" className="exchange-steps-block__image" />
+                            <BaseImage src={ExchangeStepsImage2.src} alt="" className="exchange-steps-block__image" />
 
                             <h3 className="exchange-steps-block__title">Шаг 2</h3>
 
@@ -66,7 +69,7 @@ const Exchange: React.FC = () => (
                         </div>
 
                         <div className="exchange-steps-block">
-                            <img src={ExchangeStepsImage3.src} alt="" className="exchange-steps-block__image" />
+                            <BaseImage src={ExchangeStepsImage3.src} alt="" className="exchange-steps-block__image" />
 
                             <h3 className="exchange-steps-block__title">Шаг 3</h3>
                             <p className="exchange-steps-block__description">Готово! Вы осознанно обновили гардероб</p>
@@ -194,7 +197,7 @@ const Exchange: React.FC = () => (
                         <div className="exchange-example-block-product">
                             <h3 className="exchange-example-block-product__title">Стоимость товара</h3>
 
-                            <img
+                            <BaseImage
                                 src={ExchangeExampleImage.src}
                                 alt=""
                                 className="exchange-example-block-product__image"

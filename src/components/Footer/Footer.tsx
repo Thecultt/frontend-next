@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import Logo from '@/assets/images/logo.svg';
 
-import { FooterMenuBlock, FooterEmailSubscribe } from '@/components';
+import { FooterMenuBlock, FooterEmailSubscribe, BaseImage } from '@/components';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { getClassNames } from '@/functions/getClassNames';
 import { WaitingPopupType } from '@/types/waiting';
@@ -132,7 +132,7 @@ const Footer: React.FC<FooterProps> = ({ transparent, subscribeBlockId }) => {
                 <div className="container">
                     <div className="footer-wrapper">
                         <Link href={APP_ROUTE.home} className="footer-logo">
-                            <img src={Logo.src} alt="TheCultt" className="footer-logo__image" />
+                            <BaseImage src={Logo.src} alt="TheCultt logo" className="footer-logo__image" />
                         </Link>
 
                         <div className="footer-block">

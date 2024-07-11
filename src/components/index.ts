@@ -20,6 +20,7 @@ export { default as NotificationsServerError } from './UI/NotificationsServer/No
 export { default as NotificationsServerSuccess } from './UI/NotificationsServer/NotificationsServerSuccess';
 export { Spinner } from './UI/Spinner';
 export { NavLink } from './UI/NavLink/NavLink';
+export { BaseImage } from './UI/BaseImage/BaseImage';
 
 // MenuMedia
 export { default as MenuMedia } from './MenuMedia/MenuMedia';
