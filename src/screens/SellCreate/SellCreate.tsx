@@ -23,6 +23,7 @@ import {
     SellProduct,
 } from '@/components';
 import { sendMindbox } from '@/functions/mindbox';
+import { pushDataLayer } from '@/functions/pushDataLayer';
 import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
 
 const SellCreate: React.FC = () => {
@@ -224,13 +225,7 @@ const SellCreate: React.FC = () => {
             client_comment: delivery.comment ? delivery.comment : '',
         };
 
-        window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.
-        window?.dataLayer?.push({
-            event: 'shipping_method_complete',
-            ecommerce: {
-                timestamp: Math.floor(Date.now() / 1000),
-            },
-        });
+        pushDataLayer('shipping_method_complete');
 
         dispatch(sendCreateCabinetSell(sell) as any);
     };
