@@ -359,7 +359,30 @@ button
 	& > svg
 		margin-left: 10px
 
-// checkbox 
+.btn-light-green
+	+buttonReset
+	display: inline-flex
+	align-items: center
+	justify-content: center
+	background-color: $green1
+	color: $mainColor
+	border-radius: 10px
+	padding: 12px 24px
+	+ManropeSemiBold
+	font-size: 14px
+	line-height: 24px
+	text-align: center
+	+transition
+
+	& > svg
+		margin-left: 8px
+
+	&:disabled
+		user-select: none
+		pointer-events: none
+		color: $green5
+
+// checkbox
 .checkbox-wrapper
 	display: flex
 	align-items: center

@@ -21,6 +21,7 @@ export { default as NotificationsServerSuccess } from './UI/NotificationsServer/
 export { Spinner } from './UI/Spinner';
 export { NavLink } from './UI/NavLink/NavLink';
 export { BaseImage } from './UI/BaseImage/BaseImage';
+export { Badge } from './UI/Badge/Badge';
 
 // MenuMedia
 export { default as MenuMedia } from './MenuMedia/MenuMedia';
@@ -128,6 +129,7 @@ export { default as CatalogProductsPagination } from './Catalog/CatalogProducts/
 export { default as CatalogProductsSection } from './Catalog/CatalogProducts/CatalogProductsSection';
 
 // Product
+export { ProductCard } from './Product/ProductCard/ProductCard';
 export { default as ProductCover } from './Product/ProductCover';
 export { default as ProductExchange } from './Product/ProductExchange';
 // ProductInfo

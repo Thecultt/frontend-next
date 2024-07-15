@@ -1,0 +1,122 @@
+@import "/src/assets/sass/mixin"
+@import "/src/assets/sass/variables"
+
+.product-card
+    width: 100%
+    overflow: hidden
+
+    &__btn
+        height: 38px
+        margin-top: 4px
+
+.product-card-cover
+    width: 100%
+    position: relative
+
+    // TODO
+    height: 300px
+    border-radius: 8px
+    background-color: #D9D9D9
+
+    &__badges
+        position: absolute
+        top: 0
+        left: 0
+        padding: 8px
+        z-index: 1
+
+.product-card-favorites
+    +buttonReset
+
+    position: absolute
+    top: 0
+    right: 0
+    padding: 8px
+    z-index: 2
+
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    &__icon
+        width: 28px
+
+        @media screen and (max-width: 1200px)
+            width: 24px
+
+    &__count
+        +ManropeSemiBold
+        font-size: 12px
+        line-height: 14.4px
+        text-align: center
+        color: $grey10
+
+.product-card-info
+    display: flex
+    flex-direction: column
+
+    &__name
+        +ManropeMedium
+        +textEllipsis
+        font-size: 14px
+        line-height: 19.6px
+        color: $black3
+        margin-top: 2px
+
+        @media screen and (max-width: 1200px)
+            +ManropeSemiBold
+            line-height: 16.8px
+
+    &__condition
+        +ManropeMedium
+        +textEllipsis
+        color: $black3
+        font-size: 14px
+        line-height: 19.6px
+        margin-top: 2px
+
+        &-value
+            +ManropeBold
+
+            @media screen and (max-width: 1200px)
+                +ManropeMedium
+                color: $mainColor
+
+    &__prices
+        display: inline
+
+    &__price
+        +ManropeBold
+        font-size: 16px
+        line-height: 19.2px
+        color: $black3
+
+        @media screen and (max-width: 1200px)
+            +ManropeMedium
+            line-height: 22.4px
+
+        &--old
+            color: $grey6
+            margin-left: 8px
+            text-decoration: line-through
+
+            @media screen and (max-width: 1200px)
+                margin-left: 4px
+
+    &__outstock
+        +ManropeMedium
+        font-size: 14px
+        line-height: 19.6px
+        color: $grey8
+        margin-top: 2px
+
+    &__price-split
+        height: 38px
+        display: flex
+        flex-direction: column
+        margin-top: 4px
+
+    &__split
+        width: 100%
+        height: auto
+        padding-top: 4px
