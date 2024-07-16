@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useIntersectionObserver } from 'usehooks-ts';
 
 import { Product } from '@/models/IProduct';
 import { Noop } from '@/types/functions';
@@ -15,6 +16,7 @@ import { YANDEX_SPLIT_MERCHANT_ID } from '@/constants/env';
 
 import { ProductCardBadges } from './ProductCardBadges';
 import { ProductCardFavorites } from './ProductCardFavorites';
+import { ProductCardImages } from './ProductCardImages';
 import './styles.sass';
 
 interface Props {
@@ -23,9 +25,9 @@ interface Props {
     onClick?: Noop;
 }
 
-// TODO images carousel
+const TOTAL_IMAGES_COUNT = 5;
 
-export const ProductCard: React.FC<Props> = ({ productData, className = '', onClick }) => {
+export const ProductCard: React.FC<Props> = React.memo(({ productData, className = '', onClick }) => {
     const {
         id,
         article,
@@ -41,10 +43,18 @@ export const ProductCard: React.FC<Props> = ({ productData, className = '', onCl
         availability,
         is_trial,
         model_name,
+        images,
     } = productData;
+
+    const { isIntersecting, ref } = useIntersectionObserver({
+        threshold: 0.2,
+        freezeOnceVisible: true,
+    });
 
     const { changeHash } = useHash();
     const { setWaitingData } = useWaitingData();
+
+    const slides = images.slice(0, TOTAL_IMAGES_COUNT);
 
     const subscribe = () => {
         setWaitingData({
@@ -81,10 +91,11 @@ export const ProductCard: React.FC<Props> = ({ productData, className = '', onCl
     };
 
     return (
-        <div className={`product-card ${className}`} onClick={handleClick}>
+        <div className={`product-card ${className}`} onClick={handleClick} ref={ref}>
             <div className="product-card-cover">
-                <ProductCardBadges productData={productData} />
                 <ProductCardFavorites productData={productData} />
+                <ProductCardBadges productData={productData} />
+                {isIntersecting && <ProductCardImages article={article} slides={slides} />}
             </div>
 
             <Link className="product-card-info" href={`${APP_ROUTE.product}/${article}`}>
@@ -128,4 +139,4 @@ export const ProductCard: React.FC<Props> = ({ productData, className = '', onCl
             )}
         </div>
     );
-};
+});
