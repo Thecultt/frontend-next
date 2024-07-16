@@ -86,13 +86,18 @@ export const ProductCardImages: React.FC<Props> = React.memo(({ slides, article 
                 slidesToScroll={1}
                 arrows={false}
                 className="product-card-cover__carousel"
-                lazyLoad="ondemand"
+                lazyLoad="progressive"
                 ref={sliderRef}
                 infinite
             >
                 {slides.map((image, index) => (
                     <Link key={index} href={`${APP_ROUTE.product}/${article}`} className="product-card-cover__link">
-                        <BaseImage src={image} alt="" loading="lazy" className="product-card-cover__image" cover />
+                        <div
+                            style={{
+                                backgroundImage: `url("${image}")`,
+                            }}
+                            className="product-card-cover__image"
+                        />
                     </Link>
                 ))}
             </Slider>
