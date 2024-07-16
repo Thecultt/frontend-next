@@ -30,7 +30,7 @@ declare global {
 }
 
 const manropeFont = Manrope({
-    weight: ['400', '500', '600'],
+    weight: ['400', '500', '600', '700'],
     style: 'normal',
     subsets: ['cyrillic', 'latin'],
     variable: '--font-manrope',

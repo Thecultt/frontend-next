@@ -18,6 +18,7 @@ export interface Product {
     from_boutique: boolean;
     from_parnter: boolean;
     price_drop: boolean;
+    model_name?: string;
 }
 
 export interface ProductPage {

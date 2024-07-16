@@ -11,6 +11,10 @@
 	font-family: var(--font-manrope)
 	font-weight: 600
 
+@mixin ManropeBold
+	font-family: var(--font-manrope)
+	font-weight: 700
+
 @mixin backgroundSetting
 	background-size: cover
 	background-position: center center
@@ -59,3 +63,14 @@
 	color: inherit
 	background-color: transparent
 	cursor: pointer
+
+@mixin textEllipsis
+	text-overflow: ellipsis
+	white-space: nowrap
+	overflow: hidden
+
+// grid
+@mixin flexCenter
+	display: flex
+	justify-content: center
+	align-items: center
