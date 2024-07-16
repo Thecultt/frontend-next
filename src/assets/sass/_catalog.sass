@@ -1,0 +1,900 @@
+// catalog
+.catalog
+	margin: 30px 0 100px 0
+
+	+open
+
+	&-banner
+		display: flex
+		justify-content: space-between
+		align-items: center
+
+		height: 300px
+
+		&-image
+			width: 50%
+			height: 300px
+
+			border-radius: 12px 0px 0px 12px
+
+			+backgroundSetting
+
+		&-text
+			display: flex
+			flex-direction: column
+			justify-content: center
+			align-items: center
+
+			text-align: center
+			width: 50%
+			height: 300px
+			padding: 60px
+
+			background-color: $lightBackgroundColor
+			border-radius: 0px 12px 12px 0px
+
+			&__title
+				font-size: 22px
+				margin-bottom: 10px
+
+			&__description
+				font-size: 14px
+				margin-bottom: 25px
+
+			&__link
+				width: 255px
+
+	&-banner-media
+		display: none
+
+		padding: 15px
+
+		background-color: rgba(0, 0, 0, 0.4)
+		background-blend-mode: overlay
+
+		+backgroundSetting
+		+borderRadius
+
+		&-text
+			padding-top: 150px
+
+			text-align: center
+
+			color: $white
+
+			&__title
+				font-size: 22px
+				margin-bottom: 10px
+
+				+ManropeMedium
+
+			&__description
+				font-size: 12px
+				margin-bottom: 10px
+
+			&__link
+				color: $white
+				font-size: 15px
+
+				&.white
+					color: $black
+					background-color: $white
+					border: none
+
+	&-filters-top
+		margin-top: 55px
+
+		display: flex
+		align-items: center
+
+		&-media-btn
+			position: relative
+
+			width: 100%
+			display: none
+			justify-content: space-between
+
+			&__btn
+				display: flex
+				align-items: center
+				justify-content: center
+
+				width: 100%
+				padding: 15px 25px
+
+				background-color: transparent
+				border: .3px solid $gray
+				border-radius: 12px
+
+				color: $black
+
+				font-size: 14px
+
+				& > svg
+					min-width: 15px
+					width: 15px
+					height: 15px
+
+					margin-left: 10px
+
+			&-filters-wrapper
+				width: 49%
+
+			&-sort-wrapper
+				width: 49%
+
+			&-sort
+				position: absolute
+
+				width: 100%
+
+				top: 65px
+				left: 0
+
+				z-index: 40
+
+				background-color: $lightBackgroundColor
+
+				padding: 15px
+
+				border-radius: 12px
+
+				opacity: 0
+				pointer-events: none
+
+				+transition
+
+				&.active
+					opacity: 1
+					pointer-events: auto
+
+				&-item
+					margin-bottom: 10px
+
+					&:last-child
+						margin-bottom: 0
+
+		&-title
+			display: flex
+			align-items: center
+
+			min-width: 300px
+
+			&__title
+				font-size: 22px
+
+				+ManropeSemiBold
+
+			&__count
+				margin-left: 15px
+
+				color: $gray
+				font-size: 14px
+
+		&-boutique
+			display: flex
+			align-items: center
+
+			margin-left: 25px
+
+			&__btn
+				cursor: pointer
+
+				padding: 7px 14px
+				font-size: 14px
+
+				color: $black
+				background-color: transparent
+				border: 1px solid $mainColor
+
+				+ManropeSemiBold
+				+transition
+
+				&.active
+					background-color: $mainColor
+					color: $white
+
+				&.all
+					border-radius: 6px 0 0 6px
+
+				&.boutique
+					border-radius: 0 6px 6px 0
+
+			&-info
+				position: relative
+
+				margin-left: 10px
+				cursor: pointer
+
+				&-message-wrapper
+					top: calc( 100% - 35px )
+					left: 35px
+					z-index: 20
+
+				&:hover &-message-wrapper
+					opacity: 1
+					pointer-events: auto
+
+		&-sort
+			cursor: pointer
+			position: relative
+
+			margin-left: auto
+
+			&-title
+				&__title
+					display: flex
+					align-items: center
+
+					user-select: none
+
+					font-size: 14px
+
+					+ManropeMedium
+
+					& > svg
+						margin-left: 13px
+
+			&-modal
+				position: absolute
+
+				width: 250px
+
+				z-index: 10
+
+				pointer-events: none
+				opacity: 0
+				transform: scale3d(.98, .98, .98)
+
+				top: 40px
+				right: 0
+
+				padding: 18px
+				background-color: $lightBackgroundColor
+
+				+borderRadius
+				+transition
+
+				&.active
+					opacity: 1
+					transform: scale3d(1, 1, 1)
+					pointer-events: auto
+
+				&-item
+					font-size: 16px
+					margin-bottom: 15px
+
+					&:last-child
+						margin-bottom: 0
+
+	&-blocks-and-filters-wrapper
+		display: flex
+		align-items: flex-start
+
+	&-filters
+		margin-top: 30px
+
+		min-width: 265px
+		width: 265px
+
+		&-boutique
+			width: 100%
+
+			display: none
+			align-items: center
+
+			margin-bottom: 25px
+
+			&__btn
+				width: 50%
+
+				cursor: pointer
+
+				padding: 12px 14px
+				font-size: 14px
+
+				color: $black
+				background-color: transparent
+				border: 1px solid $mainColor
+
+				+ManropeSemiBold
+				+transition
+
+				&.active
+					background-color: $mainColor
+					color: $white
+
+				&.all
+					border-radius: 6px 0 0 6px
+
+				&.boutique
+					border-radius: 0 6px 6px 0
+
+		&-media-top
+			position: relative
+			display: none
+
+			text-align: center
+
+			margin-bottom: 25px
+
+			&__title
+				font-size: 17px
+
+			&-close
+				position: absolute
+
+				right: 0
+				top: 50%
+
+				transform: translateY(-50%)
+
+		&-block
+			cursor: pointer
+
+			border-top: 1px solid #D9D9D9
+
+			padding: 15px 0
+
+			// height: 58px
+			// overflow: hidden
+
+			// &.visible
+			// 	height: auto
+
+			&.disabled
+				pointer-events: none
+				opacity: 0.5
+
+			&-top
+				display: flex
+				align-items: center
+				justify-content: space-between
+
+				&__title
+					position: relative
+
+					display: flex
+					align-items: center
+
+					user-select: none
+					font-size: 17px
+
+					+ManropeMedium
+
+					& > svg
+						margin-left: 10px
+
+						&:hover + .message-info-wrapper
+							opacity: 1
+							pointer-events: auto
+
+			&-content
+				margin-top: 15px
+
+				padding-right: 10px
+
+				overflow-y: auto
+				max-height: 310px
+
+				// scrollBar
+				&::-webkit-scrollbar
+					width: 4px
+
+				&::-webkit-scrollbar-track
+					background-color: #D9D9D9
+					border-radius: 100px
+
+				&::-webkit-scrollbar-thumb
+					background-color: $gray
+					border-radius: 100px
+
+				&-more
+					height: 100px
+					overflow: hidden
+
+					&.visible
+						height: auto
+
+				&-price
+					&-input-wrapper
+						width: 100%
+
+						display: flex
+						justify-content: space-between
+
+					&-input
+						width: calc( 50% - 2.5px )
+						padding: 12px 8px
+						border: 1px solid $gray
+						border-radius: 9px
+
+						&-field
+							width: 100%
+							display: flex
+							align-items: flex-end
+
+							&__subtitle
+								user-select: none
+								font-size: 12px
+								color: $gray
+
+							&__input
+								width: 100%
+								margin-left: 3px
+								font-size: 16px
+								border: none
+								outline: none
+
+								background-color: transparent
+
+								&::placeholder
+									color: $gray
+
+				&-checkbox
+					margin-bottom: 10px
+
+					&__subtitle
+						font-size: 16px
+						color: $gray
+						margin-bottom: 10px
+
+					&__btn
+						cursor: pointer
+
+						display: flex
+						align-items: center
+
+						font-size: 14px
+
+						border: none
+						background-color: transparent
+
+						& > svg
+							margin-left: 8px
+
+							+transition
+
+						&.active > svg
+							transform: rotate(180deg)
+
+				&-brands
+					&-search
+						position: relative
+						margin-bottom: 10px
+
+						&__input
+							width: 100%
+							border: 1px solid $gray
+							border-radius: 6px
+							font-size: 14px
+							padding: 8px 40px 8px 10px
+							outline: none
+
+						& > svg
+							top: 50%
+							right: 15px
+							transform: translateY(-50%)
+
+							position: absolute
+
+				&-colors
+					&-checkbox-wrapper
+						margin-left: 2px
+
+					&-checkbox
+						position: absolute
+						z-index: -1
+						opacity: 0
+
+						&__label
+							cursor: pointer
+							display: inline-flex
+							align-items: center
+							user-select: none
+							+transition
+
+							&-circle
+								display: inline-block
+
+								min-width: 24px
+								height: 24px
+
+								border: 3px solid $backgroundColor
+
+								border-radius: 50%
+								margin-right: 10px
+
+							&__text
+								color: $black
+								font-size: 14px
+								line-height: 1.7em
+
+								& > a
+									margin-left: 3px
+									color: $mainColor
+
+								& > svg
+									width: 20px
+									margin-left: 10px
+
+									&:first-child
+										margin-left: 5px
+
+									&:last-child
+										margin-right: 10px
+
+						&:checked+label > div
+							outline: 1px solid $gray
+
+		&-btn
+			border-top: 1px solid #D9D9D9
+			padding: 15px 0
+
+			&__clear
+				cursor: pointer
+				border: none
+				text-decoration: underline
+				color: $gray
+				background-color: transparent
+				font-size: 16px
+
+		&-btn-media
+			width: 100%
+
+			position: fixed
+
+			bottom: 0
+			left: 0
+
+			padding: 15px
+
+			display: none
+			justify-content: space-between
+
+			background-color: $lightBackgroundColor
+
+			&__clear, &__apply
+				width: calc( 50% - 7.5px )
+
+	&-product-wrapper
+		width: 100%
+
+		margin-top: 30px
+		margin-left: 60px
+
+		display: inline-flex
+		flex-wrap: wrap
+		justify-content: space-between
+
+	&-product-blocks-wrapper
+		width: 100%
+
+		display: grid
+		grid-template-columns: repeat(4, 1fr)
+		gap: 25px 10px
+
+		+transition
+		+open
+
+		&.isFetch
+			opacity: 0.3
+
+	&-product
+		&-block
+			width: 100%
+			height: auto !important
+			transition: padding .2s ease
+
+			+open
+
+			&:nth-child(4n+4)
+				margin-right: 0
+
+			.product-block-cover
+				height: auto !important
+				padding-top: 150%
+
+			.product-block-cover-link
+				position: absolute
+				left: 0
+				top: 0
+				width: 100%
+				height: 100%
+
+			.product-block-cover-image
+				background-position: center 0 !important
+
+			@media (hover: hover)
+				&:hover
+					padding-bottom: 67px
+
+				&:hover .product-block-cover
+					padding-top: calc(150% - 60px)
+
+		&-null
+			width: 100%
+
+			display: flex
+			flex-direction: column
+			align-items: center
+			justify-content: center
+
+			text-align: center
+
+			margin: 25px 0
+
+			& > svg
+				margin-bottom: 15px
+
+			&__title
+				font-size: 22px
+				margin-bottom: 10px
+
+			&__subtitle
+				font-size: 14px
+				margin-bottom: 25px
+
+		&-pagination
+			width: 100%
+
+			margin-top: 25px
+
+			display: flex
+			flex-direction: column
+			align-items: center
+
+			&__btn
+				width: 50%
+
+				&.loader
+					height: 53px
+
+			&-pages
+				margin-top: 30px
+
+				display: flex
+				align-items: center
+
+				&__btn
+					cursor: pointer
+
+					font-size: 16px
+					border: none
+
+					padding: 6px 8px
+					margin: 0 12px
+
+					background-color: $lightBackgroundColor
+					border-radius: 100px
+
+					&.disabled
+						cursor: default
+						color: $gray
+						background-color: rgba(246, 244, 240, 0.80)
+
+				&-item
+					cursor: pointer
+
+					width: 35px
+					height: 35px
+
+					display: flex
+					justify-content: center
+					align-items: center
+
+					margin: 0 6px
+
+					font-size: 16px
+					color: $mainColor
+
+					background-color: $lightBackgroundColor
+					border-radius: 24px
+
+					will-change: transform
+
+					+transition
+
+					&:hover
+						+transformHover
+
+					&:active
+						+transformClick
+
+					&.active
+						background-color: $white
+
+		&-section
+			margin: 50px 0
+
+			&__title
+				display: block
+
+				font-size: 26px
+				font-weight: 500
+				margin-bottom: 15px
+
+			&-slider-wrapper
+				position: relative
+
+			&-slider
+				&-arrow
+					cursor: pointer
+					position: absolute
+					z-index: 1
+
+					top: 145px
+
+					background-color: transparent
+					border: none
+
+					+transition
+
+					&:hover
+						transform: scale3d(1.02, 1.02, 1.02)
+
+					&:active
+						transform: scale3d(0.95, 0.95, 0.95)
+
+					&.prev
+						left: -15px
+
+					&.next
+						right: -15px
+
+				& .catalog-slider-product-block
+					width: calc( 100% - 10px )
+					margin-right: 0
+					margin-bottom: 0
+
+@media screen and ( max-width: 1200px )
+	.catalog
+		margin: 15px 0 30px
+
+		&-banner
+			display: none
+
+		&-banner-media
+			display: block
+
+		&-boutique-media
+			display: flex
+
+		&-filters-top
+			margin-top: 12px
+
+			flex-direction: column
+			align-items: flex-start
+
+			&-media-btn
+				display: flex
+
+			&-title
+				margin-top: 12px
+
+			&-boutique
+				display: none
+
+			&-sort
+				display: none
+
+		&-filters
+			padding: 25px
+
+			position: fixed
+			z-index: 1
+			background-color: $lightBackgroundColor
+
+			border-radius: 12px 12px 0px 0px
+
+			left: 0
+			bottom: 0
+
+			overflow-x: scroll
+
+			height: 72vh
+
+			z-index: 20
+
+			width: 100%
+
+			opacity: 0
+			pointer-events: none
+
+			+transition
+
+			&.active
+				opacity: 1
+				pointer-events: auto
+
+			&-media-top
+				display: block
+
+			&-boutique
+				display: flex
+
+			&-block
+				&:first-child
+					border: none
+
+				&:last-child
+					margin-bottom: 75px
+
+				&-top
+					&__title
+						width: 100%
+						font-size: 15px
+
+			&-btn
+				display: none
+
+			&-btn-media
+				display: flex
+
+		&-product-wrapper
+			margin-top: 12px
+			margin-left: 0
+
+		&-product
+			&-null
+				&__title
+					font-size: 17px
+
+			&-section
+				margin: 25px 0
+
+				&__title
+					font-size: 17px
+
+				&-slider
+					&-arrow
+						&.prev
+							left: -5px
+
+						&.next
+							right: -5px
+						// display: none
+
+			&-blocks-wrapper
+				grid-template-columns: repeat(3, 1fr)
+
+			&-pagination
+				&__btn
+					width: 100%
+
+@media screen and ( max-width: 800px )
+	.catalog
+		&-product-blocks-wrapper
+			grid-template-columns: repeat(2, 1fr)
+			gap: 10px 5px
+
+@media screen and ( max-width: 600px )
+	.catalog
+		&-boutique-media
+			&-popup
+				width: 100%
+
+@media screen and ( max-width: 500px )
+	.catalog
+		&-banner-media
+			&-text
+				padding: 45px 0
+
+				// &__description
+				// 	width: 75%
+
+		&-product
+			&-pagination
+				&-pages
+					&-item
+						margin: 0 2px
+
+						width: 30px
+						height: 30px
+
+						font-size: 15px
+
+					&__btn
+						padding: 5px 10px
+						font-size: 15px
+						margin: 0 2px

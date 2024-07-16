@@ -1,0 +1,341 @@
+// faq-main
+
+.faq *
+	font-family: var(--font-manrope) !important
+
+.faq-main
+	margin: 30px 0
+
+	&-banner
+		width: 100%
+		height: 200px
+
+		display: flex
+		justify-content: center
+		align-items: center
+
+		border-radius: 12px
+
+		margin-bottom: 40px
+
+		+backgroundSetting
+
+		&__title
+			color: $white
+			font-size: 26px
+
+			& > span
+				font-weight: 600
+
+	&-menu
+		display: flex
+		overflow-y: auto
+		margin-bottom: 40px
+
+		&__link
+			margin-right: 25px
+			font-size: 18px
+			white-space: nowrap
+
+			+transition
+
+			&:hover
+				color: $mainColor
+
+			&.active
+				color: $mainColor
+
+				border-bottom: 1px solid $mainColor
+
+			&:last-child
+				margin-right: 0
+
+	&-content
+		&-all
+			margin-bottom: 300px
+
+			&__title
+				font-size: 26px
+				font-weight: 400
+
+				margin-bottom: 25px
+
+			&-col-wrapper
+				display: flex
+
+			&-col
+				margin-right: 80px
+
+				&:last-child
+					margin-left: 75px
+					margin-right: 0
+
+				&__title
+					font-size: 26px
+					font-weight: 400
+
+					margin-bottom: 25px
+
+				&__link
+					display: block
+
+					font-size: 16px
+					margin-bottom: 15px
+
+					+transition
+
+					&:hover
+						color: $mainColor
+
+		&-tab
+			padding-bottom: 25px
+			border-bottom: 1px solid $gray
+
+			margin-bottom: 25px
+
+			&:first-child
+				border-top: 1px solid $gray
+				padding-top: 25px
+
+			&-top
+				cursor: pointer
+
+				display: flex
+				justify-content: space-between
+				align-items: center
+
+				&__title
+					font-size: 18px
+					font-weight: 400
+
+				&-icon
+					+transition
+
+					&.rotate
+						transform: rotate(180deg)
+
+			&__description
+				margin-top: 15px
+
+				width: 75%
+
+				font-size: 14px
+
+				& h4
+					font-size: 18px
+					margin-bottom: 10px
+
+				& a
+					color: $mainColor
+					text-decoration: underline
+
+				& table
+					width: 75%
+
+				& td
+					padding: 15px 0
+					border-bottom: 1px solid $black
+
+// faq
+.faq
+	margin: 30px 0 50px 0
+
+	+open
+
+	&-bread-crumbs
+		display: flex
+		align-items: center
+
+		margin-bottom: 25px
+
+		&__back
+			display: none
+
+		&__item
+			color: $gray
+
+			line-height: 1.1em
+
+			cursor: pointer
+			+transition
+
+			&:hover
+				color: $mainColor
+
+			&:last-child
+				border-bottom: 1px solid $gray
+				color: $black
+
+				&:hover
+					color: $black
+
+		& > svg
+			margin: 0 12px
+
+	&-title-white-wrapper
+		background-color: $lightBackgroundColor
+		padding: 30px 0
+
+	&-title-white
+		&__title
+			font-size: 26px
+			margin-bottom: 10px
+
+		&__description
+			font-size: 15px
+
+	&-text-block-white-wrapper
+		background-color: $lightBackgroundColor
+		padding: 25px
+
+		+borderRadius
+
+	&-text
+		margin-top: 25px
+		width: 80%
+
+		& a
+			color: $mainColor
+			text-decoration: underline
+
+		&__title
+			font-size: 26px
+			margin-bottom: 25px
+
+		&__description
+			font-size: 14px
+			margin-bottom: 25px
+
+		&-block
+			margin-bottom: 40px
+
+			&:last-child
+				margin-bottom: 0
+
+			&__title
+				font-size: 22px
+				margin-bottom: 10px
+
+				display: flex
+				align-items: center
+
+			&-description
+				font-size: 14px
+
+				& a
+					text-decoration: underline
+					color: $mainColor
+
+				& > p
+					margin-bottom: 10px
+					+ManropeRegular
+
+				& > p.white
+					background-color: $lightBackgroundColor
+					padding: 10px 15px
+					font-size: 14px
+
+					+borderRadius
+
+				& > ul
+					margin-top: 15px
+					margin-left: 35px
+					margin-bottom: 15px
+
+					list-style: none
+
+					& > li
+						position: relative
+
+						margin-bottom: 10px
+						+ManropeRegular
+
+						&::before
+							content: ""
+							position: absolute
+
+							display: block
+
+							width: 4px
+							height: 4px
+
+							top: 12px
+							left: -15px
+
+							background-color: $black
+
+							border-radius: 100%
+
+				& > button
+					cursor: pointer
+					border: none
+					background-color: transparent
+					color: $mainColor
+					font-size: 16px
+
+	&-contact
+		margin-top: 25px
+
+/* MEDIA */
+@media screen and (max-width: 1200px)
+	.faq
+		margin-bottom: 25px
+
+		&-bread-crumbs
+			display: none
+
+			&__back
+				display: block
+
+		&-text
+			width: 100%
+			margin-top: 15px
+
+	// faq-main
+	.faq-main
+		&-menu
+			margin-bottom: 25px
+
+			&__link
+				font-size: 14px
+
+		&-content
+			&-all
+				&__title
+					font-size: 17px
+
+				&-col-wrapper
+					flex-direction: column
+
+				&-col
+					&:last-child
+						margin-top: 25px
+						margin-left: 0
+
+					&__title
+						font-size: 17px
+
+					&__link
+						font-size: 14px
+
+			&-tab
+				padding-bottom: 15px
+				margin-bottom: 15px
+
+				&:first-child
+					padding-top: 15px
+
+				&-top
+					&__title
+						width: 85%
+						font-size: 14px
+
+				&__description
+					width: 100%
+
+@media screen and (max-width: 500px)
+	.faq
+		&-main
+			&-banner
+				&__title
+					font-size: 17px

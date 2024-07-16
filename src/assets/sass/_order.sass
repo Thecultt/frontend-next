@@ -1,0 +1,702 @@
+// order
+.order
+	margin: 30px 0 75px 0
+
+	+open
+
+	&-wrapper
+		display: flex
+		justify-content: space-between
+		align-items: flex-start
+
+	&-loader
+		position: sticky
+		top: 130px
+
+		width: 65%
+
+	&-form
+		position: sticky
+		top: 130px
+
+		width: 65%
+
+		&-block
+			padding: 20px 30px
+			background-color: $lightBackgroundColor
+			border-radius: 16px
+
+			margin-bottom: 15px
+
+			+open
+
+			&:last-child
+				margin-bottom: 0
+
+			&__title
+				font-size: 17px
+				margin-bottom: 15px
+
+			&-inputs-wrapper
+				display: flex
+				justify-content: space-between
+				flex-wrap: wrap
+
+			&-input
+				margin-bottom: 15px
+
+			&-input-fake
+				display: block
+
+				position: relative
+				cursor: text
+				width: 100%
+
+				background-color: $lightBackgroundColor
+				border: 1px solid $gray
+
+				padding: 18px 14px
+				font-size: 16px
+
+				+borderRadius
+
+				&__title
+					font-weight: 500
+
+			&-notloggedin
+				+open
+
+				&__text
+					font-size: 12px
+					color: $gray
+					margin-bottom: 12px
+
+				&-checkbox
+					margin-bottom: 15px
+
+			&-loggedin
+				display: flex
+				align-items: center
+
+				padding: 8px 16px
+				border: 1px solid $gray
+				border-radius: 12px
+
+				margin-bottom: 15px
+
+				+open
+
+				& > svg
+					min-width: 38px
+					width: 38px
+					height: 38px
+
+				&-text
+					margin-left: 15px
+
+					&__title
+						font-weight: 400
+						font-size: 14px
+						color: $mainColor
+						margin-bottom: 5px
+
+						& > a
+							color: $mainColor
+							text-decoration: underline
+
+					&__subtitle
+						width: 75%
+						font-size: 12px
+						color: $gray
+
+			&-checkbox
+				margin-bottom: 15px
+
+				&.hidden
+					display: none
+
+				&:last-child
+					margin-bottom: 0
+
+			&-payments
+				&-split-widget
+					margin-top: 15px
+
+	&-products
+		position: sticky
+		top: 130px
+
+		width: 30%
+
+		padding: 30px
+		background-color: $lightBackgroundColor
+		border-radius: 16px
+
+		&__title
+			font-size: 17px
+			margin-bottom: 12px
+
+			+ManropeRegular
+
+		&-check-all
+			cursor: pointer
+			display: flex
+			align-items: center
+
+			margin-bottom: 15px
+
+			&__title
+				margin-left: 10px
+				font-size: 16px
+				user-select: none
+
+				+ManropeMedium
+
+		&-items-wrapper
+			margin-bottom: 20px
+
+		&-item
+			display: flex
+			justify-content: space-between
+			align-items: center
+
+			margin-bottom: 15px
+
+			&.disabled &-content
+				opacity: 0.5
+
+			&.notAvailability &-content-check
+				pointer-events: none
+				filter: grayscale(100%)
+				opacity: 0.5
+
+			&-content
+				display: flex
+				align-items: center
+
+				will-change: opacity
+
+				+transition
+
+				&-check
+					cursor: pointer
+
+					margin-right: 10px
+
+					height: 18px
+					width: 18px
+
+				&-image
+					border-radius: 6px
+
+					width: 70px
+					height: 100px
+
+					+backgroundSetting
+
+				&-text
+					margin-left: 15px
+
+					&__brand
+						font-size: 14px
+						margin-bottom: 5px
+
+					&__model
+						font-size: 16px
+
+						+ManropeMedium
+
+					&__sum
+						font-size: 17px
+						+ManropeSemiBold
+
+					&__availability
+						color: $red
+						font-size: 15px
+
+			&-remove
+				cursor: pointer
+
+				+transition
+
+				&.disabled
+					opacity: 0.5
+					pointer-events: none
+
+				&:hover > svg
+					stroke: $red
+
+				& > svg
+					stroke: $black
+
+					+transition
+
+		&-promocode
+			display: flex
+			justify-content: space-between
+			align-items: center
+
+			margin-bottom: 15px
+
+			+transition
+
+			&.disabled
+				pointer-events: none
+				opacity: 0.5
+
+			&.error_disabled
+				margin-bottom: 55px
+
+			&.error_disabled &-input__field
+				border: 1px solid $red !important
+				color: $red
+
+			&.error_disabled &-input__error
+				bottom: -45px
+
+			&.error
+				margin-bottom: 35px
+
+			&.error
+				margin-bottom: 35px
+
+			&-input
+				position: relative
+
+				width: 100%
+
+				margin-right: 10px
+
+				&__field
+					width: 100%
+					outline: none
+					padding: 15px 14px
+					font-size: 16px
+					border: .3px solid $gray
+					background-color: transparent
+					border-radius: 12px
+
+					+ManropeSemiBold
+					+transition
+
+					&.disabled
+						border: .3px dashed $gray
+
+					&.active
+						border: 1px solid $mainColor
+						color: $mainColor
+
+					&.error
+						border: 1px solid $red
+
+				&__error
+					position: absolute
+
+					white-space: nowrap
+
+					left: 0
+					bottom: -25px
+
+					font-size: 12px
+					color: $red
+
+					+ManropeSemiBold
+					+openPopup
+
+			&__btn
+				min-width: 140px
+
+				cursor: pointer
+				display: inline-flex
+				align-items: center
+				justify-content: center
+				border-radius: 12px
+				padding: 15px 25px
+				font-size: 16px
+
+				border: 1px solid $mainColor
+				background-color: $mainColor
+				color: $white
+
+				will-change: transform
+
+				+transition
+
+				&:hover
+					+transformHover
+
+				&:active
+					+transformClick
+
+				&.disabled
+					pointer-events: none
+					border: 1px solid #DEDCD8
+					background-color: transparent
+					color: $gray
+
+				&.edit
+					min-width: auto
+
+					padding: 15px 0
+					border: none
+					background-color: transparent
+					color: $mainColor
+
+		&-total
+			&-item
+				display: flex
+				justify-content: space-between
+				align-items: center
+
+				margin-bottom: 15px
+
+				&.promocode &__value
+					color: $mainColor
+					+ManropeSemiBold
+
+				&__title
+					font-size: 17px
+
+					+ManropeMedium
+
+				&__value
+					font-size: 17px
+
+					+ManropeMedium
+
+		&__description
+			text-align: center
+
+			font-size: 12px
+			color: $gray
+			line-height: 1.4em
+
+			margin-bottom: 15px
+
+		&__btn
+			width: 100%
+
+	&-status
+		margin: 30px 0 75px
+
+		&-wrapper
+			display: flex
+			flex-direction: column
+			align-items: center
+
+		&-content
+			width: 550px
+
+			background-color: $lightBackgroundColor
+
+			padding: 35px 40px
+
+			border-radius: 24px
+
+			&-info
+				position: relative
+
+				display: flex
+				flex-direction: column
+				align-items: center
+				text-align: center
+
+				border-bottom: 0.3px solid $gray
+
+				padding-bottom: 25px
+				margin-bottom: 25px
+
+				&-circle
+					width: 50px
+					height: 50px
+
+					position: absolute
+
+					bottom: -25px
+
+					border-radius: 50%
+					background-color: $backgroundColor
+
+					&.left
+						left: -65px
+
+					&.right
+						right: -65px
+
+				&-icon
+					margin-bottom: 25px
+
+				&__title
+					font-size: 22px
+					margin-bottom: 10px
+
+				&__subtitle
+					font-size: 17px
+
+					margin-bottom: 15px
+
+					+ManropeMedium
+
+				&__description
+					font-size: 14px
+					margin-bottom: 25px
+
+					& > a
+						color: $mainColor
+						text-decoration: underline
+
+				&-btn
+					width: 100%
+					display: flex
+					justify-content: space-between
+					align-items: center
+
+					&__btn
+						width: 49%
+
+				&__repeatbtn
+					width: 240px
+
+			&-good
+				width: 100%
+				display: flex
+
+				padding: 10px
+				border: 0.3px dashed $gray
+
+				margin-bottom: 10px
+
+				+borderRadius
+
+				&:last-child
+					margin-bottom: 0
+
+				&-image
+					width: 120px
+
+					border-radius: 6px
+
+					+backgroundSetting
+
+				&-text
+					padding: 20px 0
+					margin-left: 15px
+
+					&__brand
+						font-size: 14px
+
+					&__model
+						font-size: 18px
+
+					&__option
+						font-size: 14px
+
+						display: flex
+						align-items: center
+
+						+ManropeMedium
+
+						& > span
+							color: $gray
+							margin-right: 7px
+
+					&-state
+						display: flex
+						align-items: center
+
+						margin: 5px 0
+
+						&__subtitle
+							font-size: 14px
+							padding-right: 5px
+							margin-right: 5px
+
+							border-right: 1px solid #D9D9D9
+
+						&__title
+							display: flex
+							align-items: center
+
+							font-size: 14px
+
+							color: $mainColor
+
+							+ManropeMedium
+
+							& > svg
+								cursor: pointer
+
+								width: 14px
+								margin-right: 5px
+
+					&__price
+						font-size: 18px
+
+						+ManropeMedium
+
+		&-recipient
+			margin-top: 2px
+			width: 550px
+
+			position: relative
+
+			background-color: $lightBackgroundColor
+
+			padding: 45px 40px 0 45px
+
+			border-radius: 24px
+
+			&-block
+				margin-bottom: 30px
+
+				&:last-child
+					margin-bottom: 0
+
+				&__title
+					font-size: 20px
+					margin-bottom: 15px
+
+				&__subtitle
+					display: flex
+					align-items: center
+
+					font-size: 16px
+					margin-bottom: 10px
+
+					+ManropeMedium
+
+					&:last-child
+						margin-bottom: 0
+
+					& > span
+						display: inline-block
+						width: 150px
+						color: $gray
+						margin-right: 35px
+
+					& > .payment
+						display: flex
+						align-items: center
+						color: $mainColor
+
+						+ManropeMedium
+
+						& > svg
+							margin-left: 5px
+
+					& > .payment-error
+						color: $red
+
+			&-svg
+				width: 100%
+				bottom: -50px
+				left: 0
+				position: absolute
+
+@media screen and ( max-width: 1200px )
+	// order
+	.order
+		margin-bottom: 25px
+
+		&-wrapper
+			flex-direction: column
+
+		&-form, &-products, &-loader
+			width: 100%
+
+		&-form, &-loader
+			position: static
+			margin-bottom: 15px
+
+@media screen and ( max-width: 600px )
+	// order
+	.order
+		&-status
+			margin: 15px 0 75px 0
+
+			&-content, &-recipient
+				width: 98%
+
+			&-content
+				overflow: hidden
+				padding: 10px
+
+				&-info
+					&__title
+						font-size: 18px
+
+					&__subtitle
+						font-size: 12px
+
+					&__description
+						font-size: 12px
+
+					&-btn
+						flex-direction: column
+
+						&__btn
+							width: 100%
+
+							&:first-child
+								margin-bottom: 10px
+
+				&-good
+					padding: 5px
+
+					&-image
+						width: 80px
+
+					&-text
+						padding: 0
+
+						&__model
+							font-size: 16px
+
+						&-state
+							margin: 0
+
+						&__price
+							font-size: 14px
+
+			&-recipient
+				padding: 20px 20px 0 20px
+
+				&-block
+					margin-bottom: 15px
+
+					&__title
+						font-size: 16px
+						margin-bottom: 10px
+
+					&__subtitle
+						display: block
+						font-size: 14px
+
+						& > span
+							width: 100%
+							margin-right: 0
+
+				&-svg
+					bottom: -50px
+
+@media screen and ( max-width: 500px )
+	// order
+	.order
+		&-form
+			&-block
+				padding: 15px
+
+				&-input
+					width: 100% !important
+
+		&-products
+			padding: 15px
+
+			&-promocode
+				&-input
+					&__field
+						font-size: 14px
+
+				&__btn
+					min-width: 100px
+					font-size: 14px

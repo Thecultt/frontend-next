@@ -1,0 +1,94 @@
+// cabinet favorites
+.cabinet-favorites
+	+open
+
+	& .popup-content
+		background-color: $backgroundColor
+		padding: 55px 20px 25px 20px
+		border: 1px solid $mainColor
+
+	&-share-popup
+		width: 400px
+
+		text-align: center
+
+		&__title
+			font-size: 17px
+			margin-bottom: 5px
+
+		&__subtitle
+			font-size: 14px
+			margin-bottom: 15px
+
+		&__link
+			width: 100%
+
+			white-space: nowrap
+			text-overflow: ellipsis
+			overflow: hidden
+
+			padding: 12px
+			font-size: 14px
+			background-color: $lightBackgroundColor
+			border-radius: 12px
+
+			margin-bottom: 25px
+
+		&__btn
+			width: 100%
+
+	&__share
+		cursor: pointer
+
+		display: inline-flex
+		align-items: center
+
+		border: none
+		background-color: $lightBackgroundColor
+		font-size: 14px
+		padding: 15px
+
+		border-radius: 8px
+
+		margin-bottom: 25px
+
+		+ManropeRegular
+
+		& > svg
+			margin-right: 8px
+
+	&-blocks-wrapper
+		display: flex
+		flex-wrap: wrap
+
+	&-block
+		width: calc( 25% - 15px )
+		margin-right: 15px
+		margin-bottom: 15px
+
+	&-null
+		&__title
+			font-size: 16px
+			margin-bottom: 30px
+
+/* MEDIA */
+@media screen and (max-width: 900px)
+	.cabinet-favorites
+		&__share
+			justify-content: center
+			width: 100%
+
+		&-blocks-wrapper
+			justify-content: space-between
+
+		&-block
+			width: calc( 50% - 2.5px )
+			margin-right: 0
+
+@media screen and (max-width: 600px)
+	.cabinet-favorites
+		& .popup
+			align-items: center
+
+		&-share-popup
+			width: 100%

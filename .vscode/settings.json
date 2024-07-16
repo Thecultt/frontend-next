@@ -1,4 +1,8 @@
 {
+  "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
+  "[sass]": {
+    "editor.defaultFormatter": "syler.sass-indented"
+  },
+  "cSpell.words": ["mindbox", "reglog", "AlyonaDoletskaya", "thecultt", "tinkoff", "swiper"]
 }

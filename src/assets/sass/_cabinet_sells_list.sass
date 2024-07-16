@@ -1,0 +1,338 @@
+// cabinet sells list
+.cabinet-sells-list
+	+open
+
+	&-payment-info
+		&-message
+			padding: 15px
+
+			background-color: $lightBackgroundColor
+
+			margin-bottom: 25px
+
+			+borderRadius
+
+			&__title
+				font-size: 17px
+				margin-bottom: 6px
+
+			&__description
+				font-size: 14px
+				// margin-bottom: 10px
+
+				& > a
+					color: $mainColor
+
+			&__btn
+				cursor: pointer
+
+				border: none
+				border-bottom: 1px solid $mainColor
+
+				font-size: 15px
+				color: $mainColor
+
+				background-color: transparent
+
+		&-popup
+			width: 600px
+
+			&__title
+				font-size: 22px
+				text-align: center
+
+				margin-bottom: 8px
+
+			&__subtitle
+				font-size: 14px
+				text-align: center
+
+				margin-bottom: 16px
+
+			&-block
+				margin-top: 15px
+
+				&__title
+					position: relative
+
+					display: flex
+					align-items: center
+
+					font-size: 17px
+
+					margin-bottom: 10px
+
+					& > svg
+						cursor: pointer
+						margin-left: 8px
+
+						&:hover + .message-info-wrapper
+							opacity: 1
+							pointer-events: auto
+
+				&-input-wrapper
+					display: flex
+					justify-content: space-between
+					flex-wrap: wrap
+
+				&-input
+					margin-bottom: 15px
+
+			&-btn
+				margin-top: 15px
+
+				display: flex
+				flex-direction: column
+				align-items: center
+
+				&__btn
+					margin-top: 15px
+
+					width: 75%
+
+	&-top
+		display: flex
+		justify-content: flex-end
+
+		margin-bottom: 25px
+
+	&-item-wrapper
+		background-color: $lightBackgroundColor
+		padding: 10px
+
+		+borderRadius
+
+		margin-bottom: 15px
+
+		&:last-child
+			margin-bottom: 0
+
+	&-item
+		position: relative
+		border: 1px solid $gray
+
+		cursor: pointer
+
+		padding: 18px
+
+		+borderRadius
+
+		&-topinfo
+			display: flex
+			justify-content: space-between
+			align-items: center
+
+			&-block
+				display: flex
+				align-items: center
+
+				&__title
+					font-size: 17px
+
+					+ManropeSemiBold
+
+				&__date
+					margin-left: 25px
+					font-size: 17px
+
+				&__date
+					+ManropeMedium
+
+				&__status__media
+					position: relative
+
+					display: none
+					align-items: center
+					user-select: none
+
+					font-size: 17px
+
+					+ManropeMedium
+
+					&.green
+						color: $mainColor
+
+					&.red
+						color: $red
+
+					& > svg
+						cursor: pointer
+						margin-left: 5px
+
+						&:hover + .message-info-wrapper
+							opacity: 1
+							pointer-events: auto
+
+				&__status
+					position: relative
+
+					display: inline-flex
+					align-items: center
+					user-select: none
+
+					font-size: 17px
+
+					+ManropeMedium
+
+					&.green
+						color: $mainColor
+
+					&.red
+						color: $red
+
+					& > svg
+						cursor: pointer
+						margin-left: 5px
+
+						& + .message-info-wrapper
+							right: -25px
+
+						&:hover + .message-info-wrapper
+							opacity: 1
+							pointer-events: auto
+
+				&-icon
+					display: inline-flex
+					align-items: center
+
+					margin-left: 10px
+
+					+transition
+
+					&.rotate
+						transform: rotate(180deg)
+
+		&-info
+			display: flex
+			align-items: flex-start
+			justify-content: space-between
+
+			&-block
+				width: calc( 100% - 270px )
+				margin-top: 20px
+
+				&__title
+					font-size: 17px
+
+					margin-bottom: 12px
+
+					+ManropeSemiBold
+
+				&-value-wrapper
+					display: flex
+					align-items: flex-start
+
+					&.bb
+						padding-bottom: 12px
+						margin-bottom: 12px
+						border-bottom: 1px solid $gray
+
+				&-value
+					&.ml
+						margin-left: 70px
+
+					&__value
+						display: flex
+						align-items: center
+
+						margin-bottom: 10px
+
+						+ManropeMedium
+
+						&:last-child
+							margin-bottom: 0
+
+						& > span
+							color: $gray
+							margin-right: 7px
+
+				&__btn
+					margin-top: 15px
+
+			&-cover
+				margin-top: 20px
+
+				width: 170px
+				height: 230px
+
+				+backgroundSetting
+				+borderRadius
+
+	&-null__title
+		font-size: 16px
+
+/* MEDIA */
+@media screen and (max-width: 900px)
+	.cabinet-sells-list
+		&-payment-info
+			&-popup
+				width: 400px
+
+		&-top
+			&__add
+				width: 100%
+
+		&-item
+			&-topinfo
+				&-block
+					flex-direction: column
+					align-items: flex-start
+
+					&__date
+						margin-top: 10px
+						margin-left: 0
+
+					&__status__media
+						margin-top: 10px
+						display: block
+
+						& > svg
+							& + .message-info-wrapper
+								width: 250px
+								left: 0
+
+					&__status
+						display: none
+
+			&-info
+				flex-direction: column
+
+				&-block
+					width: 100%
+
+					&-value-wrapper
+						flex-direction: column
+
+					&-value
+						margin-left: 0 !important
+						margin: 5px 0
+
+						&__value
+							flex-direction: column
+							align-items: flex-start
+
+@media screen and (max-width: 600px)
+	.cabinet-sells-list
+		&-payment-info
+			&-popup
+				width: 100%
+
+				&-block
+					&-input
+						width: 100% !important
+						margin-bottom: 15px !important
+
+				&-btn
+					&__btn
+						width: 100%
+
+@media screen and (max-width: 500px)
+	.cabinet-sells
+		&-list
+			&-payment-info-message
+				background-color: $mainColor
+				color: $white
+
+				&__description
+					& > a
+						color: $white

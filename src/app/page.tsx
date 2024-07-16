@@ -1,11 +1,17 @@
 import type { Metadata } from 'next/types';
 
+import { Home } from '@/screens';
+import NoSsr from '@/components/NoSsr/NoSsr';
+import { APP_TITLE } from '@/constants/app';
+
 export const metadata: Metadata = {
-    title: 'Ресейл-платформа культовых сумок | THECULTT',
+    title: APP_TITLE,
 };
 
-const Home = () => {
-    return <main>Next</main>;
-};
+const HomePage = () => (
+    <NoSsr>
+        <Home />
+    </NoSsr>
+);
 
-export default Home;
+export default HomePage;

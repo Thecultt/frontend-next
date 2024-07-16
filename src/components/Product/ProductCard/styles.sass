@@ -1,0 +1,209 @@
+@import "/src/assets/sass/mixin"
+@import "/src/assets/sass/variables"
+
+.product-card
+    width: 100%
+    overflow: hidden
+
+    &__btn
+        width: 100%
+        height: 38px
+        margin-top: 4px
+
+    &:hover .product-card-cover__arrow
+        opacity: 1
+        visibility: visible
+        transform: scale(1)
+
+.product-card-cover
+    width: 100%
+    position: relative
+    padding-top: 133%
+    border-radius: 8px
+    background-color: $lightBackgroundColor
+    overflow: hidden
+
+    &__link
+        display: block
+        width: 100%
+        height: 100%
+
+    &__carousel
+        position: absolute !important
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        z-index: 0 !important
+        width: 100% !important
+        height: 100% !important
+
+        &-dots
+            position: absolute
+            bottom: 8px
+            left: 0
+            width: 100%
+            +flexCenter
+            gap: 4px
+            z-index: 4
+
+            @media screen and (max-width: 1200px)
+                bottom: 6px
+
+        &-dot
+            +buttonReset
+            width: 8px
+            height: 8px
+            flex-shrink: 0
+            border-radius: 50%
+            background-color: $grey4
+            transition: background-color .2s linear
+
+            @media (hover: hover)
+                &:hover
+                    background-color: $grey6
+
+            @media screen and (max-width: 1200px)
+                width: 6px
+                height: 6px
+
+            &--active
+                background-color: $grey8
+
+        .slick-list, .slick-track
+            height: 100%
+
+        .slick-slide > div
+            width: 100%
+            height: 100%
+
+    &__image
+        width: 100%
+        height: 100%
+
+    &__arrow
+        +buttonReset
+        width: 24px
+        height: 24px
+        +flexCenter
+        position: absolute
+        top: 50%
+        margin-top: -12px
+        z-index: 3
+
+        opacity: 0
+        visibility: hidden
+        transform: scale(0)
+        transition: opacity .2s linear, transform .2s linear, visibility .2s linear
+
+        @media screen and (max-width: 1200px)
+            display: none
+
+        &--prev
+            left: 4px
+
+        &--next
+            right: 4px
+
+    &__badges
+        position: absolute
+        top: 0
+        left: 0
+        padding: 8px
+        z-index: 1
+
+.product-card-favorites
+    +buttonReset
+
+    position: absolute
+    top: 0
+    right: 0
+    padding: 8px
+    z-index: 2
+
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    &__icon
+        width: 28px
+
+        @media screen and (max-width: 1200px)
+            width: 24px
+
+    &__count
+        +ManropeSemiBold
+        font-size: 12px
+        line-height: 14.4px
+        text-align: center
+        color: $grey10
+
+.product-card-info
+    display: flex
+    flex-direction: column
+
+    &__name
+        +ManropeMedium
+        +textEllipsis
+        font-size: 14px
+        line-height: 19.6px
+        color: $black3
+        margin-top: 2px
+
+        @media screen and (max-width: 1200px)
+            +ManropeSemiBold
+            line-height: 16.8px
+
+    &__condition
+        +ManropeMedium
+        +textEllipsis
+        color: $black3
+        font-size: 14px
+        line-height: 19.6px
+        margin-top: 2px
+
+        &-value
+            +ManropeBold
+
+            @media screen and (max-width: 1200px)
+                +ManropeMedium
+                color: $mainColor
+
+    &__prices
+        display: inline
+
+    &__price
+        +ManropeBold
+        font-size: 16px
+        line-height: 19.2px
+        color: $black3
+
+        @media screen and (max-width: 1200px)
+            +ManropeMedium
+            line-height: 22.4px
+
+        &--old
+            color: $grey6
+            margin-left: 8px
+            text-decoration: line-through
+
+            @media screen and (max-width: 1200px)
+                margin-left: 4px
+
+    &__outstock
+        +ManropeMedium
+        font-size: 14px
+        line-height: 19.6px
+        color: $grey8
+        margin-top: 2px
+
+    &__price-split
+        height: 38px
+        display: flex
+        flex-direction: column
+        margin-top: 4px
+
+    &__split
+        width: 100%
+        height: auto
+        padding-top: 4px

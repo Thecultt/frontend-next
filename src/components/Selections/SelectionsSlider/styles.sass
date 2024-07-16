@@ -1,0 +1,54 @@
+@import "/src/assets/sass/mixin"
+
+.selections-slider
+    width: 100%
+    margin: 50px 0
+
+    @media screen and (max-width: 1200px)
+        margin: 25px 0
+
+    &__title
+        display: block
+        font-size: 26px
+        font-weight: 500
+        margin-bottom: 15px
+
+        @media screen and (max-width: 1200px)
+            font-size: 17px
+
+    &__wrapper
+        width: 100%
+        position: relative
+
+    &__carousel
+        width: 100%
+
+        .swiper-slide
+            height: auto !important
+
+            @media screen and (max-width: 1200px)
+                max-width: 220px
+
+    &__arrow
+        +buttonReset
+
+        cursor: pointer
+        position: absolute
+        z-index: 1
+
+        top: 50%
+        transform: translateY(-50%)
+
+        +transition
+
+        &:hover
+            transform: translateY(-50%) scale3d(1.02, 1.02, 1.02)
+
+        &:active
+            transform: translateY(-50%) scale3d(0.95, 0.95, 0.95)
+
+        &--prev
+            left: -15px
+
+        &--next
+            right: -15px

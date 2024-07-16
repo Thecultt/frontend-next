@@ -13,6 +13,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "no-console": "warn",
     "react/no-unescaped-entities": "off",
     "react/react-in-jsx-scope": "off",
     "react/display-name": "off",
@@ -20,6 +21,7 @@
     "no-unused-vars": "off",
     "no-empty-function": "off",
     "no-irregular-whitespace": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/no-empty-function": "warn",
     "@typescript-eslint/ban-types": "warn",
     "@typescript-eslint/ban-ts-comment": "warn",
@@ -32,6 +34,7 @@
         "argsIgnorePattern": "^_",
         "ignoreRestSiblings": false
       }
-    ]
+    ],
+    "@next/next/no-img-element": "warn"
   }
 }

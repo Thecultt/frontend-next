@@ -1,0 +1,84 @@
+// cabinet
+.cabinet
+	margin: 40px 0
+
+	&-wrapper
+		display: flex
+		justify-content: space-between
+		align-items: flex-start
+
+	&-menu
+		top: 150px
+		position: sticky
+
+		width: 250px
+		min-width: 200px
+		margin-right: 110px
+
+		flex-shrink: 0
+
+		&__item
+			display: block
+
+			padding: 10px
+			font-size: 16px
+			border-radius: 6px
+
+			margin-bottom: 5px
+
+			+transition
+
+			&:hover
+				color: $mainColor
+
+			&.active
+				background-color: $lightBackgroundColor
+
+	&-menu-media
+		width: 100%
+		display: flex
+		overflow: auto
+
+		margin-bottom: 15px
+
+		&-item
+			width: 140px
+			min-width: 140px
+
+			padding: 10px
+			background-color: $lightBackgroundColor
+			border-radius: 9px
+			border: 1px solid $lightBackgroundColor
+
+			margin-right: 12px
+
+			&:last-child
+				margin-right: 0
+
+			&.active
+				border: 1px solid $mainColor
+
+			&__text
+				margin-top: 8px
+				display: block
+				font-size: 14px
+
+	&__title
+		font-size: 26px
+		margin-bottom: 25px
+
+		+ManropeRegular
+
+	&-content
+		width: 100%
+		min-height: 70vh
+
+		+open
+
+/* MEDIA */
+@media screen and (max-width: 1200px)
+	.cabinet
+		margin: 25px 0
+
+		&-wrapper
+			flex-direction: column

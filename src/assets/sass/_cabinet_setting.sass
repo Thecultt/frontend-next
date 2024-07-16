@@ -1,0 +1,185 @@
+// cabinet setting
+.cabinet-setting
+	+open
+
+	&-block
+		width: 650px
+
+		padding: 15px 30px
+
+		background-color: $lightBackgroundColor
+
+		margin-bottom: 20px
+
+		border-radius: 16px
+		border: 1px solid $lightBackgroundColor
+
+		+transition
+
+		&.active
+			// border: 1px solid $gray
+
+		&-title
+			display: flex
+			align-items: center
+
+			margin-bottom: 20px
+
+			&__title
+				font-size: 17px
+
+				+ManropeSemiBold
+
+			&__btn
+				margin-left: 25px
+				cursor: pointer
+				border: none
+				background-color: transparent
+				color: $mainColor
+				font-size: 16px
+
+				+ManropeMedium
+				+transition
+
+				&.disabled
+					opacity: 0.5
+					pointer-events: none
+
+			&-btn
+				+open
+
+		&-form
+			opacity: 0.5
+			pointer-events: none
+
+			+transition
+
+			&.active
+				opacity: 1
+				pointer-events: auto
+
+			&-input-wrapper
+				display: flex
+				justify-content: space-between
+				flex-wrap: wrap
+
+			&-input
+				margin-bottom: 15px
+
+			&-radio-wrapper
+				margin-top: 10px
+
+				display: flex
+				align-items: center
+
+			&-radio
+				margin-right: 15px
+
+			&-add__btn
+				cursor: pointer
+				border: none
+				background-color: transparent
+				display: flex
+				align-items: center
+				font-size: 16px
+
+				+ManropeMedium
+				+transition
+
+				& > svg
+					margin-right: 20px
+
+				&:hover
+					color: $gray
+
+	&-password-recovery
+		width: 650px
+
+		display: flex
+		justify-content: space-between
+
+		padding: 25px 30px
+		background-color: $lightBackgroundColor
+
+		margin-bottom: 20px
+
+		+borderRadius
+
+		&__title
+			font-size: 16px
+
+			+ManropeRegular
+
+		&__btn
+			cursor: pointer
+			border: none
+			background-color: transparent
+			color: $mainColor
+			font-size: 16px
+			text-decoration: underline
+
+			+ManropeMedium
+
+		&-form
+			width: 420px
+
+			&__title
+				font-size: 22px
+				text-align: center
+				margin-bottom: 30px
+
+			&-content
+				&-input
+					margin-bottom: 30px
+
+					&:last-child
+						margin-bottom: 0
+
+					&__title
+						font-size: 17px
+						margin-bottom: 15px
+
+				&__link
+					display: block
+					text-decoration: underline
+					font-size: 16px
+					text-align: center
+
+					margin-bottom: 25px
+
+				&__btn
+					width: 100%
+
+				&__description
+					text-align: center
+
+					margin-top: 30px
+					font-size: 14px
+
+	&__logout
+		margin-top: 20px
+
+		cursor: pointer
+		font-size: 16px
+
+/* MEDIA */
+@media screen and (max-width: 1200px)
+	.cabinet-setting
+		&-block
+			width: 100%
+
+@media screen and (max-width: 500px)
+	.cabinet-setting
+		&-block
+			padding: 15px
+			
+			&-form
+				&-input
+					width: 100% !important
+
+		&__logout
+			margin-top: 0
+			width: 100%
+			
+			text-decoration: underline
+			border: none
