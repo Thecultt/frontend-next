@@ -6,6 +6,7 @@ import { LS_KEYS } from '@/constants/keys';
 import { localStorageService } from '@/services/storage';
 import { getPath } from '@/functions/getPath';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
+import { sendReachGoal } from '@/functions/yandex';
 
 import { RecoveryPasswordActions, RecoveryPasswordActionTypes } from '../types/IRecoveryPassword';
 
@@ -21,9 +22,7 @@ export const sendRecoveryPassword = (email: string, isRedirect?: boolean, router
                 email,
             })
             .then(() => {
-                // TODO
-                // const ym = window.ym || (window.ym = []);
-                // ym(68184745, 'reachGoal', 'forgot_password');
+                sendReachGoal('forgot_password');
 
                 if (isRedirect) {
                     const { pathname, search } = window.location;
