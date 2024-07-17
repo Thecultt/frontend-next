@@ -3,10 +3,11 @@
 import React from 'react';
 import Slider from 'react-slick';
 import Link from 'next/link';
+import { useMediaQuery } from 'usehooks-ts';
 
 import { getClassNames } from '@/functions/getClassNames';
 import { APP_ROUTE } from '@/constants/routes';
-import { BaseImage } from '@/components';
+import { MEDIA_SIZES } from '@/constants/styles';
 
 import 'slick-carousel/slick/slick.css';
 
@@ -16,19 +17,48 @@ interface Props {
 }
 
 export const ProductCardImages: React.FC<Props> = React.memo(({ slides, article }) => {
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+
     const sliderRef = React.useRef<any>(null);
     const [currentIndex, setCurrentIndex] = React.useState(0);
 
     const handlePrevClick = () => {
-        sliderRef.current?.slickPrev();
+        if (isMobile) {
+            sliderRef.current?.slickPrev();
+            return;
+        }
+
+        setCurrentIndex((current) => {
+            if (current - 1 < 0) {
+                return slides.length - 1;
+            }
+
+            return current - 1;
+        });
     };
 
     const handleNextClick = () => {
-        sliderRef.current?.slickNext();
+        if (isMobile) {
+            sliderRef.current?.slickNext();
+            return;
+        }
+
+        setCurrentIndex((current) => {
+            if (current + 1 > slides.length - 1) {
+                return 0;
+            }
+
+            return current + 1;
+        });
     };
 
     const handleDotClick = (index: number) => () => {
-        sliderRef.current?.slickGoTo(index);
+        if (isMobile) {
+            sliderRef.current?.slickGoTo(index);
+            return;
+        }
+
+        setCurrentIndex(index);
     };
 
     return (
@@ -66,41 +96,53 @@ export const ProductCardImages: React.FC<Props> = React.memo(({ slides, article 
             </button>
 
             <div className="product-card-cover__carousel-dots">
-                {Array(slides.length)
-                    .fill(0)
-                    .map((_, index) => (
-                        <button
-                            key={index}
-                            type="button"
-                            className={getClassNames('product-card-cover__carousel-dot', {
-                                'product-card-cover__carousel-dot--active': index === currentIndex,
-                            })}
-                            onClick={handleDotClick(index)}
-                        />
-                    ))}
+                {slides.map((_, index) => (
+                    <button
+                        key={index}
+                        type="button"
+                        className={getClassNames('product-card-cover__carousel-dot', {
+                            'product-card-cover__carousel-dot--active': index === currentIndex,
+                        })}
+                        onClick={handleDotClick(index)}
+                    />
+                ))}
             </div>
 
-            <Slider
-                beforeChange={(_cur, nextSlide) => setCurrentIndex(nextSlide)}
-                slidesToShow={1}
-                slidesToScroll={1}
-                arrows={false}
-                className="product-card-cover__carousel"
-                lazyLoad="progressive"
-                ref={sliderRef}
-                infinite
-            >
-                {slides.map((image, index) => (
-                    <Link key={index} href={`${APP_ROUTE.product}/${article}`} className="product-card-cover__link">
-                        <div
-                            style={{
-                                backgroundImage: `url("${image}")`,
-                            }}
-                            className="product-card-cover__image"
-                        />
-                    </Link>
-                ))}
-            </Slider>
+            {isMobile ? (
+                <Slider
+                    beforeChange={(_cur, nextSlide) => setCurrentIndex(nextSlide)}
+                    slidesToShow={1}
+                    slidesToScroll={1}
+                    arrows={false}
+                    className="product-card-cover__carousel"
+                    lazyLoad="progressive"
+                    ref={sliderRef}
+                    infinite
+                >
+                    {slides.map((image, index) => (
+                        <Link key={index} href={`${APP_ROUTE.product}/${article}`} className="product-card-cover__link">
+                            <div
+                                style={{
+                                    backgroundImage: `url("${image}")`,
+                                }}
+                                className="product-card-cover__image"
+                            />
+                        </Link>
+                    ))}
+                </Slider>
+            ) : (
+                slides.map((slide, index) => (
+                    <div
+                        key={index}
+                        style={{
+                            backgroundImage: `url("${slide}")`,
+                        }}
+                        className={getClassNames('product-card-cover__image product-card-cover__image--desktop', {
+                            'product-card-cover__image--active': index === currentIndex,
+                        })}
+                    />
+                ))
+            )}
         </>
     );
 });
