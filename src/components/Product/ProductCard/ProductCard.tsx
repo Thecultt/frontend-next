@@ -134,7 +134,8 @@ export const ProductCard: React.FC<Props> = React.memo(({ productData, className
 
             {(!availability || is_trial) && (
                 <button type="button" className="product-card__btn btn-light-green" onClick={subscribe}>
-                    Подписаться на товар
+                    <span className="product-card__btn-text product-card__btn-text--desktop">Подписаться на товар</span>
+                    <span className="product-card__btn-text product-card__btn-text--mobile">Подписаться</span>
                 </button>
             )}
         </div>
