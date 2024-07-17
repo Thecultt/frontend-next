@@ -198,7 +198,7 @@ const Footer: React.FC<FooterProps> = ({ transparent, subscribeBlockId }) => {
                                     Пользовательское соглашение
                                 </a>
                                 <a
-                                    href="https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/Оферта для продавца 240424.pdf"
+                                    href="https://storage.yandexcloud.net/the-cultt-docs/17.07.2024/Оферта для продавца 120724.docx.pdf"
                                     className="footer-block-bottom-link__link"
                                     target="_blank"
                                     rel="noreferrer"
@@ -206,7 +206,7 @@ const Footer: React.FC<FooterProps> = ({ transparent, subscribeBlockId }) => {
                                     Публичная оферта продавца
                                 </a>
                                 <a
-                                    href="https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/%D0%9E%D1%84%D0%B5%D1%80%D1%82%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%BF%D0%BE%D0%BA%D1%83%D0%BF%D0%B0%D1%82%D0%B5%D0%BB%D1%8F%20180424.pdf "
+                                    href="https://storage.yandexcloud.net/the-cultt-docs/17.07.2024/Оферта для покупателя 120724.docx.pdf "
                                     className="footer-block-bottom-link__link"
                                     target="_blank"
                                     rel="noreferrer"
