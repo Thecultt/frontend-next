@@ -5,6 +5,7 @@ import { Dispatch } from 'react';
 import { localStorageService } from '@/services/storage';
 import { LS_KEYS } from '@/constants/keys';
 import { sendMindbox } from '@/functions/mindbox';
+import { sendReachGoal } from '@/functions/yandex';
 
 import { LoginActions, LoginActionTypes } from '../types/ILogin';
 
@@ -28,9 +29,7 @@ export const sendLogin = (data: { username: string | null; password: string }) =
                     },
                 });
 
-                // TODO
-                // const ym = window.ym || (window.ym = []);
-                // ym(68184745, 'reachGoal', 'login_password');
+                sendReachGoal('login_password');
 
                 try {
                     sendMindbox('Website.AuthorizeCustomer', {

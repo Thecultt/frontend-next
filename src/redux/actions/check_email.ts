@@ -5,6 +5,7 @@ import { checkWarningEmail } from '@/functions/checkWarningEmail';
 import { localStorageService } from '@/services/storage';
 import { LS_KEYS } from '@/constants/keys';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
+import { sendReachGoal } from '@/functions/yandex';
 
 import { CheckEmailActionTypes, CheckEmailActions } from '../types/ICheckEmail';
 import { sendRecoveryPassword } from './recovery_password';
@@ -26,9 +27,7 @@ export const sendCheckEmail =
 
         let nextPopupType = ReglogStateTypesNotLogin.LOGIN;
 
-        // TODO
-        // const ym = window?.ym || (window.ym = []);
-        // ym(68184745, 'reachGoal', 'login_email');
+        sendReachGoal('login_email');
 
         await axios
             .post(`${process.env.NEXT_PUBLIC_API_DOMEN}/email_check/`, { email })
