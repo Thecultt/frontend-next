@@ -69,7 +69,8 @@ const SellCooperation: React.FC = () => {
                 <Link href={APP_ROUTE.vipService} className="sell-block-cooperation-type-block">
                     <h4 className="sell-block-cooperation-type-block__title">VIP-сервис</h4>
                     <p className="sell-block-cooperation-type-block__description">
-                        Премиальная услуга для продажи более 7 товаров
+                        При продаже более 7 лотов мы бесплатно предоставляем личного менеджера, услугу выезда на дом и
+                        заполнения заявки для лотов.
                     </p>
                 </Link>
             </div>
