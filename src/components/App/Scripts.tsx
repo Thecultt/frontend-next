@@ -16,7 +16,7 @@ export const Scripts = () => (
                     dataLayer.push(arguments);
                 }
                 gtag('js', new Date());
-                gtag('config', ${GOOGLE_TAG_ID});
+                gtag('config', '${GOOGLE_TAG_ID}');
             `}
         </Script>
         {/* <!-- End Google tag (gtag.js) --> */}
