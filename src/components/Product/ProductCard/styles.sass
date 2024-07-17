@@ -10,6 +10,26 @@
         height: 38px
         margin-top: 4px
 
+        &-desktop-text
+            @media screen and (max-width: 1200px)
+                display: none
+
+        &-text
+            font-family: inherit
+            font-weight: inherit
+            font-size: inherit
+            line-height: inherit
+
+            &--desktop
+                @media screen and (max-width: 1200px)
+                    display: none
+
+            &--mobile
+                display: none
+
+                @media screen and (max-width: 1200px)
+                    display: block
+
     &:hover .product-card-cover__arrow
         opacity: 1
         visibility: visible
