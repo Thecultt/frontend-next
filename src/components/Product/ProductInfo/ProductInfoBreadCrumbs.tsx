@@ -43,14 +43,8 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
 			</Link> */}
 
             <button className="product-content-info-bread-crumbs-back" onClick={router.back}>
-                <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect y="0.0234375" width="26" height="26" rx="13" fill="#F7F4F0" />
-                    <path
-                        d="M20 13.0234H6M6 13.0234L13 20.0234M6 13.0234L13 6.02344"
-                        stroke="#202020"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    />
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 8H1M1 8L8 15M1 8L8 1" stroke="#070707" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             </button>
 

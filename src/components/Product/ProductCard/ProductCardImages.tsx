@@ -131,17 +131,19 @@ export const ProductCardImages: React.FC<Props> = React.memo(({ slides, article 
                     ))}
                 </Slider>
             ) : (
-                slides.map((slide, index) => (
-                    <div
-                        key={index}
-                        style={{
-                            backgroundImage: `url("${slide}")`,
-                        }}
-                        className={getClassNames('product-card-cover__image product-card-cover__image--desktop', {
-                            'product-card-cover__image--active': index === currentIndex,
-                        })}
-                    />
-                ))
+                <Link href={`${APP_ROUTE.product}/${article}`} className="product-card-cover__link">
+                    {slides.map((slide, index) => (
+                        <div
+                            key={index}
+                            style={{
+                                backgroundImage: `url("${slide}")`,
+                            }}
+                            className={getClassNames('product-card-cover__image product-card-cover__image--desktop', {
+                                'product-card-cover__image--active': index === currentIndex,
+                            })}
+                        />
+                    ))}
+                </Link>
             )}
         </>
     );

@@ -202,7 +202,7 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
             {!isLoaded ? (
                 <div className="cabinet-waiting-list-form-auth-message">
                     <svg width="38" height="39" viewBox="0 0 38 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect y="0.5" width="38" height="37.9979" rx="18.9989" fill="#F1EDE8" />
+                        <rect y="0.5" width="38" height="37.9979" rx="18.9989" fill="#F2F5F4" />
                         <path
                             d="M19.002 18.5C21.2111 18.5 23.002 16.7091 23.002 14.5C23.002 12.2909 21.2111 10.5 19.002 10.5C16.7928 10.5 15.002 12.2909 15.002 14.5C15.002 16.7091 16.7928 18.5 19.002 18.5Z"
                             stroke="#285141"
