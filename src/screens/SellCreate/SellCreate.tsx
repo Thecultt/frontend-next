@@ -93,31 +93,11 @@ const SellCreate: React.FC = () => {
                         },
                         customer: {
                             email: `${user.email}`,
-                            // "discountCard": {
-                            // 	"ids": {
-                            // 		"number": "<Номер дисконтной карты>"
-                            // 	}
-                            // },
-                            // "birthDate": "<Дата рождения>",
-                            // "sex": "<Пол>",
-                            // "timeZone": "<Часовой пояс>",
-                            // "lastName": "<Фамилия>",
-                            // "firstName": "<Имя>",
-                            // "middleName": "<Отчество>",
-                            // "fullName": "<ФИО>",
-                            // "area": {
-                            // 	"ids": {
-                            // 		"externalId": "<Внешний идентификатор зоны>"
-                            // 	}
-                            // },
-                            // "mobilePhone": "<Мобильный телефон>",
                             ids: {
                                 websiteID: `${user.id}`,
                             },
                             customFields: {
                                 tipKlienta: 'Prodavec',
-                                // "gorod": "<Город>",
-                                // "istochnikPodpiski": "<Источник подписки>"
                             },
                             subscriptions: [],
                         },

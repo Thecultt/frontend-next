@@ -75,7 +75,7 @@ const ReglogRegister: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                             component={RenderCheckbox}
                             name="policyCheckbox"
                             // label={`
-                            // 	Я принимаю условия <a href="https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/Оферта для продавца 240424.pdf">агентского договора</a>, договора <a href="https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/%D0%9E%D1%84%D0%B5%D1%80%D1%82%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%BF%D0%BE%D0%BA%D1%83%D0%BF%D0%B0%D1%82%D0%B5%D0%BB%D1%8F%20180424.pdf ">купли-продажи</a> и даю свое согласие на <a href="https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/Положение_об_обработке_персональных_данных_с_Ботом.pdf">обработку персональных данных</a>.
+                            // 	Я принимаю условия <a href="https://storage.yandexcloud.net/the-cultt-docs/17.07.2024/Оферта для продавца 120724.docx.pdf">агентского договора</a>, договора <a href="https://storage.yandexcloud.net/the-cultt-docs/17.07.2024/Оферта для покупателя 120724.docx.pdf ">купли-продажи</a> и даю свое согласие на <a href="https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/Положение_об_обработке_персональных_данных_с_Ботом.pdf">обработку персональных данных</a>.
                             // `}
                             label={`
 								Я принимаю <a href="https://www.thecultt.com/help/thecultt">условия продажи</a> и даю свое согласие на <a href="https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/Положение_об_обработке_персональных_данных_с_Ботом.pdf">обработку персональных данных</a>.

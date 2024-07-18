@@ -31,7 +31,7 @@ const OrderProductsItem: React.FC<OrderProductsItemProps> = ({
         <div
             className={getClassNames('order-products-item', {
                 disabled: !checked,
-                notAvailability: !availability || (!!availability && is_trial),
+                // notAvailability: !availability || (!!availability && is_trial),
             })}
         >
             <div className="order-products-item-content">

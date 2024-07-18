@@ -70,6 +70,11 @@ const orderPay = ({
             },
         },
     );
+
+    // Закрываем окно через 15 минут
+    setTimeout(() => {
+        window.location.href = `/order/${orderId}`;
+    }, 900000);
 };
 
 export default orderPay;
