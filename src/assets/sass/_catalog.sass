@@ -95,27 +95,24 @@
 			justify-content: space-between
 
 			&__btn
-				display: flex
-				align-items: center
-				justify-content: center
+				+buttonReset
+				+flexCenter
 
 				width: 100%
 				padding: 15px 25px
 
-				background-color: transparent
-				border: .3px solid $gray
+				background-color: $grey1
 				border-radius: 12px
 
-				color: $black
+				color: $black2
 
+				+ManropeSemiBold
 				font-size: 14px
 
 				& > svg
-					min-width: 15px
-					width: 15px
-					height: 15px
-
-					margin-left: 10px
+					width: 24px
+					flex-shrink: 0
+					margin-left: 8px
 
 			&-filters-wrapper
 				width: 49%
@@ -659,32 +656,31 @@
 				&__btn
 					cursor: pointer
 
+					+ManropeSemiBold
 					font-size: 16px
 					border: none
 
 					padding: 6px 8px
 					margin: 0 12px
 
-					background-color: $lightBackgroundColor
+					background-color: $grey1
 					border-radius: 100px
 
 					&.disabled
 						cursor: default
-						color: $gray
-						background-color: rgba(246, 244, 240, 0.80)
+						color: $grey5
 
 				&-item
-					cursor: pointer
+					+buttonReset
 
 					width: 35px
 					height: 35px
 
-					display: flex
-					justify-content: center
-					align-items: center
+					+flexCenter
 
 					margin: 0 6px
 
+					+ManropeBold
 					font-size: 16px
 					color: $mainColor
 
@@ -695,14 +691,14 @@
 
 					+transition
 
-					&:hover
-						+transformHover
+					// &:hover
+					// 	+transformHover
 
-					&:active
-						+transformClick
+					// &:active
+					// 	+transformClick
 
 					&.active
-						background-color: $white
+						color: $black2
 
 		&-section
 			margin: 50px 0
@@ -770,7 +766,13 @@
 				display: flex
 
 			&-title
-				margin-top: 12px
+				width: 100%
+				margin-bottom: 12px
+				justify-content: space-between
+
+				&__title
+					font-size: 14px
+					line-height: 16.8px
 
 			&-boutique
 				display: none
@@ -832,7 +834,7 @@
 				display: flex
 
 		&-product-wrapper
-			margin-top: 12px
+			margin-top: 24px
 			margin-left: 0
 
 		&-product
