@@ -24,30 +24,30 @@ interface IMainBannerSlide {
 }
 
 export const MAIN_BANNER_SLIDES: IMainBannerSlide[] = [
-    {
-        title: 'Главные новинки недели',
-        description: (
-            <>
-                Новые лоты Hermes, Chanel, Celine,
-                <br />
-                Louis Vuitton, Prada и Saint Laurent
-            </>
-        ),
-        image: {
-            desktop: homeMainBannerImageNew.src,
-        },
-        link: {
-            title: 'Смотреть',
-            href: getCatalogFiltersUrl({
-                categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
-                availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                price_drop: false,
-                boutique: false,
-                page: 1,
-                sort: SORT.a,
-            }),
-        },
-    },
+    // {
+    //     title: 'Главные новинки недели',
+    //     description: (
+    //         <>
+    //             Новые лоты Hermes, Chanel, Celine,
+    //             <br />
+    //             Louis Vuitton, Prada и Saint Laurent
+    //         </>
+    //     ),
+    //     image: {
+    //         desktop: homeMainBannerImageNew.src,
+    //     },
+    //     link: {
+    //         title: 'Смотреть',
+    //         href: getCatalogFiltersUrl({
+    //             categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
+    //             availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+    //             price_drop: false,
+    //             boutique: false,
+    //             page: 1,
+    //             sort: SORT.a,
+    //         }),
+    //     },
+    // },
     {
         title: 'Популярное',
         description: (
@@ -83,25 +83,25 @@ export const MAIN_BANNER_SLIDES: IMainBannerSlide[] = [
             href: '/concierge',
         },
     },
-    {
-        title: 'Коллекция THE CULTT из бутика',
-        description:
-            'Лоты, доставленные напрямую из бутика-партнера или от частного байера — в таком состоянии, в каком вы бы купили их в магазине бренда.',
-        image: {
-            desktop: homeMainBannerImageBoutique.src,
-        },
-        link: {
-            title: 'Смотреть подборку',
-            href: getCatalogFiltersUrl({
-                categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
-                availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                price_drop: false,
-                boutique: true,
-                page: 1,
-                sort: SORT.a,
-            }),
-        },
-    },
+    // {
+    // 	title: 'Коллекция THE CULTT из бутика',
+    // 	description:
+    // 		'Лоты, доставленные напрямую из бутика-партнера или от частного байера — в таком состоянии, в каком вы бы купили их в магазине бренда.',
+    // 	image: {
+    // 		desktop: homeMainBannerImageBoutique.src,
+    // 	},
+    // 	link: {
+    // 		title: 'Смотреть подборку',
+    // 		href: getCatalogFiltersUrl({
+    // 			categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
+    // 			availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+    // 			price_drop: false,
+    // 			boutique: true,
+    // 			page: 1,
+    // 			sort: SORT.a,
+    // 		}),
+    // 	},
+    // },
     {
         title: 'Разгрузите гардероб с VIP-сервисом ТНЕ CULTT',
         description: (
