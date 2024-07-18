@@ -15,6 +15,10 @@ const ProductInfoTitleSplitPopup: React.FC<ProductInfoTitleSplitPopupProps> = ({
         if (!initWidget) {
             const YaPay = window.YaPay;
 
+            if (!YaPay) {
+                return;
+            }
+
             const paymentData = {
                 env: YaPay.PaymentEnv.Sandbox,
                 version: 4,
