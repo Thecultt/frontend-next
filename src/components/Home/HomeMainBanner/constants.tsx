@@ -3,16 +3,18 @@ import React from 'react';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { SORT } from '@/constants/catalog';
 
-import homeMainBannerImageNew from '@/assets/images/home/home-main-banner-new.jpg';
+// import homeMainBannerImageNew from '@/assets/images/home/home-main-banner-new.jpg';
 import homeMainBannerImageConcierge from '@/assets/images/home/home-main-banner-concierge.jpg';
 import homeMainBannerImageConciergeMobile from '@/assets/images/home/home-main-banner-concierge-mobile.jpg';
-import homeMainBannerImageBoutique from '@/assets/images/home/home-main-banner-boutique.jpg';
+// import homeMainBannerImageBoutique from '@/assets/images/home/home-main-banner-boutique.jpg';
 import homeMainBannerImageVip from '@/assets/images/home/home-main-banner-vip.jpg';
 import homeMainBannerImagePopular from '@/assets/images/home/home-main-banner-popular.jpg';
+import homeMainBannerImagePopularMedia from '@/assets/images/home/home-main-banner-popular-media.jpg';
 
 interface IMainBannerSlide {
     title: string;
     description: React.ReactNode;
+    descriptionMobile?: React.ReactNode;
     image: {
         desktop: string;
         mobile?: string;
@@ -57,6 +59,7 @@ export const MAIN_BANNER_SLIDES: IMainBannerSlide[] = [
         ),
         image: {
             desktop: homeMainBannerImagePopular.src,
+            mobile: homeMainBannerImagePopularMedia.src,
         },
         link: {
             title: 'Смотреть',
@@ -109,6 +112,12 @@ export const MAIN_BANNER_SLIDES: IMainBannerSlide[] = [
                 Нужно продать 7&nbsp;и&nbsp;более лотов? Закажите бесплатный VIP-сервис. <br />
                 Вам не&nbsp;нужно заполнять заявки, фотографировать вещи, <br />
                 искать покупателей&nbsp;&mdash; все это мы&nbsp;берем на&nbsp;себя.
+            </>
+        ),
+        descriptionMobile: (
+            <>
+                Нужно продать 7&nbsp;и&nbsp;более лотов? Закажите бесплатный VIP-сервис. Вам не&nbsp;нужно заполнять
+                заявки, фотографировать вещи, искать покупателей&nbsp;&mdash; все это мы&nbsp;берем на&nbsp;себя.
             </>
         ),
         image: {

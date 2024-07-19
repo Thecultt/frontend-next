@@ -76,7 +76,9 @@ const HomeMainBanner: React.FC = () => {
                                         <h2 className="home-main-banner-slider-item-text__title">{slide.title}</h2>
 
                                         <p className="home-main-banner-slider-item-text__description">
-                                            {slide.description}
+                                            {isMobile && slide.descriptionMobile
+                                                ? slide.descriptionMobile
+                                                : slide.description}
                                         </p>
 
                                         <Link
