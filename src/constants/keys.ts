@@ -16,6 +16,7 @@ export const MINDBOX_KEYS = {
 
 export const LS_KEYS = {
     accessToken: 'access_token',
+    refreshToken: 'refresh_token',
     cart: 'cart',
     utm: 'utm',
     headerVisitMessage: 'header_visit_message',

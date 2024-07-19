@@ -33,27 +33,18 @@ $api.interceptors.response.use(
                 originalRequest._isRetry = true;
 
                 try {
-                    // const response = await axios.post(
-                    // 	`${process.env.NEXT_PUBLIC_API_DOMEN}/users/token/refresh`,
-                    // 	{},
-                    // 	{ withCredentials: true }
-                    // );
-                    // localStorage.setItem(
-                    // 	"accessToken",
-                    // 	response.data.accessToken
-                    // );
-                    // return $api.request(originalRequest);
+                    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_DOMEN}/api/token/refresh/`, {
+                        refresh: localStorageService?.getItem(LS_KEYS.refreshToken),
+                    });
 
-                    localStorageService?.removeItem(LS_KEYS.accessToken);
-                    if (window.location.href !== APP_ROUTE.home) {
-                        window.location.href = APP_ROUTE.home;
-                    }
+                    localStorageService?.setItem(LS_KEYS.accessToken, response.data.access);
+
+                    return $api.request(originalRequest);
                 } catch (e) {
-                    // if (localStorage.getItem("accessToken")) {
-                    // 	await $api.post("/users/revoke")
-                    // 	localStorage.removeItem("accessToken");
-                    // 	window.location.reload();
-                    // }
+                    if (localStorageService?.getItem(LS_KEYS.accessToken)) {
+                        localStorageService?.removeItem(LS_KEYS.accessToken);
+                        window.location.reload();
+                    }
                 }
             }
         }

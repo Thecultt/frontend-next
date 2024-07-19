@@ -212,6 +212,7 @@ const SellCreate: React.FC = () => {
 
     const goToSells = () => {
         router.push(APP_ROUTE.cabinet.sells);
+        window.location.reload();
     };
 
     return (

@@ -21,6 +21,7 @@ export const sendRegister = (info: {
 
         axios.post(`${process.env.NEXT_PUBLIC_API_DOMEN}/register/`, info).then(({ data }) => {
             localStorageService?.setItem(LS_KEYS.accessToken, data.access as string, { value: 1, unit: 'month' });
+            localStorageService?.setItem(LS_KEYS.refreshToken, data.refresh as string, { value: 1, unit: 'month' });
 
             window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.
             window?.dataLayer?.push({
