@@ -4,10 +4,10 @@ export interface validateInfoValues {
     model: string;
     condition: string;
     defects: string;
-    set: string;
+    client_kit: string;
     size: string;
     price: string;
-    isBuyTheCultt: string;
+    bought_in_cultt: string;
 }
 
 interface validateInfoErrors {
@@ -16,10 +16,10 @@ interface validateInfoErrors {
     model?: string;
     condition?: string;
     defects?: string;
-    set?: string;
+    client_kit?: string;
     size?: string;
     price?: string;
-    isBuyTheCultt?: string;
+    bought_in_cultt?: string;
 }
 
 const validate = (values: validateInfoValues) => {
@@ -44,8 +44,8 @@ const validate = (values: validateInfoValues) => {
         errors.defects = 'Поле не может быть пустым';
     }
 
-    if (!values.set) {
-        errors.set = 'Поле не может быть пустым';
+    if (!values.client_kit) {
+        errors.client_kit = 'Поле не может быть пустым';
     }
 
     // if (!values.size) {
@@ -64,8 +64,8 @@ const validate = (values: validateInfoValues) => {
         errors.price = `Не менее ${defaultMin} символов`;
     }
 
-    if (!values.isBuyTheCultt) {
-        errors.isBuyTheCultt = 'Поле не может быть пустым';
+    if (!values.bought_in_cultt) {
+        errors.bought_in_cultt = 'Поле не может быть пустым';
     }
 
     return errors;
