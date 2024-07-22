@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    distDir: process.env.BUILD_DIR || '.next',
     images: {
         remotePatterns: [
             {
@@ -16,7 +17,7 @@ const nextConfig = {
             },
             {
                 source: '/cabinet/sell',
-                destination: '/sell/create',
+                destination: '/sell-create',
                 permanent: true,
             },
             {
