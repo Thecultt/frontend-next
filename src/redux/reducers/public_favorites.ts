@@ -8,7 +8,7 @@ const initialState: PublicFavoritesState = {
 
 const favorites = (state = initialState, action: PublicFavoritesActions) => {
     if (action.type === PublicFavoritesActionTypes.SET_PUBLIC_FAVORITES_ITEMS) {
-        const newObject: any = {};
+        const newObject: PublicFavoritesState['items'] = {};
 
         action.payload.map((item) => {
             newObject[item.id] = item;

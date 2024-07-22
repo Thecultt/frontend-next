@@ -7,7 +7,7 @@ const initialState: FavoritesState = {
 
 const favorites = (state = initialState, action: FavoritesActions) => {
     if (action.type === FavoritesActionTypes.SET_FAVORITES_ITEMS) {
-        const newObject: any = {};
+        const newObject: FavoritesState['items'] = {};
 
         action.payload.map((item) => {
             newObject[item.id] = item;

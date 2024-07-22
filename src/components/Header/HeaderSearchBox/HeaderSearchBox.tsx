@@ -2,14 +2,10 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { addCartItem, setCartIsVisibleMessage } from '@/redux/actions/cart';
-import { sendSaveFavorite, sendRemoveFavorite } from '@/redux/actions/favorites';
 import { setHeaderSearchValue } from '@/redux/actions/header';
-import { Product } from '@/models/IProduct';
-import { CartItem } from '@/models/ICartItem';
 import { checkDeclension } from '@/functions/checkDeclension';
 import { getClassNames } from '@/functions/getClassNames';
-import { ProductBlock } from '@/components';
+import { ProductCard } from '@/components';
 
 import { HeaderSearchInput } from '../HeaderSearchInput';
 
@@ -23,31 +19,10 @@ interface HeaderSearchBoxProps {
 const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose, goToCatalog, onInputKeyDown }) => {
     const dispatch = useDispatch();
 
-    const cartItems = useTypedSelector(({ cart }) => cart.items);
-    const favoritesItems = useTypedSelector(({ favorites }) => favorites.items);
-
     const newItems = useTypedSelector(({ products }) => products.items);
     const { search } = useTypedSelector(({ header }) => header);
 
     const PopupRef = React.useRef<HTMLDivElement>(null);
-
-    const addCart = (item: CartItem) => {
-        dispatch(setCartIsVisibleMessage(true));
-
-        dispatch(addCartItem(item));
-
-        setTimeout(() => {
-            dispatch(setCartIsVisibleMessage(false));
-        }, 5000);
-    };
-
-    const addFavorite = (item: Product) => {
-        dispatch(sendSaveFavorite(item) as any);
-    };
-
-    const removeFavorite = (item: Product) => {
-        dispatch(sendRemoveFavorite(item) as any);
-    };
 
     const togglePopup = (e: any) => {
         if (PopupRef.current && !PopupRef.current.contains(e.target)) {
@@ -59,12 +34,6 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose, goToC
         dispatch(setHeaderSearchValue(e.target.value) as any);
     };
 
-    // React.useEffect(() => {
-    //     if (search.value) {
-    //         dispatch(setHeaderSearchValue(''));
-    //     }
-    // }, [pathname]);
-
     React.useEffect(() => {
         document.addEventListener('mousedown', togglePopup);
         document.addEventListener('touchstart', togglePopup);
@@ -74,32 +43,6 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose, goToC
             document.removeEventListener('touchstart', togglePopup);
         };
     }, [PopupRef]);
-
-    const onClickProduct = (item: any, index: number) => {
-        window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.
-
-        window?.dataLayer?.push({
-            event: 'select_item',
-            ecommerce: {
-                items: [
-                    {
-                        item_name: item.model_name,
-                        item_id: `${item.id}`,
-                        price: `${item.price}`,
-                        item_brand: item.manufacturer,
-                        item_category: item.category,
-                        item_category2: item.subcategory,
-                        item_category3: '-',
-                        item_category4: '-',
-                        item_list_name: 'Search Results',
-                        item_list_id: item.article,
-                        index,
-                        quantity: 1,
-                    },
-                ],
-            },
-        });
-    };
 
     return (
         <div
@@ -212,34 +155,9 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose, goToC
                     <div className="header-search-box-products-blocks-wrapper">
                         {search.value ? (
                             search.items.length ? (
-                                search.items.map((item, index) => (
-                                    <div
-                                        className="header-search-box-products-block"
-                                        key={`header-search-box-products-block-${index}`}
-                                    >
-                                        <ProductBlock
-                                            addCart={() =>
-                                                addCart({
-                                                    id: item.id,
-                                                    checked: true,
-                                                    article: item.article,
-                                                    manufacturer: item.manufacturer,
-                                                    category: item.category,
-                                                    subcategory: item.subcategory,
-                                                    name: item.name,
-                                                    image: item.images[0],
-                                                    price: item.price,
-                                                    availability: item.availability,
-                                                    is_trial: item.is_trial,
-                                                })
-                                            }
-                                            onClickProduct={() => onClickProduct(item, index)}
-                                            isCart={cartItems[item.article] ? true : false}
-                                            addFavorite={() => addFavorite(item)}
-                                            removeFavorite={() => removeFavorite(item)}
-                                            isFavorite={favoritesItems[item.id] ? true : false}
-                                            {...item}
-                                        />
+                                search.items.map((item) => (
+                                    <div className="header-search-box-products-block" key={item.id}>
+                                        <ProductCard productData={item} />
                                     </div>
                                 ))
                             ) : (
@@ -249,34 +167,9 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose, goToC
                             )
                         ) : (
                             newItems
-                                .map((item, index) => (
-                                    <div
-                                        className="header-search-box-products-block"
-                                        key={`header-search-box-products-block-${index}`}
-                                    >
-                                        <ProductBlock
-                                            addCart={() =>
-                                                addCart({
-                                                    id: item.id,
-                                                    checked: true,
-                                                    article: item.article,
-                                                    manufacturer: item.manufacturer,
-                                                    category: item.category,
-                                                    subcategory: item.subcategory,
-                                                    name: item.name,
-                                                    image: item.images[0],
-                                                    price: item.price,
-                                                    availability: item.availability,
-                                                    is_trial: item.is_trial,
-                                                })
-                                            }
-                                            onClickProduct={() => onClickProduct(item, index)}
-                                            isCart={cartItems[item.article] ? true : false}
-                                            addFavorite={() => addFavorite(item)}
-                                            removeFavorite={() => removeFavorite(item)}
-                                            isFavorite={favoritesItems[item.id] ? true : false}
-                                            {...item}
-                                        />
+                                .map((item) => (
+                                    <div className="header-search-box-products-block" key={item.id}>
+                                        <ProductCard productData={item} />
                                     </div>
                                 ))
                                 .splice(0, 4)
