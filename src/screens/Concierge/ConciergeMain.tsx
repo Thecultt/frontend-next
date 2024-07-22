@@ -18,6 +18,7 @@ import {
     PageLoader,
     Popup,
 } from '@/components';
+import NoSsr from '@/components/NoSsr/NoSsr';
 
 const BuyerTheCulttMain: React.FC = () => {
     const dispatch = useDispatch();
@@ -62,7 +63,9 @@ const BuyerTheCulttMain: React.FC = () => {
 
             <div className="container">
                 <div className="buyer-thecultt-wrapper">
-                    <ConciergeMainBanner onClickOpenCustomForm={onClickOpenCustomForm} />
+                    <NoSsr>
+                        <ConciergeMainBanner onClickOpenCustomForm={onClickOpenCustomForm} />
+                    </NoSsr>
 
                     <ConciergeMainSteps />
 
