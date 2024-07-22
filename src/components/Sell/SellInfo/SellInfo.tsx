@@ -32,9 +32,9 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     const { parameters } = useTypedSelector(({ cabinet_sell }) => cabinet_sell);
     const selector = formValueSelector('sell-info-form');
 
-    const { brandValue, conditionValue, defectsValue, categoryValue, modelValue, priceValue, isBuyTheCulttValue } =
+    const { brandValue, conditionValue, defectsValue, categoryValue, modelValue, priceValue, boughtInCulttValue } =
         useTypedSelector((state) => {
-            const { brand, condition, defects, category, model, price, isBuyTheCultt } = selector(
+            const { brand, condition, defects, category, model, price, bought_in_cultt } = selector(
                 state,
                 'brand',
                 'condition',
@@ -42,7 +42,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 'category',
                 'model',
                 'price',
-                'isBuyTheCultt',
+                'bought_in_cultt',
             );
             return {
                 brandValue: brand,
@@ -51,7 +51,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 categoryValue: category,
                 modelValue: model,
                 priceValue: price,
-                isBuyTheCulttValue: isBuyTheCultt,
+                boughtInCulttValue: bought_in_cultt,
             };
         });
 
@@ -79,10 +79,10 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 category: categoryValue,
                 model: modelValue,
                 price: priceValue,
-                isBuyTheCultt: isBuyTheCulttValue,
+                bought_in_cultt: boughtInCulttValue,
             }),
         );
-    }, [brandValue, conditionValue, defectsValue, categoryValue, modelValue, priceValue, isBuyTheCulttValue]);
+    }, [brandValue, conditionValue, defectsValue, categoryValue, modelValue, priceValue, boughtInCulttValue]);
 
     React.useEffect(() => {
         if (parameters[currentCategory]) {
@@ -119,9 +119,9 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 condition: '',
                 defects: '',
                 size: '',
-                set: '',
+                client_kit: '',
                 price: '',
-                isBuyTheCultt: '',
+                bought_in_cultt: '',
             });
 
             localStorage.removeItem('sell-images-form');
@@ -312,7 +312,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
                     <Field
                         component={RenderSelectArray}
-                        name="set"
+                        name="client_kit"
                         label="Комплект"
                         items={
                             parameters[currentCategory] ? parameters[currentCategory].kits.map((kit) => kit.name) : []
@@ -363,7 +363,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
                     <Field
                         component={RenderSelect}
-                        name="isBuyTheCultt"
+                        name="bought_in_cultt"
                         label="Товар приобретен в THE CULTT"
                         items={['Да', 'Нет']}
                     />

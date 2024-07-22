@@ -66,7 +66,7 @@ const SellCreate: React.FC = () => {
                         kategoria: `${info.category}`,
                         model: `${info.model}`,
                         ojidaniePoTcene: `${info.price}`,
-                        tovarIzKulta: `${info.isBuyTheCultt}`,
+                        tovarIzKulta: `${info.bought_in_cultt}`,
 
                         photo1: '<Фото 1>',
                         photo2: '<Фото 2>',
@@ -187,6 +187,8 @@ const SellCreate: React.FC = () => {
             state_name: info.condition,
             defects: info.defects,
             price: info.price,
+            client_kit: info.client_kit,
+            bought_in_cultt: info.bought_in_cultt === 'Да' ? true : false,
 
             images: Object.keys(images).map((key) => images[key]),
 
