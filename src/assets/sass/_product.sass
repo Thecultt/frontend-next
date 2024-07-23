@@ -144,7 +144,7 @@
 					// height: 80vh
 
 				&-image
-					padding-top: calc( 100% + 33% )
+					padding-top: 133%
 					// height: 100%
 					width: 100%
 
@@ -573,6 +573,7 @@
 @media screen and ( max-width: 1200px )
 	.product
 		margin: 0
+		margin-top: -#{$mobileHeaderHeight}
 
 		& > .container
 			width: 100%
@@ -609,8 +610,8 @@
 				&-bread-crumbs
 					position: absolute
 
-					top: 15px
-					left: 15px
+					top: calc(#{$mobileHeaderHeight} + 6px)
+					left: 16px
 
 					z-index: 2
 
