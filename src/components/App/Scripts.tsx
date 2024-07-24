@@ -136,11 +136,11 @@ export const Scripts = () => (
         {/* <!-- End Google Tag Manager (noscript) --> */}
 
         {/* <!-- Start Yandex.Metrika counter (noscript) --> */}
-        <noscript>
+        {/* <noscript>
             <div>
                 <img src="https://mc.yandex.ru/watch/68184745" style={{ position: 'absolute', left: -9999 }} alt="" />
             </div>
-        </noscript>
+        </noscript> */}
         {/* <!-- End Yandex.Metrika counter (noscript) --> */}
     </>
 );
