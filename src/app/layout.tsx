@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 import { App } from '@/components/App/App';
 import { Scripts } from '@/components/App/Scripts';
 import { Providers } from '@/providers/Providers';
-import { APP_TITLE } from '@/constants/app';
+import { APP_TITLE, APP_DESCRIPTION } from '@/constants/app';
 
 import 'react-dots-loader/index.css';
 import '@/assets/sass/style.sass';
@@ -46,6 +46,7 @@ export const viewport: Viewport = {
 // Default meta data
 export const metadata: Metadata = {
     title: APP_TITLE,
+    description: APP_DESCRIPTION,
 };
 
 // TODO add metrics and external scripts
