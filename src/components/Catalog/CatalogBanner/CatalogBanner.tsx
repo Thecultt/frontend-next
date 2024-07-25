@@ -72,6 +72,46 @@ const CatalogBanner: React.FC = React.memo(() => {
             <div
                 className="catalog-banner-image"
                 style={{
+                    backgroundImage:
+                        'url("https://storage.yandexcloud.net/prod-cultt-banner/4/vjV7bKViGmD432RLEDaB8D8Y3GjiklBXktYFrjy6.jpg")',
+                }}
+            />
+            <div className="catalog-banner-text">
+                <h3 className="catalog-banner-text__title">Летние сумки</h3>
+                <p className="catalog-banner-text__description">
+                    Мастхэвы, без которых мы не представляем свой летний гардероб
+                </p>
+                <Link
+                    href={getCatalogFiltersUrl({
+                        selection: SELECTIONS_IDS.summerBags,
+                        sort: 'popular',
+                    })}
+                    className="btn catalog-banner-text__btn"
+                >
+                    Смотреть подборку
+                </Link>
+            </div>
+        </div>
+    ) : sort === 'popular' ? (
+        <div className="catalog-banner">
+            <div
+                className="catalog-banner-image"
+                style={{
+                    backgroundImage: `url("${CatalogBannerImagePopular.src}")`,
+                }}
+            />
+            <div className="catalog-banner-text">
+                <h3 className="catalog-banner-text__title">Горячие лоты</h3>
+                <p className="catalog-banner-text__description">
+                    Успейте заказать: лоты в единственном экземпляре и с максимумом «сердечек»
+                </p>
+            </div>
+        </div>
+    ) : (
+        <div className="catalog-banner">
+            <div
+                className="catalog-banner-image"
+                style={{
                     backgroundImage: `url("${CatalogBannerImagePriceDrop2.src}")`,
                 }}
             />
@@ -94,48 +134,8 @@ const CatalogBanner: React.FC = React.memo(() => {
                     Смотреть подборку
                 </Link>
             </div>
-
-            {/* <div className="catalog-banner">
-			<div
-				className="catalog-banner-image"
-				style={{
-					backgroundImage:
-						'url("https://storage.yandexcloud.net/prod-cultt-banner/4/vjV7bKViGmD432RLEDaB8D8Y3GjiklBXktYFrjy6.jpg")',
-				}}
-			/>
-			<div className="catalog-banner-text">
-				<h3 className="catalog-banner-text__title">Летние сумки</h3>
-				<p className="catalog-banner-text__description">
-					Мастхэвы, без которых мы не представляем свой летний гардероб
-				</p>
-				<Link
-					href={getCatalogFiltersUrl({
-						selection: SELECTIONS_IDS.summerBags,
-						sort: 'popular',
-					})}
-					className="btn catalog-banner-text__btn"
-				>
-					Смотреть подборку
-				</Link>
-			</div>
-			</div> */}
         </div>
-    ) : sort === 'popular' ? (
-        <div className="catalog-banner">
-            <div
-                className="catalog-banner-image"
-                style={{
-                    backgroundImage: `url("${CatalogBannerImagePopular.src}")`,
-                }}
-            />
-            <div className="catalog-banner-text">
-                <h3 className="catalog-banner-text__title">Горячие лоты</h3>
-                <p className="catalog-banner-text__description">
-                    Успейте заказать: лоты в единственном экземпляре и с максимумом «сердечек»
-                </p>
-            </div>
-        </div>
-    ) : null;
+    );
 });
 
 export default CatalogBanner;
