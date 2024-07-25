@@ -7,8 +7,16 @@ import { useMediaQuery } from 'usehooks-ts';
 import { APP_ROUTE } from '@/constants/routes';
 import { MEDIA_SIZES } from '@/constants/styles';
 
-const ProductInfoExchange: React.FC = () => {
+interface Props {
+    canBuy: boolean;
+}
+
+const ProductInfoExchange: React.FC<Props> = ({ canBuy }) => {
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+
+    if (!canBuy) {
+        return null;
+    }
 
     if (isMobile) {
         return (

@@ -105,7 +105,7 @@ export const ProductCard: React.FC<Props> = React.memo(
                 <Link className="product-card-info" href={`${APP_ROUTE.product}/${article}`}>
                     <h3 className="product-card-info__name">{name}</h3>
 
-                    {availability && !is_trial ? (
+                    {!!availability && !is_trial ? (
                         <>
                             <p className="product-card-info__condition">
                                 Состояние: <span className="product-card-info__condition-value">{condition}</span>

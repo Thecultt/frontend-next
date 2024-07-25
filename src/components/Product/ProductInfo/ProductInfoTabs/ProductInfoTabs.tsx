@@ -38,14 +38,12 @@ const tabs = [
     },
 ];
 
-const ProductInfoTabs: React.FC = () => {
-    return (
-        <div className="product-content-info-tabs">
-            {tabs.map((tab, index) => (
-                <ProductInfoTabsItem {...tab} key={`product-content-info-tab-${index}`} />
-            ))}
-        </div>
-    );
-};
+const ProductInfoTabs: React.FC = () => (
+    <div className="product-content-info-tabs">
+        {tabs.map((tab, index) => (
+            <ProductInfoTabsItem {...tab} key={`product-content-info-tab-${index}`} />
+        ))}
+    </div>
+);
 
 export default ProductInfoTabs;

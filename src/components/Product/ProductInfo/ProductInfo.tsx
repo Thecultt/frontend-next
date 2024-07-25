@@ -48,7 +48,7 @@ const ProductInfo: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPar
 
             {/* <ProductInfoParametersSize {...product} /> */}
 
-            <ProductInfoExchange />
+            <ProductInfoExchange canBuy={!!product.availability && !product.is_trial} />
 
             {!isMobile ? (
                 <>

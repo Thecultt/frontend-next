@@ -19,9 +19,6 @@ import {
 } from '@/components';
 import { NotFound } from '@/screens';
 
-// TODO favorites button
-// TODO buy button
-
 const Product: React.FC = () => {
     const dispatch = useDispatch();
     const { article } = useParams<{ article?: string }>();
