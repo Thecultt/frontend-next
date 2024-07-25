@@ -28,7 +28,7 @@ const CatalogFiltersModels: React.FC = () => {
                                     Object.keys(filters.brands).map((currentBrand) => {
                                         if (
                                             currentBrand === brand &&
-                                            categories[category].subsubcategories[subsubcategory].manufacturers[brand]
+                                            !!categories[category].subsubcategories[subsubcategory].manufacturers[brand]
                                                 .models
                                         ) {
                                             Object.keys(

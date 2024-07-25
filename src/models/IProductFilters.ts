@@ -4,7 +4,9 @@ export interface IModels {
 
 export interface IManufacturers {
     slug: string;
-    models: { [key: string]: IModels } | null;
+    models: any;
+    // TODO
+    // models: { [key: string]: IModels } | [] | null;
 }
 
 export interface ISubsubcategories {
