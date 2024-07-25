@@ -22,6 +22,7 @@
 	+transition
 
 	@media screen and ( max-width: 1200px )
+		top: $mobileHeaderHeight
 		height: calc(100% - #{$mobileHeaderHeight})
 
 	&.active
@@ -59,8 +60,6 @@
 
 	&.active
 		opacity: 1
-		top: 100%
-
 		visibility: visible
 		pointer-events: auto
 
