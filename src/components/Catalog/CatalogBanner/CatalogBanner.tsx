@@ -4,9 +4,10 @@ import { useSearchParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { SELECTIONS_IDS } from '@/constants/catalog';
+import { SELECTIONS_IDS, CATEGORIES } from '@/constants/catalog';
 
 import CatalogBannerImagePriceDrop from '@/assets/images/catalog/catalog-banner-price-drop.jpg';
+import CatalogBannerImagePriceDrop2 from '@/assets/images/catalog/catalog-banner-price-drop2.jpg';
 import CatalogBannerImageBoutique from '@/assets/images/catalog/catalog-banner-boutique.jpg';
 import CatalogBannerImageItbag from '@/assets/images/catalog/catalog-banner-price-itbag.jpg';
 import CatalogBannerImagePopular from '@/assets/images/catalog/catalog-banner-popular.jpg';
@@ -106,7 +107,35 @@ const CatalogBanner: React.FC = React.memo(() => {
                 </p>
             </div>
         </div>
-    ) : null;
+    ) : (
+        <div className="catalog-banner">
+            <div
+                className="catalog-banner-image"
+                style={{
+                    backgroundImage: `url("${CatalogBannerImagePriceDrop2.src}")`,
+                }}
+            />
+            <div className="catalog-banner-text">
+                <h3 className="catalog-banner-text__title">THE CULTT SALE</h3>
+                <p className="catalog-banner-text__description">
+                    Культовые лоты по сниженным ценам — успейте забрать их первыми
+                </p>
+                <Link
+                    href={getCatalogFiltersUrl({
+                        boutique: false,
+                        price_drop: true,
+                        categories: CATEGORIES,
+                        availability: ['Доступно', 'На примерке'],
+                        page: 1,
+                        sort: 'popular',
+                    })}
+                    className="btn catalog-banner-text__btn"
+                >
+                    Смотреть подборку
+                </Link>
+            </div>
+        </div>
+    );
 });
 
 export default CatalogBanner;

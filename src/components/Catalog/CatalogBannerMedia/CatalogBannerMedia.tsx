@@ -4,10 +4,11 @@ import { useSearchParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { SELECTIONS_IDS } from '@/constants/catalog';
+import { SELECTIONS_IDS, CATEGORIES } from '@/constants/catalog';
 
 import CatalogBannerImageBoutiqueMedia from '@/assets/images/catalog/catalog-banner-boutique-media.jpg';
-import CatalogBannerImagePriceDropMedia from '@/assets/images/catalog/catalog-banner-price-drop-media.jpg';
+import CatalogBannerImagePriceDropMedia from '@/assets/images/catalog/catalog-banner-price-drop.jpg';
+import CatalogBannerImagePriceDrop2 from '@/assets/images/catalog/catalog-banner-price-drop2.jpg';
 import CatalogBannerImagePopularMedia from '@/assets/images/catalog/catalog-banner-popular-media.jpg';
 
 const CatalogBannerMedia: React.FC = () => {
@@ -100,7 +101,34 @@ const CatalogBannerMedia: React.FC = () => {
                 </p>
             </div>
         </div>
-    ) : null;
+    ) : (
+        <div
+            className="catalog-banner-media"
+            style={{
+                backgroundImage: `url("${CatalogBannerImagePriceDrop2.src}")`,
+            }}
+        >
+            <div className="catalog-banner-media-text">
+                <h3 className="catalog-banner-media-text__title">THE CULTT SALE</h3>
+                <p className="catalog-banner-media-text__description">
+                    Культовые лоты по сниженным ценам — успейте забрать их первыми
+                </p>
+                <Link
+                    href={getCatalogFiltersUrl({
+                        boutique: false,
+                        price_drop: true,
+                        categories: CATEGORIES,
+                        availability: ['Доступно', 'На примерке'],
+                        page: 1,
+                        sort: 'popular',
+                    })}
+                    className="btn-light catalog-banner-media-text__btn"
+                >
+                    Смотреть подборку
+                </Link>
+            </div>
+        </div>
+    );
 };
 
 export default CatalogBannerMedia;

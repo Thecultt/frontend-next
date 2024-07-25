@@ -10,9 +10,9 @@ import { useAuthUser } from '@/hooks/useAuthUser';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
 import { Noop } from '@/types/functions';
-
-import { HeaderMediaSelectionsBanner } from './HeaderMediaSelectionsBanner';
 import { pushDataLayer } from '@/functions/pushDataLayer';
+
+import CatalogBannerImagePriceDrop2 from '@/assets/images/catalog/catalog-banner-price-drop2.jpg';
 
 const categoryAllTitles: Record<string, string> = {
     Обувь: 'Вся обувь',
@@ -41,7 +41,34 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
             })}
         >
             <div className="header-media-modal-menu-wrapper">
-                <HeaderMediaSelectionsBanner />
+                {/* <HeaderMediaSelectionsBanner /> */}
+                <Link
+                    href={getCatalogFiltersUrl({
+                        boutique: false,
+                        price_drop: true,
+                        categories: CATEGORIES,
+                        availability: ['Доступно', 'На примерке'],
+                        page: 1,
+                        sort: 'popular',
+                    })}
+                    onClick={toggleVisible}
+                    className="header-media-modal-menu-banner"
+                >
+                    <div
+                        className="header-media-modal-menu-banner-image"
+                        style={{
+                            backgroundImage: `url("${CatalogBannerImagePriceDrop2.src}")`,
+                        }}
+                    />
+
+                    <div className="header-media-modal-menu-banner-text">
+                        <h4 className="header-media-modal-menu-banner-text__title">THE CULTT SALE</h4>
+
+                        <p className="header-media-modal-menu-banner-text__subtitle">
+                            Культовые лоты <br /> по сниженным ценам — успейте забрать их первыми
+                        </p>
+                    </div>
+                </Link>
 
                 <p className="header-media-modal-menu__title">Меню</p>
 

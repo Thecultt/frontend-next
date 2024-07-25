@@ -119,6 +119,7 @@ export const ProductCard: React.FC<Props> = React.memo(
                                         </span>
                                     )}
                                 </div>
+
                                 {/* @ts-ignore */}
                                 <yandex-pay-badge
                                     type="bnpl"

@@ -25,8 +25,26 @@ export const generateMetadata = async ({ params }: PageProps) => {
             throw new Error();
         }
 
-        const title = `Купить ${data.name} по цене ${data.price}₽ на ресейл-платформе THE CULTT, доставка по РФ. ${data.category} ${data.name} ${data.condition} с быстрой доставкой в the CULTT.`;
-        const description = `${data.name} ${data.color} цвет по цене ${data.price}₽, состояние – ${data.condition}, 100% оригинал с доставкой по всей России.`;
+        let category = '';
+
+        if (data.category === 'Сумки') {
+            category = 'сумку';
+        }
+
+        if (data.category === 'Обувь') {
+            category = 'обувь';
+        }
+
+        if (data.category === 'Аксессуары') {
+            category = 'аксессуар';
+        }
+
+        if (data.category === 'Украшения') {
+            category = 'украшение';
+        }
+
+        const title = `Купить ${category} ${data.name} на ресейл платформе THE CULTT.`;
+        const description = `Купить ${category} ${data.name} за ${data.price} руб. на ресейл платформе THE CULTT, 100% подлинность гарантирована, доставка по России.`;
         const images = data.images[0] || '';
 
         return {
