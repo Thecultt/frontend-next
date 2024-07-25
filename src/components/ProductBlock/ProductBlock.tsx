@@ -19,7 +19,9 @@ interface ProductBlockProps extends Product {
     removeFavorite: () => void;
     isFavorite: boolean;
 }
-
+/**
+ * @deprecated New component ProductCard
+ */
 const ProductBlock: React.FC<ProductBlockProps> = ({
     article,
     images,

@@ -3,6 +3,7 @@ import { Field } from 'redux-form';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { RenderRadioSelect } from '@/components';
+import { YANDEX_SPLIT_LIMIT } from '@/constants/app';
 
 interface OrderFormPaymentsProps {
     paymentValue: string;
@@ -85,7 +86,7 @@ const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) =
 
             <div className="order-form-block-checkboxs-wrapper">
                 {paymentItems.map((item, index) =>
-                    totalPrice > 150000 && item.title === 'Яндекс Сплит' ? null : (
+                    totalPrice > YANDEX_SPLIT_LIMIT && item.title === 'Яндекс Сплит' ? null : (
                         <div className="order-form-block-checkbox" key={`order-form-block-checkbox-${index}`}>
                             <Field
                                 component={RenderRadioSelect}
@@ -100,7 +101,7 @@ const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) =
                 )}
             </div>
 
-            {paymentValue === 'Яндекс Сплит' && totalPrice <= 150000 ? (
+            {paymentValue === 'Яндекс Сплит' && totalPrice <= YANDEX_SPLIT_LIMIT ? (
                 <div
                     className="order-form-block-payments-split-widget"
                     id="order-form-block-payments-split-widget"

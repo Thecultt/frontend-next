@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { useMediaQuery } from 'usehooks-ts';
 
 import { ProductPage } from '@/models/IProduct';
 import {
@@ -10,13 +13,26 @@ import {
     ProductInfoAuth,
     ProductInfoTabs,
 } from '@/components';
+import { MEDIA_SIZES } from '@/constants/styles';
 
-type ProductInfoProps = ProductPage;
+import { ProductInfoBottomSheet } from './ProductInfoBottomSheet';
 
-const ProductInfo: React.FC<ProductInfoProps> = (product) => {
+interface Props {
+    product: ProductPage;
+    setBoutiquePopupVisible: (state: boolean) => void;
+    setPartnerPopupVisible: (state: boolean) => void;
+}
+
+const ProductInfo: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPartnerPopupVisible }) => {
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+
     return (
         <div className="product-content-info">
-            <ProductInfoTitle {...product} article={product.article} />
+            <ProductInfoTitle
+                product={product}
+                setBoutiquePopupVisible={setBoutiquePopupVisible}
+                setPartnerPopupVisible={setPartnerPopupVisible}
+            />
 
             {/* {product.availability ? (
 				<>
@@ -34,15 +50,20 @@ const ProductInfo: React.FC<ProductInfoProps> = (product) => {
 
             <ProductInfoExchange />
 
-            <ProductInfoState {...product} />
+            {!isMobile ? (
+                <>
+                    <ProductInfoState {...product} />
+                    <ProductInfoDescription description={product.description} />
+                    <ProductInfoParameters {...product} />
+                </>
+            ) : (
+                <ProductInfoBottomSheet product={product} />
+            )}
 
-            {product.description && product.description !== '' ? <ProductInfoDescription {...product} /> : null}
-
-            <ProductInfoParameters {...product} />
-
-            <ProductInfoAuth />
-
-            <ProductInfoTabs />
+            <div className="product-content-info__auth-tabs">
+                <ProductInfoAuth />
+                <ProductInfoTabs />
+            </div>
         </div>
     );
 };

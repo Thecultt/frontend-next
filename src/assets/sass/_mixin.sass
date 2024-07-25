@@ -15,6 +15,10 @@
 	font-family: var(--font-manrope)
 	font-weight: 700
 
+@mixin ManropeExtraBold
+	font-family: var(--font-manrope)
+	font-weight: 800
+
 @mixin backgroundSetting
 	background-size: cover
 	background-position: center center
@@ -74,3 +78,8 @@
 	display: flex
 	justify-content: center
 	align-items: center
+
+// media
+@mixin mediaTablet
+	@media only screen and (max-width: 1200px)
+		@content
