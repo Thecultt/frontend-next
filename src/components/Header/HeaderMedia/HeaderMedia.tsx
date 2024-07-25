@@ -12,6 +12,8 @@ import { ReglogStateTypesNotLogin } from '@/types/reglog';
 
 import Logo from '@/assets/images/logo.svg';
 
+import CatalogBannerImagePriceDrop2 from '@/assets/images/catalog/catalog-banner-price-drop2.jpg';
+
 import { HeaderMediaSelectionsBanner } from './HeaderMediaSelectionsBanner';
 
 interface HeaderMediaProps {
@@ -180,7 +182,34 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                 })}
             >
                 <div className="header-media-modal-menu-wrapper">
-                    <HeaderMediaSelectionsBanner />
+                    {/* <HeaderMediaSelectionsBanner /> */}
+                    <Link
+                        href={getCatalogFiltersUrl({
+                            boutique: false,
+                            price_drop: true,
+                            categories: CATEGORIES,
+                            availability: ['Доступно', 'На примерке'],
+                            page: 1,
+                            sort: 'popular',
+                        })}
+                        onClick={toggleState}
+                        className="header-media-modal-menu-banner"
+                    >
+                        <div
+                            className="header-media-modal-menu-banner-image"
+                            style={{
+                                backgroundImage: `url("${CatalogBannerImagePriceDrop2.src}")`,
+                            }}
+                        />
+
+                        <div className="header-media-modal-menu-banner-text">
+                            <h4 className="header-media-modal-menu-banner-text__title">THE CULTT SALE</h4>
+
+                            <p className="header-media-modal-menu-banner-text__subtitle">
+                                Культовые лоты <br /> по сниженным ценам — успейте забрать их первыми
+                            </p>
+                        </div>
+                    </Link>
 
                     <p className="header-media-modal-menu__title">Меню</p>
 
