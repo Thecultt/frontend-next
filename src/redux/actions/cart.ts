@@ -6,6 +6,7 @@ import { CartItem } from '@/models/ICartItem';
 import { sendMindbox } from '@/functions/mindbox';
 import { localStorageService } from '@/services/storage';
 import { LS_KEYS } from '@/constants/keys';
+import { pushDataLayer } from '@/functions/pushDataLayer';
 
 import { CartActionTypes, CartActions, ICartItemsState } from '../types/ICart';
 
@@ -40,28 +41,23 @@ export const checkAvailabilityCartItems = (items: ICartItemsState) => async (dis
 };
 
 export const addCartItem = (item: CartItem) => {
-    window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.
-    window?.dataLayer?.push({
-        event: 'add_to_cart',
-        ecommerce: {
-            timestamp: Math.floor(Date.now() / 1000),
-            items: [
-                {
-                    item_name: item.name,
-                    item_id: `${item.id}`,
-                    price: `${item.price}`,
-                    item_brand: item.manufacturer,
-                    item_category: item.category,
-                    item_category2: item.subcategory,
-                    item_category3: '-',
-                    item_category4: '-',
-                    item_list_name: 'Search Results',
-                    item_list_id: item.article,
-                    index: 1,
-                    quantity: 1,
-                },
-            ],
-        },
+    pushDataLayer('add_to_cart', {
+        items: [
+            {
+                item_name: item.name,
+                item_id: `${item.id}`,
+                price: `${item.price}`,
+                item_brand: item.manufacturer,
+                item_category: item.category,
+                item_category2: item.subcategory,
+                item_category3: '-',
+                item_category4: '-',
+                item_list_name: 'Search Results',
+                item_list_id: item.article,
+                index: 1,
+                quantity: 1,
+            },
+        ],
     });
 
     sendMindbox('Website.SetCart', {
@@ -95,28 +91,23 @@ export const changeCheckCartItem = (article: string, status: boolean) => ({
 });
 
 export const removeCartItem = (id: string, item: CartItem) => {
-    window?.dataLayer?.push({ ecommerce: null });
-    window?.dataLayer?.push({
-        event: 'remove_from_cart',
-        ecommerce: {
-            timestamp: Math.floor(Date.now() / 1000),
-            items: [
-                {
-                    item_name: item.name,
-                    item_id: `${item.id}`,
-                    price: `${item.price}`,
-                    item_brand: item.manufacturer,
-                    item_category: item.category,
-                    item_category2: item.subcategory,
-                    item_category3: '-',
-                    item_category4: '-',
-                    item_list_name: 'Search Results',
-                    item_list_id: item.article,
-                    index: 1,
-                    quantity: 1,
-                },
-            ],
-        },
+    pushDataLayer('remove_from_cart', {
+        items: [
+            {
+                item_name: item.name,
+                item_id: `${item.id}`,
+                price: `${item.price}`,
+                item_brand: item.manufacturer,
+                item_category: item.category,
+                item_category2: item.subcategory,
+                item_category3: '-',
+                item_category4: '-',
+                item_list_name: 'Search Results',
+                item_list_id: item.article,
+                index: 1,
+                quantity: 1,
+            },
+        ],
     });
 
     sendMindbox('Website.ClearCart', {

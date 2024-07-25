@@ -7,7 +7,7 @@
 	justify-content: center
 	align-items: flex-start
 
-	position: absolute
+	position: fixed
 
 	background-color: $blackTransparent
 
@@ -15,16 +15,17 @@
 	visibility: hidden
 
 	overflow-y: auto
-
 	pointer-events: none
 
 	z-index: 20
 
 	+transition
 
+	@media screen and ( max-width: 1200px )
+		height: calc(100% - #{$mobileHeaderHeight})
+
 	&.active
 		opacity: 1
-
 		visibility: visible
 		pointer-events: auto
 

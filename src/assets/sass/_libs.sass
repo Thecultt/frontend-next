@@ -1,0 +1,11 @@
+:root
+    --rsbs-backdrop-bg: #{$blackTransparent}
+    --rsbs-bg: #{$white}
+    --rsbs-handle-bg: #{$grey4}
+    --rsbs-max-w: 100%
+    --rsbs-ml: env(safe-area-inset-left)
+    --rsbs-mr: env(safe-area-inset-right)
+    --rsbs-overlay-rounded: 16px
+
+[data-rsbs-overlay], [data-rsbs-backdrop], [data-rsbs-root]:after
+    z-index: $popupZIndex !important

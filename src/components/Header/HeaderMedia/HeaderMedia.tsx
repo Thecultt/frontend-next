@@ -2,44 +2,31 @@ import React from 'react';
 import Link from 'next/link';
 
 import { getClassNames } from '@/functions/getClassNames';
-import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { HeaderMediaLinkTab, Footer, BaseImage } from '@/components';
-import { CATEGORIES, SORT } from '@/constants/catalog';
+import { BaseImage } from '@/components';
 import { useAuthUser } from '@/hooks/useAuthUser';
+import { useScrollPoint } from '@/hooks/useScrollPoint';
 import { APP_ROUTE } from '@/constants/routes';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
 
 import Logo from '@/assets/images/logo.svg';
 
-import CatalogBannerImagePriceDrop2 from '@/assets/images/catalog/catalog-banner-price-drop2.jpg';
-
-import { HeaderMediaSelectionsBanner } from './HeaderMediaSelectionsBanner';
+import { HeaderMediaModalMenu } from './HeaderMediaModalMenu';
 
 interface HeaderMediaProps {
+    transparent?: boolean;
+    isOpenSearch?: boolean;
     setIsOpenSearch: (bool: boolean) => void;
 }
 
-const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
-    const [state, setState] = React.useState<boolean>(false);
+const HeaderMedia: React.FC<HeaderMediaProps> = ({ isOpenSearch = false, transparent = false, setIsOpenSearch }) => {
+    const [state, setState] = React.useState(false);
+    const isScrolled = useScrollPoint(10);
 
     const ModalRef = React.useRef<HTMLDivElement>(null);
 
-    const { categories: filtersCategories, isLoaded: filtersIsLoaded } = useTypedSelector(
-        ({ products_filters }) => products_filters,
-    );
     const { items } = useTypedSelector(({ cart }) => cart);
-    const { items: selections } = useTypedSelector(({ selections }) => selections);
-
-    const mappedCategories = CATEGORIES.map((item) => ({ title: item, ...filtersCategories[item] }));
-
     const { isLoggedIn } = useAuthUser();
-
-    const categoryAllTitles: Record<string, string> = {
-        Обувь: 'Вся обувь',
-        Сумки: 'Все сумки',
-        Аксессуары: 'Все аксессуары',
-    };
 
     React.useEffect(() => {
         document.addEventListener('mousedown', hiddeModal);
@@ -65,12 +52,17 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
         }
     };
 
-    const toggleState = () => {
-        setState(!state);
-    };
+    const toggleState = React.useCallback(() => {
+        setState((state) => !state);
+    }, []);
 
     return (
-        <header className="header-media" ref={ModalRef}>
+        <header
+            className={getClassNames('header-media', {
+                'header-media--transparent': transparent && !state && !isOpenSearch && !isScrolled,
+            })}
+            ref={ModalRef}
+        >
             <div className="container">
                 <div className="header-media-wrapper">
                     <div className="header-media-icon-group">
@@ -94,32 +86,33 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                             ) : (
                                 <svg
                                     width="24"
-                                    height="18"
-                                    viewBox="0 0 24 18"
+                                    height="28"
+                                    viewBox="0 0 24 28"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
                                 >
-                                    <path d="M23 1H1" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M23 9H1" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M23 17H1" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path
+                                        d="M4 7H20M4 14H20M4 21H20"
+                                        stroke="#202020"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
                                 </svg>
                             )}
                         </div>
 
                         <div className="header-media-icon" onClick={() => setIsOpenSearch(true)}>
                             <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
+                                width="28"
+                                height="28"
+                                viewBox="0 0 28 28"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                             >
                                 <path
-                                    d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
-                                    stroke="#202020"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
+                                    d="M22.7504 24.1942L23.2855 23.6688L23.2793 23.6625L23.273 23.6563L22.7504 24.1942ZM19.1097 19.6114C18.8127 19.3228 18.3378 19.3296 18.0492 19.6267C17.7605 19.9238 17.7674 20.3986 18.0645 20.6872L19.1097 19.6114ZM12.7243 21.5409C8.057 21.5409 4.25 17.6833 4.25 12.8955H2.75C2.75 18.4856 7.20268 23.0409 12.7243 23.0409V21.5409ZM21.1985 12.8955C21.1985 17.6833 17.3915 21.5409 12.7243 21.5409V23.0409C18.2458 23.0409 22.6985 18.4856 22.6985 12.8955H21.1985ZM12.7243 4.25C17.3915 4.25 21.1985 8.10764 21.1985 12.8955H22.6985C22.6985 7.30534 18.2458 2.75 12.7243 2.75V4.25ZM12.7243 2.75C7.20268 2.75 2.75 7.30534 2.75 12.8955H4.25C4.25 8.10764 8.057 4.25 12.7243 4.25V2.75ZM23.6646 23.6688C23.5583 23.7771 23.3918 23.7771 23.2855 23.6688L22.2152 24.7197C22.9094 25.4268 24.0408 25.4268 24.735 24.7197L23.6646 23.6688ZM24.735 24.7197C25.4217 24.0202 25.4217 22.8919 24.735 22.1925L23.6646 23.2433C23.7785 23.3593 23.7785 23.5529 23.6646 23.6688L24.735 24.7197ZM23.273 23.6563L19.1097 19.6114L18.0645 20.6872L22.2277 24.7322L23.273 23.6563ZM19.3163 18.8143L23.6646 23.2433L24.735 22.1925L20.3866 17.7634L19.3163 18.8143Z"
+                                    fill="#202020"
                                 />
                             </svg>
                         </div>
@@ -176,300 +169,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                 </div>
             </div>
 
-            <div
-                className={getClassNames('header-media-modal-menu', {
-                    active: state,
-                })}
-            >
-                <div className="header-media-modal-menu-wrapper">
-                    {/* <HeaderMediaSelectionsBanner /> */}
-                    <Link
-                        href={getCatalogFiltersUrl({
-                            boutique: false,
-                            price_drop: true,
-                            categories: CATEGORIES,
-                            availability: ['Доступно', 'На примерке'],
-                            page: 1,
-                            sort: 'popular',
-                        })}
-                        onClick={toggleState}
-                        className="header-media-modal-menu-banner"
-                    >
-                        <div
-                            className="header-media-modal-menu-banner-image"
-                            style={{
-                                backgroundImage: `url("${CatalogBannerImagePriceDrop2.src}")`,
-                            }}
-                        />
-
-                        <div className="header-media-modal-menu-banner-text">
-                            <h4 className="header-media-modal-menu-banner-text__title">THE CULTT SALE</h4>
-
-                            <p className="header-media-modal-menu-banner-text__subtitle">
-                                Культовые лоты <br /> по сниженным ценам — успейте забрать их первыми
-                            </p>
-                        </div>
-                    </Link>
-
-                    <p className="header-media-modal-menu__title">Меню</p>
-
-                    <div className="header-media-modal-menu-links">
-                        <Link
-                            href={getCatalogFiltersUrl({
-                                boutique: false,
-                                categories: CATEGORIES,
-                                availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                                price_drop: false,
-                                page: 1,
-                                sort: SORT.a,
-                            })}
-                            className="header-media-modal-menu-links-link"
-                            onClick={toggleState}
-                        >
-                            Новинки
-                        </Link>
-
-                        <Link
-                            href={getCatalogFiltersUrl({
-                                boutique: false,
-                                categories: CATEGORIES,
-                                availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                                price_drop: false,
-                                page: 1,
-                                sort: SORT.popular,
-                            })}
-                            className="header-media-modal-menu-links-link"
-                            onClick={toggleState}
-                        >
-                            Популярное
-                        </Link>
-
-                        {selections.length > 0 && (
-                            <HeaderMediaLinkTab title="Подборки">
-                                {selections.map((item) => (
-                                    <Link
-                                        href={getCatalogFiltersUrl({
-                                            selection: item.id,
-                                            sort: SORT.popular,
-                                        })}
-                                        className="header-media-modal-menu-links__link"
-                                        key={item.id}
-                                        onClick={toggleState}
-                                    >
-                                        {item.title || '-'}
-                                    </Link>
-                                ))}
-                            </HeaderMediaLinkTab>
-                        )}
-
-                        {mappedCategories.map((category, index) => (
-                            <HeaderMediaLinkTab
-                                title={category.title}
-                                linkTitle={getCatalogFiltersUrl({
-                                    categories: [category.title],
-                                    availability: CATEGORIES,
-                                    page: 1,
-                                    sort: SORT.a,
-                                })}
-                                key={`header-media-modal-menu-links-tab${index}`}
-                            >
-                                {filtersIsLoaded &&
-                                    Object.keys(category.subsubcategories).map((subsubcategory, subindex) => (
-                                        <Link
-                                            href={getCatalogFiltersUrl({
-                                                categories: [category.title],
-                                                types: [subsubcategory],
-                                                availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                                                page: 1,
-                                                sort: 'a',
-                                            })}
-                                            className="header-media-modal-menu-links__link"
-                                            key={`header-media-modal-menu-links__link-${category}-${subsubcategory}-${subindex}`}
-                                            onClick={toggleState}
-                                        >
-                                            {subsubcategory}
-                                        </Link>
-                                    ))}
-
-                                {['Обувь', 'Сумки', 'Аксессуары'].includes(category.title) ? (
-                                    <Link
-                                        href={getCatalogFiltersUrl({
-                                            categories: [category.title],
-                                            availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                                            page: 1,
-                                            sort: 'a',
-                                        })}
-                                        className="header-media-modal-menu-links__link"
-                                        onClick={toggleState}
-                                    >
-                                        {categoryAllTitles[category.title]}
-                                    </Link>
-                                ) : null}
-
-                                <Link
-                                    onClick={toggleState}
-                                    href={getCatalogFiltersUrl({
-                                        boutique: true,
-                                        categories: [category.title],
-                                        page: 1,
-                                        sort: 'a',
-                                    })}
-                                    className="header-media-modal-menu-links-boutique"
-                                >
-                                    <span className="header-media-modal-menu-links-boutique__badge">Из бутика</span>
-
-                                    <p className="header-media-modal-menu-links-boutique__subtitle">
-                                        Новые, не были в носке
-                                    </p>
-                                </Link>
-                            </HeaderMediaLinkTab>
-                        ))}
-
-                        <Link
-                            href={APP_ROUTE.concierge.root}
-                            className="header-media-modal-menu-links-link"
-                            onClick={toggleState}
-                        >
-                            Консьерж
-                        </Link>
-
-                        <Link
-                            href={APP_ROUTE.brands}
-                            className="header-media-modal-menu-links-link"
-                            onClick={toggleState}
-                        >
-                            Бренды
-                        </Link>
-
-                        <Link
-                            href={APP_ROUTE.auth}
-                            className="header-media-modal-menu-links-link"
-                            onClick={toggleState}
-                        >
-                            Подлинность
-                        </Link>
-
-                        {/* <a href="/catalog?categories=Сумки&categories=Обувь&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=header&utm_campaign=selection_Doletskaya" className="header-media-modal-menu-links-link">
-							Архив Алены Долецкой
-						</a> */}
-
-                        <Link
-                            href={getCatalogFiltersUrl({
-                                boutique: false,
-                                price_drop: true,
-                                categories: CATEGORIES,
-                                availability: ['Доступно', 'На примерке'],
-                                page: 1,
-                                sort: 'popular',
-                            })}
-                            className="header-media-modal-menu-links-link"
-                            onClick={toggleState}
-                        >
-                            <b>THE CULTT SALE</b>
-                        </Link>
-
-                        <HeaderMediaLinkTab title="Личный кабинет">
-                            <Link
-                                href={
-                                    isLoggedIn
-                                        ? APP_ROUTE.cabinet.setting
-                                        : `/?redirect=${APP_ROUTE.cabinet.setting}#${ReglogStateTypesNotLogin.REGLOG}`
-                                }
-                                className="header-media-modal-menu-links__link"
-                                onClick={toggleState}
-                            >
-                                Профиль
-                            </Link>
-                            <Link
-                                href={APP_ROUTE.sell[isLoggedIn ? 'create' : 'info']}
-                                className="header-media-modal-menu-links__link"
-                                onClick={toggleState}
-                            >
-                                Мои продажи
-                            </Link>
-                            <Link
-                                href={
-                                    isLoggedIn
-                                        ? APP_ROUTE.cabinet.history
-                                        : `/?redirect=${APP_ROUTE.cabinet.setting}#${ReglogStateTypesNotLogin.REGLOG}`
-                                }
-                                className="header-media-modal-menu-links__link"
-                                onClick={toggleState}
-                            >
-                                История заказов
-                            </Link>
-                            <Link
-                                href={
-                                    isLoggedIn
-                                        ? APP_ROUTE.cabinet.favorites
-                                        : `/?redirect=${APP_ROUTE.cabinet.setting}#${ReglogStateTypesNotLogin.REGLOG}`
-                                }
-                                className="header-media-modal-menu-links__link"
-                                onClick={toggleState}
-                            >
-                                Избранное
-                            </Link>
-                            <Link
-                                href={
-                                    isLoggedIn
-                                        ? APP_ROUTE.cabinet.waiting
-                                        : `/?redirect=${APP_ROUTE.cabinet.setting}#${ReglogStateTypesNotLogin.REGLOG}`
-                                }
-                                className="header-media-modal-menu-links__link"
-                                onClick={toggleState}
-                            >
-                                Лист ожидания
-                            </Link>
-                        </HeaderMediaLinkTab>
-
-                        <HeaderMediaLinkTab title="Сервисы для продажи">
-                            <Link
-                                href={APP_ROUTE.sell.info}
-                                className="header-media-modal-menu-links__link"
-                                onClick={toggleState}
-                            >
-                                Продажа
-                            </Link>
-                            <Link
-                                href={APP_ROUTE.exchange}
-                                className="header-media-modal-menu-links__link"
-                                onClick={toggleState}
-                            >
-                                Обмен
-                            </Link>
-                            <Link
-                                href={APP_ROUTE.vipService}
-                                className="header-media-modal-menu-links__link"
-                                onClick={toggleState}
-                            >
-                                VIP-сервис
-                            </Link>
-                        </HeaderMediaLinkTab>
-                    </div>
-
-                    <div className="header-media-modal-menu-btn">
-                        <Link
-                            href={APP_ROUTE.sell[isLoggedIn ? 'create' : 'info']}
-                            className="btn header-media-modal-menu-btn__btn"
-                            onClick={() => {
-                                window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.
-                                window?.dataLayer?.push({
-                                    event: 'sell_click',
-                                    ecommerce: {
-                                        timestamp: Math.floor(Date.now() / 1000),
-                                    },
-                                });
-
-                                toggleState();
-                            }}
-                        >
-                            Продать
-                        </Link>
-                    </div>
-                </div>
-
-                <Footer />
-            </div>
+            <HeaderMediaModalMenu isVisible={state} toggleVisible={toggleState} />
         </header>
     );
 };

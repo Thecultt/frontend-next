@@ -1,5 +1,23 @@
+export interface IModels {
+    slug: string;
+}
+
+export interface IManufacturers {
+    slug: string;
+    models: any;
+    // TODO
+    // models: { [key: string]: IModels } | [] | null;
+}
+
+export interface ISubsubcategories {
+    slug: string;
+    manufacturers: { [key: string]: IManufacturers };
+}
+
 export interface ProductsFiltersCategory {
-    // subsubcategories: {Подкатегория: Бренд: Модели[]}
-    subsubcategories: { [key: string]: { [key: string]: string[] } };
+    slug: string;
+    subsubcategories: {
+        [key: string]: ISubsubcategories;
+    };
     size?: string[];
 }

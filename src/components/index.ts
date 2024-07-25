@@ -130,6 +130,7 @@ export { default as CatalogProductsSection } from './Catalog/CatalogProducts/Cat
 
 // Product
 export { ProductCard } from './Product/ProductCard/ProductCard';
+export { ProductCardFavorites } from './Product/ProductCard/ProductCardFavorites';
 export { default as ProductCover } from './Product/ProductCover';
 export { default as ProductExchange } from './Product/ProductExchange';
 // ProductInfo
