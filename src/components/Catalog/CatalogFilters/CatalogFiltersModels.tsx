@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -22,43 +24,30 @@ const CatalogFiltersModels: React.FC = () => {
             Object.keys(filters.categories).map((category) => {
                 if (categories[category] && categories[category].subsubcategories) {
                     Object.keys(categories[category].subsubcategories).map((subsubcategory) => {
-                        Object.keys(categories[category].subsubcategories[subsubcategory].manufacturers).map(
-                            (brand) => {
-                                if (Object.keys(filters.brands).length) {
-                                    Object.keys(filters.brands).map((currentBrand) => {
-                                        if (
-                                            currentBrand === brand &&
-                                            !!categories[category].subsubcategories[subsubcategory].manufacturers[brand]
-                                                .models
-                                        ) {
-                                            Object.keys(
-                                                categories[category].subsubcategories[subsubcategory].manufacturers[
-                                                    brand
-                                                ].models,
-                                            ).map((model) => {
-                                                if (!newModels.find((findModel) => model === findModel)) {
-                                                    newModels.push(model);
-                                                }
-                                            });
-                                        }
-                                    });
-                                } else {
+                        Object.keys(categories[category].subsubcategories[subsubcategory]).map((brand) => {
+                            if (Object.keys(filters.brands).length) {
+                                Object.keys(filters.brands).map((currentBrand) => {
                                     if (
-                                        categories[category].subsubcategories[subsubcategory].manufacturers[brand]
-                                            .models
+                                        currentBrand === brand &&
+                                        categories[category].subsubcategories[subsubcategory][brand]
                                     ) {
-                                        Object.keys(
-                                            categories[category].subsubcategories[subsubcategory].manufacturers[brand]
-                                                .models,
-                                        ).map((model) => {
+                                        categories[category].subsubcategories[subsubcategory][brand].map((model) => {
                                             if (!newModels.find((findModel) => model === findModel)) {
                                                 newModels.push(model);
                                             }
                                         });
                                     }
+                                });
+                            } else {
+                                if (categories[category].subsubcategories[subsubcategory][brand]) {
+                                    categories[category].subsubcategories[subsubcategory][brand].map((model) => {
+                                        if (!newModels.find((findModel) => model === findModel)) {
+                                            newModels.push(model);
+                                        }
+                                    });
                                 }
-                            },
-                        );
+                            }
+                        });
                     });
                 }
             });

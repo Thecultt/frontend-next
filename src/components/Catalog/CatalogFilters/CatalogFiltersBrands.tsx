@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -21,13 +23,11 @@ const CatalogFiltersBrands: React.FC = () => {
             Object.keys(filters.categories).map((category) => {
                 if (categories[category] && categories[category].subsubcategories) {
                     Object.keys(categories[category].subsubcategories).map((subsubcategory) => {
-                        Object.keys(categories[category].subsubcategories[subsubcategory].manufacturers).map(
-                            (brand) => {
-                                if (!newBrands.find((findBrand) => findBrand === brand)) {
-                                    newBrands.push(brand);
-                                }
-                            },
-                        );
+                        Object.keys(categories[category].subsubcategories[subsubcategory]).map((brand) => {
+                            if (!newBrands.find((findBrand) => findBrand === brand)) {
+                                newBrands.push(brand);
+                            }
+                        });
                     });
                 }
             });
@@ -35,13 +35,11 @@ const CatalogFiltersBrands: React.FC = () => {
             Object.keys(categories).map((category) => {
                 if (categories[category] && categories[category].subsubcategories) {
                     Object.keys(categories[category].subsubcategories).map((subsubcategory) => {
-                        Object.keys(categories[category].subsubcategories[subsubcategory].manufacturers).map(
-                            (brand) => {
-                                if (!newBrands.find((findBrand) => findBrand === brand)) {
-                                    newBrands.push(brand);
-                                }
-                            },
-                        );
+                        Object.keys(categories[category].subsubcategories[subsubcategory]).map((brand) => {
+                            if (!newBrands.find((findBrand) => findBrand === brand)) {
+                                newBrands.push(brand);
+                            }
+                        });
                     });
                 }
             });

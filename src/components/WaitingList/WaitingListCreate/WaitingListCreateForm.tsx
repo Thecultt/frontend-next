@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps, formValueSelector } from 'redux-form';
 import Link from 'next/link';
@@ -107,14 +109,10 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                         newBrands.push({ title: brand, value: brand });
                     });
 
-                    Object.keys(categories[currentCategory].subsubcategories[currentType].manufacturers).map((type) => {
-                        if (categories[currentCategory].subsubcategories[currentType].manufacturers[type].models) {
-                            Object.keys(
-                                categories[currentCategory].subsubcategories[currentType].manufacturers[type].models,
-                            ).map((brand) => {
-                                newModels.push({ title: brand, value: brand });
-                            });
-                        }
+                    Object.keys(categories[currentCategory].subsubcategories[currentType]).map((type) => {
+                        categories[currentCategory].subsubcategories[currentType][type].map((brand) => {
+                            newModels.push({ title: brand, value: brand });
+                        });
                     });
                 } else {
                     Object.keys(categories[currentCategory].subsubcategories).map((subsubcategory) => {
@@ -124,23 +122,18 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                             }
                         });
 
-                        if (categories[currentCategory].subsubcategories[subsubcategory].manufacturers) {
-                            if (
-                                categories[currentCategory].subsubcategories[subsubcategory].manufacturers[currentBrand]
-                                    .models
-                            ) {
-                                Object.keys(
-                                    categories[currentCategory].subsubcategories[subsubcategory].manufacturers[
-                                        currentBrand
-                                    ].models,
-                                ).map((model) => {
-                                    if (!newModels.find((findModel) => model === findModel.title)) {
-                                        newModels.push({
-                                            title: model,
-                                            value: model,
-                                        });
-                                    }
-                                });
+                        if (categories[currentCategory].subsubcategories[subsubcategory]) {
+                            if (categories[currentCategory].subsubcategories[subsubcategory][currentBrand]) {
+                                categories[currentCategory].subsubcategories[subsubcategory][currentBrand].map(
+                                    (model) => {
+                                        if (!newModels.find((findModel) => model === findModel.title)) {
+                                            newModels.push({
+                                                title: model,
+                                                value: model,
+                                            });
+                                        }
+                                    },
+                                );
                             }
                         }
                     });
@@ -171,10 +164,8 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
         const newModels: { title: string; value: string }[] = [];
 
         Object.keys(categories[currentCategory].subsubcategories).map((subsubcategory) => {
-            if (categories[currentCategory].subsubcategories[subsubcategory].manufacturers[value].models) {
-                Object.keys(
-                    categories[currentCategory].subsubcategories[subsubcategory].manufacturers[value].models,
-                ).map((model) => {
+            if (categories[currentCategory].subsubcategories[subsubcategory][value]) {
+                categories[currentCategory].subsubcategories[subsubcategory][value].map((model) => {
                     newModels.push({ title: model, value: model });
                 });
             }
@@ -187,10 +178,8 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
         const newModels: { title: string; value: string }[] = [];
 
         Object.keys(categories[currentCategory].subsubcategories).map((subsubcategory) => {
-            if (categories[currentCategory].subsubcategories[subsubcategory].manufacturers[currentBrand].models) {
-                Object.keys(
-                    categories[currentCategory].subsubcategories[subsubcategory].manufacturers[currentBrand].models,
-                ).map((model) => {
+            if (categories[currentCategory].subsubcategories[subsubcategory][currentBrand]) {
+                categories[currentCategory].subsubcategories[subsubcategory][currentBrand].map((model) => {
                     if (
                         model.toLowerCase().indexOf(value.toLowerCase()) !== -1 &&
                         !newModels.find((findModel) => model === findModel.title)
