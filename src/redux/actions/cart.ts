@@ -120,11 +120,6 @@ export const removeCartItem = (id: string, item: CartItem) => {
                     website: item.id,
                 },
             },
-            // productGroup: {
-            // 	ids: {
-            // 		website: item.id
-            // 	}
-            // },
             pricePerItem: item.price,
         },
         executionDateTimeUtc: new Date(),

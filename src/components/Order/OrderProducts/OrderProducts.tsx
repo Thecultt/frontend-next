@@ -407,8 +407,21 @@ const OrderProducts: React.FC = () => {
                 executionDateTimeUtc: new Date(),
             });
 
-            sendMindbox('Website.ClearCart', {
-                executionDateTimeUtc: new Date(),
+            products.map((product) => {
+                sendMindbox('Website.ClearCart', {
+                    customer: {
+                        email: user.email,
+                    },
+                    removeProductFromList: {
+                        product: {
+                            ids: {
+                                website: product.id,
+                            },
+                        },
+                        pricePerItem: product.price,
+                    },
+                    executionDateTimeUtc: new Date(),
+                });
             });
         } catch (e) {
             console.log(e);
