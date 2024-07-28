@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -12,43 +14,41 @@ const CatalogFiltersBrands: React.FC = () => {
     const { categories } = useTypedSelector(({ products_filters }) => products_filters);
 
     const [search, setSearch] = React.useState<string>('');
-    const [brands, setBrands] = React.useState<string[]>([]);
 
-    React.useEffect(() => {
-        const newBrands: string[] = [];
+    const brands = React.useMemo(() => {
+        const items = Object.keys(filters.categories).length
+            ? Object.keys(filters.categories)
+            : Object.keys(categories);
 
-        if (Object.keys(filters.categories).length) {
-            Object.keys(filters.categories).map((category) => {
-                if (categories[category] && categories[category].subsubcategories) {
-                    Object.keys(categories[category].subsubcategories).map((subsubcategory) => {
-                        Object.keys(categories[category].subsubcategories[subsubcategory]).map((brand) => {
-                            if (!newBrands.find((findBrand) => findBrand === brand)) {
-                                newBrands.push(brand);
-                            }
-                        });
-                    });
-                }
-            });
-        } else {
-            Object.keys(categories).map((category) => {
-                if (categories[category] && categories[category].subsubcategories) {
-                    Object.keys(categories[category].subsubcategories).map((subsubcategory) => {
-                        Object.keys(categories[category].subsubcategories[subsubcategory]).map((brand) => {
-                            if (!newBrands.find((findBrand) => findBrand === brand)) {
-                                newBrands.push(brand);
-                            }
-                        });
-                    });
-                }
-            });
+        if (!items.length) {
+            return [];
         }
 
-        setBrands(newBrands);
-    }, [filters.categories]);
+        const brandsSet = new Set<string>([]);
+
+        items.map((category) => {
+            if (categories[category] && categories[category].subsubcategories) {
+                Object.keys(categories[category].subsubcategories).map((subsubcategory) => {
+                    Object.keys(categories[category].subsubcategories[subsubcategory].manufacturers).map((brand) => {
+                        brandsSet.add(brand);
+                    });
+                });
+            }
+        });
+
+        return Array.from(brandsSet).sort((a, b) => a.localeCompare(b));
+    }, [categories, filters.categories]);
+
+    const visibleBrands = React.useMemo(() => {
+        if (!search) {
+            return brands;
+        }
+
+        return brands.filter((brand) => brand.toLowerCase().indexOf(search) !== -1);
+    }, [brands, search]);
 
     const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value: string = e.target.value.toLowerCase();
-
+        const value = e.target.value.toLowerCase();
         setSearch(value);
     };
 
@@ -57,7 +57,7 @@ const CatalogFiltersBrands: React.FC = () => {
     };
 
     return (
-        <CatalogFiltersBlockWrapper title="Бренды">
+        <CatalogFiltersBlockWrapper title="Бренды" disabled={!brands.length}>
             <div className="catalog-filters-block-content-brands-search">
                 <input
                     type="text"
@@ -80,55 +80,20 @@ const CatalogFiltersBrands: React.FC = () => {
                 </svg>
             </div>
 
-            {search === '' ? (
-                <>
-                    {brands.length
-                        ? brands
-                              .sort((a, b) => a.localeCompare(b))
-                              .map((brand, index) => (
-                                  <div
-                                      className="catalog-filters-block-content-checkbox"
-                                      key={`catalog-filters-block-content-brands-checkbox-${index}`}
-                                  >
-                                      <Checkbox
-                                          id={`catalog-filters-block-content-brands-checkbox-${index}`}
-                                          label={brand}
-                                          onChange={() => onChangeSetBrand(brand)}
-                                          checked={
-                                              Object.keys(filters.brands).find((filtersBrand) => brand === filtersBrand)
-                                                  ? true
-                                                  : false
-                                          }
-                                      />
-                                  </div>
-                              ))
-                        : null}
-                </>
-            ) : (
-                <>
-                    {brands
-                        .sort((a, b) => a.localeCompare(b))
-                        .map((brand, index) =>
-                            brand.toLowerCase().indexOf(search) !== -1 ? (
-                                <div
-                                    className="catalog-filters-block-content-checkbox"
-                                    key={`catalog-filters-block-content-brands-checkbox-${index}`}
-                                >
-                                    <Checkbox
-                                        id={`catalog-filters-block-content-brands-checkbox-${index}`}
-                                        label={brand}
-                                        onChange={() => onChangeSetBrand(brand)}
-                                        checked={
-                                            Object.keys(filters.brands).find((filtersBrand) => brand === filtersBrand)
-                                                ? true
-                                                : false
-                                        }
-                                    />
-                                </div>
-                            ) : null,
-                        )}
-                </>
-            )}
+            {visibleBrands.length > 0 &&
+                visibleBrands.map((brand, index) => (
+                    <div
+                        className="catalog-filters-block-content-checkbox"
+                        key={`catalog-filters-block-content-brands-checkbox-${index}`}
+                    >
+                        <Checkbox
+                            id={`catalog-filters-block-content-brands-checkbox-${index}`}
+                            label={brand}
+                            onChange={() => onChangeSetBrand(brand)}
+                            checked={!!Object.keys(filters.brands).find((filtersBrand) => brand === filtersBrand)}
+                        />
+                    </div>
+                ))}
         </CatalogFiltersBlockWrapper>
     );
 };

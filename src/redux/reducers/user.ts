@@ -1,3 +1,5 @@
+import { GENDER_IDS, GENDERS } from '@/constants/catalog';
+
 import { UserState, UserActions, UserActionTypes } from '../types/IUser';
 
 const initialState: UserState = {
@@ -8,12 +10,12 @@ const initialState: UserState = {
 
 const user = (state = initialState, action: UserActions) => {
     if (action.type === UserActionTypes.SET_USER) {
-        if (action.payload.gender === 1) {
-            action.payload.gender = 'Женский';
+        if (action.payload.gender === GENDER_IDS.female) {
+            action.payload.gender = GENDERS.female;
         }
 
-        if (action.payload.gender === 2) {
-            action.payload.gender = 'Мужской';
+        if (action.payload.gender === GENDER_IDS.male) {
+            action.payload.gender = GENDERS.male;
         }
 
         return {
