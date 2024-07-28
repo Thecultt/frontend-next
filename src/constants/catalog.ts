@@ -46,3 +46,13 @@ export const SELECTIONS_IDS = {
     investmentsBags: 6,
     juliaKatkalo: 12,
 } as const;
+
+export const GENDERS = {
+    male: 'Мужской',
+    female: 'Женский',
+} as const;
+
+export const GENDER_IDS = {
+    male: 2,
+    female: 1,
+} as const;
