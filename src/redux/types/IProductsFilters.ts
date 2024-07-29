@@ -1,13 +1,14 @@
-import { IProductFilters } from '@/models/IProductFilters';
+import { ProductsFiltersCategory } from '@/models/IProductFilters';
 
 export interface ProductsFiltersState {
     isLoaded: boolean;
+
     price: { min: number; max: number };
-    conditions: IProductFilters['conditions'];
-    categories: IProductFilters['categories'];
-    colors: IProductFilters['colors'];
-    selections: IProductFilters['selections'];
-    glass_frame: IProductFilters['glass_frame'];
+    conditions: string[];
+    categories: { [key: string]: ProductsFiltersCategory };
+    colors: { [key: string]: string };
+    selections: { [key: string]: string };
+    glass_frame: string[];
 }
 
 export enum ProductsFiltersActionTypes {
@@ -32,27 +33,27 @@ interface setProductsFiltersPrice {
 
 interface setProductsFiltersConditions {
     type: ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_CONDITIONS;
-    payload: IProductFilters['conditions'];
+    payload: string[];
 }
 
 interface setProductsFiltersCategory {
     type: ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_CATEGORIES;
-    payload: IProductFilters['categories'];
+    payload: { [key: string]: ProductsFiltersCategory };
 }
 
 interface setProductsFiltersColors {
     type: ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_COLORS;
-    payload: IProductFilters['colors'];
+    payload: { [key: string]: string };
 }
 
 interface setProductsFiltersSelections {
     type: ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_SELECTIONS;
-    payload: IProductFilters['selections'];
+    payload: { [key: string]: string };
 }
 
 interface setProductsFiltersGlassFrame {
     type: ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_GLASS_FRAME;
-    payload: IProductFilters['glass_frame'];
+    payload: string[];
 }
 
 export type ProductsFiltersTypes =

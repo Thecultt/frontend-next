@@ -1,14 +1,22 @@
 import { Dispatch } from 'redux';
 
 import $api from '@/http';
-import { IProductFilters } from '@/models/IProductFilters';
+import { ProductsFiltersCategory } from '@/models/IProductFilters';
 
 import { ProductsFiltersTypes, ProductsFiltersActionTypes } from '../types/IProductsFilters';
 
 export const fetchProductsFilters = () => async (dispatch: Dispatch<ProductsFiltersTypes>) => {
     const {
         data: { categories, colors, conditions, min_price, max_price, selections, glass_frame },
-    } = await $api.get<IProductFilters>(`/filters`);
+    } = await $api.get<{
+        categories: { [key: string]: ProductsFiltersCategory };
+        colors: { [key: string]: string };
+        conditions: string[];
+        min_price: number;
+        max_price: number;
+        selections: { [key: string]: string };
+        glass_frame: string[];
+    }>(`/filters`);
 
     dispatch({
         type: ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_PRICE,
