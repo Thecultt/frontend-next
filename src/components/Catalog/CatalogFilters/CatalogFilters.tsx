@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -31,7 +29,7 @@ import {
     CatalogFiltersPriceDrop,
 } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
-import { CATEGORY_NAMES, SORT } from '@/constants/catalog';
+import { SORT } from '@/constants/catalog';
 import { getPath } from '@/functions/getPath';
 import { useHash } from '@/hooks/useHash';
 import { APP_ROUTE } from '@/constants/routes';
@@ -52,15 +50,12 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
 
     const {
         price,
+        conditions,
         categories,
+        colors,
+        glass_frame,
         isLoaded: isLoadedProductsFilters,
     } = useTypedSelector(({ products_filters }) => products_filters);
-
-    const onClickClearFilters = () => {
-        window.scrollTo(0, 0);
-        setIsOpenFiltersMedia(false);
-        dispatch(clearProductsFilters());
-    };
 
     React.useEffect(() => {
         if (isLoadedProductsFilters) {
@@ -295,6 +290,12 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
         Object.keys(filters.brands).map((brand) => brand),
     ]);
 
+    const onClickClearFilters = () => {
+        window.scrollTo(0, 0);
+        setIsOpenFiltersMedia(false);
+        dispatch(clearProductsFilters());
+    };
+
     return (
         <div
             className={getClassNames('catalog-filters', {
@@ -323,19 +324,28 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
                 <CatalogFiltersSelections />
 
                 <CatalogFiltersPrice defaultMin={price.min} defaultMax={price.max} />
-                <CatalogFiltersConditions />
+                <CatalogFiltersConditions conditions={conditions} />
                 <CatalogFiltersCategories />
                 <CatalogFiltersTypes />
                 <CatalogFiltersBrands />
                 <CatalogFiltersModels />
-                <CatalogFiltersColors />
+                <CatalogFiltersColors colors={colors} />
 
-                {CATEGORY_NAMES.accessories in filters.categories && <CatalogFiltersGlassFrame />}
+                {Object.keys(filters.categories).find((category) => category === 'Аксессуары') ? (
+                    <CatalogFiltersGlassFrame glass_frame={glass_frame} />
+                ) : null}
 
                 <CatalogFiltersSex />
                 <CatalogFiltersAvailability />
 
-                {CATEGORY_NAMES.shoes in filters.categories && <CatalogFiltersSize />}
+                {Object.keys(filters.categories).find((category) => category === 'Обувь') ? (
+                    <CatalogFiltersSize size={categories['Обувь'].size ? categories['Обувь'].size : []} />
+                ) : null}
+                {/* {Object.keys(filters.categories).map((category) => (
+					filters.categories[category] === "Обувь" ? (
+						<CatalogFiltersSize size={categories["Обувь"].size ? categories["Обувь"].size : []} />
+					) : null
+				))} */}
 
                 <CatalogFiltersPriceDrop />
             </div>

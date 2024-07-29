@@ -46,7 +46,7 @@ const CatalogFiltersBlockWrapper: React.FC<CatalogFiltersBlockWrapperProps> = ({
                 <p className="catalog-filters-block-top__title">
                     {title}
 
-                    {infoMessage && (
+                    {infoMessage ? (
                         <>
                             <svg
                                 width="17"
@@ -73,7 +73,7 @@ const CatalogFiltersBlockWrapper: React.FC<CatalogFiltersBlockWrapperProps> = ({
                                 ></span>
                             </span>
                         </>
-                    )}
+                    ) : null}
                 </p>
 
                 {isAllVisible ? (
@@ -94,7 +94,7 @@ const CatalogFiltersBlockWrapper: React.FC<CatalogFiltersBlockWrapperProps> = ({
                 )}
             </div>
 
-            {isAllVisible && <div className="catalog-filters-block-content">{children}</div>}
+            {isAllVisible ? <div className="catalog-filters-block-content">{children}</div> : null}
         </div>
     );
 };
