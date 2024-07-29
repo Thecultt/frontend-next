@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { WrappedFieldProps, change } from 'redux-form';
 import { getClassNames } from '@/functions/getClassNames';
@@ -13,7 +11,7 @@ interface RenderInputHintsProps extends WrappedFieldProps {
     disabled?: boolean;
     bgWhite?: boolean;
     ifFreeField?: boolean;
-    onChangeCustom?: (query: string) => void;
+    onChangeCustom: (query: string) => void;
     onSaveValue?: (value: { title: string; value: string }) => void;
 }
 
@@ -56,7 +54,7 @@ const RenderInputHints: React.FC<RenderInputHintsProps> = ({
     const toggleCurrentItem = (item: { title: string; value: string }) => {
         dispatch(change(form, input.name, item.title));
 
-        onChangeCustom?.(item.title);
+        onChangeCustom(item.title);
 
         setValue(item);
 
@@ -66,7 +64,7 @@ const RenderInputHints: React.FC<RenderInputHintsProps> = ({
     const onChange = (e: any) => {
         dispatch(change(form, input.name, e.currentTarget.value));
 
-        onChangeCustom?.(e.currentTarget.value);
+        onChangeCustom(e.currentTarget.value);
 
         if (ifFreeField) {
             setValue({

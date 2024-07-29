@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
 
@@ -26,7 +24,7 @@ const CatalogFiltersTop: React.FC<any> = React.memo(({ setIsOpenFiltersMedia, is
                             ) : (
                                 <>
                                     {filters.selection ? (
-                                        selections[filters.selection].category
+                                        selections[filters.selection]
                                     ) : (
                                         <>
                                             {query.get('theme')

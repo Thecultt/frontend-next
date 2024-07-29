@@ -10,78 +10,55 @@ import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
 const CatalogFiltersModels: React.FC = () => {
     const dispatch = useDispatch();
 
-    const [search, setSearch] = React.useState('');
+    const [models, setModels] = React.useState<string[]>([]);
+
+    const [search, setSearch] = React.useState<string>('');
 
     const { filters } = useTypedSelector(({ products }) => products);
     const { isLoaded, categories } = useTypedSelector(({ products_filters }) => products_filters);
 
-    const models = React.useMemo(() => {
-        if (!isLoaded) {
-            return [];
-        }
+    React.useEffect(() => {
+        if (isLoaded) {
+            const newModels: string[] = [];
 
-        const selectedCategories = Object.keys(filters.categories);
-
-        if (!selectedCategories.length || !Object.keys(categories).length) {
-            return [];
-        }
-
-        const modelsSet = new Set<string>([]);
-
-        selectedCategories.forEach((category) => {
-            if (categories[category]) {
-                const subsubcategories = Object.keys(categories[category].subsubcategories);
-
-                if (subsubcategories.length > 0) {
-                    subsubcategories.forEach((subsubcategory) => {
-                        const manufacturers = Object.keys(
-                            categories[category].subsubcategories[subsubcategory].manufacturers,
-                        );
-
-                        if (manufacturers.length > 0) {
-                            manufacturers.forEach((brand) => {
-                                const models = Object.keys(
-                                    categories[category].subsubcategories[subsubcategory].manufacturers[brand].models ||
-                                        {},
-                                );
-
-                                if (models.length > 0) {
-                                    const selectedBrands = Object.keys(filters.brands);
-
-                                    if (selectedBrands.length > 0) {
-                                        selectedBrands.forEach((currentBrand) => {
-                                            if (currentBrand === brand) {
-                                                models.forEach((model) => {
-                                                    modelsSet.add(model);
-                                                });
+            Object.keys(filters.categories).map((category) => {
+                if (categories[category] && categories[category].subsubcategories) {
+                    Object.keys(categories[category].subsubcategories).map((subsubcategory) => {
+                        Object.keys(categories[category].subsubcategories[subsubcategory]).map((brand) => {
+                            if (Object.keys(filters.brands).length) {
+                                Object.keys(filters.brands).map((currentBrand) => {
+                                    if (
+                                        currentBrand === brand &&
+                                        categories[category].subsubcategories[subsubcategory][brand]
+                                    ) {
+                                        categories[category].subsubcategories[subsubcategory][brand].map((model) => {
+                                            if (!newModels.find((findModel) => model === findModel)) {
+                                                newModels.push(model);
                                             }
                                         });
-                                    } else {
-                                        models.forEach((model) => {
-                                            modelsSet.add(model);
-                                        });
                                     }
+                                });
+                            } else {
+                                if (categories[category].subsubcategories[subsubcategory][brand]) {
+                                    categories[category].subsubcategories[subsubcategory][brand].map((model) => {
+                                        if (!newModels.find((findModel) => model === findModel)) {
+                                            newModels.push(model);
+                                        }
+                                    });
                                 }
-                            });
-                        }
+                            }
+                        });
                     });
                 }
-            }
-        });
+            });
 
-        return Array.from(modelsSet).sort((a, b) => a.localeCompare(b));
-    }, [categories, filters.brands, filters.categories, isLoaded]);
-
-    const visibleModels = React.useMemo(() => {
-        if (!search) {
-            return models;
+            setModels(newModels);
         }
-
-        return models.filter((model) => model.toLowerCase().indexOf(search) !== -1);
-    }, [models, search]);
+    }, [filters.categories, filters.brands]);
 
     const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.toLowerCase();
+        const value: string = e.target.value.toLowerCase();
+
         setSearch(value);
     };
 
@@ -90,7 +67,7 @@ const CatalogFiltersModels: React.FC = () => {
     };
 
     return (
-        <CatalogFiltersBlockWrapper title="Модели" disabled={!models.length}>
+        <CatalogFiltersBlockWrapper title="Модели">
             <div className="catalog-filters-block-content-brands-search">
                 <input
                     type="text"
@@ -113,20 +90,55 @@ const CatalogFiltersModels: React.FC = () => {
                 </svg>
             </div>
 
-            {visibleModels.length > 0 &&
-                visibleModels.map((model, index) => (
-                    <div
-                        className="catalog-filters-block-content-checkbox"
-                        key={`catalog-filters-block-content-models-checkbox-${index}`}
-                    >
-                        <Checkbox
-                            id={`catalog-filters-block-content-models-checkbox-${index}`}
-                            label={model}
-                            onChange={() => onChangeSetModels(model)}
-                            checked={!!Object.keys(filters.models).find((filtersModel) => model === filtersModel)}
-                        />
-                    </div>
-                ))}
+            {search === '' ? (
+                <>
+                    {models.length
+                        ? models
+                              .sort((a, b) => a.localeCompare(b))
+                              .map((model, index) => (
+                                  <div
+                                      className="catalog-filters-block-content-checkbox"
+                                      key={`catalog-filters-block-content-models-checkbox-${index}`}
+                                  >
+                                      <Checkbox
+                                          id={`catalog-filters-block-content-models-checkbox-${index}`}
+                                          label={model}
+                                          onChange={() => onChangeSetModels(model)}
+                                          checked={
+                                              Object.keys(filters.models).find((filtersModel) => model === filtersModel)
+                                                  ? true
+                                                  : false
+                                          }
+                                      />
+                                  </div>
+                              ))
+                        : null}
+                </>
+            ) : (
+                <>
+                    {models
+                        .sort((a, b) => a.localeCompare(b))
+                        .map((model, index) =>
+                            model.toLowerCase().indexOf(search) !== -1 ? (
+                                <div
+                                    className="catalog-filters-block-content-checkbox"
+                                    key={`catalog-filters-block-content-models-checkbox-${index}`}
+                                >
+                                    <Checkbox
+                                        id={`catalog-filters-block-content-models-checkbox-${index}`}
+                                        label={model}
+                                        onChange={() => onChangeSetModels(model)}
+                                        checked={
+                                            Object.keys(filters.models).find((filtersModel) => model === filtersModel)
+                                                ? true
+                                                : false
+                                        }
+                                    />
+                                </div>
+                            ) : null,
+                        )}
+                </>
+            )}
         </CatalogFiltersBlockWrapper>
     );
 };
