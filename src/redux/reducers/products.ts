@@ -25,6 +25,7 @@ const initialState: ProductsState = {
         from_boutique: false,
         from_parnter: false,
         nuances: '',
+        num_of_favorites: 0,
         external_material: '',
         lining_material: '',
         kit: '',
