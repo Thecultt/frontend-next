@@ -387,7 +387,7 @@ const Header: React.FC = () => {
                                             categories: [category.title],
                                             availability: ['Доступно', 'На примерке', 'Нет в наличии'],
                                             page: 1,
-                                            sort: SORT.a,
+                                            sort: SORT.shuffle,
                                         })}
                                         className="header-menu__link"
                                         key={`header-menu__link-${index}`}

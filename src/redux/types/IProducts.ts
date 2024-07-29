@@ -1,6 +1,6 @@
 import { Product, ProductPage } from '@/models/IProduct';
 
-export type SortType = 'a' | 'price' | '-price' | 'popular';
+export type SortType = 'a' | 'price' | '-price' | 'popular' | 'shuffle';
 
 export enum CatalogFetchType {
     Page,
@@ -34,7 +34,7 @@ export interface ProductsStateFilters {
 
     glass_frame: { [key: string]: string };
 
-    sort: string; // TODO SortType
+    sort: SortType;
 }
 
 export interface ProductsState {
@@ -258,7 +258,7 @@ interface setProductsFiltersPriceDrop {
 
 interface setProductsFiltersSort {
     type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SORT;
-    payload: string;
+    payload: SortType;
 }
 
 interface clearProductsFilters {

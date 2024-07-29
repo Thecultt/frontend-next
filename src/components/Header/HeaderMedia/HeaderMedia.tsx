@@ -269,7 +269,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                                     categories: [category.title],
                                     availability: CATEGORIES,
                                     page: 1,
-                                    sort: SORT.a,
+                                    sort: SORT.shuffle,
                                 })}
                                 key={`header-media-modal-menu-links-tab${index}`}
                             >
