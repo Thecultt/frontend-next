@@ -4,7 +4,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useMediaQuery } from 'usehooks-ts';
 
+import { MEDIA_SIZES } from '@/constants/styles';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import {
     HeaderTopMessage,
@@ -176,6 +178,8 @@ const categories: HeaderHoverMenuCategory[] = [
 const Header: React.FC = () => {
     const dispatch = useDispatch();
 
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+
     const pathname = usePathname();
     const router = useRouter();
 
@@ -248,67 +252,69 @@ const Header: React.FC = () => {
             <HeaderTopMessage />
 
             <div className="header-container">
-                <header className="header">
-                    <div className="container">
-                        <div className="header-wrapper">
-                            <div className="header-wrapper-block">
-                                <div className="header-block">
-                                    <Link href={APP_ROUTE.home} className="header-block-logo">
-                                        <BaseImage
-                                            src={Logo.src}
-                                            alt="THECULTT LOGO"
-                                            className="header-block-logo__image"
-                                        />
-                                    </Link>
+                {!isMobile ? (
+                    <>
+                        <header className="header">
+                            <div className="container">
+                                <div className="header-wrapper">
+                                    <div className="header-wrapper-block">
+                                        <div className="header-block">
+                                            <Link href={APP_ROUTE.home} className="header-block-logo">
+                                                <BaseImage
+                                                    src={Logo.src}
+                                                    alt="THECULTT LOGO"
+                                                    className="header-block-logo__image"
+                                                />
+                                            </Link>
 
-                                    <HeaderSearchInput
-                                        ref={inputRef}
-                                        value={search.value}
-                                        onFocus={() => setIsOpenSearch(true)}
-                                        onChange={onChangeSearchInput}
-                                        onKeyDown={handleInputKeyDown}
-                                    />
-                                </div>
+                                            <HeaderSearchInput
+                                                ref={inputRef}
+                                                value={search.value}
+                                                onFocus={() => setIsOpenSearch(true)}
+                                                onChange={onChangeSearchInput}
+                                                onKeyDown={handleInputKeyDown}
+                                            />
+                                        </div>
 
-                                <div className="header-block">
-                                    <div className="header-block-btn">
-                                        <Link
-                                            href={APP_ROUTE.sell[isLoggedIn ? 'create' : 'info']}
-                                            className="header-block-btn__btn"
-                                            onClick={() => {
-                                                window?.dataLayer?.push({
-                                                    ecommerce: null,
-                                                }); // Clear the previous ecommerce object.
-                                                window?.dataLayer?.push({
-                                                    event: 'sell_click',
-                                                    ecommerce: {
-                                                        timestamp: Math.floor(Date.now() / 1000),
-                                                    },
-                                                });
-                                            }}
-                                        >
-                                            Продать
-                                        </Link>
-                                        <Link
-                                            href={APP_ROUTE.exchange}
-                                            className="header-block-btn__btn regular"
-                                            onClick={() => {
-                                                window?.dataLayer?.push({
-                                                    ecommerce: null,
-                                                }); // Clear the previous ecommerce object.
-                                                window?.dataLayer?.push({
-                                                    event: 'swap_click',
-                                                    ecommerce: {
-                                                        timestamp: Math.floor(Date.now() / 1000),
-                                                    },
-                                                });
-                                            }}
-                                        >
-                                            Обменять
-                                        </Link>
-                                    </div>
+                                        <div className="header-block">
+                                            <div className="header-block-btn">
+                                                <Link
+                                                    href={APP_ROUTE.sell[isLoggedIn ? 'create' : 'info']}
+                                                    className="header-block-btn__btn"
+                                                    onClick={() => {
+                                                        window?.dataLayer?.push({
+                                                            ecommerce: null,
+                                                        }); // Clear the previous ecommerce object.
+                                                        window?.dataLayer?.push({
+                                                            event: 'sell_click',
+                                                            ecommerce: {
+                                                                timestamp: Math.floor(Date.now() / 1000),
+                                                            },
+                                                        });
+                                                    }}
+                                                >
+                                                    Продать
+                                                </Link>
+                                                <Link
+                                                    href={APP_ROUTE.exchange}
+                                                    className="header-block-btn__btn regular"
+                                                    onClick={() => {
+                                                        window?.dataLayer?.push({
+                                                            ecommerce: null,
+                                                        }); // Clear the previous ecommerce object.
+                                                        window?.dataLayer?.push({
+                                                            event: 'swap_click',
+                                                            ecommerce: {
+                                                                timestamp: Math.floor(Date.now() / 1000),
+                                                            },
+                                                        });
+                                                    }}
+                                                >
+                                                    Обменять
+                                                </Link>
+                                            </div>
 
-                                    {/* <button className="header-block__language">
+                                            {/* <button className="header-block__language">
 									<svg
 										width="22"
 										height="22"
@@ -333,118 +339,126 @@ const Header: React.FC = () => {
 									</svg>
 								</button> */}
 
-                                    <HeaderUser />
+                                            <HeaderUser />
 
-                                    <HeaderCart />
-                                </div>
-                            </div>
+                                            <HeaderCart />
+                                        </div>
+                                    </div>
 
-                            <nav className="header-menu">
-                                <Link
-                                    href={getCatalogFiltersUrl({
-                                        boutique: false,
-                                        categories: CATEGORIES,
-                                        availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                                        price_drop: false,
-                                        page: 1,
-                                        sort: SORT.a,
-                                    })}
-                                    className="header-menu__link"
-                                >
-                                    Новинки
-                                </Link>
+                                    <nav className="header-menu">
+                                        <Link
+                                            href={getCatalogFiltersUrl({
+                                                boutique: false,
+                                                categories: CATEGORIES,
+                                                availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+                                                price_drop: false,
+                                                page: 1,
+                                                sort: SORT.a,
+                                            })}
+                                            className="header-menu__link"
+                                        >
+                                            Новинки
+                                        </Link>
 
-                                <Link
-                                    href={getCatalogFiltersUrl({
-                                        boutique: false,
-                                        categories: CATEGORIES,
-                                        availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                                        price_drop: false,
-                                        page: 1,
-                                        sort: SORT.popular,
-                                    })}
-                                    className="header-menu__link"
-                                >
-                                    Популярное
-                                </Link>
+                                        <Link
+                                            href={getCatalogFiltersUrl({
+                                                boutique: false,
+                                                categories: CATEGORIES,
+                                                availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+                                                price_drop: false,
+                                                page: 1,
+                                                sort: SORT.popular,
+                                            })}
+                                            className="header-menu__link"
+                                        >
+                                            Популярное
+                                        </Link>
 
-                                <Link
-                                    href={getCatalogFiltersUrl({
-                                        selection: SELECTIONS_IDS.summerBags,
-                                        sort: 'popular',
-                                    })}
-                                    className="header-menu__link"
-                                    onMouseOver={() => setIsSelectionsMenuVisible(true)}
-                                    onMouseOut={() => setIsSelectionsMenuVisible(false)}
-                                    onClick={() => setIsSelectionsMenuVisible(false)}
-                                >
-                                    Подборки
-                                </Link>
+                                        <Link
+                                            href={getCatalogFiltersUrl({
+                                                selection: SELECTIONS_IDS.summerBags,
+                                                sort: SORT.popular,
+                                            })}
+                                            className="header-menu__link"
+                                            onMouseOver={() => setIsSelectionsMenuVisible(true)}
+                                            onMouseOut={() => setIsSelectionsMenuVisible(false)}
+                                            onClick={() => setIsSelectionsMenuVisible(false)}
+                                        >
+                                            Подборки
+                                        </Link>
 
-                                {categories.map((category, index) => (
-                                    <Link
-                                        href={getCatalogFiltersUrl({
-                                            categories: [category.title],
-                                            availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                                            page: 1,
-                                            sort: SORT.shuffle,
-                                        })}
-                                        className="header-menu__link"
-                                        key={`header-menu__link-${index}`}
-                                        onMouseOver={() => openHoverMenu(index)}
-                                        onMouseOut={closeHoverMenu}
-                                        onClick={closeHoverMenu}
-                                    >
-                                        {category.title}
-                                    </Link>
-                                ))}
+                                        {categories.map((category, index) => (
+                                            <Link
+                                                href={getCatalogFiltersUrl({
+                                                    categories: [category.title],
+                                                    availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+                                                    page: 1,
+                                                    sort: SORT.shuffle,
+                                                })}
+                                                className="header-menu__link"
+                                                key={`header-menu__link-${index}`}
+                                                onMouseOver={() => openHoverMenu(index)}
+                                                onMouseOut={closeHoverMenu}
+                                                onClick={closeHoverMenu}
+                                            >
+                                                {category.title}
+                                            </Link>
+                                        ))}
 
-                                <Link href={APP_ROUTE.concierge.root} className="header-menu__link">
-                                    Консьерж
-                                </Link>
+                                        <Link href={APP_ROUTE.concierge.root} className="header-menu__link">
+                                            Консьерж
+                                        </Link>
 
-                                <Link href={APP_ROUTE.brands} className="header-menu__link">
-                                    Бренды
-                                </Link>
+                                        <Link href={APP_ROUTE.brands} className="header-menu__link">
+                                            Бренды
+                                        </Link>
 
-                                <Link href={APP_ROUTE.auth} className="header-menu__link">
-                                    Подлинность
-                                </Link>
-                                {/*
+                                        <Link href={APP_ROUTE.auth} className="header-menu__link">
+                                            Подлинность
+                                        </Link>
+                                        {/*
 								<a href="/catalog?categories=Сумки&categories=Обувь&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=header&utm_campaign=selection_Doletskaya" className="header-menu__link">
 									Архив Алены Долецкой
 								</a> */}
 
-                                <Link
-                                    href={getCatalogFiltersUrl({
-                                        boutique: false,
-                                        price_drop: true,
-                                        categories: CATEGORIES,
-                                        availability: ['Доступно', 'На примерке'],
-                                        page: 1,
-                                        sort: 'popular',
-                                    })}
-                                    className="header-menu__link"
-                                >
-                                    <b>THE CULTT SALE</b>
-                                </Link>
-                            </nav>
-                        </div>
-                    </div>
-                </header>
+                                        <Link
+                                            href={getCatalogFiltersUrl({
+                                                boutique: false,
+                                                price_drop: true,
+                                                categories: CATEGORIES,
+                                                availability: ['Доступно', 'На примерке'],
+                                                page: 1,
+                                                sort: SORT.popular,
+                                            })}
+                                            className="header-menu__link"
+                                        >
+                                            <b>THE CULTT SALE</b>
+                                        </Link>
+                                    </nav>
+                                </div>
+                            </div>
+                        </header>
 
-                <HeaderHoverMenu
-                    {...categories[currentCategoryHoverMenuIndex]}
-                    isOpenHoverMenu={isOpenHoverMenu}
-                    onOpen={() => setIsOpenHoverMenu(true)}
-                    onClose={() => setIsOpenHoverMenu(false)}
-                />
+                        <HeaderHoverMenu
+                            {...categories[currentCategoryHoverMenuIndex]}
+                            isOpenHoverMenu={isOpenHoverMenu}
+                            onOpen={() => setIsOpenHoverMenu(true)}
+                            onClose={() => setIsOpenHoverMenu(false)}
+                        />
 
-                <HeaderSelectionsHoverMenu
-                    isVisible={isSelectionsMenuVisible}
-                    onOpen={() => setIsSelectionsMenuVisible(true)}
-                    onClose={() => setIsSelectionsMenuVisible(false)}
-                />
+                        <HeaderSelectionsHoverMenu
+                            isVisible={isSelectionsMenuVisible}
+                            onOpen={() => setIsSelectionsMenuVisible(true)}
+                            onClose={() => setIsSelectionsMenuVisible(false)}
+                        />
+                    </>
+                ) : (
+                    <HeaderMedia
+                        transparent={pathname.startsWith(APP_ROUTE.product)}
+                        isOpenSearch={isOpenSearch}
+                        setIsOpenSearch={setIsOpenSearch}
+                    />
+                )}
 
                 <HeaderSearchBox
                     state={isOpenSearch}
@@ -452,8 +466,6 @@ const Header: React.FC = () => {
                     goToCatalog={goToCatalog}
                     onInputKeyDown={handleInputKeyDown}
                 />
-
-                <HeaderMedia setIsOpenSearch={setIsOpenSearch} />
             </div>
         </div>
     );

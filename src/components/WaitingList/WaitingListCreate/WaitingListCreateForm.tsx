@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps, formValueSelector } from 'redux-form';
 import Link from 'next/link';

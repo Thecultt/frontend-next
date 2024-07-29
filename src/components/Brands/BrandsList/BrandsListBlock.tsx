@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
+import { SORT } from '@/constants/catalog';
 
 interface BrandsListBlockProps {
     letter: string;
@@ -18,7 +19,7 @@ const BrandsListBlock: React.FC<BrandsListBlockProps> = ({ letter, brands }) => 
                     <Link
                         href={getCatalogFiltersUrl({
                             brands: [brand],
-                            sort: 'a',
+                            sort: SORT.a,
                         })}
                         className="brands-list-block__item"
                         key={`brands-list-block__item-${index}`}

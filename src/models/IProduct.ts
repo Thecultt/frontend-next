@@ -41,9 +41,8 @@ export interface ProductPage {
     from_boutique: boolean;
     from_parnter: boolean;
     price_drop: boolean;
-
     nuances: string;
-
+    num_of_favorites: number;
     external_material: string;
     lining_material: string;
     kit: string;
@@ -70,7 +69,6 @@ export interface ProductPage {
     scarf_composition: string;
     ring_size: string;
     jewelry_material: string;
-
     reference_number_clock: string;
     case_material_clock: string;
     bracelet_material_clock: string;

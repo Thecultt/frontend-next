@@ -13,6 +13,9 @@ import {
     CatalogProductsSection,
     ProductExchange,
     PageLoader,
+    Popup,
+    ProductInfoTitleBoutiquePopup,
+    ProductInfoTitlePartnerPopup,
 } from '@/components';
 import { NotFound } from '@/screens';
 
@@ -21,6 +24,9 @@ const Product: React.FC = () => {
     const { article } = useParams<{ article?: string }>();
 
     const { itemByArticle, itemByArticleIsLoaded } = useTypedSelector(({ products }) => products);
+
+    const [boutiquePopupVisible, setBoutiquePopupVisible] = React.useState(false);
+    const [partnerPopupVisible, setPartnerPopupVisible] = React.useState(false);
 
     React.useEffect(() => {
         if (article) {
@@ -45,9 +51,16 @@ const Product: React.FC = () => {
                             />
 
                             <div className="product-content">
-                                <ProductCover {...itemByArticle} />
-
-                                <ProductInfo {...itemByArticle} />
+                                <ProductCover
+                                    product={itemByArticle}
+                                    setBoutiquePopupVisible={setBoutiquePopupVisible}
+                                    setPartnerPopupVisible={setPartnerPopupVisible}
+                                />
+                                <ProductInfo
+                                    product={itemByArticle}
+                                    setBoutiquePopupVisible={setBoutiquePopupVisible}
+                                    setPartnerPopupVisible={setPartnerPopupVisible}
+                                />
                             </div>
                         </div>
                     </div>
@@ -58,6 +71,17 @@ const Product: React.FC = () => {
                 </div>
 
                 <ProductExchange />
+
+                <Popup
+                    state={boutiquePopupVisible}
+                    setState={() => setBoutiquePopupVisible(!boutiquePopupVisible)}
+                    center
+                >
+                    <ProductInfoTitleBoutiquePopup />
+                </Popup>
+                <Popup state={partnerPopupVisible} setState={() => setPartnerPopupVisible(!partnerPopupVisible)} center>
+                    <ProductInfoTitlePartnerPopup />
+                </Popup>
             </>
         ) : (
             <NotFound />

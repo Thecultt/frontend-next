@@ -31,21 +31,19 @@ const tabs = [
     {
         title: 'Возврат',
         description: `
-            <span>Мы принимаем возврат в течение трех дней с момента получения заказа (кроме заказов с методом доставки самовывоз). Товары из подборки "Архив Алены Долецкой" и оплаченные международными картами, не подлежат возврату.</span>
+            <span>Мы принимаем возврат в течение трех дней с момента получения заказа (кроме заказов с методом доставки самовывоз). Товары, оплаченные международными картами, не подлежат возврату.</span>
 
             <span>Подробнее в разделе <a href="${APP_ROUTE.help.return}">«Возврат»</a>.</span>
         `,
     },
 ];
 
-const ProductInfoTabs: React.FC = () => {
-    return (
-        <div className="product-content-info-tabs">
-            {tabs.map((tab, index) => (
-                <ProductInfoTabsItem {...tab} key={`product-content-info-tab-${index}`} />
-            ))}
-        </div>
-    );
-};
+const ProductInfoTabs: React.FC = () => (
+    <div className="product-content-info-tabs">
+        {tabs.map((tab, index) => (
+            <ProductInfoTabsItem {...tab} key={`product-content-info-tab-${index}`} />
+        ))}
+    </div>
+);
 
 export default ProductInfoTabs;

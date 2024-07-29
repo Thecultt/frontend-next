@@ -3,7 +3,7 @@ import { useMediaQuery } from 'usehooks-ts';
 import Link from 'next/link';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { SELECTIONS_IDS } from '@/constants/catalog';
+import { SELECTIONS_IDS, SORT } from '@/constants/catalog';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { MEDIA_SIZES } from '@/constants/styles';
 
@@ -52,7 +52,7 @@ export const SelectionsBanners: React.FC = () => {
                         <Link
                             href={getCatalogFiltersUrl({
                                 selection: influencerSelection.id,
-                                sort: 'popular',
+                                sort: SORT.popular,
                             })}
                             className="btn selections-banners-influencer__button"
                         >
@@ -88,7 +88,7 @@ export const SelectionsBanners: React.FC = () => {
                             <Link
                                 href={getCatalogFiltersUrl({
                                     selection: SELECTIONS_IDS.summerBags,
-                                    sort: 'popular',
+                                    sort: SORT.popular,
                                 })}
                                 className="btn selections-banners-bestsellers-main-item__btn"
                             >
@@ -118,7 +118,7 @@ export const SelectionsBanners: React.FC = () => {
                                 <Link
                                     href={getCatalogFiltersUrl({
                                         selection: SELECTIONS_IDS.investmentsBags,
-                                        sort: 'popular',
+                                        sort: SORT.popular,
                                     })}
                                     className="btn selections-banners-bestsellers-item__btn"
                                 >
@@ -146,7 +146,7 @@ export const SelectionsBanners: React.FC = () => {
                                 <Link
                                     href={getCatalogFiltersUrl({
                                         selection: SELECTIONS_IDS.itBags,
-                                        sort: 'popular',
+                                        sort: SORT.popular,
                                     })}
                                     className="btn selections-banners-bestsellers-item__btn"
                                 >

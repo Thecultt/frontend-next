@@ -3,7 +3,7 @@ import { useMediaQuery } from 'usehooks-ts';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
 
-import { SELECTIONS_IDS } from '@/constants/catalog';
+import { SELECTIONS_IDS, SORT } from '@/constants/catalog';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { MEDIA_SIZES, MEDIA_SIZES_NUMBERS } from '@/constants/styles';
@@ -37,7 +37,7 @@ export const SelectionsSlider = () => {
             <Link
                 href={getCatalogFiltersUrl({
                     selection: SELECTIONS_IDS.summerBags,
-                    sort: 'popular',
+                    sort: SORT.popular,
                 })}
                 className="selections-slider__title"
             >

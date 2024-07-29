@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ProductPage } from '@/models/IProduct';
+import { ProductInfoProperty } from './ProductInfoProperty';
 
 const ProductInfoParametersSize: React.FC<ProductPage> = ({
     gender,
@@ -60,15 +61,15 @@ const ProductInfoParametersSize: React.FC<ProductPage> = ({
         { title: 'Форма очков', value: glass_frame },
         { title: 'Размер', value: ring_size },
         { title: 'Размер в сетке бренда', value: brand_size },
-        { title: 'Длина, см', value: length },
-        { title: 'Ширина, см', value: width },
-        { title: 'Высота, см', value: height },
-        { title: 'Длина ручек, см', value: handle_length },
-        { title: 'Длина плечевого ремня, см', value: strap_length },
-        { title: 'Длина по стельке, см', value: insole_length },
-        { title: 'Высота каблука, см', value: heel_height },
-        { title: 'Диаметр, см', value: diameter },
-        { title: 'Рост модели, см', value: model_height },
+        { title: 'Длина (см)', value: length },
+        { title: 'Ширина (см)', value: width },
+        { title: 'Высота (см)', value: height },
+        { title: 'Длина ручек (см)', value: handle_length },
+        { title: 'Длина плечевого ремня (см)', value: strap_length },
+        { title: 'Длина по стельке (см)', value: insole_length },
+        { title: 'Высота каблука (см)', value: heel_height },
+        { title: 'Диаметр (см)', value: diameter },
+        { title: 'Рост модели (см)', value: model_height },
         { title: 'Стиль', value: style },
 
         { title: 'Референс номер', value: reference_number_clock },
@@ -80,22 +81,20 @@ const ProductInfoParametersSize: React.FC<ProductPage> = ({
         { title: 'Водонепроницаемость', value: waterproof_clock },
         { title: 'Фирменная коробка', value: branded_box_clock },
         { title: 'Документы', value: documents_clock },
-    ];
+    ].filter((item) => !!item.value);
 
     return (
         <div className="product-content-info-parameters">
-            <h4 className="product-content-info-parameters__title">Информация о товаре</h4>
+            <h4 className="product-content-info-parameters__title product-content-title">Информация о товаре</h4>
 
-            {parameters.map((parameter, index) =>
-                parameter.value !== null && parameter.value !== '' && parameter.value ? (
-                    <p
-                        className="product-content-info-parameters__item"
-                        key={`product-content-info-parameters__item-${index}`}
-                    >
-                        <span>{parameter.title}:</span> {parameter.value}
-                    </p>
-                ) : null,
-            )}
+            {parameters.map((parameter, index) => (
+                <ProductInfoProperty
+                    key={index}
+                    title={parameter.title}
+                    value={parameter.value}
+                    className="product-content-info-parameters__item"
+                />
+            ))}
         </div>
     );
 };

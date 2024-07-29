@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { SELECTIONS_IDS, CATEGORIES } from '@/constants/catalog';
+import { SELECTIONS_IDS, CATEGORIES, SORT } from '@/constants/catalog';
 
 import CatalogBannerImageBoutiqueMedia from '@/assets/images/catalog/catalog-banner-boutique-media.jpg';
 import CatalogBannerImagePriceDropMedia from '@/assets/images/catalog/catalog-banner-price-drop.jpg';
@@ -79,7 +79,7 @@ const CatalogBannerMedia: React.FC = () => {
                 <Link
                     href={getCatalogFiltersUrl({
                         selection: SELECTIONS_IDS.summerBags,
-                        sort: 'popular',
+                        sort: SORT.popular,
                     })}
                     className="btn-light catalog-banner-media-text__btn"
                 >
@@ -87,7 +87,7 @@ const CatalogBannerMedia: React.FC = () => {
                 </Link>
             </div>
         </div>
-    ) : sort === 'popular' ? (
+    ) : sort === SORT.popular ? (
         <div
             className="catalog-banner-media"
             style={{
@@ -120,7 +120,7 @@ const CatalogBannerMedia: React.FC = () => {
                         categories: CATEGORIES,
                         availability: ['Доступно', 'На примерке'],
                         page: 1,
-                        sort: 'popular',
+                        sort: SORT.popular,
                     })}
                     className="btn-light catalog-banner-media-text__btn"
                 >

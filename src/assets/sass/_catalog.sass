@@ -711,6 +711,7 @@
 				margin-bottom: 15px
 
 			&-slider-wrapper
+				width: 100%
 				position: relative
 
 			&-slider
@@ -743,7 +744,11 @@
 					margin-right: 0
 					margin-bottom: 0
 
-@media screen and ( max-width: 1200px )
+			&-mobile-slider
+				&__slide
+					max-width: 200px
+
++mediaTablet
 	.catalog
 		margin: 15px 0 30px
 
@@ -843,9 +848,18 @@
 				margin: 25px 0
 
 				&__title
-					font-size: 17px
+					+ManropeExtraBold
+					font-size: 16px
+					line-height: 19.2px
+					text-align: left
+					margin-bottom: 12px
 
 				&-slider
+					&-wrapper
+						width: calc(100% + 32px)
+						margin-left: -16px
+						margin-right: -16px
+
 					&-arrow
 						&.prev
 							left: -5px

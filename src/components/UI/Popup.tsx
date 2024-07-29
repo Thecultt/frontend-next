@@ -1,9 +1,10 @@
 import React from 'react';
-// import { createPortal } from 'react-dom';
+import { createPortal } from 'react-dom';
 
 import { getClassNames } from '@/functions/getClassNames';
+import NoSsr from '@/components/NoSsr/NoSsr';
 
-interface PopupProps {
+interface Props {
     state: boolean;
     setState?: () => void;
 
@@ -11,9 +12,11 @@ interface PopupProps {
     setStateContent?: () => void;
 
     children: React.ReactNode;
+
+    center?: boolean;
 }
 
-const Popup: React.FC<PopupProps> = ({ state, setState, stateContent, children }) => {
+const PopupContent: React.FC<Props> = ({ state, setState, stateContent, children, center = false }) => {
     const PopupRefWrapper = React.useRef<HTMLDivElement>(null);
     const PopupRef = React.useRef<HTMLDivElement>(null);
 
@@ -43,12 +46,11 @@ const Popup: React.FC<PopupProps> = ({ state, setState, stateContent, children }
         }
     };
 
-    // TODO Portal
-
-    return (
+    return createPortal(
         <div
             className={getClassNames('popup', {
                 active: state,
+                'popup--center': center,
             })}
             ref={PopupRefWrapper}
         >
@@ -83,8 +85,15 @@ const Popup: React.FC<PopupProps> = ({ state, setState, stateContent, children }
 
                 {children}
             </div>
-        </div>
+        </div>,
+        document.body,
     );
 };
+
+const Popup: React.FC<Props> = (props) => (
+    <NoSsr>
+        <PopupContent {...props} />
+    </NoSsr>
+);
 
 export default Popup;
