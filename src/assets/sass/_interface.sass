@@ -95,6 +95,10 @@ input[type="file"]
 		background-color: $lightBackgroundColor
 		border: 1px solid $gray
 
+	&.white
+		background-color: $white
+		border: none
+
 	&.error
 		border: 1px solid $red
 
@@ -227,6 +231,10 @@ input[type="file"]
 		background-color: $lightBackgroundColor
 		border: 1px solid $gray
 
+	&.white &__field
+		background-color: $white
+		border: none
+
 	&__field
 		resize: none
 		width: 100%
@@ -272,6 +280,10 @@ button
 	&.loader
 		height: 53px
 
+	&.black
+		color: $white
+		background-color: $black
+
 	& > svg
 		margin-left: 10px
 
@@ -284,7 +296,7 @@ button
 	display: inline-flex
 	align-items: center
 	justify-content: center
-	border: .5px solid $gray
+	border: none
 	background-color: $lightBackgroundColor
 	border-radius: 12px
 	color: $black

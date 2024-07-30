@@ -8,11 +8,12 @@ interface RenderTextareaProps extends WrappedFieldProps {
     bgWhite?: boolean;
 }
 
-const RenderTextarea: React.FC<RenderTextareaProps> = ({ label, input, meta: { touched, error }, bgWhite }) => {
+const RenderTextarea: React.FC<RenderTextareaProps> = ({ label, input, meta: { touched, error }, bgWhite, white }) => {
     return (
         <div
             className={getClassNames('textarea', {
                 bgWhite: !!bgWhite,
+                white: !!white,
             })}
         >
             <textarea {...input} className="textarea__field" placeholder={label} />

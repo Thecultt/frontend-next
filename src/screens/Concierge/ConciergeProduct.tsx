@@ -6,46 +6,44 @@ import { useParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import {
-    fetchBuyerTheCulttProduct,
-    sendBuyerTheCulttProductApplication,
-    setBuyerTheCulttProductIsSendFormProductPage,
-} from '@/redux/actions/buyer_thecultt';
+    fetchConciergeProduct,
+    sendConciergeProductApplication,
+    setConciergeProductIsSendFormProductPage,
+} from '@/redux/actions/concierge';
 import { ConciergeProductInfo, ConciergeProductForm, PageLoader, Popup } from '@/components';
 
-const BuyerTheCulttProduct: React.FC = () => {
+const ConciergeProduct: React.FC = () => {
     const dispatch = useDispatch();
 
     const { id } = useParams();
 
-    const { isLoadedProduct, product, isSendFormProductPageSuccess } = useTypedSelector(
-        ({ buyer_thecultt }) => buyer_thecultt,
-    );
+    const { isLoadedProduct, product, isSendFormProductPageSuccess } = useTypedSelector(({ concierge }) => concierge);
 
     React.useEffect(() => {
-        dispatch(fetchBuyerTheCulttProduct(id as string) as any);
+        dispatch(fetchConciergeProduct(id as string) as any);
     }, []);
 
     const onSubmitProductApplication = (data: any) => {
-        dispatch(sendBuyerTheCulttProductApplication(data, parseInt(id as string)) as any);
+        dispatch(sendConciergeProductApplication(data, parseInt(id as string)) as any);
     };
 
     return (
-        <section className="buyer-thecultt-product">
+        <section className="concierge-product">
             <Popup
                 state={isSendFormProductPageSuccess}
-                setState={() => dispatch(setBuyerTheCulttProductIsSendFormProductPage(false))}
+                setState={() => dispatch(setConciergeProductIsSendFormProductPage(false))}
             >
-                <div className="buyer-thecultt-product-success">
-                    <h4 className="buyer-thecultt-product-success__title">Спасибо! Ваша заявка принята</h4>
-                    <p className="buyer-thecultt-product-success__subtitle">
+                <div className="concierge-product-success">
+                    <h4 className="concierge-product-success__title">Спасибо! Ваша заявка принята</h4>
+                    <p className="concierge-product-success__subtitle">
                         Скоро мы свяжемся с вами в WhatsApp <br /> по указанному номеру телефона.
                     </p>
                 </div>
             </Popup>
 
             <div className="container">
-                <div className="buyer-thecultt-product-wrapper">
-                    <button className="buyer-thecultt-product__back" onClick={() => window.history.back()}>
+                <div className="concierge-product-wrapper">
+                    <button className="concierge-product__back" onClick={() => window.history.back()}>
                         <svg width="8" height="15" viewBox="0 0 8 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M7 1.5L1 7.5L7 13.5"
@@ -63,6 +61,18 @@ const BuyerTheCulttProduct: React.FC = () => {
                             <ConciergeProductInfo {...product} />
 
                             <ConciergeProductForm onSubmit={onSubmitProductApplication} />
+
+                            <div className="concierge-product-buyer-media">
+                                <h3 className="concierge-product-buyer-media__title">Товар частного продавца.</h3>
+
+                                <p className="concierge-product-buyer-media__subtitle">
+                                    Цена примерная, актуальную стоимость уточняйте у менеджера.
+                                </p>
+
+                                <p className="concierge-product-buyer-media__notoffer">
+                                    *предложение не является публичной офертой.
+                                </p>
+                            </div>
                         </>
                     ) : (
                         <PageLoader />
@@ -73,4 +83,4 @@ const BuyerTheCulttProduct: React.FC = () => {
     );
 };
 
-export default BuyerTheCulttProduct;
+export default ConciergeProduct;
