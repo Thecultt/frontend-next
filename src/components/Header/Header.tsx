@@ -377,7 +377,7 @@ const Header: React.FC = () => {
                                         <Link
                                             href={getCatalogFiltersUrl({
                                                 selection: SELECTIONS_IDS.summerBags,
-                                                sort: 'popular',
+                                                sort: SORT.popular,
                                             })}
                                             className="header-menu__link"
                                             onMouseOver={() => setIsSelectionsMenuVisible(true)}
@@ -393,7 +393,7 @@ const Header: React.FC = () => {
                                                     categories: [category.title],
                                                     availability: ['Доступно', 'На примерке', 'Нет в наличии'],
                                                     page: 1,
-                                                    sort: SORT.a,
+                                                    sort: SORT.shuffle,
                                                 })}
                                                 className="header-menu__link"
                                                 key={`header-menu__link-${index}`}
@@ -428,7 +428,7 @@ const Header: React.FC = () => {
                                                 categories: CATEGORIES,
                                                 availability: ['Доступно', 'На примерке'],
                                                 page: 1,
-                                                sort: 'popular',
+                                                sort: SORT.popular,
                                             })}
                                             className="header-menu__link"
                                         >

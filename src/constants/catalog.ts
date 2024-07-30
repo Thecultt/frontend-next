@@ -14,7 +14,31 @@ export const SORT: Record<SortType, SortType> = {
     price: 'price',
     '-price': '-price',
     popular: 'popular',
+    shuffle: 'shuffle',
 };
+
+export const SORT_TITLES: { type: SortType; title: string }[] = [
+    {
+        type: SORT.shuffle,
+        title: 'умолчанию',
+    },
+    {
+        type: SORT.a,
+        title: 'новизне',
+    },
+    {
+        type: SORT.price,
+        title: 'возрастанию цены',
+    },
+    {
+        type: SORT['-price'],
+        title: 'убыванию цены',
+    },
+    {
+        type: SORT.popular,
+        title: 'популярности',
+    },
+];
 
 export const SELECTIONS_IDS = {
     summerBags: 4,

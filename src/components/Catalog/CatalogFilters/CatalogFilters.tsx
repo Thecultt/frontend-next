@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import qs from 'qs';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { ProductsStateFilters } from '@/redux/types/IProducts';
+import { ProductsStateFilters, SortType } from '@/redux/types/IProducts';
 import {
     setFiltersCatalog,
     setFiltersCategoriesProduct,
@@ -90,7 +90,7 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
 
                 glass_frame: {},
 
-                sort: query.get('sort') ?? SORT.a,
+                sort: (query.get('sort') as SortType) ?? SORT.shuffle,
             };
 
             query.getAll('conditions').map((condition) => {
