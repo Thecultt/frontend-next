@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { getClassNames } from '@/functions/getClassNames';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { APP_ROUTE } from '@/constants/routes';
+import { SORT } from '@/constants/catalog';
 
 import { HeaderHoverMenuCategory } from '../Header';
 import './styles.sass';
@@ -52,7 +53,7 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
                                                 href={getCatalogFiltersUrl({
                                                     categories: [title],
                                                     types: [type],
-                                                    sort: 'a',
+                                                    sort: SORT.a,
                                                 })}
                                                 className="header-hover-menu-list-coll__item"
                                                 key={`header-hover-menu-list-coll__item-${type}-${index}`}
@@ -67,7 +68,7 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
                                         onClick={onClose}
                                         href={getCatalogFiltersUrl({
                                             categories: [title],
-                                            sort: 'a',
+                                            sort: SORT.a,
                                         })}
                                         className="header-hover-menu-list-coll__item last"
                                     >
@@ -79,7 +80,7 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
                                         href={getCatalogFiltersUrl({
                                             categories: [title],
                                             boutique: true,
-                                            sort: 'a',
+                                            sort: SORT.a,
                                         })}
                                         className="header-hover-menu-list-boutique"
                                     >
@@ -104,7 +105,7 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
                                                 href={getCatalogFiltersUrl({
                                                     categories: [title],
                                                     brands: [brand],
-                                                    sort: 'a',
+                                                    sort: SORT.a,
                                                 })}
                                                 className="header-hover-menu-list-coll__item"
                                                 key={`header-hover-menu-list-coll__item-${brand}-${index}`}
@@ -123,7 +124,7 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
                                                 href={getCatalogFiltersUrl({
                                                     categories: [title],
                                                     brands: [brand],
-                                                    sort: 'a',
+                                                    sort: SORT.a,
                                                 })}
                                                 className="header-hover-menu-list-coll__item"
                                                 key={`header-hover-menu-list-coll__item-${brand}-${index}`}

@@ -4,8 +4,9 @@ import $api from '@/http';
 import { Product, ProductPage } from '@/models/IProduct';
 import { SORT } from '@/constants/catalog';
 import { sendMindbox } from '@/functions/mindbox';
+import { pushDataLayer } from '@/functions/pushDataLayer';
 
-import { CatalogFetchType, ProductActionTypes, ProductTypes, ProductsStateFilters } from '../types/IProducts';
+import { CatalogFetchType, ProductActionTypes, ProductTypes, ProductsStateFilters, SortType } from '../types/IProducts';
 
 export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<ProductTypes>) => {
     const {
@@ -18,26 +19,21 @@ export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<Product
     }>(`/catalog?availability=1&sort_by=${SORT.a}`);
 
     // Measure product views / impressions
-    window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.
-    window?.dataLayer?.push({
-        event: 'view_item_list',
-        ecommerce: {
-            timestamp: Math.floor(Date.now() / 1000),
-            items: items.map((item, index) => ({
-                item_name: item.name,
-                item_id: `${item.article}`,
-                price: `${item.price}`,
-                item_brand: item.manufacturer,
-                item_category: item.category,
-                item_category2: item.subcategory,
-                item_category3: '-',
-                item_category4: '-',
-                item_list_name: 'Search Results',
-                item_list_id: item.article,
-                index,
-                quantity: 1,
-            })),
-        },
+    pushDataLayer('view_item_list', {
+        items: items.map((item, index) => ({
+            item_name: item.name,
+            item_id: `${item.article}`,
+            price: `${item.price}`,
+            item_brand: item.manufacturer,
+            item_category: item.category,
+            item_category2: item.subcategory,
+            item_category3: '-',
+            item_category4: '-',
+            item_list_name: 'Search Results',
+            item_list_id: item.article,
+            index,
+            quantity: 1,
+        })),
     });
 
     dispatch({
@@ -82,7 +78,7 @@ export const fetchProductsCatalog =
             boutique: boolean;
             price_drop: boolean;
 
-            sort: string;
+            sort: SortType;
         },
         page: number,
         typeFetch: CatalogFetchType,
@@ -158,7 +154,7 @@ export const fetchProductsCatalog =
             params.append('selections', filters.selection);
         }
 
-        params.append('sort_by', filters.sort ?? SORT.a);
+        params.append('sort_by', filters.sort ?? SORT.shuffle);
 
         params.append('page', String(page));
 
@@ -172,26 +168,21 @@ export const fetchProductsCatalog =
         }>(`/catalog`, { params: params });
 
         // Measure product views / impressions
-        window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.
-        window?.dataLayer?.push({
-            event: 'view_item_list',
-            ecommerce: {
-                timestamp: Math.floor(Date.now() / 1000),
-                items: items.map((item, index) => ({
-                    item_name: item.name,
-                    item_id: `${item.article}`,
-                    price: `${item.price}`,
-                    item_brand: item.manufacturer,
-                    item_category: item.category,
-                    item_category2: item.subcategory,
-                    item_category3: '-',
-                    item_category4: '-',
-                    item_list_name: 'Search Results',
-                    item_list_id: item.article,
-                    index,
-                    quantity: 1,
-                })),
-            },
+        pushDataLayer('view_item_list', {
+            items: items.map((item, index) => ({
+                item_name: item.name,
+                item_id: `${item.article}`,
+                price: `${item.price}`,
+                item_brand: item.manufacturer,
+                item_category: item.category,
+                item_category2: item.subcategory,
+                item_category3: '-',
+                item_category4: '-',
+                item_list_name: 'Search Results',
+                item_list_id: item.article,
+                index,
+                quantity: 1,
+            })),
         });
 
         dispatch({
@@ -246,28 +237,23 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
                 .get<{ items: Product[] }>(`/product/${article}/similar`)
                 .then(({ data }) => data.items);
 
-            window?.dataLayer?.push({ ecommerce: null });
-            window?.dataLayer?.push({
-                event: 'view_item',
-                ecommerce: {
-                    timestamp: Math.floor(Date.now() / 1000),
-                    items: [
-                        {
-                            item_name: data.name,
-                            item_id: `${data.article}`,
-                            price: `${data.price}`,
-                            item_brand: data.manufacturer,
-                            item_category: data.category,
-                            item_category2: data.subcategory,
-                            item_category3: '-',
-                            item_category4: '-',
-                            item_list_name: 'Search Results',
-                            item_list_id: data.article,
-                            index: 1,
-                            quantity: 1,
-                        },
-                    ],
-                },
+            pushDataLayer('view_item', {
+                items: [
+                    {
+                        item_name: data.name,
+                        item_id: `${data.article}`,
+                        price: `${data.price}`,
+                        item_brand: data.manufacturer,
+                        item_category: data.category,
+                        item_category2: data.subcategory,
+                        item_category3: '-',
+                        item_category4: '-',
+                        item_list_name: 'Search Results',
+                        item_list_id: data.article,
+                        index: 1,
+                        quantity: 1,
+                    },
+                ],
             });
 
             try {
@@ -402,7 +388,7 @@ export const setFiltersPriceDropProduct = (price_drop: boolean) => ({
     payload: price_drop,
 });
 
-export const setFiltersSortProduct = (sort: string) => ({
+export const setFiltersSortProduct = (sort: SortType) => ({
     type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SORT,
     payload: sort,
 });
