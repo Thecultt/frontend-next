@@ -1,65 +1,41 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
-
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { useAuthUser } from '@/hooks/useAuthUser';
-import { Loader, RenderInput } from '@/components';
-import { getClassNames } from '@/functions/getClassNames';
 import { CONTACTS } from '@/constants/contacts';
 
-import { validate } from './validate';
+import { RenderInput, RenderTextarea } from '@/components';
 
-const ConciergeProductForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
+const ConciergeMainApplicationForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
     initialize,
     invalid,
+    pristine,
     submitting,
 }) => {
-    const { isSendFormProductPage } = useTypedSelector(({ concierge }) => concierge);
-
-    const { isLoaded, user } = useAuthUser();
-
-    React.useEffect(() => {
-        if (isLoaded) {
-            initialize({ ...user, fio: `${user.fullname}` });
-        }
-    }, [isLoaded]);
-
     return (
-        <form className="concierge-product-form" onSubmit={handleSubmit}>
-            <h2 className="concierge-product-form__title">Оформить заявку на изделие</h2>
+        <form className="concierge-application-form">
+            <h3 className="concierge-application-form__title">
+                Нет нужного лота? <br /> Закажите его через нас
+            </h3>
 
-            <p className="concierge-product-form__description">
-                Отправьте заявку на нужное изделие, и в течение суток мы вернемся к вам с информацией о доступности
-                модели, стоимостью и сроками доставки.
-            </p>
-
-            <div className="concierge-product-form-input">
-                <Field component={RenderInput} label="ФИО" name="fio" type="text" white />
+            <div className="concierge-application-form-input">
+                <Field component={RenderInput} label="Имя" name="name" type="text" white />
             </div>
 
-            <div className="concierge-product-form-input">
-                <Field component={RenderInput} label="Номер телефона" name="phone" type="text" white />
+            <div className="concierge-application-form-input">
+                <Field component={RenderInput} label="Контактный номер телефона" name="phone" type="text" white />
             </div>
 
-            <div className="concierge-product-form-input">
-                <Field component={RenderInput} label="Email" name="email" type="text" white />
+            <div className="concierge-application-form-input">
+                <Field component={RenderTextarea} label="Комментарий" name="message" type="text" white />
             </div>
 
-            <div className="concierge-product-form-btn">
-                <button
-                    className={getClassNames('btn black concierge-product-form-btn__btn', {
-                        loader: isSendFormProductPage,
-                    })}
-                    disabled={isSendFormProductPage || invalid || submitting}
-                >
-                    {isSendFormProductPage ? <Loader /> : 'Отправить заявку'}
-                </button>
+            <div className="concierge-application-form-btn">
+                <button className="btn concierge-application-form-btn__btn">Отправить заявку</button>
 
                 <a
                     href={CONTACTS.whatsappLinkConcierge}
                     target="__blank"
-                    className="concierge-product-form-btn__social"
+                    className="concierge-application-form-btn__social"
                 >
                     <svg viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="4.48303" y="4.14844" width="48" height="48" rx="24" fill="#F2F5F4" />
@@ -70,7 +46,7 @@ const ConciergeProductForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                     </svg>
                 </a>
 
-                <a href={CONTACTS.tgHelp} target="__blank" className="concierge-product-form-btn__social">
+                <a href={CONTACTS.tgHelp} target="__blank" className="concierge-application-form-btn__social">
                     <svg viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="4.48303" y="4.14844" width="48" height="48" rx="24" fill="#F2F5F4" />
                         <path
@@ -85,6 +61,6 @@ const ConciergeProductForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 };
 
 export default reduxForm<{}, {}>({
-    form: 'concierge-product-form',
-    validate,
-})(ConciergeProductForm);
+    form: 'concierge-form',
+    // validate,
+})(ConciergeMainApplicationForm);

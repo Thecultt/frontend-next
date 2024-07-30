@@ -9,21 +9,21 @@ import { APP_ROUTE } from '@/constants/routes';
 
 import validate from './validate';
 
-const ConciergeFormBottom: React.FC<{} & InjectedFormProps<{}, {}>> = ({
+const VipServiceFormBottom: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
     invalid,
     pristine,
     submitting,
 }) => {
-    const { isSending } = useTypedSelector(({ concierge }) => concierge);
+    const { isSending } = useTypedSelector(({ vipservice }) => vipservice);
 
     return (
-        <form className="concierge-form" onSubmit={handleSubmit}>
-            <div className="concierge-form-content">
-                <h2 className="concierge-form-content__title">Закажите VIP-сервис в один клик</h2>
+        <form className="vipservice-form" onSubmit={handleSubmit}>
+            <div className="vipservice-form-content">
+                <h2 className="vipservice-form-content__title">Закажите VIP-сервис в один клик</h2>
 
-                <div className="concierge-form-content-input-wrapper">
-                    <div className="concierge-form-content-input">
+                <div className="vipservice-form-content-input-wrapper">
+                    <div className="vipservice-form-content-input">
                         <Field
                             component={RenderInput}
                             label="Ваш телефон"
@@ -36,24 +36,24 @@ const ConciergeFormBottom: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                             // })}
                         />
                     </div>
-                    <div className="concierge-form-content-input">
+                    <div className="vipservice-form-content-input">
                         <Field component={RenderInput} label="Ваше имя" name="name" type="text" />
                     </div>
                 </div>
 
-                <p className="concierge-form-content__description">
+                <p className="vipservice-form-content__description">
                     Нажимая на кнопку, вы принимаете условия{' '}
                     <Link href={APP_ROUTE.help.userAgreement}>пользовательского соглашения</Link> и{' '}
                     <Link href={APP_ROUTE.help.publicOffer}>публичной оферты</Link>.
                 </p>
 
                 {isSending ? (
-                    <button className="btn disabled loader concierge-form-content__btn" disabled>
+                    <button className="btn disabled loader vipservice-form-content__btn" disabled>
                         <Loader />
                     </button>
                 ) : (
                     <button
-                        className={getClassNames('btn concierge-form-content__btn', {
+                        className={getClassNames('btn vipservice-form-content__btn', {
                             disabled: invalid || submitting || pristine,
                         })}
                         disabled={invalid || submitting || pristine}
@@ -67,6 +67,6 @@ const ConciergeFormBottom: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 };
 
 export default reduxForm<{}, {}>({
-    form: 'concierge-form-bottom',
+    form: 'vipservice-form-bottom',
     validate,
-})(ConciergeFormBottom);
+})(VipServiceFormBottom);

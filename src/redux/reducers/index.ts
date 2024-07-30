@@ -16,11 +16,11 @@ import user from './user';
 import brands from './brands';
 import recovery_password from './recovery_password';
 import history_orders from './history_orders';
-import concierge from './concierge';
+import vipservice from './vipservice';
 import subscribe_email from './subscribe_email';
 import public_favorites from './public_favorites';
 import notifications_server from './notifications_server';
-import buyer_thecultt from './buyer_thecultt';
+import concierge from './concierge';
 import selections from './selections';
 
 export const rootReducer = combineReducers({
@@ -40,11 +40,11 @@ export const rootReducer = combineReducers({
     brands,
     recovery_password,
     history_orders,
-    concierge,
+    vipservice,
     subscribe_email,
     public_favorites,
     notifications_server,
-    buyer_thecultt,
+    concierge,
     selections,
 });
 
