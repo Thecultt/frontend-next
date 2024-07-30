@@ -16,7 +16,7 @@ import {
     ProductInfoTitleSale,
 } from '@/components';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { CATEGORY_NAMES } from '@/constants/catalog';
+import { CATEGORY_NAMES, SORT } from '@/constants/catalog';
 import { useWaitingData } from '@/hooks/catalog/useWaitingData';
 import { WaitingPopupType } from '@/types/waiting';
 import { useHash } from '@/hooks/useHash';
@@ -122,7 +122,7 @@ const ProductInfoTitle: React.FC<Props> = ({ product, setBoutiquePopupVisible, s
                     href={getCatalogFiltersUrl({
                         categories: [category],
                         brands: [manufacturer],
-                        sort: 'a',
+                        sort: SORT.a,
                     })}
                     className="product-content-info-title__brand"
                 >

@@ -6,6 +6,7 @@ import { useMediaQuery } from 'usehooks-ts';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { APP_ROUTE } from '@/constants/routes';
 import { MEDIA_SIZES } from '@/constants/styles';
+import { SORT } from '@/constants/catalog';
 
 interface ProductInfoBreadCrumbsProps {
     category: string;
@@ -68,7 +69,7 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
                     <Link
                         href={getCatalogFiltersUrl({
                             categories: [category],
-                            sort: 'a',
+                            sort: SORT.a,
                         })}
                         className="product-content-info-bread-crumbs__item"
                     >
@@ -88,7 +89,7 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
                         href={getCatalogFiltersUrl({
                             categories: [category],
                             brands: [brand],
-                            sort: 'a',
+                            sort: SORT.a,
                         })}
                         className="product-content-info-bread-crumbs__item"
                     >
@@ -109,7 +110,7 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
                             categories: [category],
                             brands: [brand],
                             models: [model],
-                            sort: 'a',
+                            sort: SORT.a,
                         })}
                         className="product-content-info-bread-crumbs__item"
                     >

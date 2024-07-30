@@ -49,7 +49,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                         categories: CATEGORIES,
                         availability: ['Доступно', 'На примерке'],
                         page: 1,
-                        sort: 'popular',
+                        sort: SORT.popular,
                     })}
                     onClick={toggleVisible}
                     className="header-media-modal-menu-banner"
@@ -128,7 +128,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                                 categories: [category.title],
                                 availability: CATEGORIES,
                                 page: 1,
-                                sort: SORT.a,
+                                sort: SORT.shuffle,
                             })}
                             key={`header-media-modal-menu-links-tab${index}`}
                         >
@@ -140,7 +140,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                                             types: [subsubcategory],
                                             availability: ['Доступно', 'На примерке', 'Нет в наличии'],
                                             page: 1,
-                                            sort: 'a',
+                                            sort: SORT.a,
                                         })}
                                         className="header-media-modal-menu-links__link"
                                         key={`header-media-modal-menu-links__link-${category}-${subsubcategory}-${subindex}`}
@@ -156,7 +156,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                                         categories: [category.title],
                                         availability: ['Доступно', 'На примерке', 'Нет в наличии'],
                                         page: 1,
-                                        sort: 'a',
+                                        sort: SORT.a,
                                     })}
                                     className="header-media-modal-menu-links__link"
                                     onClick={toggleVisible}
@@ -171,7 +171,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                                     boutique: true,
                                     categories: [category.title],
                                     page: 1,
-                                    sort: 'a',
+                                    sort: SORT.a,
                                 })}
                                 className="header-media-modal-menu-links-boutique"
                             >
@@ -211,7 +211,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                             categories: CATEGORIES,
                             availability: ['Доступно', 'На примерке'],
                             page: 1,
-                            sort: 'popular',
+                            sort: SORT.popular,
                         })}
                         className="header-media-modal-menu-links-link"
                         onClick={toggleVisible}

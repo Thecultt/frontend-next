@@ -4,12 +4,11 @@ import { useSearchParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { SELECTIONS_IDS, CATEGORIES } from '@/constants/catalog';
+import { SELECTIONS_IDS, CATEGORIES, SORT } from '@/constants/catalog';
 
 import CatalogBannerImagePriceDrop from '@/assets/images/catalog/catalog-banner-price-drop.jpg';
 import CatalogBannerImagePriceDrop2 from '@/assets/images/catalog/catalog-banner-price-drop2.jpg';
 import CatalogBannerImageBoutique from '@/assets/images/catalog/catalog-banner-boutique.jpg';
-import CatalogBannerImageItbag from '@/assets/images/catalog/catalog-banner-price-itbag.jpg';
 import CatalogBannerImagePopular from '@/assets/images/catalog/catalog-banner-popular.jpg';
 
 const CatalogBanner: React.FC = React.memo(() => {
@@ -84,7 +83,7 @@ const CatalogBanner: React.FC = React.memo(() => {
                 <Link
                     href={getCatalogFiltersUrl({
                         selection: SELECTIONS_IDS.summerBags,
-                        sort: 'popular',
+                        sort: SORT.popular,
                     })}
                     className="btn catalog-banner-text__btn"
                 >
@@ -92,7 +91,7 @@ const CatalogBanner: React.FC = React.memo(() => {
                 </Link>
             </div>
         </div>
-    ) : sort === 'popular' ? (
+    ) : sort === SORT.popular ? (
         <div className="catalog-banner">
             <div
                 className="catalog-banner-image"
@@ -127,7 +126,7 @@ const CatalogBanner: React.FC = React.memo(() => {
                         categories: CATEGORIES,
                         availability: ['Доступно', 'На примерке'],
                         page: 1,
-                        sort: 'popular',
+                        sort: SORT.popular,
                     })}
                     className="btn catalog-banner-text__btn"
                 >
