@@ -1,4 +1,4 @@
-export interface BuyerTheCulttProduct {
+export interface ConciergeProduct {
     id: number;
     title: string;
     price: string;
@@ -7,7 +7,7 @@ export interface BuyerTheCulttProduct {
     brand: string;
 }
 
-export interface BuyerTheCulttCategory {
-    products: BuyerTheCulttProduct[];
+export interface ConciergeCategory {
+    products: ConciergeProduct[];
     brands: string[];
 }

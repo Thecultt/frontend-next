@@ -249,7 +249,7 @@ const Faq: React.FC = () => (
                             />
                         </svg>
                     </a>
-                    <a href="https://t.me/thecultthelp" className="contact-block hover-scale">
+                    <a href={CONTACTS.tgHelp} className="contact-block hover-scale">
                         <div className="contact-block-content">
                             <div className="contact-block-content-icon">
                                 <svg

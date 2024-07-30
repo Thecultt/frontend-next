@@ -5,88 +5,75 @@ import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import {
-    fetchBuyerTheCulttCategories,
-    sendBuyerTheCulttProductCustomApplication,
-    setBuyerTheCulttProductIsSendFormCustomProduct,
-} from '@/redux/actions/buyer_thecultt';
+    fetchConciergeCategories,
+    sendConciergeProductCustomApplication,
+    setConciergeProductIsSendFormCustomProduct,
+} from '@/redux/actions/concierge';
 import {
     ConciergeMainBanner,
-    ConciergeMainSteps,
-    ConciergeMainCategory,
-    ConciergeMainFaq,
-    ConciergeMainCustomForm,
-    PageLoader,
+    ConciergeMainCatalog,
+    ConciergeMainService,
+    ConciergeMainApplication,
     Popup,
 } from '@/components';
+
 import NoSsr from '@/components/NoSsr/NoSsr';
 
-const BuyerTheCulttMain: React.FC = () => {
+const ConciergeMain: React.FC = () => {
     const dispatch = useDispatch();
 
     const [isOpenCustomForm, setIsOpenCustomForm] = React.useState<boolean>(false);
 
-    const { isLoadedCategories, categories, isSendFormCustomProductSuccess } = useTypedSelector(
-        ({ buyer_thecultt }) => buyer_thecultt,
-    );
+    const { isSendFormCustomProductSuccess } = useTypedSelector(({ concierge }) => concierge);
 
     React.useEffect(() => {
-        dispatch(fetchBuyerTheCulttCategories() as any);
+        dispatch(fetchConciergeCategories() as any);
     }, []);
 
-    const onSubmitProductCustomApplication = (data: any) => {
-        dispatch(sendBuyerTheCulttProductCustomApplication(data) as any);
+    // const onSubmitProductCustomApplication = (data: any) => {
+    // 	dispatch(sendConciergeProductCustomApplication(data) as any);
 
-        setIsOpenCustomForm(false);
-    };
+    // 	setIsOpenCustomForm(false);
+    // };
 
-    const onClickOpenCustomForm = () => {
-        setIsOpenCustomForm(true);
+    // const onClickOpenCustomForm = () => {
+    // 	setIsOpenCustomForm(true);
+    // };
+
+    const scrollToForm = () => {
+        const block = document.getElementById('concierge-application');
+        block?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
 
     return (
-        <section className="buyer-thecultt">
-            <Popup state={isOpenCustomForm} setState={() => setIsOpenCustomForm(false)}>
-                <ConciergeMainCustomForm onSubmit={onSubmitProductCustomApplication} />
-            </Popup>
-
+        <section className="concierge">
             <Popup
                 state={isSendFormCustomProductSuccess}
-                setState={() => dispatch(setBuyerTheCulttProductIsSendFormCustomProduct(false))}
+                setState={() => dispatch(setConciergeProductIsSendFormCustomProduct(false))}
             >
-                <div className="buyer-thecultt-product-success">
-                    <h4 className="buyer-thecultt-product-success__title">Спасибо! Ваша заявка принята</h4>
-                    <p className="buyer-thecultt-product-success__subtitle">
+                <div className="concierge-product-success">
+                    <h4 className="concierge-product-success__title">Спасибо! Ваша заявка принята</h4>
+                    <p className="concierge-product-success__subtitle">
                         Скоро мы свяжемся с вами в WhatsApp <br /> по указанному номеру телефона.
                     </p>
                 </div>
             </Popup>
 
             <div className="container">
-                <div className="buyer-thecultt-wrapper">
+                <div className="concierge-wrapper">
                     <NoSsr>
-                        <ConciergeMainBanner onClickOpenCustomForm={onClickOpenCustomForm} />
+                        <ConciergeMainBanner scrollToForm={scrollToForm} />
                     </NoSsr>
 
-                    <ConciergeMainSteps />
+                    <ConciergeMainCatalog scrollToForm={scrollToForm} />
 
-                    {isLoadedCategories ? (
-                        Object.keys(categories).map((category, index) => (
-                            <ConciergeMainCategory
-                                title={category}
-                                {...categories[category]}
-                                key={`buyer-thecultt-category-${category}-${index}`}
-                                onClickOpenCustomForm={onClickOpenCustomForm}
-                            />
-                        ))
-                    ) : (
-                        <PageLoader />
-                    )}
+                    <ConciergeMainService />
 
-                    <ConciergeMainFaq />
+                    <ConciergeMainApplication />
                 </div>
             </div>
         </section>
     );
 };
 
-export default BuyerTheCulttMain;
+export default ConciergeMain;
