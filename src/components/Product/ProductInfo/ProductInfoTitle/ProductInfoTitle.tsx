@@ -113,72 +113,72 @@ const ProductInfoTitle: React.FC<Props> = ({ product, setBoutiquePopupVisible, s
     };
 
     return (
-        <>
-            <div className="product-content-info-title">
+        <div className="product-content-info-title">
+            <div className="product-content-info-title__vendor-model">
                 <p className="product-content-info-title__vendor">Артикул: {article}</p>
                 <h1 className="product-content-info-title__model">{name}</h1>
+            </div>
 
-                <Link
-                    href={getCatalogFiltersUrl({
-                        categories: [category],
-                        brands: [manufacturer],
-                        sort: SORT.a,
-                    })}
-                    className="product-content-info-title__brand"
-                >
-                    {manufacturer}
-                </Link>
+            <Link
+                href={getCatalogFiltersUrl({
+                    categories: [category],
+                    brands: [manufacturer],
+                    sort: SORT.a,
+                })}
+                className="product-content-info-title__brand"
+            >
+                {manufacturer}
+            </Link>
 
+            {!isMobile && (
                 <div className="product-content-info-title-badges">
                     {from_boutique && <ProductInfoTitleBoutique onClick={() => setBoutiquePopupVisible(true)} />}
                     {from_parnter && <ProductInfoTitlePartner onClick={() => setPartnerPopupVisible(true)} />}
                     {price_drop && <ProductInfoTitleSale />}
                 </div>
+            )}
 
+            {canBuy && isMobile && (
+                <p className="product-content-info-title__condition">
+                    Состояние: <span className="product-content-info-title__condition-value">{condition}</span>
+                </p>
+            )}
+
+            {!canBuy && (
+                <p className="product-content-info-title__notavailable">{is_trial ? 'На примерке' : 'Нет в наличии'}</p>
+            )}
+
+            <div
+                className={getClassNames('product-content-info-title-price', {
+                    'product-content-info-title-price--disabled': !canBuy,
+                })}
+            >
+                <h3 className="product-content-info-title-price__price">{formatMoney(price)}</h3>
+                {old_price && <p className="product-content-info-title-price__oldprice">{formatMoney(old_price)}</p>}
+            </div>
+
+            {price <= YANDEX_SPLIT_LIMIT && <ProductInfoTitleSplit price={price} disabled={!canBuy} />}
+
+            <div className="product-content-info-title-btn">
                 {canBuy ? (
-                    <>
-                        {isMobile && (
-                            <p className="product-content-info-title__condition">
-                                Состояние:{' '}
-                                <span className="product-content-info-title__condition-value">{condition}</span>
-                            </p>
-                        )}
-
-                        <div className="product-content-info-title-price">
-                            <h3 className="product-content-info-title-price__price">{formatMoney(price)}</h3>
-
-                            {old_price && (
-                                <p className="product-content-info-title-price__oldprice">{formatMoney(old_price)}</p>
-                            )}
-                        </div>
-
-                        {price <= YANDEX_SPLIT_LIMIT && <ProductInfoTitleSplit price={price} />}
-                    </>
+                    <button
+                        type="button"
+                        className={getClassNames('btn product-content-info-title-btn__btn add', {
+                            'in-cart': inCart,
+                        })}
+                        onClick={addToCart}
+                    >
+                        {inCart ? 'Перейти в корзину' : isMobile ? 'В корзину' : 'Добавить в корзину'}
+                    </button>
                 ) : (
-                    <p className="product-content-info-title__notavailable">{is_trial ? 'На примерке' : 'Продано'}</p>
+                    <button className="btn product-content-info-title-btn__btn subscribe" onClick={subscribeGood}>
+                        Подписаться на модель
+                    </button>
                 )}
 
-                <div className="product-content-info-title-btn">
-                    {canBuy ? (
-                        <button
-                            type="button"
-                            className={getClassNames('btn product-content-info-title-btn__btn add', {
-                                'in-cart': inCart,
-                            })}
-                            onClick={addToCart}
-                        >
-                            {inCart ? 'Перейти в корзину' : isMobile ? 'В корзину' : 'Добавить в корзину'}
-                        </button>
-                    ) : (
-                        <button className="btn product-content-info-title-btn__btn subscribe" onClick={subscribeGood}>
-                            Подписаться на модель
-                        </button>
-                    )}
-
-                    <ProductInfoTitleFavorites productData={product} />
-                </div>
+                <ProductInfoTitleFavorites productData={product} />
             </div>
-        </>
+        </div>
     );
 };
 

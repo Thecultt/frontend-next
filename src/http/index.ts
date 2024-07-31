@@ -43,7 +43,7 @@ $api.interceptors.response.use(
                 } catch (e) {
                     if (localStorageService?.getItem(LS_KEYS.accessToken)) {
                         localStorageService?.removeItem(LS_KEYS.accessToken);
-                        window.location.reload();
+                        window.location.href = APP_ROUTE.home;
                     }
                 }
             }
