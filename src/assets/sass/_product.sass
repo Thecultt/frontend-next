@@ -269,6 +269,11 @@
 			&-title
 				margin-bottom: 20px
 
+				&__vendor-model
+					width: 100%
+					display: flex
+					flex-direction: column
+
 				&__vendor
 					font-size: 16px
 					color: $gray
@@ -345,10 +350,14 @@
 				&-price
 					display: flex
 					align-items: center
+					margin-bottom: 4px
 
 					&__price
 						color: $black
 						font-size: 22px
+
+					&--disabled &__price
+						color: $grey6
 
 					&__oldprice
 						margin-left: 12px
@@ -361,8 +370,10 @@
 					align-items: center
 					margin-bottom: 6px
 
+					&--disabled
+						opacity: 0.5
+
 					&__icon
-						margin-left: -8px
 						cursor: pointer
 
 				&__description
@@ -370,14 +381,15 @@
 					margin-bottom: 20px
 
 				&__notavailable
-					font-size: 17px
-					color: $gray
-					font-weight: 600
-					margin-bottom: 12.5px
+					+ManropeSemiBold
+					font-size: 14px
+					line-height: 16.8px
+					color: $black3
+					margin-bottom: 8px
 
 				&-btn
 					width: 100%
-					margin-top: 12.5px
+					margin-top: 24px
 					display: flex
 					justify-content: space-between
 
@@ -695,26 +707,38 @@
 				&-title
 					margin-bottom: 16px
 
+					&__vendor-model
+						flex-direction: row-reverse
+						justify-content: space-between
+						gap: 16px
+						margin-bottom: 8px
+
+					&__vendor
+						margin: 0
+						+ManropeSemiBold
+						font-size: 12px
+						color: $grey6
+						white-space: nowrap
+
 					&__model
 						+ManropeBold
 						font-size: 20px
 						line-height: 24px
 						text-align: left
-
-						margin-bottom: 6px
+						margin: 0
 
 					&__brand
 						display: none
 
 					&-price
-						margin-bottom: 4px
-
 						&__price, &__oldprice
 							+ManropeBold
 							font-size: 20px
 							line-height: 24px
 
 					&-split
+						margin: 0
+
 						&__badge
 							width: fit-content
 							height: 15px
@@ -746,7 +770,6 @@
 						+ManropeSemiBold
 						font-size: 16px
 						line-height: 19.2px
-						margin-bottom: 0
 
 					// 	position: absolute
 
