@@ -112,7 +112,7 @@ export const removeCartItem = (id: string, item: CartItem) => {
 
     sendMindbox('Website.ClearCart', {
         customer: {
-            email: `${localStorageService?.getItem<string>(LS_KEYS.email)}`,
+            email: `${localStorageService?.getItem<string>(LS_KEYS.email, '')}`,
         },
         removeProductFromList: {
             product: {

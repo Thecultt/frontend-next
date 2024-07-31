@@ -410,7 +410,7 @@ const OrderProducts: React.FC = () => {
             products.map((product) => {
                 sendMindbox('Website.ClearCart', {
                     customer: {
-                        email: user.email,
+                        email: user.email || '',
                     },
                     removeProductFromList: {
                         product: {
