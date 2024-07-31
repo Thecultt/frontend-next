@@ -12,17 +12,22 @@ export const fetchFavorites = () => async (dispatch: Dispatch<FavoritesActions>)
         data: { items },
     } = await $api.get<{ items: Product[] }>(`/favorite-products/`);
 
-    sendMindbox('Website.SetWishList', {
-        productList: items.map((product) => ({
-            product: {
-                ids: {
-                    website: `${product.id}`,
+    if (items && items.length > 0) {
+        const totalSum = items.reduce((acc, cur) => acc + (cur.price ?? 0), 0);
+
+        sendMindbox('Website.SetWishList', {
+            productList: items.map((product) => ({
+                product: {
+                    ids: {
+                        website: `${product.id}`,
+                    },
                 },
-            },
-            count: 1,
-            pricePerItem: product.price,
-        })),
-    });
+                count: 1,
+                pricePerItem: product.price ?? 0,
+                priceOfLine: totalSum,
+            })),
+        });
+    }
 
     dispatch({
         type: FavoritesActionTypes.SET_FAVORITES_ITEMS,
