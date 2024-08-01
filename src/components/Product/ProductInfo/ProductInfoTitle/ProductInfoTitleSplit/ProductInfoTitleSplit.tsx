@@ -2,17 +2,24 @@ import React from 'react';
 
 import { Popup, ProductInfoTitleSplitPopup } from '@/components';
 import { YANDEX_SPLIT_MERCHANT_ID } from '@/constants/env';
+import { getClassNames } from '@/functions/getClassNames';
 
 interface ProductInfoTitleSplitProps {
     price: number;
+    disabled?: boolean;
 }
 
-const ProductInfoTitleSplit: React.FC<ProductInfoTitleSplitProps> = ({ price }) => {
+const ProductInfoTitleSplit: React.FC<ProductInfoTitleSplitProps> = ({ price, disabled = false }) => {
     const [isStateSplitPopup, setIsStateSplitPopup] = React.useState(false);
 
     return (
         <>
-            <div className="product-content-info-title-split" onClick={() => setIsStateSplitPopup(true)}>
+            <div
+                className={getClassNames('product-content-info-title-split', {
+                    'product-content-info-title-split--disabled': disabled,
+                })}
+                onClick={() => setIsStateSplitPopup(true)}
+            >
                 {/* @ts-ignore */}
                 <yandex-pay-badge
                     type="bnpl"

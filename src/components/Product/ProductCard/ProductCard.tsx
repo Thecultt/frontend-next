@@ -120,16 +120,18 @@ export const ProductCard: React.FC<Props> = React.memo(
                                     )}
                                 </div>
 
-                                {/* @ts-ignore */}
-                                <yandex-pay-badge
-                                    type="bnpl"
-                                    amount={`${price}.00`}
-                                    size="s"
-                                    variant="detailed"
-                                    color="primary"
-                                    merchant-id={YANDEX_SPLIT_MERCHANT_ID}
-                                    class="product-card-info__split"
-                                />
+                                <div className="product-card-info__split-wrap">
+                                    {/* @ts-ignore */}
+                                    <yandex-pay-badge
+                                        type="bnpl"
+                                        amount={`${price}.00`}
+                                        size="s"
+                                        variant="detailed"
+                                        color="primary"
+                                        merchant-id={YANDEX_SPLIT_MERCHANT_ID}
+                                        class="product-card-info__split"
+                                    />
+                                </div>
                             </div>
                         </>
                     ) : (
