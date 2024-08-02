@@ -1,3 +1,5 @@
+import { ConditionType } from '@/types/catalog';
+
 export interface IModels {
     slug: string;
 }
@@ -33,7 +35,7 @@ export interface IFiltersColors {
 
 export interface IFiltersCondition {
     slug: string;
-    condition: string;
+    condition: ConditionType;
 }
 
 export interface IFiltersGlassFrame {

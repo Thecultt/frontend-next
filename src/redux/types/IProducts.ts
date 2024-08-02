@@ -27,6 +27,8 @@ export interface ProductsStateFilters {
     availability: { [key: string]: string };
     size: { [key: string]: string };
 
+    category_slug?: string;
+
     selection: string | null;
 
     boutique: boolean;

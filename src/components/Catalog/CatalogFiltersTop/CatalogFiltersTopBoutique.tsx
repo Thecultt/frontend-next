@@ -1,19 +1,16 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { getClassNames } from '@/functions/getClassNames';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setFiltersBoutiqueProduct } from '@/redux/actions/products';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const CatalogFiltersTopBoutique: React.FC = React.memo(() => {
-    const dispatch = useDispatch();
-
     const {
         filters: { boutique },
-    } = useTypedSelector(({ products }) => products);
+        updateFilters,
+    } = useCatalogFilters();
 
     const onClickSetBoutique = (status: boolean) => {
-        dispatch(setFiltersBoutiqueProduct(status));
+        updateFilters({ boutique: status });
     };
 
     return (

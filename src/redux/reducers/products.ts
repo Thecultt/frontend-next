@@ -70,6 +70,7 @@ const initialState: ProductsState = {
     currentPage: 1,
     pageCount: 0,
     itemsCount: 0,
+    // TODO удалить
     filters: {
         isParse: false,
         search: '',

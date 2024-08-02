@@ -3,7 +3,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'usehooks-ts';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { fetchProductsCatalog, setLastSearchString } from '@/redux/actions/products';
@@ -17,66 +17,43 @@ import {
 } from '@/components';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { useCatalogScroll } from '@/hooks/catalog/useCatalogScroll';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const Catalog: React.FC = () => {
     const dispatch = useDispatch();
 
+    const pathname = usePathname();
     const searchParams = useSearchParams();
     const search = searchParams.toString();
+    const url = `${pathname}?${search}`;
 
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
 
-    const { filters, currentPage, typeFetch, lastSearchString, catalogScroll } = useTypedSelector(
-        ({ products }) => products,
-    );
+    const { typeFetch, lastSearchString, catalogScroll } = useTypedSelector(({ products }) => products);
     const { isLoaded: isLoadedFilters } = useTypedSelector(({ products_filters }) => products_filters);
 
     const [isFirstRender, setIsFirstRender] = React.useState(true);
     const [isOpenFiltersMedia, setIsOpenFiltersMedia] = React.useState(false);
 
-    React.useEffect(() => {
-        if (filters.isParse) {
-            if (isFirstRender && lastSearchString === search) {
-                setTimeout(() => {
-                    window.scrollTo(0, catalogScroll);
-                }, 100);
-                setIsFirstRender(false);
-                return;
-            }
+    const { filters } = useCatalogFilters();
 
-            dispatch(fetchProductsCatalog(filters, currentPage, typeFetch) as any);
+    React.useEffect(() => {
+        console.log('FILTERS', filters);
+
+        if (isFirstRender && lastSearchString === url) {
+            setTimeout(() => {
+                window.scrollTo(0, catalogScroll);
+            }, 100);
+        } else {
+            dispatch(fetchProductsCatalog(filters, typeFetch) as any);
         }
 
         setIsFirstRender(false);
-    }, [
-        filters.isParse,
-        filters.search,
-        filters.price.min,
-        filters.price.max,
-        Object.keys(filters.categories).length,
-        filters.categories[Object.keys(filters.categories)[0]],
-        Object.keys(filters.conditions).length,
-        Object.keys(filters.types).length,
-        filters.types[Object.keys(filters.types)[0]],
-        Object.keys(filters.brands).length,
-        Object.keys(filters.models).length,
-        filters.models[Object.keys(filters.models)[0]],
-        Object.keys(filters.colors).length,
-        Object.keys(filters.sex).length,
-        // Object.keys(filters.availability)[0],
-        Object.keys(filters.availability).length,
-        Object.keys(filters.size).length,
-        Object.keys(filters.glass_frame).length,
-        filters.selection,
-        filters.boutique,
-        filters.price_drop,
-        filters.sort,
-        currentPage,
-    ]);
+    }, [filters]);
 
     React.useEffect(() => {
-        dispatch(setLastSearchString(search));
-    }, [search]);
+        dispatch(setLastSearchString(url));
+    }, [url]);
 
     useCatalogScroll();
 

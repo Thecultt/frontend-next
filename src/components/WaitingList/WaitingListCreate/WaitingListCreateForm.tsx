@@ -41,8 +41,6 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     const { categories } = useTypedSelector(({ products_filters }) => products_filters);
     const isLoadedProductsFilters = useTypedSelector(({ products_filters }) => products_filters.isLoaded);
 
-    const isLoading = !isLoaded || !isLoadedProductsFilters;
-
     const { brands, models } = React.useMemo(() => {
         const brandsSet = new Set<string>([]);
         const modelsSet = new Set<string>([]);
@@ -156,7 +154,7 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 Отправьте заявку, чтобы получить уведомление о появлении аналогичной модели на нашем сайте
             </p>
 
-            {isLoading ? (
+            {!isLoadedProductsFilters ? (
                 <Spinner />
             ) : (
                 <>

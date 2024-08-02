@@ -1,22 +1,26 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setFiltersColorsProduct } from '@/redux/actions/products';
 import { CatalogFiltersBlockWrapper } from '@/components';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const CatalogFiltersColors: React.FC = () => {
-    const dispatch = useDispatch();
+    const {
+        filters: { colors: selectedColors },
+        updateFilters,
+    } = useCatalogFilters();
 
     const { colors } = useTypedSelector(({ products_filters }) => products_filters);
-    const { filters } = useTypedSelector(({ products }) => products);
-
     const colorsArray = Object.keys(colors);
 
     const onChangeSetColor = (color: string) => {
-        dispatch(setFiltersColorsProduct(color));
+        updateFilters({
+            colors: selectedColors.includes(color)
+                ? selectedColors.filter((selectedColor) => selectedColor !== color)
+                : [...selectedColors, color],
+        });
     };
 
     return (
@@ -31,7 +35,7 @@ const CatalogFiltersColors: React.FC = () => {
                         type="checkbox"
                         className="catalog-filters-block-content-colors-checkbox"
                         onChange={() => onChangeSetColor(color)}
-                        checked={!!Object.keys(filters.colors).find((filtersColor) => color === filtersColor)}
+                        checked={selectedColors.includes(color)}
                     />
 
                     <label

@@ -1,20 +1,27 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setFiltersConditionsProduct } from '@/redux/actions/products';
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
+import { ConditionType } from '@/types/catalog';
 
 const CatalogFiltersConditions: React.FC = () => {
-    const dispatch = useDispatch();
+    const {
+        filters: { conditions: selectedConditions },
+        updateFilters,
+    } = useCatalogFilters();
 
     const { conditions } = useTypedSelector(({ products_filters }) => products_filters);
     const { filters } = useTypedSelector(({ products }) => products);
 
-    const onClickSetCondition = (condition: string) => {
-        dispatch(setFiltersConditionsProduct(condition));
+    const onClickSetCondition = (condition: ConditionType) => {
+        updateFilters({
+            conditions: selectedConditions.includes(condition)
+                ? selectedConditions.filter((selectedCondition) => selectedCondition !== condition)
+                : [...selectedConditions, condition],
+        });
     };
 
     return (
@@ -29,18 +36,13 @@ const CatalogFiltersConditions: React.FC = () => {
 			`}
             disabled={filters.boutique || !conditions.length}
         >
-            {conditions.map(({ condition }, index) => (
-                <div
-                    className="catalog-filters-block-content-checkbox"
-                    key={`catalog-filters-block-content-conditions-checkbox-${index}`}
-                >
+            {conditions.map(({ condition, slug }) => (
+                <div className="catalog-filters-block-content-checkbox" key={slug}>
                     <Checkbox
-                        id={`catalog-filters-block-content-conditions-checkbox-${index}`}
+                        id={`catalog-filters-block-content-conditions-checkbox-${slug}`}
                         label={condition}
                         onChange={() => onClickSetCondition(condition)}
-                        checked={
-                            !!Object.keys(filters.conditions).find((filtersCondition) => condition === filtersCondition)
-                        }
+                        checked={selectedConditions.includes(condition)}
                     />
                 </div>
             ))}

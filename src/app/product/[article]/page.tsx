@@ -25,6 +25,8 @@ export const generateMetadata = async ({ params }: PageProps) => {
             throw new Error();
         }
 
+        // TODO вынести в утилиту
+
         let category = '';
 
         if (data.category === 'Сумки') {

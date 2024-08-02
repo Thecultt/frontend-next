@@ -1,17 +1,16 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useOnClickOutside } from 'usehooks-ts';
 
-import { setFiltersSortProduct } from '@/redux/actions/products';
 import { getClassNames } from '@/functions/getClassNames';
 import { SORT_TITLES } from '@/constants/catalog';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { SortType } from '@/redux/types/IProducts';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const CatalogFiltersTopSortMedia: React.FC = () => {
-    const dispatch = useDispatch();
-
-    const { sort } = useTypedSelector(({ products }) => products.filters);
+    const {
+        filters: { sort },
+        updateFilters,
+    } = useCatalogFilters();
 
     const modalRef = React.useRef<HTMLDivElement>(null);
     const [state, setState] = React.useState(false);
@@ -20,9 +19,8 @@ const CatalogFiltersTopSortMedia: React.FC = () => {
         setState(!state);
     };
 
-    const onClickSetItem = (key: SortType) => {
-        dispatch(setFiltersSortProduct(key));
-
+    const onClickSetItem = (sortBy: SortType) => {
+        updateFilters({ sort: sortBy });
         setTimeout(() => {
             setState(false);
         }, 200);
