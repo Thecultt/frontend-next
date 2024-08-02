@@ -1,7 +1,6 @@
-// buyer-thecultt-product
-.buyer-thecultt-product
-	margin: 60px 0
-
+// concierge-product
+.concierge-product
+	margin: 100px 0
 	+open
 
 	&-wrapper
@@ -9,17 +8,18 @@
 
 		display: flex
 		justify-content: space-between
-		align-items: center
 
 	&__back
 		position: absolute
 
 		left: 0
-		top: 0
+		top: -60px
 
 		cursor: pointer
 		display: flex
 		align-items: center
+
+		font-weight: 600
 
 		font-size: 14px
 		border: none
@@ -28,61 +28,81 @@
 		& > svg
 			margin-right: 15px
 
-	&-info
+	&-item
+		width: calc( 60% - 15px )
+
 		display: flex
-		align-items: center
+		flex-direction: column
+		justify-content: space-between
 
-		width: 660px
+		&-info
+			position: relative
 
-		padding: 15px
-		background-color: $white
+			display: flex
+			align-items: center
 
-		border-radius: 18px
+			height: calc( 100% - 85px )
 
-		+open
+			padding: 15px
+			background-color: $cardBackgroundColor
 
-		&-image
-			width: 250px
-			min-width: 250px
-			height: 250px
+			border-radius: 18px
 
-			background-size: contain
-			background-repeat: no-repeat
-			background-position: center center
+			+open
 
-			overflow: hidden
+			&-image
+				width: 250px
+				min-width: 250px
+				height: 250px
 
-			border-radius: 12px
+				background-size: contain
+				background-repeat: no-repeat
+				background-position: center center
 
-		&-text
-			margin: 0 15px
+				overflow: hidden
 
-			&__title
-				font-size: 22px
-				margin-bottom: 5px
+				border-radius: 12px
 
-			&__price
-				font-size: 14px
-				margin-bottom: 10px
+			&-text
+				margin: 0 15px
 
-			&__description
-				font-size: 14px
-				margin-bottom: 25px
-
-			&-buyer
 				&__title
+					font-size: 22px
+					margin-bottom: 5px
+
+				&__price
 					font-size: 14px
+					margin-bottom: 10px
 
 				&__description
 					font-size: 14px
+					margin-bottom: 25px
 
-				&__subtitle
-					color: $gray
-					font-size: 14px
+			&__subinfo
+				position: absolute
+
+				bottom: 15px
+				left: 15px
+
+				font-size: 14px
+				color: $gray
+
+		&-buyer
+			padding: 12px
+			background-color: $cardBackgroundColor
+			border-radius: 12px
+
+			&__title
+				color: $mainColor
+				font-size: 16px
+
+			&__subtitle
+				color: $black
 
 	&-form
-		width: 430px
-		background-color: $white
+		width: calc( 40% - 15px )
+
+		background-color: #F1EDE88C
 		padding: 25px
 
 		border-radius: 18px
@@ -100,8 +120,43 @@
 		&-input
 			margin-bottom: 15px
 
-		&__btn
-			width: 100%
+		&-btn
+			margin-top: 20px
+
+			display: flex
+
+			&__social
+				margin-left: 16px
+
+				width: 60px
+				height: 60px
+
+				& > svg
+					width: 100%
+					height: 100%
+
+	&-buyer-media
+		display: none
+
+		margin-top: 15px
+
+		width: 100%
+
+		padding: 12px
+		background-color: $cardBackgroundColor
+		border-radius: 12px
+
+		&__title
+			color: $black
+			font-size: 14px
+
+		&__subtitle
+			color: $black
+			font-size: 12px
+
+		&__notoffer
+			font-size: 12px
+			color: $gray
 
 	&-success
 		text-align: center
@@ -116,7 +171,7 @@
 
 /* MEDIA */
 @media screen and (max-width: 1200px)
-	.buyer-thecultt-product
+	.concierge-product
 		margin: 20px 0
 
 		&-wrapper
@@ -127,32 +182,47 @@
 			position: static
 			margin-bottom: 20px
 
-		&-info
+		&-item
 			width: 100%
 			margin-bottom: 15px
 
 			flex-direction: column
 
-			&-text
-				margin: 0
+			&-info
+				padding: 0
 
-				&__title
-					font-size: 18px
+				flex-direction: column
+				align-items: flex-start
+				background-color: transparent
 
-				&-buyer
-					&__title, &__description, &__subtitle
-						font-size: 12px
+				&-image
+					min-width: 100%
+					width: 100%
+					height: 400px
+
+				&-text
+					margin: 10px 0 0 0
+
+					&__description
+						margin-bottom: 0
+
+				&__subinfo
+					display: none
+
+			&-buyer
+				display: none
 
 		&-form
 			width: 100%
-
-			+boxShadow
 
 			&__title
 				font-size: 18px
 
 			&__description
 				font-size: 14px
+
+		&-buyer-media
+			display: block
 
 		&-success
 			&__title
