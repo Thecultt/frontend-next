@@ -6,36 +6,36 @@ import Link from 'next/link';
 
 import { APP_ROUTE } from '@/constants/routes';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { sendConciergeForm, setConciergeIsSend } from '@/redux/actions/concierge';
+import { sendVipserviceForm, setVipserviceIsSend } from '@/redux/actions/vipservice';
 import { VipServiceFormBottom, VipServiceFormTop, Popup } from '@/components';
 
-import ConciergeMainImage from '@/assets/images/concierge/concierge-main-image.jpg';
+import VipserviceMainImage from '@/assets/images/vipservice/vipservice-main-image.jpg';
 
 const VipService: React.FC = () => {
     const dispatch = useDispatch();
 
-    const { isSend } = useTypedSelector(({ concierge }) => concierge);
+    const { isSend } = useTypedSelector(({ vipservice }) => vipservice);
 
     const onSubmit = (data: any) => {
-        dispatch(sendConciergeForm(data) as any);
+        dispatch(sendVipserviceForm(data) as any);
     };
 
     return (
-        <section className="concierge">
-            <Popup state={isSend} setState={() => dispatch(setConciergeIsSend(!isSend))}>
-                <div className="concierge-message">
-                    <h4 className="concierge-message__title">Ваша заявка принята в работу.</h4>
-                    <p className="concierge-message__subtitle">Наш менеджер свяжется с вами в ближайшее время!</p>
+        <section className="vipservice">
+            <Popup state={isSend} setState={() => dispatch(setVipserviceIsSend(!isSend))}>
+                <div className="vipservice-message">
+                    <h4 className="vipservice-message__title">Ваша заявка принята в работу.</h4>
+                    <p className="vipservice-message__subtitle">Наш менеджер свяжется с вами в ближайшее время!</p>
                 </div>
             </Popup>
 
             <div className="container">
-                <div className="concierge-wrapper">
-                    <div className="concierge-main">
-                        <div className="concierge-main-text">
-                            <h2 className="concierge-main-text__title">VIP-сервис</h2>
+                <div className="vipservice-wrapper">
+                    <div className="vipservice-main">
+                        <div className="vipservice-main-text">
+                            <h2 className="vipservice-main-text__title">VIP-сервис</h2>
 
-                            <p className="concierge-main-text__description">
+                            <p className="vipservice-main-text__description">
                                 Закажите VIP-сервис с выездом на дом для продажи более 7 лотов, соответствующих нашему{' '}
                                 <Link href={APP_ROUTE.sell.infoBrands}>бренд-листу</Link>.
                             </p>
@@ -43,24 +43,24 @@ const VipService: React.FC = () => {
                             <VipServiceFormTop onSubmit={onSubmit} />
                         </div>
                         <div
-                            className="concierge-main-image"
+                            className="vipservice-main-image"
                             style={{
-                                backgroundImage: `url("${ConciergeMainImage.src}")`,
+                                backgroundImage: `url("${VipserviceMainImage.src}")`,
                             }}
                         ></div>
                     </div>
 
-                    <div className="concierge-steps">
-                        <h2 className="concierge__title concierge-steps__title">Как это работает?</h2>
+                    <div className="vipservice-steps">
+                        <h2 className="vipservice__title vipservice-steps__title">Как это работает?</h2>
 
-                        <p className="concierge__description mb concierge-steps__description">
+                        <p className="vipservice__description mb vipservice-steps__description">
                             Мы создали удобный сервис, доступный для всех, кто хочет продать от 7 лотов - это могут быть
                             сумки, аксессуары, обувь. Услуга доступна только для жителей Москвы.
                         </p>
 
-                        <div className="concierge-steps-blocks-wrapper">
-                            <div className="concierge-steps-block">
-                                <div className="concierge-steps-block-icon">
+                        <div className="vipservice-steps-blocks-wrapper">
+                            <div className="vipservice-steps-block">
+                                <div className="vipservice-steps-block-icon">
                                     <svg
                                         width="59"
                                         height="61"
@@ -78,7 +78,7 @@ const VipService: React.FC = () => {
                                         />
                                     </svg>
 
-                                    <div className="concierge-steps-block-icon-arrow">
+                                    <div className="vipservice-steps-block-icon-arrow">
                                         <svg
                                             width="323"
                                             height="8"
@@ -93,15 +93,15 @@ const VipService: React.FC = () => {
                                         </svg>
                                     </div>
                                 </div>
-                                <h3 className="concierge-steps-block__title">Оставьте одну заявку</h3>
-                                <p className="concierge-steps-block__description">
+                                <h3 className="vipservice-steps-block__title">Оставьте одну заявку</h3>
+                                <p className="vipservice-steps-block__description">
                                     Вам не придется тратить время на заполнение заявки для каждого лота - это мы берем
                                     на себя.
                                 </p>
                             </div>
 
-                            <div className="concierge-steps-block">
-                                <div className="concierge-steps-block-icon">
+                            <div className="vipservice-steps-block">
+                                <div className="vipservice-steps-block-icon">
                                     <svg
                                         width="59"
                                         height="61"
@@ -119,7 +119,7 @@ const VipService: React.FC = () => {
                                         />
                                     </svg>
 
-                                    <div className="concierge-steps-block-icon-arrow">
+                                    <div className="vipservice-steps-block-icon-arrow">
                                         <svg
                                             width="323"
                                             height="8"
@@ -134,15 +134,15 @@ const VipService: React.FC = () => {
                                         </svg>
                                     </div>
                                 </div>
-                                <h3 className="concierge-steps-block__title">Согласуйте условия</h3>
-                                <p className="concierge-steps-block__description">
+                                <h3 className="vipservice-steps-block__title">Согласуйте условия</h3>
+                                <p className="vipservice-steps-block__description">
                                     Представитель THE CULTT приедет к вам, чтобы согласовать условия продажи аксессуаров
                                     и подписать документы.
                                 </p>
                             </div>
 
-                            <div className="concierge-steps-block">
-                                <div className="concierge-steps-block-icon">
+                            <div className="vipservice-steps-block">
+                                <div className="vipservice-steps-block-icon">
                                     <svg
                                         width="59"
                                         height="61"
@@ -160,20 +160,20 @@ const VipService: React.FC = () => {
                                         />
                                     </svg>
                                 </div>
-                                <h3 className="concierge-steps-block__title">Получайте выплаты</h3>
-                                <p className="concierge-steps-block__description">
+                                <h3 className="vipservice-steps-block__title">Получайте выплаты</h3>
+                                <p className="vipservice-steps-block__description">
                                     Вам останется только получать выплаты на карту!
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="concierge-steps-media">
-                        <h2 className="concierge__title concierge-steps-media__title">Как это работает?</h2>
+                    <div className="vipservice-steps-media">
+                        <h2 className="vipservice__title vipservice-steps-media__title">Как это работает?</h2>
 
-                        <div className="concierge-steps-media-blocks-wrapper">
-                            <div className="concierge-steps-media-block">
-                                <div className="concierge-steps-media-block-icon">
+                        <div className="vipservice-steps-media-blocks-wrapper">
+                            <div className="vipservice-steps-media-block">
+                                <div className="vipservice-steps-media-block-icon">
                                     <svg
                                         width="60"
                                         height="60"
@@ -189,13 +189,13 @@ const VipService: React.FC = () => {
                                     </svg>
                                 </div>
 
-                                <h3 className="concierge-steps-media-block__title">Оставьте одну заявку</h3>
-                                <p className="concierge-steps-media-block__description">
+                                <h3 className="vipservice-steps-media-block__title">Оставьте одну заявку</h3>
+                                <p className="vipservice-steps-media-block__description">
                                     Вам не придется тратить время на заполнение заявки для каждого лота - это мы берем
                                     на себя.
                                 </p>
 
-                                <div className="concierge-steps-media-block-arrow">
+                                <div className="vipservice-steps-media-block-arrow">
                                     <svg
                                         width="8"
                                         height="33"
@@ -211,8 +211,8 @@ const VipService: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="concierge-steps-media-block">
-                                <div className="concierge-steps-media-block-icon">
+                            <div className="vipservice-steps-media-block">
+                                <div className="vipservice-steps-media-block-icon">
                                     <svg
                                         width="60"
                                         height="60"
@@ -228,13 +228,13 @@ const VipService: React.FC = () => {
                                     </svg>
                                 </div>
 
-                                <h3 className="concierge-steps-media-block__title">Согласуйте условия</h3>
-                                <p className="concierge-steps-media-block__description">
+                                <h3 className="vipservice-steps-media-block__title">Согласуйте условия</h3>
+                                <p className="vipservice-steps-media-block__description">
                                     Представитель THE CULTT приедет к вам, чтобы согласовать условия продажи аксессуаров
                                     и подписать документы.
                                 </p>
 
-                                <div className="concierge-steps-media-block-arrow">
+                                <div className="vipservice-steps-media-block-arrow">
                                     <svg
                                         width="8"
                                         height="33"
@@ -250,8 +250,8 @@ const VipService: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="concierge-steps-media-block">
-                                <div className="concierge-steps-media-block-icon">
+                            <div className="vipservice-steps-media-block">
+                                <div className="vipservice-steps-media-block-icon">
                                     <svg
                                         width="60"
                                         height="60"
@@ -267,20 +267,20 @@ const VipService: React.FC = () => {
                                     </svg>
                                 </div>
 
-                                <h3 className="concierge-steps-media-block__title">Получите выплату</h3>
-                                <p className="concierge-steps-media-block__description">
+                                <h3 className="vipservice-steps-media-block__title">Получите выплату</h3>
+                                <p className="vipservice-steps-media-block__description">
                                     Вам останется только получать выплаты на карту!
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="concierge-services">
-                        <h2 className="concierge__title mb">Преимущества VIP-сервиса</h2>
+                    <div className="vipservice-services">
+                        <h2 className="vipservice__title mb">Преимущества VIP-сервиса</h2>
 
-                        <div className="concierge-services-blocks-wrapper">
-                            <div className="concierge-services-block hover-scale">
-                                <div className="concierge-services-block-icon">
+                        <div className="vipservice-services-blocks-wrapper">
+                            <div className="vipservice-services-block hover-scale">
+                                <div className="vipservice-services-block-icon">
                                     <svg
                                         width="51"
                                         height="51"
@@ -297,17 +297,17 @@ const VipService: React.FC = () => {
                                         </g>
                                     </svg>
                                 </div>
-                                <h3 className="concierge-services-block__title">
+                                <h3 className="vipservice-services-block__title">
                                     Экономия <br /> времени
                                 </h3>
-                                <p className="concierge-services-block__subtitle">
+                                <p className="vipservice-services-block__subtitle">
                                     Выделите один час на встречу с представителем THE CULTT, и вам останется только
                                     получить выплаты на карту.
                                 </p>
                             </div>
 
-                            <div className="concierge-services-block hover-scale">
-                                <div className="concierge-services-block-icon">
+                            <div className="vipservice-services-block hover-scale">
+                                <div className="vipservice-services-block-icon">
                                     <svg
                                         width="51"
                                         height="51"
@@ -327,17 +327,17 @@ const VipService: React.FC = () => {
                                         </g>
                                     </svg>
                                 </div>
-                                <h3 className="concierge-services-block__title">
+                                <h3 className="vipservice-services-block__title">
                                     Премиум <br /> Сервис
                                 </h3>
-                                <p className="concierge-services-block__subtitle">
+                                <p className="vipservice-services-block__subtitle">
                                     Мы предоставим вам персонального менеджера, который будет сопровождать вас на всех
                                     этапах. Вы сможете отслеживать статусы продаж всех лотов в личном кабинете.
                                 </p>
                             </div>
 
-                            <div className="concierge-services-block hover-scale">
-                                <div className="concierge-services-block-icon">
+                            <div className="vipservice-services-block hover-scale">
+                                <div className="vipservice-services-block-icon">
                                     <svg
                                         width="51"
                                         height="51"
@@ -357,10 +357,10 @@ const VipService: React.FC = () => {
                                         </g>
                                     </svg>
                                 </div>
-                                <h3 className="concierge-services-block__title">
+                                <h3 className="vipservice-services-block__title">
                                     Без дополнительных <br /> расходов
                                 </h3>
-                                <p className="concierge-services-block__subtitle">
+                                <p className="vipservice-services-block__subtitle">
                                     Услуга предоставляется бесплатно и не влияет на размер комиссии.
                                 </p>
                             </div>

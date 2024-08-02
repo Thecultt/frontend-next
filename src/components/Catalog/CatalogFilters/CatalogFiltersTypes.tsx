@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -30,7 +32,7 @@ const CatalogFiltersTypes: React.FC = () => {
     };
 
     return (
-        <CatalogFiltersBlockWrapper title="Тип">
+        <CatalogFiltersBlockWrapper title="Тип" disabled={!Object.keys(types).length}>
             {Object.keys(types).map((key, index) => (
                 <div key={`catalog-filters-block-content-types-checkbox-${index}-wrapper`}>
                     <p className="catalog-filters-block-content-checkbox__subtitle">{key}</p>
