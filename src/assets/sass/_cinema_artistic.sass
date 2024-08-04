@@ -284,9 +284,52 @@ $redHover: #7E000F
 
 			margin-bottom: 50px
 
-		&__subbtn
-			font-size: 16px
-			margin-bottom: 25px
+		&-form
+			display: flex
+			flex-direction: column
+			align-items: center
+
+			&__subbtn
+				font-size: 16px
+				margin-bottom: 25px
+
+			&-input
+				width: 380px
+				margin-bottom: 25px
+
+				&__field
+					width: 100%
+					padding: 15px
+					border: 1px solid $white
+					color: $white
+					outline: none
+					background-color: transparent
+					border-radius: 12px
+					font-size: 16px
+
+					+ManropeMedium
+
+					&::placeholder
+						color: $white
+
+			&__btn
+				width: 380px
+				margin-bottom: 25px
+
+			&__policy
+				font-size: 16px
+
+				& > a
+					color: $white
+					text-decoration: underline
+
+		&-form-success
+			&__btn
+				cursor: default
+				margin-bottom: 35px
+
+			&__subtitle
+				font-size: 24px
 
 /* MEDIA */
 @media screen and (max-width: 1300px)
@@ -454,3 +497,17 @@ $redHover: #7E000F
 
 			&__btn
 				width: 100%
+
+@media screen and (max-width: 500px)
+	.cinema-artistic
+		&-auction
+			&-form
+				&-input, &__btn
+					width: 100%
+
+				&__policy
+					font-size: 9px
+
+			&-form-success
+				&__subtitle
+					font-size: 12px

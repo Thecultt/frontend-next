@@ -2,7 +2,9 @@
 
 import React from 'react';
 
-import { BaseImage } from '@/components';
+import { BaseImage, CinemaArtisticFormSubscribe } from '@/components';
+
+import { sendMindbox } from '@/functions/mindbox';
 
 import CinemaArtisticExhibit1Cover from '@/assets/images/cinema-artistic/cinema-artistic-exhibit-1-cover.jpg';
 import CinemaArtisticExhibit1Image from '@/assets/images/cinema-artistic/cinema-artistic-exhibit-1-image.jpg';
@@ -82,6 +84,20 @@ const exhibits = [
 ];
 
 const CinemaArtistic: React.FC = () => {
+    const onSubmitSubscribeForm = (data: any) => {
+        sendMindbox('RegistraciyaSAukcionaXudozhestvennyj', {
+            customer: {
+                email: data.email,
+                subscriptions: [
+                    {
+                        pointOfContact: 'email',
+                        isSubscribed: true,
+                    },
+                ],
+            },
+        });
+    };
+
     return (
         <>
             <section className="cinema-artistic-main">
@@ -566,32 +582,7 @@ const CinemaArtistic: React.FC = () => {
                 </section>
             ))}
 
-            <section className="cinema-artistic-auction">
-                <div className="container">
-                    <div className="cinema-artistic-auction-wrapper">
-                        <h2 className="cinema-artistic-auction__title">АУКЦИОН</h2>
-
-                        <p className="cinema-artistic-auction__subtitle">
-                            15% средств, вырученных на онлайн-аукционе, будут перечислены в культурно-благотворительный
-                            фонд Action!
-                        </p>
-
-                        <p className="cinema-artistic-auction__description">
-                            Фонд Action! Светланы Бондарчук и&nbsp;Евгении Поповой объединяет известных российских
-                            кинематографистов и&nbsp;меценатов для помощи детям и&nbsp;взрослым, попавшим в&nbsp;сложную
-                            ситуацию. При участии фонда уже более 10&nbsp;лет проводятся благотворительные киновечера:
-                            для них режиссеры бесплатно снимают короткометражки с&nbsp;участием признанных звезд кино.
-                            Все вырученные средства поступают в&nbsp;благотворительные организации.
-                        </p>
-
-                        <p className="cinema-artistic-auction__subbtn">
-                            Подпишитесь на рассылку, чтобы получить уведомление о начале аукциона.
-                        </p>
-
-                        <button className="cinema-artistic__btn white cinema-artistic-auction__btn">ПОДПИСАТЬСЯ</button>
-                    </div>
-                </div>
-            </section>
+            <CinemaArtisticFormSubscribe onSubmit={onSubmitSubscribeForm} />
         </>
     );
 };
