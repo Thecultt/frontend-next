@@ -2,6 +2,8 @@ import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { getClassNames } from '@/functions/getClassNames';
+import { useAuthUser } from '@/hooks/useAuthUser';
+
 import validate from './validate';
 
 interface Props {
@@ -14,10 +16,18 @@ const CinemaArtisticFormSubscribe: React.FC<CinemaArtisticFormSubscribeProps> = 
     handleSubmit,
     invalid,
     submitting,
-    pristine,
     submitSucceeded,
+    initialize,
     dark = false,
 }) => {
+    const { isLoaded, user } = useAuthUser();
+
+    React.useEffect(() => {
+        if (isLoaded && user.email) {
+            initialize({ email: user.email });
+        }
+    }, [isLoaded]);
+
     return submitSucceeded ? (
         <div
             className={getClassNames('cinema-artistic-auction-form-success', {
@@ -64,7 +74,7 @@ const CinemaArtisticFormSubscribe: React.FC<CinemaArtisticFormSubscribeProps> = 
                 className={getClassNames('cinema-artistic__btn cinema-artistic-auction-form__btn', {
                     white: !dark,
                 })}
-                disabled={invalid || submitting || pristine}
+                disabled={invalid || submitting}
             >
                 ПОДПИСАТЬСЯ
             </button>

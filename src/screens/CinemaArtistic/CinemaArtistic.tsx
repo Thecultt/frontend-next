@@ -21,6 +21,10 @@ import CinemaArtisticExhibit4Image from '@/assets/images/cinema-artistic/cinema-
 import CinemaArtisticExhibit5Cover from '@/assets/images/cinema-artistic/cinema-artistic-exhibit-5-cover.jpg';
 import CinemaArtisticExhibit5Image from '@/assets/images/cinema-artistic/cinema-artistic-exhibit-5-image.jpg';
 
+import CinemaArtisticRedImage from '@/assets/images/cinema-artistic/cinema-artistic-red.jpg';
+import CinemaArtisticRedTabletImage from '@/assets/images/cinema-artistic/cinema-artistic-red__tablet.jpg';
+import CinemaArtisticRedMobileImage from '@/assets/images/cinema-artistic/cinema-artistic-red__mobile.jpg';
+
 const exhibits = [
     {
         cover: CinemaArtisticExhibit1Cover.src,
@@ -360,7 +364,13 @@ const CinemaArtistic: React.FC = () => {
                 </div>
             </section>
 
-            <section className="cinema-artistic-images"></section>
+            <section className="cinema-artistic-red-image">
+                <picture className="cinema-artistic-red-image__picture">
+                    <source media="(min-width:745px)" srcSet={CinemaArtisticRedImage.src} />
+                    <source media="(min-width:391px)" srcSet={CinemaArtisticRedTabletImage.src} />
+                    <img src={CinemaArtisticRedMobileImage.src} alt="" />
+                </picture>
+            </section>
 
             <section className="cinema-artistic-companies">
                 <div className="container">
