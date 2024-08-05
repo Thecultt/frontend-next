@@ -330,7 +330,7 @@ const CinemaArtistic: React.FC = () => {
                             С&nbsp;какими сумками появляются в&nbsp;кадре героини кино? THE CULTT, ресейл-платформа
                             с&nbsp;кураторским отбором, собрала сумки в&nbsp;точности как в&nbsp;культовых фильмах.
                             Инсталляция представлена в&nbsp;кинотеатре &laquo;Художественный&raquo;&nbsp;&mdash; найдите
-                            все сумки на&nbsp;пьедесталах, установленных от&nbsp;вестибюля до&nbsp;фойе Камерного зала
+                            все сумки на&nbsp;пьедесталах, установленных от&nbsp;вестибюля до&nbsp;фойе Камерного зала.
                         </p>
 
                         <p className="cinema-artistic-descriptions__description">
@@ -355,11 +355,7 @@ const CinemaArtistic: React.FC = () => {
                             Мы&nbsp;проводим его при участии культурно-благотворительного фонда Action!
                         </p>
 
-                        <p className="cinema-artistic-auctioninfo__subtitle">
-                            Подпишитесь на рассылку, чтобы получить уведомление о начале аукциона.
-                        </p>
-
-                        <button className="cinema-artistic__btn cinema-artistic-auctioninfo__btn">ПОДПИСАТЬСЯ</button>
+                        <CinemaArtisticFormSubscribe onSubmit={onSubmitSubscribeForm} dark />
                     </div>
                 </div>
             </section>
@@ -582,7 +578,28 @@ const CinemaArtistic: React.FC = () => {
                 </section>
             ))}
 
-            <CinemaArtisticFormSubscribe onSubmit={onSubmitSubscribeForm} />
+            <section className="cinema-artistic-auction">
+                <div className="container">
+                    <div className="cinema-artistic-auction-wrapper">
+                        <h2 className="cinema-artistic-auction__title">АУКЦИОН</h2>
+
+                        <p className="cinema-artistic-auction__subtitle">
+                            15% средств, вырученных на онлайн-аукционе, будут перечислены в культурно-благотворительный
+                            фонд Action!
+                        </p>
+
+                        <p className="cinema-artistic-auction__description">
+                            Фонд Action! Светланы Бондарчук и&nbsp;Евгении Поповой объединяет известных российских
+                            кинематографистов и&nbsp;меценатов для помощи детям и&nbsp;взрослым, попавшим в&nbsp;сложную
+                            ситуацию. При участии фонда уже более 10&nbsp;лет проводятся благотворительные киновечера:
+                            для них режиссеры бесплатно снимают короткометражки с&nbsp;участием признанных звезд кино.
+                            Все вырученные средства поступают в&nbsp;благотворительные организации.
+                        </p>
+
+                        <CinemaArtisticFormSubscribe onSubmit={onSubmitSubscribeForm} />
+                    </div>
+                </div>
+            </section>
         </>
     );
 };

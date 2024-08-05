@@ -1,6 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { Manrope } from 'next/font/google';
+import localFont from 'next/font/local';
 import { Metadata, Viewport } from 'next/types';
 
 import 'dayjs/locale/ru';
@@ -37,6 +38,13 @@ const manropeFont = Manrope({
     display: 'swap',
 });
 
+const ltSuperiorMonoFont = localFont({
+    src: '../assets/fonts/ltsuperiormono-bold.otf',
+    style: 'normal',
+    weight: '700',
+    variable: '--font-ltsuperiormono',
+});
+
 export const viewport: Viewport = {
     width: 'device-width',
     initialScale: 1,
@@ -52,7 +60,7 @@ export const metadata: Metadata = {
 // TODO add metrics and external scripts
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
-    <html lang="ru" className={manropeFont.variable}>
+    <html lang="ru" className={`${manropeFont.variable} ${ltSuperiorMonoFont.variable}`}>
         <body>
             <Scripts />
 

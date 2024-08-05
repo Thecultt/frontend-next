@@ -1,12 +1,5 @@
-@font-face
-	font-family: "LT Superior Mono"
-	src: url("../fonts/ltsuperiormono-bold.otf") format("otf")
-	font-weight: normal
-	font-style: normal
-
 @mixin title
-	font-family: "LT Superior Mono"
-	font-weight: 700
+	font-family: var(--font-ltsuperiormono)
 
 $red: #A60215
 $yellow: #EBCF68
@@ -290,8 +283,9 @@ $redHover: #7E000F
 			align-items: center
 
 			&__subbtn
+				color: $white
 				font-size: 16px
-				margin-bottom: 25px
+				margin-bottom: 24px
 
 			&-input
 				width: 380px
@@ -317,11 +311,27 @@ $redHover: #7E000F
 				margin-bottom: 25px
 
 			&__policy
+				width: 100%
+				max-width: 618px
 				font-size: 16px
+				color: $white
 
 				& > a
-					color: $white
+					color: inherit
 					text-decoration: underline
+
+			.dark &__subbtn
+				color: $black1
+
+			.dark &-input__field
+				border-color: $black1
+				color: $black1
+
+				&::placeholder
+					color: $gray
+
+			.dark &__policy
+				color: #BABABA
 
 		&-form-success
 			&__btn
@@ -329,7 +339,11 @@ $redHover: #7E000F
 				margin-bottom: 35px
 
 			&__subtitle
+				color: $white
 				font-size: 24px
+
+			.dark &__subtitle
+				color: $black1
 
 /* MEDIA */
 @media screen and (max-width: 1300px)
