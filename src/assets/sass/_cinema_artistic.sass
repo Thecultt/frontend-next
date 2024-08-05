@@ -1,0 +1,541 @@
+@mixin title
+	font-family: var(--font-ltsuperiormono)
+
+$red: #A60215
+$yellow: #EBCF68
+$redHover: #7E000F
+
+// cinema artistic
+.cinema-artistic
+	&__btn
+		cursor: pointer
+		padding: 16px 100px
+		background-color: $red
+		border-radius: 12px
+		font-size: 24px
+		font-weight: 500
+		border: none
+		color: $white
+
+		+ManropeSemiBold
+
+		+transition
+
+		&.white
+			color: $red
+			background-color: $white
+
+			@media (hover:hover)
+				&:hover
+					background-color: $white
+
+	&-main
+		position: relative
+
+		display: flex
+		flex-direction: column
+		align-items: center
+		justify-content: center
+
+		height: calc( 100vh - 145px )
+		background-color: $red
+
+		&-text
+			color: $white
+			text-align: center
+
+			&-title-media
+				display: none
+
+			&__title
+				font-size: 100px
+
+				+title
+
+			&__subtitle
+				font-size: 28px
+
+		&-logos
+			position: absolute
+			bottom: 50px
+
+			width: 900px
+
+			& > svg
+				width: 100%
+
+	&-descriptions
+		margin: 80px 0
+		text-align: center
+
+		&-wrapper
+			width: 1100px
+			margin: 0 auto
+
+		&__description
+			font-weight: 600
+			font-size: 24px
+
+			&:first-child
+				margin-bottom: 80px
+
+	&-auctioninfo
+		border-top: 60px solid $red
+		padding: 80px 0
+		text-align: center
+
+		&__title
+			font-size: 80px
+			color: $red
+			margin-bottom: 70px
+
+			+title
+
+		&__description
+			margin: 0 auto 70px auto
+			width: 1100px
+			font-size: 24px
+			font-weight: 600
+
+		&__subtitle
+			font-size: 16px
+			font-weight: 600
+			margin-bottom: 25px
+
+		&__btn
+			width: 100%
+
+	&-images
+		width: 100%
+		height: 800px
+
+		border-top: 60px solid $red
+		background-color: $grey4
+
+	&-red-image
+		width: 100%
+		border-top: 60px solid $red
+
+		&__picture
+			display: flex
+			width: 100%
+
+			img
+				width: 100%
+
+	&-companies
+		border-top: 60px solid $red
+		padding: 80px 0
+		text-align: center
+
+		&-block
+			width: 1100px
+			margin: 0 auto 40px auto
+
+			&:last-child
+				margin: 0 auto
+
+			& > svg
+				width: 250px
+				margin-bottom: 40px
+
+			&__description
+				font-weight: 600
+				font-size: 24px
+
+	&-exhibits
+		border-top: 60px solid $red
+		padding: 80px 0 100px 0
+		text-align: center
+
+		&__title
+			font-size: 80px
+			color: $red
+
+			+title
+
+	&-exhibit
+		&-wrapper
+			display: flex
+			flex-direction: column
+			align-items: center
+
+		&__number
+			position: relative
+
+			display: inline-flex
+			align-items: center
+			justify-content: space-between
+
+			width: 190px
+			height: 90px
+
+			padding: 0 14px
+
+			font-size: 60px
+			border-radius: 100px
+			background-color: $yellow
+			font-weight: 700
+			color: $red
+
+			margin-bottom: 40px
+
+			+title
+
+			&::before
+				content: ""
+				display: block
+
+				width: 12px
+				height: 12px
+
+				border-radius: 50%
+
+				background-color: $red
+
+			&::after
+				content: ""
+				display: block
+
+				width: 12px
+				height: 12px
+
+				border-radius: 50%
+
+				background-color: $red
+
+		&-cover
+			border-top: 60px solid $red
+
+			width: 100%
+			height: 780px
+
+			+backgroundSetting
+
+		&-info-wrapper
+			width: 100%
+			padding: 80px 0
+
+			&.border
+				border-top: 60px solid $red
+
+		&-info
+			width: 700px
+			margin: 0 auto
+
+			&-options
+				color: $red
+				font-size: 24px
+
+				margin-bottom: 80px
+
+				&-item
+					display: flex
+					align-items: flex-end
+					justify-content: space-between
+
+					&__title
+						white-space: nowrap
+						font-weight: 600
+						margin-right: 20px
+
+					&-line
+						height: 1px
+						width: 100%
+						border-bottom: 1px dashed $red
+						margin-bottom: 10px
+
+					&__value
+						white-space: nowrap
+						margin-left: 20px
+
+						+title
+
+			&__description
+				font-size: 24px
+				font-weight: 600
+
+				text-align: justify
+
+		&-image
+			width: 100%
+
+	&-auction
+		background-color: $red
+		color: $white
+
+		text-align: center
+
+		padding: 80px 0
+
+		&-wrapper
+			width: 700px
+			margin: 0 auto
+
+		&__title
+			font-size: 80px
+			margin-bottom: 25px
+			+title
+
+		&__subtitle
+			font-size: 24px
+			margin-bottom: 60px
+
+		&__description
+			font-size: 24px
+
+			text-align: justify
+
+			margin-bottom: 50px
+
+		&-form
+			display: flex
+			flex-direction: column
+			align-items: center
+
+			&__subbtn
+				color: $white
+				font-size: 16px
+				margin-bottom: 24px
+
+			&-input
+				width: 380px
+				margin-bottom: 25px
+
+				&__field
+					width: 100%
+					padding: 15px
+					border: 1px solid $white
+					color: $white
+					outline: none
+					background-color: transparent
+					border-radius: 12px
+					font-size: 16px
+
+					+ManropeMedium
+
+					&::placeholder
+						color: $white
+
+			&__btn
+				width: 380px
+				margin-bottom: 25px
+
+			&__policy
+				width: 100%
+				max-width: 618px
+				font-size: 16px
+				color: $white
+
+				& > a
+					color: inherit
+					text-decoration: underline
+
+			.dark &__subbtn
+				color: $black1
+
+			.dark &-input__field
+				border-color: $black1
+				color: $black1
+
+				&::placeholder
+					color: $gray
+
+			.dark &__policy
+				color: #BABABA
+
+		&-form-success
+			&__btn
+				cursor: default
+				margin-bottom: 35px
+
+			&__subtitle
+				color: $white
+				font-size: 24px
+
+			.dark &__subtitle
+				color: $black1
+
+/* MEDIA */
+@media screen and (max-width: 1300px)
+	.cinema-artistic
+		&-main
+			&-text
+				&__title
+					font-size: 52px
+
+			&-logos
+				width: 65%
+
+		&-descriptions
+			margin: 40px 0
+
+			&-wrapper
+				width: 95%
+
+			&__description
+				width: 100%
+				font-size: 16px
+
+				&:first-child
+					margin-bottom: 20px
+
+		&-auctioninfo
+			border-top: 20px solid $red
+			padding: 40px 0
+
+			&__title
+				font-size: 48px
+				margin-bottom: 35px
+
+			&__description
+				width: 95%
+				margin: 0 auto 40px auto
+				font-size: 16px
+
+			&__subtitle
+				margin: 0 auto 40px auto
+				width: 260px
+				font-size: 12px
+
+		&-images
+			border-top: 20px solid $red
+
+		&-red-image
+			border-top: 20px solid $red
+
+		&-companies
+			border-top: 20px solid $red
+			padding: 40px 0
+
+			&-block
+				width: 95%
+
+				& > svg
+					margin-bottom: 20px
+
+				&__description
+					font-size: 14px
+
+		&-exhibits
+			border-top: 20px solid $red
+
+		&-exhibit
+			&-cover
+				border-top: 20px solid $red
+
+			&-info-wrapper
+				padding: 20px 0 40px 0
+
+				&.border
+					border-top: 20px solid $red
+
+			&-info
+				width: 95%
+
+				&-options
+					margin-bottom: 40px
+
+					&-item
+						&__title
+							font-size: 14px
+							margin-right: 15px
+
+						&__value
+							font-size: 14px
+							margin-left: 15px
+
+				&__description
+					font-size: 16px
+
+			&-image
+				margin-bottom: 20px
+
+@media screen and (max-width: 800px)
+	.cinema-artistic
+		&__btn
+			padding: 13px 30px
+			font-size: 15px
+
+		&-main
+			&-text
+				display: flex
+				justify-content: center
+
+				width: 100%
+
+				&-title-media
+					width: 95%
+					display: block
+
+					& > svg
+						width: 100%
+
+				&__title, &__subtitle
+					display: none
+
+			&-logos
+				width: 95%
+				bottom: 20px
+
+		&-images
+			height: 600px
+
+		&-exhibits
+			padding: 40px 0
+
+			&__title
+				font-size: 48px
+
+		&-exhibit
+			&__number
+				font-size: 20px
+
+				width: 60px
+				height: 30px
+
+				padding: 0 4px
+
+				&::before
+					width: 4px
+					height: 4px
+
+				&::after
+					width: 4px
+					height: 4px
+
+		&-auction
+			padding: 20px 0
+
+			&-wrapper
+				width: 95%
+
+			&__title
+				font-size: 46px
+				margin-bottom: 40px
+
+			&__subtitle
+				font-size: 14px
+
+			&__description
+				font-size: 12px
+
+			&__subbtn
+				font-size: 12px
+
+			&__btn
+				width: 100%
+
+@media screen and (max-width: 500px)
+	.cinema-artistic
+		&-auction
+			&-form
+				&-input, &__btn
+					width: 100%
+
+				&__policy
+					font-size: 9px
+
+			&-form-success
+				&__subtitle
+					font-size: 12px
