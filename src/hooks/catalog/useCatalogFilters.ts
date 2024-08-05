@@ -9,6 +9,7 @@ import {
     parseAsFloat,
     useQueryStates,
 } from 'nuqs';
+import isEqual from 'lodash.isequal';
 
 import { CatalogPageParams, ICatalogFilters } from '@/types/catalog';
 import { AVAILABILITY, CATEGORY_SLUGS, CONDITIONS, FILTER_CATEGORY_SLUGS, GENDERS, SORT } from '@/constants/catalog';
@@ -19,10 +20,12 @@ import { getDefaultPageSort } from '@/functions/getDefaultPageSort';
 export const useCatalogFilters = () => {
     const { category_slug, subcategories_slug } = useParams<CatalogPageParams>();
 
-    // TODO типы, модели, бренды
-    const [state, setFilters] = useQueryStates(
+    // TODO типы, модели
+    const [state, setQueryState] = useQueryStates(
         {
             categories: parseAsArrayOf(parseAsString).withDefault([]),
+            types: parseAsArrayOf(parseAsString).withDefault([]),
+            brands: parseAsArrayOf(parseAsString).withDefault([]),
             sort: parseAsStringLiteral(Object.values(SORT)).withDefault(getDefaultPageSort(category_slug)),
             page: parseAsInteger.withDefault(1),
             search: parseAsString.withDefault(''),
@@ -42,13 +45,15 @@ export const useCatalogFilters = () => {
         { clearOnDefault: true, scroll: false, history: 'replace' },
     );
 
-    const filters = React.useMemo(
+    const tempFilters = React.useMemo(
         () =>
             ({
                 category_slug:
                     !!category_slug && FILTER_CATEGORY_SLUGS.includes(category_slug) ? category_slug : undefined,
                 subcategories_slug,
                 categories: state.categories,
+                types: state.types,
+                brands: state.brands,
                 search: state.search,
                 price: {
                     min: state.minPrice,
@@ -68,17 +73,21 @@ export const useCatalogFilters = () => {
         [category_slug, subcategories_slug, state],
     );
 
-    const updateFilters = (newFilters: Parameters<typeof setFilters>[0]) => {
-        setFilters((state) => ({
+    const [filters, setFilters] = React.useState(tempFilters);
+
+    const updateFilters = React.useCallback((newFilters: Parameters<typeof setQueryState>[0]) => {
+        setQueryState((state) => ({
             ...state,
             page: null,
             ...newFilters,
         }));
-    };
+    }, []);
 
-    const clearFilters = () => {
-        setFilters({
+    const clearFilters = React.useCallback(() => {
+        setQueryState({
             categories: null,
+            types: null,
+            brands: null,
             sort: null,
             page: null,
             search: null,
@@ -93,7 +102,13 @@ export const useCatalogFilters = () => {
             glass_frame: null,
             size: null,
         });
-    };
+    }, []);
+
+    React.useEffect(() => {
+        if (!isEqual(tempFilters, filters)) {
+            setFilters(tempFilters);
+        }
+    }, [tempFilters]);
 
     return {
         filters,

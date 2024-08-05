@@ -20,6 +20,13 @@ export const CATEGORY_SLUGS = {
     decorations: 'ukrasheniia',
 };
 
+export const CATEGORY_SLUG_NAMES = {
+    [CATEGORY_SLUGS.bags]: CATEGORY_NAMES.bags,
+    [CATEGORY_SLUGS.accessories]: CATEGORY_NAMES.accessories,
+    [CATEGORY_SLUGS.shoes]: CATEGORY_NAMES.shoes,
+    [CATEGORY_SLUGS.decorations]: CATEGORY_NAMES.decorations,
+};
+
 export const FILTER_CATEGORY_SLUGS = [
     CATEGORY_SLUGS.bags,
     CATEGORY_SLUGS.accessories,

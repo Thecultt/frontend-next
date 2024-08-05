@@ -1,24 +1,28 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
-import { setFiltersBrandsProduct } from '@/redux/actions/products';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
+import { CATEGORY_SLUG_NAMES } from '@/constants/catalog';
 
 const CatalogFiltersBrands: React.FC = () => {
-    const dispatch = useDispatch();
+    const [search, setSearch] = React.useState('');
 
-    const { filters } = useTypedSelector(({ products }) => products);
-    const { categories } = useTypedSelector(({ products_filters }) => products_filters);
+    const {
+        filters: { category_slug, categories: selectedCategories, brands: selectedBrands },
+        updateFilters,
+    } = useCatalogFilters();
 
-    const [search, setSearch] = React.useState<string>('');
+    const { categories: fetchedCategories } = useTypedSelector(({ products_filters }) => products_filters);
 
     const brands = React.useMemo(() => {
-        const items = Object.keys(filters.categories).length
-            ? Object.keys(filters.categories)
-            : Object.keys(categories);
+        const items = category_slug
+            ? [CATEGORY_SLUG_NAMES[category_slug]]
+            : selectedCategories.length > 0
+              ? selectedCategories
+              : Object.keys(fetchedCategories);
 
         if (!items.length) {
             return [];
@@ -27,17 +31,19 @@ const CatalogFiltersBrands: React.FC = () => {
         const brandsSet = new Set<string>([]);
 
         items.map((category) => {
-            if (categories[category] && categories[category].subsubcategories) {
-                Object.keys(categories[category].subsubcategories).map((subsubcategory) => {
-                    Object.keys(categories[category].subsubcategories[subsubcategory].manufacturers).map((brand) => {
-                        brandsSet.add(brand);
-                    });
+            if (fetchedCategories[category] && fetchedCategories[category].subsubcategories) {
+                Object.keys(fetchedCategories[category].subsubcategories).map((subsubcategory) => {
+                    Object.keys(fetchedCategories[category].subsubcategories[subsubcategory].manufacturers).map(
+                        (brand) => {
+                            brandsSet.add(brand);
+                        },
+                    );
                 });
             }
         });
 
         return Array.from(brandsSet).sort((a, b) => a.localeCompare(b));
-    }, [categories, filters.categories]);
+    }, [category_slug, fetchedCategories, selectedCategories]);
 
     const visibleBrands = React.useMemo(() => {
         if (!search) {
@@ -53,7 +59,11 @@ const CatalogFiltersBrands: React.FC = () => {
     };
 
     const onChangeSetBrand = (brand: string) => {
-        dispatch(setFiltersBrandsProduct(brand));
+        updateFilters({
+            brands: selectedBrands.includes(brand)
+                ? selectedBrands.filter((selectedBrand) => selectedBrand !== brand)
+                : [...selectedBrands, brand],
+        });
     };
 
     return (
@@ -62,7 +72,7 @@ const CatalogFiltersBrands: React.FC = () => {
                 <input
                     type="text"
                     className="catalog-filters-block-content-brands-search__input"
-                    onChange={(e) => onChangeSearch(e)}
+                    onChange={onChangeSearch}
                 />
                 <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -90,7 +100,7 @@ const CatalogFiltersBrands: React.FC = () => {
                             id={`catalog-filters-block-content-brands-checkbox-${index}`}
                             label={brand}
                             onChange={() => onChangeSetBrand(brand)}
-                            checked={!!Object.keys(filters.brands).find((filtersBrand) => brand === filtersBrand)}
+                            checked={selectedBrands.includes(brand)}
                         />
                     </div>
                 ))}

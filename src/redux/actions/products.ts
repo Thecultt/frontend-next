@@ -66,7 +66,6 @@ export const fetchProductsCatalog =
         const params = new URLSearchParams();
 
         const typesArray = Object.keys(filters.types || {}).map((key) => key);
-        const brandsArray = Object.keys(filters.brands || {}).map((key) => key);
         const modelsArray = Object.keys(filters.models || {}).map((key) => key);
 
         if (filters.search) {
@@ -90,7 +89,7 @@ export const fetchProductsCatalog =
 
         filters.conditions?.map((condition) => params.append('conditions', condition));
         typesArray.map((type) => params.append('subcategories', type));
-        brandsArray.map((brand) => params.append('manufacturer', brand));
+        filters.brands?.map((brand) => params.append('manufacturer', brand));
         modelsArray.map((model) => params.append('model_names', model));
         filters.colors?.map((color) => params.append('color', color));
         filters.genders?.map((gender) => params.append('genders', gender));

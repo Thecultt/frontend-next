@@ -22,6 +22,7 @@
     "browser-image-compression": "^2.0.2",
     "dayjs": "^1.11.11",
     "heic2any": "^0.0.4",
+    "lodash.isequal": "^4.5.0",
     "lodash.omitby": "^4.6.0",
     "next": "14.2.3",
     "nuqs": "^1.17.6",
@@ -48,6 +49,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/lodash.isequal": "^4.5.8",
     "@types/lodash.omitby": "^4.6.9",
     "@types/node": "^20",
     "@types/qs": "^6.9.15",

@@ -17,8 +17,8 @@ const CatalogProducts: React.FC = () => {
                                 isFetch: isFetchMore || isFetchPage,
                             })}
                         >
-                            {items.map((item) => (
-                                <ProductCard key={item.id} productData={item} />
+                            {items.map((item, index) => (
+                                <ProductCard key={index} productData={item} />
                             ))}
                         </div>
 

@@ -5,6 +5,7 @@ import { getClassNames } from '@/functions/getClassNames';
 import { SORT, SORT_TITLES } from '@/constants/catalog';
 import { SortType } from '@/redux/types/IProducts';
 import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
+import { Checkbox } from '@/components';
 
 const CatalogFiltersTopSort: React.FC = () => {
     const {
@@ -20,7 +21,7 @@ const CatalogFiltersTopSort: React.FC = () => {
         setState(!state);
     };
 
-    const onClickSetItem = (sortBy: SortType) => {
+    const handleChangeSort = (sortBy: SortType) => {
         updateFilters({ sort: sortBy });
         setTimeout(() => {
             setState(false);
@@ -50,19 +51,13 @@ const CatalogFiltersTopSort: React.FC = () => {
                     <div
                         className="checkbox-wrapper catalog-filters-top-sort-modal-item"
                         key={`catalog-filters-top-sort-modal-item-${index}`}
-                        onClick={() => onClickSetItem(type)}
                     >
-                        <input
+                        <Checkbox
                             id={`catalog-filters-top-sort-modal-item-${index}`}
-                            type="radio"
-                            className="checkbox"
-                            name="sort"
+                            label={title}
+                            onChange={() => handleChangeSort(type)}
                             checked={type === sort}
                         />
-
-                        <label htmlFor={`catalog-filters-top-sort-modal-item-${index}`} className="checkbox__label">
-                            <p className="checkbox__label__text">{title}</p>
-                        </label>
                     </div>
                 ))}
             </div>

@@ -45,7 +45,7 @@ const CatalogFiltersTopBoutique: React.FC = React.memo(() => {
 
                 <div className="catalog-filters-top-boutique-info-message-wrapper message-info-wrapper">
                     <p className="message-info center catalog-filters-top-boutique-info__message">
-                        <h3>Подборка лотов из бутика</h3>
+                        <span className="message-info__title">Подборка лотов из бутика</span>
                         Коллекция лотов, которые мы получили напрямую из бутиков-партнеров или от частных байеров. Все
                         аксессуары в подборке — новые и никогда не были в использовании.
                     </p>
