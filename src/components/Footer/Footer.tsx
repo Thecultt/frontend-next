@@ -124,7 +124,7 @@ const Footer: React.FC<FooterProps> = ({ transparent, subscribeBlockId }) => {
 
     return (
         <>
-            {pathname !== '/cinema1909' ? <FooterEmailSubscribe id={subscribeBlockId} /> : null}
+            {pathname !== APP_ROUTE.cinema && <FooterEmailSubscribe id={subscribeBlockId} />}
 
             <footer
                 className={getClassNames('footer', {
