@@ -14,6 +14,7 @@ export const APP_ROUTE = {
     subscribe: '/subscribe',
     favorites: '/favorites',
     alionaDoletskaya: '/AlionaDoletskaya',
+    cinema: '/cinema1909',
     concierge: {
         root: '/concierge',
         product: '/concierge/product',
