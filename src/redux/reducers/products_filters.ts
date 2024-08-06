@@ -2,13 +2,12 @@ import { ProductsFiltersState, ProductsFiltersTypes, ProductsFiltersActionTypes 
 
 const initialState: ProductsFiltersState = {
     isLoaded: false,
-
     price: { min: 0, max: 0 },
     conditions: [],
+    glass_frame: [],
     categories: {},
     colors: {},
     selections: {},
-    glass_frame: [],
 };
 
 const products_filters = (state = initialState, action: ProductsFiltersTypes) => {

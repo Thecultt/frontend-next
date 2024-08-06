@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import { createTextMask } from 'redux-form-input-masks';
@@ -5,6 +7,7 @@ import { createTextMask } from 'redux-form-input-masks';
 import { RenderInput, RenderRadioSelect } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { useAuthUser } from '@/hooks/useAuthUser';
+import { GENDERS } from '@/constants/catalog';
 
 import { validate } from './validate';
 
@@ -17,7 +20,6 @@ const CabinetSettingInfoBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 }) => {
     const [isEdit, setIsEdit] = React.useState<boolean>(false);
 
-    // const { user, isSending } = useTypedSelector(({ user }) => user);
     const { isSending, user } = useAuthUser();
 
     React.useEffect(() => {
@@ -103,18 +105,18 @@ const CabinetSettingInfoBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                         <Field
                             component={RenderRadioSelect}
                             type="radio"
-                            label="Женский"
+                            label={GENDERS.female}
                             name="gender"
-                            value={'Женский'}
+                            value={GENDERS.female}
                         />
                     </div>
                     <div className="cabinet-setting-block-form-radio">
                         <Field
                             component={RenderRadioSelect}
                             type="radio"
-                            label="Мужской"
+                            label={GENDERS.male}
                             name="gender"
-                            value={'Мужской'}
+                            value={GENDERS.male}
                         />
                     </div>
                 </div>

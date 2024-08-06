@@ -4,32 +4,32 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { setFiltersSizeProduct } from '@/redux/actions/products';
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
+import { CATEGORY_NAMES } from '@/constants/catalog';
 
-interface CatalogFiltersSizeProps {
-    size: string[];
-}
-
-const CatalogFiltersSize: React.FC<CatalogFiltersSizeProps> = ({ size }) => {
+const CatalogFiltersSize: React.FC = () => {
     const dispatch = useDispatch();
 
+    const { categories } = useTypedSelector(({ products_filters }) => products_filters);
     const { filters } = useTypedSelector(({ products }) => products);
 
-    const onChangeSetType = (size: string) => {
-        dispatch(setFiltersSizeProduct(size));
+    const sizes = categories[CATEGORY_NAMES.shoes].size || [];
+
+    const onChangeSetType = (size: number) => {
+        dispatch(setFiltersSizeProduct(size.toString()));
     };
 
     return (
-        <CatalogFiltersBlockWrapper title="Размер">
-            {size.map((size, index) => (
+        <CatalogFiltersBlockWrapper title="Размер" disabled={!sizes.length}>
+            {sizes.map((size, index) => (
                 <div
                     className="catalog-filters-block-content-checkbox"
                     key={`catalog-filters-block-content-size-${size}-checkbox-${index}`}
                 >
                     <Checkbox
                         id={`catalog-filters-block-content-size-${size}-checkbox-${index}`}
-                        label={size}
+                        label={size.toString()}
                         onChange={() => onChangeSetType(size)}
-                        checked={Object.keys(filters.size).find((filtersSize) => size == filtersSize) ? true : false}
+                        checked={!!Object.keys(filters.size).find((filtersSize) => size.toString() == filtersSize)}
                     />
                 </div>
             ))}

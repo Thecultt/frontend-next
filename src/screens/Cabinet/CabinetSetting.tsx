@@ -12,6 +12,7 @@ import {
     CabinetSettingPaymentBlock,
 } from '@/components';
 import { useAuthUser } from '@/hooks/useAuthUser';
+import { GENDER_IDS, GENDERS } from '@/constants/catalog';
 
 const CabinetSetting: React.FC = () => {
     const dispatch = useDispatch();
@@ -19,12 +20,12 @@ const CabinetSetting: React.FC = () => {
     const { isLoaded, logout } = useAuthUser();
 
     const onSubmit = (data: any) => {
-        if (data.gender && data.gender === 'Женский') {
-            data.gender = 1;
+        if (data.gender && data.gender === GENDERS.female) {
+            data.gender = GENDER_IDS.female;
         }
 
-        if (data.gender && data.gender === 'Мужской') {
-            data.gender = 2;
+        if (data.gender && data.gender === GENDERS.male) {
+            data.gender = GENDER_IDS.male;
         }
 
         dispatch(sendUpdateUser(data) as any);
