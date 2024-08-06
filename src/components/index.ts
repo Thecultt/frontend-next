@@ -291,6 +291,9 @@ export { default as FaqTheCultt } from './Faq/FaqTheCultt';
 // Cart
 export { default as CartItemBlock } from './Cart/CartItemBlock';
 
+// CinemaArtistic
+export { default as CinemaArtisticFormSubscribe } from './CinemaArtistic/CinemaArtisticFormSubscribe';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';
