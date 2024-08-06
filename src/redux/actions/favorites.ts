@@ -13,8 +13,6 @@ export const fetchFavorites = () => async (dispatch: Dispatch<FavoritesActions>)
     } = await $api.get<{ items: Product[] }>(`/favorite-products/`);
 
     if (items && items.length > 0) {
-        const totalSum = items.reduce((acc, cur) => acc + (cur.price ?? 0), 0);
-
         sendMindbox('Website.SetWishList', {
             productList: items.map((product) => ({
                 product: {
@@ -23,8 +21,7 @@ export const fetchFavorites = () => async (dispatch: Dispatch<FavoritesActions>)
                     },
                 },
                 count: 1,
-                pricePerItem: product.price ?? 0,
-                priceOfLine: totalSum,
+                pricePerItem: product.price ?? 1,
             })),
         });
     }
