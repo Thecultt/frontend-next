@@ -15,18 +15,20 @@ import { CatalogPageParams, ICatalogFilters } from '@/types/catalog';
 import { AVAILABILITY, CATEGORY_SLUGS, CONDITIONS, FILTER_CATEGORY_SLUGS, GENDERS, SORT } from '@/constants/catalog';
 import { getDefaultPageSort } from '@/functions/getDefaultPageSort';
 
-// TODO удалить фильтры в redux state
+// TODO SEO catalog meta
 
 export const useCatalogFilters = () => {
-    const { category_slug, subcategories_slug } = useParams<CatalogPageParams>();
+    const { category_slug, subcategories_slug, selection_id } = useParams<CatalogPageParams>();
 
-    // TODO типы, модели
     const [state, setQueryState] = useQueryStates(
         {
             categories: parseAsArrayOf(parseAsString).withDefault([]),
             types: parseAsArrayOf(parseAsString).withDefault([]),
             brands: parseAsArrayOf(parseAsString).withDefault([]),
-            sort: parseAsStringLiteral(Object.values(SORT)).withDefault(getDefaultPageSort(category_slug)),
+            models: parseAsArrayOf(parseAsString).withDefault([]),
+            sort: parseAsStringLiteral(Object.values(SORT)).withDefault(
+                getDefaultPageSort(category_slug, selection_id),
+            ),
             page: parseAsInteger.withDefault(1),
             search: parseAsString.withDefault(''),
             minPrice: parseAsInteger.withDefault(0),
@@ -54,6 +56,7 @@ export const useCatalogFilters = () => {
                 categories: state.categories,
                 types: state.types,
                 brands: state.brands,
+                models: state.models,
                 search: state.search,
                 price: {
                     min: state.minPrice,
@@ -69,6 +72,7 @@ export const useCatalogFilters = () => {
                 price_drop: state.price_drop,
                 glass_frame: state.glass_frame,
                 size: state.size,
+                selection: selection_id,
             }) satisfies ICatalogFilters,
         [category_slug, subcategories_slug, state],
     );
@@ -88,6 +92,7 @@ export const useCatalogFilters = () => {
             categories: null,
             types: null,
             brands: null,
+            models: null,
             sort: null,
             page: null,
             search: null,

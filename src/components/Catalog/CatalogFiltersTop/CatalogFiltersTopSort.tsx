@@ -2,7 +2,7 @@ import React from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 
 import { getClassNames } from '@/functions/getClassNames';
-import { SORT, SORT_TITLES } from '@/constants/catalog';
+import { SORT_TITLES } from '@/constants/catalog';
 import { SortType } from '@/redux/types/IProducts';
 import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 import { Checkbox } from '@/components';
@@ -12,10 +12,11 @@ const CatalogFiltersTopSort: React.FC = () => {
         filters: { sort },
         updateFilters,
     } = useCatalogFilters();
-    const currentSort = SORT_TITLES.find((item) => item.type === sort) || { type: SORT.shuffle, title: 'умолчанию' };
 
     const modalRef = React.useRef<HTMLDivElement>(null);
     const [state, setState] = React.useState(false);
+
+    const currentSort = SORT_TITLES.find((item) => item.type === sort) || SORT_TITLES[0];
 
     const toggleState = () => {
         setState(!state);

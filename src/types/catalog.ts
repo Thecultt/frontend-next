@@ -10,6 +10,7 @@ export type AvailabilityType = (typeof AVAILABILITY)[keyof typeof AVAILABILITY];
 export type CatalogPageParams = {
     category_slug?: string;
     subcategories_slug?: string;
+    selection_id?: string;
 };
 
 export interface ICatalogFilters {
@@ -29,7 +30,7 @@ export interface ICatalogFilters {
     glass_frame?: string[];
     size?: number[];
 
-    selection?: number | null;
+    selection?: string;
     boutique?: boolean;
     price_drop?: boolean;
     sort?: SortType;

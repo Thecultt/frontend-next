@@ -2,14 +2,16 @@ import React from 'react';
 import Link from 'next/link';
 
 import { getClassNames } from '@/functions/getClassNames';
+import { Noop } from '@/types/functions';
 
 interface HeaderMediaLinkTabProps {
     title: string;
     linkTitle?: string;
+    linkClick?: Noop;
     children: React.ReactNode;
 }
 
-const HeaderMediaLinkTab: React.FC<HeaderMediaLinkTabProps> = ({ title, linkTitle, children }) => {
+const HeaderMediaLinkTab: React.FC<HeaderMediaLinkTabProps> = ({ title, linkTitle, linkClick, children }) => {
     const [state, setState] = React.useState(false);
 
     return (
@@ -21,11 +23,7 @@ const HeaderMediaLinkTab: React.FC<HeaderMediaLinkTabProps> = ({ title, linkTitl
         >
             <div className="header-media-modal-menu-links-tab-top">
                 {linkTitle ? (
-                    <Link
-                        href={linkTitle}
-                        className="header-media-modal-menu-links-tab-top__title"
-                        onClick={() => setState(!state)}
-                    >
+                    <Link href={linkTitle} className="header-media-modal-menu-links-tab-top__title" onClick={linkClick}>
                         {title}
                     </Link>
                 ) : (
@@ -45,7 +43,7 @@ const HeaderMediaLinkTab: React.FC<HeaderMediaLinkTabProps> = ({ title, linkTitl
                 </div>
             </div>
 
-            {state ? <div className="header-media-modal-menu-links-tab-bottom">{children}</div> : null}
+            {state && <div className="header-media-modal-menu-links-tab-bottom">{children}</div>}
         </div>
     );
 };

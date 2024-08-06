@@ -1,7 +1,7 @@
 import { CATEGORY_SLUGS, SORT } from '@/constants/catalog';
 
-export const getDefaultPageSort = (categorySlug?: string) => {
-    if (categorySlug && [CATEGORY_SLUGS.sale, CATEGORY_SLUGS.popular].includes(categorySlug)) {
+export const getDefaultPageSort = (categorySlug?: string, selectionId?: string) => {
+    if ((categorySlug && [CATEGORY_SLUGS.sale, CATEGORY_SLUGS.popular].includes(categorySlug)) || !!selectionId) {
         return SORT.popular;
     }
 

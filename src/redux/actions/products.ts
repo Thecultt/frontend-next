@@ -7,7 +7,7 @@ import { sendMindbox } from '@/functions/mindbox';
 import { pushDataLayer } from '@/functions/pushDataLayer';
 import { ICatalogFilters } from '@/types/catalog';
 
-import { CatalogFetchType, ProductActionTypes, ProductTypes, ProductsStateFilters, SortType } from '../types/IProducts';
+import { CatalogFetchType, ProductActionTypes, ProductTypes } from '../types/IProducts';
 
 export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<ProductTypes>) => {
     const {
@@ -65,9 +65,6 @@ export const fetchProductsCatalog =
 
         const params = new URLSearchParams();
 
-        const typesArray = Object.keys(filters.types || {}).map((key) => key);
-        const modelsArray = Object.keys(filters.models || {}).map((key) => key);
-
         if (filters.search) {
             params.append('search', filters.search);
         }
@@ -88,9 +85,9 @@ export const fetchProductsCatalog =
         }
 
         filters.conditions?.map((condition) => params.append('conditions', condition));
-        typesArray.map((type) => params.append('subcategories', type));
+        filters.types?.map((type) => params.append('subcategories', type));
         filters.brands?.map((brand) => params.append('manufacturer', brand));
-        modelsArray.map((model) => params.append('model_names', model));
+        filters.models?.map((model) => params.append('model_names', model));
         filters.colors?.map((color) => params.append('color', color));
         filters.genders?.map((gender) => params.append('genders', gender));
         filters.glass_frame?.map((glass_frame) => params.append('glass_frame', glass_frame));
@@ -109,11 +106,10 @@ export const fetchProductsCatalog =
             params.append('price_drop', String(filters.price_drop));
         }
         if (filters.selection) {
-            params.append('selections', filters.selection.toString());
+            params.append('selections', filters.selection);
         }
 
         params.append('sort_by', filters.sort ?? SORT.shuffle);
-
         params.append('page', String(filters.page));
 
         const {
@@ -125,7 +121,6 @@ export const fetchProductsCatalog =
             items: Product[];
         }>(`/catalog_v2`, { params });
 
-        // Measure product views / impressions
         pushDataLayer('view_item_list', {
             items: items.map((item, index) => ({
                 item_name: item.name,
@@ -269,89 +264,4 @@ export const setLastSearchString = (string: string) => ({
 export const setCatalogScroll = (scrollTop: number) => ({
     type: ProductActionTypes.SET_PRODUCTS_SCROLL,
     payload: scrollTop,
-});
-
-export const setFiltersCatalog = (filters: ProductsStateFilters) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG,
-    payload: filters,
-});
-
-export const setFiltersPriceProduct = (price: { min: number; max: number }) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_PRICE,
-    payload: price,
-});
-
-export const setFiltersConditionsProduct = (condition: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_CONDITIONS,
-    payload: condition,
-});
-
-export const setFiltersCategoriesProduct = (category: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_CATEGORIES,
-    payload: category,
-});
-
-export const setFiltersTypesProduct = (type: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_TYPES,
-    payload: type,
-});
-
-export const setFiltersBrandsProduct = (brand: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_BRANDS,
-    payload: brand,
-});
-
-export const setFiltersModelsProduct = (model: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_MODELS,
-    payload: model,
-});
-
-export const setFiltersColorsProduct = (color: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_COLORS,
-    payload: color,
-});
-
-export const setFiltersSexProduct = (sex: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SEX,
-    payload: sex,
-});
-
-export const setFiltersAvailabilityProduct = (availability: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_AVAILABILITY,
-    payload: availability,
-});
-
-export const setFiltersSizeProduct = (size: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SIZE,
-    payload: size,
-});
-
-export const setFiltersSelectionProduct = (selectionId: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTION,
-    payload: selectionId,
-});
-
-export const setFiltersBoutiqueProduct = (boutique: boolean) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_BOUTIQUE,
-    payload: boutique,
-});
-
-export const setFiltersGlassFrameProduct = (glass_frame: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_GLASS_FRAME,
-    payload: glass_frame,
-});
-
-export const setFiltersPriceDropProduct = (price_drop: boolean) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_PRICE_DROP,
-    payload: price_drop,
-});
-
-export const setFiltersSortProduct = (sort: SortType) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SORT,
-    payload: sort,
-});
-
-export const clearProductsFilters = () => ({
-    type: ProductActionTypes.CLEAR_PRODUCTS_FILTERS,
-    payload: undefined,
 });

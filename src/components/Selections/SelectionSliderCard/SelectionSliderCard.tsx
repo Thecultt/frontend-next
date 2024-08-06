@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { ISelection } from '@/models/ISelection';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { BaseImage } from '@/components';
-import { SORT } from '@/constants/catalog';
 
 import './styles.sass';
 
@@ -18,8 +17,7 @@ export const SelectionSliderCard: React.FC<Props> = ({ data }) => {
     return (
         <Link
             href={getCatalogFiltersUrl({
-                selection: id,
-                sort: SORT.popular,
+                selection: id.toString(),
             })}
             className="selection-slider-card"
         >

@@ -96,11 +96,9 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                     {selections.length > 0 && (
                         <HeaderMediaLinkTab title="Подборки">
                             {selections.map((item) => (
-                                // TODO new selection link
                                 <Link
                                     href={getCatalogFiltersUrl({
-                                        selection: item.id,
-                                        sort: SORT.popular,
+                                        selection: item.id.toString(),
                                     })}
                                     className="header-media-modal-menu-links__link"
                                     key={item.id}
@@ -118,15 +116,15 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                             linkTitle={getCatalogFiltersUrl({
                                 category_slug: category.slug,
                             })}
-                            key={`header-media-modal-menu-links-tab${index}`}
+                            linkClick={toggleVisible}
+                            key={`header-media-modal-menu-links-tab-${index}`}
                         >
                             {filtersIsLoaded &&
                                 Object.keys(category.subsubcategories).map((subsubcategory, subindex) => (
                                     <Link
                                         href={getCatalogFiltersUrl({
                                             category_slug: category.slug,
-                                            subcategories_slug:
-                                                category.subsubcategories?.[subsubcategory]?.slug || undefined,
+                                            types: [subsubcategory],
                                         })}
                                         className="header-media-modal-menu-links__link"
                                         key={`header-media-modal-menu-links__link-${category}-${subsubcategory}-${subindex}`}

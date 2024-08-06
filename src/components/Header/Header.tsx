@@ -22,7 +22,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { KEYBOARD } from '@/constants/keys';
-import { CATEGORIES, CATEGORY_NAMES, CATEGORY_SLUGS, SELECTIONS_IDS, SORT } from '@/constants/catalog';
+import { CATEGORY_NAMES, CATEGORY_SLUGS, SELECTIONS_IDS, SORT } from '@/constants/catalog';
 import { APP_ROUTE } from '@/constants/routes';
 import { HeaderSearchInput } from './HeaderSearchInput';
 import { pushDataLayer } from '@/functions/pushDataLayer';
@@ -64,14 +64,12 @@ const Header: React.FC = () => {
 
     const { isLoggedIn } = useAuthUser();
 
-    const { categories: filtersCategories, isLoaded: filtersIsLoaded } = useTypedSelector(
+    const { categories: fetchedCategories, isLoaded: filtersIsLoaded } = useTypedSelector(
         ({ products_filters }) => products_filters,
     );
 
     const categories = React.useMemo(() => {
-        console.log('filtersCategories', filtersCategories);
-
-        // TODO
+        // TODO map fetchedCategories
         // if (!filtersIsLoaded) {
         //     return [];
         // }
@@ -212,7 +210,6 @@ const Header: React.FC = () => {
     const openHoverMenu = (index: number) => {
         if (!isOpenSearch) {
             setCurrentCategoryHoverMenuIndex(index);
-
             setIsOpenHoverMenu(true);
         }
     };
@@ -332,10 +329,8 @@ const Header: React.FC = () => {
                                         </Link>
 
                                         <Link
-                                            // TODO new selection link
                                             href={getCatalogFiltersUrl({
-                                                selection: SELECTIONS_IDS.summerBags,
-                                                sort: SORT.popular,
+                                                selection: SELECTIONS_IDS.summerBags.toString(),
                                             })}
                                             className="header-menu__link"
                                             onMouseOver={() => setIsSelectionsMenuVisible(true)}

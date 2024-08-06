@@ -1,53 +1,53 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setFiltersModelsProduct } from '@/redux/actions/products';
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
+import { CATEGORY_SLUG_NAMES } from '@/constants/catalog';
 
 const CatalogFiltersModels: React.FC = () => {
-    const dispatch = useDispatch();
-
     const [search, setSearch] = React.useState('');
 
-    const { filters } = useTypedSelector(({ products }) => products);
-    const { isLoaded, categories } = useTypedSelector(({ products_filters }) => products_filters);
+    const {
+        filters: { categories: selectedCategories, brands: selectedBrands, models: selectedModels, category_slug },
+        updateFilters,
+    } = useCatalogFilters();
+
+    const { isLoaded, categories: fetchedCategories } = useTypedSelector(({ products_filters }) => products_filters);
 
     const models = React.useMemo(() => {
-        if (!isLoaded) {
+        if (!isLoaded || (!selectedCategories.length && !Object.keys(fetchedCategories).length)) {
             return [];
         }
 
-        const selectedCategories = Object.keys(filters.categories);
-
-        if (!selectedCategories.length || !Object.keys(categories).length) {
-            return [];
-        }
+        const items = category_slug
+            ? [CATEGORY_SLUG_NAMES[category_slug]]
+            : selectedCategories.length > 0
+              ? selectedCategories
+              : Object.keys(fetchedCategories);
 
         const modelsSet = new Set<string>([]);
 
-        selectedCategories.forEach((category) => {
-            if (categories[category]) {
-                const subsubcategories = Object.keys(categories[category].subsubcategories);
+        items.forEach((category) => {
+            if (fetchedCategories[category]) {
+                const subsubcategories = Object.keys(fetchedCategories[category].subsubcategories);
 
                 if (subsubcategories.length > 0) {
                     subsubcategories.forEach((subsubcategory) => {
                         const manufacturers = Object.keys(
-                            categories[category].subsubcategories[subsubcategory].manufacturers,
+                            fetchedCategories[category].subsubcategories[subsubcategory].manufacturers,
                         );
 
                         if (manufacturers.length > 0) {
                             manufacturers.forEach((brand) => {
                                 const models = Object.keys(
-                                    categories[category].subsubcategories[subsubcategory].manufacturers[brand].models ||
-                                        {},
+                                    fetchedCategories[category].subsubcategories[subsubcategory].manufacturers[brand]
+                                        .models || {},
                                 );
 
                                 if (models.length > 0) {
-                                    const selectedBrands = Object.keys(filters.brands);
-
                                     if (selectedBrands.length > 0) {
                                         selectedBrands.forEach((currentBrand) => {
                                             if (currentBrand === brand) {
@@ -70,7 +70,7 @@ const CatalogFiltersModels: React.FC = () => {
         });
 
         return Array.from(modelsSet).sort((a, b) => a.localeCompare(b));
-    }, [categories, filters.brands, filters.categories, isLoaded]);
+    }, [category_slug, fetchedCategories, isLoaded, selectedBrands, selectedCategories]);
 
     const visibleModels = React.useMemo(() => {
         if (!search) {
@@ -86,7 +86,11 @@ const CatalogFiltersModels: React.FC = () => {
     };
 
     const onChangeSetModels = (model: string) => {
-        dispatch(setFiltersModelsProduct(model));
+        updateFilters({
+            models: selectedModels.includes(model)
+                ? selectedModels.filter((selectedModel) => selectedModel !== model)
+                : [...selectedModels, model],
+        });
     };
 
     return (
@@ -123,7 +127,7 @@ const CatalogFiltersModels: React.FC = () => {
                             id={`catalog-filters-block-content-models-checkbox-${index}`}
                             label={model}
                             onChange={() => onChangeSetModels(model)}
-                            checked={!!Object.keys(filters.models).find((filtersModel) => model === filtersModel)}
+                            checked={selectedModels.includes(model)}
                         />
                     </div>
                 ))}

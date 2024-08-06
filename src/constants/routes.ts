@@ -2,6 +2,7 @@ export const APP_ROUTE = {
     home: '/',
     catalog: '/catalog',
     product: '/product',
+    selections: '/selections',
     exchange: '/exchange',
     auth: '/auth',
     brands: '/brands',

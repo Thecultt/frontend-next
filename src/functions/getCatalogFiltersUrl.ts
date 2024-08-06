@@ -4,7 +4,7 @@ import { APP_ROUTE } from '@/constants/routes';
 import { ICatalogFilters } from '@/types/catalog';
 
 export const getCatalogFiltersUrl = (allFilters: ICatalogFilters) => {
-    const { category_slug, subcategories_slug, price, ...restFilters } = allFilters;
+    const { category_slug, subcategories_slug, price, selection, ...restFilters } = allFilters;
 
     const filters = {
         minPrice: price?.min,
@@ -27,6 +27,8 @@ export const getCatalogFiltersUrl = (allFilters: ICatalogFilters) => {
         if (subcategories_slug) {
             catalogUrl = `${catalogUrl}/${subcategories_slug}`;
         }
+    } else if (selection) {
+        catalogUrl = `${APP_ROUTE.selections}/${selection}`;
     }
 
     return `${catalogUrl}${url}`;

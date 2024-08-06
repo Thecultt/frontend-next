@@ -72,7 +72,7 @@ const CatalogFilters: React.FC<Props> = ({ isOpenFiltersMedia, setIsOpenFiltersM
                 <CatalogFiltersSelections />
                 <CatalogFiltersPrice defaultMin={price.min} defaultMax={price.max} />
                 <CatalogFiltersConditions />
-                <CatalogFiltersCategories />
+                {!category_slug && <CatalogFiltersCategories />}
                 <CatalogFiltersTypes />
                 <CatalogFiltersBrands />
                 <CatalogFiltersModels />
