@@ -15,7 +15,6 @@ export const getCatalogFiltersUrl = (allFilters: ICatalogFilters) => {
     const url = qs.stringify(filters, {
         arrayFormat: 'comma',
         skipNulls: true,
-        encode: false,
         addQueryPrefix: true,
     });
 

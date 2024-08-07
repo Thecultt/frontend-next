@@ -8,7 +8,7 @@ import { useWaitingData } from '@/hooks/catalog/useWaitingData';
 import { WaitingPopupType } from '@/types/waiting';
 import { useHash } from '@/hooks/useHash';
 
-const WaitingListCreate: React.FC = () => {
+const WaitingListCreate: React.FC = React.memo(() => {
     const dispatch = useDispatch();
 
     const pathname = usePathname();
@@ -72,6 +72,6 @@ const WaitingListCreate: React.FC = () => {
             {content[type]}
         </Popup>
     );
-};
+});
 
 export default WaitingListCreate;

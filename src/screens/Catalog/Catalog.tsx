@@ -38,8 +38,6 @@ const Catalog: React.FC = () => {
     const { filters } = useCatalogFilters();
 
     React.useEffect(() => {
-        console.log('FILTERS', filters);
-
         if (isFirstRender && lastSearchString === url) {
             setTimeout(() => {
                 window.scrollTo(0, catalogScroll);
