@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 import { CatalogFiltersBlockWrapper } from '@/components';
@@ -46,13 +48,6 @@ const CatalogFiltersPrice: React.FC<Props> = ({ defaultMin, defaultMax }) => {
             const newMax = debouncedMax ? parseInt(debouncedMax) || 0 : 0;
             updateFilters({ maxPrice: newMax });
         }
-
-        // dispatch(
-        //     setFiltersPriceProduct({
-        //         min: newMin,
-        //         max: newMax,
-        //     }),
-        // );
     }, [debouncedMin, debouncedMax]);
 
     return (

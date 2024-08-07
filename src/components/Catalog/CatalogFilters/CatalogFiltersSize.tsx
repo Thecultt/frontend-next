@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
@@ -24,19 +26,21 @@ const CatalogFiltersSize: React.FC = () => {
 
     return (
         <CatalogFiltersBlockWrapper title="Размер" disabled={!sizes.length}>
-            {sizes.map((size, index) => (
-                <div
-                    className="catalog-filters-block-content-checkbox"
-                    key={`catalog-filters-block-content-size-${size}-checkbox-${index}`}
-                >
-                    <Checkbox
-                        id={`catalog-filters-block-content-size-${size}-checkbox-${index}`}
-                        label={size.toString()}
-                        onChange={() => onChangeSetType(size)}
-                        checked={selectedSizes.includes(size)}
-                    />
-                </div>
-            ))}
+            <div className="catalog-filters-block-content-list">
+                {sizes.map((size, index) => (
+                    <div
+                        className="catalog-filters-block-content-checkbox"
+                        key={`catalog-filters-block-content-size-${size}-checkbox-${index}`}
+                    >
+                        <Checkbox
+                            id={`catalog-filters-block-content-size-${size}-checkbox-${index}`}
+                            label={size.toString()}
+                            onChange={() => onChangeSetType(size)}
+                            checked={selectedSizes.includes(size)}
+                        />
+                    </div>
+                ))}
+            </div>
         </CatalogFiltersBlockWrapper>
     );
 };

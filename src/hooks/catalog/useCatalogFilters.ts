@@ -72,7 +72,7 @@ export const useCatalogFilters = () => {
                 size: state.size,
                 selection: selection_id,
             }) satisfies ICatalogFilters,
-        [category_slug, subcategories_slug, state],
+        [category_slug, subcategories_slug, selection_id, state],
     );
 
     const [filters, setFilters] = React.useState(tempFilters);

@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@sentry/react": "^7.92.0",
+    "@tanstack/react-virtual": "^3.8.4",
     "@tcb-web/create-credit": "^1.0.5",
     "array-chunk-split": "^2.0.15",
     "axios": "^0.27.2",

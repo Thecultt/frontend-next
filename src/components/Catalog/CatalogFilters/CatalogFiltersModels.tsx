@@ -1,11 +1,65 @@
 'use client';
 
 import React from 'react';
+import { useVirtualizer } from '@tanstack/react-virtual';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
 import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 import { CATEGORY_SLUG_NAMES } from '@/constants/catalog';
+
+interface FilterModelListProps {
+    models: string[];
+    selectedModels: string[];
+    onChange: (model: string) => void;
+}
+
+const FilterModelList: React.FC<FilterModelListProps> = ({ models, selectedModels, onChange }) => {
+    const scrollBlockRef = React.useRef(null);
+
+    const rowVirtualizer = useVirtualizer({
+        count: models.length,
+        getScrollElement: () => scrollBlockRef.current,
+        estimateSize: () => 32,
+        overscan: 10,
+    });
+
+    return (
+        <div ref={scrollBlockRef} className="catalog-filters-block-content-list">
+            <div
+                style={{
+                    height: rowVirtualizer.getTotalSize(),
+                    width: '100%',
+                    position: 'relative',
+                }}
+            >
+                {rowVirtualizer.getVirtualItems().map((row) => (
+                    <div
+                        className="catalog-filters-block-content-row"
+                        key={row.index}
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: `${row.size}px`,
+                            transform: `translateY(${row.start}px)`,
+                            overflow: 'hidden',
+                        }}
+                    >
+                        <Checkbox
+                            id={`catalog-filters-block-content-models-checkbox-${row.index}`}
+                            label={models[row.index]}
+                            onChange={() => onChange(models[row.index])}
+                            checked={selectedModels.includes(models[row.index])}
+                            textEllipsis
+                        />
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
 
 const CatalogFiltersModels: React.FC = () => {
     const [search, setSearch] = React.useState('');
@@ -99,7 +153,8 @@ const CatalogFiltersModels: React.FC = () => {
                 <input
                     type="text"
                     className="catalog-filters-block-content-brands-search__input"
-                    onChange={(e) => onChangeSearch(e)}
+                    onChange={onChangeSearch}
+                    value={search}
                 />
                 <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -117,20 +172,7 @@ const CatalogFiltersModels: React.FC = () => {
                 </svg>
             </div>
 
-            {visibleModels.length > 0 &&
-                visibleModels.map((model, index) => (
-                    <div
-                        className="catalog-filters-block-content-checkbox"
-                        key={`catalog-filters-block-content-models-checkbox-${index}`}
-                    >
-                        <Checkbox
-                            id={`catalog-filters-block-content-models-checkbox-${index}`}
-                            label={model}
-                            onChange={() => onChangeSetModels(model)}
-                            checked={selectedModels.includes(model)}
-                        />
-                    </div>
-                ))}
+            <FilterModelList models={visibleModels} selectedModels={selectedModels} onChange={onChangeSetModels} />
         </CatalogFiltersBlockWrapper>
     );
 };

@@ -25,19 +25,21 @@ const CatalogFiltersGlassFrame: React.FC = () => {
         <CatalogFiltersBlockWrapper title="Форма оправы" disabled={!glassFrameFilters.length}>
             <p className="catalog-filters-block-content-checkbox__subtitle">Очки</p>
 
-            {glassFrameFilters.map(({ frame }, index) => (
-                <div
-                    key={`catalog-filters-block-content-glass-frame-checkbox-${index}`}
-                    className="catalog-filters-block-content-checkbox"
-                >
-                    <Checkbox
-                        id={`catalog-filters-block-content-glass-frame-checkbox-${index}`}
-                        label={frame}
-                        onChange={() => onClickSetGlassFrame(frame)}
-                        checked={selectedFrames.includes(frame)}
-                    />
-                </div>
-            ))}
+            <div className="catalog-filters-block-content-list">
+                {glassFrameFilters.map(({ frame }, index) => (
+                    <div
+                        key={`catalog-filters-block-content-glass-frame-checkbox-${index}`}
+                        className="catalog-filters-block-content-checkbox"
+                    >
+                        <Checkbox
+                            id={`catalog-filters-block-content-glass-frame-checkbox-${index}`}
+                            label={frame}
+                            onChange={() => onClickSetGlassFrame(frame)}
+                            checked={selectedFrames.includes(frame)}
+                        />
+                    </div>
+                ))}
+            </div>
         </CatalogFiltersBlockWrapper>
     );
 };

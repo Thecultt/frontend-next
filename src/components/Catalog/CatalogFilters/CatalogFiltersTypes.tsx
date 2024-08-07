@@ -42,25 +42,27 @@ const CatalogFiltersTypes: React.FC = () => {
 
     return (
         <CatalogFiltersBlockWrapper title="Тип" disabled={!Object.keys(types).length}>
-            {Object.keys(types).map((key, index) => (
-                <div key={`catalog-filters-block-content-types-checkbox-${index}-wrapper`}>
-                    <p className="catalog-filters-block-content-checkbox__subtitle">{key}</p>
+            <div className="catalog-filters-block-content-list">
+                {Object.keys(types).map((key, index) => (
+                    <div key={`catalog-filters-block-content-types-checkbox-${index}-wrapper`}>
+                        <p className="catalog-filters-block-content-checkbox__subtitle">{key}</p>
 
-                    {types[key].map((type, subindex) => (
-                        <div
-                            className="catalog-filters-block-content-checkbox"
-                            key={`catalog-filters-block-content-types-checkbox-${index}-${subindex}`}
-                        >
-                            <Checkbox
-                                id={`catalog-filters-block-content-types-checkbox-${index}-${subindex}`}
-                                label={type}
-                                onChange={() => onChangeSetType(type)}
-                                checked={selectedTypes.includes(type)}
-                            />
-                        </div>
-                    ))}
-                </div>
-            ))}
+                        {types[key].map((type, subindex) => (
+                            <div
+                                className="catalog-filters-block-content-checkbox"
+                                key={`catalog-filters-block-content-types-checkbox-${index}-${subindex}`}
+                            >
+                                <Checkbox
+                                    id={`catalog-filters-block-content-types-checkbox-${index}-${subindex}`}
+                                    label={type}
+                                    onChange={() => onChangeSetType(type)}
+                                    checked={selectedTypes.includes(type)}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
         </CatalogFiltersBlockWrapper>
     );
 };

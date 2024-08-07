@@ -25,31 +25,33 @@ const CatalogFiltersColors: React.FC = () => {
 
     return (
         <CatalogFiltersBlockWrapper title="Цвет" disabled={!colorsArray.length}>
-            {colorsArray.map((color, index) => (
-                <div
-                    className="catalog-filters-block-content-checkbox catalog-filters-block-content-colors-checkbox-wrapper"
-                    key={`catalog-filters-block-content-colors-checkbox-${index}`}
-                >
-                    <input
-                        id={`catalog-filters-block-content-colors-checkbox-${index}`}
-                        type="checkbox"
-                        className="catalog-filters-block-content-colors-checkbox"
-                        onChange={() => onChangeSetColor(color)}
-                        checked={selectedColors.includes(color)}
-                    />
-
-                    <label
-                        htmlFor={`catalog-filters-block-content-colors-checkbox-${index}`}
-                        className="catalog-filters-block-content-colors-checkbox__label"
+            <div className="catalog-filters-block-content-list">
+                {colorsArray.map((color, index) => (
+                    <div
+                        className="catalog-filters-block-content-checkbox catalog-filters-block-content-colors-checkbox-wrapper"
+                        key={`catalog-filters-block-content-colors-checkbox-${index}`}
                     >
-                        <div
-                            className="catalog-filters-block-content-colors-checkbox__label-circle"
-                            style={{ backgroundColor: colors[color].hex }}
+                        <input
+                            id={`catalog-filters-block-content-colors-checkbox-${index}`}
+                            type="checkbox"
+                            className="catalog-filters-block-content-colors-checkbox"
+                            onChange={() => onChangeSetColor(color)}
+                            checked={selectedColors.includes(color)}
                         />
-                        <p className="catalog-filters-block-content-colors-checkbox__label__text">{color}</p>
-                    </label>
-                </div>
-            ))}
+
+                        <label
+                            htmlFor={`catalog-filters-block-content-colors-checkbox-${index}`}
+                            className="catalog-filters-block-content-colors-checkbox__label"
+                        >
+                            <div
+                                className="catalog-filters-block-content-colors-checkbox__label-circle"
+                                style={{ backgroundColor: colors[color].hex }}
+                            />
+                            <p className="catalog-filters-block-content-colors-checkbox__label__text">{color}</p>
+                        </label>
+                    </div>
+                ))}
+            </div>
         </CatalogFiltersBlockWrapper>
     );
 };

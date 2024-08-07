@@ -155,17 +155,7 @@ input[type="file"]
 			max-height: 185px
 			overflow-y: auto
 
-			// scrollBar
-			&::-webkit-scrollbar
-				width: 4px
-
-			&::-webkit-scrollbar-track
-				background-color: #D9D9D9
-				border-radius: 100px
-
-			&::-webkit-scrollbar-thumb
-				background-color: $gray
-				border-radius: 100px
+			+scrollbar
 
 		&__item
 			cursor: pointer
@@ -383,7 +373,6 @@ button
 .checkbox-wrapper
 	display: flex
 	align-items: center
-
 	position: relative
 
 .checkbox
@@ -397,6 +386,14 @@ button
 		align-items: center
 		user-select: none
 		+transition
+
+		&--ellipsis
+			width: 100%
+			overflow: hidden
+			flex-wrap: nowrap
+
+		&--ellipsis &__text
+			+textEllipsis
 
 		&.small &__text
 			font-size: 12px
