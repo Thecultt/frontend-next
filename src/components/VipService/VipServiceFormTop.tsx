@@ -9,18 +9,18 @@ import { getClassNames } from '@/functions/getClassNames';
 
 import validate from './validate';
 
-const ConciergeFormTop: React.FC<{} & InjectedFormProps<{}, {}>> = ({
+const VipServiceFormTop: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
     invalid,
     pristine,
     submitting,
 }) => {
-    const { isSending } = useTypedSelector(({ concierge }) => concierge);
+    const { isSending } = useTypedSelector(({ vipservice }) => vipservice);
 
     return (
-        <form className="concierge-main-text-form" onSubmit={handleSubmit}>
-            <div className="concierge-main-text-form-input-wrapper">
-                <div className="concierge-main-text-form-input">
+        <form className="vipservice-main-text-form" onSubmit={handleSubmit}>
+            <div className="vipservice-main-text-form-input-wrapper">
+                <div className="vipservice-main-text-form-input">
                     <Field
                         component={RenderInput}
                         label="Ваш телефон"
@@ -33,23 +33,23 @@ const ConciergeFormTop: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                         // })}
                     />
                 </div>
-                <div className="concierge-main-text-form-input">
+                <div className="vipservice-main-text-form-input">
                     <Field component={RenderInput} label="Ваше имя" name="name" type="text" />
                 </div>
             </div>
 
-            <p className="concierge-main-text-form__description">
+            <p className="vipservice-main-text-form__description">
                 Нажимая на кнопку, вы принимаете условия{' '}
                 <Link href={APP_ROUTE.help.userAgreement}>пользовательского соглашения</Link> и{' '}
                 <Link href={APP_ROUTE.help.publicOffer}>публичной оферты</Link>.
             </p>
             {isSending ? (
-                <button className="btn disabled loader concierge-main-text-form__btn" disabled>
+                <button className="btn disabled loader vipservice-main-text-form__btn" disabled>
                     <Loader />
                 </button>
             ) : (
                 <button
-                    className={getClassNames('btn concierge-main-text-form__btn', {
+                    className={getClassNames('btn vipservice-main-text-form__btn', {
                         disabled: invalid || submitting || pristine,
                     })}
                     disabled={invalid || submitting || pristine}
@@ -62,6 +62,6 @@ const ConciergeFormTop: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 };
 
 export default reduxForm<{}, {}>({
-    form: 'concierge-form-top',
+    form: 'vipservice-form-top',
     validate,
-})(ConciergeFormTop);
+})(VipServiceFormTop);
