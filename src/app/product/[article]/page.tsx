@@ -6,10 +6,18 @@ import NoSsr from '@/components/NoSsr/NoSsr';
 import { Product } from '@/screens';
 import $api from '@/http';
 import { APP_PROD_DOMAIN, APP_TITLE } from '@/constants/app';
+import { CATEGORY_NAMES } from '@/constants/catalog';
 
 interface PageProps {
     params: { article?: string };
 }
+
+const CATEGORIES_DICTIONARY = {
+    [CATEGORY_NAMES.bags]: 'сумку',
+    [CATEGORY_NAMES.shoes]: 'обувь',
+    [CATEGORY_NAMES.accessories]: 'аксессуар',
+    [CATEGORY_NAMES.decorations]: 'украшение',
+};
 
 export const generateMetadata = async ({ params }: PageProps) => {
     try {
@@ -25,25 +33,7 @@ export const generateMetadata = async ({ params }: PageProps) => {
             throw new Error();
         }
 
-        // TODO вынести в утилиту
-
-        let category = '';
-
-        if (data.category === 'Сумки') {
-            category = 'сумку';
-        }
-
-        if (data.category === 'Обувь') {
-            category = 'обувь';
-        }
-
-        if (data.category === 'Аксессуары') {
-            category = 'аксессуар';
-        }
-
-        if (data.category === 'Украшения') {
-            category = 'украшение';
-        }
+        const category = CATEGORIES_DICTIONARY[data.category] ?? '';
 
         const title = `Купить ${category} ${data.name} на ресейл платформе THE CULTT.`;
         const description = `Купить ${category} ${data.name} за ${data.price} руб. на ресейл платформе THE CULTT, 100% подлинность гарантирована, доставка по России.`;
