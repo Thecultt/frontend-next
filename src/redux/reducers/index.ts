@@ -22,6 +22,7 @@ import public_favorites from './public_favorites';
 import notifications_server from './notifications_server';
 import buyer_thecultt from './buyer_thecultt';
 import selections from './selections';
+import cinema_artistic from './cinema_artistic';
 
 export const rootReducer = combineReducers({
     form: formReducer,
@@ -46,6 +47,7 @@ export const rootReducer = combineReducers({
     notifications_server,
     buyer_thecultt,
     selections,
+    cinema_artistic,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
