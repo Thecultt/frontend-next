@@ -166,7 +166,7 @@ const categories: HeaderHoverMenuCategory[] = [
             'Louis Vuitton',
             'Miu Miu',
             'Prada',
-            'Tiffani',
+            'Tiffany & Co.',
             'Van Cleef & Arpels',
         ],
         fullTextView: 'Все украшения',
