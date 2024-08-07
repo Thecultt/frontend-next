@@ -15,7 +15,9 @@ import { CatalogPageParams, ICatalogFilters } from '@/types/catalog';
 import { AVAILABILITY, CATEGORY_SLUGS, CONDITIONS, FILTER_CATEGORY_SLUGS, GENDERS, SORT } from '@/constants/catalog';
 import { getDefaultPageSort } from '@/functions/getDefaultPageSort';
 
+// TODO header categories
 // TODO SEO catalog meta
+// TODO other todos
 
 export const useCatalogFilters = () => {
     const { category_slug, subcategories_slug, selection_id } = useParams<CatalogPageParams>();
