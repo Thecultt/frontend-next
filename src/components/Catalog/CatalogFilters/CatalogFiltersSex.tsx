@@ -1,19 +1,24 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+'use client';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setFiltersSexProduct } from '@/redux/actions/products';
+import React from 'react';
+
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
 import { GENDERS } from '@/constants/catalog';
 import { GenderType } from '@/types/catalog';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const CatalogFiltersSex: React.FC = () => {
-    const dispatch = useDispatch();
+    const {
+        filters: { genders },
+        updateFilters,
+    } = useCatalogFilters();
 
-    const { filters } = useTypedSelector(({ products }) => products);
-
-    const onChangeSetSex = (sex: GenderType) => {
-        dispatch(setFiltersSexProduct(sex));
+    const onChangeSetSex = (gender: GenderType) => {
+        updateFilters({
+            genders: genders.includes(gender)
+                ? genders.filter((selectedGender) => selectedGender !== gender)
+                : [...genders, gender],
+        });
     };
 
     return (
@@ -23,7 +28,7 @@ const CatalogFiltersSex: React.FC = () => {
                     id="catalog-filters-block-content-sex-female-checkbox"
                     label={GENDERS.female}
                     onChange={() => onChangeSetSex(GENDERS.female)}
-                    checked={!!Object.keys(filters.sex).find((filtersSex) => filtersSex === GENDERS.female)}
+                    checked={genders.includes(GENDERS.female)}
                 />
             </div>
             <div className="catalog-filters-block-content-checkbox">
@@ -31,7 +36,7 @@ const CatalogFiltersSex: React.FC = () => {
                     id="catalog-filters-block-content-sex-male-checkbox"
                     label={GENDERS.male}
                     onChange={() => onChangeSetSex(GENDERS.male)}
-                    checked={!!Object.keys(filters.sex).find((filtersSex) => filtersSex === GENDERS.male)}
+                    checked={genders.includes(GENDERS.male)}
                 />
             </div>
         </CatalogFiltersBlockWrapper>

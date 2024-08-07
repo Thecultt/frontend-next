@@ -1,19 +1,18 @@
+'use client';
+
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { getClassNames } from '@/functions/getClassNames';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setFiltersBoutiqueProduct } from '@/redux/actions/products';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const CatalogFiltersTopBoutique: React.FC = React.memo(() => {
-    const dispatch = useDispatch();
-
     const {
         filters: { boutique },
-    } = useTypedSelector(({ products }) => products);
+        updateFilters,
+    } = useCatalogFilters();
 
     const onClickSetBoutique = (status: boolean) => {
-        dispatch(setFiltersBoutiqueProduct(status));
+        updateFilters({ boutique: status });
     };
 
     return (
@@ -48,7 +47,7 @@ const CatalogFiltersTopBoutique: React.FC = React.memo(() => {
 
                 <div className="catalog-filters-top-boutique-info-message-wrapper message-info-wrapper">
                     <p className="message-info center catalog-filters-top-boutique-info__message">
-                        <h3>Подборка лотов из бутика</h3>
+                        <span className="message-info__title">Подборка лотов из бутика</span>
                         Коллекция лотов, которые мы получили напрямую из бутиков-партнеров или от частных байеров. Все
                         аксессуары в подборке — новые и никогда не были в использовании.
                     </p>

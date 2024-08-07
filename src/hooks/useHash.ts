@@ -3,6 +3,7 @@
 import React from 'react';
 import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useIsClient } from 'usehooks-ts';
+
 import { getPath } from '@/functions/getPath';
 
 const getHash = () =>

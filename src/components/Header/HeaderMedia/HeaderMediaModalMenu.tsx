@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import Link from 'next/link';
 
 import { Footer, HeaderMediaLinkTab } from '@/components';
-import { CATEGORIES, SORT } from '@/constants/catalog';
+import { CATEGORIES, CATEGORY_NAMES, CATEGORY_SLUGS, SORT } from '@/constants/catalog';
 import { APP_ROUTE } from '@/constants/routes';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { getClassNames } from '@/functions/getClassNames';
@@ -75,12 +75,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                 <div className="header-media-modal-menu-links">
                     <Link
                         href={getCatalogFiltersUrl({
-                            boutique: false,
-                            categories: CATEGORIES,
-                            availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                            price_drop: false,
-                            page: 1,
-                            sort: SORT.a,
+                            category_slug: CATEGORY_SLUGS.new,
                         })}
                         className="header-media-modal-menu-links-link"
                         onClick={toggleVisible}
@@ -90,12 +85,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
 
                     <Link
                         href={getCatalogFiltersUrl({
-                            boutique: false,
-                            categories: CATEGORIES,
-                            availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                            price_drop: false,
-                            page: 1,
-                            sort: SORT.popular,
+                            category_slug: CATEGORY_SLUGS.popular,
                         })}
                         className="header-media-modal-menu-links-link"
                         onClick={toggleVisible}
@@ -108,8 +98,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                             {selections.map((item) => (
                                 <Link
                                     href={getCatalogFiltersUrl({
-                                        selection: item.id,
-                                        sort: SORT.popular,
+                                        selection: item.id.toString(),
                                     })}
                                     className="header-media-modal-menu-links__link"
                                     key={item.id}
@@ -125,22 +114,17 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                         <HeaderMediaLinkTab
                             title={category.title}
                             linkTitle={getCatalogFiltersUrl({
-                                categories: [category.title],
-                                availability: CATEGORIES,
-                                page: 1,
-                                sort: SORT.shuffle,
+                                category_slug: category.slug,
                             })}
-                            key={`header-media-modal-menu-links-tab${index}`}
+                            linkClick={toggleVisible}
+                            key={`header-media-modal-menu-links-tab-${index}`}
                         >
                             {filtersIsLoaded &&
                                 Object.keys(category.subsubcategories).map((subsubcategory, subindex) => (
                                     <Link
                                         href={getCatalogFiltersUrl({
-                                            categories: [category.title],
+                                            category_slug: category.slug,
                                             types: [subsubcategory],
-                                            availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                                            page: 1,
-                                            sort: SORT.a,
                                         })}
                                         className="header-media-modal-menu-links__link"
                                         key={`header-media-modal-menu-links__link-${category}-${subsubcategory}-${subindex}`}
@@ -150,30 +134,27 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                                     </Link>
                                 ))}
 
-                            {['Обувь', 'Сумки', 'Аксессуары'].includes(category.title) ? (
+                            {[CATEGORY_NAMES.shoes, CATEGORY_NAMES.bags, CATEGORY_NAMES.accessories].includes(
+                                category.title,
+                            ) && (
                                 <Link
                                     href={getCatalogFiltersUrl({
-                                        categories: [category.title],
-                                        availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                                        page: 1,
-                                        sort: SORT.a,
+                                        category_slug: category.slug,
                                     })}
                                     className="header-media-modal-menu-links__link"
                                     onClick={toggleVisible}
                                 >
                                     {categoryAllTitles[category.title]}
                                 </Link>
-                            ) : null}
+                            )}
 
                             <Link
-                                onClick={toggleVisible}
                                 href={getCatalogFiltersUrl({
+                                    category_slug: category.slug,
                                     boutique: true,
-                                    categories: [category.title],
-                                    page: 1,
-                                    sort: SORT.a,
                                 })}
                                 className="header-media-modal-menu-links-boutique"
+                                onClick={toggleVisible}
                             >
                                 <span className="header-media-modal-menu-links-boutique__badge">Из бутика</span>
 
@@ -206,12 +187,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
 
                     <Link
                         href={getCatalogFiltersUrl({
-                            boutique: false,
-                            price_drop: true,
-                            categories: CATEGORIES,
-                            availability: ['Доступно', 'На примерке'],
-                            page: 1,
-                            sort: SORT.popular,
+                            category_slug: CATEGORY_SLUGS.sale,
                         })}
                         className="header-media-modal-menu-links-link"
                         onClick={toggleVisible}

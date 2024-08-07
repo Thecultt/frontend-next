@@ -1,51 +1,57 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setFiltersColorsProduct } from '@/redux/actions/products';
 import { CatalogFiltersBlockWrapper } from '@/components';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const CatalogFiltersColors: React.FC = () => {
-    const dispatch = useDispatch();
+    const {
+        filters: { colors: selectedColors },
+        updateFilters,
+    } = useCatalogFilters();
 
     const { colors } = useTypedSelector(({ products_filters }) => products_filters);
-    const { filters } = useTypedSelector(({ products }) => products);
-
     const colorsArray = Object.keys(colors);
 
     const onChangeSetColor = (color: string) => {
-        dispatch(setFiltersColorsProduct(color));
+        updateFilters({
+            colors: selectedColors.includes(color)
+                ? selectedColors.filter((selectedColor) => selectedColor !== color)
+                : [...selectedColors, color],
+        });
     };
 
     return (
         <CatalogFiltersBlockWrapper title="Цвет" disabled={!colorsArray.length}>
-            {colorsArray.map((color, index) => (
-                <div
-                    className="catalog-filters-block-content-checkbox catalog-filters-block-content-colors-checkbox-wrapper"
-                    key={`catalog-filters-block-content-colors-checkbox-${index}`}
-                >
-                    <input
-                        id={`catalog-filters-block-content-colors-checkbox-${index}`}
-                        type="checkbox"
-                        className="catalog-filters-block-content-colors-checkbox"
-                        onChange={() => onChangeSetColor(color)}
-                        checked={!!Object.keys(filters.colors).find((filtersColor) => color === filtersColor)}
-                    />
-
-                    <label
-                        htmlFor={`catalog-filters-block-content-colors-checkbox-${index}`}
-                        className="catalog-filters-block-content-colors-checkbox__label"
+            <div className="catalog-filters-block-content-list">
+                {colorsArray.map((color, index) => (
+                    <div
+                        className="catalog-filters-block-content-checkbox catalog-filters-block-content-colors-checkbox-wrapper"
+                        key={`catalog-filters-block-content-colors-checkbox-${index}`}
                     >
-                        <div
-                            className="catalog-filters-block-content-colors-checkbox__label-circle"
-                            style={{ backgroundColor: colors[color].hex }}
+                        <input
+                            id={`catalog-filters-block-content-colors-checkbox-${index}`}
+                            type="checkbox"
+                            className="catalog-filters-block-content-colors-checkbox"
+                            onChange={() => onChangeSetColor(color)}
+                            checked={selectedColors.includes(color)}
                         />
-                        <p className="catalog-filters-block-content-colors-checkbox__label__text">{color}</p>
-                    </label>
-                </div>
-            ))}
+
+                        <label
+                            htmlFor={`catalog-filters-block-content-colors-checkbox-${index}`}
+                            className="catalog-filters-block-content-colors-checkbox__label"
+                        >
+                            <div
+                                className="catalog-filters-block-content-colors-checkbox__label-circle"
+                                style={{ backgroundColor: colors[color].hex }}
+                            />
+                            <p className="catalog-filters-block-content-colors-checkbox__label__text">{color}</p>
+                        </label>
+                    </div>
+                ))}
+            </div>
         </CatalogFiltersBlockWrapper>
     );
 };

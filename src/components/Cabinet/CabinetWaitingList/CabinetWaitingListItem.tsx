@@ -3,8 +3,9 @@ import Link from 'next/link';
 
 import { getClassNames } from '@/functions/getClassNames';
 import { WaitingListItem } from '@/models/IWaitingListItem';
-import { APP_ROUTE } from '@/constants/routes';
-import { IUrlFilters, getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
+import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
+import { ICatalogFilters } from '@/types/catalog';
+import { AVAILABILITY } from '@/constants/catalog';
 
 const CabinetWaitingListItem: React.FC<WaitingListItem> = ({
     num,
@@ -17,20 +18,20 @@ const CabinetWaitingListItem: React.FC<WaitingListItem> = ({
     num_products,
 }) => {
     const getCatalogLink = useCallback(() => {
-        const params: IUrlFilters = {
+        const params: ICatalogFilters = {
             categories: [category],
-            availability: ['Доступно'],
+            availability: [AVAILABILITY.available],
         };
 
-        if (subcategory !== '' && subcategory) {
+        if (subcategory) {
             params['types'] = [subcategory];
         }
 
-        if (brand !== '' && brand) {
+        if (brand) {
             params['brands'] = [brand];
         }
 
-        if (model_name !== '' && model_name) {
+        if (model_name) {
             params['models'] = [model_name];
         }
 

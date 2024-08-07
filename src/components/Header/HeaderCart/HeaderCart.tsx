@@ -1,16 +1,16 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useOnClickOutside } from 'usehooks-ts';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { setCartIsVisibleMessage } from '@/redux/actions/cart';
 import { HeaderCartModal, HeaderCartModalAddMessage } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 
-const HeaderCart: React.FC = () => {
+const HeaderCart: React.FC = React.memo(() => {
     const dispatch = useDispatch();
 
-    const [state, setState] = React.useState<boolean>(false);
-
+    const [state, setState] = React.useState(false);
     const PopupRef = React.useRef<HTMLDivElement>(null);
 
     const { items, isVisibleMessage } = useTypedSelector(({ cart }) => cart);
@@ -19,31 +19,23 @@ const HeaderCart: React.FC = () => {
         dispatch(setCartIsVisibleMessage(false));
     };
 
-    React.useEffect(() => {
-        document.addEventListener('mousedown', togglePopup);
-        document.addEventListener('touchstart', togglePopup);
-
-        return () => {
-            document.removeEventListener('mousedown', togglePopup);
-            document.removeEventListener('touchstart', togglePopup);
-        };
-    }, [PopupRef]);
-
-    const toggleClickModarCart = () => {
+    const toggleClickModalCart = () => {
         setState(!state);
         dispatch(setCartIsVisibleMessage(false));
     };
 
-    const togglePopup = (e: any) => {
-        if (PopupRef.current && !PopupRef.current.contains(e.target)) {
+    const closePopup = () => {
+        if (state) {
             setState(false);
             dispatch(setCartIsVisibleMessage(false));
         }
     };
 
+    useOnClickOutside(PopupRef, closePopup);
+
     return (
         <div className="header-block-cart-wrapper" ref={PopupRef}>
-            <div className="header-block-cart" onClick={toggleClickModarCart}>
+            <div className="header-block-cart" onClick={toggleClickModalCart}>
                 <button
                     className={getClassNames('header-block-cart__icon', {
                         active: state,
@@ -69,6 +61,6 @@ const HeaderCart: React.FC = () => {
             <HeaderCartModal state={state} setState={() => setState(false)} />
         </div>
     );
-};
+});
 
 export default HeaderCart;

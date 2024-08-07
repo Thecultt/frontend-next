@@ -1,64 +1,28 @@
 'use client';
 
 import React from 'react';
-import { useSearchParams } from 'next/navigation';
 import { useMediaQuery } from 'usehooks-ts';
 
 import { checkDeclension } from '@/functions/checkDeclension';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { CatalogFiltersTopBoutique, CatalogFiltersTopSort, CatalogFiltersTopSortMedia } from '@/components';
+import { useCatalogFiltersTitle } from '@/hooks/catalog/useCatalogFiltersTitle';
 import { MEDIA_SIZES } from '@/constants/styles';
+import { CatalogFiltersTopBoutique, CatalogFiltersTopSort, CatalogFiltersTopSortMedia } from '@/components';
 
-const CatalogFiltersTop: React.FC<any> = React.memo(({ setIsOpenFiltersMedia, isOpenFiltersMedia }) => {
+interface Props {
+    isOpenFiltersMedia: boolean;
+    setIsOpenFiltersMedia: (value: boolean) => void;
+}
+
+const CatalogFiltersTop: React.FC<Props> = React.memo(({ isOpenFiltersMedia, setIsOpenFiltersMedia }) => {
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
-
-    const { filters, itemsCount } = useTypedSelector(({ products }) => products);
-    const { categories, selections } = useTypedSelector(({ products_filters }) => products_filters);
-
-    const query = useSearchParams();
+    const { itemsCount } = useTypedSelector(({ products }) => products);
+    const title = useCatalogFiltersTitle();
 
     return (
         <div className="catalog-filters-top">
             <div className="catalog-filters-top-title">
-                <p className="catalog-filters-top-title__title">
-                    {filters.boutique ? (
-                        'Из бутика'
-                    ) : (
-                        <>
-                            {filters.price_drop ? (
-                                'THE CULTT SALE'
-                            ) : (
-                                <>
-                                    {filters.selection ? (
-                                        selections[filters.selection].category
-                                    ) : (
-                                        <>
-                                            {query.get('theme')
-                                                ? query.get('theme')
-                                                : filters.search !== ''
-                                                  ? filters.search
-                                                  : Object.keys(filters.brands).length
-                                                    ? Object.keys(filters.brands).map(
-                                                          (brand, index) =>
-                                                              `${brand}${Object.keys(filters.brands).length === index + 1 ? '' : ', '}`,
-                                                      )
-                                                    : Object.keys(filters.categories).length &&
-                                                        Object.keys(filters.categories).length !==
-                                                            Object.keys(categories).length
-                                                      ? Object.keys(filters.categories).map(
-                                                            (category, index) =>
-                                                                `${category}${Object.keys(filters.categories).length === index + 1 ? '' : ', '}`,
-                                                        )
-                                                      : filters.sort === 'popular'
-                                                        ? 'Популярное'
-                                                        : 'Новинки'}
-                                        </>
-                                    )}
-                                </>
-                            )}
-                        </>
-                    )}
-                </p>
+                <p className="catalog-filters-top-title__title">{title}</p>
 
                 <p className="catalog-filters-top-title__count">
                     {checkDeclension(itemsCount, ['товар', 'товара', 'товаров']).title}

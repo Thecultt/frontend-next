@@ -1,43 +1,45 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setFiltersGlassFrameProduct } from '@/redux/actions/products';
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const CatalogFiltersGlassFrame: React.FC = () => {
-    const dispatch = useDispatch();
+    const {
+        filters: { glass_frame: selectedFrames },
+        updateFilters,
+    } = useCatalogFilters();
+    const { glass_frame: glassFrameFilters } = useTypedSelector(({ products_filters }) => products_filters);
 
-    const { glass_frame } = useTypedSelector(({ products_filters }) => products_filters);
-    const { filters } = useTypedSelector(({ products }) => products);
-
-    const onClickSetGlassFrame = (glass_frame: string) => {
-        dispatch(setFiltersGlassFrameProduct(glass_frame));
+    const onClickSetGlassFrame = (value: string) => {
+        updateFilters({
+            glass_frame: selectedFrames.includes(value)
+                ? selectedFrames.filter((selectedFrame) => selectedFrame !== value)
+                : [...selectedFrames, value],
+        });
     };
 
     return (
-        <CatalogFiltersBlockWrapper title="Форма оправы" disabled={!glass_frame.length}>
+        <CatalogFiltersBlockWrapper title="Форма оправы" disabled={!glassFrameFilters.length}>
             <p className="catalog-filters-block-content-checkbox__subtitle">Очки</p>
 
-            {glass_frame.map(({ frame }, index) => (
-                <div
-                    className="catalog-filters-block-content-checkbox"
-                    key={`catalog-filters-block-content-glass-frame-checkbox-${index}`}
-                >
-                    <Checkbox
-                        id={`catalog-filters-block-content-glass-frame-checkbox-${index}`}
-                        label={frame}
-                        onChange={() => onClickSetGlassFrame(frame)}
-                        checked={
-                            !!Object.keys(filters.glass_frame).find(
-                                (filters_glass_frame) => frame === filters_glass_frame,
-                            )
-                        }
-                    />
-                </div>
-            ))}
+            <div className="catalog-filters-block-content-list">
+                {glassFrameFilters.map(({ frame }, index) => (
+                    <div
+                        key={`catalog-filters-block-content-glass-frame-checkbox-${index}`}
+                        className="catalog-filters-block-content-checkbox"
+                    >
+                        <Checkbox
+                            id={`catalog-filters-block-content-glass-frame-checkbox-${index}`}
+                            label={frame}
+                            onChange={() => onClickSetGlassFrame(frame)}
+                            checked={selectedFrames.includes(frame)}
+                        />
+                    </div>
+                ))}
+            </div>
         </CatalogFiltersBlockWrapper>
     );
 };

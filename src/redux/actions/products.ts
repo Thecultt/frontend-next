@@ -2,11 +2,12 @@ import { Dispatch } from 'redux';
 
 import $api from '@/http';
 import { Product, ProductPage } from '@/models/IProduct';
-import { SORT } from '@/constants/catalog';
+import { AVAILABILITY_IDS, SORT } from '@/constants/catalog';
 import { sendMindbox } from '@/functions/mindbox';
 import { pushDataLayer } from '@/functions/pushDataLayer';
+import { ICatalogFilters } from '@/types/catalog';
 
-import { CatalogFetchType, ProductActionTypes, ProductTypes, ProductsStateFilters, SortType } from '../types/IProducts';
+import { CatalogFetchType, ProductActionTypes, ProductTypes } from '../types/IProducts';
 
 export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<ProductTypes>) => {
     const {
@@ -16,7 +17,7 @@ export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<Product
         current_page: number;
         total_items: number;
         items: Product[];
-    }>(`/catalog?availability=1&sort_by=${SORT.a}`);
+    }>(`/catalog_v2?availability=1&sort_by=${SORT.a}`);
 
     // Measure product views / impressions
     pushDataLayer('view_item_list', {
@@ -53,37 +54,7 @@ export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<Product
 };
 
 export const fetchProductsCatalog =
-    (
-        filters: {
-            search: string;
-
-            price: {
-                min: number;
-                max: number;
-            };
-
-            conditions: { [key: string]: string };
-            categories: { [key: string]: string };
-            types: { [key: string]: string };
-            brands: { [key: string]: string };
-            models: { [key: string]: string };
-            colors: { [key: string]: string };
-            sex: { [key: string]: string };
-            availability: { [key: string]: string };
-            size: { [key: string]: string };
-            glass_frame: { [key: string]: string };
-
-            selection: string | null;
-
-            boutique: boolean;
-            price_drop: boolean;
-
-            sort: SortType;
-        },
-        page: number,
-        typeFetch: CatalogFetchType,
-    ) =>
-    async (dispatch: Dispatch<ProductTypes>) => {
+    (filters: ICatalogFilters, typeFetch: CatalogFetchType) => async (dispatch: Dispatch<ProductTypes>) => {
         dispatch({
             type:
                 typeFetch === CatalogFetchType.More
@@ -94,55 +65,39 @@ export const fetchProductsCatalog =
 
         const params = new URLSearchParams();
 
-        const conditionsArray = Object.keys(filters.conditions).map((key) => key);
-        const categoriesArray = Object.keys(filters.categories).map((key) => key);
-        const typesArray = Object.keys(filters.types).map((key) => key);
-        const brandsArray = Object.keys(filters.brands).map((key) => key);
-        const modelsArray = Object.keys(filters.models).map((key) => key);
-        const colorsArray = Object.keys(filters.colors).map((key) => key);
-        const sexArray = Object.keys(filters.sex).map((key) => key);
-        const availabilityArray = Object.keys(filters.availability).map((key) => key);
-        const sizeArray = Object.keys(filters.size).map((key) => key);
-        const glassFrameArray = Object.keys(filters.glass_frame).map((key) => key);
-
-        params.append('search', filters.search);
-
-        if (filters.price.max !== 0) {
-            params.append('price_from', String(filters.price.min));
-            params.append('price_to', String(filters.price.max));
+        if (filters.search) {
+            params.append('search', filters.search);
         }
 
-        if (filters.price.min !== 0 && filters.price.max === 0) {
+        if (filters.price?.max !== 0) {
+            params.append('price_from', String(filters.price?.min));
+            params.append('price_to', String(filters.price?.max));
+        }
+
+        if (filters.price?.min !== 0 && filters.price?.max === 0) {
             params.append('price_from', String(filters.price.min));
         }
 
-        conditionsArray.map((condition) => params.append('conditions', condition));
-        categoriesArray.map((categories) => params.append('category', categories));
-        typesArray.map((type) => params.append('subcategories', type));
-        brandsArray.map((brand) => params.append('manufacturer', brand));
-        modelsArray.map((model) => params.append('model_names', model));
-        colorsArray.map((color) => params.append('color', color));
-        sexArray.map((sex) => params.append('genders', sex));
+        if (filters.category_slug) {
+            params.append('category_slug', filters.category_slug);
+        } else {
+            filters.categories?.map((categories) => params.append('category', categories));
+        }
 
-        glassFrameArray.map((glass_frame) => params.append('glass_frame', glass_frame));
+        filters.conditions?.map((condition) => params.append('conditions', condition));
+        filters.types?.map((type) => params.append('subcategories', type));
+        filters.brands?.map((brand) => params.append('manufacturer', brand));
+        filters.models?.map((model) => params.append('model_names', model));
+        filters.colors?.map((color) => params.append('color', color));
+        filters.genders?.map((gender) => params.append('genders', gender));
+        filters.glass_frame?.map((glass_frame) => params.append('glass_frame', glass_frame));
+        filters.size?.map((size) => params.append('size', size.toString()));
 
-        if (availabilityArray.length) {
-            // availabilityArrray.map((availability) => availability == "Доступно" ? params.append("availability", "1") : params.append("availability", "0"))
-            availabilityArray.map((availability) => {
-                if (availability == 'Доступно') {
-                    params.append('availability', '1');
-                } else if (availability == 'На примерке') {
-                    params.append('availability', '-1');
-                } else {
-                    params.append('availability', '0');
-                }
+        if (filters.availability && filters.availability.length > 0) {
+            filters.availability.map((availability) => {
+                params.append('availability', AVAILABILITY_IDS[availability]);
             });
         }
-        // else {
-        // 	params.append("availability", "1")
-        // }
-
-        sizeArray.map((size) => params.append('size', size));
 
         if (filters.boutique) {
             params.append('from_boutique', String(filters.boutique));
@@ -155,8 +110,7 @@ export const fetchProductsCatalog =
         }
 
         params.append('sort_by', filters.sort ?? SORT.shuffle);
-
-        params.append('page', String(page));
+        params.append('page', String(filters.page));
 
         const {
             data: { total_pages, total_items, items },
@@ -165,9 +119,8 @@ export const fetchProductsCatalog =
             current_page: number;
             total_items: number;
             items: Product[];
-        }>(`/catalog`, { params: params });
+        }>(`/catalog_v2`, { params });
 
-        // Measure product views / impressions
         pushDataLayer('view_item_list', {
             items: items.map((item, index) => ({
                 item_name: item.name,
@@ -311,89 +264,4 @@ export const setLastSearchString = (string: string) => ({
 export const setCatalogScroll = (scrollTop: number) => ({
     type: ProductActionTypes.SET_PRODUCTS_SCROLL,
     payload: scrollTop,
-});
-
-export const setFiltersCatalog = (filters: ProductsStateFilters) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG,
-    payload: filters,
-});
-
-export const setFiltersPriceProduct = (price: { min: number; max: number }) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_PRICE,
-    payload: price,
-});
-
-export const setFiltersConditionsProduct = (condition: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_CONDITIONS,
-    payload: condition,
-});
-
-export const setFiltersCategoriesProduct = (category: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_CATEGORIES,
-    payload: category,
-});
-
-export const setFiltersTypesProduct = (type: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_TYPES,
-    payload: type,
-});
-
-export const setFiltersBrandsProduct = (brand: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_BRANDS,
-    payload: brand,
-});
-
-export const setFiltersModelsProduct = (model: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_MODELS,
-    payload: model,
-});
-
-export const setFiltersColorsProduct = (color: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_COLORS,
-    payload: color,
-});
-
-export const setFiltersSexProduct = (sex: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SEX,
-    payload: sex,
-});
-
-export const setFiltersAvailabilityProduct = (availability: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_AVAILABILITY,
-    payload: availability,
-});
-
-export const setFiltersSizeProduct = (size: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SIZE,
-    payload: size,
-});
-
-export const setFiltersSelectionProduct = (selectionId: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTION,
-    payload: selectionId,
-});
-
-export const setFiltersBoutiqueProduct = (boutique: boolean) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_BOUTIQUE,
-    payload: boutique,
-});
-
-export const setFiltersGlassFrameProduct = (glass_frame: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_GLASS_FRAME,
-    payload: glass_frame,
-});
-
-export const setFiltersPriceDropProduct = (price_drop: boolean) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_PRICE_DROP,
-    payload: price_drop,
-});
-
-export const setFiltersSortProduct = (sort: SortType) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SORT,
-    payload: sort,
-});
-
-export const clearProductsFilters = () => ({
-    type: ProductActionTypes.CLEAR_PRODUCTS_FILTERS,
-    payload: undefined,
 });

@@ -3,9 +3,9 @@ import { useMediaQuery } from 'usehooks-ts';
 import Link from 'next/link';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { SELECTIONS_IDS, SORT } from '@/constants/catalog';
-import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
+import { SELECTIONS_IDS } from '@/constants/catalog';
 import { MEDIA_SIZES } from '@/constants/styles';
+import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 
 import summerBagsImage from '@/assets/images/selections/summer-bags-selection.jpg';
 
@@ -51,8 +51,7 @@ export const SelectionsBanners: React.FC = () => {
 
                         <Link
                             href={getCatalogFiltersUrl({
-                                selection: influencerSelection.id,
-                                sort: SORT.popular,
+                                selection: influencerSelection.id.toString(),
                             })}
                             className="btn selections-banners-influencer__button"
                         >
@@ -87,8 +86,7 @@ export const SelectionsBanners: React.FC = () => {
                             </p>
                             <Link
                                 href={getCatalogFiltersUrl({
-                                    selection: SELECTIONS_IDS.summerBags,
-                                    sort: SORT.popular,
+                                    selection: SELECTIONS_IDS.summerBags.toString(),
                                 })}
                                 className="btn selections-banners-bestsellers-main-item__btn"
                             >
@@ -117,8 +115,7 @@ export const SelectionsBanners: React.FC = () => {
                             <div className="selections-banners-bestsellers-item__btn-wrap">
                                 <Link
                                     href={getCatalogFiltersUrl({
-                                        selection: SELECTIONS_IDS.investmentsBags,
-                                        sort: SORT.popular,
+                                        selection: SELECTIONS_IDS.investmentsBags.toString(),
                                     })}
                                     className="btn selections-banners-bestsellers-item__btn"
                                 >
@@ -145,8 +142,7 @@ export const SelectionsBanners: React.FC = () => {
                             <div className="selections-banners-bestsellers-item__btn-wrap">
                                 <Link
                                     href={getCatalogFiltersUrl({
-                                        selection: SELECTIONS_IDS.itBags,
-                                        sort: SORT.popular,
+                                        selection: SELECTIONS_IDS.itBags.toString(),
                                     })}
                                     className="btn selections-banners-bestsellers-item__btn"
                                 >

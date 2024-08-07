@@ -57,8 +57,6 @@ export const metadata: Metadata = {
     description: APP_DESCRIPTION,
 };
 
-// TODO add metrics and external scripts
-
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
     <html lang="ru" className={`${manropeFont.variable} ${ltSuperiorMonoFont.variable}`}>
         <body>

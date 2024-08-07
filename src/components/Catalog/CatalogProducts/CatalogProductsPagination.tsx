@@ -2,15 +2,20 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setCurrentPageProduct, setProductsTypeFetch } from '@/redux/actions/products';
+import { setProductsTypeFetch } from '@/redux/actions/products';
 import { Loader } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { CatalogFetchType } from '@/redux/types/IProducts';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const CatalogProductsPagination: React.FC = () => {
     const dispatch = useDispatch();
 
-    const { pageCount, currentPage, isFetchMore } = useTypedSelector(({ products }) => products);
+    const { pageCount, isFetchMore } = useTypedSelector(({ products }) => products);
+    const {
+        filters: { page: currentPage },
+        updateFilters,
+    } = useCatalogFilters();
 
     const totalPagesArray: number[] = Array(pageCount)
         .fill(0)
@@ -19,14 +24,14 @@ const CatalogProductsPagination: React.FC = () => {
     const onClickFetchProductsMore = (page: number) => {
         if (!isFetchMore && page >= 1 && page <= pageCount) {
             dispatch(setProductsTypeFetch(CatalogFetchType.More));
-            dispatch(setCurrentPageProduct(page));
+            updateFilters({ page });
         }
     };
 
     const onClickFetchProductsPage = (page: number) => {
         if (page >= 1 && page <= pageCount) {
             window?.scrollTo(0, 350);
-            dispatch(setCurrentPageProduct(page));
+            updateFilters({ page });
         }
     };
 

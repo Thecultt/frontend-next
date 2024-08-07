@@ -2,7 +2,6 @@ export const checkDeclension = (num: number, title: string[]) => {
     const result = {
         num: 0,
         text: '',
-
         title: '',
     };
 

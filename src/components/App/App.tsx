@@ -42,7 +42,7 @@ export const App = ({ children }: { children: React.ReactNode }) => {
             dispatch(fetchProductsFilters() as any);
         }
 
-        if (!isLoadedProducts && pathname !== APP_ROUTE.catalog) {
+        if (!isLoadedProducts && !pathname.startsWith(APP_ROUTE.catalog)) {
             dispatch(fetchFirstProductsCatalog() as any);
         }
 
