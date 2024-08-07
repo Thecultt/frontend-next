@@ -20,7 +20,7 @@ import {
     CatalogFiltersPriceDrop,
 } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
-import { CATEGORY_NAMES, CATEGORY_SLUGS } from '@/constants/catalog';
+import { CATEGORY_NAMES, CATEGORY_SLUGS, FILTER_CATEGORY_SLUGS } from '@/constants/catalog';
 import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 import { useParams } from 'next/navigation';
 import { CatalogPageParams } from '@/types/catalog';
@@ -72,7 +72,7 @@ const CatalogFilters: React.FC<Props> = ({ isOpenFiltersMedia, setIsOpenFiltersM
                 <CatalogFiltersSelections />
                 <CatalogFiltersPrice defaultMin={price.min} defaultMax={price.max} />
                 <CatalogFiltersConditions />
-                {!category_slug && <CatalogFiltersCategories />}
+                {(!category_slug || !FILTER_CATEGORY_SLUGS.includes(category_slug)) && <CatalogFiltersCategories />}
                 <CatalogFiltersTypes />
                 <CatalogFiltersBrands />
                 <CatalogFiltersModels />

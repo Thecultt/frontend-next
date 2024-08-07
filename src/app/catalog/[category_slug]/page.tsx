@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 
 import { Catalog } from '@/screens';
 import NoSsr from '@/components/NoSsr/NoSsr';
-import { CATEGORY_SLUG_NAMES, CATEGORY_SLUGS, FILTER_CATEGORY_SLUGS } from '@/constants/catalog';
+import { ALL_CATEGORY_SLUGS, CATEGORY_SLUG_NAMES, CATEGORY_SLUGS, FILTER_CATEGORY_SLUGS } from '@/constants/catalog';
 import { APP_PROD_DOMAIN, APP_TITLE } from '@/constants/app';
 import { CatalogPageParams } from '@/types/catalog';
 
@@ -71,7 +71,7 @@ export const generateMetadata = ({ params }: PageProps) => {
 const CatalogCategoryPage = ({ params }: PageProps) => {
     const { category_slug } = params;
 
-    if (!category_slug || !FILTER_CATEGORY_SLUGS.includes(category_slug)) {
+    if (!category_slug || !ALL_CATEGORY_SLUGS.includes(category_slug)) {
         return notFound();
     }
 

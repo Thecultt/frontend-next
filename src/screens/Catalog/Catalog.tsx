@@ -19,6 +19,8 @@ import { MEDIA_SIZES } from '@/constants/styles';
 import { useCatalogScroll } from '@/hooks/catalog/useCatalogScroll';
 import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
+// TODO filters virtual scroll
+
 const Catalog: React.FC = () => {
     const dispatch = useDispatch();
 
