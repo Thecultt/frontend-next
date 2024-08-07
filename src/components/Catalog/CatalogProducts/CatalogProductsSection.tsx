@@ -13,9 +13,10 @@ import { MEDIA_SIZES } from '@/constants/styles';
 
 interface CatalogProductsSectionProps {
     title: string;
+    titleLink?: string;
 }
 
-const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }) => {
+const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title, titleLink }) => {
     const SliderRef = React.useRef<any>(null);
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
 
@@ -67,7 +68,7 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
 
     return (
         <div className="catalog-product-section">
-            <Link href={APP_ROUTE.catalog} className="catalog-product-section__title">
+            <Link href={titleLink || APP_ROUTE.catalog} className="catalog-product-section__title">
                 {title}
             </Link>
 

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useMediaQuery } from 'usehooks-ts';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 import Logo from '@/assets/images/logo.svg';
@@ -19,6 +20,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ transparent, subscribeBlockId }) => {
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+    const pathname = usePathname();
 
     const blocks: {
         title: string;
@@ -122,7 +124,7 @@ const Footer: React.FC<FooterProps> = ({ transparent, subscribeBlockId }) => {
 
     return (
         <>
-            <FooterEmailSubscribe id={subscribeBlockId} />
+            {pathname !== APP_ROUTE.cinema && <FooterEmailSubscribe id={subscribeBlockId} />}
 
             <footer
                 className={getClassNames('footer', {
