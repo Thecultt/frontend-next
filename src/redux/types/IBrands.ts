@@ -1,8 +1,12 @@
+export interface IBrand {
+    word: string;
+    slug: string;
+}
+
 export interface BrandsState {
     isLoaded: boolean;
-    allBrands: { [key: string]: string[] };
-    brands: { [key: string]: string[] };
-
+    allBrands: { [letter: string]: IBrand[] };
+    brands: { [letter: string]: IBrand[] };
     letter: string;
     search: string;
 }
@@ -15,7 +19,7 @@ export enum BrandsActionTypes {
 
 interface setBrands {
     type: BrandsActionTypes.SET_BRANDS;
-    payload: { [key: string]: string[] };
+    payload: { [letter: string]: IBrand[] };
 }
 
 interface setBrandsLetter {

@@ -2,12 +2,12 @@ import { Dispatch } from 'react';
 
 import $api from '@/http';
 
-import { BrandsActions, BrandsActionTypes } from '../types/IBrands';
+import { BrandsActions, BrandsActionTypes, IBrand } from '../types/IBrands';
 
 export const fetchBrands = () => async (dispatch: Dispatch<BrandsActions>) => {
     const {
         data: { brands },
-    } = await $api.get<{ brands: { [key: string]: string[] } }>(`/brands/`);
+    } = await $api.get<{ brands: { [letter: string]: IBrand[] } }>(`/brands_v2/`);
 
     dispatch({
         type: BrandsActionTypes.SET_BRANDS,

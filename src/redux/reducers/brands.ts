@@ -1,4 +1,4 @@
-import { BrandsState, BrandsActions, BrandsActionTypes } from '../types/IBrands';
+import { BrandsState, BrandsActions, BrandsActionTypes, IBrand } from '../types/IBrands';
 
 const initialState: BrandsState = {
     isLoaded: false,
@@ -29,12 +29,12 @@ const brands = (state = initialState, action: BrandsActions) => {
     }
 
     if (action.type === BrandsActionTypes.SET_BRANDS_SEARCH) {
-        const newBrands: { [key: string]: string[] } = {};
+        const newBrands: { [key: string]: IBrand[] } = {};
 
         Object.keys(state.allBrands).map((key) => {
             state.allBrands[key].map((brand) => {
-                if (brand.toLowerCase().indexOf(action.payload) !== -1) {
-                    if (newBrands[key] !== undefined) {
+                if (brand.word.toLowerCase().indexOf(action.payload) !== -1) {
+                    if (key in newBrands) {
                         newBrands[key] = [...newBrands[key], brand];
                     } else {
                         newBrands[key] = [brand];
