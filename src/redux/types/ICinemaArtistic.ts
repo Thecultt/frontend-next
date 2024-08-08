@@ -1,9 +1,21 @@
+export interface ICinemaArtisticAuction {
+    id: number;
+    color: string | null;
+    current_bid: string | null;
+    description: string | null;
+    image: string | null;
+    release_year: string | null;
+    set: string | null;
+    size: string | null;
+    title: string | null;
+    type: string | null;
+}
+
 export interface CinemaArtisticState {
     isLoadedItems: boolean;
-    items: object[];
-
+    items: ICinemaArtisticAuction[];
     isLoadedPage: boolean;
-    item: object;
+    item: ICinemaArtisticAuction | null;
 }
 
 export enum CinemaArtisticActionTypes {
@@ -15,7 +27,7 @@ export enum CinemaArtisticActionTypes {
 
 interface setCinemaArtisticItems {
     type: CinemaArtisticActionTypes.SET_CINEMA_ARTISTIC_ITEMS;
-    payload: object[];
+    payload: ICinemaArtisticAuction[];
 }
 
 interface setCinemaArtisticIsLoadedPage {
@@ -25,7 +37,7 @@ interface setCinemaArtisticIsLoadedPage {
 
 interface setCinemaArtisticItem {
     type: CinemaArtisticActionTypes.SET_CINEMA_ARTISTIC_ITEM;
-    payload: object;
+    payload: ICinemaArtisticAuction;
 }
 
 export type CinemaArtisticActions = setCinemaArtisticItems | setCinemaArtisticIsLoadedPage | setCinemaArtisticItem;

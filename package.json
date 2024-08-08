@@ -47,6 +47,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@types/lodash.omitby": "^4.6.9",
     "@types/node": "^20",
     "@types/qs": "^6.9.15",

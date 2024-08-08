@@ -96,8 +96,6 @@ const EXHIBITS = [
 const CinemaArtisticExhibits: React.FC = () => {
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.mobile})`);
 
-    // ТЕСТ
-
     return (
         <>
             {EXHIBITS.map((exhibit, index) => (

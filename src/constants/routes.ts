@@ -14,7 +14,10 @@ export const APP_ROUTE = {
     subscribe: '/subscribe',
     favorites: '/favorites',
     alionaDoletskaya: '/AlionaDoletskaya',
-    cinema: '/cinema1909',
+    cinema: {
+        root: '/cinema1909',
+        product: '/cinema1909/product',
+    },
     concierge: {
         root: '/concierge',
         product: '/concierge/product',

@@ -3,9 +3,8 @@ import { CinemaArtisticState, CinemaArtisticActionTypes, CinemaArtisticActions }
 const initialState: CinemaArtisticState = {
     isLoadedItems: false,
     items: [],
-
     isLoadedPage: false,
-    item: {},
+    item: null,
 };
 
 const cinema_artistic = (state = initialState, action: CinemaArtisticActions) => {
