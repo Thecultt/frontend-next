@@ -97,13 +97,20 @@ input[type="file"]
 
 	&.white
 		background-color: $white
-		border: none
+		border-color: transparent
 
 	&.error
 		border: 1px solid $red
 
 	&.password &__field
 		width: calc( 100% - 30px )
+
+	&__label
+		display: block
+		+ManropeMedium
+		font-size: 14px
+		color: $black
+		margin-bottom: 4px
 
 	&__field
 		width: 100%
@@ -380,6 +387,29 @@ button
 		user-select: none
 		pointer-events: none
 		color: $green5
+
+.back-button
+	+buttonReset
+	width: fit-content
+	+flexCenter
+	gap: 8px
+
+	+mediaTablet
+		gap: 2px
+
+	&__icon
+		width: 24px
+		height: 24px
+		flex-shrink: 0
+		+flexCenter
+
+	&__text
+		+ManropeSemiBold
+		font-size: 14px
+		color: $black
+
+		+mediaTablet
+			+ManropeMedium
 
 // checkbox
 .checkbox-wrapper

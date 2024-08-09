@@ -93,7 +93,7 @@ const EXHIBITS = [
     },
 ];
 
-export const CinemaArtisticExhibits = () => {
+const CinemaArtisticExhibits: React.FC = () => {
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.mobile})`);
 
     return (
@@ -169,3 +169,5 @@ export const CinemaArtisticExhibits = () => {
         </>
     );
 };
+
+export default CinemaArtisticExhibits;

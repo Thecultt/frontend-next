@@ -22,6 +22,7 @@
     "axios": "^0.27.2",
     "browser-image-compression": "^2.0.2",
     "dayjs": "^1.11.11",
+    "formik": "^2.4.6",
     "heic2any": "^0.0.4",
     "lodash.isequal": "^4.5.0",
     "lodash.omitby": "^4.6.0",
@@ -47,10 +48,12 @@
     "slick-carousel": "^1.8.1",
     "swiper": "^11.0.4",
     "usehooks-ts": "^3.1.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/lodash.isequal": "^4.5.8",
+    "@faker-js/faker": "^8.4.1",
     "@types/lodash.omitby": "^4.6.9",
     "@types/node": "^20",
     "@types/qs": "^6.9.15",

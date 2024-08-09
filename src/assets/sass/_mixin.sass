@@ -85,6 +85,11 @@
 		background-color: $gray
 		border-radius: 100px
 
+@mixin bgCover
+	background-size: cover
+	background-position: center
+	background-repeat: no-repeat
+
 // grid
 @mixin flexCenter
 	display: flex
@@ -94,6 +99,10 @@
 // media
 @mixin mediaTablet
 	@media only screen and (max-width: 1200px)
+		@content
+
+@mixin mediaTabletSmall
+	@media only screen and (max-width: 800px)
 		@content
 
 @mixin mediaMobile
