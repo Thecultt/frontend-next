@@ -6,10 +6,6 @@
 
 	+ManropeMedium
 
-html,
-body
-	scroll-behavior: smooth
-
 body
 	position: relative
 	font-size: 16px
@@ -382,6 +378,29 @@ button
 		user-select: none
 		pointer-events: none
 		color: $green5
+
+.back-button
+	+buttonReset
+	width: fit-content
+	+flexCenter
+	gap: 8px
+
+	+mediaTablet
+		gap: 2px
+
+	&__icon
+		width: 24px
+		height: 24px
+		flex-shrink: 0
+		+flexCenter
+
+	&__text
+		+ManropeSemiBold
+		font-size: 14px
+		color: $black
+
+		+mediaTablet
+			+ManropeMedium
 
 // checkbox
 .checkbox-wrapper

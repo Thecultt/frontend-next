@@ -17,14 +17,16 @@ export { default as RenderSelectArray } from './UI/RenderSelectArray';
 export { default as RenderTextarea } from './UI/RenderTextarea';
 export { default as Select } from './UI/Select';
 export { default as Textarea } from './UI/Textarea';
-// Notifications
-export { default as NotificationsServer } from './UI/NotificationsServer/NotificationsServer';
-export { default as NotificationsServerError } from './UI/NotificationsServer/NotificationsServerError';
-export { default as NotificationsServerSuccess } from './UI/NotificationsServer/NotificationsServerSuccess';
+export { BackButton } from './UI/BackButton';
 export { Spinner } from './UI/Spinner';
 export { NavLink } from './UI/NavLink/NavLink';
 export { BaseImage } from './UI/BaseImage/BaseImage';
 export { Badge } from './UI/Badge/Badge';
+
+// Notifications
+export { default as NotificationsServer } from './UI/NotificationsServer/NotificationsServer';
+export { default as NotificationsServerError } from './UI/NotificationsServer/NotificationsServerError';
+export { default as NotificationsServerSuccess } from './UI/NotificationsServer/NotificationsServerSuccess';
 
 // MenuMedia
 export { default as MenuMedia } from './MenuMedia/MenuMedia';
@@ -299,6 +301,9 @@ export { default as CinemaArtisticFormSubscribe } from './CinemaArtistic/CinemaA
 // CinemaArtisticAuction
 export { default as CinemaArtisticAuction } from './CinemaArtistic/CinemaArtisticAuction/CinemaArtisticAuction';
 export { default as CinemaArtisticAuctionItem } from './CinemaArtistic/CinemaArtisticAuction/CinemaArtisticAuctionItem';
+// CinemaArtisticAuctionProduct
+export { CinemaAuctionProductProperty } from './CinemaArtistic/CinemaArtisticAuctionProduct/CinemaAuctionProductProperty';
+export { CinemaAuctionProductCarousel } from './CinemaArtistic/CinemaArtisticAuctionProduct/CinemaAuctionProductCarousel';
 
 // Footer
 // FooterEmailSubscribe

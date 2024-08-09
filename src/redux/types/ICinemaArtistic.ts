@@ -3,12 +3,13 @@ export interface ICinemaArtisticAuction {
     color: string | null;
     current_bid: string | null;
     description: string | null;
-    image: string | null;
+    images: string[] | null;
     release_year: string | null;
     set: string | null;
     size: string | null;
     title: string | null;
     type: string | null;
+    film: string | null;
 }
 
 export interface CinemaArtisticState {
@@ -37,7 +38,7 @@ interface setCinemaArtisticIsLoadedPage {
 
 interface setCinemaArtisticItem {
     type: CinemaArtisticActionTypes.SET_CINEMA_ARTISTIC_ITEM;
-    payload: ICinemaArtisticAuction;
+    payload: ICinemaArtisticAuction | null;
 }
 
 export type CinemaArtisticActions = setCinemaArtisticItems | setCinemaArtisticIsLoadedPage | setCinemaArtisticItem;

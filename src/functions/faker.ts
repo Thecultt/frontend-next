@@ -7,13 +7,14 @@ export const getFakeAuctionProducts = (length = 20): Promise<ICinemaArtisticAuct
             id: faker.number.int(),
             title: faker.commerce.productName(),
             description: faker.commerce.productDescription(),
-            image: faker.image.url(),
-            color: null,
-            current_bid: null,
-            release_year: null,
-            set: null,
-            size: null,
-            type: null,
+            images: Array.from({ length: 5 }).map(() => faker.image.urlPicsumPhotos()),
+            current_bid: faker.commerce.price(),
+            release_year: faker.date.birthdate({ mode: 'year' }).toDateString(),
+            color: 'Черный',
+            set: 'Пыльник',
+            size: '30 см.',
+            type: 'Сумка',
+            film: '«Идеальное убийство», 1998',
         }));
 
         res(items);

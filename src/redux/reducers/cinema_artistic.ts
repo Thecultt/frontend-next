@@ -26,6 +26,7 @@ const cinema_artistic = (state = initialState, action: CinemaArtisticActions) =>
     if (action.type === CinemaArtisticActionTypes.SET_CINEMA_ARTISTIC_ITEM) {
         return {
             ...state,
+            isLoadedPage: true,
             item: action.payload,
         };
     }
