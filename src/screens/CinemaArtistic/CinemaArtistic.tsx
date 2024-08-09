@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 
 import { NoSsr, CinemaArtisticExhibits, CinemaArtisticAuction } from '@/components';
+import { scrollToBlock } from '@/functions/scrollToBlock';
 
 import CinemaArtisticRedImage from '@/assets/images/cinema-artistic/cinema-artistic-red.jpg';
 import CinemaArtisticRedTabletImage from '@/assets/images/cinema-artistic/cinema-artistic-red__tablet.jpg';
@@ -267,13 +267,13 @@ const CinemaArtistic: React.FC = () => {
                             культурно-благотворительный фонд Action!
                         </p>
 
-                        <Link
-                            href="#auction"
-                            className="cinema-artistic__btn cinema-artistic-auctioninfo__btn"
+                        <button
                             type="button"
+                            className="cinema-artistic__btn cinema-artistic-auctioninfo__btn"
+                            onClick={() => scrollToBlock('auction')}
                         >
                             Сделать ставку
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </section>

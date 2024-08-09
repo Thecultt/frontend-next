@@ -6,18 +6,14 @@ import {
     CinemaArtisticActionTypes,
     ICinemaArtisticAuction,
 } from '@/redux/types/ICinemaArtistic';
-import { getFakeAuctionProducts } from '@/functions/faker';
-
-import { RootState } from '../reducers';
+import { Noop } from '@/types/functions';
+import { IStatus } from '@/types/api';
 
 export const fetchCinemaArtisticAuctionItems = () => async (dispatch: Dispatch<CinemaArtisticActions>) => {
     try {
-        // TODO
-        // const {
-        //     data: { auctions },
-        // } = await $api.get<{ auctions: ICinemaArtisticAuction[] }>(`/auctions`);
-
-        const auctions = await getFakeAuctionProducts();
+        const {
+            data: { auctions },
+        } = await $api.get<{ auctions: ICinemaArtisticAuction[] }>(`/auctions`);
 
         dispatch({
             type: CinemaArtisticActionTypes.SET_CINEMA_ARTISTIC_ITEMS,
@@ -32,35 +28,56 @@ export const fetchCinemaArtisticAuctionItems = () => async (dispatch: Dispatch<C
     }
 };
 
-export const getCinemaAuctionProductById =
-    (id: number) => async (dispatch: Dispatch<CinemaArtisticActions>, getState: () => RootState) => {
-        const {
-            cinema_artistic: { items },
-        } = getState();
+export const getCinemaAuctionProductById = (id: number) => async (dispatch: Dispatch<CinemaArtisticActions>) => {
+    try {
+        dispatch({
+            type: CinemaArtisticActionTypes.SET_CINEMA_ARTISTIC_IS_LOADED_PAGE,
+            payload: false,
+        });
 
-        const foundItem = items.find((item) => item.id === id);
+        const { data } = await $api.get<ICinemaArtisticAuction>(`/auctions/${id}`);
 
-        if (foundItem) {
-            dispatch({
-                type: CinemaArtisticActionTypes.SET_CINEMA_ARTISTIC_ITEM,
-                payload: foundItem,
-            });
+        dispatch({
+            type: CinemaArtisticActionTypes.SET_CINEMA_ARTISTIC_ITEM,
+            payload: data,
+        });
+    } catch (e) {
+        dispatch({
+            type: CinemaArtisticActionTypes.SET_CINEMA_ARTISTIC_ITEM,
+            payload: null,
+        });
+        console.error(e);
+    }
+};
 
-            return;
-        }
+interface ISendFormAuctionRequest {
+    bid: string;
+    fio: string;
+    phone: string;
+}
 
+export const sendFormAuctionProduct =
+    (id: string, form: ISendFormAuctionRequest, onSuccess?: Noop) =>
+    async (dispatch: Dispatch<CinemaArtisticActions>) => {
         try {
-            const { data } = await $api.get<ICinemaArtisticAuction>(`/auctions/${id}`);
+            dispatch({
+                type: CinemaArtisticActionTypes.SET_CINEMA_FORM_LOADING,
+                payload: true,
+            });
 
-            dispatch({
-                type: CinemaArtisticActionTypes.SET_CINEMA_ARTISTIC_ITEM,
-                payload: data,
-            });
+            const { data } = await $api.post<IStatus>(`/auctions/${id}/bet`, form);
+
+            if (data.status !== 'ok') {
+                throw new Error();
+            }
+
+            onSuccess?.();
         } catch (e) {
-            dispatch({
-                type: CinemaArtisticActionTypes.SET_CINEMA_ARTISTIC_ITEM,
-                payload: null,
-            });
             console.error(e);
+        } finally {
+            dispatch({
+                type: CinemaArtisticActionTypes.SET_CINEMA_FORM_LOADING,
+                payload: false,
+            });
         }
     };

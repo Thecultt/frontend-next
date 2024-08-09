@@ -4,6 +4,7 @@
 $red: #A60215
 $yellow: #EBCF68
 $redHover: #7E000F
+$lightRed: #F7F5F2
 
 // cinema artistic
 .cinema-artistic
@@ -632,10 +633,12 @@ $redHover: #7E000F
 
 .cinema-auction-product
 	padding-top: 70px
+	padding-bottom: 50px
 	position: relative
 
 	+mediaTabletSmall
 		padding-top: 0
+		padding-bottom: 40px
 
 	+open
 
@@ -664,7 +667,6 @@ $redHover: #7E000F
 		+ManropeMedium
 		font-size: 16px
 		color: $black
-		text-transform: capitalize
 
 		&__title
 			+ManropeBold
@@ -691,6 +693,7 @@ $redHover: #7E000F
 			width: 350px
 			height: 350px
 			flex-shrink: 0
+			background-color: $grey1
 			border-radius: 12px
 			overflow: hidden
 
@@ -709,6 +712,7 @@ $redHover: #7E000F
 			&__slide
 				width: 100%
 				height: 100%
+
 				+bgCover
 
 			.swiper-pagination
@@ -763,3 +767,113 @@ $redHover: #7E000F
 
 				+mediaTabletSmall
 					margin-bottom: 16px
+
+	&-form
+		width: 100%
+
+		&__wrapper
+			width: 100%
+			padding: 20px
+			padding-bottom: 16px
+			background-color: $lightRed
+			border-top-left-radius: 18px
+			border-top-right-radius: 18px
+
+			&.sent
+				border-radius: 18px
+
+			+mediaTabletSmall
+				border-radius: 18px
+				padding: 12px
+				margin-bottom: 12px
+
+		&__title
+			+ManropeExtraBold
+			font-size: 24px
+			color: $black
+			margin-bottom: 8px
+
+			+mediaTabletSmall
+				+ManropeSemiBold
+				font-size: 20px
+
+		&__description
+			+ManropeRegular
+			font-size: 14px
+			color: $black
+			margin-bottom: 16px
+
+			+mediaTabletSmall
+				+ManropeMedium
+
+		&__price
+			width: 100%
+			+ManropeBold
+			font-size: 16px
+			color: $black
+			margin-bottom: 16px
+
+			display: flex
+			flex-direction: column
+
+			+mediaTabletSmall
+				font-size: 14px
+				display: inline-block
+
+			&-title
+				font-size: inherit
+				font-weight: inherit
+				color: inherit
+
+			&-value
+				font-size: 22px
+				font-weight: inherit
+				color: inherit
+
+				+mediaTabletSmall
+					font-size: inherit
+
+		&__input
+			width: 100%
+			margin-bottom: 12px
+
+			&:last-of-type
+				margin-bottom: 16px
+
+		&__btn
+			background-color: $red
+			border-color: transparent
+
+			+mediaTabletSmall
+				width: 100%
+
+		&__agreement
+			width: 100%
+			padding: 20px
+			padding-top: 0
+			background-color: $lightRed
+			border-bottom-left-radius: 18px
+			border-bottom-right-radius: 18px
+
+			+ManropeRegular
+			font-size: 12px
+			line-height: 140%
+			color: $gray
+
+			&.sent
+				display: none
+
+			+mediaTabletSmall
+				padding: 12px
+				background-color: $grey1
+				border-radius: 12px
+
+			a
+				font-weight: inherit
+				font-size: inherit
+				color: inherit
+				text-decoration: underline
+				transition: color .2s linear
+
+				&:hover
+					color: $black

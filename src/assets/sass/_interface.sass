@@ -95,11 +95,22 @@ input[type="file"]
 		background-color: $lightBackgroundColor
 		border: 1px solid $gray
 
+	&.white
+		background-color: $white
+		border-color: transparent
+
 	&.error
 		border: 1px solid $red
 
 	&.password &__field
 		width: calc( 100% - 30px )
+
+	&__label
+		display: block
+		+ManropeMedium
+		font-size: 14px
+		color: $black
+		margin-bottom: 4px
 
 	&__field
 		width: 100%

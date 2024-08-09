@@ -304,6 +304,7 @@ export { default as CinemaArtisticAuctionItem } from './CinemaArtistic/CinemaArt
 // CinemaArtisticAuctionProduct
 export { CinemaAuctionProductProperty } from './CinemaArtistic/CinemaArtisticAuctionProduct/CinemaAuctionProductProperty';
 export { CinemaAuctionProductCarousel } from './CinemaArtistic/CinemaArtisticAuctionProduct/CinemaAuctionProductCarousel';
+export { CinemaAuctionProductForm } from './CinemaArtistic/CinemaArtisticAuctionProduct/CinemaAuctionProductForm/CinemaAuctionProductForm';
 
 // Footer
 // FooterEmailSubscribe

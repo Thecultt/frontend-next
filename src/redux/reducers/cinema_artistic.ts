@@ -5,6 +5,7 @@ const initialState: CinemaArtisticState = {
     items: [],
     isLoadedPage: false,
     item: null,
+    formIsLoading: false,
 };
 
 const cinema_artistic = (state = initialState, action: CinemaArtisticActions) => {
@@ -28,6 +29,13 @@ const cinema_artistic = (state = initialState, action: CinemaArtisticActions) =>
             ...state,
             isLoadedPage: true,
             item: action.payload,
+        };
+    }
+
+    if (action.type === CinemaArtisticActionTypes.SET_CINEMA_FORM_LOADING) {
+        return {
+            ...state,
+            formIsLoading: action.payload,
         };
     }
 
