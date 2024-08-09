@@ -2,31 +2,14 @@
 
 import React from 'react';
 
-import NoSsr from '@/components/NoSsr/NoSsr';
-import { CinemaArtisticFormSubscribe } from '@/components';
-import { sendMindbox } from '@/functions/mindbox';
+import { NoSsr, CinemaArtisticExhibits, CinemaArtisticAuction } from '@/components';
+import { scrollToBlock } from '@/functions/scrollToBlock';
 
 import CinemaArtisticRedImage from '@/assets/images/cinema-artistic/cinema-artistic-red.jpg';
 import CinemaArtisticRedTabletImage from '@/assets/images/cinema-artistic/cinema-artistic-red__tablet.jpg';
 import CinemaArtisticRedMobileImage from '@/assets/images/cinema-artistic/cinema-artistic-red__mobile.jpg';
 
-import { CinemaArtisticExhibits } from './CinemaArtisticExhibits';
-
 const CinemaArtistic: React.FC = () => {
-    const onSubmitSubscribeForm = (data: any) => {
-        sendMindbox('RegistraciyaSAukcionaXudozhestvennyj', {
-            customer: {
-                email: data.email,
-                subscriptions: [
-                    {
-                        pointOfContact: 'email',
-                        isSubscribed: true,
-                    },
-                ],
-            },
-        });
-    };
-
     return (
         <>
             <section className="cinema-artistic-main">
@@ -279,12 +262,18 @@ const CinemaArtistic: React.FC = () => {
                         <h2 className="cinema-artistic-auctioninfo__title">АУКЦИОН</h2>
 
                         <p className="cinema-artistic-auctioninfo__description">
-                            Скоро экспонаты из&nbsp;инсталляции и&nbsp;еще несколько сумок &laquo;как в&nbsp;кино&raquo;
-                            из&nbsp;коллекции THE&nbsp;CULTT можно будет приобрести на&nbsp;онлайн-аукционе.
-                            Мы&nbsp;проводим его при участии культурно-благотворительного фонда Action!
+                            Следующая главная роль — ваша! Стартовал онлайн-аукцион, где вы можете купить эти и другие
+                            избранные лоты почти как в кино. Часть средств от продажи будет передана в
+                            культурно-благотворительный фонд Action!
                         </p>
 
-                        <CinemaArtisticFormSubscribe onSubmit={onSubmitSubscribeForm} dark />
+                        <button
+                            type="button"
+                            className="cinema-artistic__btn cinema-artistic-auctioninfo__btn"
+                            onClick={() => scrollToBlock('auction')}
+                        >
+                            Сделать ставку
+                        </button>
                     </div>
                 </div>
             </section>
@@ -448,28 +437,7 @@ const CinemaArtistic: React.FC = () => {
                 <CinemaArtisticExhibits />
             </NoSsr>
 
-            <section className="cinema-artistic-auction">
-                <div className="container">
-                    <div className="cinema-artistic-auction-wrapper">
-                        <h2 className="cinema-artistic-auction__title">АУКЦИОН</h2>
-
-                        <p className="cinema-artistic-auction__subtitle">
-                            15% средств, вырученных на онлайн-аукционе, будут перечислены в культурно-благотворительный
-                            фонд Action!
-                        </p>
-
-                        <p className="cinema-artistic-auction__description">
-                            Фонд Action! Светланы Бондарчук и&nbsp;Евгении Поповой объединяет известных российских
-                            кинематографистов и&nbsp;меценатов для помощи детям и&nbsp;взрослым, попавшим в&nbsp;сложную
-                            ситуацию. При участии фонда уже более 10&nbsp;лет проводятся благотворительные киновечера:
-                            для них режиссеры бесплатно снимают короткометражки с&nbsp;участием признанных звезд кино.
-                            Все вырученные средства поступают в&nbsp;благотворительные организации.
-                        </p>
-
-                        <CinemaArtisticFormSubscribe onSubmit={onSubmitSubscribeForm} />
-                    </div>
-                </div>
-            </section>
+            <CinemaArtisticAuction />
         </>
     );
 };

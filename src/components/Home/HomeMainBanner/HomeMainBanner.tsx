@@ -363,7 +363,7 @@ const HomeMainBanner: React.FC = () => {
                                         сумки как в кино на аукционе THE CULTT!
                                     </p>
                                     <Link
-                                        href={APP_ROUTE.cinema}
+                                        href={APP_ROUTE.cinema.root}
                                         className="home-main-banner-slider-item-text__btn color home-banner-cinema-slide__btn"
                                     >
                                         Подробнее

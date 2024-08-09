@@ -78,3 +78,4 @@ export { default as Visit } from './Visit/Visit';
 
 // CinemaArtistic
 export { default as CinemaArtistic } from './CinemaArtistic/CinemaArtistic';
+export { CinemaArtisticProduct } from './CinemaArtistic/CinemaArtisticProduct';
