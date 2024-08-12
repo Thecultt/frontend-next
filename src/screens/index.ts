@@ -75,3 +75,6 @@ export { default as OrderDetails } from './OrderDetails/OrderDetails';
 
 // Visit
 export { default as Visit } from './Visit/Visit';
+
+// CinemaArtistic
+export { default as CinemaArtistic } from './CinemaArtistic/CinemaArtistic';

@@ -29,7 +29,7 @@ const concierge = (state = initialState, action: ConciergeActions) => {
         return {
             ...state,
             currentCategory: action.payload,
-            currentBrand: '',
+            currentBrand: state.categories[action.payload]?.brands[0],
         };
     }
 

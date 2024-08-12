@@ -26,6 +26,11 @@ export const fetchConciergeCategories = () => async (dispatch: Dispatch<Concierg
     });
 
     dispatch({
+        type: ConciergeActionTypes.SET_CONCIERGE_CURRENT_BRAND,
+        payload: data[Object.keys(data)[0]].brands[0],
+    });
+
+    dispatch({
         type: ConciergeActionTypes.SET_CONCIERGE_CATEGORIES,
         payload: data,
     });

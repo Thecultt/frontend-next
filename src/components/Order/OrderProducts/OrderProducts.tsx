@@ -284,7 +284,10 @@ const OrderProducts: React.FC = () => {
                     delivery_type: currentDelivery.id,
                     payment_type: paymentId,
 
-                    coupon_id: paymentValue === 'На сайте' ? promocode.id : 0,
+                    coupon_id:
+                        paymentValue === 'На сайте' || currentDelivery.title === 'Доставка с примеркой (по Москве)'
+                            ? promocode.id
+                            : 0,
                 },
                 (orderId: number, orderNum: string) => pay(orderId, orderNum),
             ) as any,
@@ -410,7 +413,7 @@ const OrderProducts: React.FC = () => {
             products.map((product) => {
                 sendMindbox('Website.ClearCart', {
                     customer: {
-                        email: user.email,
+                        email: user.email || '',
                     },
                     removeProductFromList: {
                         product: {
