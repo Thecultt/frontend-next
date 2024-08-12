@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -95,7 +97,7 @@ export const ProductCardFavorites: React.FC<Props> = ({ productData }) => {
                 </svg>
             )}
 
-            <span className="product-card-favorites__count">{localCount}</span>
+            {localCount > 0 && <span className="product-card-favorites__count">{localCount}</span>}
         </button>
     );
 };
