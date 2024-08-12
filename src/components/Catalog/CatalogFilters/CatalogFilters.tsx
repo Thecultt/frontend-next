@@ -75,7 +75,9 @@ const CatalogFilters: React.FC<Props> = ({ isOpenFiltersMedia, setIsOpenFiltersM
                 {(!category_slug || !FILTER_CATEGORY_SLUGS.includes(category_slug)) && <CatalogFiltersCategories />}
                 <CatalogFiltersTypes />
                 <CatalogFiltersBrands />
-                <CatalogFiltersModels />
+                {(!category_slug || ![CATEGORY_SLUGS.accessories, CATEGORY_SLUGS.shoes].includes(category_slug)) && (
+                    <CatalogFiltersModels />
+                )}
                 <CatalogFiltersColors />
                 {(category_slug === CATEGORY_SLUGS.accessories ||
                     selectedCategories.includes(CATEGORY_NAMES.accessories)) && <CatalogFiltersGlassFrame />}
