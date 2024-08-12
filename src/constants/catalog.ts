@@ -36,6 +36,8 @@ export const FILTER_CATEGORY_SLUGS = [
     CATEGORY_SLUGS.decorations,
 ];
 
+export const FAKE_CATEGORY_SLUGS = [CATEGORY_SLUGS.new, CATEGORY_SLUGS.popular, CATEGORY_SLUGS.sale];
+
 export const AVAILABILITY = {
     available: 'Доступно',
     notAvailable: 'Нет в наличии',
