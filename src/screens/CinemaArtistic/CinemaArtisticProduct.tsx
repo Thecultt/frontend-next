@@ -33,7 +33,7 @@ export const CinemaArtisticProduct = () => {
 
     return (
         <section className="cinema-auction-product container">
-            <BackButton className="cinema-auction-product__back" link={`${APP_ROUTE.cinema.root}#auction`} />
+            <BackButton className="cinema-auction-product__back" link={APP_ROUTE.cinema.root} />
 
             {isLoadedPage && item ? (
                 <div className="cinema-auction-product__content">
