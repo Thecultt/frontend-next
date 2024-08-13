@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -5,13 +7,10 @@ import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { setFiltersGlassFrameProduct } from '@/redux/actions/products';
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
 
-interface CatalogFiltersGlassFrameProps {
-    glass_frame: string[];
-}
-
-const CatalogFiltersGlassFrame: React.FC<CatalogFiltersGlassFrameProps> = ({ glass_frame }) => {
+const CatalogFiltersGlassFrame: React.FC = () => {
     const dispatch = useDispatch();
 
+    const { glass_frame } = useTypedSelector(({ products_filters }) => products_filters);
     const { filters } = useTypedSelector(({ products }) => products);
 
     const onClickSetGlassFrame = (glass_frame: string) => {
@@ -19,24 +18,22 @@ const CatalogFiltersGlassFrame: React.FC<CatalogFiltersGlassFrameProps> = ({ gla
     };
 
     return (
-        <CatalogFiltersBlockWrapper title="Форма оправы">
+        <CatalogFiltersBlockWrapper title="Форма оправы" disabled={!glass_frame.length}>
             <p className="catalog-filters-block-content-checkbox__subtitle">Очки</p>
 
-            {glass_frame.map((glass_frame_item, index) => (
+            {glass_frame.map(({ frame }, index) => (
                 <div
                     className="catalog-filters-block-content-checkbox"
                     key={`catalog-filters-block-content-glass-frame-checkbox-${index}`}
                 >
                     <Checkbox
                         id={`catalog-filters-block-content-glass-frame-checkbox-${index}`}
-                        label={glass_frame_item}
-                        onChange={() => onClickSetGlassFrame(glass_frame_item)}
+                        label={frame}
+                        onChange={() => onClickSetGlassFrame(frame)}
                         checked={
-                            Object.keys(filters.glass_frame).find(
-                                (filters_glass_frame) => glass_frame_item === filters_glass_frame,
+                            !!Object.keys(filters.glass_frame).find(
+                                (filters_glass_frame) => frame === filters_glass_frame,
                             )
-                                ? true
-                                : false
                         }
                     />
                 </div>

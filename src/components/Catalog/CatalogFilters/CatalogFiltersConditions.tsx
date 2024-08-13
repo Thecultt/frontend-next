@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -5,13 +7,10 @@ import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { setFiltersConditionsProduct } from '@/redux/actions/products';
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
 
-interface CatalogFiltersConditionsProps {
-    conditions: string[];
-}
-
-const CatalogFiltersConditions: React.FC<CatalogFiltersConditionsProps> = ({ conditions }) => {
+const CatalogFiltersConditions: React.FC = () => {
     const dispatch = useDispatch();
 
+    const { conditions } = useTypedSelector(({ products_filters }) => products_filters);
     const { filters } = useTypedSelector(({ products }) => products);
 
     const onClickSetCondition = (condition: string) => {
@@ -28,9 +27,9 @@ const CatalogFiltersConditions: React.FC<CatalogFiltersConditionsProps> = ({ con
 					<li><span>Хорошее</span>: присутствуют значительные следы носки. Могут присутствовать следующие нюансы: отсутствие элементов полного комплекта,  загар, потертости или царапины на коже, пятна на материале, следы носки на подкладке, потертости на фурнитуре, сумка была в спа</li>
 				</ul>
 			`}
-            disabled={filters.boutique}
+            disabled={filters.boutique || !conditions.length}
         >
-            {conditions.map((condition, index) => (
+            {conditions.map(({ condition }, index) => (
                 <div
                     className="catalog-filters-block-content-checkbox"
                     key={`catalog-filters-block-content-conditions-checkbox-${index}`}
@@ -40,9 +39,7 @@ const CatalogFiltersConditions: React.FC<CatalogFiltersConditionsProps> = ({ con
                         label={condition}
                         onChange={() => onClickSetCondition(condition)}
                         checked={
-                            Object.keys(filters.conditions).find((filtersCondition) => condition === filtersCondition)
-                                ? true
-                                : false
+                            !!Object.keys(filters.conditions).find((filtersCondition) => condition === filtersCondition)
                         }
                     />
                 </div>
