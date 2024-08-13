@@ -25,9 +25,6 @@ export const getValidationSchema = (min: number) =>
         [AuctionFieldName.Fio]: YUP_REQUIRED_STRING,
         [AuctionFieldName.Phone]: YUP_REQUIRED_STRING,
         [AuctionFieldName.Bid]: Yup.number()
-            .min(
-                min,
-                'Пожалуйста, введите ставку заново: ваша ставка должна быть выше текущей ставки на 10 000 ₽ и более',
-            )
+            .min(min, 'Пожалуйста, введите ставку заново: ваша ставка должна быть выше текущей цены на 5 000 ₽ и более')
             .required(REQUIRED_VALIDATION_MESSAGE),
     });

@@ -28,7 +28,7 @@ export const CinemaAuctionProductForm: React.FC<Props> = ({ productId, currentBi
     const { formIsLoading } = useTypedSelector(({ cinema_artistic }) => cinema_artistic);
     const { user } = useAuthUser();
 
-    const minBid = currentBid + 10000;
+    const minBid = currentBid + 5000;
     const validationSchema = getValidationSchema(minBid);
     const initialValues: IAuctionForm = {
         ...INITIAL_VALUES,
@@ -62,7 +62,7 @@ export const CinemaAuctionProductForm: React.FC<Props> = ({ productId, currentBi
                 <h3 className="cinema-auction-product-form__title">Сделать ставку</h3>
                 <p className="cinema-auction-product-form__description">
                     Заполните заявку, чтобы участвовать в аукционе. Ваша ставка должна быть выше текущей цены на
-                    10&nbsp;000&nbsp;₽ и более. Вам придёт уведомление, как только ставка будет принята, а также если
+                    5&nbsp;000&nbsp;₽ и более. Вам придёт уведомление, как только ставка будет принята, а также если
                     кто-то перебьёт вашу ставку.
                 </p>
 
