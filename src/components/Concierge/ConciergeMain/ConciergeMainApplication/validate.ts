@@ -32,5 +32,13 @@ export const validate = (values: validateValues) => {
         errors.phone = `Не менее ${defaultMin} символов`;
     }
 
+    if (!values.comment) {
+        errors.comment = 'Поле не может быть пустым';
+    } else if (values.comment.length > defaultMax) {
+        errors.comment = `Не более ${defaultMax} символов`;
+    } else if (values.comment.length < defaultMin) {
+        errors.comment = `Не менее ${defaultMin} символов`;
+    }
+
     return errors;
 };

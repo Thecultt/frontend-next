@@ -4,11 +4,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import {
-    fetchConciergeCategories,
-    sendConciergeProductCustomApplication,
-    setConciergeProductIsSendFormCustomProduct,
-} from '@/redux/actions/concierge';
+import { fetchConciergeCategories, setConciergeProductIsSendFormCustomProduct } from '@/redux/actions/concierge';
 import {
     ConciergeMainBanner,
     ConciergeMainCatalog,
@@ -22,23 +18,11 @@ import NoSsr from '@/components/NoSsr/NoSsr';
 const ConciergeMain: React.FC = () => {
     const dispatch = useDispatch();
 
-    const [isOpenCustomForm, setIsOpenCustomForm] = React.useState<boolean>(false);
-
     const { isSendFormCustomProductSuccess } = useTypedSelector(({ concierge }) => concierge);
 
     React.useEffect(() => {
         dispatch(fetchConciergeCategories() as any);
     }, []);
-
-    // const onSubmitProductCustomApplication = (data: any) => {
-    // 	dispatch(sendConciergeProductCustomApplication(data) as any);
-
-    // 	setIsOpenCustomForm(false);
-    // };
-
-    // const onClickOpenCustomForm = () => {
-    // 	setIsOpenCustomForm(true);
-    // };
 
     const scrollToForm = () => {
         const block = document.getElementById('concierge-application');
