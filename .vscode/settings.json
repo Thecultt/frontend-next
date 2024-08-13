@@ -4,5 +4,5 @@
   "[sass]": {
     "editor.defaultFormatter": "syler.sass-indented"
   },
-  "cSpell.words": ["mindbox", "reglog", "AlyonaDoletskaya", "thecultt", "tinkoff", "swiper"]
+  "cSpell.words": ["mindbox", "reglog", "AlyonaDoletskaya", "thecultt", "tinkoff", "swiper", "formik"]
 }

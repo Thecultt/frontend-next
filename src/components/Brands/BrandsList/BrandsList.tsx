@@ -8,7 +8,7 @@ const BrandsList: React.FC = () => {
 
     return (
         <div className="brands-list">
-            {letter !== '' && search === '' ? (
+            {!!letter && !search ? (
                 <BrandsListBlock letter={letter} brands={brands[letter]} />
             ) : (
                 Object.keys(brands).map((key, index) => (

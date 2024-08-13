@@ -38,10 +38,7 @@ const CabinetSellsList: React.FC = () => {
 
     return (
         <div className="cabinet-content cabinet-sells-list">
-            {/* {user.bik === "" || user.bik === null || user.inn === "" || user.inn === null || user.passport === "" || user.passport === null || user.rs === "" || user.rs === null ? (
-                <CabinetSellsListPaymentInfoMessage />
-            ) : null} */}
-            <CabinetSellsListPaymentInfoMessage />
+            {/* <CabinetSellsListPaymentInfoMessage /> */}
 
             <div className="cabinet-sells-list-top">
                 <Link href={APP_ROUTE.sell.create} className="btn cabinet-sells-list-top__add">
