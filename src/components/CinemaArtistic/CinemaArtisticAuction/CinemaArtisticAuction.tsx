@@ -80,12 +80,12 @@ const CinemaArtisticAuction: React.FC = () => {
                         <div className="cinema-artistic-auction-description-properties__column">
                             <PropertyItem>
                                 Чтобы участвовать, сделайте ставку на понравившийся лот —{' '}
-                                <strong>не менее 10&nbsp;000&nbsp;₽</strong>
+                                <strong>не менее 5&nbsp;000&nbsp;₽</strong>
                             </PropertyItem>
                             <PropertyItem>Цена лота на сайте меняется в зависимости от последней ставки.</PropertyItem>
                             <PropertyItem>
                                 Вы можете сделать сколько угодно ставок с шагом{' '}
-                                <strong>не менее 10&nbsp;000&nbsp;₽</strong>
+                                <strong>не менее 5&nbsp;000&nbsp;₽</strong>
                             </PropertyItem>
                             <PropertyItem>
                                 По завершении аукциона лот будет продан тому участнику, кто сделал последнюю ставку.
