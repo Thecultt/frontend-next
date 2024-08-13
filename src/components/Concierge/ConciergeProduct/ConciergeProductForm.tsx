@@ -21,7 +21,7 @@ const ConciergeProductForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
     React.useEffect(() => {
         if (isLoaded) {
-            initialize({ ...user, fio: `${user.fullname}` });
+            initialize({ fio: `${user.fullname}`, phone: user.phone, email: user.email });
         }
     }, [isLoaded]);
 
@@ -35,7 +35,7 @@ const ConciergeProductForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
             </p>
 
             <div className="concierge-product-form-input">
-                <Field component={RenderInput} label="ФИО" name="fio" type="text" white />
+                <Field component={RenderInput} label="Имя" name="name" type="text" white />
             </div>
 
             <div className="concierge-product-form-input">
@@ -43,7 +43,7 @@ const ConciergeProductForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
             </div>
 
             <div className="concierge-product-form-input">
-                <Field component={RenderInput} label="Email" name="email" type="text" white />
+                <Field component={RenderInput} label="Комментарий" name="comment" type="text" white />
             </div>
 
             <div className="concierge-product-form-btn">

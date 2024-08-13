@@ -1,18 +1,32 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
+
+import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { useAuthUser } from '@/hooks/useAuthUser';
+import { Loader, RenderTextarea, RenderInput } from '@/components';
+import { getClassNames } from '@/functions/getClassNames';
 import { CONTACTS } from '@/constants/contacts';
 
-import { RenderInput, RenderTextarea } from '@/components';
+import { validate } from './validate';
 
 const ConciergeMainApplicationForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
     initialize,
     invalid,
-    pristine,
     submitting,
 }) => {
+    const { isSendFormCustomProductSuccess } = useTypedSelector(({ concierge }) => concierge);
+
+    const { isLoaded, user } = useAuthUser();
+
+    React.useEffect(() => {
+        if (isLoaded) {
+            initialize({ name: `${user.name}`, phone: user.phone });
+        }
+    }, [isLoaded]);
+
     return (
-        <form className="concierge-application-form">
+        <form className="concierge-application-form" onSubmit={handleSubmit}>
             <h3 className="concierge-application-form__title">
                 Нет нужного лота? <br /> Закажите его через нас
             </h3>
@@ -26,11 +40,18 @@ const ConciergeMainApplicationForm: React.FC<{} & InjectedFormProps<{}, {}>> = (
             </div>
 
             <div className="concierge-application-form-input">
-                <Field component={RenderTextarea} label="Комментарий" name="message" type="text" white />
+                <Field component={RenderTextarea} label="Комментарий" name="comment" type="text" white />
             </div>
 
             <div className="concierge-application-form-btn">
-                <button className="btn concierge-application-form-btn__btn">Отправить заявку</button>
+                <button
+                    className={getClassNames('btn concierge-application-form-btn__btn', {
+                        loader: isSendFormCustomProductSuccess,
+                    })}
+                    disabled={isSendFormCustomProductSuccess || invalid || submitting}
+                >
+                    {isSendFormCustomProductSuccess ? <Loader /> : 'Отправить заявку'}
+                </button>
 
                 <a
                     href={CONTACTS.whatsappLinkConcierge}
@@ -62,5 +83,5 @@ const ConciergeMainApplicationForm: React.FC<{} & InjectedFormProps<{}, {}>> = (
 
 export default reduxForm<{}, {}>({
     form: 'concierge-form',
-    // validate,
+    validate,
 })(ConciergeMainApplicationForm);

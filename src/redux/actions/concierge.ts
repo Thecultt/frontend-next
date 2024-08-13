@@ -51,7 +51,7 @@ export const fetchConciergeProduct = (id: string) => async (dispatch: Dispatch<C
 };
 
 export const sendConciergeProductApplication =
-    (info: { fio: string; phone: string; email: string }, good_id: number) =>
+    (info: { name: string; phone: string; comment: string }, good_id: number) =>
     (dispatch: Dispatch<ConciergeActions>) => {
         dispatch({
             type: ConciergeActionTypes.SET_CONCIERGE_IS_SEND_FORM_PRODUCT_PAGE,
@@ -80,8 +80,7 @@ export const setConciergeProductIsSendFormProductPage = (status: boolean) => ({
 });
 
 export const sendConciergeProductCustomApplication =
-    (info: { fio: string; phone: string; email: string; brand: string; good_link: string; additional_link: string }) =>
-    (dispatch: Dispatch<ConciergeActions>) => {
+    (info: { name: string; phone: string; comment: string }) => (dispatch: Dispatch<ConciergeActions>) => {
         dispatch({
             type: ConciergeActionTypes.SET_CONCIERGE_IS_SEND_FORM_CUSTOM_PRODUCT,
             payload: true,
