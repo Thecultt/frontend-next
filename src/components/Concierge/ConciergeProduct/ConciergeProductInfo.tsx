@@ -20,10 +20,11 @@ const ConciergeProductInfo: React.FC<ConciergeProduct> = ({ image, title, price,
             </div>
 
             <div className="concierge-product-item-buyer">
-                <h3 className="concierge-product-item-buyer__title">Товар частного продавца.</h3>
+                <h3 className="concierge-product-item-buyer__title">Доставляется через консьерж-сервис</h3>
 
                 <p className="concierge-product-item-buyer__subtitle">
-                    Цена примерная, актуальную стоимость уточняйте у менеджера.
+                    Этот товар будет доставлен консьержем THE CULTT с официального сайта бренда. Подайте заявку, чтобы
+                    определить актуальную стоимость с учетом доставки.
                 </p>
             </div>
         </div>

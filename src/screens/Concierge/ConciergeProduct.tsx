@@ -63,10 +63,13 @@ const ConciergeProduct: React.FC = () => {
                             <ConciergeProductForm onSubmit={onSubmitProductApplication} />
 
                             <div className="concierge-product-buyer-media">
-                                <h3 className="concierge-product-buyer-media__title">Товар частного продавца.</h3>
+                                <h3 className="concierge-product-buyer-media__title">
+                                    Доставляется через консьерж-сервис
+                                </h3>
 
                                 <p className="concierge-product-buyer-media__subtitle">
-                                    Цена примерная, актуальную стоимость уточняйте у менеджера.
+                                    Этот товар будет доставлен консьержем THE CULTT с официального сайта бренда. Подайте
+                                    заявку, чтобы определить актуальную стоимость с учетом доставки.
                                 </p>
 
                                 <p className="concierge-product-buyer-media__notoffer">

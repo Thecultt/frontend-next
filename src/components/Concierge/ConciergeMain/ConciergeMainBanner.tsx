@@ -23,7 +23,8 @@ const ConciergeMainBanner: React.FC<Props> = ({ scrollToForm }) => {
             <div className="concierge-main-text">
                 <h2 className="title mb concierge-main-text__title">Вы выберете, мы доставим</h2>
                 <p className="description concierge-main-text__description">
-                    Консьерж-сервис THE CULTT доставит для вас любые позиции с официальных сайтов luxury-брендов.
+                    Консьерж-сервис THE CULTT доставит для вас из&nbsp;Европы и&nbsp;США любые позиции
+                    с&nbsp;официальных сайтов Herm&egrave;s, Chanel, Cartier, Panerai и&nbsp;других культовых брендов.
                 </p>
                 <button
                     className={getClassNames('concierge-main-text__btn', {
