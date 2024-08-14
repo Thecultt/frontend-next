@@ -16,7 +16,7 @@ import { AVAILABILITY, CATEGORY_SLUGS, CONDITIONS, FILTER_CATEGORY_SLUGS, GENDER
 import { getDefaultPageSort } from '@/functions/getDefaultPageSort';
 
 export const useCatalogFilters = () => {
-    const { category_slug, subcategories_slug, selection_id } = useParams<CatalogPageParams>();
+    const { category_slug, subcategories_slug, selection_id, brand_slug } = useParams<CatalogPageParams>();
 
     const [state, setQueryState] = useQueryStates(
         {
@@ -25,7 +25,7 @@ export const useCatalogFilters = () => {
             brands: parseAsArrayOf(parseAsString).withDefault([]),
             models: parseAsArrayOf(parseAsString).withDefault([]),
             sort: parseAsStringLiteral(Object.values(SORT)).withDefault(
-                getDefaultPageSort(category_slug, selection_id),
+                getDefaultPageSort({ categorySlug: category_slug, selectionId: selection_id }),
             ),
             page: parseAsInteger.withDefault(1),
             search: parseAsString.withDefault(''),
@@ -51,6 +51,7 @@ export const useCatalogFilters = () => {
                 category_slug:
                     !!category_slug && FILTER_CATEGORY_SLUGS.includes(category_slug) ? category_slug : undefined,
                 subcategories_slug,
+                brand_slug,
                 categories: state.categories,
                 types: state.types,
                 brands: state.brands,
@@ -72,7 +73,7 @@ export const useCatalogFilters = () => {
                 size: state.size,
                 selection: selection_id,
             }) satisfies ICatalogFilters,
-        [category_slug, subcategories_slug, selection_id, state],
+        [category_slug, subcategories_slug, brand_slug, selection_id, state],
     );
 
     const [filters, setFilters] = React.useState(tempFilters);

@@ -7,6 +7,7 @@ import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
 import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 import { CATEGORY_SLUG_NAMES } from '@/constants/catalog';
+import { IModels } from '@/models/IProductFilters';
 
 interface FilterModelListProps {
     models: string[];
@@ -65,7 +66,13 @@ const CatalogFiltersModels: React.FC = () => {
     const [search, setSearch] = React.useState('');
 
     const {
-        filters: { categories: selectedCategories, brands: selectedBrands, models: selectedModels, category_slug },
+        filters: {
+            categories: selectedCategories,
+            brands: selectedBrands,
+            models: selectedModels,
+            category_slug,
+            brand_slug,
+        },
         updateFilters,
     } = useCatalogFilters();
 
@@ -90,33 +97,45 @@ const CatalogFiltersModels: React.FC = () => {
 
                 if (subsubcategories.length > 0) {
                     subsubcategories.forEach((subsubcategory) => {
-                        const manufacturers = Object.keys(
-                            fetchedCategories[category].subsubcategories[subsubcategory].manufacturers,
-                        );
+                        if (brand_slug) {
+                            Object.values(fetchedCategories[category].subsubcategories[subsubcategory].manufacturers)
+                                .filter(({ models, slug }) => !!models && slug === brand_slug)
+                                .forEach(({ models }) => {
+                                    const castedModels = models as { [key: string]: IModels };
+                                    Object.keys(castedModels).forEach((model) => {
+                                        modelsSet.add(model);
+                                    });
+                                });
+                        } else {
+                            const manufacturers = Object.keys(
+                                fetchedCategories[category].subsubcategories[subsubcategory].manufacturers,
+                            );
 
-                        if (manufacturers.length > 0) {
-                            manufacturers.forEach((brand) => {
-                                const models = Object.keys(
-                                    fetchedCategories[category].subsubcategories[subsubcategory].manufacturers[brand]
-                                        .models || {},
-                                );
+                            if (manufacturers.length > 0) {
+                                manufacturers.forEach((brand) => {
+                                    const models = Object.keys(
+                                        fetchedCategories[category].subsubcategories[subsubcategory].manufacturers[
+                                            brand
+                                        ].models || {},
+                                    );
 
-                                if (models.length > 0) {
-                                    if (selectedBrands.length > 0) {
-                                        selectedBrands.forEach((currentBrand) => {
-                                            if (currentBrand === brand) {
-                                                models.forEach((model) => {
-                                                    modelsSet.add(model);
-                                                });
-                                            }
-                                        });
-                                    } else {
-                                        models.forEach((model) => {
-                                            modelsSet.add(model);
-                                        });
+                                    if (models.length > 0) {
+                                        if (selectedBrands.length > 0) {
+                                            selectedBrands.forEach((currentBrand) => {
+                                                if (currentBrand === brand) {
+                                                    models.forEach((model) => {
+                                                        modelsSet.add(model);
+                                                    });
+                                                }
+                                            });
+                                        } else {
+                                            models.forEach((model) => {
+                                                modelsSet.add(model);
+                                            });
+                                        }
                                     }
-                                }
-                            });
+                                });
+                            }
                         }
                     });
                 }
