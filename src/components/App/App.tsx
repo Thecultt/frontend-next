@@ -15,7 +15,7 @@ import { fetchUser } from '@/redux/actions/user';
 import NoSsr from '@/components/NoSsr/NoSsr';
 import { Footer, Header, NotificationsServer, Reglog, WaitingListCreate, WaitingListDelete } from '@/components';
 import { useReplaceLS } from '@/hooks/useReplaceLS';
-import { APP_ROUTE } from '@/constants/routes';
+import { CATALOG_PAGES } from '@/constants/routes';
 
 import { ClientOnly } from './ClientOnly';
 
@@ -42,7 +42,7 @@ export const App = ({ children }: { children: React.ReactNode }) => {
             dispatch(fetchProductsFilters() as any);
         }
 
-        if (!isLoadedProducts && !pathname.startsWith(APP_ROUTE.catalog)) {
+        if (!isLoadedProducts && CATALOG_PAGES.every((page) => !pathname.startsWith(page))) {
             dispatch(fetchFirstProductsCatalog() as any);
         }
 
