@@ -27,10 +27,10 @@ const CATEGORIES_DICTIONARY = {
 };
 
 const CATEGORIES_IMAGE_DICTIONARY = {
-    [CATEGORY_SLUGS.bags]: '/images/seo/category-bags.jpg',
-    [CATEGORY_SLUGS.shoes]: '/images/seo/category-shoes.jpg',
-    [CATEGORY_SLUGS.accessories]: '/images/seo/category-accessories.jpg',
-    [CATEGORY_SLUGS.decorations]: '/images/seo/category-decorations.jpg',
+    [CATEGORY_SLUGS.bags]: `${APP_PROD_DOMAIN}/images/seo/category-bags.jpg`,
+    [CATEGORY_SLUGS.shoes]: `${APP_PROD_DOMAIN}/images/seo/category-shoes.jpg`,
+    [CATEGORY_SLUGS.accessories]: `${APP_PROD_DOMAIN}/images/seo/category-accessories.jpg`,
+    [CATEGORY_SLUGS.decorations]: `${APP_PROD_DOMAIN}/images/seo/category-decorations.jpg`,
 };
 
 export const generateMetadata = ({ params }: PageProps) => {
