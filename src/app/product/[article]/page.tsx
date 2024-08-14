@@ -5,8 +5,9 @@ import type { ProductPage } from '@/models/IProduct';
 import NoSsr from '@/components/NoSsr/NoSsr';
 import { Product } from '@/screens';
 import $api from '@/http';
-import { APP_PROD_DOMAIN, APP_TITLE } from '@/constants/app';
+import { APP_PROD_DOMAIN } from '@/constants/app';
 import { CATEGORY_NAMES } from '@/constants/catalog';
+import { MAIN_META } from '@/constants/meta';
 
 interface PageProps {
     params: { article?: string };
@@ -58,9 +59,7 @@ export const generateMetadata = async ({ params }: PageProps) => {
             },
         } satisfies Metadata;
     } catch (e) {
-        return {
-            title: APP_TITLE,
-        } satisfies Metadata;
+        return MAIN_META;
     }
 };
 
