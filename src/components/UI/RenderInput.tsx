@@ -14,6 +14,8 @@ const RenderInput: React.FC<any> = ({ label, type, input, meta: { touched, error
                 disabled: !!disabled,
             })}
         >
+            {white && <span className="input__title">{label}</span>}
+
             <div
                 className={getClassNames('input', {
                     password: type === 'password',
