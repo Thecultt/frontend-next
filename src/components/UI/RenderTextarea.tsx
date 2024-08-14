@@ -17,6 +17,8 @@ const RenderTextarea: React.FC<RenderTextareaProps> = ({ label, input, meta: { t
                 white: !!white,
             })}
         >
+            {white && <span className="textarea__title">{label}</span>}
+
             <textarea {...input} className="textarea__field" placeholder={label} />
         </div>
     );
