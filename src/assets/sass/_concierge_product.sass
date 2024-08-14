@@ -117,7 +117,7 @@
 			margin-bottom: 10px
 
 		&__description
-			font-size: 17px
+			font-size: 16px
 			margin-bottom: 15px
 
 		&-input
@@ -127,6 +127,7 @@
 			margin-top: 20px
 
 			display: flex
+			align-items: center
 
 			&__btn
 				width: 100%
@@ -242,9 +243,14 @@
 @media screen and (max-width: 450px)
 	.concierge-product
 		&-form
+			padding: 12px
+
 			&-btn
-				flex-wrap: wrap
-				justify-content: center
+				&__btn
+					font-size: 14px
+					padding: 12px
 
 				&__social
-					margin-top: 10px
+					min-width: 45px
+					width: 45px
+					height: 45px
