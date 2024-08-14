@@ -84,9 +84,14 @@ export const fetchProductsCatalog =
             filters.categories?.map((categories) => params.append('category', categories));
         }
 
+        if (filters.brand_slug) {
+            params.append('manufacturer_slug', filters.brand_slug);
+        } else {
+            filters.brands?.map((brand) => params.append('manufacturer', brand));
+        }
+
         filters.conditions?.map((condition) => params.append('conditions', condition));
         filters.types?.map((type) => params.append('subcategories', type));
-        filters.brands?.map((brand) => params.append('manufacturer', brand));
         filters.models?.map((model) => params.append('model_names', model));
         filters.colors?.map((color) => params.append('color', color));
         filters.genders?.map((gender) => params.append('genders', gender));

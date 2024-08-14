@@ -1,13 +1,9 @@
 import React from 'react';
-import { Metadata } from 'next/types';
 
 import { SellInfo } from '@/screens';
-import { APP_SELL_TITLE, APP_SELL_DESCRIPTION } from '@/constants/app';
+import { SELL_META } from '@/constants/meta';
 
-export const metadata: Metadata = {
-    title: APP_SELL_TITLE,
-    description: APP_SELL_DESCRIPTION,
-};
+export const metadata = SELL_META;
 
 const SellInfoPage = () => <SellInfo />;
 
