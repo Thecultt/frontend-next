@@ -5,7 +5,7 @@ import { sendConciergeProductCustomApplication } from '@/redux/actions/concierge
 
 import ConciergeMainApplicationForm from './ConciergeMainApplicationForm';
 
-import ConciergeMainImage from '@/assets/images/concierge/concierge-main.jpg';
+import ConciergeMainImage from '@/assets/images/concierge/concierge-main-form.jpg';
 
 const ConciergeMainApplication: React.FC = () => {
     const dispatch = useDispatch();
