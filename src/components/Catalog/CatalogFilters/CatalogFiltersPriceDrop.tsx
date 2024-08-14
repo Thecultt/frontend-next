@@ -1,44 +1,39 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+'use client';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setFiltersPriceDropProduct } from '@/redux/actions/products';
+import React from 'react';
+
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const CatalogFiltersPriceDrop: React.FC = () => {
-    const dispatch = useDispatch();
-
-    const { filters } = useTypedSelector(({ products }) => products);
+    const {
+        filters: { price_drop, boutique },
+        updateFilters,
+    } = useCatalogFilters();
 
     const onClickSetPriceDrop = (price_drop: boolean) => {
-        dispatch(setFiltersPriceDropProduct(price_drop));
+        updateFilters({
+            price_drop,
+        });
     };
 
     return (
-        <CatalogFiltersBlockWrapper title="Снижение цены" disabled={filters.boutique}>
+        <CatalogFiltersBlockWrapper title="Снижение цены" disabled={boutique}>
             <div className="catalog-filters-block-content-checkbox">
                 <Checkbox
-                    id={`catalog-filters-block-content-price-drop-checkbox-true`}
+                    id="catalog-filters-block-content-price-drop-checkbox-true"
                     label="Только со сниженной ценой"
                     onChange={() => onClickSetPriceDrop(true)}
-                    checked={filters.price_drop === true}
-                    // checked={Object.keys(filters.conditions).find((filtersCondition) => (
-                    // 	condition === filtersCondition
-                    // )) ? true : false}
+                    checked={price_drop}
                 />
             </div>
 
             <div className="catalog-filters-block-content-checkbox">
                 <Checkbox
-                    id={`catalog-filters-block-content-price-drop-checkbox-false`}
+                    id="catalog-filters-block-content-price-drop-checkbox-false"
                     label="Показать все"
                     onChange={() => onClickSetPriceDrop(false)}
-                    checked={filters.price_drop === false}
-                    // checked={!filters.price_drop}
-                    // onChange={() => onClickSetCondition(condition)}
-                    // checked={Object.keys(filters.conditions).find((filtersCondition) => (
-                    // 	condition === filtersCondition
-                    // )) ? true : false}
+                    checked={!price_drop}
                 />
             </div>
         </CatalogFiltersBlockWrapper>

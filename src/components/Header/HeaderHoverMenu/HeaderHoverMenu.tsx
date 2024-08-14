@@ -4,19 +4,19 @@ import Link from 'next/link';
 import { getClassNames } from '@/functions/getClassNames';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { APP_ROUTE } from '@/constants/routes';
-import { SORT } from '@/constants/catalog';
 
-import { HeaderHoverMenuCategory } from '../Header';
+import { IHeaderHoverMenuCategory } from '../constants';
+
 import './styles.sass';
 
-interface HeaderHoverMenuProps extends HeaderHoverMenuCategory {
+interface HeaderHoverMenuProps extends IHeaderHoverMenuCategory {
     isOpenHoverMenu: boolean;
     onOpen: () => void;
     onClose: () => void;
 }
 
 const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
-    title,
+    slug,
     types,
     brands,
     fullTextView,
@@ -51,9 +51,8 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
                                             <Link
                                                 onClick={onClose}
                                                 href={getCatalogFiltersUrl({
-                                                    categories: [title],
+                                                    category_slug: slug,
                                                     types: [type],
-                                                    sort: SORT.a,
                                                 })}
                                                 className="header-hover-menu-list-coll__item"
                                                 key={`header-hover-menu-list-coll__item-${type}-${index}`}
@@ -62,13 +61,11 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
                                             </Link>
                                         ))
                                         .slice(0, 4)}
-                                    {/* 4 / 7 */}
 
                                     <Link
                                         onClick={onClose}
                                         href={getCatalogFiltersUrl({
-                                            categories: [title],
-                                            sort: SORT.a,
+                                            category_slug: slug,
                                         })}
                                         className="header-hover-menu-list-coll__item last"
                                     >
@@ -78,9 +75,8 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
                                     <Link
                                         onClick={onClose}
                                         href={getCatalogFiltersUrl({
-                                            categories: [title],
+                                            category_slug: slug,
                                             boutique: true,
-                                            sort: SORT.a,
                                         })}
                                         className="header-hover-menu-list-boutique"
                                     >
@@ -103,9 +99,8 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
                                             <Link
                                                 onClick={onClose}
                                                 href={getCatalogFiltersUrl({
-                                                    categories: [title],
+                                                    category_slug: slug,
                                                     brands: [brand],
-                                                    sort: SORT.a,
                                                 })}
                                                 className="header-hover-menu-list-coll__item"
                                                 key={`header-hover-menu-list-coll__item-${brand}-${index}`}
@@ -122,9 +117,8 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
                                             <Link
                                                 onClick={onClose}
                                                 href={getCatalogFiltersUrl({
-                                                    categories: [title],
+                                                    category_slug: slug,
                                                     brands: [brand],
-                                                    sort: SORT.a,
                                                 })}
                                                 className="header-hover-menu-list-coll__item"
                                                 key={`header-hover-menu-list-coll__item-${brand}-${index}`}

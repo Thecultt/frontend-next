@@ -99,6 +99,12 @@ input[type="file"]
 		background-color: $white
 		border-color: transparent
 
+	&__title
+		display: block
+		font-weight: 500
+		font-size: 14px
+		margin-bottom: 5px
+
 	&.error
 		border: 1px solid $red
 
@@ -166,17 +172,7 @@ input[type="file"]
 			max-height: 185px
 			overflow-y: auto
 
-			// scrollBar
-			&::-webkit-scrollbar
-				width: 4px
-
-			&::-webkit-scrollbar-track
-				background-color: #D9D9D9
-				border-radius: 100px
-
-			&::-webkit-scrollbar-thumb
-				background-color: $gray
-				border-radius: 100px
+			+scrollbar
 
 		&__item
 			cursor: pointer
@@ -238,6 +234,16 @@ input[type="file"]
 		background-color: $lightBackgroundColor
 		border: 1px solid $gray
 
+	&.white &__field
+		background-color: $white
+		border-color: transparent
+
+	&__title
+		display: block
+		font-weight: 500
+		font-size: 14px
+		margin-bottom: 5px
+
 	&__field
 		resize: none
 		width: 100%
@@ -283,6 +289,10 @@ button
 	&.loader
 		height: 53px
 
+	&.black
+		color: $white
+		background-color: $black
+
 	& > svg
 		margin-left: 10px
 
@@ -295,7 +305,7 @@ button
 	display: inline-flex
 	align-items: center
 	justify-content: center
-	border: .5px solid $gray
+	border: none
 	background-color: $lightBackgroundColor
 	border-radius: 12px
 	color: $black
@@ -354,7 +364,7 @@ button
 	align-items: center
 	justify-content: center
 	border: none
-	background-color: $black
+	background-color: $black4
 	border-radius: 9px
 	color: $white
 	padding: 15px 25px
@@ -417,7 +427,6 @@ button
 .checkbox-wrapper
 	display: flex
 	align-items: center
-
 	position: relative
 
 .checkbox
@@ -431,6 +440,14 @@ button
 		align-items: center
 		user-select: none
 		+transition
+
+		&--ellipsis
+			width: 100%
+			overflow: hidden
+			flex-wrap: nowrap
+
+		&--ellipsis &__text
+			+textEllipsis
 
 		&.small &__text
 			font-size: 12px
@@ -857,7 +874,8 @@ button
 	&.center
 		text-align: center
 
-	& h3
+	&__title
+		display: block
 		font-size: 17px
 		margin-bottom: 8px
 

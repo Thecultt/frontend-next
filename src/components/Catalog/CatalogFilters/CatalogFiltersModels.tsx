@@ -1,53 +1,107 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useVirtualizer } from '@tanstack/react-virtual';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setFiltersModelsProduct } from '@/redux/actions/products';
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
+import { CATEGORY_SLUG_NAMES } from '@/constants/catalog';
+
+interface FilterModelListProps {
+    models: string[];
+    selectedModels: string[];
+    onChange: (model: string) => void;
+}
+
+const FilterModelList: React.FC<FilterModelListProps> = ({ models, selectedModels, onChange }) => {
+    const scrollBlockRef = React.useRef(null);
+
+    const rowVirtualizer = useVirtualizer({
+        count: models.length,
+        getScrollElement: () => scrollBlockRef.current,
+        estimateSize: () => 32,
+        overscan: 10,
+    });
+
+    return (
+        <div ref={scrollBlockRef} className="catalog-filters-block-content-list">
+            <div
+                style={{
+                    height: rowVirtualizer.getTotalSize(),
+                    width: '100%',
+                    position: 'relative',
+                }}
+            >
+                {rowVirtualizer.getVirtualItems().map((row) => (
+                    <div
+                        className="catalog-filters-block-content-row"
+                        key={row.index}
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: `${row.size}px`,
+                            transform: `translateY(${row.start}px)`,
+                            overflow: 'hidden',
+                        }}
+                    >
+                        <Checkbox
+                            id={`catalog-filters-block-content-models-checkbox-${row.index}`}
+                            label={models[row.index]}
+                            onChange={() => onChange(models[row.index])}
+                            checked={selectedModels.includes(models[row.index])}
+                            textEllipsis
+                        />
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
 
 const CatalogFiltersModels: React.FC = () => {
-    const dispatch = useDispatch();
-
     const [search, setSearch] = React.useState('');
 
-    const { filters } = useTypedSelector(({ products }) => products);
-    const { isLoaded, categories } = useTypedSelector(({ products_filters }) => products_filters);
+    const {
+        filters: { categories: selectedCategories, brands: selectedBrands, models: selectedModels, category_slug },
+        updateFilters,
+    } = useCatalogFilters();
+
+    const { isLoaded, categories: fetchedCategories } = useTypedSelector(({ products_filters }) => products_filters);
 
     const models = React.useMemo(() => {
-        if (!isLoaded) {
+        if (!isLoaded || (!selectedCategories.length && !Object.keys(fetchedCategories).length)) {
             return [];
         }
 
-        const selectedCategories = Object.keys(filters.categories);
-
-        if (!selectedCategories.length || !Object.keys(categories).length) {
-            return [];
-        }
+        const items = category_slug
+            ? [CATEGORY_SLUG_NAMES[category_slug]]
+            : selectedCategories.length > 0
+              ? selectedCategories
+              : Object.keys(fetchedCategories);
 
         const modelsSet = new Set<string>([]);
 
-        selectedCategories.forEach((category) => {
-            if (categories[category]) {
-                const subsubcategories = Object.keys(categories[category].subsubcategories);
+        items.forEach((category) => {
+            if (fetchedCategories[category]) {
+                const subsubcategories = Object.keys(fetchedCategories[category].subsubcategories);
 
                 if (subsubcategories.length > 0) {
                     subsubcategories.forEach((subsubcategory) => {
                         const manufacturers = Object.keys(
-                            categories[category].subsubcategories[subsubcategory].manufacturers,
+                            fetchedCategories[category].subsubcategories[subsubcategory].manufacturers,
                         );
 
                         if (manufacturers.length > 0) {
                             manufacturers.forEach((brand) => {
                                 const models = Object.keys(
-                                    categories[category].subsubcategories[subsubcategory].manufacturers[brand].models ||
-                                        {},
+                                    fetchedCategories[category].subsubcategories[subsubcategory].manufacturers[brand]
+                                        .models || {},
                                 );
 
                                 if (models.length > 0) {
-                                    const selectedBrands = Object.keys(filters.brands);
-
                                     if (selectedBrands.length > 0) {
                                         selectedBrands.forEach((currentBrand) => {
                                             if (currentBrand === brand) {
@@ -70,7 +124,7 @@ const CatalogFiltersModels: React.FC = () => {
         });
 
         return Array.from(modelsSet).sort((a, b) => a.localeCompare(b));
-    }, [categories, filters.brands, filters.categories, isLoaded]);
+    }, [category_slug, fetchedCategories, isLoaded, selectedBrands, selectedCategories]);
 
     const visibleModels = React.useMemo(() => {
         if (!search) {
@@ -86,7 +140,11 @@ const CatalogFiltersModels: React.FC = () => {
     };
 
     const onChangeSetModels = (model: string) => {
-        dispatch(setFiltersModelsProduct(model));
+        updateFilters({
+            models: selectedModels.includes(model)
+                ? selectedModels.filter((selectedModel) => selectedModel !== model)
+                : [...selectedModels, model],
+        });
     };
 
     return (
@@ -95,7 +153,8 @@ const CatalogFiltersModels: React.FC = () => {
                 <input
                     type="text"
                     className="catalog-filters-block-content-brands-search__input"
-                    onChange={(e) => onChangeSearch(e)}
+                    onChange={onChangeSearch}
+                    value={search}
                 />
                 <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -113,20 +172,7 @@ const CatalogFiltersModels: React.FC = () => {
                 </svg>
             </div>
 
-            {visibleModels.length > 0 &&
-                visibleModels.map((model, index) => (
-                    <div
-                        className="catalog-filters-block-content-checkbox"
-                        key={`catalog-filters-block-content-models-checkbox-${index}`}
-                    >
-                        <Checkbox
-                            id={`catalog-filters-block-content-models-checkbox-${index}`}
-                            label={model}
-                            onChange={() => onChangeSetModels(model)}
-                            checked={!!Object.keys(filters.models).find((filtersModel) => model === filtersModel)}
-                        />
-                    </div>
-                ))}
+            <FilterModelList models={visibleModels} selectedModels={selectedModels} onChange={onChangeSetModels} />
         </CatalogFiltersBlockWrapper>
     );
 };

@@ -17,8 +17,7 @@ const CatalogFiltersBlockWrapper: React.FC<CatalogFiltersBlockWrapperProps> = ({
     infoMessage,
     defaultVisible = false,
 }) => {
-    const [isAllVisible, setIsAllVisible] = React.useState<boolean>(false);
-
+    const [isAllVisible, setIsAllVisible] = React.useState(false);
     const ObjectsFiltersBlockWrapperRef = React.useRef<HTMLDivElement>(null);
 
     const toggleIsAllVisibleOnClick = () => {

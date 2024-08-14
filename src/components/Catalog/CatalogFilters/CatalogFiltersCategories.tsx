@@ -1,18 +1,25 @@
+'use client';
+
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setFiltersCategoriesProduct } from '@/redux/actions/products';
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const CatalogFiltersCategories: React.FC = () => {
-    const dispatch = useDispatch();
+    const {
+        filters: { categories: selectedCategories },
+        updateFilters,
+    } = useCatalogFilters();
 
-    const { filters } = useTypedSelector(({ products }) => products);
     const { categories } = useTypedSelector(({ products_filters }) => products_filters);
 
     const onChangeSetCategory = (category: string) => {
-        dispatch(setFiltersCategoriesProduct(category));
+        updateFilters({
+            categories: selectedCategories.includes(category)
+                ? selectedCategories.filter((selectedCategory) => selectedCategory !== category)
+                : [...selectedCategories, category],
+        });
     };
 
     return (
@@ -26,11 +33,7 @@ const CatalogFiltersCategories: React.FC = () => {
                         id={`catalog-filters-block-content-category-checkbox-${index}`}
                         label={category}
                         onChange={() => onChangeSetCategory(category)}
-                        checked={
-                            Object.keys(filters.categories).find((filtersCategory) => category === filtersCategory)
-                                ? true
-                                : false
-                        }
+                        checked={selectedCategories.includes(category)}
                     />
                 </div>
             ))}

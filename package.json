@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@sentry/react": "^7.92.0",
+    "@tanstack/react-virtual": "^3.8.4",
     "@tcb-web/create-credit": "^1.0.5",
     "array-chunk-split": "^2.0.15",
     "axios": "^0.27.2",
@@ -23,8 +24,10 @@
     "dayjs": "^1.11.11",
     "formik": "^2.4.6",
     "heic2any": "^0.0.4",
+    "lodash.isequal": "^4.5.0",
     "lodash.omitby": "^4.6.0",
     "next": "14.2.3",
+    "nuqs": "^1.17.6",
     "qs": "^6.12.1",
     "react": "^18.1.0",
     "react-animate-height": "^3.1.1",
@@ -49,6 +52,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/lodash.isequal": "^4.5.8",
     "@faker-js/faker": "^8.4.1",
     "@types/lodash.omitby": "^4.6.9",
     "@types/node": "^20",

@@ -1,42 +1,9 @@
 // concierge
 .concierge
-	margin: 30px 0 80px 0
+	margin: 30px 0
 
 	+open
 
-	& .popup
-		align-items: center
-
-	&__title
-		width: 500px
-
-		font-size: 26px
-		text-align: center
-
-		margin: 0 auto 10px auto
-
-		&.mb
-			margin: 0 auto 25px auto
-
-	&__description
-		width: 75%
-
-		font-size: 18px
-		text-align: center
-
-		margin: 0 auto
-
-	&-message
-		text-align: center
-
-		&__title
-			font-size: 21px
-			margin-bottom: 10px
-
-		&__subtitle
-			font-size: 16px
-
-	// &-main
 	&-main
 		display: flex
 
@@ -45,288 +12,402 @@
 
 		border-radius: 24px
 
-		margin-bottom: 60px
-
 		&-text
-			width: 100%
+			width: 50%
 
-			padding: 70px 50px 70px 65px
+			padding: 52px 65px
 
 			&__title
-				font-size: 26px
-				margin-bottom: 15px
+				font-weight: 800
+				font-size: 32px
+				margin-bottom: 10px
 
 			&__description
-				color: #3F3F3F
-
-				font-size: 16px
+				font-size: 18px
 				margin-bottom: 25px
 
-				& > a
-					text-decoration: underline
-					color: #3F3F3F
-
-			&-form
-				&-input-wrapper
-					display: flex
-					justify-content: space-between
-					align-items: flex-start
-
-				&-input
-					width: calc(50% - 4px)
-
-				&__description
-					margin-top: 8px
-
-					color: $gray
-					font-size: 12px
-
-					& > a
-						color: $gray
-						text-decoration: underline
-
-				&__btn
-					margin-top: 25px
-
-					width: 230px
-
 		&-image
-			min-width: 600px
-			width: 600px
+			width: 50%
 
 			+backgroundSetting
 
-	// &-steps
-	&-steps
-		margin-bottom: 60px
+	&-catalog
+		margin: 65px 0
 
-		&__description
-			width: 65%
-			font-size: 16px
-
-			margin: 0 auto 32px auto
-
-		&-blocks-wrapper
+		&-filters
 			display: flex
 			justify-content: space-between
-
-		&-block
-			width: 400px
-			text-align: center
-
-			&-icon
-				position: relative
-
-				display: flex
-				align-items: center
-				justify-content: center
-
-				margin-bottom: 10px
-
-				&-arrow
-					position: absolute
-					right: -180px
-
-			&__title
-				+ManropeSemiBold
-				font-size: 22px
-				margin-bottom: 10px
-
-			&__description
-				font-size: 16px
-
-	// &-steps-media
-	&-steps-media
-		display: none
-		margin-bottom: 50px
-
-		&__title
-			margin-bottom: 32px
-
-		&-blocks-wrapper
-			display: flex
-			flex-direction: column
-			align-items: center
-
-		&-block
-			width: 310px
-
-			text-align: center
-
-			display: flex
-			flex-direction: column
 			align-items: center
 
 			margin-bottom: 15px
 
-			&:last-child
-				margin-bottom: 0
+			&-categories
+				display: inline-block
+				background-color: $cardBackgroundColor
+				border-radius: 12px
+
+				&__btn
+					cursor: pointer
+
+					font-size: 16px
+					padding: 12px
+					border-radius: 12px
+
+					border: none
+					background-color: transparent
+
+					+transition
+
+					&.active
+						color: $mainColor
+						background-color: $green1
+
+			&-brand
+				position: relative
+
+				&-current
+					display: inline-block
+
+					cursor: pointer
+
+					padding: 12px 16px
+					border-radius: 12px
+
+					background-color: $green1
+
+					&__title
+						margin-right: 5px
+
+						font-size: 16px
+						color: $mainColor
+
+				&-list
+					width: 200px
+
+					position: absolute
+
+					z-index: 5
+
+					top: 60px
+					right: 0
+
+					padding: 12px 16px
+					border-radius: 12px
+
+					background-color: $cardBackgroundColor
+
+					opacity: 0
+					transform: scale3d(.98, .98, .98)
+					visibility: hidden
+
+					+transition
+
+					&.active
+						opacity: 1
+						transform: scale3d(1, 1, 1)
+						visibility: visible
+
+					&__item
+						cursor: pointer
+
+						font-size: 16px
+						color: $mainColor
+
+						padding-bottom: 5px
+
+						+transition
+
+						&.current
+							opacity: 0.5
+
+						&:last-child
+							padding-bottom: 0
+
+		&-products
+			width: 100%
+
+			display: grid
+			grid-template-columns: repeat(4, 1fr)
+			gap: 16px 16px
+
+			&-product
+				display: block
+
+				width: 100%
+
+				background-color: $grey1
+				padding: 16px
+
+				border-radius: 24px
+
+				text-align: center
+
+				+open
+
+				&-image
+					width: 100%
+
+					height: 250px
+
+					background-size: contain
+					background-repeat: no-repeat
+					background-position: center center
+
+					overflow: hidden
+
+					border-radius: 12px
+
+					margin-bottom: 16px
+
+				&__title
+					+ManropeMedium
+					font-size: 18px
+
+			&-application
+				position: relative
+
+				display: flex
+				flex-direction: column
+				justify-content: center
+
+				cursor: pointer
+
+				width: 100%
+				height: 320px
+
+				background-color: $grey1
+				padding: 16px
+
+				border-radius: 24px
+
+				text-align: center
+
+				+open
+
+				&__title
+					font-weight: 800
+
+				&__btn
+					position: absolute
+					width: calc( 100% - 32px )
+
+					bottom: 16px
+
+	&-service
+		margin: 65px 0
+
+		display: flex
+		justify-content: space-between
+
+		&-title
+			width: calc( 38% - 12px )
+			padding: 32px
+
+			border-radius: 16px
+			background-color: $cardBackgroundColor
 
 			&__title
-				margin-bottom: 5px
+				font-weight: 800
+				font-size: 24px
+				margin-bottom: 15px
 
 			&__description
-				font-size: 12px
-
-			&-arrow
-				margin-top: 15px
-
-	// &-services
-	&-services
-		margin-bottom: 60px
-
-		&-blocks-wrapper
-			display: flex
-			justify-content: space-between
-
-		&-block
-			padding: 25px 30px
-			width: calc( 100% / 3 - 12.5px )
-
-			text-align: center
-
-			background-color: $lightBackgroundColor
-
-			border-radius: 24px
-
-			&-icon
-				margin-bottom: 15px
-
-			&__title
-				font-size: 22px
-				margin-bottom: 15px
-
-			&__subtitle
+				font-weight: 500
 				font-size: 16px
 
-	// &-form
-	&-form
-		padding: 40px
-		background-color: $lightBackgroundColor
+		&-text
+			width: calc( 62% - 12px )
 
+			display: flex
+			flex-wrap: wrap
+			justify-content: space-between
+
+			padding: 32px
+
+			border-radius: 16px
+			background-color: $cardBackgroundColor
+
+			&-block
+				width: calc( 50% - 16px )
+
+				display: flex
+				align-items: flex-start
+
+				&:first-child
+					width: 100%
+					margin-bottom: 30px
+
+				& > svg
+					min-width: 24px
+
+				&-text
+					margin-left: 12px
+
+					&__title
+						font-size: 16px
+						margin-bottom: 8px
+
+					&__subtitle
+						font-size: 14px
+						font-weight: 500
+
+	&-application
+		display: flex
 		border-radius: 24px
+		overflow: hidden
 
-		&-content
-			width: 620px
+		&-image
+			width: 55%
 
-			margin: 0 auto
+			+backgroundSetting
 
-			text-align: center
+		&-form
+			width: 45%
+			padding: 25px 50px
+			background-color: $cardBackgroundColor
 
 			&__title
-				font-size: 22px
-
-				margin-bottom: 30px
-
-			&-input-wrapper
-				display: flex
-				justify-content: space-between
-				align-items: flex-start
-				text-align: left
+				font-size: 24px
+				font-weight: 800
+				margin-bottom: 16px
 
 			&-input
-				width: calc(50% - 6px)
+				margin-bottom: 12px
 
-			&__description
-				margin-top: 15px
+			&-btn
+				margin-top: 20px
 
-				color: $gray
-				font-size: 12px
+				display: flex
+				align-items: center
 
-				& > a
-					color: $gray
-					text-decoration: underline
+				&__social
+					margin-left: 16px
 
-			&__btn
-				margin-top: 25px
+					width: 60px
+					height: 60px
 
-				width: 230px
+					& > svg
+						width: 100%
+						height: 100%
 
 /* MEDIA */
 @media screen and (max-width: 1200px)
 	.concierge
-		margin-bottom: 50px
-
-		&__title
-			width: 100%
-			font-size: 22px
-
-		&__description
-			font-size: 14px
+		margin: 25px 0
 
 		&-main
 			flex-direction: column
-			margin-bottom: 50px
+			margin-bottom: 25px
+
+			background-color: rgba(0, 0, 0, 0.4)
+			background-blend-mode: overlay
+
+			+backgroundSetting
 
 			&-text
-				padding: 15px
-				text-align: center
-				order: 2
+				width: 100%
+
+				padding: 70px 12px 12px 12px
 
 				&__title
-					font-size: 18px
+					color: $white
+					font-weight: 700
+					font-size: 22px
+					margin-bottom: 8px
+
+				&__description
+					color: $white
+					font-size: 16px
+					margin-bottom: 15px
+
+				&__btn
+					width: 100%
+
+			&-image
+				display: none
+
+		&-catalog
+			&-products
+				grid-template-columns: repeat(2, 1fr)
+
+		&-application
+			&-image
+				display: none
+
+			&-form
+				width: 100%
+				padding: 12px
+
+				&__title
+					font-weight: 700
+					font-size: 20px
+					margin-bottom: 15px
+
+				&-btn
+					&__social
+						margin-left: 5px
+
+						min-width: 50px
+						width: 50px
+						height: 50px
+
+/* MEDIA */
+@media screen and (max-width: 900px)
+	.concierge
+		&-catalog
+			&-filters
+				flex-direction: column
+				align-items: flex-start
+
+				&-categories
+					margin-bottom: 15px
+
+			&-products
+				display: flex
+
+				overflow-y: scroll
+
+				&-product
+					min-width: 230px
+					width: 230px
+
+				&-application
+					min-width: 230px
+					width: 230px
+					height: 345px
+
+					&__title
+						font-size: 14px
+
+		&-service
+			flex-direction: column
+
+			&-title
+				margin-bottom: 15px
+
+			&-title, &-text
+				width: 100%
+				padding: 15px
+
+			&-title
+				&__title
+					font-size: 20px
 
 				&__description
 					font-size: 14px
-					margin-bottom: 15px
 
-				&-form
-					&-input-wrapper
-						flex-direction: column
-
-					&-input
-						width: 100%
-						margin-bottom: 10px
-
-						&:last-child
-							margin-bottom: 0
-
-					&__btn
-						width: 100%
-
-			&-image
-				order: 1
-
-				width: 100%
-				min-width: 100%
-
-				height: 200px
-
-		&-steps
-			display: none
-
-		&-steps-media
-			display: block
-
-		&-services
-			margin-bottom: 30px
-
-			&-blocks-wrapper
+			&-text
 				flex-direction: column
+				align-items: flex-start
 
-			&-block
-				width: 100%
-				padding: 15px
-				margin-bottom: 15px
-
-				&__title
-					font-size: 17px
-
-				&__subtitle
-					font-size: 14px
-
-		&-form
-			padding: 15px
-
-			&-content
-				width: 100%
-
-				&-input-wrapper
-					flex-direction: column
-
-				&-input
+				&-block
 					width: 100%
-					margin-bottom: 10px
+					margin-bottom: 25px
 
 					&:last-child
 						margin-bottom: 0
+
+@media screen and (max-width: 450px)
+	.concierge
+		&-catalog, &-service
+			margin: 32px 0

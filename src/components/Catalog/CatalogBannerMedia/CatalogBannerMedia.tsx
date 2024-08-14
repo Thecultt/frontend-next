@@ -1,10 +1,12 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { SELECTIONS_IDS, CATEGORIES, SORT } from '@/constants/catalog';
+import { SELECTIONS_IDS, SORT, CATEGORY_SLUG_NAMES, CATEGORY_NAMES, CATEGORY_SLUGS } from '@/constants/catalog';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 import CatalogBannerImageBoutiqueMedia from '@/assets/images/catalog/catalog-banner-boutique-media.jpg';
 import CatalogBannerImagePriceDropMedia from '@/assets/images/catalog/catalog-banner-price-drop.jpg';
@@ -12,17 +14,15 @@ import CatalogBannerImagePriceDrop2 from '@/assets/images/catalog/catalog-banner
 import CatalogBannerImagePopularMedia from '@/assets/images/catalog/catalog-banner-popular-media.jpg';
 
 const CatalogBannerMedia: React.FC = () => {
-    const searchParams = useSearchParams();
-    const querySelection = searchParams.get('selection');
-
     const {
-        filters: { sort },
-    } = useTypedSelector(({ products }) => products);
+        filters: { sort, selection: selectionId, price_drop, boutique, categories: selectedCategories, category_slug },
+    } = useCatalogFilters();
     const { items: selections } = useTypedSelector(({ selections }) => selections);
 
-    const currentSelection = querySelection ? selections.find(({ id }) => id === +querySelection) || null : null;
+    const categories = category_slug ? [CATEGORY_SLUG_NAMES[category_slug]] : selectedCategories;
+    const currentSelection = selectionId ? selections.find(({ id }) => id.toString() === selectionId) ?? null : null;
 
-    return searchParams.get('price_drop') == 'true' ? (
+    return price_drop ? (
         <div
             className="catalog-banner-media"
             style={{
@@ -36,7 +36,7 @@ const CatalogBannerMedia: React.FC = () => {
                 </p>
             </div>
         </div>
-    ) : searchParams.get('boutique') == 'true' ? (
+    ) : boutique ? (
         <div
             className="catalog-banner-media"
             style={{
@@ -63,7 +63,7 @@ const CatalogBannerMedia: React.FC = () => {
                 <p className="catalog-banner-media-text__description">{currentSelection.description}</p>
             </div>
         </div>
-    ) : searchParams.getAll('categories').length === 1 && searchParams.get('categories') === 'Сумки' ? (
+    ) : categories.length === 1 && categories[0] === CATEGORY_NAMES.bags ? (
         <div
             className="catalog-banner-media"
             style={{
@@ -78,8 +78,7 @@ const CatalogBannerMedia: React.FC = () => {
                 </p>
                 <Link
                     href={getCatalogFiltersUrl({
-                        selection: SELECTIONS_IDS.summerBags,
-                        sort: SORT.popular,
+                        selection: SELECTIONS_IDS.summerBags.toString(),
                     })}
                     className="btn-light catalog-banner-media-text__btn"
                 >
@@ -115,12 +114,7 @@ const CatalogBannerMedia: React.FC = () => {
                 </p>
                 <Link
                     href={getCatalogFiltersUrl({
-                        boutique: false,
-                        price_drop: true,
-                        categories: CATEGORIES,
-                        availability: ['Доступно', 'На примерке'],
-                        page: 1,
-                        sort: SORT.popular,
+                        category_slug: CATEGORY_SLUGS.sale,
                     })}
                     className="btn-light catalog-banner-media-text__btn"
                 >

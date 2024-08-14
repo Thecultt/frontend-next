@@ -4,48 +4,47 @@ import { useMediaQuery } from 'usehooks-ts';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { getClassNames } from '@/functions/getClassNames';
 
-import BuyerTheculttMainImage from '@/assets/images/buyer-thecultt/buyer-thecultt-main.jpg';
-import BuyerTheculttMainImageMedia from '@/assets/images/buyer-thecultt/buyer-thecultt-main-media.jpg';
+import ConciergeMainImage from '@/assets/images/concierge/concierge-main.jpg';
 
-interface BuyerTheCulttMainBannerProps {
-    onClickOpenCustomForm: () => void;
+interface Props {
+    scrollToForm: () => void;
 }
 
-const BuyerTheCulttMainBanner: React.FC<BuyerTheCulttMainBannerProps> = ({ onClickOpenCustomForm }) => {
+const ConciergeMainBanner: React.FC<Props> = ({ scrollToForm }) => {
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
 
     return (
         <div
-            className="buyer-thecultt-main"
+            className="concierge-main"
             style={{
-                backgroundImage: `url("${isMobile ? BuyerTheculttMainImageMedia.src : ''}")`,
+                backgroundImage: `url("${isMobile ? ConciergeMainImage.src : ''}")`,
             }}
         >
-            <div className="buyer-thecultt-main-text">
-                <h2 className="title mb buyer-thecultt-main-text__title">Консьерж-сервис</h2>
-                <p className="description buyer-thecultt-main-text__description">
-                    Доставит для вас из Европы украшения Cartier, Bvlgari, Messika, Van Cleef & Arpels или часы главных
-                    часовых брендов. К заказу доступны все позиции с официальных сайтов.
+            <div className="concierge-main-text">
+                <h2 className="title mb concierge-main-text__title">Вы выберете, мы доставим</h2>
+                <p className="description concierge-main-text__description">
+                    Консьерж-сервис THE CULTT доставит для вас из&nbsp;Европы и&nbsp;США любые позиции
+                    с&nbsp;официальных сайтов Herm&egrave;s, Chanel, Cartier, Panerai и&nbsp;других культовых брендов.
                 </p>
                 <button
-                    className={getClassNames('buyer-thecultt-main-text__btn', {
+                    className={getClassNames('concierge-main-text__btn', {
                         btn: !isMobile,
                         'btn-light': isMobile,
                     })}
-                    onClick={onClickOpenCustomForm}
+                    onClick={scrollToForm}
                 >
-                    Отправить заявку
+                    Заказать сейчас
                 </button>
             </div>
 
             <div
-                className="buyer-thecultt-main-image"
+                className="concierge-main-image"
                 style={{
-                    backgroundImage: `url("${!isMobile ? BuyerTheculttMainImage.src : ''}")`,
+                    backgroundImage: `url("${!isMobile ? ConciergeMainImage.src : ''}")`,
                 }}
             ></div>
         </div>
     );
 };
 
-export default BuyerTheCulttMainBanner;
+export default ConciergeMainBanner;

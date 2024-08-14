@@ -273,13 +273,14 @@ export { default as AlyonaDoletskayaProductSection } from './AlyonaDoletskaya/Al
 // Concierge
 // ConciergeMain
 export { default as ConciergeMainBanner } from './Concierge/ConciergeMain/ConciergeMainBanner';
-export { default as ConciergeMainCustomForm } from './Concierge/ConciergeMain/ConciergeMainCustomForm';
-export { default as ConciergeMainFaq } from './Concierge/ConciergeMain/ConciergeMainFaq';
-export { default as ConciergeMainSteps } from './Concierge/ConciergeMain/ConciergeMainSteps';
-// ConciergeMainCategory
-export { default as ConciergeMainCategory } from './Concierge/ConciergeMain/ConciergeMainCategory/ConciergeMainCategory';
-export { default as ConciergeMainCategoryBrands } from './Concierge/ConciergeMain/ConciergeMainCategory/ConciergeMainCategoryBrands';
-export { default as ConciergeMainCategoryProduct } from './Concierge/ConciergeMain/ConciergeMainCategory/ConciergeMainCategoryProduct';
+export { default as ConciergeMainService } from './Concierge/ConciergeMain/ConciergeMainService';
+// ConciergeMainProducts
+export { default as ConciergeMainCatalog } from './Concierge/ConciergeMain/ConciergeMainCatalog/ConciergeMainCatalog';
+export { default as ConciergeMainCatalogCategories } from './Concierge/ConciergeMain/ConciergeMainCatalog/ConciergeMainCatalogCategories';
+export { default as ConciergeMainCatalogBrand } from './Concierge/ConciergeMain/ConciergeMainCatalog/ConciergeMainCatalogBrand';
+export { default as ConciergeMainCatalogProduct } from './Concierge/ConciergeMain/ConciergeMainCatalog/ConciergeMainCatalogProduct';
+// ConciergeMainApplication
+export { default as ConciergeMainApplication } from './Concierge/ConciergeMain/ConciergeMainApplication/ConciergeMainApplication';
 // ConciergeProduct
 export { default as ConciergeProductForm } from './Concierge/ConciergeProduct/ConciergeProductForm';
 export { default as ConciergeProductInfo } from './Concierge/ConciergeProduct/ConciergeProductInfo';

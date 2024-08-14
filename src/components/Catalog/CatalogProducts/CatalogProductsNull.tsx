@@ -1,14 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
-import { clearProductsFilters } from '@/redux/actions/products';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const CatalogProductsNull: React.FC = () => {
-    const dispatch = useDispatch();
+    const { clearFilters } = useCatalogFilters();
 
     const onClickClearFilters = () => {
         window.scrollTo(0, 0);
-        dispatch(clearProductsFilters());
+        clearFilters();
     };
 
     return (

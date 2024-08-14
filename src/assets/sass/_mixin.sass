@@ -73,6 +73,18 @@
 	white-space: nowrap
 	overflow: hidden
 
+@mixin scrollbar
+	&::-webkit-scrollbar
+		width: 4px
+
+	&::-webkit-scrollbar-track
+		background-color: #D9D9D9
+		border-radius: 100px
+
+	&::-webkit-scrollbar-thumb
+		background-color: $gray
+		border-radius: 100px
+
 @mixin bgCover
 	background-size: cover
 	background-position: center

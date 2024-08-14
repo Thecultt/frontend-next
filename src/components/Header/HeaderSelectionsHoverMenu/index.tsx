@@ -2,10 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 
 import { Spinner } from '@/components';
-import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { getClassNames } from '@/functions/getClassNames';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { SORT } from '@/constants/catalog';
+import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 
 import defaultImage from '@/assets/images/header/header-selection-default-image.jpg';
 
@@ -63,8 +62,7 @@ export const HeaderSelectionsHoverMenu: React.FC<Props> = ({ onOpen, onClose, is
                                             key={id}
                                             className="header-hover-menu-list-coll__item"
                                             href={getCatalogFiltersUrl({
-                                                selection: id,
-                                                sort: SORT.popular,
+                                                selection: id.toString(),
                                             })}
                                             onClick={onClose}
                                             onMouseOver={selectItem(id)}
@@ -80,8 +78,7 @@ export const HeaderSelectionsHoverMenu: React.FC<Props> = ({ onOpen, onClose, is
                                             key={id}
                                             className="header-hover-menu-list-coll__item"
                                             href={getCatalogFiltersUrl({
-                                                selection: id,
-                                                sort: SORT.popular,
+                                                selection: id.toString(),
                                             })}
                                             onClick={onClose}
                                             onMouseOver={selectItem(id)}

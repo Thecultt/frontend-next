@@ -1,20 +1,26 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setFiltersConditionsProduct } from '@/redux/actions/products';
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
+import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
+import { ConditionType } from '@/types/catalog';
 
 const CatalogFiltersConditions: React.FC = () => {
-    const dispatch = useDispatch();
+    const {
+        filters: { conditions: selectedConditions, boutique },
+        updateFilters,
+    } = useCatalogFilters();
 
     const { conditions } = useTypedSelector(({ products_filters }) => products_filters);
-    const { filters } = useTypedSelector(({ products }) => products);
 
-    const onClickSetCondition = (condition: string) => {
-        dispatch(setFiltersConditionsProduct(condition));
+    const onClickSetCondition = (condition: ConditionType) => {
+        updateFilters({
+            conditions: selectedConditions.includes(condition)
+                ? selectedConditions.filter((selectedCondition) => selectedCondition !== condition)
+                : [...selectedConditions, condition],
+        });
     };
 
     return (
@@ -27,20 +33,15 @@ const CatalogFiltersConditions: React.FC = () => {
 					<li><span>Хорошее</span>: присутствуют значительные следы носки. Могут присутствовать следующие нюансы: отсутствие элементов полного комплекта,  загар, потертости или царапины на коже, пятна на материале, следы носки на подкладке, потертости на фурнитуре, сумка была в спа</li>
 				</ul>
 			`}
-            disabled={filters.boutique || !conditions.length}
+            disabled={boutique || !conditions.length}
         >
-            {conditions.map(({ condition }, index) => (
-                <div
-                    className="catalog-filters-block-content-checkbox"
-                    key={`catalog-filters-block-content-conditions-checkbox-${index}`}
-                >
+            {conditions.map(({ condition, slug }) => (
+                <div className="catalog-filters-block-content-checkbox" key={slug}>
                     <Checkbox
-                        id={`catalog-filters-block-content-conditions-checkbox-${index}`}
+                        id={`catalog-filters-block-content-conditions-checkbox-${slug}`}
                         label={condition}
                         onChange={() => onClickSetCondition(condition)}
-                        checked={
-                            !!Object.keys(filters.conditions).find((filtersCondition) => condition === filtersCondition)
-                        }
+                        checked={selectedConditions.includes(condition)}
                     />
                 </div>
             ))}

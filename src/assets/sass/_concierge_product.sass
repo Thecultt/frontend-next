@@ -1,0 +1,257 @@
+// concierge-product
+.concierge-product
+	margin: 100px 0
+	+open
+
+	&-wrapper
+		position: relative
+
+		display: flex
+		justify-content: space-between
+
+	&__back
+		position: absolute
+
+		left: 0
+		top: -60px
+
+		cursor: pointer
+		display: flex
+		align-items: center
+
+		font-weight: 600
+
+		font-size: 14px
+		border: none
+		background-color: transparent
+
+		& > svg
+			margin-right: 15px
+
+	&-item
+		width: calc( 60% - 15px )
+
+		display: flex
+		flex-direction: column
+		justify-content: space-between
+
+		&-info
+			position: relative
+
+			display: flex
+			align-items: center
+
+			height: calc( 100% - 85px )
+
+			padding: 15px
+			background-color: $cardBackgroundColor
+
+			border-radius: 18px
+
+			margin-bottom: 12px
+
+			+open
+
+			&-image
+				width: 350px
+				min-width: 350px
+				height: 350px
+
+				background-size: contain
+				background-repeat: no-repeat
+				background-position: center center
+
+				overflow: hidden
+
+				border-radius: 12px
+
+			&-text
+				margin: 0 15px
+
+				&__title
+					font-size: 22px
+					margin-bottom: 5px
+
+				&__price
+					font-weight: 600
+					font-size: 16px
+					margin-bottom: 10px
+
+				&__description
+					font-size: 16px
+					margin-bottom: 25px
+
+			&__subinfo
+				position: absolute
+
+				bottom: 15px
+				left: 15px
+
+				font-size: 14px
+				color: $gray
+
+		&-buyer
+			padding: 12px
+			background-color: $green1
+			border-radius: 12px
+
+			&__title
+				color: $mainColor
+				font-size: 16px
+				margin-bottom: 8px
+
+			&__subtitle
+				color: $black
+
+	&-form
+		width: calc( 40% - 15px )
+
+		background-color: #F1EDE88C
+		padding: 25px
+
+		border-radius: 18px
+
+		+open
+
+		&__title
+			font-size: 22px
+			margin-bottom: 10px
+
+		&__description
+			font-size: 14px
+			margin-bottom: 15px
+
+		&-input
+			margin-bottom: 15px
+
+		&-btn
+			margin-top: 20px
+
+			display: flex
+			align-items: center
+
+			&__btn
+				width: 100%
+
+			&__social
+				margin-left: 16px
+
+				min-width: 60px
+				width: 60px
+				height: 60px
+
+				& > svg
+					width: 100%
+					height: 100%
+
+	&-buyer-media
+		display: none
+
+		margin-top: 15px
+
+		width: 100%
+
+		padding: 12px
+		background-color: $green1
+		border-radius: 12px
+
+		&__title
+			color: $black
+			font-size: 14px
+			margin-bottom: 8px
+
+		&__subtitle
+			color: $black
+			font-size: 12px
+
+		&__notoffer
+			font-size: 12px
+			color: $gray
+
+	&-success
+		text-align: center
+
+		&__title
+			font-size: 22px
+			color: $mainColor
+			margin-bottom: 10px
+
+		&__subtitle
+			font-size: 18px
+
+/* MEDIA */
+@media screen and (max-width: 1200px)
+	.concierge-product
+		margin: 20px 0
+
+		&-wrapper
+			flex-direction: column
+			align-items: flex-start
+
+		&__back
+			position: static
+			margin-bottom: 20px
+
+		&-item
+			width: 100%
+			margin-bottom: 15px
+
+			flex-direction: column
+
+			&-info
+				padding: 0
+
+				flex-direction: column
+				align-items: flex-start
+				background-color: transparent
+
+				&-image
+					min-width: 100%
+					width: 100%
+					height: 400px
+
+				&-text
+					margin: 10px 0 0 0
+
+					&__description
+						margin-bottom: 0
+
+				&__subinfo
+					display: none
+
+			&-buyer
+				display: none
+
+		&-form
+			width: 100%
+
+			&__title
+				font-size: 18px
+
+			&__description
+				font-size: 16px
+
+		&-buyer-media
+			display: block
+
+		&-success
+			&__title
+				font-size: 17px
+
+			&__subtitle
+				font-size: 14px
+
+@media screen and (max-width: 450px)
+	.concierge-product
+		&-form
+			padding: 12px
+
+			&-btn
+				&__btn
+					font-size: 14px
+					padding: 12px
+
+				&__social
+					min-width: 45px
+					width: 45px
+					height: 45px
