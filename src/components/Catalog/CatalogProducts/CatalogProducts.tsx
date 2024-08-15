@@ -1,34 +1,33 @@
+'use client';
+
 import React from 'react';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { CatalogProductsPagination, CatalogProductsNull, PageLoader, ProductCard } from '@/components';
-import { getClassNames } from '@/functions/getClassNames';
+import { CatalogProductsPagination, CatalogProductsNull, ProductCard, Skeleton } from '@/components';
+import { createFakeArray } from '@/functions/createFakeArray';
+import { CATALOG_PRODUCTS_LIMIT } from '@/constants/catalog';
 
 const CatalogProducts: React.FC = () => {
-    const { items, isLoaded, itemsCount, isFetchMore, isFetchPage } = useTypedSelector(({ products }) => products);
+    const { items, itemsCount, isFetchMore, isFetchPage } = useTypedSelector(({ products }) => products);
+    const isFetch = isFetchMore || isFetchPage;
 
     return (
         <div className="catalog-product-wrapper">
-            {isLoaded ? (
-                items.length ? (
-                    <>
-                        <div
-                            className={getClassNames('catalog-product-blocks-wrapper', {
-                                isFetch: isFetchMore || isFetchPage,
-                            })}
-                        >
-                            {items.map((item, index) => (
-                                <ProductCard key={index} productData={item} />
-                            ))}
-                        </div>
-
-                        {itemsCount > 20 ? <CatalogProductsPagination /> : null}
-                    </>
-                ) : (
-                    <CatalogProductsNull />
-                )
+            {!isFetch && !items.length ? (
+                <CatalogProductsNull />
             ) : (
-                <PageLoader />
+                <>
+                    <div className="catalog-product-blocks-wrapper">
+                        {!isFetchPage && items.map((item, index) => <ProductCard key={index} productData={item} />)}
+
+                        {isFetch &&
+                            createFakeArray(CATALOG_PRODUCTS_LIMIT).map((_, index) => (
+                                <Skeleton key={index} className="product-card-skeleton" />
+                            ))}
+                    </div>
+
+                    {itemsCount > CATALOG_PRODUCTS_LIMIT && <CatalogProductsPagination />}
+                </>
             )}
         </div>
     );

@@ -11,7 +11,9 @@ import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 const CatalogProductsPagination: React.FC = () => {
     const dispatch = useDispatch();
 
-    const { pageCount, isFetchMore } = useTypedSelector(({ products }) => products);
+    const { pageCount, isFetchMore, isFetchPage } = useTypedSelector(({ products }) => products);
+    const isFetch = isFetchMore || isFetchPage;
+
     const {
         filters: { page: currentPage },
         updateFilters,
@@ -37,17 +39,18 @@ const CatalogProductsPagination: React.FC = () => {
 
     return (
         <div className="catalog-product-pagination">
-            {currentPage !== pageCount ? (
+            {currentPage !== pageCount && (
                 <button
                     type="button"
                     className={getClassNames('btn catalog-product-pagination__btn', {
                         loader: isFetchMore,
                     })}
+                    disabled={isFetchMore}
                     onClick={() => onClickFetchProductsMore(currentPage + 1)}
                 >
                     {isFetchMore ? <Loader /> : 'Показать ещё'}
                 </button>
-            ) : null}
+            )}
 
             <div className="catalog-product-pagination-pages">
                 <button
@@ -55,6 +58,7 @@ const CatalogProductsPagination: React.FC = () => {
                         disabled: currentPage === 1,
                     })}
                     onClick={() => onClickFetchProductsPage(1)}
+                    disabled={isFetch}
                 >
                     Первая
                 </button>
@@ -77,23 +81,23 @@ const CatalogProductsPagination: React.FC = () => {
                     </>
                 ) : (
                     <>
-                        {currentPage > 1 ? (
+                        {currentPage > 1 && (
                             <div
                                 className="catalog-product-pagination-pages-item"
                                 onClick={() => onClickFetchProductsPage(1)}
                             >
                                 {1}
                             </div>
-                        ) : null}
+                        )}
 
-                        {currentPage > 2 ? (
+                        {currentPage > 2 && (
                             <div
                                 className="catalog-product-pagination-pages-item"
                                 onClick={() => onClickFetchProductsPage(2)}
                             >
                                 {2}
                             </div>
-                        ) : null}
+                        )}
                     </>
                 )}
 
@@ -116,6 +120,7 @@ const CatalogProductsPagination: React.FC = () => {
                         disabled: currentPage === pageCount,
                     })}
                     onClick={() => onClickFetchProductsPage(pageCount)}
+                    disabled={isFetch}
                 >
                     Последняя
                 </button>

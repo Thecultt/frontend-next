@@ -103,3 +103,5 @@ export const CONDITIONS = {
     excellent: 'Отличное',
     good: 'Хорошее',
 } as const;
+
+export const CATALOG_PRODUCTS_LIMIT = 20;

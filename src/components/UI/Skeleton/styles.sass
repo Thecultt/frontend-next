@@ -1,0 +1,13 @@
+@import "/src/assets/sass/variables"
+
+@keyframes skeletonLoading
+    0%
+        background-color: $grey1
+    100%
+        background-color: $grey3
+
+.skeleton
+    width: 100%
+
+    background-color: $grey1
+    animation: skeletonLoading 1s linear infinite alternate

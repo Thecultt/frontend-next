@@ -87,6 +87,16 @@
 		display: flex
 		align-items: center
 
+		&-skeleton-top
+			height: 38px
+
+			+mediaTablet
+				height: 24px
+
+		&-skeleton-bottom
+			height: 54px
+			margin-top: 12px
+
 		&-media-btn
 			position: relative
 
@@ -154,8 +164,7 @@
 		&-title
 			display: flex
 			align-items: center
-
-			min-width: 300px
+			min-width: 240px
 
 			&__title
 				font-size: 22px
@@ -172,7 +181,7 @@
 			display: flex
 			align-items: center
 
-			margin-left: 25px
+			margin-left: 32px
 
 			&__btn
 				cursor: pointer
@@ -265,14 +274,17 @@
 						margin-bottom: 0
 
 	&-blocks-and-filters-wrapper
-		display: flex
-		align-items: flex-start
+		width: 100%
+		display: grid
+		grid-template-columns: 240px auto
+		gap: 32px
+		margin-top: 24px
 
 	&-filters
-		margin-top: 30px
+		width: 100%
 
-		min-width: 265px
-		width: 265px
+		&-skeleton
+			height: 650px
 
 		&-boutique
 			width: 100%
@@ -547,13 +559,6 @@
 	&-product-wrapper
 		width: 100%
 
-		margin-top: 30px
-		margin-left: 60px
-
-		display: inline-flex
-		flex-wrap: wrap
-		justify-content: space-between
-
 	&-product-blocks-wrapper
 		width: 100%
 
@@ -772,6 +777,9 @@
 			&-sort
 				display: none
 
+		&-blocks-and-filters-wrapper
+			grid-template-columns: 100%
+
 		&-filters
 			padding: 25px
 
@@ -824,10 +832,6 @@
 
 			&-btn-media
 				display: flex
-
-		&-product-wrapper
-			margin-top: 24px
-			margin-left: 0
 
 		&-product
 			&-null
@@ -901,3 +905,6 @@
 						padding: 5px 10px
 						font-size: 15px
 						margin: 0 2px
+
+.product-card-skeleton
+	padding-top: calc(#{$productImageAspectRatio} + 85px)
