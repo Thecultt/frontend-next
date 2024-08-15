@@ -22,6 +22,7 @@ export { Spinner } from './UI/Spinner';
 export { NavLink } from './UI/NavLink/NavLink';
 export { BaseImage } from './UI/BaseImage/BaseImage';
 export { Badge } from './UI/Badge/Badge';
+export { Skeleton } from './UI/Skeleton/Skeleton';
 
 // Notifications
 export { default as NotificationsServer } from './UI/NotificationsServer/NotificationsServer';

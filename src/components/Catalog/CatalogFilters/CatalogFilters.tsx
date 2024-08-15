@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import {
@@ -18,11 +19,11 @@ import {
     CatalogFiltersSelections,
     CatalogFiltersGlassFrame,
     CatalogFiltersPriceDrop,
+    Skeleton,
 } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { CATEGORY_NAMES, CATEGORY_SLUGS, FILTER_CATEGORY_SLUGS } from '@/constants/catalog';
 import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
-import { useParams } from 'next/navigation';
 import { CatalogPageParams } from '@/types/catalog';
 
 interface Props {
@@ -37,13 +38,21 @@ const CatalogFilters: React.FC<Props> = ({ isOpenFiltersMedia, setIsOpenFiltersM
         clearFilters,
     } = useCatalogFilters();
 
-    const { price } = useTypedSelector(({ products_filters }) => products_filters);
+    const { price, isLoaded } = useTypedSelector(({ products_filters }) => products_filters);
 
     const handleClearFilters = () => {
         clearFilters();
         window.scrollTo(0, 0);
         setIsOpenFiltersMedia(false);
     };
+
+    if (!isLoaded) {
+        return (
+            <div className="catalog-filters">
+                <Skeleton className="catalog-filters-skeleton" />
+            </div>
+        );
+    }
 
     return (
         <div
