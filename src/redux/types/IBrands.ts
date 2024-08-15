@@ -3,10 +3,14 @@ export interface IBrand {
     slug: string;
 }
 
+export interface IBrands {
+    brands: { [letter: string]: IBrand[] };
+}
+
 export interface BrandsState {
     isLoaded: boolean;
-    allBrands: { [letter: string]: IBrand[] };
-    brands: { [letter: string]: IBrand[] };
+    allBrands: IBrands['brands'];
+    brands: IBrands['brands'];
     letter: string;
     search: string;
 }

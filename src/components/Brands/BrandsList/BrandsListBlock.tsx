@@ -19,8 +19,7 @@ const BrandsListBlock: React.FC<BrandsListBlockProps> = ({ letter, brands }) => 
                 {brands.map((brand, index) => (
                     <Link
                         href={getCatalogFiltersUrl({
-                            brands: [brand.word],
-                            sort: SORT.a,
+                            brand_slug: brand.slug,
                         })}
                         className="brands-list-block__item"
                         key={`brands-list-block__item-${index}`}

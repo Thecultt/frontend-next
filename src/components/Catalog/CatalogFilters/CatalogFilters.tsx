@@ -31,7 +31,7 @@ interface Props {
 }
 
 const CatalogFilters: React.FC<Props> = ({ isOpenFiltersMedia, setIsOpenFiltersMedia }) => {
-    const { category_slug } = useParams<CatalogPageParams>();
+    const { category_slug, brand_slug } = useParams<CatalogPageParams>();
     const {
         filters: { categories: selectedCategories },
         clearFilters,
@@ -74,7 +74,7 @@ const CatalogFilters: React.FC<Props> = ({ isOpenFiltersMedia, setIsOpenFiltersM
                 <CatalogFiltersConditions />
                 {(!category_slug || !FILTER_CATEGORY_SLUGS.includes(category_slug)) && <CatalogFiltersCategories />}
                 <CatalogFiltersTypes />
-                <CatalogFiltersBrands />
+                {!brand_slug && <CatalogFiltersBrands />}
                 {(!category_slug || ![CATEGORY_SLUGS.accessories, CATEGORY_SLUGS.shoes].includes(category_slug)) && (
                     <CatalogFiltersModels />
                 )}

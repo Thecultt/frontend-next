@@ -46,6 +46,8 @@ export const APP_ROUTE = {
     },
 } as const;
 
+export const CATALOG_PAGES = [APP_ROUTE.catalog, APP_ROUTE.selections, `${APP_ROUTE.brands}/`];
+
 export const EXTERNAL_LINKS = {
     sellerVisit: 'https://calendly.com/thecultt_2023/visitsellers',
     clientVisit: 'https://calendly.com/thecultt/visit',
