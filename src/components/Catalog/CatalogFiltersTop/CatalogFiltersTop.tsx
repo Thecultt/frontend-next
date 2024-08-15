@@ -7,7 +7,7 @@ import { checkDeclension } from '@/functions/checkDeclension';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useCatalogFiltersTitle } from '@/hooks/catalog/useCatalogFiltersTitle';
 import { MEDIA_SIZES } from '@/constants/styles';
-import { CatalogFiltersTopBoutique, CatalogFiltersTopSort, CatalogFiltersTopSortMedia } from '@/components';
+import { CatalogFiltersTopBoutique, CatalogFiltersTopSort, CatalogFiltersTopSortMedia, Skeleton } from '@/components';
 
 interface Props {
     isOpenFiltersMedia: boolean;
@@ -16,8 +16,20 @@ interface Props {
 
 const CatalogFiltersTop: React.FC<Props> = React.memo(({ isOpenFiltersMedia, setIsOpenFiltersMedia }) => {
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+
     const { itemsCount } = useTypedSelector(({ products }) => products);
+    const { isLoaded } = useTypedSelector(({ products_filters }) => products_filters);
+
     const title = useCatalogFiltersTitle();
+
+    if (!isLoaded) {
+        return (
+            <div className="catalog-filters-top">
+                <Skeleton className="catalog-filters-top-skeleton-top" />
+                {isMobile && <Skeleton className="catalog-filters-top-skeleton-bottom" />}
+            </div>
+        );
+    }
 
     return (
         <div className="catalog-filters-top">
