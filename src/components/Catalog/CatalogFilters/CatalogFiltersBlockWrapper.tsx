@@ -1,8 +1,11 @@
+'use client';
+
 import React from 'react';
+import AnimateHeight from 'react-animate-height';
 
 import { getClassNames } from '@/functions/getClassNames';
 
-interface CatalogFiltersBlockWrapperProps {
+interface Props {
     title: string;
     children: React.ReactNode;
     disabled?: boolean;
@@ -10,7 +13,9 @@ interface CatalogFiltersBlockWrapperProps {
     defaultVisible?: boolean;
 }
 
-const CatalogFiltersBlockWrapper: React.FC<CatalogFiltersBlockWrapperProps> = ({
+const ANIMATION_DURATION = 300;
+
+const CatalogFiltersBlockWrapper: React.FC<Props> = ({
     title,
     children,
     disabled,
@@ -18,18 +23,32 @@ const CatalogFiltersBlockWrapper: React.FC<CatalogFiltersBlockWrapperProps> = ({
     defaultVisible = false,
 }) => {
     const [isAllVisible, setIsAllVisible] = React.useState(false);
+    const [isChildrenVisible, setIsChildrenVisible] = React.useState(false);
+
     const ObjectsFiltersBlockWrapperRef = React.useRef<HTMLDivElement>(null);
 
     const toggleIsAllVisibleOnClick = () => {
-        setIsAllVisible(!isAllVisible);
+        if (isAllVisible) {
+            setIsAllVisible(false);
+            setTimeout(() => {
+                setIsChildrenVisible(false);
+            }, ANIMATION_DURATION);
+        } else {
+            setIsChildrenVisible(true);
+            setIsAllVisible(true);
+        }
     };
 
     React.useEffect(() => {
-        if (disabled) setIsAllVisible(false);
+        if (disabled) {
+            setIsChildrenVisible(false);
+            setIsAllVisible(false);
+        }
     }, [disabled]);
 
     React.useEffect(() => {
         if (defaultVisible) {
+            setIsChildrenVisible(true);
             setIsAllVisible(true);
         }
     }, [defaultVisible]);
@@ -93,7 +112,9 @@ const CatalogFiltersBlockWrapper: React.FC<CatalogFiltersBlockWrapperProps> = ({
                 )}
             </div>
 
-            {isAllVisible && <div className="catalog-filters-block-content">{children}</div>}
+            <AnimateHeight duration={ANIMATION_DURATION} height={isAllVisible ? 'auto' : 0}>
+                {isChildrenVisible && <div className="catalog-filters-block-content">{children}</div>}
+            </AnimateHeight>
         </div>
     );
 };
