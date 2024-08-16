@@ -65,7 +65,7 @@ const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) =
 
     return (
         <>
-            <Popup state={isStateSplitPopup} setState={() => setIsStateSplitPopup(!isStateSplitPopup)} borderBlack>
+            <Popup state={isStateSplitPopup} setState={() => setIsStateSplitPopup(!isStateSplitPopup)}>
                 <ProductInfoTitleSplitPopup
                     price={totalPrice}
                     onClosePopup={() => setIsStateSplitPopup(!isStateSplitPopup)}

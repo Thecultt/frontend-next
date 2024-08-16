@@ -15,7 +15,7 @@ export const PAYMENTS_METHODS: { [key: string]: { title: string; description: st
     },
     yandexSplit: {
         title: PAYMENTS_NAMES.yandexSplit,
-        description: `Для покупки свыше 150 000 рублей нужно оформить <a href="${EXTERNAL_LINKS.yandexSplit}">улучшенный Яндекс Сплит</a>`,
+        description: `Для покупки свыше 150 000 рублей нужно оформить <a href="${EXTERNAL_LINKS.yandexSplit}" target="_blank" rel="noopener noreferrer">улучшенный Яндекс Сплит</a>`,
     },
     installmentTinkoff: {
         title: PAYMENTS_NAMES.installmentTinkoff,

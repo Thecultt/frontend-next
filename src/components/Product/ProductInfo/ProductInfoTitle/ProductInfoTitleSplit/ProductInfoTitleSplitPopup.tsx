@@ -58,7 +58,12 @@ const ProductInfoTitleSplitPopup: React.FC<ProductInfoTitleSplitPopupProps> = ({
                 условий. А&nbsp;покупку вы&nbsp;получите после первого платежа&nbsp;&mdash; то&nbsp;есть сразу.
             </p>
 
-            <a href={EXTERNAL_LINKS.yandexSplit} target="__blank" className="product-content-info-split-popup__limit">
+            <a
+                href={EXTERNAL_LINKS.yandexSplit}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="product-content-info-split-popup__limit"
+            >
                 Узнать свой лимит
             </a>
 
@@ -71,7 +76,8 @@ const ProductInfoTitleSplitPopup: React.FC<ProductInfoTitleSplitPopupProps> = ({
                 </p>
                 <a
                     href={EXTERNAL_LINKS.yandexSplit}
-                    target="__blank"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="product-content-info-split-popup-greater-split__link"
                 >
                     Оформить Улучшенный Сплит
