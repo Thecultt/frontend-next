@@ -14,9 +14,18 @@ interface Props {
     children: React.ReactNode;
 
     center?: boolean;
+
+    borderBlack?: boolean;
 }
 
-const PopupContent: React.FC<Props> = ({ state, setState, stateContent, children, center = false }) => {
+const PopupContent: React.FC<Props> = ({
+    state,
+    setState,
+    stateContent,
+    children,
+    center = false,
+    borderBlack = false,
+}) => {
     const PopupRefWrapper = React.useRef<HTMLDivElement>(null);
     const PopupRef = React.useRef<HTMLDivElement>(null);
 
@@ -59,7 +68,7 @@ const PopupContent: React.FC<Props> = ({ state, setState, stateContent, children
                 //     active: state && !!stateContent,
                 //     close: state && !stateContent,
                 // })}
-                className={`popup-content ${
+                className={`popup-content ${borderBlack ? 'border-black' : ''} ${
                     state ? (stateContent !== undefined ? (stateContent ? 'active' : 'close') : 'active') : ''
                 }`}
                 ref={PopupRef}

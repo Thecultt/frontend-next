@@ -48,10 +48,12 @@ const ProductInfoTitleSplit: React.FC<ProductInfoTitleSplitProps> = ({ price, di
                     />
                 </svg>
             </div>
-            <Popup state={isStateSplitPopup} setState={() => setIsStateSplitPopup(!isStateSplitPopup)}>
+
+            <Popup state={isStateSplitPopup} setState={() => setIsStateSplitPopup(!isStateSplitPopup)} borderBlack>
                 <ProductInfoTitleSplitPopup
                     price={price}
                     onClosePopup={() => setIsStateSplitPopup(!isStateSplitPopup)}
+                    state={isStateSplitPopup}
                 />
             </Popup>
         </>
