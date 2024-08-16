@@ -3,6 +3,8 @@ import React from 'react';
 import { FooterEmailSubscribeForm } from '@/components';
 import { sendMindbox } from '@/functions/mindbox';
 
+import { IFormValues } from './validate';
+
 interface Props {
     id?: string;
 }
@@ -10,7 +12,7 @@ interface Props {
 const FooterEmailSubscribe: React.FC<Props> = ({ id }) => {
     const [isSubmit, setIsSubmit] = React.useState(false);
 
-    const onSubmit = async (data: any) => {
+    const handleSubmit = async (data: IFormValues) => {
         try {
             await sendMindbox('KlientImportPriPodpiskeVFooter', {
                 customer: {
@@ -57,7 +59,7 @@ const FooterEmailSubscribe: React.FC<Props> = ({ id }) => {
                             </p>
                         </div>
 
-                        <FooterEmailSubscribeForm onSubmit={onSubmit} />
+                        <FooterEmailSubscribeForm onSubmit={handleSubmit} />
                     </div>
                 )}
             </div>
