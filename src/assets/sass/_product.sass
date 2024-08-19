@@ -599,25 +599,63 @@
 								border-bottom: 1px solid $mainColor
 
 			&-split-popup
-				width: 420px
+				width: 400px
 
 				&__logo
-					width: 200px
+					width: 150px
 
 					margin-bottom: 25px
 
 				&__title
 					font-size: 15px
 
-					font-weight: 500
+					font-weight: 700
 
 					margin-bottom: 8px
 
 				&__description
 					font-size: 14px
+					font-weight: 500
+					margin-bottom: 25px
+
+				&__limit
+					display: inline-block
+
+					font-size: 14px
+					font-weight: 500
+					border-bottom: 1px solid $black
+
+					margin-bottom: 12px
 
 				&-widget
-					margin-top: 25px
+					margin-bottom: 25px
+
+					& .ya-pay-widget
+						display: none !important
+
+					& .ya-pay-widget:first-child
+						display: block !important
+
+				&-greater-split
+					padding: 8px
+					background-color: $green1
+					border-radius: 12px
+
+					&__title
+						font-size: 16px
+						color: $mainColor
+						margin-bottom: 8px
+
+					&__subtitle
+						font-size: 14px
+						font-weight: 500
+						margin-bottom: 10px
+
+					&__link
+						font-size: 14px
+						font-weight: 500
+						color: $mainColor
+						border-bottom: 1px solid $mainColor
 
 				&__btn
 					margin-top: 25px
