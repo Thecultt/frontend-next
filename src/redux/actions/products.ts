@@ -105,6 +105,10 @@ export const fetchProductsCatalog =
             params.append('price_drop', String(filters.price_drop));
         }
 
+        if (filters.selection) {
+            params.append('selections', filters.selection);
+        }
+
         if (filters.availability && filters.availability.length > 0) {
             filters.availability.map((availability) => {
                 params.append('availability', AVAILABILITY_IDS[availability]);
