@@ -98,20 +98,17 @@ export const fetchProductsCatalog =
         filters.glass_frame?.map((glass_frame) => params.append('glass_frame', glass_frame));
         filters.size?.map((size) => params.append('size', size.toString()));
 
-        if (filters.availability && filters.availability.length > 0) {
-            filters.availability.map((availability) => {
-                params.append('availability', AVAILABILITY_IDS[availability]);
-            });
-        }
-
         if (filters.boutique) {
             params.append('from_boutique', String(filters.boutique));
         }
         if (filters.price_drop) {
             params.append('price_drop', String(filters.price_drop));
         }
-        if (filters.selection) {
-            params.append('selections', filters.selection);
+
+        if (filters.availability && filters.availability.length > 0) {
+            filters.availability.map((availability) => {
+                params.append('availability', AVAILABILITY_IDS[availability]);
+            });
         }
 
         params.append('sort_by', filters.sort ?? SORT.shuffle);
