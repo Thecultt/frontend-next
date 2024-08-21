@@ -36,7 +36,9 @@ export const useCatalogFilters = () => {
             genders: parseAsArrayOf(parseAsStringLiteral(Object.values(GENDERS))).withDefault([]),
             conditions: parseAsArrayOf(parseAsStringLiteral(Object.values(CONDITIONS))).withDefault([]),
             availability: parseAsArrayOf(parseAsStringLiteral(Object.values(AVAILABILITY))).withDefault(
-                category_slug === CATEGORY_SLUGS.sale ? [AVAILABILITY.available, AVAILABILITY.fitting] : [],
+                category_slug === CATEGORY_SLUGS.sale || selection_id
+                    ? [AVAILABILITY.available, AVAILABILITY.fitting]
+                    : [],
             ),
             price_drop: parseAsBoolean.withDefault(category_slug === CATEGORY_SLUGS.sale),
             glass_frame: parseAsArrayOf(parseAsString).withDefault([]),
