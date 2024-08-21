@@ -6,12 +6,14 @@ import Link from 'next/link';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { SELECTIONS_IDS, SORT, CATEGORY_SLUG_NAMES, CATEGORY_NAMES, CATEGORY_SLUGS } from '@/constants/catalog';
+import { APP_ROUTE } from '@/constants/routes';
 import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 import CatalogBannerImageBoutiqueMedia from '@/assets/images/catalog/catalog-banner-boutique-media.jpg';
 import CatalogBannerImagePriceDropMedia from '@/assets/images/catalog/catalog-banner-price-drop.jpg';
 import CatalogBannerImagePriceDrop2 from '@/assets/images/catalog/catalog-banner-price-drop2.jpg';
 import CatalogBannerImagePopularMedia from '@/assets/images/catalog/catalog-banner-popular-media.jpg';
+import CatalogBannerImageConcierge from '@/assets/images/concierge/concierge-main.jpg';
 
 const CatalogBannerMedia: React.FC = () => {
     const {
@@ -21,6 +23,31 @@ const CatalogBannerMedia: React.FC = () => {
 
     const categories = category_slug ? [CATEGORY_SLUG_NAMES[category_slug]] : selectedCategories;
     const currentSelection = selectionId ? selections.find(({ id }) => id.toString() === selectionId) ?? null : null;
+
+    if (category_slug === 'sumki' || category_slug === 'ukrasheniia') {
+        return (
+            <div
+                className="catalog-banner-media"
+                style={{
+                    backgroundImage: `url("${CatalogBannerImageConcierge.src}")`,
+                }}
+            >
+                <div className="catalog-banner-media-text">
+                    <h3 className="catalog-banner-media-text__title">
+                        Доставим для вас сумки <br /> и&nbsp;ювелирные украшения
+                    </h3>
+                    <p className="catalog-banner-media-text__description">
+                        Консьерж-сервис THE CULTT доставит для вас из&nbsp;Европы и&nbsp;США любые позиции
+                        с&nbsp;официальных сайтов Herm&egrave;s, Chanel, Cartier, Panerai и&nbsp;других культовых
+                        брендов{' '}
+                    </p>
+                    <Link href={APP_ROUTE.concierge.root} className="btn-light catalog-banner-media-text__btn">
+                        Заказать через консьержа
+                    </Link>
+                </div>
+            </div>
+        );
+    }
 
     return price_drop ? (
         <div
