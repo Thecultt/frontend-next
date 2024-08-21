@@ -10,6 +10,7 @@ import {
     ProductInfoState,
     ProductInfoDescription,
     ProductInfoParameters,
+    ProductInfoConcierge,
     ProductInfoAuth,
     ProductInfoTabs,
 } from '@/components';
@@ -55,9 +56,19 @@ const ProductInfo: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPar
                     <ProductInfoState {...product} />
                     <ProductInfoDescription description={product.description} />
                     <ProductInfoParameters {...product} />
+
+                    {product.price >= 500000 && (product.availability === -1 || product.availability === 0) && (
+                        <ProductInfoConcierge article={product.article} />
+                    )}
                 </>
             ) : (
-                <ProductInfoBottomSheet product={product} />
+                <>
+                    {product.price >= 500000 && (product.availability === -1 || product.availability === 0) && (
+                        <ProductInfoConcierge article={product.article} />
+                    )}
+
+                    <ProductInfoBottomSheet product={product} />
+                </>
             )}
 
             <div className="product-content-info__auth-tabs">

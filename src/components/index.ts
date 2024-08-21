@@ -148,6 +148,9 @@ export { default as ProductInfoExchange } from './Product/ProductInfo/ProductInf
 export { default as ProductInfoParameters } from './Product/ProductInfo/ProductInfoParameters';
 export { default as ProductInfoParametersSize } from './Product/ProductInfo/ProductInfoParametersSize';
 export { default as ProductInfoState } from './Product/ProductInfo/ProductInfoState';
+// ProductInfoConcierge
+export { default as ProductInfoConcierge } from './Product/ProductInfo/ProductInfoConcierge/ProductInfoConcierge';
+export { default as ProductInfoConciergeForm } from './Product/ProductInfo/ProductInfoConcierge/ProductInfoConciergeForm';
 // ProductInfoTitle
 export { default as ProductInfoTitle } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitle';
 // ProductInfoTitleBoutique
