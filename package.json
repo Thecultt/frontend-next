@@ -31,6 +31,7 @@
     "qs": "^6.12.1",
     "react": "^18.1.0",
     "react-animate-height": "^3.1.1",
+    "react-countdown": "^2.3.6",
     "react-countup": "^6.5.3",
     "react-dom": "^18.1.0",
     "react-dots-loader": "^1.1.4",
@@ -52,8 +53,8 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
-    "@types/lodash.isequal": "^4.5.8",
     "@faker-js/faker": "^8.4.1",
+    "@types/lodash.isequal": "^4.5.8",
     "@types/lodash.omitby": "^4.6.9",
     "@types/node": "^20",
     "@types/qs": "^6.9.15",
