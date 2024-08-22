@@ -139,15 +139,13 @@ const OrderStatusError: React.FC = () => {
                                         К сожалению, ваша оплата не прошла. Попробуйте еще раз.
                                     </h2>
 
-                                    <p className="order-status-content-info__subtitle">
-                                        Мы зарезервировали для вас товар на 15 минут.
-                                    </p>
-
                                     <p className="order-status-content-info__subtextbtn">
                                         Завершите платеж в течение
                                         <Countdown
                                             date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
-                                            renderer={({ minutes, seconds }) => ` ${minutes}:${seconds}`}
+                                            renderer={({ minutes, seconds }) =>
+                                                ` ${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`
+                                            }
                                         />
                                     </p>
 
