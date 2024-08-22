@@ -180,23 +180,25 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
 
                         {status === 'Ожидает оплаты' ||
                         dayjs().isBefore(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm')) ? (
-                            yandex_split_link ? (
-                                <a href={yandex_split_link} className="btn cabinet-history-orders-item-info__btn">
-                                    Оплатите в течении
+                            <>
+                                <p className="cabinet-history-orders-item-info__subtextbtn">
+                                    Завершите платеж в течение
                                     <Countdown
                                         date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
-                                        renderer={({ minutes, seconds }) => ` ${minutes}:${seconds} минут`}
+                                        renderer={({ minutes, seconds }) => ` ${minutes}:${seconds}`}
                                     />
-                                </a>
-                            ) : (
-                                <button className="btn cabinet-history-orders-item-info__btn" onClick={onClickPay}>
-                                    Оплатите в течении
-                                    <Countdown
-                                        date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
-                                        renderer={({ minutes, seconds }) => ` ${minutes}:${seconds} минут`}
-                                    />
-                                </button>
-                            )
+                                </p>
+
+                                {yandex_split_link ? (
+                                    <a href={yandex_split_link} className="btn cabinet-history-orders-item-info__btn">
+                                        Оплатить еще раз
+                                    </a>
+                                ) : (
+                                    <button className="btn cabinet-history-orders-item-info__btn" onClick={onClickPay}>
+                                        Оплатить еще раз
+                                    </button>
+                                )}
+                            </>
                         ) : null}
                     </div>
                 </AnimateHeight>

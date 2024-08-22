@@ -143,27 +143,27 @@ const OrderStatusError: React.FC = () => {
                                         Мы зарезервировали для вас товар на 15 минут.
                                     </p>
 
+                                    <p className="order-status-content-info__subtextbtn">
+                                        Завершите платеж в течение
+                                        <Countdown
+                                            date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
+                                            renderer={({ minutes, seconds }) => ` ${minutes}:${seconds}`}
+                                        />
+                                    </p>
+
                                     {yandex_split_link ? (
                                         <a
                                             href={yandex_split_link}
-                                            className="btn-black order-status-content-info__repeatbtn"
+                                            className="btn-black order-status-content-info__btn"
                                         >
-                                            Оплатите в течении
-                                            <Countdown
-                                                date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
-                                                renderer={({ minutes, seconds }) => ` ${minutes}:${seconds} минут`}
-                                            />
+                                            Оплатить еще раз
                                         </a>
                                     ) : (
                                         <button
-                                            className="btn-black order-status-content-info__repeatbtn"
+                                            className="btn-black order-status-content-info__btn"
                                             onClick={onClickPay}
                                         >
-                                            Оплатите в течении
-                                            <Countdown
-                                                date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
-                                                renderer={({ minutes, seconds }) => ` ${minutes}:${seconds} минут`}
-                                            />
+                                            Оплатить еще раз
                                         </button>
                                     )}
                                 </>
