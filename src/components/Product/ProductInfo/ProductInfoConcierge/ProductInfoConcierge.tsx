@@ -2,6 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'usehooks-ts';
 
+import { sendReachGoal } from '@/functions/yandex';
+
 import { sendConciergeProductApplication } from '@/redux/actions/concierge';
 
 import { MEDIA_SIZES } from '@/constants/styles';
@@ -23,6 +25,11 @@ const ProductInfoConcierge: React.FC<Props> = ({ article }) => {
         dispatch(sendConciergeProductApplication(data, article) as any);
     };
 
+    const onClickOpen = () => {
+        setStatePopup(true);
+        sendReachGoal('click_banner_concierge');
+    };
+
     return (
         <>
             <Popup state={statePopup} setState={() => setStatePopup(!statePopup)} center>
@@ -32,7 +39,7 @@ const ProductInfoConcierge: React.FC<Props> = ({ article }) => {
             {isMobile ? (
                 <button
                     className="btn-light-green large product-content-info-concierge-media__btn"
-                    onClick={() => setStatePopup(true)}
+                    onClick={onClickOpen}
                 >
                     Заказать через Консьерж-сервис
                 </button>
@@ -46,7 +53,7 @@ const ProductInfoConcierge: React.FC<Props> = ({ article }) => {
                         брендов
                     </p>
 
-                    <button className="product-content-info-concierge__btn" onClick={() => setStatePopup(true)}>
+                    <button className="product-content-info-concierge__btn" onClick={onClickOpen}>
                         Заказать через Консьерж-сервис
                     </button>
                 </div>
