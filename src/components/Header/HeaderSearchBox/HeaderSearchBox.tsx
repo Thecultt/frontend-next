@@ -1,11 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import Link from 'next/link';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { setHeaderSearchValue } from '@/redux/actions/header';
 import { checkDeclension } from '@/functions/checkDeclension';
 import { getClassNames } from '@/functions/getClassNames';
 import { ProductCard } from '@/components';
+import { APP_ROUTE } from '@/constants/routes';
 
 import { HeaderSearchInput } from '../HeaderSearchInput';
 
@@ -161,9 +163,19 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose, goToC
                                     </div>
                                 ))
                             ) : (
-                                <p className="header-search-box-products-blocks__null">
-                                    К сожалению, мы не смогли ничего найти
-                                </p>
+                                <div className="header-search-box-products-blocks-null">
+                                    <p className="header-search-box-products-blocks-null__title">
+                                        К сожалению, мы не смогли ничего найти, но это можно поискать в
+                                        Консьерж-сервисе.
+                                    </p>
+
+                                    <Link
+                                        href={`${APP_ROUTE.concierge.root}`}
+                                        className="btn-light-green large header-search-box-products-blocks-null__btn"
+                                    >
+                                        Смотреть в Консьерж-сервисе
+                                    </Link>
+                                </div>
                             )
                         ) : (
                             newItems
