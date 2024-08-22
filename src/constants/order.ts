@@ -26,3 +26,5 @@ export const PAYMENTS_METHODS: { [key: string]: { title: string; description: st
         description: '',
     },
 };
+
+export const COUNT_MINUTES_RESERVED_ORDER = 15;

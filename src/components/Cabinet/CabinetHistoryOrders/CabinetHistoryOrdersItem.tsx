@@ -1,10 +1,13 @@
 import React from 'react';
 import AnimateHeight from 'react-animate-height';
+import Countdown from 'react-countdown';
 import dayjs from 'dayjs';
 
 import { Order } from '@/models/IOrder';
 import { CabinetHistoryOrdersItemProduct } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
+import { COUNT_MINUTES_RESERVED_ORDER } from '@/constants/order';
+import { APP_ROUTE } from '@/constants/routes';
 
 interface CabinetHistoryOrdersItemProps extends Order {
     statusColor: string;
@@ -175,14 +178,23 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
                             ))}
                         </div>
 
-                        {status === 'Ожидает оплаты' ? (
+                        {status === 'Ожидает оплаты' ||
+                        dayjs().isBefore(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm')) ? (
                             yandex_split_link ? (
                                 <a href={yandex_split_link} className="btn cabinet-history-orders-item-info__btn">
-                                    Оплатить заказ
+                                    Оплатите в течении
+                                    <Countdown
+                                        date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
+                                        renderer={({ minutes, seconds }) => ` ${minutes}:${seconds} минут`}
+                                    />
                                 </a>
                             ) : (
                                 <button className="btn cabinet-history-orders-item-info__btn" onClick={onClickPay}>
-                                    Оплатить заказ
+                                    Оплатите в течении
+                                    <Countdown
+                                        date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
+                                        renderer={({ minutes, seconds }) => ` ${minutes}:${seconds} минут`}
+                                    />
                                 </button>
                             )
                         ) : null}
