@@ -185,7 +185,9 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
                                     Завершите платеж в течение
                                     <Countdown
                                         date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
-                                        renderer={({ minutes, seconds }) => ` ${minutes}:${seconds}`}
+                                        renderer={({ minutes, seconds }) =>
+                                            ` ${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`
+                                        }
                                     />
                                 </p>
 
