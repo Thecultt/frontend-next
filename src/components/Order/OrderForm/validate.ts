@@ -31,7 +31,9 @@ const validate = (values: Values) => {
 
     if (!values.email) {
         errors.email = 'Поле не может быть пустым';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$/i.test(values.email)) {
+    } else if (/[А-Яа-яЁё]/i.test(values.email)) {
+        errors.email = 'Некорректный email';
+    } else if (/\s/.test(values.email)) {
         errors.email = 'Некорректный email';
     } else if (values.email.length > MAX_INPUT_SYMBOLS) {
         errors.email = `Не более ${MAX_INPUT_SYMBOLS} символов`;
