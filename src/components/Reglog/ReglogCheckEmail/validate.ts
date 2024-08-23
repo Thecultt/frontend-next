@@ -16,6 +16,8 @@ const validate = (values: validateInfoValues) => {
         errors.email = 'Поле не может быть пустым';
     } else if (/[А-Яа-яЁё]/i.test(values.email)) {
         errors.email = 'Некорректный email';
+    } else if (/\s/.test(values.email)) {
+        errors.email = 'Некорректный email';
     } else if (values.email.length > defaultMax) {
         errors.email = `Не более ${defaultMax} символов`;
     } else if (values.email.length < defaultMin) {
