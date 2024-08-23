@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
+import { createTextMask } from 'redux-form-input-masks';
 
 import { RenderInput } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
@@ -94,19 +95,59 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 >
                     <div className="cabinet-setting-block-form-input-wrapper">
                         <div className="cabinet-setting-block-form-input" style={{ width: '100%' }}>
-                            <Field component={RenderInput} name="pasport" label="Серия и номер паспорта" bgWhite />
+                            <Field
+                                component={RenderInput}
+                                name="pasport"
+                                label="Серия и номер паспорта"
+                                bgWhite
+                                {...createTextMask({
+                                    pattern: '9999 999999',
+                                    guide: false,
+                                    stripMask: false,
+                                })}
+                            />
                         </div>
 
                         <div className="cabinet-setting-block-form-input" style={{ width: '100%' }}>
-                            <Field component={RenderInput} name="inn" label="Ваш ИНН" bgWhite />
+                            <Field
+                                component={RenderInput}
+                                name="inn"
+                                label="Ваш ИНН"
+                                bgWhite
+                                {...createTextMask({
+                                    pattern: '999999999999',
+                                    guide: false,
+                                    stripMask: false,
+                                })}
+                            />
                         </div>
 
                         <div className="cabinet-setting-block-form-input" style={{ width: '100%' }}>
-                            <Field component={RenderInput} name="bik" label="БИК" bgWhite />
+                            <Field
+                                component={RenderInput}
+                                name="bik"
+                                label="БИК"
+                                bgWhite
+                                {...createTextMask({
+                                    pattern: '999999999',
+                                    guide: false,
+                                    stripMask: false,
+                                })}
+                            />
                         </div>
 
                         <div className="cabinet-setting-block-form-input" style={{ width: '100%' }}>
-                            <Field component={RenderInput} name="rs" label="Расчетный счёт" bgWhite />
+                            <Field
+                                component={RenderInput}
+                                name="rs"
+                                label="Расчетный счёт"
+                                bgWhite
+                                {...createTextMask({
+                                    pattern: '99999999999999999999',
+                                    guide: false,
+                                    stripMask: false,
+                                })}
+                            />
                         </div>
                     </div>
                 </div>
