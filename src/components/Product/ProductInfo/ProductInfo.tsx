@@ -10,6 +10,7 @@ import {
     ProductInfoState,
     ProductInfoDescription,
     ProductInfoParameters,
+    ProductInfoConcierge,
     ProductInfoAuth,
     ProductInfoTabs,
 } from '@/components';
@@ -49,6 +50,10 @@ const ProductInfo: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPar
             {/* <ProductInfoParametersSize {...product} /> */}
 
             <ProductInfoExchange canBuy={!!product.availability && !product.is_trial} />
+
+            {product.price >= 500000 && (!product.availability || product.is_trial) ? (
+                <ProductInfoConcierge article={product.article} />
+            ) : null}
 
             {!isMobile ? (
                 <>

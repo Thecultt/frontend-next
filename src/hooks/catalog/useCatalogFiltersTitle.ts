@@ -31,7 +31,7 @@ export const useCatalogFiltersTitle = () => {
         }
 
         if (filters.selection) {
-            return selections[filters.selection].category;
+            return selections[filters.selection]?.category;
         }
 
         if (filters.search) {

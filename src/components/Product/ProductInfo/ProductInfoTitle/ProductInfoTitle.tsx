@@ -157,7 +157,7 @@ const ProductInfoTitle: React.FC<Props> = ({ product, setBoutiquePopupVisible, s
                 {old_price && <p className="product-content-info-title-price__oldprice">{formatMoney(old_price)}</p>}
             </div>
 
-            {price <= YANDEX_SPLIT_LIMIT && <ProductInfoTitleSplit price={price} disabled={!canBuy} />}
+            {price <= 150000 && <ProductInfoTitleSplit price={price} disabled={!canBuy} />}
 
             <div className="product-content-info-title-btn">
                 {canBuy ? (

@@ -18,7 +18,7 @@
 			margin-bottom: 12px
 
 		&-cover
-			top: 120px
+			top: 170px
 			position: sticky
 
 			display: flex
@@ -29,8 +29,6 @@
 
 			max-height: 640px
 			height: 78vh
-			// height: 640px
-			// height: 78vh
 
 			&-list-wrapper
 				position: relative
@@ -529,6 +527,70 @@
 					&:last-child
 						margin-bottom: 0
 
+			&-concierge
+				padding: 12px
+				background-color: $white
+				border-radius: 12px
+
+				box-shadow: 0px 3.83px 19.31px 0px rgba(0, 0, 0, 0.0275)
+				box-shadow: 0px 18.1px 75.49px 0px rgba(0, 0, 0, 0.0425)
+				box-shadow: 0px 47px 237px 0px rgba(0, 0, 0, 0.07)
+
+				margin-bottom: 25px
+
+				&__title
+					font-size: 16px
+					margin-bottom: 5px
+
+				&__description
+					font-size: 12px
+					margin-bottom: 5px
+
+				&__btn
+					cursor: pointer
+					background-color: transparent
+					font-size: 14px
+					border: none
+					border-bottom: 1px solid $black
+
+				&-form
+					width: 100%
+					max-width: 400px
+
+					&__title
+						font-weight: 700
+						font-size: 22px
+						margin-bottom: 12px
+
+					&__description
+						font-weight: 500
+						font-size: 14px
+
+						margin-bottom: 24px
+
+					&-input
+						margin-bottom: 16px
+
+					&-btn
+						margin-top: 25px
+
+						display: flex
+						align-items: center
+
+						&__btn
+							width: 255px
+							margin-right: auto
+
+						&__social
+							// display: block
+							width: 55px
+							min-width: 55px
+							height: 55px
+
+				&-media__btn
+					width: 100%
+					margin-bottom: 15px
+
 			&__auth-tabs
 				width: 100%
 				display: flex
@@ -542,22 +604,22 @@
 				align-items: center
 				justify-content: space-between
 
-				padding: 12px 20px
-				border: 1px solid $gray
+				padding: 12px
+				background-color: $green1
 
 				+borderRadius
 
 				&-text
 					&__title
 						font-weight: 600
-						font-size: 17px
+						font-size: 14px
 
 						margin-bottom: 10px
 
 					&__link
 						color: $mainColor
-						text-decoration: underline
-						font-size: 16px
+						font-size: 14px
+						border-bottom: 1px solid $mainColor
 
 			&-tabs
 				&-item
@@ -599,25 +661,63 @@
 								border-bottom: 1px solid $mainColor
 
 			&-split-popup
-				width: 420px
+				width: 400px
 
 				&__logo
-					width: 200px
+					width: 150px
 
 					margin-bottom: 25px
 
 				&__title
 					font-size: 15px
 
-					font-weight: 500
+					font-weight: 700
 
 					margin-bottom: 8px
 
 				&__description
 					font-size: 14px
+					font-weight: 500
+					margin-bottom: 25px
+
+				&__limit
+					display: inline-block
+
+					font-size: 14px
+					font-weight: 500
+					border-bottom: 1px solid $black
+
+					margin-bottom: 12px
 
 				&-widget
-					margin-top: 25px
+					margin-bottom: 25px
+
+					& .ya-pay-widget
+						display: none !important
+
+					& .ya-pay-widget:first-child
+						display: block !important
+
+				&-greater-split
+					padding: 8px
+					background-color: $green1
+					border-radius: 12px
+
+					&__title
+						font-size: 16px
+						color: $mainColor
+						margin-bottom: 8px
+
+					&__subtitle
+						font-size: 14px
+						font-weight: 500
+						margin-bottom: 10px
+
+					&__link
+						font-size: 14px
+						font-weight: 500
+						color: $mainColor
+						border-bottom: 1px solid $mainColor
 
 				&__btn
 					margin-top: 25px

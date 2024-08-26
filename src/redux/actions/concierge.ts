@@ -51,7 +51,7 @@ export const fetchConciergeProduct = (id: string) => async (dispatch: Dispatch<C
 };
 
 export const sendConciergeProductApplication =
-    (info: { name: string; phone: string; comment: string }, good_id: number) =>
+    (info: { name: string; phone: string; comment: string }, good_id: number | string) =>
     (dispatch: Dispatch<ConciergeActions>) => {
         dispatch({
             type: ConciergeActionTypes.SET_CONCIERGE_IS_SEND_FORM_PRODUCT_PAGE,

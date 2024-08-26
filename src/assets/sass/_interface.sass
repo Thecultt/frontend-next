@@ -400,6 +400,10 @@ button
 		pointer-events: none
 		color: $green5
 
+	&.large
+		padding: 16px 13px
+		font-size: 16px
+
 .back-button
 	+buttonReset
 	width: fit-content
@@ -530,6 +534,10 @@ button
 
 	position: relative
 
+	& > svg
+		margin-left: 8px
+		cursor: pointer
+
 	&__field
 		position: absolute
 		z-index: -1
@@ -596,6 +604,10 @@ button
 			font-weight: 400
 
 			margin-bottom: 5px
+
+		& > a
+			font-weight: 400
+			border-bottom: 1px solid $black
 
 // select
 .select-wrapper
