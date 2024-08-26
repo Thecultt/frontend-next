@@ -1,5 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import Countdown from 'react-countdown';
+import dayjs from 'dayjs';
+import Link from 'next/link';
 
 import { OrderStatusProduct } from '@/components';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
@@ -7,6 +10,8 @@ import { CartItem } from '@/models/ICartItem';
 import { sendSubmitOrder } from '@/redux/actions/order';
 import { setCartItems } from '@/redux/actions/cart';
 import { ICartItemsState } from '@/redux/types/ICart';
+import { COUNT_MINUTES_RESERVED_ORDER } from '@/constants/order';
+import { APP_ROUTE } from '@/constants/routes';
 
 import orderPay from '../orderPay';
 
@@ -28,6 +33,7 @@ const OrderStatusError: React.FC = () => {
             delivery_price,
             num,
             yandex_split_link,
+            createdon,
         },
     } = useTypedSelector(({ order }) => order);
 
@@ -117,22 +123,48 @@ const OrderStatusError: React.FC = () => {
                                 </svg>
                             </div>
 
-                            <h2 className="order-status-content-info__title">
-                                К сожалению, ваша оплата не прошла. Попробуйте еще раз.
-                            </h2>
+                            {dayjs().isAfter(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm')) ? (
+                                <>
+                                    <h2 className="order-status-content-info__title">К сожалению, ваш заказ отменен</h2>
 
-                            <p className="order-status-content-info__subtitle">
-                                Мы зарезервировали для вас товар на 10 минут.
-                            </p>
+                                    <p className="order-status-content-info__subtitle">Попробуйте оформить еще раз</p>
 
-                            {yandex_split_link ? (
-                                <a href={yandex_split_link} className="btn-black order-status-content-info__repeatbtn">
-                                    Оплатите ещё раз
-                                </a>
+                                    <Link href={APP_ROUTE.catalog} className="btn-black">
+                                        Перейти в каталог
+                                    </Link>
+                                </>
                             ) : (
-                                <button className="btn-black order-status-content-info__repeatbtn" onClick={onClickPay}>
-                                    Оплатите ещё раз
-                                </button>
+                                <>
+                                    <h2 className="order-status-content-info__title">
+                                        К сожалению, ваша оплата не прошла. Попробуйте еще раз.
+                                    </h2>
+
+                                    <p className="order-status-content-info__subtextbtn">
+                                        Завершите платеж в течение
+                                        <Countdown
+                                            date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
+                                            renderer={({ minutes, seconds }) =>
+                                                ` ${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`
+                                            }
+                                        />
+                                    </p>
+
+                                    {yandex_split_link ? (
+                                        <a
+                                            href={yandex_split_link}
+                                            className="btn-black order-status-content-info__btn"
+                                        >
+                                            Оплатить еще раз
+                                        </a>
+                                    ) : (
+                                        <button
+                                            className="btn-black order-status-content-info__btn"
+                                            onClick={onClickPay}
+                                        >
+                                            Оплатить еще раз
+                                        </button>
+                                    )}
+                                </>
                             )}
                         </div>
 
