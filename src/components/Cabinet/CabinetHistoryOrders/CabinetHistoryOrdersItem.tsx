@@ -178,8 +178,8 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
                             ))}
                         </div>
 
-                        {status === 'Ожидает оплаты' ||
-                        dayjs().isBefore(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm')) ? (
+                        {(status === 'Ожидает оплаты' ||
+                            dayjs().isBefore(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm'))) && (
                             <>
                                 <p className="cabinet-history-orders-item-info__subtextbtn">
                                     Завершите платеж в течение
@@ -201,7 +201,7 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
                                     </button>
                                 )}
                             </>
-                        ) : null}
+                        )}
                     </div>
                 </AnimateHeight>
             </div>
