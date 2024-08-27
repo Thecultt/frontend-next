@@ -48,7 +48,7 @@ const FilterBrandList: React.FC<FilterModelListProps> = ({ brands, selectedBrand
                         }}
                     >
                         <Checkbox
-                            id={`catalog-filters-block-content-models-checkbox-${row.index}`}
+                            id={`catalog-filters-block-content-brands-checkbox-${row.index}`}
                             label={brands[row.index]}
                             onChange={() => onChange(brands[row.index])}
                             checked={selectedBrands.includes(brands[row.index])}

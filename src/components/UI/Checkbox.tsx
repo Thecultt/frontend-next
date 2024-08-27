@@ -10,21 +10,18 @@ interface CheckboxProps {
     textEllipsis?: boolean;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({ id, label, checked, textEllipsis = false, onChange }) => {
-    return (
-        <div className="checkbox-wrapper">
-            <input id={id} type="checkbox" className="checkbox" checked={checked} onChange={onChange} />
+const Checkbox: React.FC<CheckboxProps> = ({ label, checked, textEllipsis = false, onChange }) => (
+    <label className="checkbox-wrapper">
+        <input type="checkbox" className="checkbox" checked={checked} onChange={onChange} />
 
-            <label
-                htmlFor={id}
-                className={getClassNames('checkbox__label', {
-                    'checkbox__label--ellipsis': textEllipsis,
-                })}
-            >
-                <p className="checkbox__label__text">{label}</p>
-            </label>
-        </div>
-    );
-};
+        <p
+            className={getClassNames('checkbox__label', {
+                'checkbox__label--ellipsis': textEllipsis,
+            })}
+        >
+            <span className="checkbox__label__text">{label}</span>
+        </p>
+    </label>
+);
 
 export default Checkbox;
