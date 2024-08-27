@@ -8,8 +8,7 @@ import { useAuthUser } from '@/hooks/useAuthUser';
 import { useScrollPoint } from '@/hooks/useScrollPoint';
 import { APP_ROUTE } from '@/constants/routes';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
-
-import Logo from '@/assets/images/logo.svg';
+import { logoPath } from '@/assets/icons';
 
 import { HeaderMediaModalMenu } from './HeaderMediaModalMenu';
 
@@ -119,7 +118,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ isOpenSearch = false, transpa
                     </div>
 
                     <Link href={APP_ROUTE.home} className="header-media-logo">
-                        <BaseImage src={Logo.src} alt="THECULTT logo" className="header-media-logo__image" />
+                        <BaseImage src={logoPath} alt="THECULTT logo" className="header-media-logo__image" />
                     </Link>
 
                     <div className="header-media-icon-group">

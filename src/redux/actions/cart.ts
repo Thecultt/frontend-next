@@ -90,7 +90,7 @@ export const changeCheckCartItem = (article: string, status: boolean) => ({
     payload: { article, status },
 });
 
-export const removeCartItem = (id: string, item: CartItem) => {
+export const removeCartItem = (item: CartItem) => {
     pushDataLayer('remove_from_cart', {
         items: [
             {
@@ -127,7 +127,7 @@ export const removeCartItem = (id: string, item: CartItem) => {
 
     return {
         type: CartActionTypes.REMOVE_CART_ITEMS,
-        payload: id,
+        payload: item.article,
     };
 };
 

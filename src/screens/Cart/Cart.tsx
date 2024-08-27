@@ -20,7 +20,7 @@ const Cart: React.FC = () => {
     };
 
     const removeItem = (article: string) => {
-        dispatch(removeCartItem(article, items[article]));
+        dispatch(removeCartItem(items[article]));
     };
 
     return (

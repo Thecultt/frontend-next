@@ -54,6 +54,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "@svgr/webpack": "^8.1.0",
     "@types/lodash.isequal": "^4.5.8",
     "@types/lodash.omitby": "^4.6.9",
     "@types/node": "^20",
@@ -75,6 +76,7 @@
     "husky": "^9.0.11",
     "prettier": "^3.2.5",
     "typescript": "^4.7.3",
-    "typescript-eslint": "^7.11.0"
+    "typescript-eslint": "^7.11.0",
+    "url-loader": "^4.1.1"
   }
 }

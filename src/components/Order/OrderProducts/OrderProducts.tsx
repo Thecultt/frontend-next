@@ -76,7 +76,7 @@ const OrderProducts: React.FC = () => {
     };
 
     const removeItem = (article: string) => {
-        dispatch(removeCartItem(article, items[article]));
+        dispatch(removeCartItem(items[article]));
 
         if (promocode.name) {
             dispatch(
