@@ -7,7 +7,7 @@ import { AlyonaDoletskayaProductSection } from '@/components';
 
 import MainBanner from '@/assets/images/doletskaya/main-banner.jpg';
 import MainBannerMedia from '@/assets/images/doletskaya/main-banner-media.jpg';
-import CharityLogo from '@/assets/images/doletskaya/charity-logo.svg';
+import { default as charityLogoPath } from '@/assets/images/doletskaya/charity-logo.svg';
 
 import Lot1 from '@/assets/images/doletskaya/lot1.jpg';
 import Lot1Media from '@/assets/images/doletskaya/lot1-media.jpg';
@@ -38,7 +38,7 @@ import Deco3Images from '@/assets/images/doletskaya/deco-images-3.jpg';
 import Lot6 from '@/assets/images/doletskaya/lot6.jpg';
 import Lot6Media from '@/assets/images/doletskaya/lot6-media.jpg';
 
-import AboutTitle from '@/assets/images/doletskaya/about-title.svg';
+import { default as aboutTitlePath } from '@/assets/images/doletskaya/about-title.svg';
 
 import AboutImage1 from '@/assets/images/doletskaya/about-image1.jpg';
 import AboutImage2 from '@/assets/images/doletskaya/about-image2.jpg';
@@ -106,7 +106,7 @@ const AlyonaDoletskaya: React.FC = () => {
                     </h3>
 
                     <div className="alyona-doletskaya-main-charity-logo">
-                        <img src={CharityLogo.src} alt="" className="alyona-doletskaya-main-charity-logo__image" />
+                        <img src={charityLogoPath} alt="" className="alyona-doletskaya-main-charity-logo__image" />
 
                         <p className="alyona-doletskaya-main-charity-logo__text">
                             Благотворительный фонд помощи хосписам &laquo;Вера&raquo; c&nbsp;2006 года поддерживает
@@ -358,7 +358,7 @@ const AlyonaDoletskaya: React.FC = () => {
 
             <div className="alyona-doletskaya-about">
                 <div className="alyona-doletskaya-about-title">
-                    <img src={AboutTitle.src} alt="" className="alyona-doletskaya-about-title__image" />
+                    <img src={aboutTitlePath} alt="" className="alyona-doletskaya-about-title__image" />
                 </div>
 
                 <div className="alyona-doletskaya-about-images">

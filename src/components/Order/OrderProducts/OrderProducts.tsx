@@ -11,7 +11,7 @@ import { ICartItemsState } from '@/redux/types/ICart';
 import { sendCreateOrder, sendSubmitOrder } from '@/redux/actions/order';
 import { sendUpdateUser } from '@/redux/actions/user';
 import { sendOrderApplyPromocode } from '@/redux/actions/order';
-import { Loader, OrderProductsItem, OrderProductsPromocode } from '@/components';
+import { CartProductItem, Loader, NewCheckbox, OrderProductsPromocode } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { sendMindbox } from '@/functions/mindbox';
 
@@ -76,7 +76,7 @@ const OrderProducts: React.FC = () => {
     };
 
     const removeItem = (article: string) => {
-        dispatch(removeCartItem(article, items[article]));
+        dispatch(removeCartItem(items[article]));
 
         if (promocode.name) {
             dispatch(
@@ -466,38 +466,22 @@ const OrderProducts: React.FC = () => {
         <div className="order-products">
             <h3 className="order-products__title">Ваш заказ:</h3>
 
-            {isCheckAll() ? (
-                <div className="order-products-check-all" onClick={uncheckedAllItems}>
-                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect y="0.5" width="20" height="20" rx="10" fill="#285141" />
-                        <path
-                            d="M13.636 7.77344L8.63601 12.7734L6.36328 10.5007"
-                            stroke="#F7F4F0"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
-
-                    <p className="order-products-check-all__title">Выделить все</p>
-                </div>
-            ) : (
-                <div className="order-products-check-all" onClick={checkedAllItems}>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="9" cy="9" r="8.75" stroke="#838383" strokeWidth="0.5" />
-                    </svg>
-
-                    <p className="order-products-check-all__title">Выделить все</p>
-                </div>
-            )}
+            <NewCheckbox
+                className="order-products-check-all"
+                checked={isCheckAll()}
+                onChange={isCheckAll() ? uncheckedAllItems : checkedAllItems}
+            >
+                <p className="order-products-check-all__title">Выделить все</p>
+            </NewCheckbox>
 
             <div className="order-products-items-wrapper">
-                {Object.keys(items).map((key, index) => (
-                    <OrderProductsItem
-                        {...items[key]}
-                        disabledDelete={Object.keys(items).length === 1 ? true : false}
-                        key={`order-products-item-${index}`}
-                        changeCheck={() => changeCheck(key, !items[key].checked)}
-                        removeItem={() => removeItem(key)}
+                {Object.keys(items).map((key) => (
+                    <CartProductItem
+                        key={items[key].id}
+                        data={items[key]}
+                        removeDisabled={Object.keys(items).length === 1}
+                        onCheck={() => changeCheck(key, !items[key].checked)}
+                        onRemove={() => removeItem(key)}
                     />
                 ))}
             </div>

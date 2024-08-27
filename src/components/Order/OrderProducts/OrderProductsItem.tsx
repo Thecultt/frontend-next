@@ -13,6 +13,9 @@ interface OrderProductsItemProps extends CartItem {
     removeItem: () => void;
 }
 
+/**
+ * @deprecated New component CartProductItem
+ */
 const OrderProductsItem: React.FC<OrderProductsItemProps> = ({
     disabledDelete,
     hiddenCheck,

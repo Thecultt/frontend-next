@@ -25,7 +25,7 @@ export interface ProductPage {
     id: number;
     article: string;
     price: number;
-    old_price: number;
+    old_price: number | null;
     store_price: number;
     condition: string;
     manufacturer: string;

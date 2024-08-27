@@ -21,7 +21,6 @@ import { useWaitingData } from '@/hooks/catalog/useWaitingData';
 import { WaitingPopupType } from '@/types/waiting';
 import { useHash } from '@/hooks/useHash';
 import { formatMoney } from '@/functions/formatMoney';
-import { YANDEX_SPLIT_LIMIT } from '@/constants/app';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { APP_ROUTE } from '@/constants/routes';
 import { getClassNames } from '@/functions/getClassNames';
@@ -90,8 +89,10 @@ const ProductInfoTitle: React.FC<Props> = ({ product, setBoutiquePopupVisible, s
                 name,
                 image: images[0],
                 price,
+                old_price,
                 availability,
                 is_trial,
+                condition,
             }),
         );
 

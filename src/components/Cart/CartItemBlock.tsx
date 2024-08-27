@@ -11,6 +11,9 @@ interface CartItemBlockProps extends CartItem {
     removeItem: () => void;
 }
 
+/**
+ * @deprecated New component CartProductItem
+ */
 const CartItemBlock: React.FC<CartItemBlockProps> = ({
     hiddenCheck,
     checked,
