@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { XIcon } from '@/assets/icons';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { changeCheckCartItem, removeCartItem } from '@/redux/actions/cart';
-import { HeaderCartModalItem } from '@/components';
+import { CartProductItem } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { APP_ROUTE } from '@/constants/routes';
@@ -77,11 +77,11 @@ const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) =>
                 <>
                     <div className="header-block-cart-modal__items">
                         {mappedItems.map((item) => (
-                            <HeaderCartModalItem
-                                {...item}
+                            <CartProductItem
                                 key={item.id}
-                                changeCheck={() => changeCheck(item.article, !item.checked)}
-                                removeItem={() => removeItem(item)}
+                                data={item}
+                                onCheck={() => changeCheck(item.article, !item.checked)}
+                                onRemove={() => removeItem(item)}
                             />
                         ))}
                     </div>

@@ -14,6 +14,9 @@ interface HeaderCartModalItemProps extends CartItem {
     removeItem: () => void;
 }
 
+/**
+ * @deprecated New component CartProductItem
+ */
 const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
     hiddenCheck,
     checked,

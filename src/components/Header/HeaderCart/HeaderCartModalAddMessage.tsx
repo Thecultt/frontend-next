@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { removeCartItem } from '@/redux/actions/cart';
-import { HeaderCartModalItem } from '@/components';
+import { CartProductItem } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { CartItem } from '@/models/ICartItem';
 import { APP_ROUTE } from '@/constants/routes';
@@ -44,15 +44,16 @@ const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ s
 
             <div className="header-block-cart-modal__items">
                 {item && (
-                    <HeaderCartModalItem
-                        {...item}
-                        removeItem={() => {
+                    <CartProductItem
+                        key={item.id}
+                        data={item}
+                        onRemove={() => {
                             setState();
                             setTimeout(() => {
                                 removeItem(item);
                             }, 300);
                         }}
-                        hiddenCheck
+                        checkDisabled
                     />
                 )}
             </div>

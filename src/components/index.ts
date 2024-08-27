@@ -17,6 +17,11 @@ export { default as RenderSelectArray } from './UI/RenderSelectArray';
 export { default as RenderTextarea } from './UI/RenderTextarea';
 export { default as Select } from './UI/Select';
 export { default as Textarea } from './UI/Textarea';
+
+// New UI
+
+// TODO
+export { Checkbox as NewCheckbox } from './UI/Checkbox/Checkbox';
 export { BackButton } from './UI/BackButton';
 export { Spinner } from './UI/Spinner';
 export { NavLink } from './UI/NavLink/NavLink';
@@ -299,6 +304,7 @@ export { default as FaqTheCultt } from './Faq/FaqTheCultt';
 
 // Cart
 export { default as CartItemBlock } from './Cart/CartItemBlock';
+export { CartProductItem } from './Cart/CartProductItem/CartProductItem';
 
 // CinemaArtistic
 export { default as CinemaArtisticExhibits } from './CinemaArtistic/CinemaArtisticExhibits';
