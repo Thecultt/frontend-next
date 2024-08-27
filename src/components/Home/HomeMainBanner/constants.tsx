@@ -22,34 +22,25 @@ interface IMainBannerSlide {
     link: {
         title: string;
         href: string;
+        isWhite?: boolean;
     };
 }
 
 export const MAIN_BANNER_SLIDES: IMainBannerSlide[] = [
-    // {
-    //     title: 'Главные новинки недели',
-    //     description: (
-    //         <>
-    //             Новые лоты Hermes, Chanel, Celine,
-    //             <br />
-    //             Louis Vuitton, Prada и Saint Laurent
-    //         </>
-    //     ),
-    //     image: {
-    //         desktop: homeMainBannerImageNew.src,
-    //     },
-    //     link: {
-    //         title: 'Смотреть',
-    //         href: getCatalogFiltersUrl({
-    //             categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
-    //             availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-    //             price_drop: false,
-    //             boutique: false,
-    //             page: 1,
-    //             sort: SORT.a,
-    //         }),
-    //     },
-    // },
+    {
+        title: 'Доставим для вас сумки и ювелирные украшения',
+        description:
+            'Консьерж-сервис THE CULTT доставит для вас из Европы и США любые позиции с официальных сайтов Hermès, Chanel, Cartier, Panerai и других культовых брендов',
+        image: {
+            desktop: homeMainBannerImageConcierge.src,
+            mobile: homeMainBannerImageConciergeMobile.src,
+        },
+        link: {
+            title: 'Заказать через Консьерж-сервис',
+            href: '/concierge',
+            isWhite: true,
+        },
+    },
     {
         title: 'Популярное',
         description: (
@@ -71,19 +62,6 @@ export const MAIN_BANNER_SLIDES: IMainBannerSlide[] = [
                 page: 1,
                 sort: SORT.popular,
             }),
-        },
-    },
-    {
-        title: 'Консьерж-сервис',
-        description:
-            'Доставим для вас из Европы украшения Cartier, Bvlgari, Messika, Van Cleef & Arpels и часы главных часовых брендов.',
-        image: {
-            desktop: homeMainBannerImageConcierge.src,
-            mobile: homeMainBannerImageConciergeMobile.src,
-        },
-        link: {
-            title: 'Узнать больше',
-            href: '/concierge',
         },
     },
     // {
