@@ -68,7 +68,7 @@ const CatalogBanner: React.FC = React.memo(() => {
                     </h3>
                     <p className="catalog-banner-text__description">
                         Решайтесь: промокод AUTUMN24 действует с&nbsp;28&nbsp;августа по&nbsp;4&nbsp;сентября
-                        на&nbsp;все лоты от&nbsp;70 000₽. Ваша новая сумка мечты ждёт вас
+                        на&nbsp;все лоты от&nbsp;70 000₽. Ваша новая сумка мечты ждёт вас.
                     </p>
                 </div>
             </div>

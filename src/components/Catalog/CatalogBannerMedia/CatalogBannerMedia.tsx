@@ -68,7 +68,7 @@ const CatalogBannerMedia: React.FC = () => {
                     </h3>
                     <p className="catalog-banner-media-text__description">
                         Решайтесь: промокод AUTUMN24 действует с&nbsp;28&nbsp;августа по&nbsp;4&nbsp;сентября
-                        на&nbsp;все лоты от&nbsp;70 000₽. Ваша новая сумка мечты ждёт вас
+                        на&nbsp;все лоты от&nbsp;70 000₽. Ваша новая сумка мечты ждёт вас.
                     </p>
                 </div>
             </div>
@@ -90,7 +90,7 @@ const CatalogBannerMedia: React.FC = () => {
                     <p className="catalog-banner-media-text__description">
                         Консьерж-сервис THE CULTT доставит для вас из&nbsp;Европы и&nbsp;США любые позиции
                         с&nbsp;официальных сайтов Herm&egrave;s, Chanel, Cartier, Panerai и&nbsp;других культовых
-                        брендов{' '}
+                        брендов
                     </p>
                     <Link href={APP_ROUTE.concierge.root} className="btn-light catalog-banner-media-text__btn">
                         Заказать через консьержа
