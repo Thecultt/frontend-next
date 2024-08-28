@@ -16,7 +16,7 @@ import {
     ProductInfoTitleSale,
 } from '@/components';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { CATEGORY_NAMES, SORT } from '@/constants/catalog';
+import { CATEGORY_NAME_SLUGS, CATEGORY_NAMES, SORT } from '@/constants/catalog';
 import { useWaitingData } from '@/hooks/catalog/useWaitingData';
 import { WaitingPopupType } from '@/types/waiting';
 import { useHash } from '@/hooks/useHash';
@@ -65,6 +65,9 @@ const ProductInfoTitle: React.FC<Props> = ({ product, setBoutiquePopupVisible, s
 
     const inCart = !!cartItems[article];
     const canBuy = !!availability && !is_trial;
+
+    const categorySlug: string | undefined = CATEGORY_NAME_SLUGS[category];
+    const categoryFilterParam = categorySlug ? { category_slug: categorySlug } : { categories: [category] };
 
     const addToCart = () => {
         if (inCart) {
@@ -122,9 +125,8 @@ const ProductInfoTitle: React.FC<Props> = ({ product, setBoutiquePopupVisible, s
 
             <Link
                 href={getCatalogFiltersUrl({
-                    categories: [category],
+                    ...categoryFilterParam,
                     brands: [manufacturer],
-                    sort: SORT.a,
                 })}
                 className="product-content-info-title__brand"
             >
