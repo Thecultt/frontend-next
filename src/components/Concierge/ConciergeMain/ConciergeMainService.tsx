@@ -27,8 +27,8 @@ const ConciergeMainService: React.FC = () => {
                         <h3 className="concierge-service-text-block-text__title">Любые позиции</h3>
 
                         <p className="concierge-service-text-block-text__subtitle">
-                            Вы&nbsp;можете выбрать для доставки сумку, часы, украшения, обувь, одежду культовых марок,
-                            от&nbsp;Bottega Veneta и&nbsp;Bvlgari до&nbsp;Valentino и&nbsp;Van Cleef &amp;&nbsp;Arpels.
+                            Вы&nbsp;можете выбрать для доставки сумку, часы, украшения культовых марок от&nbsp;Bottega
+                            Veneta и&nbsp;Bvlgari до&nbsp;Valentino и&nbsp;Van Cleef &amp;&nbsp;Arpels.
                         </p>
                     </div>
                 </div>
