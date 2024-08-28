@@ -27,6 +27,13 @@ export const CATEGORY_SLUG_NAMES = {
     [CATEGORY_SLUGS.decorations]: CATEGORY_NAMES.decorations,
 };
 
+export const CATEGORY_NAME_SLUGS = {
+    [CATEGORY_NAMES.bags]: CATEGORY_SLUGS.bags,
+    [CATEGORY_NAMES.accessories]: CATEGORY_SLUGS.accessories,
+    [CATEGORY_NAMES.shoes]: CATEGORY_SLUGS.shoes,
+    [CATEGORY_NAMES.decorations]: CATEGORY_SLUGS.decorations,
+};
+
 export const ALL_CATEGORY_SLUGS = Object.values(CATEGORY_SLUGS);
 
 export const FILTER_CATEGORY_SLUGS = [

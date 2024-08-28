@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { SORT } from '@/constants/catalog';
+import { CATEGORY_SLUGS } from '@/constants/catalog';
 
 // import homeMainBannerImageNew from '@/assets/images/home/home-main-banner-new.jpg';
 import homeMainBannerImageConcierge from '@/assets/images/home/home-main-banner-concierge.jpg';
@@ -55,12 +55,7 @@ export const MAIN_BANNER_SLIDES: IMainBannerSlide[] = [
         link: {
             title: 'Смотреть',
             href: getCatalogFiltersUrl({
-                boutique: false,
-                categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
-                availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                price_drop: false,
-                page: 1,
-                sort: SORT.popular,
+                category_slug: CATEGORY_SLUGS.popular,
             }),
         },
     },

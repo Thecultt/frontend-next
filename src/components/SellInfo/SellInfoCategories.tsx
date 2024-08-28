@@ -2,14 +2,13 @@ import React from 'react';
 import Link from 'next/link';
 
 import { APP_ROUTE } from '@/constants/routes';
-import { CategoriesItem } from '@/components/Home/HomeCategories/HomeCategories';
 
 import HomeCategoriesBagImage from '@/assets/images/home/home-categories-bag.jpg';
 import HomeCategoriesShoesImage from '@/assets/images/home/home-categories-shoes.jpg';
 import HomeCategoriesDecorationImage from '@/assets/images/home/home-categories-decoration.jpg';
 import SellInfoCategoriesAccessoriesImage from '@/assets/images/sell-info/sell-info-categories-accessories.jpg';
 
-const categories: CategoriesItem[] = [
+const categories = [
     {
         image: HomeCategoriesBagImage.src,
         title: 'Сумки',

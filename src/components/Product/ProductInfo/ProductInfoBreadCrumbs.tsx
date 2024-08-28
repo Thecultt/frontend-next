@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -6,17 +8,20 @@ import { useMediaQuery } from 'usehooks-ts';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { APP_ROUTE } from '@/constants/routes';
 import { MEDIA_SIZES } from '@/constants/styles';
-import { SORT } from '@/constants/catalog';
+import { CATEGORY_NAME_SLUGS } from '@/constants/catalog';
 
-interface ProductInfoBreadCrumbsProps {
+interface Props {
     category: string;
     brand: string;
     model: string;
 }
 
-const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ category, brand, model }) => {
+const ProductInfoBreadCrumbs: React.FC<Props> = ({ category, brand, model }) => {
     const router = useRouter();
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+
+    const categorySlug: string | undefined = CATEGORY_NAME_SLUGS[category];
+    const categoryFilterParam = categorySlug ? { category_slug: categorySlug } : { categories: [category] };
 
     return (
         <div className="product-content-info-bread-crumbs">
@@ -67,10 +72,7 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
                     </svg>
 
                     <Link
-                        href={getCatalogFiltersUrl({
-                            categories: [category],
-                            sort: SORT.a,
-                        })}
+                        href={getCatalogFiltersUrl(categoryFilterParam)}
                         className="product-content-info-bread-crumbs__item"
                     >
                         {category}
@@ -87,9 +89,8 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
 
                     <Link
                         href={getCatalogFiltersUrl({
-                            categories: [category],
+                            ...categoryFilterParam,
                             brands: [brand],
-                            sort: SORT.a,
                         })}
                         className="product-content-info-bread-crumbs__item"
                     >
@@ -107,10 +108,9 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
 
                     <Link
                         href={getCatalogFiltersUrl({
-                            categories: [category],
+                            ...categoryFilterParam,
                             brands: [brand],
                             models: [model],
-                            sort: SORT.a,
                         })}
                         className="product-content-info-bread-crumbs__item"
                     >

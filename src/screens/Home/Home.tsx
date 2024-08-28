@@ -15,7 +15,7 @@ import {
     SelectionsBanners,
 } from '@/components';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { CATEGORIES, SORT } from '@/constants/catalog';
+import { CATEGORY_SLUGS } from '@/constants/catalog';
 
 const Home: React.FC = () => (
     <>
@@ -28,12 +28,7 @@ const Home: React.FC = () => (
                     <CatalogProductsSection
                         title="Новинки"
                         titleLink={getCatalogFiltersUrl({
-                            categories: CATEGORIES,
-                            availability: ['Доступно', 'На примерке', 'Нет в наличии'],
-                            price_drop: false,
-                            boutique: false,
-                            page: 1,
-                            sort: SORT.a,
+                            category_slug: CATEGORY_SLUGS.new,
                         })}
                     />
                     <SelectionsBanners />
