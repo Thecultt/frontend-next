@@ -7,9 +7,9 @@ import { MEDIA_SIZES } from '@/constants/styles';
 import { APP_ROUTE } from '@/constants/routes';
 import { BaseImage, Select } from '@/components';
 import { Conditions } from '@/types/product';
+import { logoPath } from '@/assets/icons';
 
 import SellInfoMainImage from '@/assets/images/sell-info/sell-info-main.jpg';
-import Logo from '@/assets/images/logo.svg';
 import HermesKellyImage from '@/assets/images/sell-info/products/hermesKelly.jpg';
 import CelineClassicImage from '@/assets/images/sell-info/products/celineClassic.jpg';
 import PradaReNylonImage from '@/assets/images/sell-info/products/pradaReNylon.jpg';
@@ -121,7 +121,7 @@ const SellInfoMain: React.FC = () => {
             <div className="sell-info-main-text">
                 <h2 className="sell-info-main-text__title">
                     Продайте свои товары с
-                    <BaseImage src={Logo.src} alt="THE CULTT logo" className="sell-info-main-text__image" />
+                    <BaseImage src={logoPath} alt="THE CULTT logo" className="sell-info-main-text__image" />
                 </h2>
 
                 <div className="sell-info-main-text-form">

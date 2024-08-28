@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useOnClickOutside } from 'usehooks-ts';
@@ -14,6 +16,7 @@ const HeaderCart: React.FC = React.memo(() => {
     const PopupRef = React.useRef<HTMLDivElement>(null);
 
     const { items, isVisibleMessage } = useTypedSelector(({ cart }) => cart);
+    const itemsCount = Object.keys(items).length;
 
     const closeIsVisibleMessage = () => {
         dispatch(setCartIsVisibleMessage(false));
@@ -47,9 +50,7 @@ const HeaderCart: React.FC = React.memo(() => {
                     </svg>
                 </button>
 
-                {Object.keys(items).length ? (
-                    <span className="header-block-cart__count">{Object.keys(items).length}</span>
-                ) : null}
+                {itemsCount > 0 && <span className="header-block-cart__count">{itemsCount}</span>}
             </div>
 
             <HeaderCartModalAddMessage

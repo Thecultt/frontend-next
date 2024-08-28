@@ -25,8 +25,7 @@ import { KEYBOARD } from '@/constants/keys';
 import { CATEGORY_SLUGS, SELECTIONS_IDS, SORT } from '@/constants/catalog';
 import { APP_ROUTE } from '@/constants/routes';
 import { pushDataLayer } from '@/functions/pushDataLayer';
-
-import Logo from '@/assets/images/logo.svg';
+import { logoPath } from '@/assets/icons';
 
 import { HeaderSearchInput } from './HeaderSearchInput';
 import { HeaderSelectionsHoverMenu } from './HeaderSelectionsHoverMenu';
@@ -117,7 +116,7 @@ const Header: React.FC = () => {
                                         <div className="header-block">
                                             <Link href={APP_ROUTE.home} className="header-block-logo">
                                                 <BaseImage
-                                                    src={Logo.src}
+                                                    src={logoPath}
                                                     alt="THECULTT LOGO"
                                                     className="header-block-logo__image"
                                                 />

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 
@@ -12,6 +14,9 @@ interface HeaderCartModalItemProps extends CartItem {
     removeItem: () => void;
 }
 
+/**
+ * @deprecated New component CartProductItem
+ */
 const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
     hiddenCheck,
     checked,

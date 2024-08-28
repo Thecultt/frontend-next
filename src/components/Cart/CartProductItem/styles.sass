@@ -1,0 +1,92 @@
+@import "/src/assets/sass/variables"
+@import "/src/assets/sass/mixin"
+
+.cart-product-item
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: space-between
+    flex-wrap: nowrap
+    gap: 12px
+
+    &-image
+        width: 90px
+
+        +mediaTablet
+            width: 96px
+
+        &__background
+            width: 100%
+            padding-bottom: $productImageAspectRatio
+            +bgCover
+            border-radius: 12px
+            overflow: hidden
+
+    &-info
+        flex: 1
+        display: flex
+        flex-direction: column
+
+        &__title
+            +ManropeMedium
+            font-size: 16px
+            line-height: 140%
+            color: $black3
+
+        &__condition
+            +ManropeBold
+            font-size: 14px
+            line-height: 120%
+            color: $black3
+            text-transform: capitalize
+            margin-top: 4px
+
+        &-prices
+            display: flex
+            align-items: baseline
+            margin-top: 8px
+
+            &__current, &__old
+                +ManropeSemiBold
+                font-size: 16px
+                line-height: 120%
+
+            &__current
+                color: $black3
+
+            &__old
+                margin-left: 4px
+                color: $grey6
+                text-decoration: line-through
+
+        &--disabled &__title,
+        &--disabled &__condition,
+        &--disabled &-prices__current
+            color: $grey6
+
+        &-split
+            display: flex
+            justify-content: flex-start
+            align-items: center
+            margin-top: 4px
+
+            &__element
+                width: fit-content
+                height: 12px
+
+        &__unavailable
+            +ManropeSemiBold
+            font-size: 16px
+            line-height: 120%
+            color: $black3
+            margin-top: 8px
+
+    &__remove
+        +buttonReset
+        width: 20px
+        height: 20px
+        +flexCenter
+        flex-shrink: 0
+
+        &:disabled
+            opacity: 0.6

@@ -1,10 +1,11 @@
+'use client';
+
 import React from 'react';
 
-import LogoSplit from '@/assets/images/logo-split.svg';
-
 import { BaseImage } from '@/components';
-
 import { EXTERNAL_LINKS } from '@/constants/routes';
+
+import { default as splitLogoPath } from '@/assets/images/logo-split.svg';
 
 interface ProductInfoTitleSplitPopupProps {
     price: number;
@@ -48,7 +49,7 @@ const ProductInfoTitleSplitPopup: React.FC<ProductInfoTitleSplitPopupProps> = ({
 
     return (
         <div className="product-content-info-split-popup">
-            <BaseImage src={LogoSplit.src} alt="Яндекс Сплит" className="product-content-info-split-popup__logo" />
+            <BaseImage src={splitLogoPath} alt="Яндекс Сплит" className="product-content-info-split-popup__logo" />
 
             <p className="product-content-info-split-popup__title">Разделите оплату на несколько месяцев в сплит</p>
 

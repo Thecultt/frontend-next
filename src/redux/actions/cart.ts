@@ -14,7 +14,19 @@ export const checkAvailabilityCartItems = (items: ICartItemsState) => async (dis
     await Promise.all(
         Object.keys(items).map(async (article) => {
             const {
-                data: { id, images, manufacturer, category, subcategory, name, price, availability, is_trial },
+                data: {
+                    id,
+                    images,
+                    manufacturer,
+                    category,
+                    subcategory,
+                    name,
+                    price,
+                    old_price,
+                    availability,
+                    is_trial,
+                    condition,
+                },
             } = await $api.get<ProductPage>(`/product/${article}`);
 
             dispatch({
@@ -31,8 +43,10 @@ export const checkAvailabilityCartItems = (items: ICartItemsState) => async (dis
                         manufacturer,
                         name,
                         price,
+                        old_price,
                         availability,
                         is_trial,
+                        condition,
                     },
                 },
             });
@@ -67,11 +81,6 @@ export const addCartItem = (item: CartItem) => {
                     website: item.id,
                 },
             },
-            // productGroup: {
-            // 	ids: {
-            // 		website: item.id
-            // 	}
-            // },
             pricePerItem: item.price,
         },
         customer: {
@@ -90,7 +99,7 @@ export const changeCheckCartItem = (article: string, status: boolean) => ({
     payload: { article, status },
 });
 
-export const removeCartItem = (id: string, item: CartItem) => {
+export const removeCartItem = (item: CartItem) => {
     pushDataLayer('remove_from_cart', {
         items: [
             {
@@ -127,7 +136,7 @@ export const removeCartItem = (id: string, item: CartItem) => {
 
     return {
         type: CartActionTypes.REMOVE_CART_ITEMS,
-        payload: id,
+        payload: item.article,
     };
 };
 

@@ -8,6 +8,8 @@ export interface CartItem {
     subcategory: string;
     name: string;
     price: number;
+    old_price?: number | null;
     availability: number;
     is_trial: boolean;
+    condition?: string | null;
 }

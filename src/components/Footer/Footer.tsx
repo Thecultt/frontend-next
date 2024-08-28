@@ -5,8 +5,7 @@ import { useMediaQuery } from 'usehooks-ts';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-import Logo from '@/assets/images/logo.svg';
-
+import { logoPath } from '@/assets/icons';
 import { FooterMenuBlock, FooterEmailSubscribe, BaseImage } from '@/components';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { getClassNames } from '@/functions/getClassNames';
@@ -134,7 +133,7 @@ const Footer: React.FC<FooterProps> = ({ transparent, subscribeBlockId }) => {
                 <div className="container">
                     <div className="footer-wrapper">
                         <Link href={APP_ROUTE.home} className="footer-logo">
-                            <BaseImage src={Logo.src} alt="TheCultt logo" className="footer-logo__image" />
+                            <BaseImage src={logoPath} alt="TheCultt logo" className="footer-logo__image" />
                         </Link>
 
                         <div className="footer-block">
