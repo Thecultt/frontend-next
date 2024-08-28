@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import Link from 'next/link';
 
 import { Footer, HeaderMediaLinkTab } from '@/components';
-import { CATEGORIES, CATEGORY_NAMES, CATEGORY_SLUGS, SORT } from '@/constants/catalog';
+import { CATEGORIES, CATEGORY_NAMES, CATEGORY_SLUGS } from '@/constants/catalog';
 import { APP_ROUTE } from '@/constants/routes';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { getClassNames } from '@/functions/getClassNames';
@@ -44,12 +44,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                 {/* <HeaderMediaSelectionsBanner /> */}
                 <Link
                     href={getCatalogFiltersUrl({
-                        boutique: false,
-                        price_drop: true,
-                        categories: CATEGORIES,
-                        availability: ['Доступно', 'На примерке'],
-                        page: 1,
-                        sort: SORT.popular,
+                        category_slug: CATEGORY_SLUGS.sale,
                     })}
                     onClick={toggleVisible}
                     className="header-media-modal-menu-banner"

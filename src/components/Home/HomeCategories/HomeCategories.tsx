@@ -1,52 +1,16 @@
+'use client';
+
 import React from 'react';
 import Slider from 'react-slick';
 
 import { HomeCategoriesItem } from '@/components';
-
-import HomeCategoriesBagImage from '@/assets/images/home/home-categories-bag.jpg';
-import HomeCategoriesShoesImage from '@/assets/images/home/home-categories-shoes.jpg';
-import HomeCategoriesDecorationImage from '@/assets/images/home/home-categories-decoration.jpg';
-import HomeCategoriesClockImage from '@/assets/images/home/home-categories-clock.jpg';
-import HomeCategoriesBeltImage from '@/assets/images/home/home-categories-belt.jpg';
-import HomeCategoriesHandImage from '@/assets/images/home/home-categories-hand.jpg';
+import { HOME_CATEGORIES } from './constants';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export interface CategoriesItem {
-    image: string;
-    title: string;
-}
-
 const HomeCategories: React.FC = () => {
     const SliderRef = React.useRef<any>(null);
-
-    const categories: CategoriesItem[] = [
-        {
-            image: HomeCategoriesBagImage.src,
-            title: 'Сумки',
-        },
-        {
-            image: HomeCategoriesShoesImage.src,
-            title: 'Обувь',
-        },
-        {
-            image: HomeCategoriesDecorationImage.src,
-            title: 'Украшения',
-        },
-        {
-            image: HomeCategoriesClockImage.src,
-            title: 'Часы',
-        },
-        {
-            image: HomeCategoriesBeltImage.src,
-            title: 'Ремни',
-        },
-        {
-            image: HomeCategoriesHandImage.src,
-            title: 'Платки и шарфы',
-        },
-    ];
 
     const settings = {
         arrows: false,
@@ -55,7 +19,6 @@ const HomeCategories: React.FC = () => {
         speed: 500,
         slidesToShow: 5,
         slidesToScroll: 1,
-
         responsive: [
             {
                 breakpoint: 1200,
@@ -92,7 +55,7 @@ const HomeCategories: React.FC = () => {
             </button>
 
             <Slider {...settings} className="home-categories" ref={SliderRef}>
-                {categories.map((category, index) => (
+                {HOME_CATEGORIES.map((category, index) => (
                     <HomeCategoriesItem {...category} key={`home-categories-item-${index}`} />
                 ))}
             </Slider>
