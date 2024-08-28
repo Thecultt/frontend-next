@@ -6,9 +6,10 @@ import { CartState, CartActions, CartActionTypes, ICartItemsState } from '../typ
 const initialState: CartState = {
     items: localStorageService?.getItem<ICartItemsState>(LS_KEYS.cart, {}) || {},
     isVisibleMessage: false,
+    isLoading: false,
 };
 
-const cart = (state = initialState, action: CartActions) => {
+const cart = (state = initialState, action: CartActions): CartState => {
     if (action.type === CartActionTypes.SET_CART_ITEMS) {
         const newItems = action.payload;
         const hasItems = Object.keys(newItems).length > 0;
@@ -79,6 +80,13 @@ const cart = (state = initialState, action: CartActions) => {
         return {
             ...state,
             isVisibleMessage: action.payload,
+        };
+    }
+
+    if (action.type === CartActionTypes.SET_CART_IS_LOADING) {
+        return {
+            ...state,
+            isLoading: action.payload,
         };
     }
 

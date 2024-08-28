@@ -7,6 +7,7 @@ export interface ICartItemsState {
 export interface CartState {
     items: ICartItemsState;
     isVisibleMessage: boolean;
+    isLoading: boolean;
 }
 
 export enum CartActionTypes {
@@ -18,6 +19,8 @@ export enum CartActionTypes {
     REMOVE_CART_ITEMS = 'REMOVE_CART_ITEMS',
 
     SET_CART_IS_VISIBLE_MESSAGE = 'SET_CART_IS_VISIBLE_MESSAGE',
+
+    SET_CART_IS_LOADING = 'SET_CART_IS_LOADING',
 }
 
 interface setCartItems {
@@ -56,10 +59,16 @@ interface setCartIsVisibleMessage {
     payload: boolean;
 }
 
+interface setCartIsLoading {
+    type: CartActionTypes.SET_CART_IS_LOADING;
+    payload: boolean;
+}
+
 export type CartActions =
     | setCartItems
     | addCartItems
     | changeCartItems
     | changeCheckCartItems
     | removeCartItems
-    | setCartIsVisibleMessage;
+    | setCartIsVisibleMessage
+    | setCartIsLoading;
