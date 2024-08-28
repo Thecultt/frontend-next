@@ -13,6 +13,7 @@ import CatalogBannerImageBoutiqueMedia from '@/assets/images/catalog/catalog-ban
 import CatalogBannerImagePriceDropMedia from '@/assets/images/catalog/catalog-banner-price-drop.jpg';
 import CatalogBannerImagePriceDrop2 from '@/assets/images/catalog/catalog-banner-price-drop2.jpg';
 import CatalogBannerImagePopularMedia from '@/assets/images/catalog/catalog-banner-popular-media.jpg';
+import CatalogBannerImageAutumn from '@/assets/images/catalog/catalog-banner-price-autumn-promocode.jpg';
 import CatalogBannerImageConcierge from '@/assets/images/concierge/concierge-main.jpg';
 
 const CatalogBannerMedia: React.FC = () => {
@@ -23,6 +24,56 @@ const CatalogBannerMedia: React.FC = () => {
 
     const categories = category_slug ? [CATEGORY_SLUG_NAMES[category_slug]] : selectedCategories;
     const currentSelection = selectionId ? selections.find(({ id }) => id.toString() === selectionId) ?? null : null;
+
+    if (category_slug === 'obuv' || category_slug === 'aksessuary') {
+        return (
+            <div
+                className="catalog-banner-media"
+                style={{
+                    backgroundImage: `url("${CatalogBannerImageAutumn.src}")`,
+                }}
+            >
+                <div className="catalog-banner-media-text">
+                    <h3 className="catalog-banner-media-text__title">
+                        5 000 ₽ на ваш гардероб <br />к осеннему сезону
+                    </h3>
+                    <p className="catalog-banner-media-text__description">
+                        Решайтесь: промокод AUTUMN24 действует с&nbsp;28&nbsp;августа по&nbsp;4&nbsp;сентября
+                        на&nbsp;все лоты от&nbsp;70 000₽. Ваша новая сумка мечты ждёт здесь:
+                    </p>
+                    <Link
+                        href={getCatalogFiltersUrl({
+                            category_slug: CATEGORY_SLUGS.new,
+                        })}
+                        className="btn-light catalog-banner-media-text__btn"
+                    >
+                        Популярно сейчас
+                    </Link>
+                </div>
+            </div>
+        );
+    }
+
+    if (sort === SORT.a) {
+        return (
+            <div
+                className="catalog-banner-media"
+                style={{
+                    backgroundImage: `url("${CatalogBannerImageAutumn.src}")`,
+                }}
+            >
+                <div className="catalog-banner-media-text">
+                    <h3 className="catalog-banner-media-text__title">
+                        5 000 ₽ на ваш гардероб <br />к осеннему сезону
+                    </h3>
+                    <p className="catalog-banner-media-text__description">
+                        Решайтесь: промокод AUTUMN24 действует с&nbsp;28&nbsp;августа по&nbsp;4&nbsp;сентября
+                        на&nbsp;все лоты от&nbsp;70 000₽. Ваша новая сумка мечты ждёт вас
+                    </p>
+                </div>
+            </div>
+        );
+    }
 
     if (category_slug === 'sumki' || category_slug === 'ukrasheniia') {
         return (
