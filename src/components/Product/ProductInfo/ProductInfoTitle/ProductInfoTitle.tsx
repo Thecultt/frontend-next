@@ -16,7 +16,7 @@ import {
     ProductInfoTitleSale,
 } from '@/components';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { CATEGORY_NAME_SLUGS, CATEGORY_NAMES, SORT } from '@/constants/catalog';
+import { CATEGORY_NAME_SLUGS, CATEGORY_NAMES } from '@/constants/catalog';
 import { useWaitingData } from '@/hooks/catalog/useWaitingData';
 import { WaitingPopupType } from '@/types/waiting';
 import { useHash } from '@/hooks/useHash';
