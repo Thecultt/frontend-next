@@ -36,7 +36,7 @@ export const CartProductItem: React.FC<Props> = ({
 
     return (
         <div className="cart-product-item">
-            <NewCheckbox disabled={checkDisabled} checked={checked} onChange={onCheck} />
+            <NewCheckbox disabled={checkDisabled || (!checked && !canBuy)} checked={checked} onChange={onCheck} />
             <Link href={`${APP_ROUTE.product}/${article}`} className="cart-product-item-image">
                 <div
                     className="cart-product-item-image__background"

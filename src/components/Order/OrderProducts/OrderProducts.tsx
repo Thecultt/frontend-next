@@ -1,12 +1,15 @@
+'use client';
+
 import React from 'react';
+import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import dayjs from 'dayjs';
+import isEqual from 'lodash.isequal';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useAuthUser } from '@/hooks/useAuthUser';
-import { CartItem } from '@/models/ICartItem';
-import { changeCheckCartItem, removeCartItem, setCartItems } from '@/redux/actions/cart';
+import { changeCheckCartItem, checkAvailabilityCartItems, removeCartItem, setCartItems } from '@/redux/actions/cart';
 import { ICartItemsState } from '@/redux/types/ICart';
 import { sendCreateOrder, sendSubmitOrder } from '@/redux/actions/order';
 import { sendUpdateUser } from '@/redux/actions/user';
@@ -14,62 +17,27 @@ import { sendOrderApplyPromocode } from '@/redux/actions/order';
 import { CartProductItem, Loader, NewCheckbox, OrderProductsPromocode } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { sendMindbox } from '@/functions/mindbox';
+import { pushDataLayer } from '@/functions/pushDataLayer';
+import { formatMoney } from '@/functions/formatMoney';
+import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
 
 import orderPay from '../orderPay';
 
 const OrderProducts: React.FC = () => {
     const dispatch = useDispatch();
 
-    const [isDisableSendBtn, setIsDisableSendBtn] = React.useState<boolean>(false);
+    const [isDisableSendBtn, setIsDisableSendBtn] = React.useState(false);
 
     const { isLoggedIn, user } = useAuthUser();
 
-    const { items } = useTypedSelector(({ cart }) => cart);
+    const { items, isLoading } = useTypedSelector(({ cart }) => cart);
     const { promocode, currentDelivery, isValid } = useTypedSelector(({ order }) => order);
 
-    React.useEffect(() => {
-        const products: CartItem[] = [];
+    const mappedCartItems = Object.keys(items).map((article) => items[article]);
+    const availableCartItems = mappedCartItems.filter((item) => !!item.availability && !item.is_trial);
+    const checkedCartItems = availableCartItems.filter((item) => item.checked);
 
-        Object.keys(items).map((keyCartItem) => {
-            if (items[keyCartItem].checked) {
-                products.push(items[keyCartItem]);
-            }
-        });
-
-        window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.
-        window?.dataLayer?.push({
-            event: 'add_shipping_info',
-            ecommerce: {
-                timestamp: Math.floor(Date.now() / 1000),
-                shipping_tier: `${currentDelivery.title}|${dayjs().format('DD.MM.YYYY')}|${currentDelivery.price}`,
-                items: products.map((item, index) => ({
-                    item_name: item.name,
-                    item_id: `${item.id}`,
-                    price: `${item.price}`,
-                    item_brand: item.manufacturer,
-                    item_category: item.category,
-                    item_category2: item.subcategory,
-                    item_category3: '-',
-                    item_category4: '-',
-                    item_list_name: 'Search Results',
-                    item_list_id: item.article,
-                    index,
-                    quantity: 1,
-                })),
-            },
-        });
-    }, [currentDelivery.title]);
-
-    const totalPrice = Object.keys(items)
-        .map((article) => items[article])
-        .filter((item) => item.availability && !item.is_trial && item.checked)
-        .map((item) => item.price).length
-        ? Object.keys(items)
-              .map((article) => items[article])
-              .filter((item) => item.availability && !item.is_trial && item.checked)
-              .map((item) => item.price)
-              .reduce((a: number, b: number) => a + b)
-        : 0;
+    const cartPrice = checkedCartItems.reduce((acc, cur) => acc + cur.price, 0);
 
     const changeCheck = (article: string, status: boolean) => {
         dispatch(changeCheckCartItem(article, status));
@@ -79,33 +47,17 @@ const OrderProducts: React.FC = () => {
         dispatch(removeCartItem(items[article]));
 
         if (promocode.name) {
-            dispatch(
-                sendOrderApplyPromocode(
-                    promocode.name,
-                    Object.keys(items)
-                        .map((article) => items[article])
-                        .filter((item) => item.availability && !item.is_trial && item.checked)
-                        .map((item) => item.price).length
-                        ? Object.keys(items)
-                              .map((article) => items[article])
-                              .filter((item) => item.availability && !item.is_trial && item.checked)
-                              .map((item) => item.price)
-                              .reduce((a: number, b: number) => a + b)
-                        : 0,
-                ) as any,
-            );
+            dispatch(sendOrderApplyPromocode(promocode.name, cartPrice) as any);
         }
     };
 
-    const isCheckAll = () => {
-        const checkedArr: boolean[] = [];
-
-        Object.keys(items).map((key) => {
-            if (items[key].checked) checkedArr.push(true);
-        });
-
-        return checkedArr.length === Object.keys(items).length;
-    };
+    const isCheckedAll =
+        availableCartItems.length === 0
+            ? false
+            : isEqual(
+                  availableCartItems.map((item) => item.id),
+                  checkedCartItems.map((item) => item.id),
+              );
 
     const isCheckNull = () => {
         const checkedArr: boolean[] = [];
@@ -117,15 +69,17 @@ const OrderProducts: React.FC = () => {
         return !!checkedArr.length;
     };
 
-    const checkedAllItems = () => {
-        Object.keys(items).map((key) => {
-            if (!items[key].checked) dispatch(changeCheckCartItem(items[key].article, true));
+    const checkAllItems = () => {
+        availableCartItems.forEach((item) => {
+            if (!item.checked) {
+                dispatch(changeCheckCartItem(item.article, true));
+            }
         });
     };
 
-    const uncheckedAllItems = () => {
-        Object.keys(items).map((key) => {
-            if (items[key].checked) dispatch(changeCheckCartItem(items[key].article, false));
+    const uncheckAllItems = () => {
+        checkedCartItems.forEach((item) => {
+            dispatch(changeCheckCartItem(item.article, false));
         });
     };
 
@@ -137,7 +91,7 @@ const OrderProducts: React.FC = () => {
         phoneValue,
         countryValue,
         cityValue,
-        deliveryValue,
+        // deliveryValue,
         paymentValue,
         streetValue,
         houseValue,
@@ -176,39 +130,6 @@ const OrderProducts: React.FC = () => {
         };
     });
 
-    React.useEffect(() => {
-        const products: CartItem[] = [];
-
-        Object.keys(items).map((keyCartItem) => {
-            if (items[keyCartItem].checked) {
-                products.push(items[keyCartItem]);
-            }
-        });
-
-        window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.
-        window?.dataLayer?.push({
-            event: 'add_payment_info',
-            ecommerce: {
-                timestamp: Math.floor(Date.now() / 1000),
-                payment_type: `${paymentValue}`,
-                items: products.map((item, index) => ({
-                    item_name: item.name,
-                    item_id: `${item.id}`,
-                    price: `${item.price}`,
-                    item_brand: item.manufacturer,
-                    item_category: item.category,
-                    item_category2: item.subcategory,
-                    item_category3: '-',
-                    item_category4: '-',
-                    item_list_name: 'Search Results',
-                    item_list_id: item.article,
-                    index,
-                    quantity: 1,
-                })),
-            },
-        });
-    }, [paymentValue]);
-
     const isPromocode = () => {
         if (
             promocode.isActive &&
@@ -222,16 +143,14 @@ const OrderProducts: React.FC = () => {
         return false;
     };
 
+    const totalPrice = isPromocode()
+        ? cartPrice + currentDelivery.price - promocode.saleSum
+        : cartPrice + currentDelivery.price;
+
     const onClickSendCreateOrder = () => {
         setIsDisableSendBtn(true);
 
-        const products: number[] = [];
-
-        Object.keys(items).map((keyCartItem) => {
-            if (items[keyCartItem].checked && items[keyCartItem].availability) {
-                products.push(items[keyCartItem].id);
-            }
-        });
+        const products = checkedCartItems.map((item) => item.id);
 
         const middlename = nameValue.split(' ')[0];
         const name = nameValue.split(' ')[1];
@@ -294,45 +213,35 @@ const OrderProducts: React.FC = () => {
         );
     };
 
-    const successPayment = (orderId: number) => {
+    const updateCart = () => {
         const newCart: ICartItemsState = {};
-
         Object.keys(items).map((article) => {
-            if (!items[article].checked) {
+            if (!items[article].checked && !!items[article].availability && !items[article].is_trial) {
                 newCart[article] = { ...items[article], checked: true };
             }
         });
 
         dispatch(setCartItems(newCart) as any);
+    };
 
-        const products: CartItem[] = [];
+    const successPayment = (orderId: number) => {
+        updateCart();
 
-        Object.keys(items).map((keyCartItem) => {
-            if (items[keyCartItem].checked) {
-                products.push(items[keyCartItem]);
-            }
-        });
-
-        window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.
-        window?.dataLayer?.push({
-            event: 'purchase',
-            ecommerce: {
-                timestamp: Math.floor(Date.now() / 1000),
-                transaction_id: `${orderId}`,
-                value: `${isPromocode() ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price}`,
-                tax: '-',
-                shipping: `${promocode.saleSum}`,
-                currency: 'RUB',
-                coupon: `${promocode.name}`,
-                items: products.map((item) => ({
-                    item_name: item.name,
-                    item_id: `${item.id}`,
-                    price: `${item.price}`,
-                    item_brand: item.manufacturer,
-                    item_category: item.category,
-                    quantity: 1,
-                })),
-            },
+        pushDataLayer('purchase', {
+            transaction_id: `${orderId}`,
+            value: `${totalPrice}`,
+            tax: '-',
+            shipping: `${promocode.saleSum}`,
+            currency: 'RUB',
+            coupon: `${promocode.name}`,
+            items: checkedCartItems.map((item) => ({
+                item_name: item.name,
+                item_id: `${item.id}`,
+                price: `${item.price}`,
+                item_brand: item.manufacturer,
+                item_category: item.category,
+                quantity: 1,
+            })),
         });
 
         try {
@@ -376,13 +285,13 @@ const OrderProducts: React.FC = () => {
                               },
                           ]
                         : [],
-                    lines: products.map((product) => {
+                    lines: checkedCartItems.map((product) => {
                         return {
                             minPricePerItem: `${product.price}`,
                             basePricePerItem: `${product.price}`,
                             quantity: '1',
                             quantityType: 'int',
-                            discountedPricePerLine: `${totalPrice}`,
+                            discountedPricePerLine: `${cartPrice}`,
                             lineId: `${product.id}`,
                             discounts: promocode.isActive
                                 ? [
@@ -410,7 +319,7 @@ const OrderProducts: React.FC = () => {
                 executionDateTimeUtc: new Date(),
             });
 
-            products.map((product) => {
+            checkedCartItems.map((product) => {
                 sendMindbox('Website.ClearCart', {
                     customer: {
                         email: user.email || '',
@@ -437,23 +346,15 @@ const OrderProducts: React.FC = () => {
         if (currentDelivery.title === 'Доставка с примеркой (по Москве)') {
             successPayment(orderId);
         } else {
-            const products: { name: string; price: number }[] = [];
-
-            Object.keys(items).map((keyCartItem) => {
-                if (items[keyCartItem].checked) {
-                    products.push({
-                        name: items[keyCartItem].name,
-                        price: items[keyCartItem].price,
-                    });
-                }
-            });
+            const products = checkedCartItems.map((item) => ({
+                name: item.name,
+                price: item.price,
+            }));
 
             orderPay({
                 type: paymentValue,
                 orderId,
-                totalPrice: isPromocode()
-                    ? totalPrice + currentDelivery.price - promocode.saleSum
-                    : totalPrice + currentDelivery.price,
+                totalPrice,
                 deliveryPrice: currentDelivery.price,
                 products,
                 orderNum,
@@ -462,26 +363,71 @@ const OrderProducts: React.FC = () => {
         }
     };
 
+    React.useEffect(() => {
+        dispatch(checkAvailabilityCartItems(items) as any);
+    }, []);
+
+    React.useEffect(() => {
+        pushDataLayer('add_shipping_info', {
+            shipping_tier: `${currentDelivery.title}|${dayjs().format('DD.MM.YYYY')}|${currentDelivery.price}`,
+            items: checkedCartItems.map((item, index) => ({
+                item_name: item.name,
+                item_id: `${item.id}`,
+                price: `${item.price}`,
+                item_brand: item.manufacturer,
+                item_category: item.category,
+                item_category2: item.subcategory,
+                item_category3: '-',
+                item_category4: '-',
+                item_list_name: 'Search Results',
+                item_list_id: item.article,
+                index,
+                quantity: 1,
+            })),
+        });
+    }, [currentDelivery.title]);
+
+    React.useEffect(() => {
+        pushDataLayer('add_payment_info', {
+            payment_type: `${paymentValue}`,
+            items: checkedCartItems.map((item, index) => ({
+                item_name: item.name,
+                item_id: `${item.id}`,
+                price: `${item.price}`,
+                item_brand: item.manufacturer,
+                item_category: item.category,
+                item_category2: item.subcategory,
+                item_category3: '-',
+                item_category4: '-',
+                item_list_name: 'Search Results',
+                item_list_id: item.article,
+                index,
+                quantity: 1,
+            })),
+        });
+    }, [paymentValue]);
+
     return (
         <div className="order-products">
             <h3 className="order-products__title">Ваш заказ:</h3>
 
             <NewCheckbox
                 className="order-products-check-all"
-                checked={isCheckAll()}
-                onChange={isCheckAll() ? uncheckedAllItems : checkedAllItems}
+                checked={isCheckedAll}
+                onChange={isCheckedAll ? uncheckAllItems : checkAllItems}
+                disabled={availableCartItems.length === 0}
             >
                 <p className="order-products-check-all__title">Выделить все</p>
             </NewCheckbox>
 
             <div className="order-products-items-wrapper">
-                {Object.keys(items).map((key) => (
+                {mappedCartItems.map((item) => (
                     <CartProductItem
-                        key={items[key].id}
-                        data={items[key]}
-                        removeDisabled={Object.keys(items).length === 1}
-                        onCheck={() => changeCheck(key, !items[key].checked)}
-                        onRemove={() => removeItem(key)}
+                        key={item.id}
+                        data={item}
+                        removeDisabled={mappedCartItems.length === 1 && !!item.availability && !item.is_trial}
+                        onCheck={() => changeCheck(item.article, !item.checked)}
+                        onRemove={() => removeItem(item.article)}
                     />
                 ))}
             </div>
@@ -492,63 +438,50 @@ const OrderProducts: React.FC = () => {
                     paymentValue === 'Кредит' ||
                     paymentValue === 'Яндекс Сплит'
                 }
-                totalPrice={totalPrice + currentDelivery.price}
+                totalPrice={cartPrice + currentDelivery.price}
             />
 
             <div className="order-products-total">
                 <div className="order-products-total-item">
-                    <p className="order-products-total-item__title">
-                        Товары -{' '}
-                        {
-                            Object.keys(items)
-                                .map((article) => items[article])
-                                .filter((item) => item.availability && !item.is_trial && item.checked).length
-                        }{' '}
-                        шт
-                    </p>
-                    <p className="order-products-total-item__value">{totalPrice.toLocaleString('ru-RU')}₽</p>
+                    <p className="order-products-total-item__title">Товары - {checkedCartItems.length} шт</p>
+                    <p className="order-products-total-item__value">{formatMoney(cartPrice)}</p>
                 </div>
 
-                {isPromocode() ? (
+                {isPromocode() && (
                     <div className="order-products-total-item promocode">
                         <p className="order-products-total-item__title">Скидка в корзине</p>
-                        <p className="order-products-total-item__value">
-                            - {promocode.saleSum.toLocaleString('ru-RU')}₽
-                        </p>
+                        <p className="order-products-total-item__value">- {formatMoney(promocode.saleSum)}</p>
                     </div>
-                ) : null}
+                )}
 
                 <div className="order-products-total-item">
                     <p className="order-products-total-item__title">Доставка</p>
-                    <p className="order-products-total-item__value">{currentDelivery.price.toLocaleString('ru-RU')}₽</p>
+                    <p className="order-products-total-item__value">{formatMoney(currentDelivery.price)}</p>
                 </div>
                 <div className="order-products-total-item">
                     <p className="order-products-total-item__title">Итого:</p>
-                    <p className="order-products-total-item__value">
-                        {totalPrice > 0
-                            ? isPromocode()
-                                ? (totalPrice + currentDelivery.price - promocode.saleSum).toLocaleString('ru-RU')
-                                : (totalPrice + currentDelivery.price).toLocaleString('ru-RU')
-                            : 0}
-                        ₽
-                    </p>
+                    <p className="order-products-total-item__value">{formatMoney(totalPrice)}</p>
                 </div>
 
                 <p className="order-products__description">
                     Нажимая кнопку, вы принимаете условия{' '}
-                    <a href="https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/Положение_об_обработке_персональных_данных_с_Ботом.pdf">
+                    <a href={EXTERNAL_LINKS.personalData} target="_blank" rel="noreferrer">
                         обработки персональных данных
                     </a>{' '}
-                    и <a href="https://www.thecultt.com/help/thecultt">условия продажи</a>.
+                    и{' '}
+                    <Link href={APP_ROUTE.help.theCultt} target="_blank">
+                        условия продажи
+                    </Link>
+                    .
                 </p>
 
                 <button
                     className={getClassNames('btn order-products__btn', {
-                        loader: isDisableSendBtn,
+                        loader: isDisableSendBtn || isLoading,
                         disabled: !isCheckNull() || !isValid,
                     })}
                     onClick={onClickSendCreateOrder}
-                    disabled={isDisableSendBtn}
+                    disabled={isDisableSendBtn || isLoading}
                 >
                     {isDisableSendBtn ? (
                         <Loader />
