@@ -36,9 +36,9 @@ const validate = (values: validateInfoValues) => {
         errors.brand = 'Поле не может быть пустым';
     }
 
-    // if (!values.condition) {
-    // 	errors.condition = "Поле не может быть пустым";
-    // }
+    if (!values.condition) {
+        errors.condition = 'Поле не может быть пустым';
+    }
 
     if (!values.defects) {
         errors.defects = 'Поле не может быть пустым';

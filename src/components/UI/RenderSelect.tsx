@@ -14,7 +14,7 @@ const RenderSelect: React.FC<RenderSelectProps> = ({
     items,
     disabled,
     input,
-    meta: { form, dispatch, initial },
+    meta: { form, dispatch, initial, touched, error },
     onChangeCutsom,
 }) => {
     const [state, setState] = React.useState<boolean>(false);
@@ -69,6 +69,7 @@ const RenderSelect: React.FC<RenderSelectProps> = ({
             <div
                 className={getClassNames('select', {
                     disabled: !!disabled,
+                    error: !!touched && !!error,
                     active: state,
                 })}
                 onClick={() => setState(!state)}
@@ -134,6 +135,8 @@ const RenderSelect: React.FC<RenderSelectProps> = ({
                     ))}
                 </div>
             </div>
+
+            {touched && error && <span className="select__error">{error}</span>}
         </div>
     );
 };

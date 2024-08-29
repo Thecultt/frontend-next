@@ -14,7 +14,7 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({
     items,
     disabled,
     input,
-    meta: { form, dispatch, initial },
+    meta: { form, dispatch, initial, touched, error },
 }) => {
     const [state, setState] = React.useState<boolean>(false);
     const [currentItems, setCurrentItems] = React.useState<{
@@ -100,6 +100,7 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({
                 className={getClassNames('select', {
                     active: state,
                     disabled: !!disabled,
+                    error: !!touched && !!error,
                 })}
                 onClick={() => setState(!state)}
             >
@@ -170,6 +171,8 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({
                     ))}
                 </div>
             </div>
+
+            {touched && error && <span className="select__error">{error}</span>}
         </div>
     );
 };
