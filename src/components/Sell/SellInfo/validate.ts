@@ -1,3 +1,5 @@
+import { CATEGORY_NAMES } from '@/constants/catalog';
+
 export interface validateInfoValues {
     category: string;
     brand: string;
@@ -48,13 +50,15 @@ const validate = (values: validateInfoValues) => {
         errors.client_kit = 'Поле не может быть пустым';
     }
 
-    // if (!values.size) {
-    // 	errors.size = "Поле не может быть пустым";
-    // } else if (values.size.length > defaultMax) {
-    // 	errors.size = `Не более ${defaultMax} символов`;
-    // } else if (values.size.length < defaultMin) {
-    // 	errors.size = `Не менее ${defaultMin} символов`;
-    // }
+    if (values.category === CATEGORY_NAMES.shoes) {
+        if (!values.size) {
+            errors.size = 'Поле не может быть пустым';
+        } else if (values.size.length > defaultMax) {
+            errors.size = `Не более ${defaultMax} символов`;
+        } else if (values.size.length < defaultMin) {
+            errors.size = `Не менее ${defaultMin} символов`;
+        }
+    }
 
     if (!values.price) {
         errors.price = 'Поле не может быть пустым';
