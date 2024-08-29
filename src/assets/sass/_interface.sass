@@ -645,6 +645,9 @@ button
 		& > svg
 			transform: rotate(180deg)
 
+	&.error
+		border: 1px solid $red
+
 	&-current-item
 		width: 100%
 
@@ -763,6 +766,17 @@ button
 			& > svg
 				opacity: 0
 				+transition
+
+	&__error
+		text-align: left
+
+		margin-top: 8px
+		display: block
+
+		font-size: 14px
+		color: $red
+
+		+open
 
 // popup
 .popup
