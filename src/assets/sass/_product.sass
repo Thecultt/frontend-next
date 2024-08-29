@@ -5,11 +5,14 @@
 	+open
 
 	&-content
-		margin: 40px 0 0 0
+		width: 100%
+		margin-top: 40px
 
 		display: flex
 		justify-content: space-between
 		align-items: flex-start
+		flex-wrap: nowrap
+		gap: 64px
 
 		&-title
 			+ManropeSemiBold
@@ -24,20 +27,15 @@
 			display: flex
 			justify-content: space-between
 			align-items: flex-start
+			flex-shrink: 0
 
-			width: calc( 50% - 35px )
-
-			max-height: 640px
-			height: 78vh
+			height: calc(100vh - 230px)
+			min-height: 640px
 
 			&-list-wrapper
 				position: relative
-
-				max-height: 640px
-				height: 78vh
-				// height: 78vh
-
-				margin-right: 55px
+				height: 100%
+				margin-right: 30px
 
 			&-list
 				height: 100% !important
@@ -770,6 +768,7 @@
 			margin: 0
 
 			flex-direction: column
+			gap: 0
 
 			&-title
 				+ManropeExtraBold

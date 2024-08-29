@@ -1,8 +1,10 @@
+'use client';
+
 import React from 'react';
 import Slider from 'react-slick';
 import { useMediaQuery } from 'usehooks-ts';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 
 import 'swiper/css';
@@ -30,7 +32,7 @@ const ProductCover: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPa
     const SourceRef = React.useRef<any>(null);
     const TargetRef = React.useRef<any>(null);
     const ContainerRef = React.useRef<any>(null);
-    const SliderSwiperRef = React.useRef<any>(null);
+    const SliderSwiperRef = React.useRef<SwiperRef>(null);
     const SliderRef = React.useRef<any>(null);
 
     const [isStartSlider, setIsStartSlider] = React.useState<boolean>(false);
@@ -45,21 +47,20 @@ const ProductCover: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPa
     const onClickNext = () => {
         if (currentIndexImage + 1 < images.length) {
             setCurrentIndexImage(currentIndexImage + 1);
+            SliderSwiperRef.current?.swiper.slideTo(currentIndexImage + 1);
         } else {
             setCurrentIndexImage(0);
-            // SliderSwiperRef.current?.scrollBy(0)
-        }
-
-        if (currentIndexImage > 3) {
-            onClickSwiperNext();
+            SliderSwiperRef.current?.swiper.slideTo(0);
         }
     };
 
     const onClickPrev = () => {
         if (currentIndexImage > 0) {
             setCurrentIndexImage(currentIndexImage - 1);
+            SliderSwiperRef.current?.swiper.slideTo(currentIndexImage - 1);
         } else {
-            setCurrentIndexImage(currentIndexImage - 1);
+            setCurrentIndexImage(images.length - 1);
+            SliderSwiperRef.current?.swiper.slideTo(images.length - 1);
         }
     };
 
@@ -99,11 +100,11 @@ const ProductCover: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPa
     };
 
     const onClickSwiperNext = () => {
-        SliderSwiperRef.current?.slideNext();
+        SliderSwiperRef.current?.swiper.slideNext();
     };
 
     const onClickSwiperPrev = () => {
-        SliderSwiperRef.current?.slidePrev();
+        SliderSwiperRef.current?.swiper.slidePrev();
     };
 
     const handleDotClick = (index: number) => () => {
@@ -143,14 +144,11 @@ const ProductCover: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPa
 
                 <Swiper
                     modules={[Navigation]}
-                    slidesPerView={5}
+                    slidesPerView="auto"
                     spaceBetween={10}
                     direction="vertical"
                     freeMode={true}
                     autoHeight={true}
-                    onBeforeInit={(swiper: any) => {
-                        SliderSwiperRef.current = swiper;
-                    }}
                     className="product-content-cover-list"
                     onProgress={(e: any) => {
                         setIsStartSlider(e.isBeginning);
