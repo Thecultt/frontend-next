@@ -36,7 +36,7 @@ export const CartProductItem: React.FC<Props> = ({
 
     return (
         <div className="cart-product-item">
-            <NewCheckbox disabled={checkDisabled} checked={checked} onChange={onCheck} />
+            <NewCheckbox disabled={checkDisabled || (!checked && !canBuy)} checked={checked} onChange={onCheck} />
             <Link href={`${APP_ROUTE.product}/${article}`} className="cart-product-item-image">
                 <div
                     className="cart-product-item-image__background"
@@ -74,7 +74,7 @@ export const CartProductItem: React.FC<Props> = ({
                     </div>
                 )}
 
-                {!canBuy && <span className="cart-product-item-info__unavailable">Не в наличии</span>}
+                {!canBuy && <span className="cart-product-item-info__unavailable">Нет в наличии</span>}
             </Link>
             <button type="button" className="cart-product-item__remove" disabled={removeDisabled} onClick={onRemove}>
                 <XIcon />
