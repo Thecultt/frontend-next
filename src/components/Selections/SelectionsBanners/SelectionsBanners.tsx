@@ -21,7 +21,7 @@ export const SelectionsBanners: React.FC = () => {
 
     const influencerSelection = items.find((item) => item.id === SELECTIONS_IDS.juliaKatkalo);
 
-    const summerBagsSelection = items.find((item) => item.id === SELECTIONS_IDS.summerBags);
+    const autumnBagsSelection = items.find((item) => item.id === SELECTIONS_IDS.autumnBags);
     const investmentsBagsSelection = items.find((item) => item.id === SELECTIONS_IDS.investmentsBags);
     const iiBagsSelection = items.find((item) => item.id === SELECTIONS_IDS.itBags);
 
@@ -69,7 +69,7 @@ export const SelectionsBanners: React.FC = () => {
             )}
 
             <div className="selections-banners-bestsellers">
-                {summerBagsSelection && (
+                {autumnBagsSelection && (
                     <div className="selections-banners-bestsellers-main-item hover-scale">
                         <div
                             className="selections-banners-bestsellers-main-item__cover"
@@ -79,10 +79,10 @@ export const SelectionsBanners: React.FC = () => {
                         />
                         <div className="selections-banners-bestsellers-main-item__content">
                             <h3 className="selections-banners-bestsellers-main-item__title">
-                                {summerBagsSelection.title}
+                                {autumnBagsSelection.title}
                             </h3>
                             <p className="selections-banners-bestsellers-main-item__description">
-                                {summerBagsSelection.description}
+                                {autumnBagsSelection.description}
                             </p>
                             <Link
                                 href={getCatalogFiltersUrl({
