@@ -113,18 +113,45 @@ const CabinetSellsListPaymentInfoPopupForm: React.FC<{} & InjectedFormProps<{}, 
 
                 <div className="cabinet-sells-list-payment-info-popup-block-input-wrapper">
                     <div className="cabinet-sells-list-payment-info-popup-block-input" style={{ width: '100%' }}>
-                        <Field component={RenderInput} name="bik" label="БИК" />
+                        <Field
+                            component={RenderInput}
+                            name="bik"
+                            label="БИК"
+                            {...createTextMask({
+                                pattern: '999999999',
+                                guide: false,
+                                stripMask: false,
+                            })}
+                        />
                     </div>
 
                     <div className="cabinet-sells-list-payment-info-popup-block-input" style={{ width: '100%' }}>
-                        <Field component={RenderInput} name="inn" label="Ваш ИНН" />
+                        <Field
+                            component={RenderInput}
+                            name="inn"
+                            label="Ваш ИНН"
+                            {...createTextMask({
+                                pattern: '999999999999',
+                                guide: false,
+                                stripMask: false,
+                            })}
+                        />
                     </div>
 
                     <div
                         className="cabinet-sells-list-payment-info-popup-block-input"
                         style={{ width: '100%', marginBottom: 0 }}
                     >
-                        <Field component={RenderInput} name="rs" label="Расчетный счет" />
+                        <Field
+                            component={RenderInput}
+                            name="rs"
+                            label="Расчетный счет"
+                            {...createTextMask({
+                                pattern: '99999999999999999999',
+                                guide: false,
+                                stripMask: false,
+                            })}
+                        />
                     </div>
                 </div>
             </div>

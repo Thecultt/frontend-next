@@ -78,15 +78,30 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose, goToC
                     <div className="header-search-box-history-often">
                         <p className="header-search-box-history-often__title">Часто ищут</p>
 
-                        <div className="header-search-box-history-often-items-wrapper">
+                        <div className="header-search-box-history-often-items">
                             {['Сумка Louis Vuitton', 'Hermes Birkin', 'Сумка Gucci', 'Prada'].map((search, index) => (
-                                <p
-                                    className="header-search-box-history-often__item"
-                                    key={`header-search-box-history-often__item-${index}`}
+                                <div
+                                    className="header-search-box-history-often-items-item"
                                     onClick={() => dispatch(setHeaderSearchValue(search))}
+                                    key={`header-search-box-history-often-items-item-${index}`}
                                 >
-                                    {search}
-                                </p>
+                                    <p className="header-search-box-history-often-items-item__text">{search}</p>
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M19 18.9766L14.65 14.6266M17 8.97656C17 13.3948 13.4183 16.9766 9 16.9766C4.58172 16.9766 1 13.3948 1 8.97656C1 4.55828 4.58172 0.976562 9 0.976562C13.4183 0.976562 17 4.55828 17 8.97656Z"
+                                            stroke="#202020"
+                                            strokeWidth="1.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                </div>
                             ))}
                         </div>
                     </div>
