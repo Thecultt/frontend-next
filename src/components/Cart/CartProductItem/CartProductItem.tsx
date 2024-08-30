@@ -77,7 +77,7 @@ export const CartProductItem: React.FC<Props> = ({
                 {!canBuy && <span className="cart-product-item-info__unavailable">Нет в наличии</span>}
             </Link>
             <button type="button" className="cart-product-item__remove" disabled={removeDisabled} onClick={onRemove}>
-                <XIcon />
+                <XIcon className="cart-product-item__remove-icon" />
             </button>
         </div>
     );

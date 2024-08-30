@@ -166,7 +166,7 @@ const ProductCover: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPa
                                     backgroundImage: `url("${image}")`,
                                 }}
                                 onMouseEnter={() => setCurrentIndexImage(index)}
-                            ></div>
+                            />
                         </SwiperSlide>
                     ))}
                 </Swiper>
