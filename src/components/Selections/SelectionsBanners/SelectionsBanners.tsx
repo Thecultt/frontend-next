@@ -86,7 +86,7 @@ export const SelectionsBanners: React.FC = () => {
                             </p>
                             <Link
                                 href={getCatalogFiltersUrl({
-                                    selection: SELECTIONS_IDS.summerBags.toString(),
+                                    selection: SELECTIONS_IDS.autumnBags.toString(),
                                 })}
                                 className="btn selections-banners-bestsellers-main-item__btn"
                             >
