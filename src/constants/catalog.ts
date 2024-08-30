@@ -90,6 +90,7 @@ export const SORT_TITLES: { type: SortType; title: string }[] = [
 
 export const SELECTIONS_IDS = {
     summerBags: 4,
+    autumnBags: 15,
     itBags: 5,
     investmentsBags: 6,
     juliaKatkalo: 12,
