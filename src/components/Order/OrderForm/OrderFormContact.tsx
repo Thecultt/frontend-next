@@ -54,6 +54,7 @@ const OrderFormContact: React.FC<Props> = ({ emailValue }) => {
                             <Field component={RenderInput} type="text" name="email" label="Почта" />
                         </div>
 
+                        {/* TODO: Отрефакторить */}
                         {!(/[А-Яа-яЁё]/i.test(emailValue) || /\s/.test(emailValue)) &&
                             (emailValueDebounce && emailValueDebounce !== '' ? (
                                 !isSending ? (

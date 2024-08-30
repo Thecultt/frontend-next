@@ -96,8 +96,6 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
         }
     }, [isLoggedIn, isLoaded]);
 
-    console.log(invalid);
-
     return (
         <form className="order-form" onSubmit={handleSubmit}>
             <OrderFormContact emailValue={emailValue} />
