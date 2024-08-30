@@ -227,7 +227,8 @@ const Header: React.FC = () => {
 
                         <HeaderHoverMenu
                             {...HEADER_MENU_CATEGORIES[currentCategoryHoverMenuIndex]}
-                            isOpenHoverMenu={isOpenHoverMenu}
+                            isOpenHoverMenu={true}
+                            // isOpenHoverMenu={isOpenHoverMenu}
                             onOpen={() => setIsOpenHoverMenu(true)}
                             onClose={() => setIsOpenHoverMenu(false)}
                         />
