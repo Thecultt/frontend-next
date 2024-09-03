@@ -20,6 +20,7 @@ import { sendMindbox } from '@/functions/mindbox';
 import { pushDataLayer } from '@/functions/pushDataLayer';
 import { formatMoney } from '@/functions/formatMoney';
 import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
+import { useOrder } from '@/hooks/order/useOrder';
 
 import orderPay from '../orderPay';
 
@@ -29,13 +30,11 @@ const OrderProducts: React.FC = () => {
     const [isDisableSendBtn, setIsDisableSendBtn] = React.useState(false);
 
     const { isLoggedIn, user } = useAuthUser();
-
-    // TODO useCart
-    const { items, isLoading } = useTypedSelector(({ cart }) => cart);
     const { promocode, currentDelivery, isValid } = useTypedSelector(({ order }) => order);
 
-    const mappedCartItems = Object.keys(items).map((article) => items[article]);
-    const availableCartItems = mappedCartItems.filter((item) => !!item.availability && !item.is_trial);
+    const { cartItems, cartIsLoading } = useOrder();
+
+    const availableCartItems = cartItems.filter((item) => !!item.availability && !item.is_trial);
     const checkedCartItems = availableCartItems.filter((item) => item.checked);
 
     const cartPrice = checkedCartItems.reduce((acc, cur) => acc + cur.price, 0);
@@ -45,7 +44,11 @@ const OrderProducts: React.FC = () => {
     };
 
     const removeItem = (article: string) => {
-        dispatch(removeCartItem(items[article]));
+        const item = cartItems.find((item) => item.article === article);
+
+        if (item) {
+            dispatch(removeCartItem(item));
+        }
 
         if (promocode.name) {
             dispatch(sendOrderApplyPromocode(promocode.name, cartPrice) as any);
@@ -63,8 +66,10 @@ const OrderProducts: React.FC = () => {
     const isCheckNull = () => {
         const checkedArr: boolean[] = [];
 
-        Object.keys(items).map((key) => {
-            if (items[key].checked && !items[key].is_trial) checkedArr.push(true);
+        cartItems.map((item) => {
+            if (item.checked && !item.is_trial) {
+                checkedArr.push(true);
+            }
         });
 
         return !!checkedArr.length;
@@ -216,9 +221,9 @@ const OrderProducts: React.FC = () => {
 
     const updateCart = () => {
         const newCart: ICartItemsState = {};
-        Object.keys(items).map((article) => {
-            if (!items[article].checked && !!items[article].availability && !items[article].is_trial) {
-                newCart[article] = { ...items[article], checked: true };
+        cartItems.map((item) => {
+            if (!item.checked && !!item.availability && !item.is_trial) {
+                newCart[item.article] = { ...item, checked: true };
             }
         });
 
@@ -365,7 +370,7 @@ const OrderProducts: React.FC = () => {
     };
 
     React.useEffect(() => {
-        dispatch(checkAvailabilityCartItems(mappedCartItems) as any);
+        dispatch(checkAvailabilityCartItems(cartItems) as any);
     }, []);
 
     React.useEffect(() => {
@@ -422,11 +427,11 @@ const OrderProducts: React.FC = () => {
             </NewCheckbox>
 
             <div className="order-products-items-wrapper">
-                {mappedCartItems.map((item) => (
+                {cartItems.map((item) => (
                     <CartProductItem
                         key={item.id}
                         data={item}
-                        removeDisabled={mappedCartItems.length === 1 && !!item.availability && !item.is_trial}
+                        removeDisabled={cartItems.length === 1 && !!item.availability && !item.is_trial}
                         onCheck={() => changeCheck(item.article, !item.checked)}
                         onRemove={() => removeItem(item.article)}
                     />
@@ -478,11 +483,11 @@ const OrderProducts: React.FC = () => {
 
                 <button
                     className={getClassNames('btn order-products__btn', {
-                        loader: isDisableSendBtn || isLoading,
+                        loader: isDisableSendBtn || cartIsLoading,
                         disabled: !isCheckNull() || !isValid,
                     })}
                     onClick={onClickSendCreateOrder}
-                    disabled={isDisableSendBtn || isLoading}
+                    disabled={isDisableSendBtn || cartIsLoading}
                 >
                     {isDisableSendBtn ? (
                         <Loader />

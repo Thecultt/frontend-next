@@ -8,20 +8,19 @@ import Link from 'next/link';
 
 import { OrderStatusProduct } from '@/components';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { CartItem } from '@/models/ICartItem';
 import { sendSubmitOrder } from '@/redux/actions/order';
 import { setCartItems } from '@/redux/actions/cart';
 import { ICartItemsState } from '@/redux/types/ICart';
 import { COUNT_MINUTES_RESERVED_ORDER } from '@/constants/order';
 import { APP_ROUTE } from '@/constants/routes';
+import { useCart } from '@/hooks/catalog/useCart';
 
 import orderPay from '../orderPay';
 
 const OrderStatusError: React.FC = () => {
     const dispatch = useDispatch();
 
-    // TODO useCart
-    const { items } = useTypedSelector(({ cart }) => cart);
+    const { allCart } = useCart();
 
     const {
         order: {
@@ -43,19 +42,15 @@ const OrderStatusError: React.FC = () => {
     const successPayment = (orderId: number) => {
         const newCart: ICartItemsState = {};
 
-        Object.keys(items).map((article) => {
-            if (!items[article].checked) newCart[article] = { ...items[article], checked: true };
+        allCart.forEach((item) => {
+            if (!item.checked) {
+                newCart[item.article] = { ...item, checked: true };
+            }
         });
 
         dispatch(setCartItems(newCart) as any);
 
-        const products: CartItem[] = [];
-
-        Object.keys(items).map((keyCartItem) => {
-            if (items[keyCartItem].checked) {
-                products.push(items[keyCartItem]);
-            }
-        });
+        // const products = allCart.filter((item) => item.checked);
 
         // window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
         // window.dataLayer.push({

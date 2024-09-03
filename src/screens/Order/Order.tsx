@@ -2,30 +2,28 @@
 
 import React from 'react';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { PageLoader, OrderForm, OrderProducts } from '@/components';
 import { pushDataLayer } from '@/functions/pushDataLayer';
+import { useOrder } from '@/hooks/order/useOrder';
 
 const Order: React.FC = () => {
     const { isLoggedIn, isLoaded: isLoadedUser } = useAuthUser();
-
-    // TODO useCart
-    const { items } = useTypedSelector(({ cart }) => cart);
+    const { cartItems } = useOrder();
 
     React.useEffect(() => {
         pushDataLayer('begin_checkout', {
-            items: Object.keys(items).map((article, index) => ({
-                item_name: items[article].name,
-                item_id: `${items[article].id}`,
-                price: `${items[article].price}`,
-                item_brand: items[article].manufacturer,
-                item_category: items[article].category,
-                item_category2: items[article].subcategory,
+            items: cartItems.map((item, index) => ({
+                item_name: item.name,
+                item_id: `${item.id}`,
+                price: `${item.price}`,
+                item_brand: item.manufacturer,
+                item_category: item.category,
+                item_category2: item.subcategory,
                 item_category3: '-',
                 item_category4: '-',
                 item_list_name: 'Search Results',
-                item_list_id: article,
+                item_list_id: item.article,
                 index,
                 quantity: 1,
             })),
