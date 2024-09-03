@@ -12,4 +12,5 @@ export interface CartItem {
     availability: number;
     is_trial: boolean;
     condition?: string | null;
+    is_jewelry: boolean;
 }

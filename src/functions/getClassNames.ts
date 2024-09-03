@@ -1,6 +1,6 @@
 export const getClassNames = (defaultClasses: string, dynamicClasses: { [className: string]: boolean }) => {
     if (Object.keys(dynamicClasses).length === 0) {
-        return '';
+        return defaultClasses;
     }
 
     const result: string[] = [defaultClasses];

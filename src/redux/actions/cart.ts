@@ -31,6 +31,7 @@ export const checkAvailabilityCartItems = (items: ICartItemsState) => async (dis
                     availability,
                     is_trial,
                     condition,
+                    is_jewelry,
                 },
             } = await $api.get<ProductPage>(`/product/${article}`);
 
@@ -54,6 +55,7 @@ export const checkAvailabilityCartItems = (items: ICartItemsState) => async (dis
                         availability,
                         is_trial,
                         condition,
+                        is_jewelry,
                     },
                 },
             });
