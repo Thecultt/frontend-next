@@ -12,14 +12,14 @@ import { APP_ROUTE } from '@/constants/routes';
 import { XIcon } from '@/assets/icons';
 import { Noop } from '@/types/functions';
 import { useCart } from '@/hooks/catalog/useCart';
+import { setHeaderCartIsVisible } from '@/redux/actions/header';
 
 interface HeaderCartModalAddMessageProps {
     state: boolean;
     setState: Noop;
-    openCart: Noop;
 }
 
-const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ state, setState, openCart }) => {
+const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ state, setState }) => {
     const dispatch = useDispatch();
 
     const { allCart } = useCart();
@@ -27,6 +27,10 @@ const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ s
 
     const removeItem = (item: CartItem) => {
         dispatch(removeCartItem(item));
+    };
+
+    const openCart = () => {
+        dispatch(setHeaderCartIsVisible(true));
     };
 
     return (

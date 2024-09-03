@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { fetchOrder } from '@/redux/actions/order';
-import { OrderStatusSuccess, OrderStatusError } from '@/components';
+import { OrderStatusSuccess, OrderStatusError, PageLoader } from '@/components';
 
 const OrderStatus: React.FC = () => {
     const dispatch = useDispatch();
@@ -21,7 +21,11 @@ const OrderStatus: React.FC = () => {
         dispatch(fetchOrder(parseInt(id as string)) as any);
     }, []);
 
-    return <>{isLoadedOrder ? success_status ? <OrderStatusSuccess /> : <OrderStatusError /> : null}</>;
+    if (!isLoadedOrder) {
+        return <PageLoader />;
+    }
+
+    return success_status ? <OrderStatusSuccess /> : <OrderStatusError />;
 };
 
 export default OrderStatus;
