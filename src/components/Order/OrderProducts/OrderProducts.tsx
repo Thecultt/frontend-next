@@ -30,6 +30,7 @@ const OrderProducts: React.FC = () => {
 
     const { isLoggedIn, user } = useAuthUser();
 
+    // TODO useCart
     const { items, isLoading } = useTypedSelector(({ cart }) => cart);
     const { promocode, currentDelivery, isValid } = useTypedSelector(({ order }) => order);
 
@@ -364,7 +365,7 @@ const OrderProducts: React.FC = () => {
     };
 
     React.useEffect(() => {
-        dispatch(checkAvailabilityCartItems(items) as any);
+        dispatch(checkAvailabilityCartItems(mappedCartItems) as any);
     }, []);
 
     React.useEffect(() => {

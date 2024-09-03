@@ -16,6 +16,7 @@ import NoSsr from '@/components/NoSsr/NoSsr';
 import { Footer, Header, NotificationsServer, Reglog, WaitingListCreate, WaitingListDelete } from '@/components';
 import { useReplaceLS } from '@/hooks/useReplaceLS';
 import { CATALOG_PAGES } from '@/constants/routes';
+import { useCart } from '@/hooks/catalog/useCart';
 
 import { ClientOnly } from './ClientOnly';
 
@@ -26,7 +27,8 @@ export const App = ({ children }: { children: React.ReactNode }) => {
     const isLoadedFilters = useTypedSelector(({ products_filters }) => products_filters.isLoaded);
     const isLoadedProducts = useTypedSelector(({ products }) => products.isLoaded);
     const isLoadedSelections = useTypedSelector(({ selections }) => selections.isLoaded);
-    const cartItems = useTypedSelector(({ cart }) => cart.items);
+
+    const { allCart } = useCart();
 
     const { isLoggedIn, isLoaded: isLoadedUser, user } = useAuthUser();
 
@@ -50,7 +52,7 @@ export const App = ({ children }: { children: React.ReactNode }) => {
             dispatch(fetchSelections() as any);
         }
 
-        dispatch(checkAvailabilityCartItems(cartItems) as any);
+        dispatch(checkAvailabilityCartItems(allCart) as any);
     }, []);
 
     React.useEffect(() => {

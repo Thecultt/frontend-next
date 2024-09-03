@@ -10,14 +10,14 @@ import { pushDataLayer } from '@/functions/pushDataLayer';
 
 import { CartActionTypes, CartActions, ICartItemsState } from '../types/ICart';
 
-export const checkAvailabilityCartItems = (items: ICartItemsState) => async (dispatch: Dispatch<CartActions>) => {
+export const checkAvailabilityCartItems = (items: CartItem[]) => async (dispatch: Dispatch<CartActions>) => {
     dispatch({
         type: CartActionTypes.SET_CART_IS_LOADING,
         payload: true,
     });
 
     await Promise.all(
-        Object.keys(items).map(async (article) => {
+        items.map(async (item) => {
             const {
                 data: {
                     id,
@@ -33,18 +33,18 @@ export const checkAvailabilityCartItems = (items: ICartItemsState) => async (dis
                     condition,
                     is_jewelry,
                 },
-            } = await $api.get<ProductPage>(`/product/${article}`);
+            } = await $api.get<ProductPage>(`/product/${item.article}`);
 
             const canBuy = !!availability && !is_trial;
 
             dispatch({
                 type: CartActionTypes.CHANGE_CART_ITEMS,
                 payload: {
-                    article,
+                    article: item.article,
                     data: {
                         id,
-                        checked: !canBuy ? false : items[article].checked,
-                        article,
+                        checked: !canBuy ? false : item.checked,
+                        article: item.article,
                         category,
                         subcategory,
                         image: images[0],

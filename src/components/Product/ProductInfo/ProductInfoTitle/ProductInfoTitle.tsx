@@ -57,14 +57,13 @@ const ProductInfoTitle: React.FC<Props> = ({ product, setBoutiquePopupVisible, s
     const router = useRouter();
 
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+
     const { changeHash } = useHash();
-
     const { setWaitingData } = useWaitingData();
-    const { items: cartItems } = useTypedSelector(({ cart }) => cart);
 
-    const { addToCart } = useCart();
+    const { allCart, addToCart } = useCart();
 
-    const inCart = !!cartItems[article];
+    const inCart = !!allCart.find((item) => item.id === id);
     const canBuy = !!availability && !is_trial;
 
     const categorySlug: string | undefined = CATEGORY_NAME_SLUGS[category];

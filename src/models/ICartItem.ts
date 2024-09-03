@@ -2,7 +2,7 @@ export interface CartItem {
     id: number;
     checked: boolean;
     article: string;
-    image: string;
+    image?: string;
     manufacturer: string;
     category: string;
     subcategory: string;

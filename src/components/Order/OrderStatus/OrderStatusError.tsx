@@ -18,6 +18,7 @@ import orderPay from '../orderPay';
 const OrderStatusError: React.FC = () => {
     const dispatch = useDispatch();
 
+    // TODO useCart
     const { items } = useTypedSelector(({ cart }) => cart);
 
     const {
