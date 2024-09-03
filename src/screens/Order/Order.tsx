@@ -10,6 +10,7 @@ import { pushDataLayer } from '@/functions/pushDataLayer';
 const Order: React.FC = () => {
     const { isLoggedIn, isLoaded: isLoadedUser } = useAuthUser();
 
+    // TODO useCart
     const { items } = useTypedSelector(({ cart }) => cart);
 
     React.useEffect(() => {

@@ -12,6 +12,8 @@ interface OrderFormPaymentsProps {
 
 const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) => {
     // const { sum } = useTypedSelector(({ order }) => order)
+
+    // TODO useCart
     const { items } = useTypedSelector(({ cart }) => cart);
 
     const [initWidget, setInitWidget] = React.useState(false);

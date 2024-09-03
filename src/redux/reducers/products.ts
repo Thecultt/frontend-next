@@ -60,6 +60,7 @@ const initialState: ProductsState = {
         waterproof_clock: '',
         branded_box_clock: '',
         documents_clock: '',
+        is_jewelry: false,
     },
     itemByArticleSimilar: [],
     itemByArticleIsLoaded: false,

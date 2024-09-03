@@ -4,10 +4,10 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useOnClickOutside } from 'usehooks-ts';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { setCartIsVisibleMessage } from '@/redux/actions/cart';
 import { HeaderCartModal, HeaderCartModalAddMessage } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
+import { useCart } from '@/hooks/catalog/useCart';
 
 const HeaderCart: React.FC = React.memo(() => {
     const dispatch = useDispatch();
@@ -15,8 +15,8 @@ const HeaderCart: React.FC = React.memo(() => {
     const [state, setState] = React.useState(false);
     const PopupRef = React.useRef<HTMLDivElement>(null);
 
-    const { items, isVisibleMessage } = useTypedSelector(({ cart }) => cart);
-    const itemsCount = Object.keys(items).length;
+    const { allCart, isVisibleMessage } = useCart();
+    const cartCount = allCart.length;
 
     const closeIsVisibleMessage = () => {
         dispatch(setCartIsVisibleMessage(false));
@@ -50,7 +50,7 @@ const HeaderCart: React.FC = React.memo(() => {
                     </svg>
                 </button>
 
-                {itemsCount > 0 && <span className="header-block-cart__count">{itemsCount}</span>}
+                {cartCount > 0 && <span className="header-block-cart__count">{cartCount}</span>}
             </div>
 
             <HeaderCartModalAddMessage
@@ -59,7 +59,12 @@ const HeaderCart: React.FC = React.memo(() => {
                 openCart={() => setState(true)}
             />
 
-            <HeaderCartModal state={state} setState={() => setState(false)} />
+            <HeaderCartModal
+                state={state}
+                onCloseCart={() => {
+                    setState(false);
+                }}
+            />
         </div>
     );
 });
