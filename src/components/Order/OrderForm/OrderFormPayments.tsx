@@ -13,11 +13,7 @@ interface OrderFormPaymentsProps {
 }
 
 const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) => {
-    const { cartItems } = useOrder();
-    const availableCartItems = cartItems.filter((item) => !!item.availability && !item.is_trial);
-    const checkedCartItems = availableCartItems.filter((item) => item.checked);
-
-    const totalPrice = checkedCartItems.reduce((acc, cur) => acc + cur.price, 0);
+    const { cartSum: totalPrice } = useOrder();
 
     const [initWidget, setInitWidget] = React.useState(false);
     const [isStateSplitPopup, setIsStateSplitPopup] = React.useState(false);
