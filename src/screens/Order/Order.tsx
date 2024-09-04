@@ -9,7 +9,7 @@ import { useOrder } from '@/hooks/order/useOrder';
 
 const Order: React.FC = () => {
     const { isLoggedIn, isLoaded: isLoadedUser } = useAuthUser();
-    const { cartItems } = useOrder();
+    const { cartItems, isJewelry } = useOrder();
 
     React.useEffect(() => {
         pushDataLayer('begin_checkout', {
@@ -31,7 +31,7 @@ const Order: React.FC = () => {
     }, []);
 
     return (
-        <section className="order">
+        <section className="order" key={`${isJewelry}`}>
             <div className="container">
                 <div className="order-wrapper">
                     {isLoggedIn && !isLoadedUser ? (

@@ -1,4 +1,5 @@
-import { MIN_INPUT_SYMBOLS, MAX_INPUT_SYMBOLS } from '@/constants/validation';
+import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
+import { MIN_INPUT_SYMBOLS, MAX_INPUT_SYMBOLS, PASSPORT_REGEXP } from '@/constants/validation';
 
 export interface Values {
     email: string;
@@ -11,29 +12,19 @@ export interface Values {
     house: string;
     flat: string;
     payment: string;
+    passport: string;
+    isJewelry: boolean;
+    cartSum: number;
 }
 
-interface Errors {
-    email?: string;
-    name?: string;
-    phone?: string;
-    country?: string;
-    city?: string;
-    delivery?: string;
-    street?: string;
-    house?: string;
-    flat?: string;
-    payment?: string;
-}
+type Errors = { [key in keyof Values]?: string };
 
 const validate = (values: Values) => {
     const errors: Errors = {};
 
     if (!values.email) {
         errors.email = 'Поле не может быть пустым';
-    } else if (/[А-Яа-яЁё]/i.test(values.email)) {
-        errors.email = 'Некорректный email';
-    } else if (/\s/.test(values.email)) {
+    } else if (/[А-Яа-яЁё]/i.test(values.email) || /\s/.test(values.email)) {
         errors.email = 'Некорректный email';
     } else if (values.email.length > MAX_INPUT_SYMBOLS) {
         errors.email = `Не более ${MAX_INPUT_SYMBOLS} символов`;
@@ -90,6 +81,14 @@ const validate = (values: Values) => {
 
     if (!values.payment) {
         errors.payment = 'Поле не может быть пустым';
+    }
+
+    if (values.isJewelry && values.cartSum >= JEWELRY_PASSPORT_SUM) {
+        if (!values.passport) {
+            errors.passport = 'Поле не может быть пустым';
+        } else if (!PASSPORT_REGEXP.test(values.passport)) {
+            errors.passport = 'Некорректный формат паспорта';
+        }
     }
 
     return errors;
