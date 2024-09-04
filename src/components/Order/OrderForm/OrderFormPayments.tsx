@@ -1,34 +1,22 @@
+'use client';
+
 import React from 'react';
 import { Field } from 'redux-form';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { RenderRadioSelect, Popup, ProductInfoTitleSplitPopup } from '@/components';
 import { PAYMENTS_NAMES, PAYMENTS_METHODS } from '@/constants/order';
 import { YANDEX_SPLIT_LIMIT } from '@/constants/app';
+import { useOrder } from '@/hooks/order/useOrder';
 
 interface OrderFormPaymentsProps {
     paymentValue: string;
 }
 
 const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) => {
-    // const { sum } = useTypedSelector(({ order }) => order)
-
-    // TODO useCart
-    const { items } = useTypedSelector(({ cart }) => cart);
+    const { cartSum: totalPrice } = useOrder();
 
     const [initWidget, setInitWidget] = React.useState(false);
     const [isStateSplitPopup, setIsStateSplitPopup] = React.useState(false);
-
-    const totalPrice = Object.keys(items)
-        .map((article) => items[article])
-        .filter((item) => item.availability && !item.is_trial && item.checked)
-        .map((item) => item.price).length
-        ? Object.keys(items)
-              .map((article) => items[article])
-              .filter((item) => item.availability && !item.is_trial && item.checked)
-              .map((item) => item.price)
-              .reduce((a: number, b: number) => a + b)
-        : 0;
 
     React.useEffect(() => {
         if (!initWidget && paymentValue === 'Яндекс Сплит') {
