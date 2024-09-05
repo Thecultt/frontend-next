@@ -1,3 +1,5 @@
+'use client';
+
 import { LS_KEYS } from '@/constants/keys';
 import { useLS } from '../useLS';
 

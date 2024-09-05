@@ -10,7 +10,7 @@ const selectionsReducer = (state = initialState, action: SelectionsActions): ISe
         case SelectionsActionType.SET_ITEMS:
             return {
                 ...state,
-                items: action.payload,
+                items: action.payload.sort((a, b) => b.id - a.id),
                 isLoaded: true,
             };
         default:
