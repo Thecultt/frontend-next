@@ -109,8 +109,7 @@ export { default as BrandsListBlock } from './Brands/BrandsList/BrandsListBlock'
 // Catalog
 // CatalogBanner
 export { default as CatalogBanner } from './Catalog/CatalogBanner/CatalogBanner';
-// CatalogBannerMedia
-export { default as CatalogBannerMedia } from './Catalog/CatalogBannerMedia/CatalogBannerMedia';
+
 // CatalogFiltersTop
 export { default as CatalogFiltersTop } from './Catalog/CatalogFiltersTop/CatalogFiltersTop';
 export { default as CatalogFiltersTopBoutique } from './Catalog/CatalogFiltersTop/CatalogFiltersTopBoutique';
