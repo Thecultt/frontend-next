@@ -10,7 +10,7 @@ const initialState: CabinetSellState = {
     isSend: false,
     isSending: false,
 
-    currentStep: CabinetSellStepKeys.COOPERATION,
+    currentStep: CabinetSellStepKeys.DELIVERY,
     currentType: CabinetSellTypes.SELL,
 
     isLoadedParameters: false,
