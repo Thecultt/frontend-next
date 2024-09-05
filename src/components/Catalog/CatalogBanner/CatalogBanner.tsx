@@ -1,5 +1,6 @@
+'use client';
+
 import React from 'react';
-import Link from 'next/link';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
@@ -11,8 +12,9 @@ import CatalogBannerImagePriceDrop from '@/assets/images/catalog/catalog-banner-
 import CatalogBannerImagePriceDrop2 from '@/assets/images/catalog/catalog-banner-price-drop2.jpg';
 import CatalogBannerImageBoutique from '@/assets/images/catalog/catalog-banner-boutique.jpg';
 import CatalogBannerImagePopular from '@/assets/images/catalog/catalog-banner-popular.jpg';
-import CatalogBannerImageAutumn from '@/assets/images/catalog/catalog-banner-price-autumn-promocode.jpg';
 import CatalogBannerImageConcierge from '@/assets/images/concierge/concierge-main.jpg';
+
+import { CatalogBannerTemplate } from './CatalogBannerTemplate';
 
 const CatalogBanner: React.FC = React.memo(() => {
     const {
@@ -23,191 +25,92 @@ const CatalogBanner: React.FC = React.memo(() => {
     const categories = category_slug ? [CATEGORY_SLUG_NAMES[category_slug]] : selectedCategories;
     const currentSelection = selectionId ? selections.find(({ id }) => id.toString() === selectionId) ?? null : null;
 
-    if (category_slug === 'obuv' || category_slug === 'aksessuary') {
+    if (
+        (category_slug && [CATEGORY_SLUGS.shoes, CATEGORY_SLUGS.accessories].includes(category_slug)) ||
+        (categories.length === 1 &&
+            (categories[0] === CATEGORY_NAMES.shoes || categories[0] === CATEGORY_NAMES.accessories)) ||
+        sort === SORT.a
+    ) {
         return (
-            <div className="catalog-banner">
-                <div
-                    className="catalog-banner-image"
-                    style={{
-                        backgroundImage: `url("${CatalogBannerImageAutumn.src}")`,
-                    }}
-                />
-                <div className="catalog-banner-text">
-                    <h3 className="catalog-banner-text__title">
-                        5 000 ₽ на ваш гардероб <br />к осеннему сезону
-                    </h3>
-                    <p className="catalog-banner-text__description">
-                        Решайтесь: промокод AUTUMN24 действует с&nbsp;28&nbsp;августа по&nbsp;4&nbsp;сентября
-                        на&nbsp;все лоты от&nbsp;70 000₽. Ваша новая сумка мечты ждёт здесь:
-                    </p>
-                    <Link
-                        href={getCatalogFiltersUrl({
-                            category_slug: CATEGORY_SLUGS.new,
-                        })}
-                        className="btn catalog-banner-text__btn"
-                    >
-                        Популярно сейчас
-                    </Link>
-                </div>
-            </div>
+            <CatalogBannerTemplate
+                image="https://storage.yandexcloud.net/prod-cultt-banner/15/mEnb5jp0fXe8jZsR6332V31ZWnLpqM595tnSj3An.jpg"
+                title="Осенние лоты"
+                description="Мастхэвы, без которых мы не представляем свой осенний гардероб"
+                link={{
+                    href: getCatalogFiltersUrl({
+                        selection: SELECTIONS_IDS.autumnBags.toString(),
+                    }),
+                    title: 'В подборку',
+                }}
+            />
         );
     }
 
-    if (sort === SORT.a) {
+    if (
+        (category_slug && [CATEGORY_SLUGS.bags, CATEGORY_SLUGS.decorations].includes(category_slug)) ||
+        (categories.length === 1 &&
+            (categories[0] === CATEGORY_NAMES.bags || categories[0] === CATEGORY_NAMES.decorations))
+    ) {
         return (
-            <div className="catalog-banner">
-                <div
-                    className="catalog-banner-image"
-                    style={{
-                        backgroundImage: `url("${CatalogBannerImageAutumn.src}")`,
-                    }}
-                />
-                <div className="catalog-banner-text">
-                    <h3 className="catalog-banner-text__title">
-                        5 000 ₽ на ваш гардероб <br />к осеннему сезону
-                    </h3>
-                    <p className="catalog-banner-text__description">
-                        Решайтесь: промокод AUTUMN24 действует с&nbsp;28&nbsp;августа по&nbsp;4&nbsp;сентября
-                        на&nbsp;все лоты от&nbsp;70 000₽. Ваша новая сумка мечты ждёт вас.
-                    </p>
-                </div>
-            </div>
-        );
-    }
-
-    if (category_slug === 'sumki' || category_slug === 'ukrasheniia') {
-        return (
-            <div className="catalog-banner">
-                <div
-                    className="catalog-banner-image"
-                    style={{
-                        backgroundImage: `url("${CatalogBannerImageConcierge.src}")`,
-                        backgroundPosition: 'center -50px',
-                    }}
-                />
-                <div className="catalog-banner-text">
-                    <h3 className="catalog-banner-text__title">
+            <CatalogBannerTemplate
+                image={CatalogBannerImageConcierge.src}
+                imageExtraStyles={{ backgroundPosition: 'center -50px' }}
+                title={
+                    <>
                         Доставим для вас сумки <br /> и&nbsp;ювелирные украшения
-                    </h3>
-                    <p className="catalog-banner-text__description">
+                    </>
+                }
+                description={
+                    <>
                         Консьерж-сервис THE CULTT доставит для вас из&nbsp;Европы и&nbsp;США любые позиции
                         с&nbsp;официальных сайтов Herm&egrave;s, Chanel, Cartier, Panerai и&nbsp;других культовых
                         брендов
-                    </p>
-                    <Link href={APP_ROUTE.concierge.root} className="btn catalog-banner-text__btn">
-                        Заказать через консьержа
-                    </Link>
-                </div>
-            </div>
+                    </>
+                }
+                link={{
+                    title: 'Заказать через консьержа',
+                    href: APP_ROUTE.concierge.root,
+                }}
+            />
         );
     }
 
     return price_drop ? (
-        <div className="catalog-banner">
-            <div
-                className="catalog-banner-image"
-                style={{
-                    backgroundImage: `url("${CatalogBannerImagePriceDrop.src}")`,
-                }}
-            />
-            <div className="catalog-banner-text">
-                <h3 className="catalog-banner-text__title">THE CULTT SALE</h3>
-                <p className="catalog-banner-text__description">
-                    Цена на эти лоты была недавно снижена. Успейте забрать их, пока это не сделал кто-то ещё.
-                </p>
-            </div>
-        </div>
+        <CatalogBannerTemplate
+            image={CatalogBannerImagePriceDrop.src}
+            title="THE CULTT SALE"
+            description="Цена на эти лоты была недавно снижена. Успейте забрать их, пока это не сделал кто-то ещё."
+        />
     ) : boutique ? (
-        <div className="catalog-banner">
-            <div
-                className="catalog-banner-image"
-                style={{
-                    backgroundImage: `url("${CatalogBannerImageBoutique.src}")`,
-                }}
-            />
-            <div className="catalog-banner-text">
-                <h3 className="catalog-banner-text__title">Из бутика</h3>
-                <p className="catalog-banner-text__description">
-                    Коллекция лотов, которые мы получили напрямую из бутиков-партнеров или от частных байеров. Все
-                    аксессуары в этой подборке — новые и никогда не были в использовании.
-                </p>
-            </div>
-        </div>
+        <CatalogBannerTemplate
+            image={CatalogBannerImageBoutique.src}
+            title="Из бутика"
+            description="Коллекция лотов, которые мы получили напрямую из бутиков-партнеров или от частных байеров. Все аксессуары в этой подборке — новые и никогда не были в использовании."
+        />
     ) : currentSelection ? (
-        <div className="catalog-banner">
-            <div
-                className="catalog-banner-image"
-                style={{
-                    backgroundImage: `url("${currentSelection.background_image}")`,
-                }}
-            />
-            <div className="catalog-banner-text">
-                <h3 className="catalog-banner-text__title">{currentSelection.title}</h3>
-                <p className="catalog-banner-text__description">{currentSelection.description}</p>
-            </div>
-        </div>
-    ) : categories.length === 1 && categories[0] === CATEGORY_NAMES.bags ? (
-        <div className="catalog-banner">
-            <div
-                className="catalog-banner-image"
-                style={{
-                    backgroundImage:
-                        'url("https://storage.yandexcloud.net/prod-cultt-banner/4/vjV7bKViGmD432RLEDaB8D8Y3GjiklBXktYFrjy6.jpg")',
-                }}
-            />
-            <div className="catalog-banner-text">
-                <h3 className="catalog-banner-text__title">Летние сумки</h3>
-                <p className="catalog-banner-text__description">
-                    Мастхэвы, без которых мы не представляем свой летний гардероб
-                </p>
-                <Link
-                    href={getCatalogFiltersUrl({
-                        selection: SELECTIONS_IDS.summerBags.toString(),
-                    })}
-                    className="btn catalog-banner-text__btn"
-                >
-                    Смотреть подборку
-                </Link>
-            </div>
-        </div>
+        <CatalogBannerTemplate
+            image={currentSelection.background_image ?? ''}
+            title={currentSelection.title ?? ''}
+            description={currentSelection.description ?? ''}
+        />
     ) : sort === SORT.popular ? (
-        <div className="catalog-banner">
-            <div
-                className="catalog-banner-image"
-                style={{
-                    backgroundImage: `url("${CatalogBannerImagePopular.src}")`,
-                }}
-            />
-            <div className="catalog-banner-text">
-                <h3 className="catalog-banner-text__title">Горячие лоты</h3>
-                <p className="catalog-banner-text__description">
-                    Успейте заказать: лоты в единственном экземпляре и с максимумом «сердечек»
-                </p>
-            </div>
-        </div>
+        <CatalogBannerTemplate
+            image={CatalogBannerImagePopular.src}
+            title="Горячие лоты"
+            description="Успейте заказать: лоты в единственном экземпляре и с максимумом «сердечек»"
+        />
     ) : (
-        <div className="catalog-banner">
-            <div
-                className="catalog-banner-image"
-                style={{
-                    backgroundImage: `url("${CatalogBannerImagePriceDrop2.src}")`,
-                }}
-            />
-            <div className="catalog-banner-text">
-                <h3 className="catalog-banner-text__title">THE CULTT SALE</h3>
-                <p className="catalog-banner-text__description">
-                    Культовые лоты по сниженным ценам — успейте забрать их первыми
-                </p>
-                <Link
-                    href={getCatalogFiltersUrl({
-                        category_slug: CATEGORY_SLUGS.sale,
-                    })}
-                    className="btn catalog-banner-text__btn"
-                >
-                    Смотреть подборку
-                </Link>
-            </div>
-        </div>
+        <CatalogBannerTemplate
+            image={CatalogBannerImagePriceDrop2.src}
+            title="THE CULTT SALE"
+            description="Культовые лоты по сниженным ценам — успейте забрать их первыми"
+            link={{
+                title: 'Смотреть подборку',
+                href: getCatalogFiltersUrl({
+                    category_slug: CATEGORY_SLUGS.sale,
+                }),
+            }}
+        />
     );
 });
 
