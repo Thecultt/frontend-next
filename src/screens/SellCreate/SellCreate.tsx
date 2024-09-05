@@ -24,6 +24,7 @@ import {
 } from '@/components';
 import { sendMindbox } from '@/functions/mindbox';
 import { pushDataLayer } from '@/functions/pushDataLayer';
+
 import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
 
 const SellCreate: React.FC = () => {
