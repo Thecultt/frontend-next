@@ -17,7 +17,7 @@ const CatalogFiltersSelections: React.FC = () => {
     } = useCatalogFilters();
 
     const { selections } = useTypedSelector(({ products_filters }) => products_filters);
-    const selectionsIds = Object.keys(selections);
+    const selectionsIds = Object.keys(selections).sort((a, b) => +b - +a);
 
     const onChangeSetSelection = (selectionId: string) => {
         router.push(

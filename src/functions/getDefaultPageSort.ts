@@ -2,11 +2,10 @@ import { CATEGORY_SLUGS, SORT } from '@/constants/catalog';
 
 interface IParams {
     categorySlug?: string;
-    selectionId?: string;
 }
 
-export const getDefaultPageSort = ({ categorySlug, selectionId }: IParams) => {
-    if ((categorySlug && [CATEGORY_SLUGS.sale, CATEGORY_SLUGS.popular].includes(categorySlug)) || !!selectionId) {
+export const getDefaultPageSort = ({ categorySlug }: IParams) => {
+    if (categorySlug && [CATEGORY_SLUGS.sale, CATEGORY_SLUGS.popular].includes(categorySlug)) {
         return SORT.popular;
     }
 
