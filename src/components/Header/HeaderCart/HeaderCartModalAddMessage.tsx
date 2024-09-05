@@ -4,7 +4,6 @@ import React from 'react';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { removeCartItem } from '@/redux/actions/cart';
 import { CartProductItem } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
@@ -12,21 +11,26 @@ import { CartItem } from '@/models/ICartItem';
 import { APP_ROUTE } from '@/constants/routes';
 import { XIcon } from '@/assets/icons';
 import { Noop } from '@/types/functions';
+import { useCart } from '@/hooks/catalog/useCart';
+import { setHeaderCartIsVisible } from '@/redux/actions/header';
 
 interface HeaderCartModalAddMessageProps {
     state: boolean;
     setState: Noop;
-    openCart: Noop;
 }
 
-const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ state, setState, openCart }) => {
+const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ state, setState }) => {
     const dispatch = useDispatch();
 
-    const { items } = useTypedSelector(({ cart }) => cart);
-    const item: CartItem | undefined = items[Object.keys(items)[Object.keys(items).length - 1]];
+    const { allCart } = useCart();
+    const item: CartItem | undefined = allCart[allCart.length - 1];
 
     const removeItem = (item: CartItem) => {
         dispatch(removeCartItem(item));
+    };
+
+    const openCart = () => {
+        dispatch(setHeaderCartIsVisible(true));
     };
 
     return (

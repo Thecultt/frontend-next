@@ -305,6 +305,7 @@ export { default as FaqTheCultt } from './Faq/FaqTheCultt';
 // Cart
 export { default as CartItemBlock } from './Cart/CartItemBlock';
 export { CartProductItem } from './Cart/CartProductItem/CartProductItem';
+export { CartList } from './Cart/CartList/CartList';
 
 // CinemaArtistic
 export { default as CinemaArtisticExhibits } from './CinemaArtistic/CinemaArtisticExhibits';

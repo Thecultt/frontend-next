@@ -1,48 +1,32 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 
 import { XIcon } from '@/assets/icons';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { changeCheckCartItem, removeCartItem } from '@/redux/actions/cart';
-import { CartProductItem } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
-import { useAuthUser } from '@/hooks/useAuthUser';
-import { APP_ROUTE } from '@/constants/routes';
 import { pushDataLayer } from '@/functions/pushDataLayer';
-import { CartItem } from '@/models/ICartItem';
-import { formatMoney } from '@/functions/formatMoney';
-import { Noop } from '@/types/functions';
+import { useCart } from '@/hooks/catalog/useCart';
+import { CartList } from '@/components';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { setHeaderCartIsVisible } from '@/redux/actions/header';
 
-interface HeaderCartModalProps {
-    state: boolean;
-    setState: Noop;
-}
-
-const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) => {
+const HeaderCartModal: React.FC = () => {
     const dispatch = useDispatch();
 
-    const { isLoaded: isLoadedUser } = useAuthUser();
-    const { items } = useTypedSelector(({ cart }) => cart);
+    const { cartIsVisible } = useTypedSelector(({ header }) => header);
 
-    const mappedItems = Object.keys(items).map((article) => items[article]);
-    const availableItems = mappedItems.filter((item) => !!item.availability && !item.is_trial && item.checked);
-    const cartSum = formatMoney(availableItems.reduce((acc, cur) => acc + cur.price, 0));
+    const { allCart, cart, jewelryCart } = useCart();
+    const hasTitles = jewelryCart.length > 0 && cart.length > 0;
 
-    const changeCheck = (article: string, status: boolean) => {
-        dispatch(changeCheckCartItem(article, status));
-    };
-
-    const removeItem = (item: CartItem) => {
-        dispatch(removeCartItem(item));
+    const closeCart = () => {
+        dispatch(setHeaderCartIsVisible(false));
     };
 
     React.useEffect(() => {
-        if (state) {
+        if (cartIsVisible) {
             pushDataLayer('view_cart', {
-                items: mappedItems.map((item, index) => ({
+                items: allCart.map((item, index) => ({
                     item_name: item.name,
                     item_id: `${item.id}`,
                     price: `${item.price}`,
@@ -58,52 +42,28 @@ const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) =>
                 })),
             });
         }
-    }, [state]);
+    }, [cartIsVisible]);
 
     return (
         <div
             className={getClassNames('header-block-cart-modal', {
-                active: state,
+                active: cartIsVisible,
             })}
         >
             <div className="header-block-cart-modal__header">
                 <p className="header-block-cart-modal__title">Корзина:</p>
-                <button type="button" className="header-block-cart-modal__close" onClick={setState}>
+                <button type="button" className="header-block-cart-modal__close" onClick={closeCart}>
                     <XIcon />
                 </button>
             </div>
 
-            {mappedItems.length ? (
+            {allCart.length > 0 ? (
                 <>
-                    <div className="header-block-cart-modal__items">
-                        {mappedItems.map((item) => (
-                            <CartProductItem
-                                key={item.id}
-                                data={item}
-                                onCheck={() => changeCheck(item.article, !item.checked)}
-                                onRemove={() => removeItem(item)}
-                            />
-                        ))}
-                    </div>
+                    {jewelryCart.length > 0 && (
+                        <CartList cart={jewelryCart} hasTittle={hasTitles} onLinkClick={closeCart} isJewelry />
+                    )}
 
-                    <div className="header-block-cart-modal-total">
-                        <p className="header-block-cart-modal-total__description">
-                            Товары - {availableItems.length} шт.
-                        </p>
-                        <p className="header-block-cart-modal-total__sum">{cartSum}</p>
-                    </div>
-
-                    <Link
-                        href={APP_ROUTE.order}
-                        className={getClassNames('btn header-block-cart-modal__btn', {
-                            disabled: !mappedItems.filter((item) => item.checked).length,
-                        })}
-                        onClick={isLoadedUser ? setState : undefined}
-                        scroll={false}
-                        prefetch={false}
-                    >
-                        Перейти к оформлению
-                    </Link>
+                    {cart.length > 0 && <CartList cart={cart} hasTittle={hasTitles} onLinkClick={closeCart} />}
                 </>
             ) : (
                 <div className="header-block-cart-modal-null">

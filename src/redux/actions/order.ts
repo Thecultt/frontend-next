@@ -265,6 +265,8 @@ export const sendCreateOrder =
             payment_type: number;
 
             coupon_id: number;
+
+            passport?: string;
         },
         onComplete: (orderId: number, orderNum: string) => void,
     ) =>
