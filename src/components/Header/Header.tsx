@@ -29,6 +29,7 @@ import { logoPath } from '@/assets/icons';
 
 import { HeaderSearchInput } from './HeaderSearchInput';
 import { HeaderSelectionsHoverMenu } from './HeaderSelectionsHoverMenu';
+import { HeaderCatalogButton } from './HeaderCatalogButton/HeaderCatalogButton';
 import { HEADER_MENU_CATEGORIES } from './constants';
 
 const Header: React.FC = () => {
@@ -113,7 +114,7 @@ const Header: React.FC = () => {
                             <div className="container">
                                 <div className="header-wrapper">
                                     <div className="header-wrapper-block">
-                                        <div className="header-block">
+                                        <div className="header-block" style={{ flex: 1 }}>
                                             <Link href={APP_ROUTE.home} className="header-block-logo">
                                                 <BaseImage
                                                     src={logoPath}
@@ -121,6 +122,8 @@ const Header: React.FC = () => {
                                                     className="header-block-logo__image"
                                                 />
                                             </Link>
+
+                                            <HeaderCatalogButton />
 
                                             <HeaderSearchInput
                                                 ref={inputRef}

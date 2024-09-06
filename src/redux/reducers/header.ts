@@ -8,6 +8,7 @@ const initialState: HeaderState = {
         items: [],
     },
     cartIsVisible: false,
+    catalogMenuIsVisible: false,
 };
 
 const header = (state = initialState, action: HeaderActions): HeaderState => {
@@ -55,6 +56,20 @@ const header = (state = initialState, action: HeaderActions): HeaderState => {
         return {
             ...state,
             cartIsVisible: action.payload,
+        };
+    }
+
+    if (action.type === HeaderActionTypes.SET_HEADER_CATALOG_MENU_IS_VISIBLE) {
+        return {
+            ...state,
+            catalogMenuIsVisible: action.payload,
+        };
+    }
+
+    if (action.type === HeaderActionTypes.TOGGLE_HEADER_CATALOG_MENU_IS_VISIBLE) {
+        return {
+            ...state,
+            catalogMenuIsVisible: !state.catalogMenuIsVisible,
         };
     }
 

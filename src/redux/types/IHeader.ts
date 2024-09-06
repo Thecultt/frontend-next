@@ -8,6 +8,7 @@ export interface HeaderState {
         items: Product[];
     };
     cartIsVisible: boolean;
+    catalogMenuIsVisible: boolean;
 }
 
 export enum HeaderActionTypes {
@@ -17,6 +18,9 @@ export enum HeaderActionTypes {
     SET_HEADER_SEARCH_ITEMS = 'SET_HEADER_SEARCH_ITEMS',
 
     SET_HEADER_CART_IS_VISIBLE = 'SET_HEADER_CART_IS_VISIBLE',
+
+    SET_HEADER_CATALOG_MENU_IS_VISIBLE = 'SET_HEADER_CATALOG_MENU_IS_VISIBLE',
+    TOGGLE_HEADER_CATALOG_MENU_IS_VISIBLE = 'TOGGLE_HEADER_CATALOG_MENU_IS_VISIBLE',
 }
 
 interface setHeaderSearchValue {
@@ -44,9 +48,21 @@ interface setHeaderCartIsVisible {
     payload: boolean;
 }
 
+interface setHeaderCatalogMenuIsVisible {
+    type: HeaderActionTypes.SET_HEADER_CATALOG_MENU_IS_VISIBLE;
+    payload: boolean;
+}
+
+interface toggleHeaderCatalogMenuIsVisible {
+    type: HeaderActionTypes.TOGGLE_HEADER_CATALOG_MENU_IS_VISIBLE;
+    payload: undefined;
+}
+
 export type HeaderActions =
     | setHeaderSearchValue
     | setHeaderSearchItems
     | setHeaderSearchTotalCount
     | setHeaderSearchIsFetch
-    | setHeaderCartIsVisible;
+    | setHeaderCartIsVisible
+    | setHeaderCatalogMenuIsVisible
+    | toggleHeaderCatalogMenuIsVisible;
