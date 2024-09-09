@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, Field } from 'redux-form';
+import Link from 'next/link';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useAuthUser } from '@/hooks/useAuthUser';
@@ -9,6 +10,8 @@ import { setCabinetSellCurrentStep } from '@/redux/actions/cabinet_sell';
 import { fetchOrderAddressCitys, fetchOrderAddressStreet } from '@/redux/actions/order';
 import { SellBackBtn, SellDeliveryTypes, Loader, RenderInputHints, RenderInput, RenderTextarea } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
+
+import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
 
 import validate from './validate';
 
@@ -158,6 +161,12 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, 
                 </>
             ) : null}
 
+            <p className="sell-block__policy">
+                Нажимая кнопку, вы принимаете условия{' '}
+                <a href={EXTERNAL_LINKS.personalData}>обработки персональных данных</a> и{' '}
+                <Link href={APP_ROUTE.help.sellers}>условия продажи</Link>
+            </p>
+
             {isSending ? (
                 <button className="btn disabled loader sell-block__btn" disabled>
                     <Loader />
@@ -169,7 +178,7 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, 
                     })}
                     disabled={submitting}
                 >
-                    Продолжить
+                    Отправить заявку
                 </button>
             )}
         </form>
