@@ -1,15 +1,15 @@
 import React from 'react';
 
 import { VISIT_AVAILABLE } from '@/constants/app';
+import { DELIVERY_TYPES } from '@/constants/sell';
+
 import { getClassNames } from '@/functions/getClassNames';
 
 interface SellDeliveryTypesProps {
     currentCity: string;
-    currentTypeDelivery: string;
-    setCurrentTypeDelivery: (value: string) => void;
+    currentTypeDelivery: DELIVERY_TYPES;
+    setCurrentTypeDelivery: (value: DELIVERY_TYPES) => void;
 }
-
-// TODO вынести delivery types в enum/const
 
 const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
     currentCity,
@@ -17,8 +17,8 @@ const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
     setCurrentTypeDelivery,
 }) => {
     React.useEffect(() => {
-        if (!VISIT_AVAILABLE && currentTypeDelivery === 'Лично в офис') {
-            setCurrentTypeDelivery('Курьер');
+        if (!VISIT_AVAILABLE && currentTypeDelivery === DELIVERY_TYPES.office) {
+            setCurrentTypeDelivery(DELIVERY_TYPES.courier);
         }
     }, [currentTypeDelivery]);
 
@@ -28,9 +28,9 @@ const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
                 <>
                     <div
                         className={getClassNames('sell-block-delivery-types-block', {
-                            active: currentTypeDelivery === 'Курьер',
+                            active: currentTypeDelivery === DELIVERY_TYPES.courier,
                         })}
-                        onClick={() => setCurrentTypeDelivery('Курьер')}
+                        onClick={() => setCurrentTypeDelivery(DELIVERY_TYPES.courier)}
                     >
                         <svg width="40" height="24" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -48,7 +48,7 @@ const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
 
                     <div
                         className={getClassNames('sell-block-delivery-types-block', {
-                            active: currentTypeDelivery === 'Лично в офис',
+                            active: currentTypeDelivery === DELIVERY_TYPES.office,
                             disabled: !VISIT_AVAILABLE,
                         })}
                         onClick={() => {
@@ -56,7 +56,7 @@ const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
                                 return;
                             }
 
-                            setCurrentTypeDelivery('Лично в офис');
+                            setCurrentTypeDelivery(DELIVERY_TYPES.office);
                         }}
                     >
                         <svg width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -86,9 +86,9 @@ const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
             ) : (
                 <div
                     className={getClassNames('sell-block-delivery-types-block full', {
-                        active: currentTypeDelivery === 'CDEK',
+                        active: currentTypeDelivery === DELIVERY_TYPES.cdek,
                     })}
-                    onClick={() => setCurrentTypeDelivery('CDEK')}
+                    onClick={() => setCurrentTypeDelivery(DELIVERY_TYPES.cdek)}
                 >
                     <svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path

@@ -1,7 +1,8 @@
-import { CATEGORY_NAMES } from '@/constants/catalog';
+import { CATEGORY_NAMES } from '@/constants/sell';
 
 export interface validateInfoValues {
     category: string;
+    precious_stones_in_kit: string;
     brand: string;
     model: string;
     condition: string;
@@ -14,6 +15,7 @@ export interface validateInfoValues {
 
 interface validateInfoErrors {
     category?: string;
+    precious_stones_in_kit?: string;
     brand?: string;
     model?: string;
     condition?: string;
@@ -48,6 +50,12 @@ const validate = (values: validateInfoValues) => {
 
     if (!values.client_kit) {
         errors.client_kit = 'Поле не может быть пустым';
+    }
+
+    if (values.category === CATEGORY_NAMES.jewelry || values.category === CATEGORY_NAMES.watch) {
+        if (!values.precious_stones_in_kit) {
+            errors.precious_stones_in_kit = 'Поле не может быть пустым';
+        }
     }
 
     if (values.category === CATEGORY_NAMES.shoes) {
