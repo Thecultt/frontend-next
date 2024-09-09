@@ -100,8 +100,10 @@ export const HeaderCatalogMenu = () => {
                                     className="header-catalog-menu-boutique"
                                     onClick={closeCatalogMenu}
                                 >
-                                    <span className="header-catalog-menu-boutique__title">Из бутика</span>
-                                    <span className="header-catalog-menu-boutique__text">Новые, не были в носке</span>
+                                    <span className="header-catalog-menu-boutique__title">Новое</span>
+                                    <span className="header-catalog-menu-boutique__text">
+                                        Лоты от брендов и из бутиков-партнеров
+                                    </span>
                                 </Link>
                             </div>
                             <div className="header-catalog-menu__column header-catalog-menu-nesting">

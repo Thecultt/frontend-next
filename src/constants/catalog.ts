@@ -9,7 +9,13 @@ export const CATEGORY_NAMES = {
     jewelry: 'Ювелирные изделия',
 };
 
-export const CATEGORIES = Object.values(CATEGORY_NAMES);
+export const CATEGORIES = [
+    CATEGORY_NAMES.bags,
+    CATEGORY_NAMES.jewelry,
+    CATEGORY_NAMES.accessories,
+    CATEGORY_NAMES.shoes,
+    CATEGORY_NAMES.decorations,
+];
 
 export const CATEGORY_SLUGS = {
     new: 'new',
