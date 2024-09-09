@@ -329,7 +329,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                                     ? parameters[currentCategory].conditions.map((condition) => condition.name)
                                     : []
                             }
-                            disabled={parameters[currentCategory] ? false : true}
+                            disabled={!parameters[currentCategory]}
                         />
                     </div>
 
@@ -345,7 +345,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                                     ? parameters[currentCategory].defects.map((defect) => defect.name)
                                     : []
                             }
-                            disabled={parameters[currentCategory] ? false : true}
+                            disabled={!parameters[currentCategory]}
                         />
                     </div>
 
@@ -369,7 +369,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                                     ? parameters[currentCategory].kits.map((kit) => kit.name)
                                     : []
                             }
-                            disabled={parameters[currentCategory] ? false : true}
+                            disabled={!parameters[currentCategory]}
                         />
                     </div>
 

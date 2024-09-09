@@ -12,7 +12,7 @@ import { SellBackBtn, SellDeliveryTypes, Loader, RenderInputHints, RenderInput, 
 import { getClassNames } from '@/functions/getClassNames';
 
 import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
-import { DELIVERY_TYPES } from '@/constants/sell';
+import { DeliveryTypes } from '@/constants/sell';
 
 import validate from './validate';
 
@@ -23,7 +23,7 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, 
         title: string;
         value: string;
     }>({ title: '', value: '' });
-    const [currentTypeDelivery, setCurrentTypeDelivery] = React.useState(DELIVERY_TYPES.courier);
+    const [currentTypeDelivery, setCurrentTypeDelivery] = React.useState(DeliveryTypes.courier);
 
     const { user } = useAuthUser();
 
@@ -41,9 +41,9 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, 
     React.useEffect(() => {
         // TODO: Вынести в const
         if (currentCity.title.toLocaleLowerCase().indexOf('москва') !== -1) {
-            setCurrentTypeDelivery(DELIVERY_TYPES.courier);
+            setCurrentTypeDelivery(DeliveryTypes.courier);
         } else {
-            setCurrentTypeDelivery(DELIVERY_TYPES.cdek);
+            setCurrentTypeDelivery(DeliveryTypes.cdek);
         }
     }, [currentCity]);
 
@@ -94,7 +94,7 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, 
                     <SellDeliveryTypes
                         currentCity={currentCity.title}
                         currentTypeDelivery={currentTypeDelivery}
-                        setCurrentTypeDelivery={(value: DELIVERY_TYPES) => setCurrentTypeDelivery(value)}
+                        setCurrentTypeDelivery={(value: DeliveryTypes) => setCurrentTypeDelivery(value)}
                     />
 
                     {currentTypeDelivery === 'Лично в офис' ? (

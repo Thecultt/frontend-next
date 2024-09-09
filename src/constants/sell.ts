@@ -31,7 +31,7 @@ export const SELL_TYPES = [
     },
 ];
 
-export enum DELIVERY_TYPES {
+export enum DeliveryTypes {
     cdek = 'CDEK',
     courier = 'Курьер',
     office = 'Лично в офис',
