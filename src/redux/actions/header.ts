@@ -52,3 +52,8 @@ export const setHeaderCatalogMenuIsVisible = (value: boolean) => ({
 export const toggleHeaderCatalogMenuIsVisible = () => ({
     type: HeaderActionTypes.TOGGLE_HEADER_CATALOG_MENU_IS_VISIBLE,
 });
+
+export const setHeaderTopMessageHeight = (value: number) => ({
+    type: HeaderActionTypes.SET_HEADER_TOP_MESSAGE_HEIGHT,
+    payload: value,
+});

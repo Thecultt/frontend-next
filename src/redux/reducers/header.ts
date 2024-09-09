@@ -9,6 +9,7 @@ const initialState: HeaderState = {
     },
     cartIsVisible: false,
     catalogMenuIsVisible: false,
+    topMessageHeight: 0,
 };
 
 const header = (state = initialState, action: HeaderActions): HeaderState => {
@@ -70,6 +71,13 @@ const header = (state = initialState, action: HeaderActions): HeaderState => {
         return {
             ...state,
             catalogMenuIsVisible: !state.catalogMenuIsVisible,
+        };
+    }
+
+    if (action.type === HeaderActionTypes.SET_HEADER_TOP_MESSAGE_HEIGHT) {
+        return {
+            ...state,
+            topMessageHeight: action.payload,
         };
     }
 

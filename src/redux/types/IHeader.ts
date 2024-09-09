@@ -9,6 +9,7 @@ export interface HeaderState {
     };
     cartIsVisible: boolean;
     catalogMenuIsVisible: boolean;
+    topMessageHeight: number;
 }
 
 export enum HeaderActionTypes {
@@ -21,6 +22,8 @@ export enum HeaderActionTypes {
 
     SET_HEADER_CATALOG_MENU_IS_VISIBLE = 'SET_HEADER_CATALOG_MENU_IS_VISIBLE',
     TOGGLE_HEADER_CATALOG_MENU_IS_VISIBLE = 'TOGGLE_HEADER_CATALOG_MENU_IS_VISIBLE',
+
+    SET_HEADER_TOP_MESSAGE_HEIGHT = 'SET_HEADER_TOP_MESSAGE_HEIGHT',
 }
 
 interface setHeaderSearchValue {
@@ -58,6 +61,11 @@ interface toggleHeaderCatalogMenuIsVisible {
     payload: undefined;
 }
 
+interface setHeaderTopMessageHeight {
+    type: HeaderActionTypes.SET_HEADER_TOP_MESSAGE_HEIGHT;
+    payload: number;
+}
+
 export type HeaderActions =
     | setHeaderSearchValue
     | setHeaderSearchItems
@@ -65,4 +73,5 @@ export type HeaderActions =
     | setHeaderSearchIsFetch
     | setHeaderCartIsVisible
     | setHeaderCatalogMenuIsVisible
-    | toggleHeaderCatalogMenuIsVisible;
+    | toggleHeaderCatalogMenuIsVisible
+    | setHeaderTopMessageHeight;
