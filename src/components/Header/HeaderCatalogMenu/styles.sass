@@ -3,21 +3,21 @@
 
 .header-catalog-menu-backdrop
     position: fixed
-    top: $headerHeight
+    top: calc(#{$headerHeight} + var(--top-message-height))
     left: 0
     right: 0
     width: 100%
-    height: calc(100% - #{$headerHeight})
+    height: calc(100% - #{$headerHeight} - var(--top-message-height))
     background-color: $blackTransparent
     z-index: $catalogMenuZIndex
 
 .header-catalog-menu
     position: fixed
-    top: $headerHeight
+    top: calc(#{$headerHeight} + var(--top-message-height))
     left: 0
     right: 0
     width: 100%
-    height: calc(100% - #{$headerHeight})
+    height: calc(100% - #{$headerHeight} - var(--top-message-height))
     max-height: 616px
     background-color: $white
     z-index: $catalogMenuZIndex + 1

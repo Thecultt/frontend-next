@@ -1,10 +1,19 @@
+'use client';
+
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import { setHeaderTopMessageHeight } from '@/redux/actions/header';
+import { Noop } from '@/types/functions';
 
 interface Props {
-    onClose?: () => void;
+    onClose?: Noop;
 }
 
 export const HeaderTopMessageSubscribe: React.FC<Props> = ({ onClose }) => {
+    const dispatch = useDispatch();
+    const blockRef = React.useRef<HTMLDivElement>(null);
+
     const handleClose: React.MouseEventHandler<HTMLButtonElement> = (e) => {
         e.stopPropagation();
         onClose?.();
@@ -15,8 +24,18 @@ export const HeaderTopMessageSubscribe: React.FC<Props> = ({ onClose }) => {
         block?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
 
+    React.useEffect(() => {
+        if (blockRef.current) {
+            dispatch(setHeaderTopMessageHeight(blockRef.current.getBoundingClientRect().height));
+        }
+
+        return () => {
+            dispatch(setHeaderTopMessageHeight(0));
+        };
+    }, []);
+
     return (
-        <div className="header-top-message-subscribe" onClick={scrollToSubscribeForm}>
+        <div className="header-top-message-subscribe" onClick={scrollToSubscribeForm} ref={blockRef}>
             <div className="container header-top-message-subscribe__wrapper">
                 <div className="header-top-message-subscribe__content">
                     <svg
