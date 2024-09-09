@@ -8,16 +8,8 @@ import { useMediaQuery } from 'usehooks-ts';
 
 import { MEDIA_SIZES } from '@/constants/styles';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import {
-    HeaderTopMessage,
-    HeaderCart,
-    HeaderUser,
-    HeaderHoverMenu,
-    HeaderSearchBox,
-    HeaderMedia,
-    BaseImage,
-} from '@/components';
-import { setHeaderSearchValue, fetchHeaderSearchItems } from '@/redux/actions/header';
+import { HeaderTopMessage, HeaderCart, HeaderUser, HeaderSearchBox, HeaderMedia, BaseImage } from '@/components';
+import { setHeaderSearchValue, fetchHeaderSearchItems, setHeaderCatalogMenuIsVisible } from '@/redux/actions/header';
 import { useDebounce } from '@/hooks/useDebounce';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { useAuthUser } from '@/hooks/useAuthUser';
@@ -29,7 +21,8 @@ import { logoPath } from '@/assets/icons';
 
 import { HeaderSearchInput } from './HeaderSearchInput';
 import { HeaderSelectionsHoverMenu } from './HeaderSelectionsHoverMenu';
-import { HEADER_MENU_CATEGORIES } from './constants';
+import { HeaderCatalogButton } from './HeaderCatalogButton/HeaderCatalogButton';
+import { HeaderCatalogMenu } from './HeaderCatalogMenu/HeaderCatalogMenu';
 
 const Header: React.FC = () => {
     const dispatch = useDispatch();
@@ -41,8 +34,6 @@ const Header: React.FC = () => {
 
     const inputRef = React.useRef<HTMLInputElement>(null);
 
-    const [currentCategoryHoverMenuIndex, setCurrentCategoryHoverMenuIndex] = React.useState(0);
-    const [isOpenHoverMenu, setIsOpenHoverMenu] = React.useState(false);
     const [isOpenSearch, setIsOpenSearch] = React.useState(false);
     const [isSelectionsMenuVisible, setIsSelectionsMenuVisible] = React.useState(false);
 
@@ -53,17 +44,6 @@ const Header: React.FC = () => {
 
     const { isLoggedIn } = useAuthUser();
 
-    const openHoverMenu = (index: number) => {
-        if (!isOpenSearch) {
-            setCurrentCategoryHoverMenuIndex(index);
-            setIsOpenHoverMenu(true);
-        }
-    };
-
-    const closeHoverMenu = () => {
-        setIsOpenHoverMenu(false);
-    };
-
     const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setHeaderSearchValue(e.target.value) as any);
         setIsOpenSearch(true);
@@ -71,6 +51,11 @@ const Header: React.FC = () => {
 
     const handleSearchClose = () => {
         setIsOpenSearch(false);
+    };
+
+    const handleSearchFocus = () => {
+        setIsOpenSearch(true);
+        dispatch(setHeaderCatalogMenuIsVisible(false));
     };
 
     const goToCatalog = (withSearchValue = true) => {
@@ -100,7 +85,7 @@ const Header: React.FC = () => {
     }, [debouncedValue]);
 
     React.useEffect(() => {
-        setIsOpenHoverMenu(false);
+        setIsSelectionsMenuVisible(false);
         setIsOpenSearch(false);
     }, [pathname]);
 
@@ -115,7 +100,7 @@ const Header: React.FC = () => {
                             <div className="container">
                                 <div className="header-wrapper">
                                     <div className="header-wrapper-block">
-                                        <div className="header-block">
+                                        <div className="header-block" style={{ flex: 1 }}>
                                             <Link href={APP_ROUTE.home} className="header-block-logo">
                                                 <BaseImage
                                                     src={logoPath}
@@ -124,10 +109,12 @@ const Header: React.FC = () => {
                                                 />
                                             </Link>
 
+                                            <HeaderCatalogButton />
+
                                             <HeaderSearchInput
                                                 ref={inputRef}
                                                 value={search.value}
-                                                onFocus={() => setIsOpenSearch(true)}
+                                                onFocus={handleSearchFocus}
                                                 onChange={onChangeSearchInput}
                                                 onKeyDown={handleInputKeyDown}
                                             />
@@ -186,21 +173,6 @@ const Header: React.FC = () => {
                                             Подборки
                                         </Link>
 
-                                        {HEADER_MENU_CATEGORIES.map((category, index) => (
-                                            <Link
-                                                href={getCatalogFiltersUrl({
-                                                    category_slug: category.slug,
-                                                })}
-                                                className="header-menu__link"
-                                                key={`header-menu__link-${index}`}
-                                                onMouseOver={() => openHoverMenu(index)}
-                                                onMouseOut={closeHoverMenu}
-                                                onClick={closeHoverMenu}
-                                            >
-                                                {category.title}
-                                            </Link>
-                                        ))}
-
                                         <Link href={APP_ROUTE.concierge.root} className="header-menu__link">
                                             Консьерж
                                         </Link>
@@ -226,18 +198,13 @@ const Header: React.FC = () => {
                             </div>
                         </header>
 
-                        <HeaderHoverMenu
-                            {...HEADER_MENU_CATEGORIES[currentCategoryHoverMenuIndex]}
-                            isOpenHoverMenu={isOpenHoverMenu}
-                            onOpen={() => setIsOpenHoverMenu(true)}
-                            onClose={() => setIsOpenHoverMenu(false)}
-                        />
-
                         <HeaderSelectionsHoverMenu
                             isVisible={isSelectionsMenuVisible}
                             onOpen={() => setIsSelectionsMenuVisible(true)}
                             onClose={() => setIsSelectionsMenuVisible(false)}
                         />
+
+                        <HeaderCatalogMenu />
                     </>
                 ) : (
                     <HeaderMedia

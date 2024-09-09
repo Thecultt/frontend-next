@@ -38,3 +38,17 @@ export const setHeaderSearchValue = (value: string) => ({
     type: HeaderActionTypes.SET_HEADER_SEARCH_VALUE,
     payload: value,
 });
+
+export const setHeaderCartIsVisible = (value: boolean) => ({
+    type: HeaderActionTypes.SET_HEADER_CART_IS_VISIBLE,
+    payload: value,
+});
+
+export const setHeaderCatalogMenuIsVisible = (value: boolean) => ({
+    type: HeaderActionTypes.SET_HEADER_CATALOG_MENU_IS_VISIBLE,
+    payload: value,
+});
+
+export const toggleHeaderCatalogMenuIsVisible = () => ({
+    type: HeaderActionTypes.TOGGLE_HEADER_CATALOG_MENU_IS_VISIBLE,
+});

@@ -78,4 +78,5 @@ export interface ProductPage {
     waterproof_clock: string;
     branded_box_clock: string;
     documents_clock: string;
+    is_jewelry: boolean;
 }

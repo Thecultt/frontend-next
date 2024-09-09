@@ -73,7 +73,7 @@
 
 		display: flex
 		flex-direction: column
-		gap: 16px
+		gap: 20px
 
 		padding: 16px
 		border-radius: 16px
@@ -121,94 +121,6 @@
 			font-size: 20px
 			line-height: 24px
 			color: $black
-
-		&__items
-			width: 100%
-			display: flex
-			flex-direction: column
-			gap: 12px
-
-		&-item
-			display: flex
-			justify-content: space-between
-			align-items: center
-
-			&.disabled &-content
-				opacity: 0.5
-
-			&.notAvailability &-content-check
-				pointer-events: none
-				filter: grayscale(100%)
-				opacity: 0.5
-
-			&-content
-				display: flex
-				align-items: center
-
-				will-change: opacity
-
-				+transition
-
-				&-check
-					cursor: pointer
-
-					margin-right: 10px
-
-					height: 18px
-					width: 18px
-
-				&-image
-					border-radius: 6px
-
-					width: 70px
-					height: 100px
-
-					+backgroundSetting
-
-				&-text
-					margin-left: 15px
-
-					&__brand
-						font-size: 14px
-						margin-bottom: 5px
-
-					&__model
-						font-size: 16px
-
-						+ManropeMedium
-
-					&__sum
-						font-size: 17px
-						+ManropeSemiBold
-
-					&__availability
-						color: $red
-						font-size: 15px
-
-			&-remove
-				cursor: pointer
-
-				&:hover > svg
-					stroke: $red
-
-				& > svg
-					stroke: $black
-
-					+transition
-
-		&-total
-			width: 100%
-			display: flex
-			justify-content: space-between
-			align-items: center
-
-			&__description, &__sum
-				+ManropeSemiBold
-				font-size: 16px
-				color: $black3
-
-		&__btn
-			width: 100%
 
 		&__more
 			width: 100%

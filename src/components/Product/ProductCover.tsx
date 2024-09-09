@@ -44,6 +44,8 @@ const ProductCover: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPa
         top: 0,
     });
 
+    const currentImage: string | undefined = images[currentIndexImage];
+
     const onClickNext = () => {
         if (currentIndexImage + 1 < images.length) {
             setCurrentIndexImage(currentIndexImage + 1);
@@ -221,40 +223,58 @@ const ProductCover: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPa
                     <div
                         className="product-content-cover-main"
                         ref={SourceRef}
-                        style={{
-                            backgroundImage: `url("${images[currentIndexImage]}")`,
-                        }}
-                    ></div>
+                        style={
+                            currentImage
+                                ? {
+                                      backgroundImage: `url("${currentImage}")`,
+                                  }
+                                : undefined
+                        }
+                    />
                 </div>
 
-                <div className="product-content-cover-main-nav">
-                    <button className="product-content-cover-main-nav__item prev" onClick={onClickPrev}>
-                        <svg width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="0.25" width="36" height="36" rx="18" fill="#F7F4F0" />
-                            <path d="M20.5 11.6094L14.9998 17.5227L20.5 23.4361" fill="#F7F4F0" />
-                            <path
-                                d="M20.5 11.6094L14.9998 17.5227L20.5 23.4361"
-                                stroke="#838383"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                    </button>
-                    <button className="product-content-cover-main-nav__item next" onClick={onClickNext}>
-                        <svg width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="0.890625" width="36" height="36" rx="18" fill="#F7F4F0" />
-                            <path d="M16.0039 23.4375L21.5041 17.5242L16.0039 11.6108" fill="#F7F4F0" />
-                            <path
-                                d="M16.0039 23.4375L21.5041 17.5242L16.0039 11.6108"
-                                stroke="#838383"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                    </button>
-                </div>
+                {images.length > 1 && (
+                    <div className="product-content-cover-main-nav">
+                        <button className="product-content-cover-main-nav__item prev" onClick={onClickPrev}>
+                            <svg
+                                width="37"
+                                height="36"
+                                viewBox="0 0 37 36"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <rect x="0.25" width="36" height="36" rx="18" fill="#F7F4F0" />
+                                <path d="M20.5 11.6094L14.9998 17.5227L20.5 23.4361" fill="#F7F4F0" />
+                                <path
+                                    d="M20.5 11.6094L14.9998 17.5227L20.5 23.4361"
+                                    stroke="#838383"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                            </svg>
+                        </button>
+                        <button className="product-content-cover-main-nav__item next" onClick={onClickNext}>
+                            <svg
+                                width="37"
+                                height="36"
+                                viewBox="0 0 37 36"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <rect x="0.890625" width="36" height="36" rx="18" fill="#F7F4F0" />
+                                <path d="M16.0039 23.4375L21.5041 17.5242L16.0039 11.6108" fill="#F7F4F0" />
+                                <path
+                                    d="M16.0039 23.4375L21.5041 17.5242L16.0039 11.6108"
+                                    stroke="#838383"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     ) : (

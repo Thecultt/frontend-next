@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, formValueSelector, Field } from 'redux-form';
 import Link from 'next/link';
 
-import { APP_ROUTE } from '@/constants/routes';
 import { CabinetSellStepKeys } from '@/redux/types/ICabinetSell';
 import { setCabinetSellCurrentStep } from '@/redux/actions/cabinet_sell';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { RenderInput, RenderInputHints, RenderSelect, RenderSelectArray, SellBackBtn } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
+
+import { APP_ROUTE } from '@/constants/routes';
+import { CATEGORY_NAMES } from '@/constants/sell';
 
 import validate from './validate';
 
@@ -299,7 +301,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                     />
                 </div>
 
-                {currentCategory === 'Обувь' ? (
+                {currentCategory === CATEGORY_NAMES.shoes ? (
                     <div className="sell-block-select">
                         <h4 className="sell-block-select__title">Размер</h4>
 

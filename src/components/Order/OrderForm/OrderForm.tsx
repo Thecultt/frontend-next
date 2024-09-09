@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, formValueSelector } from 'redux-form';
@@ -5,6 +7,7 @@ import { reduxForm, InjectedFormProps, formValueSelector } from 'redux-form';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { setOrderIsValid } from '@/redux/actions/order';
 import { useAuthUser } from '@/hooks/useAuthUser';
+import { useOrder } from '@/hooks/order/useOrder';
 import {
     OrderFormContact,
     OrderFormCountry,
@@ -21,12 +24,14 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     pristine,
     submitting,
     initialize,
+    change,
 }) => {
     const dispatch = useDispatch();
 
-    const [indexForm, setIndexForm] = React.useState<number>(0);
+    const [indexForm, setIndexForm] = React.useState(0);
 
     const { isLoggedIn, isLoaded, user } = useAuthUser();
+    const { isJewelry, cartSum } = useOrder();
 
     const {
         address: { country, city, street },
@@ -86,8 +91,9 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
         if (isLoggedIn && isLoaded) {
             initialize({
                 email: user.email || '',
-                name: `${user.lastname ? `${user.lastname} ` : ''}${user.name ? `${user.name} ` : ''}${user.middlename ? `${user.middlename} ` : ''}`,
-                phone: user.phone,
+                name: [user.lastname, user.name, user.middlename].filter(Boolean).join(' '),
+                phone: user.phone || '',
+                passport: user.pasport || '',
             });
         } else {
             initialize({
@@ -95,6 +101,14 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
             });
         }
     }, [isLoggedIn, isLoaded]);
+
+    React.useEffect(() => {
+        change('isJewelry', isJewelry);
+    }, [isJewelry]);
+
+    React.useEffect(() => {
+        change('cartSum', cartSum);
+    }, [cartSum]);
 
     return (
         <form className="order-form" onSubmit={handleSubmit}>
