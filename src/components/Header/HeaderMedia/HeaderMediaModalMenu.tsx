@@ -1,3 +1,5 @@
+'use client';
+
 import React, { memo } from 'react';
 import Link from 'next/link';
 
@@ -115,6 +117,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                             key={`header-media-modal-menu-links-tab-${index}`}
                         >
                             {filtersIsLoaded &&
+                                category.subsubcategories &&
                                 Object.keys(category.subsubcategories).map((subsubcategory, subindex) => (
                                     <Link
                                         href={getCatalogFiltersUrl({

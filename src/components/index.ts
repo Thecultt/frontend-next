@@ -44,8 +44,6 @@ export { default as ProductBlock } from './ProductBlock/ProductBlock';
 export { default as Header } from './Header/Header';
 // HeaderTopMessage
 export { default as HeaderTopMessage } from './Header/HeaderTopMessage/HeaderTopMessage';
-// HeaderHoverMenu
-export { default as HeaderHoverMenu } from './Header/HeaderHoverMenu/HeaderHoverMenu';
 // HeaderSearchBox
 export { default as HeaderSearchBox } from './Header/HeaderSearchBox/HeaderSearchBox';
 // HeaderUser

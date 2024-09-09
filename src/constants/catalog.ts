@@ -6,6 +6,7 @@ export const CATEGORY_NAMES = {
     accessories: 'Аксессуары',
     shoes: 'Обувь',
     decorations: 'Украшения',
+    jewelry: 'Ювелирные изделия',
 };
 
 export const CATEGORIES = Object.values(CATEGORY_NAMES);
@@ -18,6 +19,7 @@ export const CATEGORY_SLUGS = {
     accessories: 'aksessuary',
     shoes: 'obuv',
     decorations: 'ukrasheniia',
+    jewelry: 'jewelry', // TODO sync slug with api
 };
 
 export const CATEGORY_SLUG_NAMES = {
@@ -25,6 +27,7 @@ export const CATEGORY_SLUG_NAMES = {
     [CATEGORY_SLUGS.accessories]: CATEGORY_NAMES.accessories,
     [CATEGORY_SLUGS.shoes]: CATEGORY_NAMES.shoes,
     [CATEGORY_SLUGS.decorations]: CATEGORY_NAMES.decorations,
+    [CATEGORY_SLUGS.jewelry]: CATEGORY_NAMES.jewelry,
 };
 
 export const CATEGORY_NAME_SLUGS = {
@@ -32,6 +35,7 @@ export const CATEGORY_NAME_SLUGS = {
     [CATEGORY_NAMES.accessories]: CATEGORY_SLUGS.accessories,
     [CATEGORY_NAMES.shoes]: CATEGORY_SLUGS.shoes,
     [CATEGORY_NAMES.decorations]: CATEGORY_SLUGS.decorations,
+    [CATEGORY_NAMES.jewelry]: CATEGORY_SLUGS.jewelry,
 };
 
 export const ALL_CATEGORY_SLUGS = Object.values(CATEGORY_SLUGS);
@@ -41,6 +45,7 @@ export const FILTER_CATEGORY_SLUGS = [
     CATEGORY_SLUGS.accessories,
     CATEGORY_SLUGS.shoes,
     CATEGORY_SLUGS.decorations,
+    CATEGORY_SLUGS.jewelry,
 ];
 
 export const FAKE_CATEGORY_SLUGS = [CATEGORY_SLUGS.new, CATEGORY_SLUGS.popular, CATEGORY_SLUGS.sale];
