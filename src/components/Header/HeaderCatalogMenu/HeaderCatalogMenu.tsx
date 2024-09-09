@@ -24,7 +24,7 @@ export const HeaderCatalogMenu = () => {
     const pathname = usePathname();
     const ref = React.useRef<HTMLDivElement>(null);
 
-    const menuIsVisible = useTypedSelector(({ header }) => header.catalogMenuIsVisible);
+    const { catalogMenuIsVisible, topMessageHeight } = useTypedSelector(({ header }) => header);
     const [allTypesIsVisible, toggleAllTypesIsVisible] = useToggle(false);
 
     const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -33,6 +33,8 @@ export const HeaderCatalogMenu = () => {
     const typesIsMore = selectedCategory.types.length > MAX_TYPES_COUNT;
     const visibleTypes =
         typesIsMore && !allTypesIsVisible ? selectedCategory.types.slice(0, MAX_TYPES_COUNT) : selectedCategory.types;
+
+    const style = { '--top-message-height': `${topMessageHeight}px` } as React.CSSProperties;
 
     const closeCatalogMenu = () => {
         dispatch(setHeaderCatalogMenuIsVisible(false));
@@ -43,14 +45,14 @@ export const HeaderCatalogMenu = () => {
     }, [pathname]);
 
     React.useEffect(() => {
-        if (!menuIsVisible) {
+        if (!catalogMenuIsVisible) {
             setSelectedIndex(0);
         }
-    }, [menuIsVisible]);
+    }, [catalogMenuIsVisible]);
 
     return createPortal(
         <AnimatePresence mode="wait">
-            {menuIsVisible && (
+            {catalogMenuIsVisible && (
                 <>
                     <motion.div
                         key="backdrop"
@@ -60,6 +62,7 @@ export const HeaderCatalogMenu = () => {
                         exit={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={DEFAULT_TRANSITION}
+                        style={style}
                     />
                     <motion.div
                         ref={ref}
@@ -69,6 +72,7 @@ export const HeaderCatalogMenu = () => {
                         exit={{ opacity: 0, y: -30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={DEFAULT_TRANSITION}
+                        style={style}
                     >
                         <div className="header-catalog-menu__wrapper container">
                             <div className="header-catalog-menu__column">
