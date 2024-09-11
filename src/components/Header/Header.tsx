@@ -14,7 +14,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { KEYBOARD } from '@/constants/keys';
-import { CATEGORY_SLUGS, SELECTIONS_IDS, SORT } from '@/constants/catalog';
+import { CATEGORY_SLUGS, SORT } from '@/constants/catalog';
 import { APP_ROUTE } from '@/constants/routes';
 import { pushDataLayer } from '@/functions/pushDataLayer';
 import { logoPath } from '@/assets/icons';
@@ -36,6 +36,8 @@ const Header: React.FC = () => {
 
     const [isOpenSearch, setIsOpenSearch] = React.useState(false);
     const [isSelectionsMenuVisible, setIsSelectionsMenuVisible] = React.useState(false);
+
+    const selections = useTypedSelector(({ selections }) => selections.items);
 
     const { search } = useTypedSelector(({ header }) => header);
     const debouncedValue = useDebounce(search.value);
@@ -161,7 +163,7 @@ const Header: React.FC = () => {
 
                                         <Link
                                             href={getCatalogFiltersUrl({
-                                                selection: SELECTIONS_IDS.summerBags.toString(),
+                                                selection: selections[0]?.id?.toString() || '',
                                             })}
                                             className="header-menu__link"
                                             onMouseOver={() => setIsSelectionsMenuVisible(true)}

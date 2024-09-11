@@ -1,0 +1,88 @@
+@import "/src/assets/sass/variables"
+@import "/src/assets/sass/mixin"
+
+.tc-button
+    +buttonReset
+    width: fit-content
+    +flexCenter
+    gap: 8px
+    border-radius: 12px
+    transition: background-color 0.2s linear, color 0.2s linear
+    user-select: none
+
+    &__label
+        +ManropeSemiBold
+        color: inherit
+        text-align: center
+
+    &__icon
+        +flexCenter
+        color: inherit
+
+    &__icon svg
+        width: 100%
+
+    &--wide
+        width: 100%
+
+    &--disabled
+        cursor: not-allowed
+
+        &.tc-button--link
+            pointer-events: none
+
+    // Size L
+
+    &--size-l
+        height: 50px
+        padding: 16px
+
+    &--size-l &__label
+        font-size: 16px
+        line-height: 19.2px
+
+    &--size-l &__icon
+        width: 24px
+
+    // Size M
+
+    &--size-m
+        height: 44px
+        padding: 12px
+
+    &--size-m &__label
+        font-size: 14px
+        line-height: 16.8px
+
+    &--size-m &__icon
+        width: 20px
+
+    // Theme Dark
+
+    &--theme-dark
+        background-color: $mainColor
+        color: $white
+
+        &.tc-button--disabled
+            background-color: $green5
+
+        &:active:not(.tc-button--disabled)
+            background-color: $green9
+
+    // Theme Light/Transparent
+
+    &--theme-light
+        background-color: $green1
+
+    &--theme-transparent
+        background-color: transparent
+
+    &--theme-light,
+    &--theme-transparent
+        color: $mainColor
+
+        &.tc-button--disabled
+            color: $green5
+
+        &:active:not(.tc-button--disabled)
+            color: $green9

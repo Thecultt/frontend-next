@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useParams } from 'next/navigation';
 import {
@@ -25,7 +27,7 @@ export const useCatalogFilters = () => {
             brands: parseAsArrayOf(parseAsString).withDefault([]),
             models: parseAsArrayOf(parseAsString).withDefault([]),
             sort: parseAsStringLiteral(Object.values(SORT)).withDefault(
-                getDefaultPageSort({ categorySlug: category_slug, selectionId: selection_id }),
+                getDefaultPageSort({ categorySlug: category_slug }),
             ),
             page: parseAsInteger.withDefault(1),
             search: parseAsString.withDefault(''),
