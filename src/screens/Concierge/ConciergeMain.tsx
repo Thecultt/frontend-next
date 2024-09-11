@@ -4,6 +4,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { usePopupInfo } from '@/hooks/usePopupInfo';
 import { fetchConciergeCategories, setConciergeProductIsSendFormCustomProduct } from '@/redux/actions/concierge';
 import {
     ConciergeMainBanner,
@@ -20,9 +21,25 @@ const ConciergeMain: React.FC = () => {
 
     const { isSendFormCustomProductSuccess } = useTypedSelector(({ concierge }) => concierge);
 
+    const { openPopupInfo } = usePopupInfo();
+
     React.useEffect(() => {
         dispatch(fetchConciergeCategories() as any);
     }, []);
+
+    React.useEffect(() => {
+        if (isSendFormCustomProductSuccess) {
+            openPopupInfo({
+                title: `Спасибо! Ваша заявка принята`,
+                content: (
+                    <p className="concierge-product-success__subtitle">
+                        Скоро мы свяжемся с вами в WhatsApp <br /> по указанному номеру телефона.
+                    </p>
+                ),
+                onClose: () => dispatch(setConciergeProductIsSendFormCustomProduct(false)),
+            });
+        }
+    }, [isSendFormCustomProductSuccess]);
 
     const scrollToForm = () => {
         const block = document.getElementById('concierge-application');
@@ -31,18 +48,6 @@ const ConciergeMain: React.FC = () => {
 
     return (
         <section className="concierge">
-            <Popup
-                state={isSendFormCustomProductSuccess}
-                setState={() => dispatch(setConciergeProductIsSendFormCustomProduct(false))}
-            >
-                <div className="concierge-product-success">
-                    <h4 className="concierge-product-success__title">Спасибо! Ваша заявка принята</h4>
-                    <p className="concierge-product-success__subtitle">
-                        Скоро мы свяжемся с вами в WhatsApp <br /> по указанному номеру телефона.
-                    </p>
-                </div>
-            </Popup>
-
             <div className="container">
                 <div className="concierge-wrapper">
                     <NoSsr>
