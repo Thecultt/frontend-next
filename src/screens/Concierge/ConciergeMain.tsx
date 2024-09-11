@@ -11,7 +11,6 @@ import {
     ConciergeMainCatalog,
     ConciergeMainService,
     ConciergeMainApplication,
-    Popup,
 } from '@/components';
 
 import NoSsr from '@/components/NoSsr/NoSsr';
@@ -23,6 +22,11 @@ const ConciergeMain: React.FC = () => {
 
     const { openPopupInfo } = usePopupInfo();
 
+    const scrollToForm = () => {
+        const block = document.getElementById('concierge-application');
+        block?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
     React.useEffect(() => {
         dispatch(fetchConciergeCategories() as any);
     }, []);
@@ -30,7 +34,7 @@ const ConciergeMain: React.FC = () => {
     React.useEffect(() => {
         if (isSendFormCustomProductSuccess) {
             openPopupInfo({
-                title: `Спасибо! Ваша заявка принята`,
+                title: 'Спасибо! Ваша заявка принята',
                 content: (
                     <p className="concierge-product-success__subtitle">
                         Скоро мы свяжемся с вами в WhatsApp <br /> по указанному номеру телефона.
@@ -40,11 +44,6 @@ const ConciergeMain: React.FC = () => {
             });
         }
     }, [isSendFormCustomProductSuccess]);
-
-    const scrollToForm = () => {
-        const block = document.getElementById('concierge-application');
-        block?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    };
 
     return (
         <section className="concierge">

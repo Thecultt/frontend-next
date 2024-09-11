@@ -23,7 +23,10 @@ const popup_info = (state = initialState, action: PopupInfoActions) => {
             ...state,
 
             isOpen: false,
-            ...action.payload,
+            title: '',
+            content: '',
+            btn: '',
+            onClose: () => {},
         };
     }
 

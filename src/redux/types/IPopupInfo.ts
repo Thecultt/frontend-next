@@ -16,7 +16,6 @@ interface setOpenPopup {
 
 interface setClosePopup {
     type: PopupInfoActionTypes.SET_CLOSE_INFO_POPUP;
-    payload: PopupInfo;
 }
 
 export type PopupInfoActions = setOpenPopup | setClosePopup;

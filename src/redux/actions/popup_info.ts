@@ -6,7 +6,6 @@ export const setOpenInfoPopup = (info: PopupInfo) => ({
     payload: info,
 });
 
-export const setCloseInfoPopup = (info: PopupInfo) => ({
+export const setCloseInfoPopup = () => ({
     type: PopupInfoActionTypes.SET_CLOSE_INFO_POPUP,
-    payload: info,
 });
