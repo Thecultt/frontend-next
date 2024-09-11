@@ -29,6 +29,7 @@ export { BaseImage } from './UI/BaseImage/BaseImage';
 export { Badge } from './UI/Badge/Badge';
 export { Skeleton } from './UI/Skeleton/Skeleton';
 export { Button } from './UI/Button/Button';
+export { Input as NewInput } from './UI/Input/Input';
 
 // Notifications
 export { default as NotificationsServer } from './UI/NotificationsServer/NotificationsServer';
