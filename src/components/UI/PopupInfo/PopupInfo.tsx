@@ -32,6 +32,7 @@ export const PopupInfo: React.FC = () => {
             title: '',
             content: <></>,
             btn: '',
+            onClose: () => {},
         });
 
         if (onClose) onClose();
@@ -50,9 +51,11 @@ export const PopupInfo: React.FC = () => {
 
                         {content}
 
-                        <div className="tc-popup-info-content-btn">
-                            <Button label={btn} wide />
-                        </div>
+                        {btn && (
+                            <div className="tc-popup-info-content-btn">
+                                <Button label={btn} wide />
+                            </div>
+                        )}
                     </div>
                 </div>
             )}
