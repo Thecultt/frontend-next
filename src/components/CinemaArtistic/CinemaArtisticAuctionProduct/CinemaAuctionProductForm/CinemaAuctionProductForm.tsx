@@ -6,12 +6,11 @@ import { useDispatch } from 'react-redux';
 
 import { formatMoney } from '@/functions/formatMoney';
 import { getClassNames } from '@/functions/getClassNames';
-import { FormikInput } from '@/components/formik/FormikInput';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { sendFormAuctionProduct } from '@/redux/actions/cinema_artistic';
 import { EXTERNAL_LINKS } from '@/constants/routes';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { Loader } from '@/components';
+import { Loader, FormikInput } from '@/components';
 
 import { AuctionFieldName, getValidationSchema, IAuctionForm, INITIAL_VALUES } from './validate';
 
@@ -89,7 +88,6 @@ export const CinemaAuctionProductForm: React.FC<Props> = ({ productId, currentBi
                                     className="cinema-auction-product-form__input"
                                     label="ФИО"
                                     placeholder="ФИО"
-                                    white
                                 />
                                 <FormikInput
                                     name={AuctionFieldName.Phone}
@@ -97,7 +95,6 @@ export const CinemaAuctionProductForm: React.FC<Props> = ({ productId, currentBi
                                     className="cinema-auction-product-form__input"
                                     label="Телефон"
                                     placeholder="Номер телефона"
-                                    white
                                 />
                                 <FormikInput
                                     name={AuctionFieldName.Bid}
@@ -105,7 +102,6 @@ export const CinemaAuctionProductForm: React.FC<Props> = ({ productId, currentBi
                                     className="cinema-auction-product-form__input"
                                     label="Ставка"
                                     placeholder={formatMoney(minBid)}
-                                    white
                                 />
                                 <button
                                     type="submit"

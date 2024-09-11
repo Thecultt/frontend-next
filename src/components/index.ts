@@ -31,6 +31,10 @@ export { Skeleton } from './UI/Skeleton/Skeleton';
 export { Button } from './UI/Button/Button';
 export { Input as NewInput } from './UI/Input/Input';
 
+// Formik
+
+export { FormikInput } from './formik/FormikInput/FormikInput';
+
 // Notifications
 export { default as NotificationsServer } from './UI/NotificationsServer/NotificationsServer';
 export { default as NotificationsServerError } from './UI/NotificationsServer/NotificationsServerError';

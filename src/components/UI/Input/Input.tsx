@@ -7,17 +7,19 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { getClassNames } from '@/functions/getClassNames';
 import { InfoIcon } from '@/assets/icons';
 import { DEFAULT_TRANSITION } from '@/constants/animation';
+import { InputProps } from '@/types/ui';
 
 import './styles.sass';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    label: string;
-    error?: string;
-    theme?: 'white' | 'grey' | 'green';
-    info?: string;
-}
-
-export const Input: React.FC<InputProps> = ({ label, error, info, type = 'text', theme = 'white', ...inputProps }) => {
+export const Input: React.FC<InputProps> = ({
+    label,
+    error,
+    info,
+    className = '',
+    type = 'text',
+    theme = 'white',
+    ...inputProps
+}) => {
     const infoRef = React.useRef<HTMLDivElement>(null);
     const infoButtonRef = React.useRef<HTMLButtonElement>(null);
 
@@ -27,7 +29,7 @@ export const Input: React.FC<InputProps> = ({ label, error, info, type = 'text',
 
     return (
         <div
-            className={getClassNames(`tc-input tc-input--theme-${theme}`, {
+            className={getClassNames(`tc-input tc-input--theme-${theme} ${className}`, {
                 'tc-input--error': !!error,
             })}
         >
