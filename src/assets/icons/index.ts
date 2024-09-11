@@ -11,3 +11,4 @@ export { ReactComponent as DiamondIcon, default as diamondIconPath } from './dia
 export { ReactComponent as RingIcon, default as ringIconPath } from './ring.svg';
 export { ReactComponent as ShoesIcon, default as shoesIconPath } from './shoes.svg';
 export { ReactComponent as WalletIcon, default as walletIconPath } from './wallet.svg';
+export { ReactComponent as InfoIcon, default as infoIconPath } from './info.svg';
