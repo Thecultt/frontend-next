@@ -1,0 +1,81 @@
+@import "/src/assets/sass/variables"
+@import "/src/assets/sass/mixin"
+
+.tc-textarea
+    width: 100%
+    display: flex
+    flex-direction: column
+
+    &__wrapper
+        width: 100%
+        height: 120px
+        display: flex
+        flex-direction: column-reverse
+        padding: 8px 12px
+        border-radius: 8px
+        border: 1px solid transparent
+        transition: border 0.2s linear
+        position: relative
+
+        +mediaTablet
+            padding: 12px
+
+    &--theme-white &__wrapper
+        background-color: $white
+
+    &--theme-grey &__wrapper
+        background-color: $grey1
+
+    &--theme-green &__wrapper
+        background-color: $green1
+
+    &--error &__wrapper
+        border-color: $red
+
+    &__label
+        +ManropeBold
+        font-size: 12px
+        line-height: 14.4px
+        text-align: left
+        color: $black3
+        margin-bottom: 4px
+        transition: color 0.2s linear
+
+        +mediaTablet
+            +ManropeSemiBold
+            margin-bottom: 8px
+
+    &__field:focus + &__label,
+    &__field:not(:placeholder-shown) + &__label,
+    &__field:disabled + &__label
+        color: $grey6
+
+    &__field
+        width: 100%
+        flex: 1
+        border: none
+        outline: none
+        resize: none
+        +ManropeSemiBold
+        font-size: 16px
+        line-height: 24px
+        color: $black3
+        background-color: transparent
+        +scrollbar
+
+        &:disabled
+            color: $grey6
+
+        &:placeholder
+            color: $grey6
+
+        +mediaTablet
+            font-size: 14px
+            line-height: 16.8px
+
+    &__error
+        +ManropeBold
+        font-size: 12px
+        line-height: 14.4px
+        color: $red
+        margin-top: 4px
