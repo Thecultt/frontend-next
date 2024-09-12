@@ -1,8 +1,13 @@
 import React from 'react';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface CommonInputProps {
     label: string;
     error?: string;
     theme?: 'white' | 'grey' | 'green';
+}
+
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, CommonInputProps {
     info?: string;
 }
+
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement>, CommonInputProps {}
