@@ -40,7 +40,7 @@ const ConciergeMain: React.FC = () => {
                         Скоро мы свяжемся с вами в WhatsApp <br /> по указанному номеру телефона.
                     </p>
                 ),
-                onClose: () => dispatch(setConciergeProductIsSendFormCustomProduct(false)),
+                callbackClose: () => dispatch(setConciergeProductIsSendFormCustomProduct(false)),
             });
         }
     }, [isSendFormCustomProductSuccess]);

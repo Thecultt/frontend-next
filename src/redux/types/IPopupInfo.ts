@@ -1,8 +1,6 @@
-import { PopupInfo } from '@/models/IPopupInfo';
+import { Popup, PopupContent } from '@/models/IPopup';
 
-export interface PopupInfoState extends PopupInfo {
-    isOpen: boolean;
-}
+export interface PopupInfoState extends Popup {}
 
 export enum PopupInfoActionTypes {
     SET_OPEN_INFO_POPUP = 'SET_OPEN_INFO_POPUP',
@@ -11,7 +9,7 @@ export enum PopupInfoActionTypes {
 
 interface setOpenPopup {
     type: PopupInfoActionTypes.SET_OPEN_INFO_POPUP;
-    payload: PopupInfo;
+    payload: PopupContent;
 }
 
 interface setClosePopup {

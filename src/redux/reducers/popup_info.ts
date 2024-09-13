@@ -5,7 +5,7 @@ const initialState: PopupInfoState = {
     title: '',
     content: '',
     btn: '',
-    onClose: () => {},
+    callbackClose: () => {},
 };
 
 const popup_info = (state = initialState, action: PopupInfoActions) => {
@@ -26,7 +26,7 @@ const popup_info = (state = initialState, action: PopupInfoActions) => {
             title: '',
             content: '',
             btn: '',
-            onClose: () => {},
+            callbackClose: () => {},
         };
     }
 

@@ -1,7 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { useScrollLock } from 'usehooks-ts';
 
-import { PopupInfo } from '@/models/IPopupInfo';
+import { PopupContent } from '@/models/IPopup';
 
 import { setOpenInfoPopup, setCloseInfoPopup } from '@/redux/actions/popup_info';
 
@@ -12,18 +11,14 @@ export const usePopupInfo = () => {
 
     const popupState = useTypedSelector(({ popup_info }) => popup_info);
 
-    const { lock, unlock } = useScrollLock();
-
-    const openPopupInfo = (info: PopupInfo) => {
+    const openPopupInfo = (info: PopupContent) => {
         dispatch(setOpenInfoPopup(info));
-
-        lock();
     };
 
     const closePopupInfo = () => {
         dispatch(setCloseInfoPopup());
 
-        unlock();
+        popupState.callbackClose?.();
     };
 
     return {
