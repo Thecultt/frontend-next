@@ -4,11 +4,11 @@ const initialState: PopupInfoState = {
     isOpen: false,
     title: '',
     content: '',
-    btn: '',
+    btn: undefined,
     callbackClose: () => {},
 };
 
-const popup_info = (state = initialState, action: PopupInfoActions) => {
+const popup_info = (state = initialState, action: PopupInfoActions): PopupInfoState => {
     if (action.type === PopupInfoActionTypes.SET_OPEN_INFO_POPUP) {
         return {
             ...state,
@@ -19,15 +19,7 @@ const popup_info = (state = initialState, action: PopupInfoActions) => {
     }
 
     if (action.type === PopupInfoActionTypes.SET_CLOSE_INFO_POPUP) {
-        return {
-            ...state,
-
-            isOpen: false,
-            title: '',
-            content: '',
-            btn: '',
-            callbackClose: () => {},
-        };
+        return initialState;
     }
 
     return state;
