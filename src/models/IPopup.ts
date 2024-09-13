@@ -3,7 +3,11 @@ import { Noop } from '@/types/functions';
 export interface PopupContent {
     title: string;
     content: React.ReactNode;
-    btn?: string;
+    btn?: {
+        label: string;
+        href?: string;
+        onClick?: Noop;
+    };
     callbackClose?: Noop;
 }
 

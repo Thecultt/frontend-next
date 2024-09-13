@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import { useScrollLock, useOnClickOutside } from 'usehooks-ts';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import { Popup as PopupModel } from '@/models/IPopup';
 import { Button } from '@/components';
@@ -12,34 +15,66 @@ interface Props extends PopupModel {
     onClose: Noop;
 }
 
-export const Popup: React.FC<Props> = ({ isOpen, title, content, btn, onClose }) => {
+export const Popup: React.FC<Props> = ({ isOpen, title, content, btn, onClose, callbackClose }) => {
     const PopupRef = React.useRef(null);
 
     const { lock, unlock } = useScrollLock();
 
-    useOnClickOutside(PopupRef, onClose);
+    const onCloseWrapper = () => {
+        onClose();
+        callbackClose?.();
+    };
+
+    useOnClickOutside(PopupRef, onCloseWrapper);
 
     React.useEffect(() => {
         isOpen ? lock() : unlock();
     }, [isOpen]);
 
     return (
-        isOpen && (
-            <div className="tc-popup">
-                <div className="tc-popup-content" ref={PopupRef}>
-                    <XIcon className="tc-popup-content-close" onClick={onClose} />
+        <AnimatePresence mode="wait">
+            {isOpen && (
+                <>
+                    <motion.div
+                        className="tc-popup-backdrop"
+                        initial={{ opacity: 0 }}
+                        exit={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.2 }}
+                    ></motion.div>
 
-                    <h3 className="tc-popup-content__title">{title}</h3>
+                    <motion.div
+                        key="popup"
+                        className="tc-popup"
+                        initial={{ opacity: 0, y: 30 }}
+                        exit={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        <div className="tc-popup-content" ref={PopupRef}>
+                            <XIcon className="tc-popup-content-close" onClick={onCloseWrapper} />
 
-                    {content}
+                            <h3 className="tc-popup-content__title">{title}</h3>
 
-                    {btn && (
-                        <div className="tc-popup-content-btn">
-                            <Button label={btn} wide />
+                            {content}
+
+                            {btn && (
+                                <div className="tc-popup-content-btn">
+                                    <Button
+                                        label={btn.label}
+                                        href={btn.href}
+                                        onClick={() => {
+                                            btn?.onClick?.();
+                                            onCloseWrapper();
+                                        }}
+                                        wide
+                                    />
+                                </div>
+                            )}
                         </div>
-                    )}
-                </div>
-            </div>
-        )
+                    </motion.div>
+                </>
+            )}
+        </AnimatePresence>
     );
 };

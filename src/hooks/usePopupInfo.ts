@@ -1,3 +1,5 @@
+'use client';
+
 import { useDispatch } from 'react-redux';
 
 import { PopupContent } from '@/models/IPopup';
@@ -17,8 +19,6 @@ export const usePopupInfo = () => {
 
     const closePopupInfo = () => {
         dispatch(setCloseInfoPopup());
-
-        popupState.callbackClose?.();
     };
 
     return {
