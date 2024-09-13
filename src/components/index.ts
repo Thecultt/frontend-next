@@ -37,6 +37,7 @@ export { Select as NewSelect } from './UI/Select/Select';
 
 export { FormikInput } from './formik/FormikInput/FormikInput';
 export { FormikTextarea } from './formik/FormikTextarea/FormikTextarea';
+export { FormikSelect } from './formik/FormikSelect/FormikSelect';
 
 // Notifications
 export { default as NotificationsServer } from './UI/NotificationsServer/NotificationsServer';
