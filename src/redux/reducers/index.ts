@@ -23,6 +23,7 @@ import notifications_server from './notifications_server';
 import concierge from './concierge';
 import selections from './selections';
 import cinema_artistic from './cinema_artistic';
+import popup_info from './popup_info';
 
 export const rootReducer = combineReducers({
     form: formReducer,
@@ -48,6 +49,7 @@ export const rootReducer = combineReducers({
     concierge,
     selections,
     cinema_artistic,
+    popup_info,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

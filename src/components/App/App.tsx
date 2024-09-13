@@ -13,7 +13,15 @@ import { fetchProductsFilters } from '@/redux/actions/products_filters';
 import { fetchSelections } from '@/redux/actions/selections';
 import { fetchUser } from '@/redux/actions/user';
 import NoSsr from '@/components/NoSsr/NoSsr';
-import { Footer, Header, NotificationsServer, Reglog, WaitingListCreate, WaitingListDelete } from '@/components';
+import {
+    Footer,
+    Header,
+    NotificationsServer,
+    PopupInfo,
+    Reglog,
+    WaitingListCreate,
+    WaitingListDelete,
+} from '@/components';
 import { useReplaceLS } from '@/hooks/useReplaceLS';
 import { CATALOG_PAGES } from '@/constants/routes';
 
@@ -74,7 +82,10 @@ export const App = ({ children }: { children: React.ReactNode }) => {
                 <NotificationsServer />
                 <WaitingListCreate />
                 <WaitingListDelete />
+
+                <PopupInfo />
             </NoSsr>
+
             <div className="wrapper" id="wrapper">
                 <NoSsr>
                     <Header />

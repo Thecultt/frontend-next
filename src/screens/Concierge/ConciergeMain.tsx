@@ -4,13 +4,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { usePopupInfo } from '@/hooks/usePopupInfo';
 import { fetchConciergeCategories, setConciergeProductIsSendFormCustomProduct } from '@/redux/actions/concierge';
 import {
     ConciergeMainBanner,
     ConciergeMainCatalog,
     ConciergeMainService,
     ConciergeMainApplication,
-    Popup,
 } from '@/components';
 
 import NoSsr from '@/components/NoSsr/NoSsr';
@@ -20,29 +20,33 @@ const ConciergeMain: React.FC = () => {
 
     const { isSendFormCustomProductSuccess } = useTypedSelector(({ concierge }) => concierge);
 
-    React.useEffect(() => {
-        dispatch(fetchConciergeCategories() as any);
-    }, []);
+    const { openPopupInfo } = usePopupInfo();
 
     const scrollToForm = () => {
         const block = document.getElementById('concierge-application');
         block?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
 
-    return (
-        <section className="concierge">
-            <Popup
-                state={isSendFormCustomProductSuccess}
-                setState={() => dispatch(setConciergeProductIsSendFormCustomProduct(false))}
-            >
-                <div className="concierge-product-success">
-                    <h4 className="concierge-product-success__title">Спасибо! Ваша заявка принята</h4>
+    React.useEffect(() => {
+        dispatch(fetchConciergeCategories() as any);
+    }, []);
+
+    React.useEffect(() => {
+        if (isSendFormCustomProductSuccess) {
+            openPopupInfo({
+                title: 'Спасибо! Ваша заявка принята',
+                content: (
                     <p className="concierge-product-success__subtitle">
                         Скоро мы свяжемся с вами в WhatsApp <br /> по указанному номеру телефона.
                     </p>
-                </div>
-            </Popup>
+                ),
+                callbackClose: () => dispatch(setConciergeProductIsSendFormCustomProduct(false)),
+            });
+        }
+    }, [isSendFormCustomProductSuccess]);
 
+    return (
+        <section className="concierge">
             <div className="container">
                 <div className="concierge-wrapper">
                     <NoSsr>
