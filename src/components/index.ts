@@ -30,6 +30,13 @@ export { Badge } from './UI/Badge/Badge';
 export { Skeleton } from './UI/Skeleton/Skeleton';
 export { Button } from './UI/Button/Button';
 export { PopupInfo } from './UI/PopupInfo/PopupInfo';
+export { Input as NewInput } from './UI/Input/Input';
+export { Textarea as NewTextarea } from './UI/Textarea/Textarea';
+
+// Formik
+
+export { FormikInput } from './formik/FormikInput/FormikInput';
+export { FormikTextarea } from './formik/FormikTextarea/FormikTextarea';
 
 // Notifications
 export { default as NotificationsServer } from './UI/NotificationsServer/NotificationsServer';
