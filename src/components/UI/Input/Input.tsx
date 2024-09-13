@@ -18,6 +18,7 @@ export const Input: React.FC<InputProps> = ({
     className = '',
     type = 'text',
     theme = 'white',
+    placeholder = label,
     ...inputProps
 }) => {
     const infoRef = React.useRef<HTMLDivElement>(null);
@@ -35,7 +36,7 @@ export const Input: React.FC<InputProps> = ({
         >
             <div className="tc-input__wrapper">
                 <label className="tc-input__l-wrapper">
-                    <input type={type} className="tc-input__field" {...inputProps} />
+                    <input type={type} className="tc-input__field" placeholder={placeholder} {...inputProps} />
                     <span className="tc-input__label">{label}</span>
                 </label>
 

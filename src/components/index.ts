@@ -31,6 +31,7 @@ export { Skeleton } from './UI/Skeleton/Skeleton';
 export { Button } from './UI/Button/Button';
 export { Input as NewInput } from './UI/Input/Input';
 export { Textarea as NewTextarea } from './UI/Textarea/Textarea';
+export { Select as NewSelect } from './UI/Select/Select';
 
 // Formik
 
