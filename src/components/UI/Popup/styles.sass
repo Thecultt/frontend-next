@@ -29,9 +29,8 @@
 
     overflow: auto
 
-    display: flex
-    justify-content: center
-    align-items: center
+    display: grid
+    place-items: center
 
     &-content
         position: relative
@@ -60,3 +59,8 @@
 
         &-btn
             margin-top: 25px
+
+@media screen and (max-width: 500px)
+    .tc-popup
+        &-content
+            width: 95%
