@@ -32,7 +32,7 @@ const ConciergeMain: React.FC = () => {
     }, []);
 
     React.useEffect(() => {
-        if (isSendFormCustomProductSuccess) {
+        if (!isSendFormCustomProductSuccess) {
             openPopupInfo({
                 title: 'Спасибо! Ваша заявка принята',
                 content: (
