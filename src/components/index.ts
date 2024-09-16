@@ -29,6 +29,16 @@ export { BaseImage } from './UI/BaseImage/BaseImage';
 export { Badge } from './UI/Badge/Badge';
 export { Skeleton } from './UI/Skeleton/Skeleton';
 export { Button } from './UI/Button/Button';
+export { Input as NewInput } from './UI/Input/Input';
+export { Textarea as NewTextarea } from './UI/Textarea/Textarea';
+export { Popup as NewPopup } from './UI/Popup/Popup';
+export { Select as NewSelect } from './UI/Select/Select';
+
+// Formik
+
+export { FormikInput } from './formik/FormikInput/FormikInput';
+export { FormikTextarea } from './formik/FormikTextarea/FormikTextarea';
+export { FormikSelect } from './formik/FormikSelect/FormikSelect';
 
 // Notifications
 export { default as NotificationsServer } from './UI/NotificationsServer/NotificationsServer';
@@ -37,6 +47,9 @@ export { default as NotificationsServerSuccess } from './UI/NotificationsServer/
 
 // MenuMedia
 export { default as MenuMedia } from './MenuMedia/MenuMedia';
+
+// PopupInfo
+export { PopupInfo } from './PopupInfo/PopupInfo';
 
 // ProductBlock
 export { default as ProductBlock } from './ProductBlock/ProductBlock';
