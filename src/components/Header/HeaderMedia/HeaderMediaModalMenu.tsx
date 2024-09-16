@@ -1,3 +1,5 @@
+'use client';
+
 import React, { memo } from 'react';
 import Link from 'next/link';
 
@@ -12,7 +14,7 @@ import { ReglogStateTypesNotLogin } from '@/types/reglog';
 import { Noop } from '@/types/functions';
 import { pushDataLayer } from '@/functions/pushDataLayer';
 
-import CatalogBannerImagePriceDrop2 from '@/assets/images/catalog/catalog-banner-price-drop2.jpg';
+import conciergeBannerMediaImage from '@/assets/images/header/header-concierge-media-banner.jpg';
 
 const categoryAllTitles: Record<string, string> = {
     Обувь: 'Вся обувь',
@@ -43,29 +45,24 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
             <div className="header-media-modal-menu-wrapper">
                 {/* <HeaderMediaSelectionsBanner /> */}
                 <Link
-                    href={getCatalogFiltersUrl({
-                        category_slug: CATEGORY_SLUGS.sale,
-                    })}
+                    href={APP_ROUTE.concierge.root}
                     onClick={toggleVisible}
                     className="header-media-modal-menu-banner"
                 >
                     <div
                         className="header-media-modal-menu-banner-image"
                         style={{
-                            backgroundImage: `url("${CatalogBannerImagePriceDrop2.src}")`,
+                            backgroundImage: `url("${conciergeBannerMediaImage.src}")`,
+                            backgroundPosition: 'center 30%',
                         }}
                     />
-
                     <div className="header-media-modal-menu-banner-text">
-                        <h4 className="header-media-modal-menu-banner-text__title">THE CULTT SALE</h4>
-
+                        <h4 className="header-media-modal-menu-banner-text__title">Консьерж-сервис</h4>
                         <p className="header-media-modal-menu-banner-text__subtitle">
-                            Культовые лоты <br /> по сниженным ценам — успейте забрать их первыми
+                            Найдем и доставим вам сумки и украшения главных luxury-брендов
                         </p>
                     </div>
                 </Link>
-
-                <p className="header-media-modal-menu__title">Меню</p>
 
                 <div className="header-media-modal-menu-links">
                     <Link
