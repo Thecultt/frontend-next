@@ -32,11 +32,13 @@ export { Button } from './UI/Button/Button';
 export { Input as NewInput } from './UI/Input/Input';
 export { Textarea as NewTextarea } from './UI/Textarea/Textarea';
 export { Popup as NewPopup } from './UI/Popup/Popup';
+export { Select as NewSelect } from './UI/Select/Select';
 
 // Formik
 
 export { FormikInput } from './formik/FormikInput/FormikInput';
 export { FormikTextarea } from './formik/FormikTextarea/FormikTextarea';
+export { FormikSelect } from './formik/FormikSelect/FormikSelect';
 
 // Notifications
 export { default as NotificationsServer } from './UI/NotificationsServer/NotificationsServer';

@@ -6,7 +6,7 @@ import { useField } from 'formik';
 import { InputProps } from '@/types/ui';
 import { NewInput } from '@/components';
 
-interface Props extends Omit<InputProps, 'name'> {
+interface Props extends Omit<InputProps, 'value' | 'onChange' | 'name'> {
     name: string;
 }
 
