@@ -54,7 +54,7 @@ export const Popup: React.FC<Props> = ({ isOpen, title, content, btn, onClose, c
                         <div className="tc-popup-content" ref={PopupRef}>
                             <XIcon className="tc-popup-content-close" onClick={onCloseWrapper} />
 
-                            <h3 className="tc-popup-content__title">{title}</h3>
+                            <h3 className="tc-popup-content__title" dangerouslySetInnerHTML={{ __html: title }}></h3>
 
                             {content}
 
