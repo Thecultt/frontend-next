@@ -1,0 +1,194 @@
+@import "/src/assets/sass/variables"
+@import "/src/assets/sass/mixin"
+
+.tc-select
+    width: 100%
+
+    &__wrapper
+        width: 100%
+        position: relative
+
+    &-control
+        +buttonReset
+        width: 100%
+        display: flex
+        justify-content: space-between
+        align-items: center
+        gap: 12px
+        text-align: left
+        padding: 8px 12px
+        border-radius: 8px
+        border: 1px solid transparent
+        transition: border 0.2s linear
+        user-select: none
+
+        +mediaTablet
+            padding: 12px
+
+        &__label
+            +ManropeBold
+            font-size: 12px
+            line-height: 14.4px
+            text-align: left
+            color: $black3
+            margin-bottom: 4px
+            transition: color 0.2s linear
+
+            +mediaTablet
+                +ManropeSemiBold
+                margin-bottom: 8px
+
+        &__value
+            +ManropeSemiBold
+            font-size: 16px
+            line-height: 24px
+            color: $grey6
+            transition: color 0.2s linear
+            +textEllipsis
+
+        &__l-wrapper
+            flex: 1
+            display: flex
+            flex-direction: column
+            overflow: hidden
+
+        &__r-wrapper
+            flex-shrink: 0
+            display: flex
+            align-items: center
+            justify-content: flex-end
+            gap: 8px
+
+    &--theme-white &-control
+        background-color: $white
+
+    &--theme-grey &-control
+        background-color: $grey1
+
+    &--theme-green &-control
+        background-color: $green1
+
+    &--error &-control
+        border-color: $red
+
+    &--has-value &-control
+        &__label
+            color: $grey6
+
+        &__value
+            color: $black3
+
+    &--opened &-control
+        &__label
+            color: $black3
+
+    &--disabled &-control
+        pointer-events: none
+
+        &__label
+            color: $grey6
+
+        &__value
+            color: $grey6
+
+    &-icon-btn
+        +flexCenter
+
+        &__icon
+            width: 24px
+            color: $black3
+
+    &-icon-btn-arrow
+        transition: transform 0.2s linear
+
+    &--disabled &-icon-btn-arrow .tc-select-icon-btn__icon
+        color: $grey6
+
+    &--disabled &-icon-btn-info
+        pointer-events: all
+
+    &--opened &-icon-btn-arrow
+        transform: rotate(-180deg)
+
+    &__error
+        +ManropeBold
+        font-size: 12px
+        line-height: 14.4px
+        color: $red
+        margin-top: 4px
+
+    &-options
+        position: absolute
+        top: calc(100% + 8px)
+        left: 0
+        right: 0
+        z-index: 1
+
+        width: 100%
+        padding: 8px 12px
+        border-radius: 8px
+
+        &__wrapper
+            width: 100%
+            max-height: 160px
+            padding-right: 12px
+            display: flex
+            flex-direction: column
+            flex-wrap: nowrap
+            gap: 12px
+            overflow-y: auto
+            +scrollbar
+
+    &--theme-white &-options
+        background-color: $white
+
+    &--theme-grey &-options
+        background-color: $grey1
+
+    &--theme-green &-options
+        background-color: $green1
+
+    &-option
+        +buttonReset
+        width: 100%
+        display: flex
+        align-items: center
+        justify-content: space-between
+        color: $black3
+
+        &:hover
+            color: $green9
+
+        &--selected
+            color: $mainColor
+
+        &__label
+            +ManropeSemiBold
+            font-size: 16px
+            line-height: 24px
+            color: inherit
+            transition: color 0.2s linear
+
+        &__icon
+            width: 24px
+            color: inherit
+
+    &-info
+        position: absolute
+        top: calc(100% + 8px)
+        left: 0
+        right: 0
+        z-index: 1
+
+        width: 100%
+        padding: 8px
+        border: 1px solid $black3
+        border-radius: 8px
+        background-color: $white
+
+        +ManropeMedium
+        font-size: 14px
+        line-height: 19.6px
+        text-align: left
+        color: $black3
+        word-break: break-word

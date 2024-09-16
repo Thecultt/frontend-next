@@ -6,7 +6,7 @@ import { useField } from 'formik';
 import { TextareaProps } from '@/types/ui';
 import { NewTextarea } from '@/components';
 
-interface Props extends Omit<TextareaProps, 'name'> {
+interface Props extends Omit<TextareaProps, 'value' | 'onChange' | 'name'> {
     name: string;
 }
 
