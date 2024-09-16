@@ -12,5 +12,4 @@ export { ReactComponent as RingIcon, default as ringIconPath } from './ring.svg'
 export { ReactComponent as ShoesIcon, default as shoesIconPath } from './shoes.svg';
 export { ReactComponent as WalletIcon, default as walletIconPath } from './wallet.svg';
 export { ReactComponent as InfoIcon, default as infoIconPath } from './info.svg';
-export { ReactComponent as ChevronDownIcon, default as chevronDownIconPath } from './chevron-down.svg';
 export { ReactComponent as CheckIcon, default as checkIconPath } from './check.svg';
