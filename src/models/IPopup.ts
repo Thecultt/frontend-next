@@ -1,7 +1,7 @@
 import { Noop } from '@/types/functions';
 
 export interface PopupContent {
-    title: string;
+    title: React.ReactNode;
     content: React.ReactNode;
     btn?: {
         label: string;

@@ -34,7 +34,11 @@ const ConciergeMain: React.FC = () => {
     React.useEffect(() => {
         if (isSendFormCustomProductSuccess) {
             openPopupInfo({
-                title: 'Спасибо! <br /> Ваша заявка принята',
+                title: (
+                    <>
+                        Спасибо! <br /> Ваша заявка принята
+                    </>
+                ),
                 content: (
                     <p className="concierge-product-success__subtitle">
                         Скоро мы свяжемся с вами в WhatsApp <br /> по указанному номеру телефона.
