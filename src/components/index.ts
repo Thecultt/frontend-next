@@ -58,8 +58,6 @@ export { default as ProductBlock } from './ProductBlock/ProductBlock';
 export { default as Header } from './Header/Header';
 // HeaderTopMessage
 export { default as HeaderTopMessage } from './Header/HeaderTopMessage/HeaderTopMessage';
-// HeaderHoverMenu
-export { default as HeaderHoverMenu } from './Header/HeaderHoverMenu/HeaderHoverMenu';
 // HeaderSearchBox
 export { default as HeaderSearchBox } from './Header/HeaderSearchBox/HeaderSearchBox';
 // HeaderUser
@@ -318,6 +316,7 @@ export { default as FaqTheCultt } from './Faq/FaqTheCultt';
 // Cart
 export { default as CartItemBlock } from './Cart/CartItemBlock';
 export { CartProductItem } from './Cart/CartProductItem/CartProductItem';
+export { CartList } from './Cart/CartList/CartList';
 
 // CinemaArtistic
 export { default as CinemaArtisticExhibits } from './CinemaArtistic/CinemaArtisticExhibits';

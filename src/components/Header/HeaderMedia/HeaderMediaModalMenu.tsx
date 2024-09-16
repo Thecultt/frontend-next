@@ -1,3 +1,5 @@
+'use client';
+
 import React, { memo } from 'react';
 import Link from 'next/link';
 
@@ -32,7 +34,15 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
     const { categories: filtersCategories, isLoaded: filtersIsLoaded } = useTypedSelector(
         ({ products_filters }) => products_filters,
     );
-    const mappedCategories = CATEGORIES.map((item) => ({ title: item, ...filtersCategories[item] }));
+
+    const mappedCategories = CATEGORIES.map((item) => {
+        // TODO remove after api update
+        if (item === CATEGORY_NAMES.jewelry) {
+            return { title: item, ...filtersCategories[CATEGORY_NAMES.decorations] };
+        }
+
+        return { title: item, ...filtersCategories[item] };
+    });
 
     return (
         <div
@@ -115,6 +125,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                             key={`header-media-modal-menu-links-tab-${index}`}
                         >
                             {filtersIsLoaded &&
+                                category.subsubcategories &&
                                 Object.keys(category.subsubcategories).map((subsubcategory, subindex) => (
                                     <Link
                                         href={getCatalogFiltersUrl({
@@ -151,10 +162,9 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                                 className="header-media-modal-menu-links-boutique"
                                 onClick={toggleVisible}
                             >
-                                <span className="header-media-modal-menu-links-boutique__badge">Из бутика</span>
-
+                                <span className="header-media-modal-menu-links-boutique__badge">Новое</span>
                                 <p className="header-media-modal-menu-links-boutique__subtitle">
-                                    Новые, не были в носке
+                                    Лоты от брендов и из бутиков-партнеров
                                 </p>
                             </Link>
                         </HeaderMediaLinkTab>

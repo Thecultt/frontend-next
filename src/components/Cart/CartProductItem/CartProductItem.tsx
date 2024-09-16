@@ -40,9 +40,13 @@ export const CartProductItem: React.FC<Props> = ({
             <Link href={`${APP_ROUTE.product}/${article}`} className="cart-product-item-image">
                 <div
                     className="cart-product-item-image__background"
-                    style={{
-                        backgroundImage: `url('${image}')`,
-                    }}
+                    style={
+                        image
+                            ? {
+                                  backgroundImage: `url('${image}')`,
+                              }
+                            : undefined
+                    }
                 />
             </Link>
             <Link

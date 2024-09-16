@@ -1,14 +1,16 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 
 import { getClassNames } from '@/functions/getClassNames';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { BaseImage } from '@/components';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { useScrollPoint } from '@/hooks/useScrollPoint';
 import { APP_ROUTE } from '@/constants/routes';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
 import { logoPath } from '@/assets/icons';
+import { useCart } from '@/hooks/catalog/useCart';
 
 import { HeaderMediaModalMenu } from './HeaderMediaModalMenu';
 
@@ -24,8 +26,8 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ isOpenSearch = false, transpa
 
     const ModalRef = React.useRef<HTMLDivElement>(null);
 
-    const { items } = useTypedSelector(({ cart }) => cart);
     const { isLoggedIn } = useAuthUser();
+    const { allCart } = useCart();
 
     React.useEffect(() => {
         document.addEventListener('mousedown', hiddeModal);
@@ -147,9 +149,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ isOpenSearch = false, transpa
                         </Link>
 
                         <Link href={APP_ROUTE.cart} className="header-media-icon">
-                            {Object.keys(items).length ? (
-                                <span className="header-media-icon__count">{Object.keys(items).length}</span>
-                            ) : null}
+                            {allCart.length > 0 && <span className="header-media-icon__count">{allCart.length}</span>}
 
                             <svg
                                 width="28"

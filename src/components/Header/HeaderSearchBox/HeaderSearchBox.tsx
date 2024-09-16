@@ -1,6 +1,9 @@
+'use client';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
+import { useOnClickOutside } from 'usehooks-ts';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { setHeaderSearchValue } from '@/redux/actions/header';
@@ -26,25 +29,11 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose, goToC
 
     const PopupRef = React.useRef<HTMLDivElement>(null);
 
-    const togglePopup = (e: any) => {
-        if (PopupRef.current && !PopupRef.current.contains(e.target)) {
-            onClose();
-        }
-    };
-
     const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setHeaderSearchValue(e.target.value) as any);
     };
 
-    React.useEffect(() => {
-        document.addEventListener('mousedown', togglePopup);
-        document.addEventListener('touchstart', togglePopup);
-
-        return () => {
-            document.removeEventListener('mousedown', togglePopup);
-            document.removeEventListener('touchstart', togglePopup);
-        };
-    }, [PopupRef]);
+    useOnClickOutside(PopupRef, onClose);
 
     return (
         <div
