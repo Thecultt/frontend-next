@@ -8,6 +8,7 @@ export interface ProductsFiltersState {
     colors: IProductFilters['colors'];
     selections: IProductFilters['selections'];
     glass_frame: IProductFilters['glass_frame'];
+    jewelry_metal_type: IProductFilters['jewelry_metal_type'];
 }
 
 export enum ProductsFiltersActionTypes {
@@ -18,6 +19,7 @@ export enum ProductsFiltersActionTypes {
     SET_PRODUCTS_FILTERS_COLORS = 'SET_PRODUCTS_FILTERS_COLORS',
     SET_PRODUCTS_FILTERS_SELECTIONS = 'SET_PRODUCTS_FILTERS_SELECTIONS',
     SET_PRODUCTS_FILTERS_GLASS_FRAME = 'SET_PRODUCTS_FILTERS_GLASS_FRAME',
+    SET_PRODUCTS_FILTERS_METAL_TYPES = 'SET_PRODUCTS_FILTERS_METAL_TYPES',
 }
 
 interface setProductsFiltersIsLoaded {
@@ -55,6 +57,11 @@ interface setProductsFiltersGlassFrame {
     payload: IProductFilters['glass_frame'];
 }
 
+interface setProductsFiltersMetalTypes {
+    type: ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_METAL_TYPES;
+    payload: IProductFilters['jewelry_metal_type'];
+}
+
 export type ProductsFiltersTypes =
     | setProductsFiltersIsLoaded
     | setProductsFiltersPrice
@@ -62,4 +69,5 @@ export type ProductsFiltersTypes =
     | setProductsFiltersCategory
     | setProductsFiltersColors
     | setProductsFiltersSelections
-    | setProductsFiltersGlassFrame;
+    | setProductsFiltersGlassFrame
+    | setProductsFiltersMetalTypes;

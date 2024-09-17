@@ -8,9 +8,10 @@ const initialState: ProductsFiltersState = {
     categories: {},
     colors: {},
     selections: {},
+    jewelry_metal_type: [],
 };
 
-const products_filters = (state = initialState, action: ProductsFiltersTypes) => {
+const products_filters = (state = initialState, action: ProductsFiltersTypes): ProductsFiltersState => {
     if (action.type === ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_IS_LOADED) {
         return {
             ...state,
@@ -57,6 +58,13 @@ const products_filters = (state = initialState, action: ProductsFiltersTypes) =>
         return {
             ...state,
             glass_frame: action.payload,
+        };
+    }
+
+    if (action.type === ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_METAL_TYPES) {
+        return {
+            ...state,
+            jewelry_metal_type: action.payload,
         };
     }
 

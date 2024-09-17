@@ -144,6 +144,8 @@ export { default as CatalogFiltersSelections } from './Catalog/CatalogFilters/Ca
 export { default as CatalogFiltersSex } from './Catalog/CatalogFilters/CatalogFiltersSex';
 export { default as CatalogFiltersSize } from './Catalog/CatalogFilters/CatalogFiltersSize';
 export { default as CatalogFiltersTypes } from './Catalog/CatalogFilters/CatalogFiltersTypes';
+export { default as CatalogFiltersMetalType } from './Catalog/CatalogFilters/CatalogFiltersMetalType';
+
 // CatalogProducts
 export { default as CatalogProducts } from './Catalog/CatalogProducts/CatalogProducts';
 export { default as CatalogProductsNull } from './Catalog/CatalogProducts/CatalogProductsNull';

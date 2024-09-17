@@ -25,7 +25,7 @@ export const CATEGORY_SLUGS = {
     accessories: 'aksessuary',
     shoes: 'obuv',
     decorations: 'ukrasheniia',
-    jewelry: 'jewelry', // TODO sync slug with api
+    jewelry: 'iuvelirnye-izdeliia',
 };
 
 export const CATEGORY_SLUG_NAMES = {

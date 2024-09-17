@@ -97,6 +97,7 @@ export const fetchProductsCatalog =
         filters.genders?.map((gender) => params.append('genders', gender));
         filters.glass_frame?.map((glass_frame) => params.append('glass_frame', glass_frame));
         filters.size?.map((size) => params.append('size', size.toString()));
+        filters.metal_types?.map((metalType) => params.append('metal_jewelry_type_slug', metalType));
 
         if (filters.boutique) {
             params.append('from_boutique', String(filters.boutique));
