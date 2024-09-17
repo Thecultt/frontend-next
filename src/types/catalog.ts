@@ -30,6 +30,7 @@ export interface ICatalogFilters {
     availability?: AvailabilityType[];
     glass_frame?: string[];
     size?: number[];
+    metal_types?: string[];
 
     selection?: string;
     boutique?: boolean;

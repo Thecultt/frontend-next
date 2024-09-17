@@ -13,6 +13,7 @@ import { XIcon } from '@/assets/icons';
 import { Noop } from '@/types/functions';
 import { useCart } from '@/hooks/catalog/useCart';
 import { setHeaderCartIsVisible } from '@/redux/actions/header';
+import { getUrlWithParams } from '@/functions/getUrlWithParams';
 
 interface HeaderCartModalAddMessageProps {
     state: boolean;
@@ -77,7 +78,13 @@ const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ s
                 </button>
 
                 <Link
-                    href={APP_ROUTE.order}
+                    href={
+                        !item.is_jewelry
+                            ? APP_ROUTE.order
+                            : getUrlWithParams(APP_ROUTE.order, {
+                                  type: 'jewelry',
+                              })
+                    }
                     className="btn header-block-cart-modal__more-btn"
                     onClick={setState}
                     scroll={false}
