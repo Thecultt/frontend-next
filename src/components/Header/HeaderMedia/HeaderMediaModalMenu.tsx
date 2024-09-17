@@ -35,14 +35,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
         ({ products_filters }) => products_filters,
     );
 
-    const mappedCategories = CATEGORIES.map((item) => {
-        // TODO remove after api update
-        if (item === CATEGORY_NAMES.jewelry) {
-            return { title: item, ...filtersCategories[CATEGORY_NAMES.decorations] };
-        }
-
-        return { title: item, ...filtersCategories[item] };
-    });
+    const mappedCategories = CATEGORIES.map((item) => ({ title: item, ...filtersCategories[item] }));
 
     return (
         <div

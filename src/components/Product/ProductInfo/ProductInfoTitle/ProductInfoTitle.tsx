@@ -5,24 +5,24 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMediaQuery } from 'usehooks-ts';
 
-import { ProductPage } from '@/models/IProduct';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import {
     ProductInfoTitleBoutique,
     ProductInfoTitlePartner,
     ProductInfoTitleSplit,
     ProductInfoTitleSale,
 } from '@/components';
-import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { CATEGORY_NAME_SLUGS, CATEGORY_NAMES } from '@/constants/catalog';
-import { useWaitingData } from '@/hooks/catalog/useWaitingData';
+import { ProductPage } from '@/models/IProduct';
 import { WaitingPopupType } from '@/types/waiting';
+import { useWaitingData } from '@/hooks/catalog/useWaitingData';
 import { useHash } from '@/hooks/useHash';
+import { useCart } from '@/hooks/catalog/useCart';
+import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
+import { getClassNames } from '@/functions/getClassNames';
+import { getUrlWithParams } from '@/functions/getUrlWithParams';
 import { formatMoney } from '@/functions/formatMoney';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { APP_ROUTE } from '@/constants/routes';
-import { getClassNames } from '@/functions/getClassNames';
-import { useCart } from '@/hooks/catalog/useCart';
+import { CATEGORY_NAME_SLUGS, CATEGORY_NAMES } from '@/constants/catalog';
 
 import { ProductInfoTitleFavorites } from './ProductInfoTitleFavorites';
 
@@ -71,7 +71,12 @@ const ProductInfoTitle: React.FC<Props> = ({ product, setBoutiquePopupVisible, s
 
     const handleAddClick = () => {
         if (inCart) {
-            router.push(isMobile ? APP_ROUTE.cart : APP_ROUTE.order);
+            const orderPath = !is_jewelry
+                ? APP_ROUTE.order
+                : getUrlWithParams(APP_ROUTE.order, {
+                      type: 'jewelry',
+                  });
+            router.push(isMobile ? APP_ROUTE.cart : orderPath);
             return;
         }
 
