@@ -5,7 +5,7 @@ interface IParams {
 }
 
 export const getDefaultPageSort = ({ categorySlug }: IParams) => {
-    if (categorySlug && [CATEGORY_SLUGS.sale, CATEGORY_SLUGS.popular].includes(categorySlug)) {
+    if (categorySlug === CATEGORY_SLUGS.popular) {
         return SORT.popular;
     }
 
