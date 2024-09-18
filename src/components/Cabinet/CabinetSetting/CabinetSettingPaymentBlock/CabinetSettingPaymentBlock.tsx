@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import { createTextMask } from 'redux-form-input-masks';
@@ -13,25 +15,41 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     pristine,
     submitting,
 }) => {
-    // const {
-    //     user: { pasport, inn, bik, fullname, rs },
-    //     isSending,
-    // } = useTypedSelector(({ user }) => user);
     const {
         isSending,
-        user: { pasport, inn, bik, fullname, rs },
-    } = useAuthUser();
-
-    const [state, setState] = React.useState(pasport !== '' || pasport !== null);
-    const [isEdit, setIsEdit] = React.useState(pasport === '' || pasport === null);
-
-    React.useEffect(() => {
-        initialize({
+        user: {
+            dr,
             pasport,
             inn,
             bik,
             fullname,
             rs,
+            issued_by,
+            issued_code,
+            issued_date,
+            place_of_birth,
+            registration_address,
+            citizenship,
+        },
+    } = useAuthUser();
+
+    const [state, setState] = React.useState(!!pasport);
+    const [isEdit, setIsEdit] = React.useState(!pasport);
+
+    React.useEffect(() => {
+        initialize({
+            dr,
+            pasport,
+            inn,
+            bik,
+            fullname,
+            rs,
+            issued_by,
+            issued_code,
+            issued_date,
+            place_of_birth,
+            registration_address,
+            citizenship,
         });
     }, [isEdit]);
 
@@ -108,21 +126,7 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                             />
                         </div>
 
-                        <div className="cabinet-setting-block-form-input" style={{ width: '100%' }}>
-                            <Field
-                                component={RenderInput}
-                                name="inn"
-                                label="Ваш ИНН"
-                                bgWhite
-                                {...createTextMask({
-                                    pattern: '999999999999',
-                                    guide: false,
-                                    stripMask: false,
-                                })}
-                            />
-                        </div>
-
-                        <div className="cabinet-setting-block-form-input" style={{ width: '100%' }}>
+                        <div className="cabinet-setting-block-form-input" style={{ width: '49%' }}>
                             <Field
                                 component={RenderInput}
                                 name="bik"
@@ -130,6 +134,20 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                                 bgWhite
                                 {...createTextMask({
                                     pattern: '999999999',
+                                    guide: false,
+                                    stripMask: false,
+                                })}
+                            />
+                        </div>
+
+                        <div className="cabinet-setting-block-form-input" style={{ width: '49%' }}>
+                            <Field
+                                component={RenderInput}
+                                name="inn"
+                                label="ИНН"
+                                bgWhite
+                                {...createTextMask({
+                                    pattern: '999999999999',
                                     guide: false,
                                     stripMask: false,
                                 })}
@@ -147,6 +165,69 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                                     guide: false,
                                     stripMask: false,
                                 })}
+                            />
+                        </div>
+
+                        <div className="cabinet-setting-block-form-input" style={{ width: '100%' }}>
+                            <Field component={RenderInput} name="issued_by" label="Кем выдан" bgWhite />
+                        </div>
+
+                        <div className="cabinet-setting-block-form-input" style={{ width: '49%' }}>
+                            <Field
+                                component={RenderInput}
+                                name="issued_date"
+                                label="Дата выдачи"
+                                bgWhite
+                                {...createTextMask({
+                                    pattern: '99.99.9999',
+                                    guide: false,
+                                    stripMask: false,
+                                })}
+                            />
+                        </div>
+
+                        <div className="cabinet-setting-block-form-input" style={{ width: '49%' }}>
+                            <Field
+                                component={RenderInput}
+                                name="issued_code"
+                                label="Код подразделения"
+                                bgWhite
+                                {...createTextMask({
+                                    pattern: '999-999',
+                                    guide: false,
+                                    stripMask: false,
+                                })}
+                            />
+                        </div>
+
+                        <div className="cabinet-setting-block-form-input" style={{ width: '100%' }}>
+                            <Field component={RenderInput} name="place_of_birth" label="Место рождения" bgWhite />
+                        </div>
+
+                        <div className="cabinet-setting-block-form-input" style={{ width: '49%' }}>
+                            <Field
+                                component={RenderInput}
+                                label="Дата рождения"
+                                name="dr"
+                                bgWhite
+                                {...createTextMask({
+                                    pattern: '99.99.9999',
+                                    guide: false,
+                                    stripMask: false,
+                                })}
+                            />
+                        </div>
+
+                        <div className="cabinet-setting-block-form-input" style={{ width: '49%' }}>
+                            <Field component={RenderInput} label="Гражданство" name="citizenship" bgWhite />
+                        </div>
+
+                        <div className="cabinet-setting-block-form-input" style={{ width: '100%' }}>
+                            <Field
+                                component={RenderInput}
+                                label="Адрес регистрации"
+                                name="registration_address"
+                                bgWhite
                             />
                         </div>
                     </div>
