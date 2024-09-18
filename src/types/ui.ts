@@ -1,4 +1,5 @@
 import React from 'react';
+import { Props as MaskInputProps } from 'react-input-mask';
 
 interface CommonInputProps {
     label: string;
@@ -8,6 +9,7 @@ interface CommonInputProps {
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, CommonInputProps {
     info?: React.ReactNode;
+    maskProps?: Pick<MaskInputProps, 'mask' | 'maskChar' | 'alwaysShowMask'>;
 }
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement>, CommonInputProps {}
