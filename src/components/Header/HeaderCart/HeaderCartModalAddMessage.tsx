@@ -34,6 +34,10 @@ const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ s
         dispatch(setHeaderCartIsVisible(true));
     };
 
+    if (!item) {
+        return null;
+    }
+
     return (
         <div
             className={getClassNames('header-block-cart-modal', {
