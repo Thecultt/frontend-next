@@ -3,6 +3,7 @@
 import React from 'react';
 import { useOnClickOutside, useToggle } from 'usehooks-ts';
 import { AnimatePresence, motion } from 'framer-motion';
+import MaskInput from 'react-input-mask';
 
 import { getClassNames } from '@/functions/getClassNames';
 import { InfoIcon } from '@/assets/icons';
@@ -19,6 +20,7 @@ export const Input: React.FC<InputProps> = ({
     type = 'text',
     theme = 'white',
     placeholder = label,
+    maskProps,
     ...inputProps
 }) => {
     const infoRef = React.useRef<HTMLDivElement>(null);
@@ -36,7 +38,18 @@ export const Input: React.FC<InputProps> = ({
         >
             <div className="tc-input__wrapper">
                 <label className="tc-input__l-wrapper">
-                    <input type={type} className="tc-input__field" placeholder={placeholder} {...inputProps} />
+                    {maskProps ? (
+                        <MaskInput
+                            type={type}
+                            className="tc-input__field"
+                            placeholder={placeholder}
+                            {...maskProps}
+                            {...inputProps}
+                        />
+                    ) : (
+                        <input type={type} className="tc-input__field" placeholder={placeholder} {...inputProps} />
+                    )}
+
                     <span className="tc-input__label">{label}</span>
                 </label>
 
