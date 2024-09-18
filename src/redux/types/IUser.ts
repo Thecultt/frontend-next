@@ -1,3 +1,4 @@
+// TODO update this model
 export interface IUser {
     user_id: number;
     user_wishlist_link: string | null;
@@ -45,6 +46,7 @@ export interface IUser {
 export interface UserState {
     isLoaded: boolean;
     isSending: boolean;
+    // TODO ts model IUser
     user: any;
 }
 
