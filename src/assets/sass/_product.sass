@@ -513,10 +513,6 @@
 				&__item
 					margin-bottom: 12px
 
-					& > span
-						color: $gray
-						margin-right: 5px
-
 					&:last-child
 						margin-bottom: 0
 
@@ -997,16 +993,33 @@
 						width: 100%
 
 .product-info-property
-	+ManropeMedium
-	font-size: 16px
-	color: $black3
+	width: 100%
+	display: block
+
+	&--column
+		display: flex
+		flex-direction: column
 
 	&__title
+		+ManropeMedium
+		font-size: 16px
 		color: $grey6
 		margin-right: 6px
 
-	+mediaTablet
-		font-size: 14px
+		+mediaTablet
+			font-size: 14px
+
+	&--column &__title
+		margin-right: 0
+
+	&__value
+		+ManropeMedium
+		font-size: 16px
+		color: $black3
+		white-space: pre-wrap
+
+		+mediaTablet
+			font-size: 14px
 
 .product-info-favorites-mobile
 	+buttonReset

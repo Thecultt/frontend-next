@@ -1,9 +1,11 @@
 import React from 'react';
 
 import { ProductPage } from '@/models/IProduct';
+import { capitalize } from '@/functions/capitalize';
+
 import { ProductInfoProperty } from './ProductInfoProperty';
 
-const ProductInfoParametersSize: React.FC<ProductPage> = ({
+const ProductInfoParameters: React.FC<ProductPage> = ({
     gender,
     color,
     external_material,
@@ -41,8 +43,18 @@ const ProductInfoParametersSize: React.FC<ProductPage> = ({
     waterproof_clock,
     branded_box_clock,
     documents_clock,
+    collection_jewelry,
+    weight_jewelry,
+    metal_jewelry,
+    color_metal_jewelry,
+    sample_metal_jewelry,
+    cover_metal_jewelry,
+    size_jewelry,
+    length_jewelry,
+    width_jewelry,
+    description_jewelry,
 }) => {
-    const parameters: { title: string; value: string }[] = [
+    const parameters = [
         { title: 'Год выпуска', value: bag_year },
         { title: 'Внешний материал', value: external_material },
         { title: 'Материал подкладки', value: lining_material },
@@ -81,7 +93,22 @@ const ProductInfoParametersSize: React.FC<ProductPage> = ({
         { title: 'Водонепроницаемость', value: waterproof_clock },
         { title: 'Фирменная коробка', value: branded_box_clock },
         { title: 'Документы', value: documents_clock },
-    ].filter((item) => !!item.value);
+
+        { title: 'Коллекция', value: collection_jewelry },
+        { title: 'Вес', value: weight_jewelry },
+        { title: 'Тип металла', value: metal_jewelry ? capitalize(metal_jewelry) : '' },
+        { title: 'Цвет металла', value: color_metal_jewelry },
+        { title: 'Проба', value: sample_metal_jewelry },
+        { title: 'Покрытие', value: cover_metal_jewelry },
+        { title: 'Размер', value: size_jewelry },
+        { title: 'Длина (см)', value: length_jewelry },
+        { title: 'Ширина (см)', value: width_jewelry },
+        { title: 'Характеристики', value: description_jewelry, column: true },
+    ].filter((item) => !!item.value) as { title: string; value: string; column?: boolean }[];
+
+    if (!parameters.length) {
+        return null;
+    }
 
     return (
         <div className="product-content-info-parameters">
@@ -92,6 +119,7 @@ const ProductInfoParametersSize: React.FC<ProductPage> = ({
                     key={index}
                     title={parameter.title}
                     value={parameter.value}
+                    column={parameter.column}
                     className="product-content-info-parameters__item"
                 />
             ))}
@@ -99,4 +127,4 @@ const ProductInfoParametersSize: React.FC<ProductPage> = ({
     );
 };
 
-export default ProductInfoParametersSize;
+export default ProductInfoParameters;
