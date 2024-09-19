@@ -38,39 +38,31 @@ const FooterEmailSubscribeForm: React.FC<Props> = ({ onSubmit }) => (
                 </div>
 
                 <div className="footer-email-form-radio">
-                    <div className="footer-email-form-radio-item">
+                    <label className="footer-email-form-radio-item">
                         <Field
-                            id="footer-email-form-input-buyer"
                             name="type"
                             type="radio"
                             className="footer-email-form-radio-item__field"
                             value={FormUserType.Seller}
                         />
 
-                        <label
-                            htmlFor={'footer-email-form-input-buyer'}
-                            className="footer-email-form-radio-item__label"
-                        >
-                            <p className="footer-email-form-radio-item__label__text">Продавец</p>
-                        </label>
-                    </div>
+                        <p className="footer-email-form-radio-item__label">
+                            <span className="footer-email-form-radio-item__label__text">Продавец</span>
+                        </p>
+                    </label>
 
-                    <div className="footer-email-form-radio-item">
+                    <label className="footer-email-form-radio-item">
                         <Field
-                            id="footer-email-form-input-seller"
                             name="type"
                             type="radio"
                             className="footer-email-form-radio-item__field"
                             value={FormUserType.Buyer}
                         />
 
-                        <label
-                            htmlFor={'footer-email-form-input-seller'}
-                            className="footer-email-form-radio-item__label"
-                        >
-                            <p className="footer-email-form-radio-item__label__text">Покупатель</p>
-                        </label>
-                    </div>
+                        <p className="footer-email-form-radio-item__label">
+                            <span className="footer-email-form-radio-item__label__text">Покупатель</span>
+                        </p>
+                    </label>
                 </div>
 
                 <p className="footer-email-form__subtitle">

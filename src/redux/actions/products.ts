@@ -9,6 +9,8 @@ import { ICatalogFilters } from '@/types/catalog';
 
 import { CatalogFetchType, ProductActionTypes, ProductTypes } from '../types/IProducts';
 
+const MIN_PRICE_FROM = 1000;
+
 export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<ProductTypes>) => {
     const {
         data: { total_pages, total_items, items },
@@ -69,13 +71,18 @@ export const fetchProductsCatalog =
             params.append('search', filters.search);
         }
 
-        if (filters.price?.max !== 0) {
-            params.append('price_from', String(filters.price?.min));
-            params.append('price_to', String(filters.price?.max));
+        const priceFrom = filters.price?.min ?? 0;
+        const priceTo = filters.price?.max ?? 0;
+
+        const preparedPriceFrom = priceFrom < MIN_PRICE_FROM ? MIN_PRICE_FROM : priceFrom;
+
+        if (priceTo > 0) {
+            params.append('price_from', String(preparedPriceFrom));
+            params.append('price_to', String(priceTo));
         }
 
-        if (filters.price?.min !== 0 && filters.price?.max === 0) {
-            params.append('price_from', String(filters.price.min));
+        if (preparedPriceFrom > 0 && !priceTo) {
+            params.append('price_from', String(preparedPriceFrom));
         }
 
         if (filters.category_slug) {
