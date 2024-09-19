@@ -6,15 +6,14 @@ import dayjs from 'dayjs';
 import { Order } from '@/models/IOrder';
 import { CabinetHistoryOrdersItemProduct } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
-import { COUNT_MINUTES_RESERVED_ORDER } from '@/constants/order';
+import { COUNT_MINUTES_RESERVED_ORDER, ORDER_STATUSES, ORDER_STATUSES_COLORS } from '@/constants/order';
 import { APP_ROUTE } from '@/constants/routes';
 
-interface CabinetHistoryOrdersItemProps extends Order {
-    statusColor: string;
+interface Props extends Order {
     onClickPay?: () => void;
 }
 
-const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
+const CabinetHistoryOrdersItem: React.FC<Props> = ({
     num,
     createdon,
     cost,
@@ -24,7 +23,6 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
     delivery_type,
     payment_type,
     products,
-    statusColor,
     status,
     status_description,
     yandex_split_link,
@@ -35,6 +33,15 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
     const toggleOpen = () => {
         setIsOpen(!isOpen);
     };
+
+    // const statusColor = Object.keys(ORDER_STATUSES).map(
+    //     (key) => ORDER_STATUSES[key] === status && ORDER_STATUSES_COLORS[key],
+    // );
+    const statusColor = Object.keys(ORDER_STATUSES).find((key) => console.log(ORDER_STATUSES[key], status));
+
+    React.useEffect(() => {
+        console.log(Object.keys(ORDER_STATUSES).find((key) => console.log(ORDER_STATUSES[key], status)));
+    }, []);
 
     return (
         <div className="cabinet-history-orders-item-wrapper">
@@ -178,6 +185,7 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
                             ))}
                         </div>
 
+                        {/* TODO: Вынести в отдельный компонент */}
                         {(status === 'Ожидает оплаты' ||
                             dayjs().isBefore(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm'))) && (
                             <>

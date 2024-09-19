@@ -7,6 +7,7 @@ export interface OrderProduct {
     manufacturer: string;
     model_name: string;
     price: number;
+    is_jewelry: boolean;
 }
 
 export interface Order {

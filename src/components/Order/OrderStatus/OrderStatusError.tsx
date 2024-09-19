@@ -13,7 +13,10 @@ import { setCartItems } from '@/redux/actions/cart';
 import { ICartItemsState } from '@/redux/types/ICart';
 import { COUNT_MINUTES_RESERVED_ORDER } from '@/constants/order';
 import { APP_ROUTE } from '@/constants/routes';
+import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
 import { useCart } from '@/hooks/catalog/useCart';
+import { useOrder } from '@/hooks/order/useOrder';
+import { useOrderDetails } from '@/hooks/order/useOrderDetails';
 
 import orderPay from '../orderPay';
 
@@ -21,23 +24,23 @@ const OrderStatusError: React.FC = () => {
     const dispatch = useDispatch();
 
     const { allCart } = useCart();
+    // const { cartSum, isJewelry } = useOrder();
 
     const {
-        order: {
-            payment_type,
-            id,
-            cost,
-            products,
-            client_name,
-            client_phone,
-            delivery_type,
-            delivery_address,
-            delivery_price,
-            num,
-            yandex_split_link,
-            createdon,
-        },
-    } = useTypedSelector(({ order }) => order);
+        payment_type,
+        id,
+        cost,
+        products,
+        client_name,
+        client_phone,
+        delivery_type,
+        delivery_address,
+        delivery_price,
+        num,
+        yandex_split_link,
+        createdon,
+        isJewelry,
+    } = useOrderDetails();
 
     const successPayment = (orderId: number) => {
         const newCart: ICartItemsState = {};
@@ -79,6 +82,7 @@ const OrderStatusError: React.FC = () => {
 
     const onClickPay = () => {
         orderPay({
+            isJewelry: isJewelry && parseInt(cost) >= JEWELRY_PASSPORT_SUM,
             type: payment_type,
             orderId: id,
             totalPrice: parseInt(cost),
@@ -121,6 +125,7 @@ const OrderStatusError: React.FC = () => {
                                 </svg>
                             </div>
 
+                            {/* TODO: Переписать на usehooks-ts */}
                             {dayjs().isAfter(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm')) ? (
                                 <>
                                     <h2 className="order-status-content-info__title">К сожалению, ваш заказ отменен</h2>

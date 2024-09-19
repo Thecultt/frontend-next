@@ -371,6 +371,7 @@ const OrderProducts: React.FC = () => {
             }));
 
             orderPay({
+                isJewelry: isJewelry && cartPrice >= JEWELRY_PASSPORT_SUM,
                 type: paymentValue,
                 orderId,
                 totalPrice,
