@@ -18,7 +18,7 @@ const ProductInfoParametersSize: React.FC<ProductPage> = ({
     diameter,
     ring_size,
 }) => {
-    const parameters: { title: string; value: string }[] = [
+    const parameters = [
         { title: 'Рост модели, см', value: model_height },
         { title: 'Длина, см', value: length },
         { title: 'Ширина, см', value: width },
@@ -33,22 +33,20 @@ const ProductInfoParametersSize: React.FC<ProductPage> = ({
         { title: 'Размер', value: glasses_sizes },
         { title: 'Диаметр, см', value: diameter },
         { title: 'Размер', value: ring_size },
-    ];
+    ].filter((item) => !!item.value) as { title: string; value: string }[];
 
     return (
         <div className="product-content-info-parameters">
             <h4 className="product-content-info-parameters__title">Размер</h4>
 
-            {parameters.map((parameter, index) =>
-                parameter.value !== null && parameter.value !== '' && parameter.value ? (
-                    <p
-                        className="product-content-info-parameters__item"
-                        key={`product-content-info-parameters-size__item-${index}`}
-                    >
-                        <span>{parameter.title}:</span> {parameter.value}
-                    </p>
-                ) : null,
-            )}
+            {parameters.map((parameter, index) => (
+                <p
+                    className="product-content-info-parameters__item"
+                    key={`product-content-info-parameters-size__item-${index}`}
+                >
+                    <span>{parameter.title}:</span> {parameter.value}
+                </p>
+            ))}
         </div>
     );
 };
