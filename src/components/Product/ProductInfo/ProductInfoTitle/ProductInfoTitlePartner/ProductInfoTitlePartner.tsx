@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 import { Noop } from '@/types/functions';
@@ -9,7 +11,7 @@ interface Props {
 const ProductInfoTitlePartner: React.FC<Props> = ({ onClick }) => (
     <div className="product-content-info-title-badges-badge">
         <div className="product-content-info-title-badges-badge-label" onClick={onClick}>
-            <span className="product-content-info-title-badges-badge-label__text">От партнеров</span>
+            <span className="product-content-info-title-badges-badge-label__text">Только онлайн</span>
 
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
