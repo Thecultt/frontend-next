@@ -10,19 +10,12 @@ interface Props {
 }
 
 export const ProductCardBadges: React.FC<Props> = ({ productData }) => {
-    const { from_boutique, from_parnter, price_drop } = productData;
+    const { from_boutique, price_drop } = productData;
 
     const getBadge = () => {
         if (from_boutique) {
             return {
                 title: 'Из бутика',
-                isGreen: false,
-            };
-        }
-
-        if (from_parnter) {
-            return {
-                title: 'От партнеров',
                 isGreen: false,
             };
         }
