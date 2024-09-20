@@ -24,16 +24,17 @@ import { formatMoney } from '@/functions/formatMoney';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { APP_ROUTE } from '@/constants/routes';
 import { getClassNames } from '@/functions/getClassNames';
+import { Noop } from '@/types/functions';
 
 import { ProductInfoTitleFavorites } from './ProductInfoTitleFavorites';
 
 interface Props {
     product: ProductPage;
-    setBoutiquePopupVisible: (state: boolean) => void;
-    setPartnerPopupVisible: (state: boolean) => void;
+    onBoutiquePopupVisible: Noop;
+    onPartnerPopupVisible: Noop;
 }
 
-const ProductInfoTitle: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPartnerPopupVisible }) => {
+const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, onPartnerPopupVisible }) => {
     const {
         id,
         article,
@@ -135,8 +136,8 @@ const ProductInfoTitle: React.FC<Props> = ({ product, setBoutiquePopupVisible, s
 
             {!isMobile && (
                 <div className="product-content-info-title-badges">
-                    {from_boutique && <ProductInfoTitleBoutique onClick={() => setBoutiquePopupVisible(true)} />}
-                    {from_parnter && <ProductInfoTitlePartner onClick={() => setPartnerPopupVisible(true)} />}
+                    {from_boutique && <ProductInfoTitleBoutique onClick={onBoutiquePopupVisible} />}
+                    {from_parnter && <ProductInfoTitlePartner onClick={onPartnerPopupVisible} />}
                     {price_drop && <ProductInfoTitleSale />}
                 </div>
             )}

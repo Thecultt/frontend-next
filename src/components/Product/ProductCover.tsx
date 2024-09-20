@@ -15,14 +15,15 @@ import { getClassNames } from '@/functions/getClassNames';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { ProductPage } from '@/models/IProduct';
 import { Badge } from '@/components';
+import { Noop } from '@/types/functions';
 
 interface Props {
     product: ProductPage;
-    setBoutiquePopupVisible: (state: boolean) => void;
-    setPartnerPopupVisible: (state: boolean) => void;
+    onBoutiquePopupVisible: Noop;
+    onPartnerPopupVisible: Noop;
 }
 
-const ProductCover: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPartnerPopupVisible }) => {
+const ProductCover: React.FC<Props> = ({ product, onBoutiquePopupVisible, onPartnerPopupVisible }) => {
     const { images, from_boutique, from_parnter, price_drop } = product;
 
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
@@ -296,12 +297,12 @@ const ProductCover: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPa
             {(from_boutique || from_parnter || price_drop) && (
                 <div className="product-content-cover-media__badges">
                     {from_boutique && (
-                        <Badge isGreen onClick={() => setBoutiquePopupVisible(true)}>
+                        <Badge isGreen onClick={onBoutiquePopupVisible}>
                             Из бутика
                         </Badge>
                     )}
                     {from_parnter && (
-                        <Badge isGreen onClick={() => setPartnerPopupVisible(true)}>
+                        <Badge isGreen onClick={onPartnerPopupVisible}>
                             От партнеров
                         </Badge>
                     )}
