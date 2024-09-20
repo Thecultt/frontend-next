@@ -13,11 +13,10 @@ import {
     CatalogProductsSection,
     ProductExchange,
     PageLoader,
-    Popup,
-    ProductInfoTitleBoutiquePopup,
-    ProductInfoTitlePartnerPopup,
 } from '@/components';
 import { NotFound } from '@/screens';
+import { usePopupInfo } from '@/hooks/usePopupInfo';
+import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 
 const Product: React.FC = () => {
     const dispatch = useDispatch();
@@ -25,8 +24,27 @@ const Product: React.FC = () => {
 
     const { itemByArticle, itemByArticleIsLoaded } = useTypedSelector(({ products }) => products);
 
-    const [boutiquePopupVisible, setBoutiquePopupVisible] = React.useState(false);
-    const [partnerPopupVisible, setPartnerPopupVisible] = React.useState(false);
+    const { openPopupInfo } = usePopupInfo();
+
+    const showBoutiquePopup = () => {
+        openPopupInfo({
+            title: 'Лот из бутика',
+            content:
+                'Этот лот новый и не был в использовании. Мы получили его напрямую из бутика-партнера или от частного байера — в таком состоянии, в каком вы бы купили его в бутике бренда.',
+            btn: {
+                label: 'Смотреть все',
+                href: getCatalogFiltersUrl({ boutique: true }),
+            },
+        });
+    };
+
+    const showPartnerPopup = () => {
+        openPopupInfo({
+            title: 'Только онлайн',
+            content:
+                'Этот лот находится у нашего партнера и недоступен для примерки. Доставка займет 5-7 рабочих дней.',
+        });
+    };
 
     React.useEffect(() => {
         if (article) {
@@ -53,13 +71,13 @@ const Product: React.FC = () => {
                             <div className="product-content">
                                 <ProductCover
                                     product={itemByArticle}
-                                    setBoutiquePopupVisible={setBoutiquePopupVisible}
-                                    setPartnerPopupVisible={setPartnerPopupVisible}
+                                    onBoutiquePopupVisible={showBoutiquePopup}
+                                    onPartnerPopupVisible={showPartnerPopup}
                                 />
                                 <ProductInfo
                                     product={itemByArticle}
-                                    setBoutiquePopupVisible={setBoutiquePopupVisible}
-                                    setPartnerPopupVisible={setPartnerPopupVisible}
+                                    onBoutiquePopupVisible={showBoutiquePopup}
+                                    onPartnerPopupVisible={showPartnerPopup}
                                 />
                             </div>
                         </div>
@@ -71,17 +89,6 @@ const Product: React.FC = () => {
                 </div>
 
                 <ProductExchange />
-
-                <Popup
-                    state={boutiquePopupVisible}
-                    setState={() => setBoutiquePopupVisible(!boutiquePopupVisible)}
-                    center
-                >
-                    <ProductInfoTitleBoutiquePopup />
-                </Popup>
-                <Popup state={partnerPopupVisible} setState={() => setPartnerPopupVisible(!partnerPopupVisible)} center>
-                    <ProductInfoTitlePartnerPopup />
-                </Popup>
             </>
         ) : (
             <NotFound />
