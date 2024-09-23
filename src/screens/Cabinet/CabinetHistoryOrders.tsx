@@ -4,9 +4,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { useOrder } from '@/hooks/order/useOrder';
 import { fetchHistoryOrders } from '@/redux/actions/history_orders';
 import { CabinetHistoryOrdersItem, CabinetHistoryOrdersNull, PageLoader } from '@/components';
-import { sendSubmitOrder } from '@/redux/actions/order';
 import orderPay from '@/components/Order/orderPay';
 
 const CabinetHistoryOrders: React.FC = () => {
@@ -14,6 +14,8 @@ const CabinetHistoryOrders: React.FC = () => {
 
     const { isLoaded } = useTypedSelector(({ history_orders }) => history_orders);
     const historyOrdersItems = useTypedSelector(({ history_orders }) => history_orders.items);
+
+    const { submitOrder } = useOrder();
 
     // TODO вынести статусы заказа в const/enum
     const statuses: { [key: string]: string } = {
@@ -57,7 +59,7 @@ const CabinetHistoryOrders: React.FC = () => {
         // 	}
         // });
 
-        dispatch(sendSubmitOrder(orderId) as any);
+        submitOrder(orderId);
     };
 
     const onClickPay = ({
