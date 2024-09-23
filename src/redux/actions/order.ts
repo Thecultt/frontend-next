@@ -5,6 +5,7 @@ import $api from '@/http';
 import { Order } from '@/models/IOrder';
 import { YM_KEYS } from '@/constants/keys';
 import { getUtm } from '@/functions/getUtm';
+import { Noop } from '@/types/functions';
 
 import { OrderStateActionTypes, OrderStateActions } from '../types/IOrder';
 import { setIsNotificationServerError } from '../actions/notifications_server';
@@ -295,10 +296,13 @@ export const sendCreateOrder =
             });
     };
 
-export const sendSubmitOrder = (order_id: number) => async (dispatch: Dispatch<OrderStateActions>) => {
-    await $api.post(`submit_order/`, { order_id });
-
-    window.location.href = `/order/${order_id}`;
+export const sendSubmitOrder = (order_id: number, onSuccess?: Noop) => async () => {
+    try {
+        await $api.post(`submit_order/`, { order_id });
+        onSuccess?.();
+    } catch (e) {
+        console.error('sendSubmitOrder', e);
+    }
 };
 
 export const fetchOrder = (order_id: number) => async (dispatch: Dispatch<OrderStateActions>) => {

@@ -1,26 +1,20 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import Countdown from 'react-countdown';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 
 import { OrderStatusProduct } from '@/components';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { sendSubmitOrder } from '@/redux/actions/order';
-import { setCartItems } from '@/redux/actions/cart';
-import { ICartItemsState } from '@/redux/types/ICart';
+import { useOrder } from '@/hooks/order/useOrder';
 import { COUNT_MINUTES_RESERVED_ORDER } from '@/constants/order';
 import { APP_ROUTE } from '@/constants/routes';
-import { useCart } from '@/hooks/catalog/useCart';
 
 import orderPay from '../orderPay';
 
 const OrderStatusError: React.FC = () => {
-    const dispatch = useDispatch();
-
-    const { allCart } = useCart();
+    const { submitOrder } = useOrder();
 
     const {
         order: {
@@ -40,16 +34,6 @@ const OrderStatusError: React.FC = () => {
     } = useTypedSelector(({ order }) => order);
 
     const successPayment = (orderId: number) => {
-        const newCart: ICartItemsState = {};
-
-        allCart.forEach((item) => {
-            if (!item.checked) {
-                newCart[item.article] = { ...item, checked: true };
-            }
-        });
-
-        dispatch(setCartItems(newCart) as any);
-
         // const products = allCart.filter((item) => item.checked);
 
         // window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
@@ -74,7 +58,7 @@ const OrderStatusError: React.FC = () => {
         // 	}
         // });
 
-        dispatch(sendSubmitOrder(orderId) as any);
+        submitOrder(orderId);
     };
 
     const onClickPay = () => {
