@@ -164,6 +164,7 @@ const OrderFormDelivery: React.FC = () => {
                                   value={item.title}
                               />
 
+                              {/* TODO: Вынести в cost */}
                               {!isLoggedIn && item.title === 'Доставка с примеркой (по Москве)' && (
                                   <p className="order-form-block-checkbox__login">
                                       Доступно только авторизованным пользователям -{' '}
