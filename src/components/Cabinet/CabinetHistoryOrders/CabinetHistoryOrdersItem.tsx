@@ -6,15 +6,14 @@ import dayjs from 'dayjs';
 import { Order } from '@/models/IOrder';
 import { CabinetHistoryOrdersItemProduct } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
-import { COUNT_MINUTES_RESERVED_ORDER } from '@/constants/order';
+import { COUNT_MINUTES_RESERVED_ORDER, ORDER_STATUSES, ORDER_STATUSES_COLORS } from '@/constants/order';
 import { APP_ROUTE } from '@/constants/routes';
 
-interface CabinetHistoryOrdersItemProps extends Order {
-    statusColor: string;
+interface Props extends Order {
     onClickPay?: () => void;
 }
 
-const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
+const CabinetHistoryOrdersItem: React.FC<Props> = ({
     num,
     createdon,
     cost,
@@ -24,7 +23,6 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
     delivery_type,
     payment_type,
     products,
-    statusColor,
     status,
     status_description,
     yandex_split_link,
@@ -35,6 +33,8 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
     const toggleOpen = () => {
         setIsOpen(!isOpen);
     };
+
+    const statusKey = Object.keys(ORDER_STATUSES).find((key) => ORDER_STATUSES[key] === status);
 
     return (
         <div className="cabinet-history-orders-item-wrapper">
@@ -49,7 +49,9 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
 
                         <p className="cabinet-history-orders-item-topinfo-block__sum">{cost} ₽</p>
 
-                        <p className={`cabinet-history-orders-item-topinfo-block__status__media ${statusColor}`}>
+                        <p
+                            className={`cabinet-history-orders-item-topinfo-block__status__media ${statusKey && ORDER_STATUSES_COLORS[ORDER_STATUSES[statusKey]]}`}
+                        >
                             {status}
 
                             <svg
@@ -73,7 +75,9 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
                         </p>
                     </div>
                     <div className="cabinet-history-orders-item-topinfo-block">
-                        <p className={`cabinet-history-orders-item-topinfo-block__status ${statusColor}`}>
+                        <p
+                            className={`cabinet-history-orders-item-topinfo-block__status ${statusKey && ORDER_STATUSES_COLORS[ORDER_STATUSES[statusKey]]}`}
+                        >
                             {status}
 
                             <svg
@@ -178,6 +182,7 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
                             ))}
                         </div>
 
+                        {/* TODO: Вынести в отдельный компонент */}
                         {(status === 'Ожидает оплаты' ||
                             dayjs().isBefore(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm'))) && (
                             <>

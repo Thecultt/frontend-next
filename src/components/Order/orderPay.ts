@@ -1,4 +1,7 @@
+import { PAYMENTS_NAMES } from '@/constants/pay';
+
 interface orderPayParams {
+    isJewelry: boolean;
     type: string;
     orderId: number;
     totalPrice: number;
@@ -9,6 +12,7 @@ interface orderPayParams {
 }
 
 const orderPay = ({
+    isJewelry,
     type,
     orderId,
     totalPrice,
@@ -18,10 +22,10 @@ const orderPay = ({
     onSuccessCallback,
 }: orderPayParams) => {
     // TODO payment types to const/enum
-    if (type === 'Кредит' || type === 'Рассрочка от Тинькофф') {
+    if (type === PAYMENTS_NAMES.creditTinkoff || type === PAYMENTS_NAMES.installmentTinkoff) {
         const data: any = {
-            shopId: process.env.NEXT_PUBLIC_TINKOFF_SHOP_ID as string,
-            showcaseId: process.env.NEXT_PUBLIC_TINKOFF_SHOW_CASE_ID as string,
+            shopId: process.env.NEXT_PUBLIC_TINKOFF_SHOP_ID,
+            showcaseId: process.env.NEXT_PUBLIC_TINKOFF_SHOW_CASE_ID,
             orderNumber: String(orderId),
             items: [
                 ...products.map((product) => ({
@@ -35,8 +39,8 @@ const orderPay = ({
             successURL: `https://thecultt.com/order/${orderId}`,
         };
 
-        if (type === 'Рассрочка от Тинькофф') {
-            data.promoCode = 'installment_0_0_3_3,87';
+        if (type === PAYMENTS_NAMES.installmentTinkoff) {
+            data.promoCode = process.env.NEXT_PUBLIC_TINKOFF_PROMOCODE;
         }
 
         if (typeof window !== 'undefined') {
@@ -53,7 +57,9 @@ const orderPay = ({
     widget.pay(
         'charge',
         {
-            publicId: process.env.NEXT_PUBLIC_CLOUD_PAYMENTS_PUBLIC_ID,
+            publicId: isJewelry
+                ? process.env.NEXT_PUBLIC_CLOUD_PAYMENTS_PUBLIC_ID_JEWELRY
+                : process.env.NEXT_PUBLIC_CLOUD_PAYMENTS_PUBLIC_ID,
             description: `${orderNum}`,
             amount: totalPrice,
             invoiceId: String(orderNum),
