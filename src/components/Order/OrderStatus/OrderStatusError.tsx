@@ -6,10 +6,11 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 
 import { OrderStatusProduct } from '@/components';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { useOrder } from '@/hooks/order/useOrder';
 import { COUNT_MINUTES_RESERVED_ORDER } from '@/constants/order';
 import { APP_ROUTE } from '@/constants/routes';
+import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
+import { useOrder } from '@/hooks/order/useOrder';
+import { useOrderDetails } from '@/hooks/order/useOrderDetails';
 
 import orderPay from '../orderPay';
 
@@ -17,52 +18,28 @@ const OrderStatusError: React.FC = () => {
     const { submitOrder } = useOrder();
 
     const {
-        order: {
-            payment_type,
-            id,
-            cost,
-            products,
-            client_name,
-            client_phone,
-            delivery_type,
-            delivery_address,
-            delivery_price,
-            num,
-            yandex_split_link,
-            createdon,
-        },
-    } = useTypedSelector(({ order }) => order);
+        payment_type,
+        id,
+        cost,
+        products,
+        client_name,
+        client_phone,
+        delivery_type,
+        delivery_address,
+        delivery_price,
+        num,
+        yandex_split_link,
+        createdon,
+        isJewelry,
+    } = useOrderDetails();
 
     const successPayment = (orderId: number) => {
-        // const products = allCart.filter((item) => item.checked);
-
-        // window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
-        // window.dataLayer.push({
-        // 	event: "purchase",
-        // 	ecommerce: {
-        // 		timestamp: Math.floor(Date.now() / 1000),
-        // 		transaction_id: `${orderId}`,
-        // 		value: `${promocode.isActive ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price}`,
-        // 		tax: "-",
-        // 		shipping: `${promocode.saleSum}`,
-        // 		currency: "RUB",
-        // 		coupon: `${promocode.name}`,
-        // 		items: products.map((item) => ({
-        // 			item_name: item.name,
-        // 			item_id: `${item.id}`,
-        // 			price: `${item.price}`,
-        // 			item_brand: item.manufacturer,
-        // 			item_category: item.category,
-        // 			quantity: 1
-        // 		}))
-        // 	}
-        // });
-
         submitOrder(orderId);
     };
 
     const onClickPay = () => {
         orderPay({
+            isJewelry: isJewelry && parseInt(cost) >= JEWELRY_PASSPORT_SUM,
             type: payment_type,
             orderId: id,
             totalPrice: parseInt(cost),
@@ -105,6 +82,7 @@ const OrderStatusError: React.FC = () => {
                                 </svg>
                             </div>
 
+                            {/* TODO: Переписать на usehooks-ts */}
                             {dayjs().isAfter(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm')) ? (
                                 <>
                                     <h2 className="order-status-content-info__title">К сожалению, ваш заказ отменен</h2>

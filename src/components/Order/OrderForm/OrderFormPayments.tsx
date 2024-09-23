@@ -4,7 +4,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import { RenderRadioSelect, Popup, ProductInfoTitleSplitPopup } from '@/components';
-import { PAYMENTS_NAMES, PAYMENTS_METHODS } from '@/constants/order';
+import { PAYMENTS_NAMES, PAYMENTS_METHODS } from '@/constants/pay';
 import { YANDEX_SPLIT_LIMIT } from '@/constants/app';
 import { useOrder } from '@/hooks/order/useOrder';
 
