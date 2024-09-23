@@ -1,30 +1,21 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import Countdown from 'react-countdown';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 
 import { OrderStatusProduct } from '@/components';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { sendSubmitOrder } from '@/redux/actions/order';
-import { setCartItems } from '@/redux/actions/cart';
-import { ICartItemsState } from '@/redux/types/ICart';
 import { COUNT_MINUTES_RESERVED_ORDER } from '@/constants/order';
 import { APP_ROUTE } from '@/constants/routes';
 import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
-import { useCart } from '@/hooks/catalog/useCart';
 import { useOrder } from '@/hooks/order/useOrder';
 import { useOrderDetails } from '@/hooks/order/useOrderDetails';
 
 import orderPay from '../orderPay';
 
 const OrderStatusError: React.FC = () => {
-    const dispatch = useDispatch();
-
-    const { allCart } = useCart();
-    // const { cartSum, isJewelry } = useOrder();
+    const { submitOrder } = useOrder();
 
     const {
         payment_type,
@@ -43,41 +34,7 @@ const OrderStatusError: React.FC = () => {
     } = useOrderDetails();
 
     const successPayment = (orderId: number) => {
-        const newCart: ICartItemsState = {};
-
-        allCart.forEach((item) => {
-            if (!item.checked) {
-                newCart[item.article] = { ...item, checked: true };
-            }
-        });
-
-        dispatch(setCartItems(newCart) as any);
-
-        // const products = allCart.filter((item) => item.checked);
-
-        // window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
-        // window.dataLayer.push({
-        // 	event: "purchase",
-        // 	ecommerce: {
-        // 		timestamp: Math.floor(Date.now() / 1000),
-        // 		transaction_id: `${orderId}`,
-        // 		value: `${promocode.isActive ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price}`,
-        // 		tax: "-",
-        // 		shipping: `${promocode.saleSum}`,
-        // 		currency: "RUB",
-        // 		coupon: `${promocode.name}`,
-        // 		items: products.map((item) => ({
-        // 			item_name: item.name,
-        // 			item_id: `${item.id}`,
-        // 			price: `${item.price}`,
-        // 			item_brand: item.manufacturer,
-        // 			item_category: item.category,
-        // 			quantity: 1
-        // 		}))
-        // 	}
-        // });
-
-        dispatch(sendSubmitOrder(orderId) as any);
+        submitOrder(orderId);
     };
 
     const onClickPay = () => {

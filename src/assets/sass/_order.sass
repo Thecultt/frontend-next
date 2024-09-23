@@ -112,11 +112,23 @@
 			&-checkbox
 				margin-bottom: 15px
 
-				&.hidden
-					display: none
+				&.hidden > .radio-wrapper
+					opacity: 0.5
+					pointer-events: none
 
 				&:last-child
 					margin-bottom: 0
+
+				&__login
+					font-size: 14px
+					color: $grey7
+					margin-top: 10px
+					margin-left: 32px
+
+					& > a
+						color: $mainColor
+						font-weight: 600
+						border-bottom: 1px solid $mainColor
 
 			&-payments
 				&-split-widget

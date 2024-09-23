@@ -56,7 +56,13 @@ export const Popup: React.FC<Props> = ({ isOpen, title, content, btn, onClose, c
 
                             <h3 className="tc-popup-content__title">{title}</h3>
 
-                            {content}
+                            <div className="tc-popup-content__content">
+                                {typeof content === 'string' || typeof content === 'number' ? (
+                                    <p className="tc-popup-content__text">{content}</p>
+                                ) : (
+                                    content
+                                )}
+                            </div>
 
                             {btn && (
                                 <div className="tc-popup-content-btn">

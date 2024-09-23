@@ -9,9 +9,8 @@ import isEqual from 'lodash.isequal';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useAuthUser } from '@/hooks/useAuthUser';
-import { changeCheckCartItem, checkAvailabilityCartItems, removeCartItem, setCartItems } from '@/redux/actions/cart';
-import { ICartItemsState } from '@/redux/types/ICart';
-import { sendCreateOrder, sendSubmitOrder } from '@/redux/actions/order';
+import { changeCheckCartItem, checkAvailabilityCartItems, removeCartItem } from '@/redux/actions/cart';
+import { sendCreateOrder } from '@/redux/actions/order';
 import { sendUpdateUser } from '@/redux/actions/user';
 import { sendOrderApplyPromocode } from '@/redux/actions/order';
 import { CartProductItem, Loader, NewCheckbox, OrderProductsPromocode } from '@/components';
@@ -33,7 +32,7 @@ const OrderProducts: React.FC = () => {
     const { isLoggedIn, user } = useAuthUser();
     const { promocode, currentDelivery, isValid } = useTypedSelector(({ order }) => order);
 
-    const { cartItems, cartIsLoading, isJewelry } = useOrder();
+    const { cartItems, cartIsLoading, isJewelry, submitOrder } = useOrder();
 
     const availableCartItems = cartItems.filter((item) => !!item.availability && !item.is_trial);
     const checkedCartItems = availableCartItems.filter((item) => item.checked);
@@ -232,20 +231,7 @@ const OrderProducts: React.FC = () => {
         dispatch(sendCreateOrder(requestData, (orderId: number, orderNum: string) => pay(orderId, orderNum)) as any);
     };
 
-    const updateCart = () => {
-        const newCart: ICartItemsState = {};
-        cartItems.map((item) => {
-            if (!item.checked && !!item.availability && !item.is_trial) {
-                newCart[item.article] = { ...item, checked: true };
-            }
-        });
-
-        dispatch(setCartItems(newCart) as any);
-    };
-
     const successPayment = (orderId: number) => {
-        updateCart();
-
         pushDataLayer('purchase', {
             transaction_id: `${orderId}`,
             value: `${totalPrice}`,
@@ -358,7 +344,7 @@ const OrderProducts: React.FC = () => {
             console.log(e);
         }
 
-        dispatch(sendSubmitOrder(orderId) as any);
+        submitOrder(orderId);
     };
 
     const pay = (orderId: number, orderNum: string) => {

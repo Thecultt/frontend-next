@@ -15,24 +15,25 @@ import {
     ProductInfoTabs,
 } from '@/components';
 import { MEDIA_SIZES } from '@/constants/styles';
+import { Noop } from '@/types/functions';
 
 import { ProductInfoBottomSheet } from './ProductInfoBottomSheet';
 
 interface Props {
     product: ProductPage;
-    setBoutiquePopupVisible: (state: boolean) => void;
-    setPartnerPopupVisible: (state: boolean) => void;
+    onBoutiquePopupVisible: Noop;
+    onPartnerPopupVisible: Noop;
 }
 
-const ProductInfo: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPartnerPopupVisible }) => {
+const ProductInfo: React.FC<Props> = ({ product, onBoutiquePopupVisible, onPartnerPopupVisible }) => {
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
 
     return (
         <div className="product-content-info">
             <ProductInfoTitle
                 product={product}
-                setBoutiquePopupVisible={setBoutiquePopupVisible}
-                setPartnerPopupVisible={setPartnerPopupVisible}
+                onBoutiquePopupVisible={onBoutiquePopupVisible}
+                onPartnerPopupVisible={onPartnerPopupVisible}
             />
 
             {/* {product.availability ? (
@@ -51,9 +52,9 @@ const ProductInfo: React.FC<Props> = ({ product, setBoutiquePopupVisible, setPar
 
             <ProductInfoExchange canBuy={!!product.availability && !product.is_trial} />
 
-            {product.price >= 500000 && (!product.availability || product.is_trial) ? (
+            {product.price >= 500000 && (!product.availability || product.is_trial) && (
                 <ProductInfoConcierge article={product.article} />
-            ) : null}
+            )}
 
             {!isMobile ? (
                 <>
