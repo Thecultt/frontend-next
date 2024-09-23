@@ -34,14 +34,7 @@ const CabinetHistoryOrdersItem: React.FC<Props> = ({
         setIsOpen(!isOpen);
     };
 
-    // const statusColor = Object.keys(ORDER_STATUSES).map(
-    //     (key) => ORDER_STATUSES[key] === status && ORDER_STATUSES_COLORS[key],
-    // );
-    const statusColor = Object.keys(ORDER_STATUSES).find((key) => console.log(ORDER_STATUSES[key], status));
-
-    React.useEffect(() => {
-        console.log(Object.keys(ORDER_STATUSES).find((key) => console.log(ORDER_STATUSES[key], status)));
-    }, []);
+    const statusKey = Object.keys(ORDER_STATUSES).find((key) => ORDER_STATUSES[key] === status);
 
     return (
         <div className="cabinet-history-orders-item-wrapper">
@@ -56,7 +49,9 @@ const CabinetHistoryOrdersItem: React.FC<Props> = ({
 
                         <p className="cabinet-history-orders-item-topinfo-block__sum">{cost} ₽</p>
 
-                        <p className={`cabinet-history-orders-item-topinfo-block__status__media ${statusColor}`}>
+                        <p
+                            className={`cabinet-history-orders-item-topinfo-block__status__media ${statusKey && ORDER_STATUSES_COLORS[ORDER_STATUSES[statusKey]]}`}
+                        >
                             {status}
 
                             <svg
@@ -80,7 +75,9 @@ const CabinetHistoryOrdersItem: React.FC<Props> = ({
                         </p>
                     </div>
                     <div className="cabinet-history-orders-item-topinfo-block">
-                        <p className={`cabinet-history-orders-item-topinfo-block__status ${statusColor}`}>
+                        <p
+                            className={`cabinet-history-orders-item-topinfo-block__status ${statusKey && ORDER_STATUSES_COLORS[ORDER_STATUSES[statusKey]]}`}
+                        >
                             {status}
 
                             <svg
