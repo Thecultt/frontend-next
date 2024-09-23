@@ -1,12 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
+import Link from 'next/link';
 
 import { setOrderCurrentDelivery } from '@/redux/actions/order';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { getClassNames } from '@/functions/getClassNames';
 import { RenderRadioSelect } from '@/components';
+import { ReglogStateTypesNotLogin } from '@/types/reglog';
 
 const deliveryItemsRussiaMoscow: {
     title: string;
@@ -161,6 +163,14 @@ const OrderFormDelivery: React.FC = () => {
                                   name="delivery"
                                   value={item.title}
                               />
+
+                              {/* TODO: Вынести в cost */}
+                              {!isLoggedIn && item.title === 'Доставка с примеркой (по Москве)' && (
+                                  <p className="order-form-block-checkbox__login">
+                                      Доступно только авторизованным пользователям -{' '}
+                                      <Link href={`#${ReglogStateTypesNotLogin.LOGIN}`}>Войти в аккаунт</Link>
+                                  </p>
+                              )}
                           </div>
                       ))
                     : null}
