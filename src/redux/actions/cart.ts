@@ -154,6 +154,11 @@ export const removeCartItem = (item: CartItem) => {
     };
 };
 
+export const removeCartItemByArticle = (article: string) => ({
+    type: CartActionTypes.REMOVE_CART_ITEMS,
+    payload: article,
+});
+
 export const setCartIsVisibleMessage = (status: boolean) => ({
     type: CartActionTypes.SET_CART_IS_VISIBLE_MESSAGE,
     payload: status,
