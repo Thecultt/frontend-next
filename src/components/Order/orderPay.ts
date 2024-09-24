@@ -1,5 +1,4 @@
 import { PAYMENTS_NAMES } from '@/constants/pay';
-import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
 
 interface orderPayParams {
     type: string;
@@ -20,7 +19,7 @@ const orderPay = ({
     orderNum,
     onSuccessCallback,
 }: orderPayParams) => {
-    const isJewelry = products.some((product) => product.is_jewelry) && parseInt(orderNum) >= JEWELRY_PASSPORT_SUM;
+    const isJewelry = products.some((product) => product.is_jewelry);
 
     if (type === PAYMENTS_NAMES.creditTinkoff || type === PAYMENTS_NAMES.installmentTinkoff) {
         const data: any = {
