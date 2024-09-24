@@ -71,7 +71,7 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
             })}
         >
             <div className="cabinet-setting-block-title">
-                <h3 className="cabinet-setting-block-title__title">Реквизиты для выплат</h3>
+                <h3 className="cabinet-setting-block-title__title">Реквизиты получателя</h3>
 
                 {state ? (
                     isEdit ? (
@@ -130,7 +130,7 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                             <Field
                                 component={RenderInput}
                                 name="bik"
-                                label="БИК"
+                                label="БИК банка"
                                 bgWhite
                                 {...createTextMask({
                                     pattern: '999999999',
@@ -144,7 +144,7 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                             <Field
                                 component={RenderInput}
                                 name="inn"
-                                label="ИНН"
+                                label="ИНН получателя"
                                 bgWhite
                                 {...createTextMask({
                                     pattern: '999999999999',
@@ -169,14 +169,14 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                         </div>
 
                         <div className="cabinet-setting-block-form-input" style={{ width: '100%' }}>
-                            <Field component={RenderInput} name="issued_by" label="Кем выдан" bgWhite />
+                            <Field component={RenderInput} name="issued_by" label="Кем выдан паспорт" bgWhite />
                         </div>
 
                         <div className="cabinet-setting-block-form-input" style={{ width: '49%' }}>
                             <Field
                                 component={RenderInput}
                                 name="issued_date"
-                                label="Дата выдачи"
+                                label="Дата выдачи паспорта"
                                 bgWhite
                                 {...createTextMask({
                                     pattern: '99.99.9999',
