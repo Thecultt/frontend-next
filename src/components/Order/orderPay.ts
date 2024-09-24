@@ -5,7 +5,7 @@ interface orderPayParams {
     orderId: number;
     totalPrice: number;
     deliveryPrice: number;
-    products: { name: string; price: number; is_jewelry: boolean }[];
+    products: { name: string; price: number; is_jewelry?: boolean }[];
     orderNum: string;
     onSuccessCallback: () => void;
 }

@@ -46,7 +46,7 @@ const OrderStatusError: React.FC = () => {
             products: products.map((product) => ({
                 name: product.model_name,
                 price: product.price,
-                is_jewelry: product.is_jewelry,
+                is_jewelry: product?.is_jewelry,
             })),
             orderNum: num,
             onSuccessCallback: () => successPayment(id),

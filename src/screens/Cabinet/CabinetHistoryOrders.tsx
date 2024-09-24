@@ -34,7 +34,7 @@ const CabinetHistoryOrders: React.FC = () => {
         cost: string;
         delivery_price: string;
         num: string;
-        products: { model_name: string; price: number; is_jewelry: boolean }[];
+        products: { model_name: string; price: number; is_jewelry?: boolean }[];
     }) => {
         orderPay({
             type: payment_type,
@@ -44,7 +44,7 @@ const CabinetHistoryOrders: React.FC = () => {
             products: products.map((product) => ({
                 name: product.model_name,
                 price: product.price,
-                is_jewelry: product.is_jewelry,
+                is_jewelry: product?.is_jewelry,
             })),
             orderNum: num,
             onSuccessCallback: () => successPayment(id),
