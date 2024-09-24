@@ -1,18 +1,17 @@
 import { PAYMENTS_NAMES } from '@/constants/pay';
+import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
 
 interface orderPayParams {
-    isJewelry: boolean;
     type: string;
     orderId: number;
     totalPrice: number;
     deliveryPrice: number;
-    products: { name: string; price: number }[];
+    products: { name: string; price: number; is_jewelry: boolean }[];
     orderNum: string;
     onSuccessCallback: () => void;
 }
 
 const orderPay = ({
-    isJewelry,
     type,
     orderId,
     totalPrice,
@@ -21,7 +20,8 @@ const orderPay = ({
     orderNum,
     onSuccessCallback,
 }: orderPayParams) => {
-    // TODO payment types to const/enum
+    const isJewelry = products.some((product) => product.is_jewelry) && parseInt(orderNum) >= JEWELRY_PASSPORT_SUM;
+
     if (type === PAYMENTS_NAMES.creditTinkoff || type === PAYMENTS_NAMES.installmentTinkoff) {
         const data: any = {
             shopId: process.env.NEXT_PUBLIC_TINKOFF_SHOP_ID,

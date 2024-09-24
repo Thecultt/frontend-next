@@ -351,18 +351,16 @@ const OrderProducts: React.FC = () => {
         if (currentDelivery.title === 'Доставка с примеркой (по Москве)') {
             successPayment(orderId);
         } else {
-            const products = checkedCartItems.map((item) => ({
-                name: item.name,
-                price: item.price,
-            }));
-
             orderPay({
-                isJewelry: isJewelry && cartPrice >= JEWELRY_PASSPORT_SUM,
                 type: paymentValue,
                 orderId,
                 totalPrice,
                 deliveryPrice: currentDelivery.price,
-                products,
+                products: checkedCartItems.map((item) => ({
+                    name: item.name,
+                    price: item.price,
+                    is_jewelry: item.is_jewelry,
+                })),
                 orderNum,
                 onSuccessCallback: () => successPayment(orderId),
             });
