@@ -150,7 +150,7 @@ export { default as CatalogFiltersTypes } from './Catalog/CatalogFilters/Catalog
 export { default as CatalogProducts } from './Catalog/CatalogProducts/CatalogProducts';
 export { default as CatalogProductsNull } from './Catalog/CatalogProducts/CatalogProductsNull';
 export { default as CatalogProductsPagination } from './Catalog/CatalogProducts/CatalogProductsPagination';
-export { default as CatalogProductsSection } from './Catalog/CatalogProducts/CatalogProductsSection';
+export { CatalogProductsSection } from './Catalog/CatalogProductsSection/CatalogProductsSection';
 
 // Product
 export { ProductCard } from './Product/ProductCard/ProductCard';
