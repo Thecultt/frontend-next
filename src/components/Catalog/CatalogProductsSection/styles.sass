@@ -1,0 +1,63 @@
+@import "/src/assets/sass/mixin"
+
+.catalog-products-section
+    width: 100%
+    margin: 48px 0
+
+    +mediaTablet
+        margin: 24px 0
+
+    &__title
+        display: block
+        width: fit-content
+        +ManropeMedium
+        font-size: 26px
+        line-height: 38px
+        text-align: left
+        margin-bottom: 12px
+
+        +mediaTablet
+            +ManropeExtraBold
+            font-size: 16px
+            line-height: 19.2px
+
+    &__wrapper
+        width: 100%
+        position: relative
+
+        +mediaTablet
+            width: calc(100% + 32px)
+            margin-left: -16px
+            margin-right: -16px
+
+    &__slider
+        width: 100%
+
+        &-slide
+            width: 100%
+
+            +mediaTablet
+                max-width: 200px
+
+        &-arrow
+            +buttonReset
+            position: absolute
+            top: 50%
+            transform: translateY(-50%)
+            z-index: 1
+            transition: transform 0.2s linear
+
+            +mediaTablet
+                display: none
+
+            &:hover
+                transform: translateY(-50%) scale3d(1.02, 1.02, 1.02)
+
+            &:active
+                transform: translateY(-50%) scale3d(0.95, 0.95, 0.95)
+
+            &--prev
+                left: -16px
+
+            &--next
+                right: -16px

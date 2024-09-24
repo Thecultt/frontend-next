@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { useMediaQuery } from 'usehooks-ts';
@@ -20,7 +22,7 @@ const HomeAbout: React.FC = () => {
                         style={{
                             backgroundImage: `url('${HomeAboutImage.src}')`,
                         }}
-                    ></div>
+                    />
 
                     <div className="home-about-text">
                         <h2 className="home-about-text__title">Мы THE CULTT — ресейл-платформа культовых вещей.</h2>
