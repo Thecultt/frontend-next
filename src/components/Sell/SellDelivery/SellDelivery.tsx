@@ -165,8 +165,13 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, 
 
             <p className="sell-block__policy">
                 Нажимая кнопку, вы принимаете условия{' '}
-                <a href={EXTERNAL_LINKS.personalData}>обработки персональных данных</a> и{' '}
-                <Link href={APP_ROUTE.help.sellers}>условия продажи</Link>
+                <a href={EXTERNAL_LINKS.personalData} target="_blank" rel="noopener noreferrer">
+                    обработки персональных данных
+                </a>{' '}
+                и{' '}
+                <Link href={APP_ROUTE.help.sellers} target="_blank" rel="noopener noreferrer">
+                    условия продажи
+                </Link>
             </p>
 
             {isSending ? (
