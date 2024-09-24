@@ -13,13 +13,16 @@ import {
     CatalogProductsSection,
     SelectionsSlider,
     SelectionsBanners,
+    NoSsr,
 } from '@/components';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { CATEGORY_SLUGS } from '@/constants/catalog';
 
 const Home: React.FC = () => (
     <>
-        <HomeMainBanner />
+        <NoSsr>
+            <HomeMainBanner />
+        </NoSsr>
         <section className="home">
             <div className="container">
                 <div className="home-wrapper">
@@ -35,7 +38,9 @@ const Home: React.FC = () => (
                     <HomeVisit />
                     <HomeSell />
                     <HomeSellPartners />
-                    <HomeAbout />
+                    <NoSsr>
+                        <HomeAbout />
+                    </NoSsr>
                     <HomeWaiting />
                 </div>
             </div>

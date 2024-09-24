@@ -695,54 +695,6 @@
 					&.active
 						color: $black2
 
-		&-section
-			margin: 50px 0
-
-			&__title
-				display: block
-
-				font-size: 26px
-				font-weight: 500
-				margin-bottom: 15px
-
-			&-slider-wrapper
-				width: 100%
-				position: relative
-
-			&-slider
-				&-arrow
-					cursor: pointer
-					position: absolute
-					z-index: 1
-
-					top: 145px
-
-					background-color: transparent
-					border: none
-
-					+transition
-
-					&:hover
-						transform: scale3d(1.02, 1.02, 1.02)
-
-					&:active
-						transform: scale3d(0.95, 0.95, 0.95)
-
-					&.prev
-						left: -15px
-
-					&.next
-						right: -15px
-
-				& .catalog-slider-product-block
-					width: calc( 100% - 10px )
-					margin-right: 0
-					margin-bottom: 0
-
-			&-mobile-slider
-				&__slide
-					max-width: 200px
-
 +mediaTablet
 	.catalog
 		margin: 15px 0 30px
@@ -837,30 +789,6 @@
 			&-null
 				&__title
 					font-size: 17px
-
-			&-section
-				margin: 25px 0
-
-				&__title
-					+ManropeExtraBold
-					font-size: 16px
-					line-height: 19.2px
-					text-align: left
-					margin-bottom: 12px
-
-				&-slider
-					&-wrapper
-						width: calc(100% + 32px)
-						margin-left: -16px
-						margin-right: -16px
-
-					&-arrow
-						&.prev
-							left: -5px
-
-						&.next
-							right: -5px
-						// display: none
 
 			&-blocks-wrapper
 				grid-template-columns: repeat(3, 1fr)

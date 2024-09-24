@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Slider from 'react-slick';
@@ -5,10 +7,6 @@ import { useMediaQuery } from 'usehooks-ts';
 
 import { getClassNames } from '@/functions/getClassNames';
 import { MEDIA_SIZES } from '@/constants/styles';
-import { APP_ROUTE } from '@/constants/routes';
-
-import cinemaBannerImage from '@/assets/images/cinema-artistic/cinema-artistic-home-banner-desktop.jpg';
-import cinemaBannerMobileImage from '@/assets/images/cinema-artistic/cinema-artistic-home-banner-mobile.jpg';
 
 import { MAIN_BANNER_SLIDES } from './constants';
 
