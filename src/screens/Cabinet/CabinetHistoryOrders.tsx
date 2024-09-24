@@ -22,7 +22,6 @@ const CabinetHistoryOrders: React.FC = () => {
     };
 
     const onClickPay = ({
-        is_jewelry,
         payment_type,
         id,
         cost,
@@ -30,16 +29,14 @@ const CabinetHistoryOrders: React.FC = () => {
         num,
         products,
     }: {
-        is_jewelry: boolean;
         payment_type: string;
         id: number;
         cost: string;
         delivery_price: string;
         num: string;
-        products: { model_name: string; price: number }[];
+        products: { model_name: string; price: number; is_jewelry?: boolean }[];
     }) => {
         orderPay({
-            isJewelry: is_jewelry,
             type: payment_type,
             orderId: id,
             totalPrice: parseInt(cost),
@@ -47,6 +44,7 @@ const CabinetHistoryOrders: React.FC = () => {
             products: products.map((product) => ({
                 name: product.model_name,
                 price: product.price,
+                is_jewelry: product?.is_jewelry,
             })),
             orderNum: num,
             onSuccessCallback: () => successPayment(id),
@@ -70,7 +68,6 @@ const CabinetHistoryOrders: React.FC = () => {
                         key={`cabinet-history-orders-${index}`}
                         onClickPay={() =>
                             onClickPay({
-                                is_jewelry: item.products.some((product) => product.is_jewelry),
                                 payment_type: item.payment_type,
                                 id: item.id,
                                 cost: item.cost,

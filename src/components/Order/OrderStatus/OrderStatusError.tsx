@@ -8,9 +8,8 @@ import Link from 'next/link';
 import { OrderStatusProduct } from '@/components';
 import { COUNT_MINUTES_RESERVED_ORDER } from '@/constants/order';
 import { APP_ROUTE } from '@/constants/routes';
-import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
 import { useOrder } from '@/hooks/order/useOrder';
-import { useOrderDetails } from '@/hooks/order/useOrderDetails';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
 
 import orderPay from '../orderPay';
 
@@ -18,20 +17,21 @@ const OrderStatusError: React.FC = () => {
     const { submitOrder } = useOrder();
 
     const {
-        payment_type,
-        id,
-        cost,
-        products,
-        client_name,
-        client_phone,
-        delivery_type,
-        delivery_address,
-        delivery_price,
-        num,
-        yandex_split_link,
-        createdon,
-        isJewelry,
-    } = useOrderDetails();
+        order: {
+            payment_type,
+            id,
+            cost,
+            products,
+            client_name,
+            client_phone,
+            delivery_type,
+            delivery_address,
+            delivery_price,
+            num,
+            yandex_split_link,
+            createdon,
+        },
+    } = useTypedSelector(({ order }) => order);
 
     const successPayment = (orderId: number) => {
         submitOrder(orderId);
@@ -39,7 +39,6 @@ const OrderStatusError: React.FC = () => {
 
     const onClickPay = () => {
         orderPay({
-            isJewelry: isJewelry && parseInt(cost) >= JEWELRY_PASSPORT_SUM,
             type: payment_type,
             orderId: id,
             totalPrice: parseInt(cost),
@@ -47,6 +46,7 @@ const OrderStatusError: React.FC = () => {
             products: products.map((product) => ({
                 name: product.model_name,
                 price: product.price,
+                is_jewelry: product?.is_jewelry,
             })),
             orderNum: num,
             onSuccessCallback: () => successPayment(id),
