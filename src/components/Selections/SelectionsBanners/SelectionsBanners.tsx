@@ -1,10 +1,10 @@
+'use client';
+
 import React from 'react';
-import { useMediaQuery } from 'usehooks-ts';
 import Link from 'next/link';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { SELECTIONS_IDS } from '@/constants/catalog';
-import { MEDIA_SIZES } from '@/constants/styles';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 
 import summerBagsImage from '@/assets/images/selections/summer-bags-selection.jpg';
@@ -12,7 +12,6 @@ import summerBagsImage from '@/assets/images/selections/summer-bags-selection.jp
 import './styles.sass';
 
 export const SelectionsBanners: React.FC = () => {
-    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
     const { items } = useTypedSelector(({ selections }) => selections);
 
     if (!items.length) {
@@ -55,7 +54,7 @@ export const SelectionsBanners: React.FC = () => {
                             })}
                             className="btn selections-banners-influencer__button"
                         >
-                            {isMobile ? 'Перейти' : 'Перейти в подборку'}
+                            Перейти
                         </Link>
                     </div>
 
