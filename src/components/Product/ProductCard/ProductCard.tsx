@@ -112,7 +112,7 @@ export const ProductCard: React.FC<Props> = React.memo(
                                 Состояние: <span className="product-card-info__condition-value">{condition}</span>
                             </p>
 
-                            {/* TODO: Вынести цену из класса spit */}
+                            {/* TODO: Вынести цену из класса split */}
                             <div className="product-card-info__price-split">
                                 <div className="product-card-info__prices">
                                     <span className="product-card-info__price">{formatMoney(price)}</span>
