@@ -160,7 +160,7 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
             </div>
 
             {/* TODO to const */}
-            {price <= 150000 && <ProductInfoTitleSplit price={price} disabled={!canBuy} />}
+            {!is_jewelry && price <= 150000 && <ProductInfoTitleSplit price={price} disabled={!canBuy} />}
 
             <div className="product-content-info-title-btn">
                 {canBuy ? (

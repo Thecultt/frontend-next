@@ -46,6 +46,7 @@ export const ProductCard: React.FC<Props> = React.memo(
             is_trial,
             model_name,
             images,
+            is_jewelry,
         } = productData;
 
         const { isIntersecting, ref } = useIntersectionObserver({
@@ -110,29 +111,32 @@ export const ProductCard: React.FC<Props> = React.memo(
                             <p className="product-card-info__condition">
                                 Состояние: <span className="product-card-info__condition-value">{condition}</span>
                             </p>
-                            <div className="product-card-info__price-split">
-                                <div className="product-card-info__prices">
-                                    <span className="product-card-info__price">{formatMoney(price)}</span>
-                                    {old_price && (
-                                        <span className="product-card-info__price product-card-info__price--old">
-                                            {formatMoney(old_price)}
-                                        </span>
-                                    )}
-                                </div>
 
-                                <div className="product-card-info__split-wrap">
-                                    {/* @ts-ignore */}
-                                    <yandex-pay-badge
-                                        type="bnpl"
-                                        amount={`${price}.00`}
-                                        size="s"
-                                        variant="detailed"
-                                        color="primary"
-                                        merchant-id={YANDEX_SPLIT_MERCHANT_ID}
-                                        class="product-card-info__split"
-                                    />
+                            {!is_jewelry && (
+                                <div className="product-card-info__price-split">
+                                    <div className="product-card-info__prices">
+                                        <span className="product-card-info__price">{formatMoney(price)}</span>
+                                        {old_price && (
+                                            <span className="product-card-info__price product-card-info__price--old">
+                                                {formatMoney(old_price)}
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    <div className="product-card-info__split-wrap">
+                                        {/* @ts-ignore */}
+                                        <yandex-pay-badge
+                                            type="bnpl"
+                                            amount={`${price}.00`}
+                                            size="s"
+                                            variant="detailed"
+                                            color="primary"
+                                            merchant-id={YANDEX_SPLIT_MERCHANT_ID}
+                                            class="product-card-info__split"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </>
                     ) : (
                         <span className="product-card-info__outstock">
