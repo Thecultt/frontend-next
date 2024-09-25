@@ -15,10 +15,10 @@ export interface Product {
     shoe_size: string;
     size: string;
     is_trial: boolean;
-    is_jewelry: boolean;
     from_boutique: boolean;
     from_parnter: boolean;
     price_drop: boolean;
+    is_jewelry?: boolean;
     model_name?: string;
 }
 
