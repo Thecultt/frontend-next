@@ -30,7 +30,7 @@ export const CartProductItem: React.FC<Props> = ({
     onCheck,
     onRemove,
 }) => {
-    const { article, name, checked, image, condition, price, old_price, availability, is_trial } = data;
+    const { article, name, checked, image, condition, price, old_price, availability, is_trial, is_jewelry } = data;
 
     const canBuy = !!availability && !is_trial;
 
@@ -63,7 +63,7 @@ export const CartProductItem: React.FC<Props> = ({
                     {old_price && <span className="cart-product-item-info-prices__old">{formatMoney(old_price)}</span>}
                 </div>
 
-                {canBuy && price <= YANDEX_SPLIT_LIMIT && (
+                {!is_jewelry && canBuy && price <= YANDEX_SPLIT_LIMIT && (
                     <div className="cart-product-item-info-split">
                         {/* @ts-ignore */}
                         <yandex-pay-badge

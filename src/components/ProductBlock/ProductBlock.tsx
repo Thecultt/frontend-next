@@ -47,6 +47,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
     from_boutique,
     from_parnter,
     price_drop,
+    is_jewelry,
 }) => {
     const [isCartLocal, setIsCartLocal] = React.useState(isCart);
     const [isFavoriteLocal, setIsFavoriteLocal] = React.useState(false);
@@ -212,17 +213,19 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
                                 ) : null}
                             </div>
 
-                            <div className="product-block-text-yandex-split">
-                                {/* @ts-ignore */}
-                                <yandex-pay-badge
-                                    type="bnpl"
-                                    amount={`${price}.00`}
-                                    size="s"
-                                    variant="detailed"
-                                    color="primary"
-                                    merchant-id="40d34cdd-8666-4829-9988-aaea1b87ed9a"
-                                />
-                            </div>
+                            {!is_jewelry && (
+                                <div className="product-block-text-yandex-split">
+                                    {/* @ts-ignore */}
+                                    <yandex-pay-badge
+                                        type="bnpl"
+                                        amount={`${price}.00`}
+                                        size="s"
+                                        variant="detailed"
+                                        color="primary"
+                                        merchant-id="40d34cdd-8666-4829-9988-aaea1b87ed9a"
+                                    />
+                                </div>
+                            )}
                         </Link>
 
                         {isCartLocal ? (
