@@ -112,17 +112,18 @@ export const ProductCard: React.FC<Props> = React.memo(
                                 Состояние: <span className="product-card-info__condition-value">{condition}</span>
                             </p>
 
-                            {!is_jewelry && (
-                                <div className="product-card-info__price-split">
-                                    <div className="product-card-info__prices">
-                                        <span className="product-card-info__price">{formatMoney(price)}</span>
-                                        {old_price && (
-                                            <span className="product-card-info__price product-card-info__price--old">
-                                                {formatMoney(old_price)}
-                                            </span>
-                                        )}
-                                    </div>
+                            {/* TODO: Вынести цену из класса spit */}
+                            <div className="product-card-info__price-split">
+                                <div className="product-card-info__prices">
+                                    <span className="product-card-info__price">{formatMoney(price)}</span>
+                                    {old_price && (
+                                        <span className="product-card-info__price product-card-info__price--old">
+                                            {formatMoney(old_price)}
+                                        </span>
+                                    )}
+                                </div>
 
+                                {!is_jewelry && (
                                     <div className="product-card-info__split-wrap">
                                         {/* @ts-ignore */}
                                         <yandex-pay-badge
@@ -135,8 +136,8 @@ export const ProductCard: React.FC<Props> = React.memo(
                                             class="product-card-info__split"
                                         />
                                     </div>
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </>
                     ) : (
                         <span className="product-card-info__outstock">
