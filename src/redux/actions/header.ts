@@ -14,7 +14,7 @@ export const fetchHeaderSearchItems = (value: string) => async (dispatch: Dispat
 
     const {
         data: { total_items, items },
-    } = await $api.get<{ total_items: number; items: Product[] }>('/catalog', {
+    } = await $api.get<{ total_items: number; items: Product[] }>('/catalog_v2', {
         params: { search: value, sort_by: SORT.a },
     });
 
