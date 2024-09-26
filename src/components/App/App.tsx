@@ -26,6 +26,7 @@ import { useReplaceLS } from '@/hooks/useReplaceLS';
 import { CATALOG_PAGES } from '@/constants/routes';
 
 import { ClientOnly } from './ClientOnly';
+import { Preloader } from './Preloader';
 
 export const App = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useDispatch();
@@ -76,6 +77,8 @@ export const App = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <>
+            <Preloader />
+
             <NoSsr>
                 <ClientOnly />
                 <Reglog />
@@ -93,9 +96,7 @@ export const App = ({ children }: { children: React.ReactNode }) => {
 
                 {children}
 
-                <NoSsr>
-                    <Footer subscribeBlockId="footer-email" />
-                </NoSsr>
+                <Footer subscribeBlockId="footer-email" />
             </div>
         </>
     );
