@@ -11,7 +11,8 @@ export const CATEGORY_NAMES = {
 
 export const CATEGORIES = [
     CATEGORY_NAMES.bags,
-    CATEGORY_NAMES.jewelry,
+    // TODO jewelry on hold
+    // CATEGORY_NAMES.jewelry,
     CATEGORY_NAMES.accessories,
     CATEGORY_NAMES.shoes,
     CATEGORY_NAMES.decorations,
