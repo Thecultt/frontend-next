@@ -178,7 +178,8 @@ const SellCreate: React.FC = () => {
 
         const delivery = data;
 
-        const sell = {
+        // TODO Вынести в interface
+        const sell: any = {
             type: currentType === 'sell' ? 'Продажа' : 'Обмен',
 
             category: info.category,
@@ -207,6 +208,10 @@ const SellCreate: React.FC = () => {
             client_room: delivery.flat ? delivery.flat : '',
             client_comment: delivery.comment ? delivery.comment : '',
         };
+
+        if (info.precious_stones_in_kit) {
+            sell.precious_stones_in_kit = info.precious_stones_in_kit === 'Да' ? true : false;
+        }
 
         pushDataLayer('shipping_method_complete');
 
