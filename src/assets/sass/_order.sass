@@ -394,6 +394,39 @@
 	&-status
 		margin: 30px 0 75px
 
+		&-button
+			+buttonReset
+			width: 100%
+			max-width: 480px
+			display: flex
+			align-items: center
+			justify-content: space-between
+			gap: 8px
+			margin-bottom: 24px
+			padding: 12px
+			border-radius: 12px
+			border: 1px solid $mainColor
+			background-color: $green1
+
+			&__icon
+				width: 24px
+				color: $mainColor
+
+			&__arrow
+				width: 24px
+				color: $black3
+
+			&__text
+				flex: 1
+				text-align: left
+				+ManropeSemiBold
+				font-size: 14px
+				line-height: 16.8px
+
+				+mediaTablet
+					font-size: 12px
+					line-height: 14.4px
+
 		&-wrapper
 			display: flex
 			flex-direction: column
@@ -444,6 +477,10 @@
 				&__title
 					font-size: 22px
 					margin-bottom: 25px
+
+				&__subtitle
+					font-size: 16px
+					margin-bottom: 15px
 
 				&__description
 					font-size: 14px

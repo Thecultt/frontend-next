@@ -1,14 +1,17 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { Field } from 'redux-form';
+import { createTextMask } from 'redux-form-input-masks';
 import axios from 'axios';
-
-import { APP_ROUTE } from '@/constants/routes';
 
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { useDebounce } from '@/hooks/useDebounce';
-
+import { useOrder } from '@/hooks/order/useOrder';
 import { RenderInput, RenderCheckbox } from '@/components';
+import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
+import { APP_ROUTE } from '@/constants/routes';
 
 interface Props {
     emailValue: string;
@@ -16,6 +19,7 @@ interface Props {
 
 const OrderFormContact: React.FC<Props> = ({ emailValue }) => {
     const { isLoggedIn, user } = useAuthUser();
+    const { isJewelry, cartSum } = useOrder();
 
     const emailValueDebounce = useDebounce(emailValue);
 
@@ -144,6 +148,22 @@ const OrderFormContact: React.FC<Props> = ({ emailValue }) => {
                         // })}
                     />
                 </div>
+
+                {isJewelry && cartSum >= JEWELRY_PASSPORT_SUM && (
+                    <div className="order-form-block-input" style={{ width: '100%' }}>
+                        <Field
+                            component={RenderInput}
+                            type="text"
+                            name="passport"
+                            label="Серия и номер паспорта"
+                            {...createTextMask({
+                                pattern: '9999 999999',
+                                guide: false,
+                                stripMask: false,
+                            })}
+                        />
+                    </div>
+                )}
             </div>
         </div>
     );

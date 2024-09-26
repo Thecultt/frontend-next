@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
 export const EMAIL_REGEXP = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$/i);
+export const PASSPORT_REGEXP = new RegExp(/\d{4}\s\d{6}/);
 
 export const MIN_INPUT_SYMBOLS = 2;
 export const MAX_INPUT_SYMBOLS = 256;

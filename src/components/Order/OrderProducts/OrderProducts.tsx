@@ -9,9 +9,8 @@ import isEqual from 'lodash.isequal';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useAuthUser } from '@/hooks/useAuthUser';
-import { changeCheckCartItem, checkAvailabilityCartItems, removeCartItem, setCartItems } from '@/redux/actions/cart';
-import { ICartItemsState } from '@/redux/types/ICart';
-import { sendCreateOrder, sendSubmitOrder } from '@/redux/actions/order';
+import { changeCheckCartItem, checkAvailabilityCartItems, removeCartItem } from '@/redux/actions/cart';
+import { sendCreateOrder } from '@/redux/actions/order';
 import { sendUpdateUser } from '@/redux/actions/user';
 import { sendOrderApplyPromocode } from '@/redux/actions/order';
 import { CartProductItem, Loader, NewCheckbox, OrderProductsPromocode } from '@/components';
@@ -20,6 +19,8 @@ import { sendMindbox } from '@/functions/mindbox';
 import { pushDataLayer } from '@/functions/pushDataLayer';
 import { formatMoney } from '@/functions/formatMoney';
 import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
+import { useOrder } from '@/hooks/order/useOrder';
+import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
 
 import orderPay from '../orderPay';
 
@@ -29,12 +30,11 @@ const OrderProducts: React.FC = () => {
     const [isDisableSendBtn, setIsDisableSendBtn] = React.useState(false);
 
     const { isLoggedIn, user } = useAuthUser();
-
-    const { items, isLoading } = useTypedSelector(({ cart }) => cart);
     const { promocode, currentDelivery, isValid } = useTypedSelector(({ order }) => order);
 
-    const mappedCartItems = Object.keys(items).map((article) => items[article]);
-    const availableCartItems = mappedCartItems.filter((item) => !!item.availability && !item.is_trial);
+    const { cartItems, cartIsLoading, isJewelry, submitOrder } = useOrder();
+
+    const availableCartItems = cartItems.filter((item) => !!item.availability && !item.is_trial);
     const checkedCartItems = availableCartItems.filter((item) => item.checked);
 
     const cartPrice = checkedCartItems.reduce((acc, cur) => acc + cur.price, 0);
@@ -44,7 +44,11 @@ const OrderProducts: React.FC = () => {
     };
 
     const removeItem = (article: string) => {
-        dispatch(removeCartItem(items[article]));
+        const item = cartItems.find((item) => item.article === article);
+
+        if (item) {
+            dispatch(removeCartItem(item));
+        }
 
         if (promocode.name) {
             dispatch(sendOrderApplyPromocode(promocode.name, cartPrice) as any);
@@ -62,8 +66,10 @@ const OrderProducts: React.FC = () => {
     const isCheckNull = () => {
         const checkedArr: boolean[] = [];
 
-        Object.keys(items).map((key) => {
-            if (items[key].checked && !items[key].is_trial) checkedArr.push(true);
+        cartItems.map((item) => {
+            if (item.checked && !item.is_trial) {
+                checkedArr.push(true);
+            }
         });
 
         return !!checkedArr.length;
@@ -97,21 +103,24 @@ const OrderProducts: React.FC = () => {
         houseValue,
         flatValue,
         commentValue,
+        passportValue,
     } = useTypedSelector((state) => {
-        const { email, name, phone, country, city, delivery, payment, street, house, flat, comment } = selector(
-            state,
-            'email',
-            'name',
-            'phone',
-            'country',
-            'city',
-            'delivery',
-            'payment',
-            'street',
-            'house',
-            'flat',
-            'comment',
-        );
+        const { email, name, phone, country, city, delivery, payment, street, house, flat, comment, passport } =
+            selector(
+                state,
+                'email',
+                'name',
+                'phone',
+                'country',
+                'city',
+                'delivery',
+                'payment',
+                'street',
+                'house',
+                'flat',
+                'comment',
+                'passport',
+            );
         return {
             emailValue: email,
             nameValue: name,
@@ -127,6 +136,8 @@ const OrderProducts: React.FC = () => {
             houseValue: house,
             flatValue: flat,
             commentValue: comment ? comment : '',
+
+            passportValue: passport,
         };
     });
 
@@ -152,21 +163,27 @@ const OrderProducts: React.FC = () => {
 
         const products = checkedCartItems.map((item) => item.id);
 
-        const middlename = nameValue.split(' ')[0];
-        const name = nameValue.split(' ')[1];
-        const lastname = nameValue.split(' ')[2];
+        const splitName = nameValue.split(' ');
+        const lastname = splitName[0];
+        const name = splitName[1];
+        const middlename = splitName[2];
 
-        if (middlename && user.middlename === '') {
-            dispatch(sendUpdateUser({ middlename }) as any);
+        // TODO any
+        const newUserName: any = {};
+
+        if (middlename && user.middlename !== '') {
+            newUserName.middlename = middlename;
         }
 
-        if (name && user.name === '') {
-            dispatch(sendUpdateUser({ name }) as any);
+        if (name && user.name !== '') {
+            newUserName.name = name;
         }
 
-        if (lastname && user.lastname === '') {
-            dispatch(sendUpdateUser({ lastname }) as any);
+        if (lastname && user.lastname !== '') {
+            newUserName.lastname = lastname;
         }
+
+        dispatch(sendUpdateUser(newUserName) as any);
 
         let paymentId;
 
@@ -182,51 +199,39 @@ const OrderProducts: React.FC = () => {
             paymentId = 6;
         }
 
-        dispatch(
-            sendCreateOrder(
-                {
-                    isLoggedIn,
+        const requestData: any = {
+            isLoggedIn,
 
-                    email: emailValue,
-                    name: nameValue,
-                    phone: phoneValue,
+            email: emailValue,
+            name: nameValue,
+            phone: phoneValue,
 
-                    country: countryValue,
-                    city: cityValue,
-                    street: streetValue,
-                    home: houseValue,
-                    room: flatValue,
-                    comment: commentValue,
+            country: countryValue,
+            city: cityValue,
+            street: streetValue,
+            home: houseValue,
+            room: flatValue,
+            comment: commentValue,
 
-                    products,
+            products,
 
-                    delivery_type: currentDelivery.id,
-                    payment_type: paymentId,
+            delivery_type: currentDelivery.id,
+            payment_type: paymentId,
 
-                    coupon_id:
-                        paymentValue === 'На сайте' || currentDelivery.title === 'Доставка с примеркой (по Москве)'
-                            ? promocode.id
-                            : 0,
-                },
-                (orderId: number, orderNum: string) => pay(orderId, orderNum),
-            ) as any,
-        );
-    };
+            coupon_id:
+                paymentValue === 'На сайте' || currentDelivery.title === 'Доставка с примеркой (по Москве)'
+                    ? promocode.id
+                    : 0,
+        };
 
-    const updateCart = () => {
-        const newCart: ICartItemsState = {};
-        Object.keys(items).map((article) => {
-            if (!items[article].checked && !!items[article].availability && !items[article].is_trial) {
-                newCart[article] = { ...items[article], checked: true };
-            }
-        });
+        if (isJewelry && cartPrice >= JEWELRY_PASSPORT_SUM) {
+            requestData.passport = passportValue;
+        }
 
-        dispatch(setCartItems(newCart) as any);
+        dispatch(sendCreateOrder(requestData, (orderId: number, orderNum: string) => pay(orderId, orderNum)) as any);
     };
 
     const successPayment = (orderId: number) => {
-        updateCart();
-
         pushDataLayer('purchase', {
             transaction_id: `${orderId}`,
             value: `${totalPrice}`,
@@ -339,24 +344,23 @@ const OrderProducts: React.FC = () => {
             console.log(e);
         }
 
-        dispatch(sendSubmitOrder(orderId) as any);
+        submitOrder(orderId);
     };
 
     const pay = (orderId: number, orderNum: string) => {
         if (currentDelivery.title === 'Доставка с примеркой (по Москве)') {
             successPayment(orderId);
         } else {
-            const products = checkedCartItems.map((item) => ({
-                name: item.name,
-                price: item.price,
-            }));
-
             orderPay({
                 type: paymentValue,
                 orderId,
                 totalPrice,
                 deliveryPrice: currentDelivery.price,
-                products,
+                products: checkedCartItems.map((item) => ({
+                    name: item.name,
+                    price: item.price,
+                    is_jewelry: item.is_jewelry,
+                })),
                 orderNum,
                 onSuccessCallback: () => successPayment(orderId),
             });
@@ -364,7 +368,7 @@ const OrderProducts: React.FC = () => {
     };
 
     React.useEffect(() => {
-        dispatch(checkAvailabilityCartItems(items) as any);
+        dispatch(checkAvailabilityCartItems(cartItems) as any);
     }, []);
 
     React.useEffect(() => {
@@ -421,11 +425,11 @@ const OrderProducts: React.FC = () => {
             </NewCheckbox>
 
             <div className="order-products-items-wrapper">
-                {mappedCartItems.map((item) => (
+                {cartItems.map((item) => (
                     <CartProductItem
                         key={item.id}
                         data={item}
-                        removeDisabled={mappedCartItems.length === 1 && !!item.availability && !item.is_trial}
+                        removeDisabled={cartItems.length === 1 && !!item.availability && !item.is_trial}
                         onCheck={() => changeCheck(item.article, !item.checked)}
                         onRemove={() => removeItem(item.article)}
                     />
@@ -477,11 +481,11 @@ const OrderProducts: React.FC = () => {
 
                 <button
                     className={getClassNames('btn order-products__btn', {
-                        loader: isDisableSendBtn || isLoading,
+                        loader: isDisableSendBtn || cartIsLoading,
                         disabled: !isCheckNull() || !isValid,
                     })}
                     onClick={onClickSendCreateOrder}
-                    disabled={isDisableSendBtn || isLoading}
+                    disabled={!isValid || isDisableSendBtn || cartIsLoading}
                 >
                     {isDisableSendBtn ? (
                         <Loader />

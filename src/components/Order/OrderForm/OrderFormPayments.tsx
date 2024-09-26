@@ -1,35 +1,25 @@
+'use client';
+
 import React from 'react';
 import { Field } from 'redux-form';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { RenderRadioSelect, Popup, ProductInfoTitleSplitPopup } from '@/components';
-import { PAYMENTS_NAMES, PAYMENTS_METHODS } from '@/constants/order';
+import { PAYMENTS_NAMES, PAYMENTS_METHODS } from '@/constants/pay';
 import { YANDEX_SPLIT_LIMIT } from '@/constants/app';
+import { useOrder } from '@/hooks/order/useOrder';
 
 interface OrderFormPaymentsProps {
     paymentValue: string;
 }
 
 const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) => {
-    // const { sum } = useTypedSelector(({ order }) => order)
-    const { items } = useTypedSelector(({ cart }) => cart);
+    const { cartSum: totalPrice, isJewelry } = useOrder();
 
     const [initWidget, setInitWidget] = React.useState(false);
     const [isStateSplitPopup, setIsStateSplitPopup] = React.useState(false);
 
-    const totalPrice = Object.keys(items)
-        .map((article) => items[article])
-        .filter((item) => item.availability && !item.is_trial && item.checked)
-        .map((item) => item.price).length
-        ? Object.keys(items)
-              .map((article) => items[article])
-              .filter((item) => item.availability && !item.is_trial && item.checked)
-              .map((item) => item.price)
-              .reduce((a: number, b: number) => a + b)
-        : 0;
-
     React.useEffect(() => {
-        if (!initWidget && paymentValue === 'Яндекс Сплит') {
+        if (!initWidget && paymentValue === PAYMENTS_NAMES.yandexSplit) {
             const YaPay = window.YaPay;
 
             const paymentData = {
@@ -77,25 +67,39 @@ const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) =
                 <h3 className="order-form-block__title">Варианты оплаты</h3>
 
                 <div className="order-form-block-checkboxs-wrapper">
-                    {Object.keys(PAYMENTS_METHODS).map((method, index) =>
-                        totalPrice > YANDEX_SPLIT_LIMIT &&
-                        PAYMENTS_METHODS[method].title === PAYMENTS_NAMES.yandexSplit ? null : (
-                            <div className="order-form-block-checkbox" key={`order-form-block-checkbox-${index}`}>
-                                <Field
-                                    component={RenderRadioSelect}
-                                    label={PAYMENTS_METHODS[method].title}
-                                    description={PAYMENTS_METHODS[method].description}
-                                    type="radio"
-                                    name="payment"
-                                    value={PAYMENTS_METHODS[method].title}
-                                    onClickInfoTag={
-                                        PAYMENTS_METHODS[method].title === PAYMENTS_NAMES.yandexSplit
-                                            ? () => setIsStateSplitPopup(true)
-                                            : null
-                                    }
-                                />
-                            </div>
-                        ),
+                    {isJewelry ? (
+                        <div className="order-form-block-checkbox">
+                            <Field
+                                component={RenderRadioSelect}
+                                label={PAYMENTS_METHODS.card.title}
+                                description={PAYMENTS_METHODS.card.description}
+                                type="radio"
+                                name="payment"
+                                value={PAYMENTS_METHODS.card.title}
+                                defaultChecked
+                            />
+                        </div>
+                    ) : (
+                        Object.keys(PAYMENTS_METHODS).map((method, index) =>
+                            totalPrice > YANDEX_SPLIT_LIMIT &&
+                            PAYMENTS_METHODS[method].title === PAYMENTS_NAMES.yandexSplit ? null : (
+                                <div className="order-form-block-checkbox" key={`order-form-block-checkbox-${index}`}>
+                                    <Field
+                                        component={RenderRadioSelect}
+                                        label={PAYMENTS_METHODS[method].title}
+                                        description={PAYMENTS_METHODS[method].description}
+                                        type="radio"
+                                        name="payment"
+                                        value={PAYMENTS_METHODS[method].title}
+                                        onClickInfoTag={
+                                            PAYMENTS_METHODS[method].title === PAYMENTS_NAMES.yandexSplit
+                                                ? () => setIsStateSplitPopup(true)
+                                                : null
+                                        }
+                                    />
+                                </div>
+                            ),
+                        )
                     )}
                 </div>
 

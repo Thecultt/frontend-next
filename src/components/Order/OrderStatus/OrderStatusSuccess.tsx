@@ -1,17 +1,51 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { useMediaQuery } from 'usehooks-ts';
+import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
 
 import { OrderStatusProduct } from '@/components';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { APP_ROUTE } from '@/constants/routes';
+import { useCart } from '@/hooks/catalog/useCart';
+import { CartIcon, ChevronRightIcon } from '@/assets/icons';
+import { MEDIA_SIZES } from '@/constants/styles';
+import { setHeaderCartIsVisible } from '@/redux/actions/header';
 
 const OrderStatusSuccess: React.FC = () => {
+    const dispatch = useDispatch();
+    const router = useRouter();
+
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+
     const { order } = useTypedSelector(({ order }) => order);
+    const { allCart } = useCart();
+
+    const handleCartClick = () => {
+        if (isMobile) {
+            router.push(APP_ROUTE.cart);
+            return;
+        }
+
+        dispatch(setHeaderCartIsVisible(true));
+    };
 
     return (
         <section className="order-status">
             <div className="container">
                 <div className="order-status-wrapper">
+                    {allCart.length > 0 && (
+                        <button type="button" className="order-status-button" onClick={handleCartClick}>
+                            <CartIcon className="order-status-button__icon" />
+                            <p className="order-status-button__text">
+                                У вас осталось {allCart.length} товаров в корзине — перейти в корзину
+                            </p>
+                            <ChevronRightIcon className="order-status-button__arrow" />
+                        </button>
+                    )}
+
                     <div className="order-status-content">
                         <div className="order-status-content-info">
                             <div className="order-status-content-info-circle left"></div>

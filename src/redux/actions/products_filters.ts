@@ -7,8 +7,8 @@ import { ProductsFiltersTypes, ProductsFiltersActionTypes } from '../types/IProd
 
 export const fetchProductsFilters = () => async (dispatch: Dispatch<ProductsFiltersTypes>) => {
     const {
-        data: { categories, colors, conditions, min_price, max_price, selections, glass_frame },
-    } = await $api.get<IProductFilters>(`/filters_v2`);
+        data: { categories, colors, conditions, min_price, max_price, selections, glass_frame, jewelry_metal_type },
+    } = await $api.get<IProductFilters>('/filters_v2');
 
     dispatch({
         type: ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_PRICE,
@@ -38,6 +38,11 @@ export const fetchProductsFilters = () => async (dispatch: Dispatch<ProductsFilt
     dispatch({
         type: ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_GLASS_FRAME,
         payload: glass_frame,
+    });
+
+    dispatch({
+        type: ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_METAL_TYPES,
+        payload: jewelry_metal_type,
     });
 
     dispatch({

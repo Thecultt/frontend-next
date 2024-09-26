@@ -58,8 +58,6 @@ export { default as ProductBlock } from './ProductBlock/ProductBlock';
 export { default as Header } from './Header/Header';
 // HeaderTopMessage
 export { default as HeaderTopMessage } from './Header/HeaderTopMessage/HeaderTopMessage';
-// HeaderHoverMenu
-export { default as HeaderHoverMenu } from './Header/HeaderHoverMenu/HeaderHoverMenu';
 // HeaderSearchBox
 export { default as HeaderSearchBox } from './Header/HeaderSearchBox/HeaderSearchBox';
 // HeaderUser
@@ -146,6 +144,8 @@ export { default as CatalogFiltersSelections } from './Catalog/CatalogFilters/Ca
 export { default as CatalogFiltersSex } from './Catalog/CatalogFilters/CatalogFiltersSex';
 export { default as CatalogFiltersSize } from './Catalog/CatalogFilters/CatalogFiltersSize';
 export { default as CatalogFiltersTypes } from './Catalog/CatalogFilters/CatalogFiltersTypes';
+export { default as CatalogFiltersMetalType } from './Catalog/CatalogFilters/CatalogFiltersMetalType';
+
 // CatalogProducts
 export { default as CatalogProducts } from './Catalog/CatalogProducts/CatalogProducts';
 export { default as CatalogProductsNull } from './Catalog/CatalogProducts/CatalogProductsNull';
@@ -318,6 +318,7 @@ export { default as FaqTheCultt } from './Faq/FaqTheCultt';
 // Cart
 export { default as CartItemBlock } from './Cart/CartItemBlock';
 export { CartProductItem } from './Cart/CartProductItem/CartProductItem';
+export { CartList } from './Cart/CartList/CartList';
 
 // CinemaArtistic
 export { default as CinemaArtisticExhibits } from './CinemaArtistic/CinemaArtisticExhibits';

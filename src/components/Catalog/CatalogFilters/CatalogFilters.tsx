@@ -20,6 +20,7 @@ import {
     CatalogFiltersGlassFrame,
     CatalogFiltersPriceDrop,
     Skeleton,
+    CatalogFiltersMetalType,
 } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { CATEGORY_NAMES, CATEGORY_SLUGS, FILTER_CATEGORY_SLUGS } from '@/constants/catalog';
@@ -83,6 +84,9 @@ const CatalogFilters: React.FC<Props> = ({ isOpenFiltersMedia, setIsOpenFiltersM
                 <CatalogFiltersConditions />
                 {(!category_slug || !FILTER_CATEGORY_SLUGS.includes(category_slug)) && <CatalogFiltersCategories />}
                 <CatalogFiltersTypes />
+                {(category_slug === CATEGORY_SLUGS.jewelry || selectedCategories.includes(CATEGORY_NAMES.jewelry)) && (
+                    <CatalogFiltersMetalType />
+                )}
                 {!brand_slug && <CatalogFiltersBrands />}
                 {(!category_slug || ![CATEGORY_SLUGS.accessories, CATEGORY_SLUGS.shoes].includes(category_slug)) && (
                     <CatalogFiltersModels />
