@@ -45,6 +45,7 @@ export const useCatalogFilters = () => {
             price_drop: parseAsBoolean.withDefault(category_slug === CATEGORY_SLUGS.sale),
             glass_frame: parseAsArrayOf(parseAsString).withDefault([]),
             size: parseAsArrayOf(parseAsFloat).withDefault([]),
+            metal_types: parseAsArrayOf(parseAsString).withDefault([]),
         },
         { clearOnDefault: true, scroll: false, history: 'replace' },
     );
@@ -75,6 +76,7 @@ export const useCatalogFilters = () => {
                 price_drop: state.price_drop,
                 glass_frame: state.glass_frame,
                 size: state.size,
+                metal_types: state.metal_types,
                 selection: selection_id,
             }) satisfies ICatalogFilters,
         [category_slug, subcategories_slug, brand_slug, selection_id, state],
@@ -109,6 +111,7 @@ export const useCatalogFilters = () => {
             price_drop: null,
             glass_frame: null,
             size: null,
+            metal_types: null,
         });
     }, []);
 

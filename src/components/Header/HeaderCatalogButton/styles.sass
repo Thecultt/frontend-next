@@ -1,0 +1,26 @@
+@import "/src/assets/sass/mixin"
+@import "/src/assets/sass/variables"
+
+.header-catalog-button
+    +buttonReset
+    width: fit-content
+    height: 42px
+    padding: 0 12px
+    margin-right: 16px
+    +flexCenter
+    gap: 8px
+    border-radius: 9px
+    background-color: $green1
+    transition: background-color 0.2s linear
+
+    &:active
+        background-color: darken($green1, 5)
+
+    &__icon
+        width: 24px
+        color: $mainColor
+
+    &__text
+        +ManropeSemiBold
+        font-size: 16px
+        color: $mainColor

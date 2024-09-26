@@ -1,0 +1,33 @@
+@import "/src/assets/sass/variables"
+@import "/src/assets/sass/mixin"
+
+.cart-list
+    width: 100%
+    display: flex
+    flex-direction: column
+    gap: 16px
+
+    &__title
+        +ManropeSemiBold
+        font-size: 16px
+        color: $black3
+
+    &__items
+        width: 100%
+        display: flex
+        flex-direction: column
+        gap: 12px
+
+    &-total
+        width: 100%
+        display: flex
+        justify-content: space-between
+        align-items: center
+
+        &__description, &__sum
+            +ManropeSemiBold
+            font-size: 16px
+            color: $black3
+
+    &__btn
+        width: 100%

@@ -1,0 +1,181 @@
+@import "/src/assets/sass/mixin"
+@import "/src/assets/sass/variables"
+
+.header-catalog-menu-backdrop
+    position: fixed
+    top: calc(#{$headerHeight} + var(--top-message-height))
+    left: 0
+    right: 0
+    width: 100%
+    height: calc(100% - #{$headerHeight} - var(--top-message-height))
+    background-color: $blackTransparent
+    z-index: $catalogMenuZIndex
+
+.header-catalog-menu
+    position: fixed
+    top: calc(#{$headerHeight} + var(--top-message-height))
+    left: 0
+    right: 0
+    width: 100%
+    height: calc(100% - #{$headerHeight} - var(--top-message-height))
+    max-height: 616px
+    background-color: $white
+    z-index: $catalogMenuZIndex + 1
+
+    &__wrapper
+        width: 100%
+        padding: 32px 0
+        height: 100%
+        display: grid
+        grid-template-columns: 210px auto 250px
+        gap: 80px
+
+    &__column
+        width: 100%
+        height: 100%
+        display: flex
+        flex-direction: column
+        overflow-y: auto
+        +scrollbar
+
+    &__nav
+        width: 100%
+        display: flex
+        flex-direction: column
+        flex-wrap: nowrap
+        gap: 8px
+
+    &-nav-item
+        width: 100%
+        padding: 8px
+        display: flex
+        align-items: center
+        border-radius: 12px
+        background-color: transparent
+        transition: background-color 0.2s linear
+
+        &--active
+            background-color: $green1
+
+        &__icon
+            width: 24px
+            color: $black2
+
+        &__title
+            margin-left: 8px
+            +ManropeSemiBold
+            font-size: 16px
+            color: $black2
+
+    &-boutique
+        width: 100%
+        padding: 12px
+        margin-top: 20px
+        display: flex
+        flex-direction: column
+        border-radius: 12px
+        background-color: $green1
+        transition: background-color 0.2s linear
+
+        &:hover
+            background-color: darken($green1, 5)
+
+        &__title
+            +ManropeSemiBold
+            font-size: 16px
+            color: $mainColor
+
+        &__text
+            +ManropeMedium
+            font-size: 14px
+            color: $black3
+            margin-top: 4px
+
+    &-nesting
+        width: 100%
+        display: grid
+        grid-template-columns: 192px auto
+        gap: 68px
+
+        &__title
+            +ManropeExtraBold
+            font-size: 20px
+            color: $black3
+            margin-bottom: 20px
+
+        &__types &__links
+            width: 100%
+            display: flex
+            flex-direction: column
+            gap: 16px
+
+        &__brands &__links
+            width: 100%
+            display: grid
+            grid-template-columns: 1fr 1fr
+            gap: 16px 48px
+
+        &__link
+            width: fit-content
+            +ManropeSemiBold
+            font-size: 16px
+            color: $black3
+            transition: color 0.2s linear
+
+            &:first-of-type
+                text-decoration: underline
+
+            &:hover
+                color: $mainColor
+
+        &-all-button
+            +buttonReset
+            width: fit-content
+            display: flex
+            align-items: center
+
+            &__text
+                +ManropeSemiBold
+                font-size: 16px
+                color: $black3
+
+            &__icon
+                width: 24px
+                margin-left: 4px
+                color: $grey8
+                transition: transform 0.2s linear
+
+            &--active &__icon
+                transform: rotate(180deg)
+
+    &-services
+        width: 100%
+        padding: 12px
+        border-radius: 12px
+        background-color: $green1
+        display: flex
+        flex-direction: column
+        gap: 12px
+
+        &__title
+            +ManropeExtraBold
+            font-size: 20px
+            color: $black3
+
+        &__link
+            width: fit-content
+            +ManropeSemiBold
+            font-size: 16px
+            color: $black3
+            transition: color 0.2s linear
+
+            &:hover
+                color: $mainColor
+
+    &-banner
+        width: 100%
+        flex: 1
+        min-height: 250px
+        border-radius: 16px
+        margin-top: 12px
+        +bgCover

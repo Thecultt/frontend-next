@@ -57,7 +57,7 @@ const Product: React.FC = () => {
     }, [article]);
 
     return itemByArticleIsLoaded ? (
-        itemByArticle.article !== '' ? (
+        itemByArticle && itemByArticle.article ? (
             <>
                 <section className="product">
                     <div className="container">

@@ -34,6 +34,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
     const { categories: filtersCategories, isLoaded: filtersIsLoaded } = useTypedSelector(
         ({ products_filters }) => products_filters,
     );
+
     const mappedCategories = CATEGORIES.map((item) => ({ title: item, ...filtersCategories[item] }));
 
     return (
@@ -112,6 +113,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                             key={`header-media-modal-menu-links-tab-${index}`}
                         >
                             {filtersIsLoaded &&
+                                category.subsubcategories &&
                                 Object.keys(category.subsubcategories).map((subsubcategory, subindex) => (
                                     <Link
                                         href={getCatalogFiltersUrl({
@@ -149,9 +151,8 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                                 onClick={toggleVisible}
                             >
                                 <span className="header-media-modal-menu-links-boutique__badge">Из бутика</span>
-
                                 <p className="header-media-modal-menu-links-boutique__subtitle">
-                                    Новые, не были в носке
+                                    Лоты от брендов и из бутиков-партнеров
                                 </p>
                             </Link>
                         </HeaderMediaLinkTab>

@@ -50,6 +50,11 @@ export interface IFiltersSelections {
     };
 }
 
+export interface IFiltersMetalType {
+    type: string;
+    slug: string;
+}
+
 export interface IProductFilters {
     categories: IFiltersCategories;
     colors: IFiltersColors;
@@ -58,4 +63,5 @@ export interface IProductFilters {
     max_price: number;
     min_price: number;
     selections: IFiltersSelections;
+    jewelry_metal_type: IFiltersMetalType[];
 }

@@ -1,29 +1,28 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMediaQuery } from 'usehooks-ts';
 
-import { ProductPage } from '@/models/IProduct';
-import { addCartItem, setCartIsVisibleMessage } from '@/redux/actions/cart';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import {
     ProductInfoTitleBoutique,
     ProductInfoTitlePartner,
     ProductInfoTitleSplit,
     ProductInfoTitleSale,
 } from '@/components';
-import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { CATEGORY_NAME_SLUGS, CATEGORY_NAMES } from '@/constants/catalog';
-import { useWaitingData } from '@/hooks/catalog/useWaitingData';
+import { ProductPage } from '@/models/IProduct';
 import { WaitingPopupType } from '@/types/waiting';
+import { useWaitingData } from '@/hooks/catalog/useWaitingData';
 import { useHash } from '@/hooks/useHash';
+import { useCart } from '@/hooks/catalog/useCart';
+import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
+import { getClassNames } from '@/functions/getClassNames';
+import { getUrlWithParams } from '@/functions/getUrlWithParams';
 import { formatMoney } from '@/functions/formatMoney';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { APP_ROUTE } from '@/constants/routes';
-import { getClassNames } from '@/functions/getClassNames';
+import { CATEGORY_NAME_SLUGS, CATEGORY_NAMES } from '@/constants/catalog';
 import { Noop } from '@/types/functions';
 
 import { ProductInfoTitleFavorites } from './ProductInfoTitleFavorites';
@@ -53,26 +52,32 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
         from_boutique,
         from_parnter,
         condition,
+        is_jewelry,
     } = product;
 
     const router = useRouter();
-    const dispatch = useDispatch();
 
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+
     const { changeHash } = useHash();
-
     const { setWaitingData } = useWaitingData();
-    const { items: cartItems } = useTypedSelector(({ cart }) => cart);
 
-    const inCart = !!cartItems[article];
+    const { allCart, addToCart } = useCart();
+
+    const inCart = !!allCart.find((item) => item.id === id);
     const canBuy = !!availability && !is_trial;
 
     const categorySlug: string | undefined = CATEGORY_NAME_SLUGS[category];
     const categoryFilterParam = categorySlug ? { category_slug: categorySlug } : { categories: [category] };
 
-    const addToCart = () => {
+    const handleAddClick = () => {
         if (inCart) {
-            router.push(isMobile ? APP_ROUTE.cart : APP_ROUTE.order);
+            const orderPath = !is_jewelry
+                ? APP_ROUTE.order
+                : getUrlWithParams(APP_ROUTE.order, {
+                      type: 'jewelry',
+                  });
+            router.push(isMobile ? APP_ROUTE.cart : orderPath);
             return;
         }
 
@@ -80,29 +85,22 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
             return;
         }
 
-        dispatch(setCartIsVisibleMessage(true));
-
-        dispatch(
-            addCartItem({
-                id: id,
-                checked: true,
-                article,
-                manufacturer,
-                category,
-                subcategory,
-                name,
-                image: images[0],
-                price,
-                old_price,
-                availability,
-                is_trial,
-                condition,
-            }),
-        );
-
-        setTimeout(() => {
-            dispatch(setCartIsVisibleMessage(false));
-        }, 5000);
+        addToCart({
+            id: id,
+            checked: true,
+            article,
+            manufacturer,
+            category,
+            subcategory,
+            name,
+            image: images[0],
+            price,
+            old_price,
+            availability,
+            is_trial,
+            condition,
+            is_jewelry,
+        });
     };
 
     const subscribeGood = () => {
@@ -161,7 +159,8 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
                 {old_price && <p className="product-content-info-title-price__oldprice">{formatMoney(old_price)}</p>}
             </div>
 
-            {price <= 150000 && <ProductInfoTitleSplit price={price} disabled={!canBuy} />}
+            {/* TODO to const */}
+            {!is_jewelry && price <= 150000 && <ProductInfoTitleSplit price={price} disabled={!canBuy} />}
 
             <div className="product-content-info-title-btn">
                 {canBuy ? (
@@ -170,7 +169,7 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
                         className={getClassNames('btn product-content-info-title-btn__btn add', {
                             'in-cart': inCart,
                         })}
-                        onClick={addToCart}
+                        onClick={handleAddClick}
                     >
                         {inCart ? 'Перейти в корзину' : isMobile ? 'В корзину' : 'Добавить в корзину'}
                     </button>

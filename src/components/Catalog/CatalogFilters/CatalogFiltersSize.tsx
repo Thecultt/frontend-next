@@ -16,7 +16,7 @@ const CatalogFiltersSize: React.FC = () => {
     const { categories } = useTypedSelector(({ products_filters }) => products_filters);
     const sizes = categories[CATEGORY_NAMES.shoes].size || [];
 
-    const onChangeSetType = (size: number) => {
+    const onChangeSetSize = (size: number) => {
         updateFilters({
             size: selectedSizes.includes(size)
                 ? selectedSizes.filter((selectedSize) => selectedSize !== size)
@@ -35,7 +35,7 @@ const CatalogFiltersSize: React.FC = () => {
                         <Checkbox
                             id={`catalog-filters-block-content-size-${size}-checkbox-${index}`}
                             label={size.toString()}
-                            onChange={() => onChangeSetType(size)}
+                            onChange={() => onChangeSetSize(size)}
                             checked={selectedSizes.includes(size)}
                         />
                     </div>

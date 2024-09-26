@@ -55,6 +55,9 @@ a
 img
 	+disabledImage
 
+svg
+	flex-shrink: 0
+
 // input
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -209,27 +212,30 @@ input[type="file"]
 		+open
 
 .input-light
-	cursor: text
-
-	padding-left: 15px
-
-	width: 470px
+	width: 100%
+	max-width: 470px
+	height: 42px
+	padding: 0 20px
 
 	display: flex
 	align-items: center
 
 	outline: none
-
 	background-color: $lightBackgroundColor
 
 	+borderRadius
 
-	&__field
-		padding: 12px 20px 12px 10px
+	&__icon
+		width: 20px
+		color: $grey6
 
+	&__field
 		width: 100%
-		outline: none
+		height: 100%
+		padding-left: 10px
+		+ManropeRegular
 		font-size: 16px
+		outline: none
 		border: none
 		background-color: transparent
 

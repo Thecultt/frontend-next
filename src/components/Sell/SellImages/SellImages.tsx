@@ -7,6 +7,8 @@ import { setCabinetSellCurrentStep, sendCreateCabinetSellImage } from '@/redux/a
 import { SellBackBtn, SellImagesBlock } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 
+import { CATEGORY_NAMES } from '@/constants/sell';
+
 import SellImagesImageBag1 from '@/assets/images/sell/sell-images-image-bag-1.jpg';
 import SellImagesImageBag2 from '@/assets/images/sell/sell-images-image-bag-2.jpg';
 import SellImagesImageBag3 from '@/assets/images/sell/sell-images-image-bag-3.jpg';
@@ -45,7 +47,303 @@ import SellImagesImageClock4 from '@/assets/images/sell/sell-images-image-clock-
 import SellImagesImageHand1 from '@/assets/images/sell/sell-images-image-hand-1.jpg';
 import SellImagesImageHand2 from '@/assets/images/sell/sell-images-image-hand-2.jpg';
 import SellImagesImageHand3 from '@/assets/images/sell/sell-images-image-hand-3.jpg';
+
 import SellImagesImageHand4 from '@/assets/images/sell/sell-images-image-hand-4.jpg';
+const imageBlocksBag: {
+    image?: string;
+    imageTitle?: string;
+    imageDescription?: string;
+    isMore?: any;
+}[] = [
+    {
+        image: SellImagesImageBag1.src,
+        imageTitle: 'Лицевая сторона',
+        imageDescription: 'Сфотографируйте сумку спереди при дневном свете',
+    },
+
+    {
+        image: SellImagesImageBag2.src,
+        imageTitle: 'Внутри',
+        imageDescription: 'Сфотографируйте внутреннее пространство сумки',
+    },
+
+    {
+        image: SellImagesImageBag3.src,
+        imageTitle: 'Нюансы',
+        imageDescription: 'Сфотографируйте наиболее ярко выраженные нюансы',
+    },
+
+    {
+        image: SellImagesImageBag4.src,
+        imageTitle: 'Размер',
+        imageDescription: 'Cфотографируйте сумку на себе, чтобы был понятен размер',
+    },
+    {
+        isMore: true,
+    },
+    {
+        isMore: true,
+    },
+];
+
+const imageBlocksShoes: {
+    image?: string;
+    imageTitle?: string;
+    imageDescription?: string;
+    isMore?: any;
+}[] = [
+    {
+        image: SellImagesImageShoes1.src,
+        imageTitle: 'Передняя часть',
+        imageDescription: 'Сфотографируйте пару сверху при дневном свете',
+    },
+
+    {
+        image: SellImagesImageShoes2.src,
+        imageTitle: 'Нюансы',
+        imageDescription: 'Сфотографируйте внутреннее пространство сумки',
+    },
+
+    {
+        image: SellImagesImageShoes3.src,
+        imageTitle: 'Подошва',
+        imageDescription: 'Сфотографируйте подошвы обеих частей сверху',
+    },
+
+    {
+        image: SellImagesImageShoes4.src,
+        imageTitle: 'Комплект',
+        imageDescription: 'Сфотографируйте пару рядом с полным комплектом (коробка, пыльник)',
+    },
+    {
+        isMore: true,
+    },
+    {
+        isMore: true,
+    },
+];
+
+const imageBlocksAccess: {
+    image?: string;
+    imageTitle?: string;
+    imageDescription?: string;
+    isMore?: any;
+}[] = [
+    {
+        image: SellImagesImageAccess1.src,
+        imageTitle: 'Сверху',
+        imageDescription: 'Сфотографируйте аксессуар сверху при дневном свете',
+    },
+
+    {
+        image: SellImagesImageAccess2.src,
+        imageTitle: 'Вблизи',
+        imageDescription: 'Сфотографируйте аксессуар вблизи, подчеркивая бренд или нюансы',
+    },
+
+    {
+        image: SellImagesImageAccess3.src,
+        imageTitle: 'Размер',
+        imageDescription: 'Сфотографируйте аксессуар на себе, чтобы был понятен размер',
+    },
+
+    {
+        image: SellImagesImageAccess4.src,
+        imageTitle: 'Комплект',
+        imageDescription: 'Сфотографируйте аксесуар на фоне полного комплекта (коробка/чехол)',
+    },
+    {
+        isMore: true,
+    },
+    {
+        isMore: true,
+    },
+];
+
+const imageBlocksJewerly: {
+    image?: string;
+    imageTitle?: string;
+    imageDescription?: string;
+    isMore?: any;
+}[] = [
+    {
+        image: SellImagesImageJewerly1.src,
+        imageTitle: 'Сверху',
+        imageDescription: 'Сфотографируйте аксессуар сверху при дневном свете',
+    },
+
+    {
+        image: SellImagesImageJewerly2.src,
+        imageTitle: 'Вблизи',
+        imageDescription: 'Сфотографируйте аксессуар вблизи, подчеркивая бренд или нюансы',
+    },
+
+    {
+        image: SellImagesImageJewerly3.src,
+        imageTitle: 'Размер',
+        imageDescription: 'Сфотографируйте аксессуар на себе, чтобы был понятен размер',
+    },
+
+    {
+        image: SellImagesImageJewerly4.src,
+        imageTitle: 'Комплект',
+        imageDescription: 'Сфотографируйте аксесуар на фоне полного комплекта (коробка/чехол)',
+    },
+    {
+        isMore: true,
+    },
+    {
+        isMore: true,
+    },
+];
+
+const imageBlocksHat: {
+    image?: string;
+    imageTitle?: string;
+    imageDescription?: string;
+    isMore?: any;
+}[] = [
+    {
+        image: SellImagesImageHat1.src,
+        imageTitle: 'Сверху',
+        imageDescription: 'Сфотографируйте аксессуар сверху при дневном свете',
+    },
+
+    {
+        image: SellImagesImageHat2.src,
+        imageTitle: 'Вблизи',
+        imageDescription: 'Сфотографируйте аксессуар вблизи, подчеркивая бренд или нюансы',
+    },
+
+    {
+        image: SellImagesImageHat3.src,
+        imageTitle: 'Размер',
+        imageDescription: 'Сфотографируйте аксессуар на себе, чтобы был понятен размер',
+    },
+
+    {
+        image: SellImagesImageHat4.src,
+        imageTitle: 'Комплект',
+        imageDescription: 'Сфотографируйте аксесуар на фоне полного комплекта (коробка/чехол)',
+    },
+    {
+        isMore: true,
+    },
+    {
+        isMore: true,
+    },
+];
+
+const imageBlocksBelt: {
+    image?: string;
+    imageTitle?: string;
+    imageDescription?: string;
+    isMore?: any;
+}[] = [
+    {
+        image: SellImagesImageBelt1.src,
+        imageTitle: 'Сверху',
+        imageDescription: 'Сфотографируйте аксессуар сверху при дневном свете',
+    },
+
+    {
+        image: SellImagesImageBelt2.src,
+        imageTitle: 'Вблизи',
+        imageDescription: 'Сфотографируйте аксессуар вблизи, подчеркивая бренд или нюансы',
+    },
+
+    {
+        image: SellImagesImageBelt3.src,
+        imageTitle: 'Размер',
+        imageDescription: 'Сфотографируйте аксессуар на себе, чтобы был понятен размер',
+    },
+
+    {
+        image: SellImagesImageBelt4.src,
+        imageTitle: 'Комплект',
+        imageDescription: 'Сфотографируйте аксесуар на фоне полного комплекта (коробка/чехол)',
+    },
+    {
+        isMore: true,
+    },
+    {
+        isMore: true,
+    },
+];
+
+const imageBlocksClock: {
+    image?: string;
+    imageTitle?: string;
+    imageDescription?: string;
+    isMore?: any;
+}[] = [
+    {
+        image: SellImagesImageClock1.src,
+        imageTitle: 'Сверху',
+        imageDescription: 'Сфотографируйте аксессуар сверху при дневном свете',
+    },
+
+    {
+        image: SellImagesImageClock2.src,
+        imageTitle: 'Вблизи',
+        imageDescription: 'Сфотографируйте аксессуар вблизи, подчеркивая бренд или нюансы',
+    },
+
+    {
+        image: SellImagesImageClock3.src,
+        imageTitle: 'Размер',
+        imageDescription: 'Сфотографируйте аксессуар на себе, чтобы был понятен размер',
+    },
+
+    {
+        image: SellImagesImageClock4.src,
+        imageTitle: 'Комплект',
+        imageDescription: 'Сфотографируйте аксесуар на фоне полного комплекта (коробка/чехол)',
+    },
+    {
+        isMore: true,
+    },
+    {
+        isMore: true,
+    },
+];
+
+const imageBlocksHand: {
+    image?: string;
+    imageTitle?: string;
+    imageDescription?: string;
+    isMore?: any;
+}[] = [
+    {
+        image: SellImagesImageHand1.src,
+        imageTitle: 'Сверху',
+        imageDescription: 'Сфотографируйте аксессуар сверху при дневном свете',
+    },
+
+    {
+        image: SellImagesImageHand2.src,
+        imageTitle: 'Вблизи',
+        imageDescription: 'Сфотографируйте аксессуар вблизи, подчеркивая бренд или нюансы',
+    },
+
+    {
+        image: SellImagesImageHand3.src,
+        imageTitle: 'Размер',
+        imageDescription: 'Сфотографируйте аксессуар на себе, чтобы был понятен размер',
+    },
+
+    {
+        image: SellImagesImageHand4.src,
+        imageTitle: 'Комплект',
+        imageDescription: 'Сфотографируйте аксесуар на фоне полного комплекта (коробка/чехол)',
+    },
+    {
+        isMore: true,
+    },
+    {
+        isMore: true,
+    },
+];
 
 const SellImages: React.FC = () => {
     const dispatch = useDispatch();
@@ -58,302 +356,6 @@ const SellImages: React.FC = () => {
         [key: string]: string;
     }>(localStorage.getItem('sell-images-form') ? JSON.parse(localStorage.getItem('sell-images-form') as any) : {});
 
-    const imageBlocksBag: {
-        image?: string;
-        imageTitle?: string;
-        imageDescription?: string;
-        isMore?: any;
-    }[] = [
-        {
-            image: SellImagesImageBag1.src,
-            imageTitle: 'Лицевая сторона',
-            imageDescription: 'Сфотографируйте сумку спереди при дневном свете',
-        },
-
-        {
-            image: SellImagesImageBag2.src,
-            imageTitle: 'Внутри',
-            imageDescription: 'Сфотографируйте внутреннее пространство сумки',
-        },
-
-        {
-            image: SellImagesImageBag3.src,
-            imageTitle: 'Нюансы',
-            imageDescription: 'Сфотографируйте наиболее ярко выраженные нюансы',
-        },
-
-        {
-            image: SellImagesImageBag4.src,
-            imageTitle: 'Размер',
-            imageDescription: 'Cфотографируйте сумку на себе, чтобы был понятен размер',
-        },
-        {
-            isMore: true,
-        },
-        {
-            isMore: true,
-        },
-    ];
-
-    const imageBlocksShoes: {
-        image?: string;
-        imageTitle?: string;
-        imageDescription?: string;
-        isMore?: any;
-    }[] = [
-        {
-            image: SellImagesImageShoes1.src,
-            imageTitle: 'Передняя часть',
-            imageDescription: 'Сфотографируйте пару сверху при дневном свете',
-        },
-
-        {
-            image: SellImagesImageShoes2.src,
-            imageTitle: 'Нюансы',
-            imageDescription: 'Сфотографируйте внутреннее пространство сумки',
-        },
-
-        {
-            image: SellImagesImageShoes3.src,
-            imageTitle: 'Подошва',
-            imageDescription: 'Сфотографируйте подошвы обеих частей сверху',
-        },
-
-        {
-            image: SellImagesImageShoes4.src,
-            imageTitle: 'Комплект',
-            imageDescription: 'Сфотографируйте пару рядом с полным комплектом (коробка, пыльник)',
-        },
-        {
-            isMore: true,
-        },
-        {
-            isMore: true,
-        },
-    ];
-
-    const imageBlocksAccess: {
-        image?: string;
-        imageTitle?: string;
-        imageDescription?: string;
-        isMore?: any;
-    }[] = [
-        {
-            image: SellImagesImageAccess1.src,
-            imageTitle: 'Сверху',
-            imageDescription: 'Сфотографируйте аксессуар сверху при дневном свете',
-        },
-
-        {
-            image: SellImagesImageAccess2.src,
-            imageTitle: 'Вблизи',
-            imageDescription: 'Сфотографируйте аксессуар вблизи, подчеркивая бренд или нюансы',
-        },
-
-        {
-            image: SellImagesImageAccess3.src,
-            imageTitle: 'Размер',
-            imageDescription: 'Сфотографируйте аксессуар на себе, чтобы был понятен размер',
-        },
-
-        {
-            image: SellImagesImageAccess4.src,
-            imageTitle: 'Комплект',
-            imageDescription: 'Сфотографируйте аксесуар на фоне полного комплекта (коробка/чехол)',
-        },
-        {
-            isMore: true,
-        },
-        {
-            isMore: true,
-        },
-    ];
-
-    const imageBlocksJewerly: {
-        image?: string;
-        imageTitle?: string;
-        imageDescription?: string;
-        isMore?: any;
-    }[] = [
-        {
-            image: SellImagesImageJewerly1.src,
-            imageTitle: 'Сверху',
-            imageDescription: 'Сфотографируйте аксессуар сверху при дневном свете',
-        },
-
-        {
-            image: SellImagesImageJewerly2.src,
-            imageTitle: 'Вблизи',
-            imageDescription: 'Сфотографируйте аксессуар вблизи, подчеркивая бренд или нюансы',
-        },
-
-        {
-            image: SellImagesImageJewerly3.src,
-            imageTitle: 'Размер',
-            imageDescription: 'Сфотографируйте аксессуар на себе, чтобы был понятен размер',
-        },
-
-        {
-            image: SellImagesImageJewerly4.src,
-            imageTitle: 'Комплект',
-            imageDescription: 'Сфотографируйте аксесуар на фоне полного комплекта (коробка/чехол)',
-        },
-        {
-            isMore: true,
-        },
-        {
-            isMore: true,
-        },
-    ];
-
-    const imageBlocksHat: {
-        image?: string;
-        imageTitle?: string;
-        imageDescription?: string;
-        isMore?: any;
-    }[] = [
-        {
-            image: SellImagesImageHat1.src,
-            imageTitle: 'Сверху',
-            imageDescription: 'Сфотографируйте аксессуар сверху при дневном свете',
-        },
-
-        {
-            image: SellImagesImageHat2.src,
-            imageTitle: 'Вблизи',
-            imageDescription: 'Сфотографируйте аксессуар вблизи, подчеркивая бренд или нюансы',
-        },
-
-        {
-            image: SellImagesImageHat3.src,
-            imageTitle: 'Размер',
-            imageDescription: 'Сфотографируйте аксессуар на себе, чтобы был понятен размер',
-        },
-
-        {
-            image: SellImagesImageHat4.src,
-            imageTitle: 'Комплект',
-            imageDescription: 'Сфотографируйте аксесуар на фоне полного комплекта (коробка/чехол)',
-        },
-        {
-            isMore: true,
-        },
-        {
-            isMore: true,
-        },
-    ];
-
-    const imageBlocksBelt: {
-        image?: string;
-        imageTitle?: string;
-        imageDescription?: string;
-        isMore?: any;
-    }[] = [
-        {
-            image: SellImagesImageBelt1.src,
-            imageTitle: 'Сверху',
-            imageDescription: 'Сфотографируйте аксессуар сверху при дневном свете',
-        },
-
-        {
-            image: SellImagesImageBelt2.src,
-            imageTitle: 'Вблизи',
-            imageDescription: 'Сфотографируйте аксессуар вблизи, подчеркивая бренд или нюансы',
-        },
-
-        {
-            image: SellImagesImageBelt3.src,
-            imageTitle: 'Размер',
-            imageDescription: 'Сфотографируйте аксессуар на себе, чтобы был понятен размер',
-        },
-
-        {
-            image: SellImagesImageBelt4.src,
-            imageTitle: 'Комплект',
-            imageDescription: 'Сфотографируйте аксесуар на фоне полного комплекта (коробка/чехол)',
-        },
-        {
-            isMore: true,
-        },
-        {
-            isMore: true,
-        },
-    ];
-
-    const imageBlocksClock: {
-        image?: string;
-        imageTitle?: string;
-        imageDescription?: string;
-        isMore?: any;
-    }[] = [
-        {
-            image: SellImagesImageClock1.src,
-            imageTitle: 'Сверху',
-            imageDescription: 'Сфотографируйте аксессуар сверху при дневном свете',
-        },
-
-        {
-            image: SellImagesImageClock2.src,
-            imageTitle: 'Вблизи',
-            imageDescription: 'Сфотографируйте аксессуар вблизи, подчеркивая бренд или нюансы',
-        },
-
-        {
-            image: SellImagesImageClock3.src,
-            imageTitle: 'Размер',
-            imageDescription: 'Сфотографируйте аксессуар на себе, чтобы был понятен размер',
-        },
-
-        {
-            image: SellImagesImageClock4.src,
-            imageTitle: 'Комплект',
-            imageDescription: 'Сфотографируйте аксесуар на фоне полного комплекта (коробка/чехол)',
-        },
-        {
-            isMore: true,
-        },
-        {
-            isMore: true,
-        },
-    ];
-
-    const imageBlocksHand: {
-        image?: string;
-        imageTitle?: string;
-        imageDescription?: string;
-        isMore?: any;
-    }[] = [
-        {
-            image: SellImagesImageHand1.src,
-            imageTitle: 'Сверху',
-            imageDescription: 'Сфотографируйте аксессуар сверху при дневном свете',
-        },
-
-        {
-            image: SellImagesImageHand2.src,
-            imageTitle: 'Вблизи',
-            imageDescription: 'Сфотографируйте аксессуар вблизи, подчеркивая бренд или нюансы',
-        },
-
-        {
-            image: SellImagesImageHand3.src,
-            imageTitle: 'Размер',
-            imageDescription: 'Сфотографируйте аксессуар на себе, чтобы был понятен размер',
-        },
-
-        {
-            image: SellImagesImageHand4.src,
-            imageTitle: 'Комплект',
-            imageDescription: 'Сфотографируйте аксесуар на фоне полного комплекта (коробка/чехол)',
-        },
-        {
-            isMore: true,
-        },
-        {
-            isMore: true,
-        },
-    ];
-
     const onChangeCustom = async (result: any, index: number) => {
         const image = await sendCreateCabinetSellImage(result);
 
@@ -361,21 +363,21 @@ const SellImages: React.FC = () => {
     };
 
     const isValid = () => {
-        if (category === 'Женские сумки' || category === 'Мужские сумки')
+        if (category === CATEGORY_NAMES.womensBags || category === CATEGORY_NAMES.mensBags)
             return Object.keys(imageBlocksValue).length >= imageBlocksBag.filter((image) => !image.isMore).length;
-        if (category === 'Обувь')
+        if (category === CATEGORY_NAMES.shoes)
             return Object.keys(imageBlocksValue).length >= imageBlocksShoes.filter((image) => !image.isMore).length;
-        if (category === 'Очки' || category === 'Другой аксессуар')
+        if (category === CATEGORY_NAMES.glasses || category === CATEGORY_NAMES.anotherAccessory)
             return Object.keys(imageBlocksValue).length >= imageBlocksAccess.filter((image) => !image.isMore).length;
-        if (category === 'Украшения')
+        if (category === CATEGORY_NAMES.decorating)
             return Object.keys(imageBlocksValue).length >= imageBlocksJewerly.filter((image) => !image.isMore).length;
-        if (category === 'Головные уборы')
+        if (category === CATEGORY_NAMES.hats)
             return Object.keys(imageBlocksValue).length >= imageBlocksHat.filter((image) => !image.isMore).length;
-        if (category === 'Ремни')
+        if (category === CATEGORY_NAMES.belts)
             return Object.keys(imageBlocksValue).length >= imageBlocksBelt.filter((image) => !image.isMore).length;
-        if (category === 'Часы')
+        if (category === CATEGORY_NAMES.watch)
             return Object.keys(imageBlocksValue).length >= imageBlocksClock.filter((image) => !image.isMore).length;
-        if (category === 'Платки и шарфы')
+        if (category === CATEGORY_NAMES.shawlsScarves)
             return Object.keys(imageBlocksValue).length >= imageBlocksHand.filter((image) => !image.isMore).length;
 
         return false;
@@ -407,7 +409,7 @@ const SellImages: React.FC = () => {
             <p className="sell-block__subtitle">Загрузите 4 фотографии вашего товара согласно примерам ниже</p>
 
             <div className="sell-block-images-block-wrapper">
-                {category === 'Женские сумки' || category === 'Мужские сумки'
+                {category === CATEGORY_NAMES.womensBags || category === CATEGORY_NAMES.mensBags
                     ? imageBlocksBag.map((block, index) => (
                           <SellImagesBlock
                               {...block}
@@ -420,7 +422,7 @@ const SellImages: React.FC = () => {
                       ))
                     : null}
 
-                {category === 'Обувь'
+                {category === CATEGORY_NAMES.shoes
                     ? imageBlocksShoes.map((block, index) => (
                           <SellImagesBlock
                               {...block}
@@ -433,7 +435,7 @@ const SellImages: React.FC = () => {
                       ))
                     : null}
 
-                {category === 'Очки' || category === 'Другой аксессуар'
+                {category === CATEGORY_NAMES.glasses || category === CATEGORY_NAMES.anotherAccessory
                     ? imageBlocksAccess.map((block, index) => (
                           <SellImagesBlock
                               {...block}
@@ -446,7 +448,7 @@ const SellImages: React.FC = () => {
                       ))
                     : null}
 
-                {category === 'Украшения'
+                {category === CATEGORY_NAMES.jewelry || category === CATEGORY_NAMES.decorating
                     ? imageBlocksJewerly.map((block, index) => (
                           <SellImagesBlock
                               {...block}
@@ -459,7 +461,7 @@ const SellImages: React.FC = () => {
                       ))
                     : null}
 
-                {category === 'Головные уборы'
+                {category === CATEGORY_NAMES.hats
                     ? imageBlocksHat.map((block, index) => (
                           <SellImagesBlock
                               {...block}
@@ -472,7 +474,7 @@ const SellImages: React.FC = () => {
                       ))
                     : null}
 
-                {category === 'Ремни'
+                {category === CATEGORY_NAMES.belts
                     ? imageBlocksBelt.map((block, index) => (
                           <SellImagesBlock
                               {...block}
@@ -485,7 +487,7 @@ const SellImages: React.FC = () => {
                       ))
                     : null}
 
-                {category === 'Часы'
+                {category === CATEGORY_NAMES.watch
                     ? imageBlocksClock.map((block, index) => (
                           <SellImagesBlock
                               {...block}
@@ -498,7 +500,7 @@ const SellImages: React.FC = () => {
                       ))
                     : null}
 
-                {category === 'Платки и шарфы'
+                {category === CATEGORY_NAMES.shawlsScarves
                     ? imageBlocksHand.map((block, index) => (
                           <SellImagesBlock
                               {...block}

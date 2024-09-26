@@ -32,6 +32,7 @@ export const fetchFavorites = () => async (dispatch: Dispatch<FavoritesActions>)
     });
 };
 
+// TODO Custom interface для аналитики
 export const sendSaveFavorite = (item: Product) => async (dispatch: Dispatch<FavoritesActions>) => {
     await $api.post(`/add-favorite-product/${item.id}/`);
 
@@ -58,7 +59,7 @@ export const sendSaveFavorite = (item: Product) => async (dispatch: Dispatch<Fav
 
     dispatch(fetchFavorites() as any);
 };
-
+// TODO Custom interface для аналитики
 export const sendRemoveFavorite = (item: Product) => async (dispatch: Dispatch<FavoritesActions>) => {
     await $api.delete(`/remove-favorite-product/${item.id}/`);
 

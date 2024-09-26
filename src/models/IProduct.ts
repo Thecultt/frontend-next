@@ -18,25 +18,34 @@ export interface Product {
     from_boutique: boolean;
     from_parnter: boolean;
     price_drop: boolean;
+    is_jewelry?: boolean;
     model_name?: string;
 }
 
 export interface ProductPage {
     id: number;
     article: string;
+
+    category: string;
+    category_slug: string;
+    subcategory: string;
+    subcategory_slug: string;
+    model_name: string;
+    model_name_slug: string;
+
     price: number;
     old_price: number | null;
     store_price: number;
     condition: string;
     manufacturer: string;
+    manufacturer_slug: string;
     name: string;
     availability: number;
-    category: string;
     images: string[];
     description: string;
     gender: string;
     color: string;
-    subcategory: string;
+
     is_trial: boolean;
     from_boutique: boolean;
     from_parnter: boolean;
@@ -78,4 +87,18 @@ export interface ProductPage {
     waterproof_clock: string;
     branded_box_clock: string;
     documents_clock: string;
+
+    // jewelry params
+    is_jewelry: boolean;
+    metal_jewelry: string | null;
+    metal_jewelry_slug: string | null;
+    collection_jewelry: string | null;
+    weight_jewelry: string | null;
+    color_metal_jewelry: string | null;
+    sample_metal_jewelry: string | null;
+    cover_metal_jewelry: string | null;
+    size_jewelry: string | null;
+    length_jewelry: string | null;
+    width_jewelry: string | null;
+    description_jewelry: string | null;
 }

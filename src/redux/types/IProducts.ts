@@ -11,7 +11,7 @@ export interface ProductsState {
     items: Product[];
     isLoaded: boolean;
 
-    itemByArticle: ProductPage;
+    itemByArticle: ProductPage | null;
     itemByArticleSimilar: Product[];
     itemByArticleIsLoaded: boolean;
 

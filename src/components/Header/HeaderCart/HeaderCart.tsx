@@ -4,32 +4,35 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useOnClickOutside } from 'usehooks-ts';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { setCartIsVisibleMessage } from '@/redux/actions/cart';
 import { HeaderCartModal, HeaderCartModalAddMessage } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
+import { useCart } from '@/hooks/catalog/useCart';
+import { setHeaderCartIsVisible } from '@/redux/actions/header';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
 
 const HeaderCart: React.FC = React.memo(() => {
     const dispatch = useDispatch();
 
-    const [state, setState] = React.useState(false);
     const PopupRef = React.useRef<HTMLDivElement>(null);
 
-    const { items, isVisibleMessage } = useTypedSelector(({ cart }) => cart);
-    const itemsCount = Object.keys(items).length;
+    const { cartIsVisible } = useTypedSelector(({ header }) => header);
+
+    const { allCart, isVisibleMessage } = useCart();
+    const cartCount = allCart.length;
 
     const closeIsVisibleMessage = () => {
         dispatch(setCartIsVisibleMessage(false));
     };
 
     const toggleClickModalCart = () => {
-        setState(!state);
+        dispatch(setHeaderCartIsVisible(!cartIsVisible));
         dispatch(setCartIsVisibleMessage(false));
     };
 
     const closePopup = () => {
-        if (state) {
-            setState(false);
+        if (cartIsVisible) {
+            dispatch(setHeaderCartIsVisible(false));
             dispatch(setCartIsVisibleMessage(false));
         }
     };
@@ -41,7 +44,7 @@ const HeaderCart: React.FC = React.memo(() => {
             <div className="header-block-cart" onClick={toggleClickModalCart}>
                 <button
                     className={getClassNames('header-block-cart__icon', {
-                        active: state,
+                        active: cartIsVisible,
                     })}
                 >
                     <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,16 +53,11 @@ const HeaderCart: React.FC = React.memo(() => {
                     </svg>
                 </button>
 
-                {itemsCount > 0 && <span className="header-block-cart__count">{itemsCount}</span>}
+                {cartCount > 0 && <span className="header-block-cart__count">{cartCount}</span>}
             </div>
 
-            <HeaderCartModalAddMessage
-                state={isVisibleMessage}
-                setState={closeIsVisibleMessage}
-                openCart={() => setState(true)}
-            />
-
-            <HeaderCartModal state={state} setState={() => setState(false)} />
+            <HeaderCartModalAddMessage state={isVisibleMessage} setState={closeIsVisibleMessage} />
+            <HeaderCartModal />
         </div>
     );
 });

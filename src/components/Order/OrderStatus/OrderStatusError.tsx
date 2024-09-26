@@ -1,24 +1,20 @@
+'use client';
+
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import Countdown from 'react-countdown';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 
 import { OrderStatusProduct } from '@/components';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { CartItem } from '@/models/ICartItem';
-import { sendSubmitOrder } from '@/redux/actions/order';
-import { setCartItems } from '@/redux/actions/cart';
-import { ICartItemsState } from '@/redux/types/ICart';
 import { COUNT_MINUTES_RESERVED_ORDER } from '@/constants/order';
 import { APP_ROUTE } from '@/constants/routes';
+import { useOrder } from '@/hooks/order/useOrder';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
 
 import orderPay from '../orderPay';
 
 const OrderStatusError: React.FC = () => {
-    const dispatch = useDispatch();
-
-    const { items } = useTypedSelector(({ cart }) => cart);
+    const { submitOrder } = useOrder();
 
     const {
         order: {
@@ -38,45 +34,7 @@ const OrderStatusError: React.FC = () => {
     } = useTypedSelector(({ order }) => order);
 
     const successPayment = (orderId: number) => {
-        const newCart: ICartItemsState = {};
-
-        Object.keys(items).map((article) => {
-            if (!items[article].checked) newCart[article] = { ...items[article], checked: true };
-        });
-
-        dispatch(setCartItems(newCart) as any);
-
-        const products: CartItem[] = [];
-
-        Object.keys(items).map((keyCartItem) => {
-            if (items[keyCartItem].checked) {
-                products.push(items[keyCartItem]);
-            }
-        });
-
-        // window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
-        // window.dataLayer.push({
-        // 	event: "purchase",
-        // 	ecommerce: {
-        // 		timestamp: Math.floor(Date.now() / 1000),
-        // 		transaction_id: `${orderId}`,
-        // 		value: `${promocode.isActive ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price}`,
-        // 		tax: "-",
-        // 		shipping: `${promocode.saleSum}`,
-        // 		currency: "RUB",
-        // 		coupon: `${promocode.name}`,
-        // 		items: products.map((item) => ({
-        // 			item_name: item.name,
-        // 			item_id: `${item.id}`,
-        // 			price: `${item.price}`,
-        // 			item_brand: item.manufacturer,
-        // 			item_category: item.category,
-        // 			quantity: 1
-        // 		}))
-        // 	}
-        // });
-
-        dispatch(sendSubmitOrder(orderId) as any);
+        submitOrder(orderId);
     };
 
     const onClickPay = () => {
@@ -88,6 +46,7 @@ const OrderStatusError: React.FC = () => {
             products: products.map((product) => ({
                 name: product.model_name,
                 price: product.price,
+                is_jewelry: product?.is_jewelry,
             })),
             orderNum: num,
             onSuccessCallback: () => successPayment(id),
@@ -123,6 +82,7 @@ const OrderStatusError: React.FC = () => {
                                 </svg>
                             </div>
 
+                            {/* TODO: Переписать на usehooks-ts */}
                             {dayjs().isAfter(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm')) ? (
                                 <>
                                     <h2 className="order-status-content-info__title">К сожалению, ваш заказ отменен</h2>
