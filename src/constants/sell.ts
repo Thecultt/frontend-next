@@ -10,7 +10,7 @@ export const CATEGORY_NAMES = {
     mensBags: 'Мужские сумки',
     shawlsScarves: 'Платки и шарфы',
     decorating: 'Украшения',
-    jewelry: 'Ювелирные украшения',
+    jewelry: 'Ювелирные изделия',
     hats: 'Головные уборы',
 };
 

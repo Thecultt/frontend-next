@@ -379,6 +379,8 @@ const SellImages: React.FC = () => {
             return Object.keys(imageBlocksValue).length >= imageBlocksClock.filter((image) => !image.isMore).length;
         if (category === CATEGORY_NAMES.shawlsScarves)
             return Object.keys(imageBlocksValue).length >= imageBlocksHand.filter((image) => !image.isMore).length;
+        if (category === CATEGORY_NAMES.jewelry)
+            return Object.keys(imageBlocksValue).length >= imageBlocksJewerly.filter((image) => !image.isMore).length;
 
         return false;
     };
