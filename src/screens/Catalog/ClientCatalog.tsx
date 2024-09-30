@@ -5,17 +5,12 @@ import { useDispatch } from 'react-redux';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { fetchProductsCatalog, setLastSearchString } from '@/redux/actions/products';
-import { CatalogBanner, CatalogFiltersTop, CatalogFilters, CatalogProducts } from '@/components';
 import { useCatalogScroll } from '@/hooks/catalog/useCatalogScroll';
 import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
-import { Product } from '@/models/IProduct';
+import { fetchProductsCatalog, setLastSearchString } from '@/redux/actions/products';
+import { CatalogBanner, CatalogFiltersTop, CatalogFilters, CatalogProducts } from '@/components';
 
-interface Props {
-    serverItems?: Product[];
-}
-
-const ClientCatalog: React.FC<Props> = ({ serverItems }) => {
+const ClientCatalog: React.FC = () => {
     const dispatch = useDispatch();
 
     const pathname = usePathname();
@@ -65,7 +60,7 @@ const ClientCatalog: React.FC<Props> = ({ serverItems }) => {
                             isOpenFiltersMedia={isOpenFiltersMedia}
                         />
 
-                        <CatalogProducts serverItems={serverItems} />
+                        <CatalogProducts />
                     </div>
                 </div>
             </div>

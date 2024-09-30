@@ -1,4 +1,5 @@
-import { BrandsState, BrandsActions, BrandsActionTypes, IBrand } from '../types/IBrands';
+import { IBrand } from '@/models/IBrand';
+import { BrandsState, BrandsActions, BrandsActionTypes } from '../types/IBrands';
 
 const initialState: BrandsState = {
     isLoaded: false,

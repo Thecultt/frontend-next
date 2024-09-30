@@ -2,8 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { SORT } from '@/constants/catalog';
-import { IBrand } from '@/redux/types/IBrands';
+import { IBrand } from '@/models/IBrand';
 
 interface BrandsListBlockProps {
     letter: string;

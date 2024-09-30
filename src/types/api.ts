@@ -1,4 +1,5 @@
 import { Product } from '@/models/IProduct';
+import { ISelection } from '@/models/ISelection';
 
 export interface IStatus {
     status: string;
@@ -9,4 +10,8 @@ export interface GetCatalogResponse {
     current_page: number;
     total_items: number;
     items: Product[];
+}
+
+export interface GetSelectionsResponse {
+    selections: ISelection[];
 }

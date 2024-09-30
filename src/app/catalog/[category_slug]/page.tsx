@@ -13,13 +13,15 @@ import {
 import { APP_PROD_DOMAIN } from '@/constants/app';
 import { CATALOG_NEW_META, CATALOG_POPULAR_META, CATALOG_SALE_META, MAIN_META } from '@/constants/meta';
 import { ICatalogPageProps } from '@/types/catalog';
-import { fetchCatalogServerSide } from '@/functions/fetchCatalogServerSide';
+import { catalogAPI } from '@/services/api';
+import { parseCatalogSearchParams } from '@/functions/parseCatalogSearchParams';
 
 const CATEGORIES_DICTIONARY = {
     [CATEGORY_SLUGS.bags]: 'брендовых сумок',
     [CATEGORY_SLUGS.shoes]: 'брендовой обуви',
     [CATEGORY_SLUGS.accessories]: 'брендовых аксессуаров',
     [CATEGORY_SLUGS.decorations]: 'брендовых украшений',
+    [CATEGORY_SLUGS.jewelry]: 'ювелирных изделий',
 };
 
 const CATEGORIES_IMAGE_DICTIONARY = {
@@ -27,7 +29,10 @@ const CATEGORIES_IMAGE_DICTIONARY = {
     [CATEGORY_SLUGS.shoes]: `${APP_PROD_DOMAIN}/images/seo/category-shoes.jpg`,
     [CATEGORY_SLUGS.accessories]: `${APP_PROD_DOMAIN}/images/seo/category-accessories.jpg`,
     [CATEGORY_SLUGS.decorations]: `${APP_PROD_DOMAIN}/images/seo/category-decorations.jpg`,
+    [CATEGORY_SLUGS.jewelry]: `${APP_PROD_DOMAIN}/images/seo/category-decorations.jpg`,
 };
+
+export const revalidate = 24 * 60 * 60;
 
 export const generateMetadata = ({ params }: ICatalogPageProps) => {
     try {
@@ -76,8 +81,6 @@ export const generateMetadata = ({ params }: ICatalogPageProps) => {
     }
 };
 
-export const revalidate = 3600;
-
 const CatalogCategoryPage = async (props: ICatalogPageProps) => {
     const { category_slug } = props.params;
 
@@ -85,13 +88,9 @@ const CatalogCategoryPage = async (props: ICatalogPageProps) => {
         return notFound();
     }
 
-    const data = await fetchCatalogServerSide(props);
+    const data = await catalogAPI.getCatalog(parseCatalogSearchParams(props));
 
-    // TODO remove logs
-    console.log('props', props);
-    console.log('data', { ...data, items: data.items.map((i) => i.name) });
-
-    return <Catalog serverCatalogData={data} />;
+    return <Catalog serverCatalogData={data} mainTitle={CATEGORY_SLUG_NAMES[category_slug]} />;
 };
 
 export default CatalogCategoryPage;

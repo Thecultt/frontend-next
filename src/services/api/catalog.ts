@@ -70,6 +70,7 @@ const getCatalog = async (filters: ICatalogFilters): Promise<GetCatalogResponse>
         const { data } = await $api.get<GetCatalogResponse>('/catalog_v2', { params });
         return data;
     } catch (e) {
+        console.error('getCatalog', e);
         return {
             total_pages: 0,
             current_page: 0,

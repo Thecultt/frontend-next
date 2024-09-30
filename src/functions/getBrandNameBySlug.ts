@@ -1,4 +1,4 @@
-import { IBrands } from '@/redux/types/IBrands';
+import { IBrands } from '@/models/IBrand';
 
 export const getBrandNameBySlug = (brands: IBrands['brands'], brandSlug: string) =>
     Object.values(brands)

@@ -92,13 +92,15 @@ export const App = ({ children }: { children: React.ReactNode }) => {
             </NoSsr>
 
             <div className="wrapper" id="wrapper">
-                <NoSsr>
+                <NoSsr fallback={<>{/* TODO static header */}</>}>
                     <Header />
                 </NoSsr>
 
                 {children}
 
-                <Footer subscribeBlockId="footer-email" />
+                <NoSsr fallback={<>{/* TODO static footer */}</>}>
+                    <Footer subscribeBlockId="footer-email" />
+                </NoSsr>
             </div>
         </>
     );

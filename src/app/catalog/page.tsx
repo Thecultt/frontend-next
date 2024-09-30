@@ -2,16 +2,13 @@ import React from 'react';
 
 import { ICatalogPageProps } from '@/types/catalog';
 import { Catalog } from '@/screens';
-import { fetchCatalogServerSide } from '@/functions/fetchCatalogServerSide';
+import { catalogAPI } from '@/services/api';
+import { parseCatalogSearchParams } from '@/functions/parseCatalogSearchParams';
 
-export const revalidate = 3600;
+export const revalidate = 24 * 60 * 60;
 
 const CatalogPage = async (props: ICatalogPageProps) => {
-    const data = await fetchCatalogServerSide(props);
-
-    // TODO remove logs
-    console.log('props', props);
-    console.log('data', { ...data, items: data.items.map((i) => i.name) });
+    const data = await catalogAPI.getCatalog(parseCatalogSearchParams(props));
 
     return <Catalog serverCatalogData={data} />;
 };

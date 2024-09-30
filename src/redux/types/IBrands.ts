@@ -1,11 +1,4 @@
-export interface IBrand {
-    word: string;
-    slug: string;
-}
-
-export interface IBrands {
-    brands: { [letter: string]: IBrand[] };
-}
+import { IBrands } from '@/models/IBrand';
 
 export interface BrandsState {
     isLoaded: boolean;
@@ -23,7 +16,7 @@ export enum BrandsActionTypes {
 
 interface setBrands {
     type: BrandsActionTypes.SET_BRANDS;
-    payload: { [letter: string]: IBrand[] };
+    payload: IBrands['brands'];
 }
 
 interface setBrandsLetter {

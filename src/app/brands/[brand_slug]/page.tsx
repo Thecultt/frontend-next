@@ -1,13 +1,14 @@
 import React from 'react';
 import { Metadata } from 'next/types';
 
-import $api from '@/http';
 import { Catalog } from '@/screens';
 import { MAIN_META } from '@/constants/meta';
 import { ICatalogPageProps } from '@/types/catalog';
-import { IBrands } from '@/redux/types/IBrands';
 import { getBrandNameBySlug } from '@/functions/getBrandNameBySlug';
-import { fetchCatalogServerSide } from '@/functions/fetchCatalogServerSide';
+import { parseCatalogSearchParams } from '@/functions/parseCatalogSearchParams';
+import { brandsAPI, catalogAPI } from '@/services/api';
+
+export const revalidate = 24 * 60 * 60;
 
 export const generateMetadata = async ({ params }: ICatalogPageProps) => {
     try {
@@ -15,10 +16,7 @@ export const generateMetadata = async ({ params }: ICatalogPageProps) => {
             throw new Error();
         }
 
-        const {
-            data: { brands },
-        } = await $api.get<IBrands>(`/brands_v2/`);
-
+        const { brands } = await brandsAPI.getBrands();
         const foundBrand = getBrandNameBySlug(brands, params.brand_slug);
 
         if (!foundBrand) {
@@ -34,16 +32,19 @@ export const generateMetadata = async ({ params }: ICatalogPageProps) => {
     }
 };
 
-export const revalidate = 3600;
-
 const CatalogBrandPage = async (props: ICatalogPageProps) => {
-    const data = await fetchCatalogServerSide(props);
+    const data = await catalogAPI.getCatalog(parseCatalogSearchParams(props));
 
-    // TODO remove logs
-    console.log('props', props);
-    console.log('data', { ...data, items: data.items.map((i) => i.name) });
+    let mainTitle: string | undefined;
+    const brandSlug = props.params.brand_slug;
 
-    return <Catalog serverCatalogData={data} />;
+    if (brandSlug) {
+        const { brands } = await brandsAPI.getBrands();
+        const foundBrand = getBrandNameBySlug(brands, brandSlug);
+        mainTitle = foundBrand?.word;
+    }
+
+    return <Catalog serverCatalogData={data} mainTitle={mainTitle} />;
 };
 
 export default CatalogBrandPage;
