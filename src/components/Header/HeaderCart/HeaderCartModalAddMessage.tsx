@@ -11,6 +11,7 @@ import { CartItem } from '@/models/ICartItem';
 import { APP_ROUTE } from '@/constants/routes';
 import { XIcon } from '@/assets/icons';
 import { Noop } from '@/types/functions';
+import { useAuthUser } from '@/hooks/useAuthUser';
 import { useCart } from '@/hooks/catalog/useCart';
 import { setHeaderCartIsVisible } from '@/redux/actions/header';
 import { getUrlWithParams } from '@/functions/getUrlWithParams';
@@ -23,11 +24,14 @@ interface HeaderCartModalAddMessageProps {
 const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ state, setState }) => {
     const dispatch = useDispatch();
 
+    const {
+        user: { email },
+    } = useAuthUser();
     const { allCart } = useCart();
     const item: CartItem | undefined = allCart[allCart.length - 1];
 
     const removeItem = (item: CartItem) => {
-        dispatch(removeCartItem(item));
+        dispatch(removeCartItem(item, email));
     };
 
     const openCart = () => {
