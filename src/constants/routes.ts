@@ -57,5 +57,12 @@ export const EXTERNAL_LINKS = {
     career: 'https://www.notion.so/9a26fcf2ac2049feb782bcd967eed574',
     personalData:
         'https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/Положение_об_обработке_персональных_данных_с_Ботом.pdf',
+    userAgreement:
+        'https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/Пользовательское_соглашение_для_интернет_магазина_с_Ботом 23.04.24.docx.pdf',
+    publicOfferSeller: 'https://storage.yandexcloud.net/the-cultt-docs/17.07.2024/Оферта для продавца 120724.docx.pdf',
+    publicOfferBuyer: 'https://storage.yandexcloud.net/the-cultt-docs/17.07.2024/Оферта для покупателя 120724.docx.pdf',
+    termsOfUse:
+        'https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/%D0%A3%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F%20%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%20The%20Cultt.docx.pdf',
     yandexSplit: 'https://bank.yandex.ru/pay/split/account',
+    tg: 'https://t.me/thecultt',
 };

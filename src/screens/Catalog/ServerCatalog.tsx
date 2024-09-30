@@ -1,15 +1,11 @@
 import React from 'react';
-import Link from 'next/link';
 import type { ItemList as SchemaItemList, Product as SchemaProduct, WithContext } from 'schema-dts';
 
 import CatalogProductsNull from '@/components/Catalog/CatalogProducts/CatalogProductsNull';
 import { GetCatalogResponse } from '@/types/api';
 import { APP_ROUTE } from '@/constants/routes';
 import { APP_PROD_DOMAIN } from '@/constants/app';
-import { CATALOG_PRODUCTS_LIMIT } from '@/constants/catalog';
-
-// TODO breadcrumbs
-// TODO sidebar/filters
+import { CATALOG_PRODUCTS_LIMIT, CATEGORY_SLUG_NAMES, CATEGORY_SLUGS } from '@/constants/catalog';
 
 interface Props {
     serverCatalogData?: GetCatalogResponse;
@@ -27,7 +23,7 @@ const ServerCatalog: React.FC<Props> = ({ serverCatalogData, mainTitle }) => {
         return <CatalogProductsNull />;
     }
 
-    const jsonLd: WithContext<SchemaItemList> = {
+    const productsJsonLd: WithContext<SchemaItemList> = {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
         itemListElement: items.map((item, index) => ({
@@ -43,7 +39,7 @@ const ServerCatalog: React.FC<Props> = ({ serverCatalogData, mainTitle }) => {
                 },
                 offers: {
                     '@type': 'Offer',
-                    url: `${APP_PROD_DOMAIN}/${APP_ROUTE.product}/${item.article}`,
+                    url: `${APP_PROD_DOMAIN}${APP_ROUTE.product}/${item.article}`,
                     priceCurrency: 'RUB',
                     price: item.price,
                     availability:
@@ -58,21 +54,40 @@ const ServerCatalog: React.FC<Props> = ({ serverCatalogData, mainTitle }) => {
     return (
         <section className="static-catalog">
             <h1 className="static-catalog-main-title">{mainTitle || 'Каталог'}</h1>
+            <nav className="static-catalog-sidebar">
+                <a
+                    href={`${APP_PROD_DOMAIN}${APP_ROUTE.catalog}`}
+                    className="static-catalog-sidebar__item"
+                    title="Каталог"
+                >
+                    Каталог
+                </a>
+                {Object.values(CATEGORY_SLUGS).map((slug) => (
+                    <a
+                        key={slug}
+                        href={`${APP_PROD_DOMAIN}${APP_ROUTE.catalog}/${slug}`}
+                        className="static-catalog-sidebar__item"
+                        title={CATEGORY_SLUG_NAMES[slug]}
+                    >
+                        {CATEGORY_SLUG_NAMES[slug]}
+                    </a>
+                ))}
+            </nav>
             <div className="static-catalog-products">
                 {items.map((item) => (
                     <article key={item.article} className="static-catalog-products-item">
-                        <Link href={`${APP_PROD_DOMAIN}/${APP_ROUTE.product}/${item.article}`} title={item.name}>
+                        <a href={`${APP_PROD_DOMAIN}${APP_ROUTE.product}/${item.article}`} title={item.name}>
                             <img
                                 width="100%"
                                 className="static-catalog-products-item__image"
                                 src={item.images[0]}
                                 alt={item.name}
                             />
-                        </Link>
+                        </a>
                         <h2 className="static-catalog-products-item__title">
-                            <Link href={`${APP_PROD_DOMAIN}/${APP_ROUTE.product}/${item.article}`} title={item.name}>
+                            <a href={`${APP_PROD_DOMAIN}${APP_ROUTE.product}/${item.article}`} title={item.name}>
                                 {item.name}
-                            </Link>
+                            </a>
                         </h2>
                         <p className="static-catalog-products-item__prices">
                             <span className="static-catalog-products-item__price">{item.price}</span>
@@ -84,7 +99,7 @@ const ServerCatalog: React.FC<Props> = ({ serverCatalogData, mainTitle }) => {
                 ))}
             </div>
 
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productsJsonLd) }} />
         </section>
     );
 };

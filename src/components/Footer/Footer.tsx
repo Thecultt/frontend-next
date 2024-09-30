@@ -11,6 +11,7 @@ import { MEDIA_SIZES } from '@/constants/styles';
 import { getClassNames } from '@/functions/getClassNames';
 import { WaitingPopupType } from '@/types/waiting';
 import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
+import { FOOTER_BOTTOM_LINKS } from '@/constants/menu';
 
 interface FooterProps {
     transparent?: boolean;
@@ -190,42 +191,17 @@ const Footer: React.FC<FooterProps> = ({ transparent, subscribeBlockId }) => {
                                 © Все права защищены {new Date().getFullYear()}, THE CULTT
                             </p>
                             <div className="footer-block-bottom-link">
-                                <a
-                                    href="https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/Пользовательское_соглашение_для_интернет_магазина_с_Ботом 23.04.24.docx.pdf"
-                                    className="footer-block-bottom-link__link"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    Пользовательское соглашение
-                                </a>
-                                <a
-                                    href="https://storage.yandexcloud.net/the-cultt-docs/17.07.2024/Оферта для продавца 120724.docx.pdf"
-                                    className="footer-block-bottom-link__link"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    Публичная оферта продавца
-                                </a>
-                                <a
-                                    href="https://storage.yandexcloud.net/the-cultt-docs/17.07.2024/Оферта для покупателя 120724.docx.pdf "
-                                    className="footer-block-bottom-link__link"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    Публичная оферта покупателя
-                                </a>
-                                {/* <a
-								href="/help/public-offerte"
-								className="footer-block-bottom-link__link"
-							>
-								Публичная оферта
-							</a>
-							<a
-								href="/help/user-agreement"
-								className="footer-block-bottom-link__link"
-							>
-								Пользовательсткое соглашение
-							</a> */}
+                                {FOOTER_BOTTOM_LINKS.map((item) => (
+                                    <a
+                                        key={item.title}
+                                        href={item.href}
+                                        className="footer-block-bottom-link__link"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        {item.title}
+                                    </a>
+                                ))}
                             </div>
                         </div>
                     </div>

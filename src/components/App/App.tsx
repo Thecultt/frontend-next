@@ -13,6 +13,8 @@ import { fetchProductsFilters } from '@/redux/actions/products_filters';
 import { fetchSelections } from '@/redux/actions/selections';
 import { fetchUser } from '@/redux/actions/user';
 import NoSsr from '@/components/NoSsr/NoSsr';
+import { StaticHeader } from '@/components/static/StaticHeader';
+import { StaticFooter } from '@/components/static/StaticFooter';
 import {
     Footer,
     Header,
@@ -92,13 +94,13 @@ export const App = ({ children }: { children: React.ReactNode }) => {
             </NoSsr>
 
             <div className="wrapper" id="wrapper">
-                <NoSsr fallback={<>{/* TODO static header */}</>}>
+                <NoSsr fallback={<StaticHeader />}>
                     <Header />
                 </NoSsr>
 
                 {children}
 
-                <NoSsr fallback={<>{/* TODO static footer */}</>}>
+                <NoSsr fallback={<StaticFooter />}>
                     <Footer subscribeBlockId="footer-email" />
                 </NoSsr>
             </div>
