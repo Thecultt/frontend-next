@@ -2,8 +2,6 @@ import axios from 'axios';
 import { Dispatch } from 'react';
 
 import { checkWarningEmail } from '@/functions/checkWarningEmail';
-import { localStorageService } from '@/services/storage';
-import { LS_KEYS } from '@/constants/keys';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
 import { sendReachGoal } from '@/functions/yandex';
 
@@ -22,8 +20,6 @@ export const sendCheckEmail =
             type: CheckEmailActionTypes.SET_CHECK_EMAIL_IS_SEND,
             payload: true,
         });
-
-        localStorageService?.setItem(LS_KEYS.email, email);
 
         let nextPopupType = ReglogStateTypesNotLogin.LOGIN;
 
@@ -67,3 +63,8 @@ export const sendCheckEmail =
 
         callback(nextPopupType);
     };
+
+export const setCheckEmailValue = (email: string) => ({
+    type: CheckEmailActionTypes.SET_CHECK_EMAIL_EMAIL,
+    payload: email,
+});
