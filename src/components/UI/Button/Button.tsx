@@ -10,6 +10,7 @@ import './styles.sass';
 
 interface Props {
     // Common props
+    className?: string;
     label?: string;
     type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
     icon?: React.ReactNode;
@@ -26,6 +27,7 @@ interface Props {
 
 export const Button: React.FC<Props> = ({
     label,
+    className = '',
     type = 'button',
     icon,
     iconPosition = 'left',
@@ -37,7 +39,7 @@ export const Button: React.FC<Props> = ({
     target,
     onClick,
 }) => {
-    const className = getClassNames(`tc-button tc-button--theme-${theme} tc-button--size-${size}`, {
+    const classNames = getClassNames(`tc-button tc-button--theme-${theme} tc-button--size-${size} ${className}`, {
         'tc-button--disabled': disabled,
         'tc-button--wide': wide,
         'tc-button--link': !!href,
@@ -46,7 +48,7 @@ export const Button: React.FC<Props> = ({
     if (href) {
         return (
             <Link
-                className={className}
+                className={classNames}
                 href={href}
                 target={target}
                 onClick={disabled ? (e) => e.preventDefault() : onClick}
@@ -60,7 +62,7 @@ export const Button: React.FC<Props> = ({
     }
 
     return (
-        <button className={className} disabled={disabled} type={type} onClick={onClick}>
+        <button className={classNames} disabled={disabled} type={type} onClick={onClick}>
             {icon && iconPosition === 'left' && <span className="tc-button__icon">{icon}</span>}
             {label && <span className="tc-button__label">{label}</span>}
             {icon && iconPosition === 'right' && <span className="tc-button__icon">{icon}</span>}
