@@ -11,7 +11,7 @@ import HomeAboutImage from '@/assets/images/home/home-about.jpg';
 import HomeAboutImageMedia from '@/assets/images/home/home-about-media.jpg';
 
 const HomeAbout: React.FC = () => {
-    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`, { initializeWithValue: false });
 
     return (
         <>

@@ -14,6 +14,11 @@ export type CatalogPageParams = {
     selection_id?: string;
 };
 
+export interface ICatalogPageProps {
+    params: CatalogPageParams;
+    searchParams: { [key: string]: string | string[] | undefined };
+}
+
 export interface ICatalogFilters {
     price?: {
         min: number;

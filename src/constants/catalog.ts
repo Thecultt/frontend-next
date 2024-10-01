@@ -35,6 +35,10 @@ export const CATEGORY_SLUG_NAMES = {
     [CATEGORY_SLUGS.shoes]: CATEGORY_NAMES.shoes,
     [CATEGORY_SLUGS.decorations]: CATEGORY_NAMES.decorations,
     [CATEGORY_SLUGS.jewelry]: CATEGORY_NAMES.jewelry,
+
+    [CATEGORY_SLUGS.new]: 'Новинки',
+    [CATEGORY_SLUGS.popular]: 'Популярное',
+    [CATEGORY_SLUGS.sale]: 'THE CULTT SALE',
 };
 
 export const CATEGORY_NAME_SLUGS = {

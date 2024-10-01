@@ -1,13 +1,11 @@
 import { Dispatch } from 'react';
 
-import $api from '@/http';
+import { brandsAPI } from '@/services/api';
 
-import { BrandsActions, BrandsActionTypes, IBrands } from '../types/IBrands';
+import { BrandsActions, BrandsActionTypes } from '../types/IBrands';
 
 export const fetchBrands = () => async (dispatch: Dispatch<BrandsActions>) => {
-    const {
-        data: { brands },
-    } = await $api.get<IBrands>(`/brands_v2/`);
+    const { brands } = await brandsAPI.getBrands();
 
     dispatch({
         type: BrandsActionTypes.SET_BRANDS,

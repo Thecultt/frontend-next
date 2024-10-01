@@ -11,7 +11,7 @@ import { MEDIA_SIZES } from '@/constants/styles';
 import { MAIN_BANNER_SLIDES } from './constants';
 
 const HomeMainBanner: React.FC = () => {
-    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.mobile})`);
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.mobile})`, { initializeWithValue: false });
     const SliderRef = React.useRef<any>(null);
 
     const [currentSlide, setCurrentSlide] = React.useState<number>(0);
