@@ -61,6 +61,10 @@ export const EXTERNAL_LINKS = {
         'https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/Пользовательское_соглашение_для_интернет_магазина_с_Ботом 23.04.24.docx.pdf',
     publicOfferSeller: 'https://storage.yandexcloud.net/the-cultt-docs/17.07.2024/Оферта для продавца 120724.docx.pdf',
     publicOfferBuyer: 'https://storage.yandexcloud.net/the-cultt-docs/17.07.2024/Оферта для покупателя 120724.docx.pdf',
+    publicOfferSellerJewelry:
+        'https://storage.yandexcloud.net/the-cultt-docs/01.10.2024/Оферта продавца ООО КУЛЬТ ДЖЮЛЕРИ.pdf',
+    publicOfferBuyerJewelry:
+        'https://storage.yandexcloud.net/the-cultt-docs/01.10.2024/Оферта_для_покупателя_Культ_Джюлери_220824.pdf',
     termsOfUse:
         'https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/%D0%A3%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F%20%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%20The%20Cultt.docx.pdf',
     yandexSplit: 'https://bank.yandex.ru/pay/split/account',
