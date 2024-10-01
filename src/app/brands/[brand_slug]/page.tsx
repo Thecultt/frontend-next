@@ -1,28 +1,22 @@
 import React from 'react';
 import { Metadata } from 'next/types';
 
-import NoSsr from '@/components/NoSsr/NoSsr';
-import $api from '@/http';
 import { Catalog } from '@/screens';
 import { MAIN_META } from '@/constants/meta';
-import { CatalogPageParams } from '@/types/catalog';
-import { IBrands } from '@/redux/types/IBrands';
+import { ICatalogPageProps } from '@/types/catalog';
 import { getBrandNameBySlug } from '@/functions/getBrandNameBySlug';
+import { parseCatalogSearchParams } from '@/functions/parseCatalogSearchParams';
+import { brandsAPI, catalogAPI } from '@/services/api';
 
-interface PageProps {
-    params: CatalogPageParams;
-}
+export const revalidate = 24 * 60 * 60;
 
-export const generateMetadata = async ({ params }: PageProps) => {
+export const generateMetadata = async ({ params }: ICatalogPageProps) => {
     try {
         if (!params.brand_slug) {
             throw new Error();
         }
 
-        const {
-            data: { brands },
-        } = await $api.get<IBrands>(`/brands_v2/`);
-
+        const { brands } = await brandsAPI.getBrands();
         const foundBrand = getBrandNameBySlug(brands, params.brand_slug);
 
         if (!foundBrand) {
@@ -38,10 +32,19 @@ export const generateMetadata = async ({ params }: PageProps) => {
     }
 };
 
-const CatalogBrandPage = () => (
-    <NoSsr>
-        <Catalog />
-    </NoSsr>
-);
+const CatalogBrandPage = async (props: ICatalogPageProps) => {
+    const data = await catalogAPI.getCatalog(parseCatalogSearchParams(props));
+
+    let mainTitle: string | undefined;
+    const brandSlug = props.params.brand_slug;
+
+    if (brandSlug) {
+        const { brands } = await brandsAPI.getBrands();
+        const foundBrand = getBrandNameBySlug(brands, brandSlug);
+        mainTitle = foundBrand?.word;
+    }
+
+    return <Catalog serverCatalogData={data} mainTitle={mainTitle} />;
+};
 
 export default CatalogBrandPage;

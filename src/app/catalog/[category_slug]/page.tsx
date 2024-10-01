@@ -3,7 +3,6 @@ import { Metadata } from 'next/types';
 import { notFound } from 'next/navigation';
 
 import { Catalog } from '@/screens';
-import NoSsr from '@/components/NoSsr/NoSsr';
 import {
     ALL_CATEGORY_SLUGS,
     CATEGORY_SLUG_NAMES,
@@ -13,17 +12,16 @@ import {
 } from '@/constants/catalog';
 import { APP_PROD_DOMAIN } from '@/constants/app';
 import { CATALOG_NEW_META, CATALOG_POPULAR_META, CATALOG_SALE_META, MAIN_META } from '@/constants/meta';
-import { CatalogPageParams } from '@/types/catalog';
-
-interface PageProps {
-    params: CatalogPageParams;
-}
+import { ICatalogPageProps } from '@/types/catalog';
+import { catalogAPI } from '@/services/api';
+import { parseCatalogSearchParams } from '@/functions/parseCatalogSearchParams';
 
 const CATEGORIES_DICTIONARY = {
     [CATEGORY_SLUGS.bags]: 'брендовых сумок',
     [CATEGORY_SLUGS.shoes]: 'брендовой обуви',
     [CATEGORY_SLUGS.accessories]: 'брендовых аксессуаров',
     [CATEGORY_SLUGS.decorations]: 'брендовых украшений',
+    [CATEGORY_SLUGS.jewelry]: 'ювелирных изделий',
 };
 
 const CATEGORIES_IMAGE_DICTIONARY = {
@@ -31,9 +29,12 @@ const CATEGORIES_IMAGE_DICTIONARY = {
     [CATEGORY_SLUGS.shoes]: `${APP_PROD_DOMAIN}/images/seo/category-shoes.jpg`,
     [CATEGORY_SLUGS.accessories]: `${APP_PROD_DOMAIN}/images/seo/category-accessories.jpg`,
     [CATEGORY_SLUGS.decorations]: `${APP_PROD_DOMAIN}/images/seo/category-decorations.jpg`,
+    [CATEGORY_SLUGS.jewelry]: `${APP_PROD_DOMAIN}/images/seo/category-decorations.jpg`,
 };
 
-export const generateMetadata = ({ params }: PageProps) => {
+export const revalidate = 24 * 60 * 60;
+
+export const generateMetadata = ({ params }: ICatalogPageProps) => {
     try {
         const { category_slug } = params;
 
@@ -80,18 +81,16 @@ export const generateMetadata = ({ params }: PageProps) => {
     }
 };
 
-const CatalogCategoryPage = ({ params }: PageProps) => {
-    const { category_slug } = params;
+const CatalogCategoryPage = async (props: ICatalogPageProps) => {
+    const { category_slug } = props.params;
 
     if (!category_slug || !ALL_CATEGORY_SLUGS.includes(category_slug)) {
         return notFound();
     }
 
-    return (
-        <NoSsr>
-            <Catalog />
-        </NoSsr>
-    );
+    const data = await catalogAPI.getCatalog(parseCatalogSearchParams(props));
+
+    return <Catalog serverCatalogData={data} mainTitle={CATEGORY_SLUG_NAMES[category_slug]} />;
 };
 
 export default CatalogCategoryPage;

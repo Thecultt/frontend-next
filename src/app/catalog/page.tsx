@@ -1,12 +1,16 @@
 import React from 'react';
 
-import NoSsr from '@/components/NoSsr/NoSsr';
+import { ICatalogPageProps } from '@/types/catalog';
 import { Catalog } from '@/screens';
+import { catalogAPI } from '@/services/api';
+import { parseCatalogSearchParams } from '@/functions/parseCatalogSearchParams';
 
-const CatalogPage = () => (
-    <NoSsr>
-        <Catalog />
-    </NoSsr>
-);
+export const revalidate = 24 * 60 * 60;
+
+const CatalogPage = async (props: ICatalogPageProps) => {
+    const data = await catalogAPI.getCatalog(parseCatalogSearchParams(props));
+
+    return <Catalog serverCatalogData={data} />;
+};
 
 export default CatalogPage;

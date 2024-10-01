@@ -10,7 +10,7 @@ const FaqTheCultt: React.FC = () => {
                     <h4 className="faq-main-content-all-col__title">Условия продажи THE CULTT</h4>
 
                     <a
-                        href="https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/Пользовательское_соглашение_для_интернет_магазина_с_Ботом 23.04.24.docx.pdf"
+                        href={EXTERNAL_LINKS.userAgreement}
                         className="faq-main-content-all-col__link"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -18,7 +18,7 @@ const FaqTheCultt: React.FC = () => {
                         Пользовательское соглашение
                     </a>
                     <a
-                        href="https://storage.yandexcloud.net/the-cultt-docs/17.07.2024/Оферта для продавца 120724.docx.pdf"
+                        href={EXTERNAL_LINKS.publicOfferSeller}
                         className="faq-main-content-all-col__link"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -26,7 +26,7 @@ const FaqTheCultt: React.FC = () => {
                         Публичная оферта продавца
                     </a>
                     <a
-                        href="https://storage.yandexcloud.net/the-cultt-docs/17.07.2024/Оферта для покупателя 120724.docx.pdf"
+                        href={EXTERNAL_LINKS.publicOfferBuyer}
                         className="faq-main-content-all-col__link"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -34,7 +34,7 @@ const FaqTheCultt: React.FC = () => {
                         Публичная оферта покупателя
                     </a>
                     <a
-                        href="https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/%D0%A3%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F%20%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B0%20The%20Cultt.docx.pdf"
+                        href={EXTERNAL_LINKS.termsOfUse}
                         className="faq-main-content-all-col__link"
                         target="_blank"
                         rel="noopener noreferrer"

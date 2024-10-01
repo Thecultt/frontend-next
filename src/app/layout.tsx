@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { Manrope } from 'next/font/google';
 import localFont from 'next/font/local';
 import { Viewport } from 'next/types';
+import NextTopLoader from 'nextjs-toploader';
 
 import 'dayjs/locale/ru';
 import dayjs from 'dayjs';
@@ -57,11 +58,13 @@ export const metadata = MAIN_META;
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
     <html lang="ru" className={`${manropeFont.variable} ${ltSuperiorMonoFont.variable}`}>
         <body>
-            <Scripts />
+            <NextTopLoader zIndex={99999999} showSpinner={false} shadow={false} color="#285141" />
 
             <Providers>
                 <App>{children}</App>
             </Providers>
+
+            <Scripts />
         </body>
     </html>
 );

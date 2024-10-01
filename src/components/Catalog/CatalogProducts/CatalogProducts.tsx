@@ -2,12 +2,12 @@
 
 import React from 'react';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { CatalogProductsPagination, CatalogProductsNull, ProductCard, Skeleton } from '@/components';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { createFakeArray } from '@/functions/createFakeArray';
 import { CATALOG_PRODUCTS_LIMIT } from '@/constants/catalog';
 
-const CatalogProducts: React.FC = () => {
+const CatalogProducts = () => {
     const { items, itemsCount, isFetchMore, isFetchPage } = useTypedSelector(({ products }) => products);
     const isFetch = isFetchMore || isFetchPage;
 

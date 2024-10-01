@@ -13,6 +13,8 @@ import { fetchProductsFilters } from '@/redux/actions/products_filters';
 import { fetchSelections } from '@/redux/actions/selections';
 import { fetchUser } from '@/redux/actions/user';
 import NoSsr from '@/components/NoSsr/NoSsr';
+import { StaticHeader } from '@/components/static/StaticHeader';
+import { StaticFooter } from '@/components/static/StaticFooter';
 import {
     Footer,
     Header,
@@ -27,6 +29,7 @@ import { CATALOG_PAGES } from '@/constants/routes';
 import { useCart } from '@/hooks/catalog/useCart';
 
 import { ClientOnly } from './ClientOnly';
+import { Preloader } from './Preloader';
 
 export const App = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useDispatch();
@@ -78,6 +81,8 @@ export const App = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <>
+            <Preloader />
+
             <NoSsr>
                 <ClientOnly />
                 <Reglog />
@@ -89,13 +94,13 @@ export const App = ({ children }: { children: React.ReactNode }) => {
             </NoSsr>
 
             <div className="wrapper" id="wrapper">
-                <NoSsr>
+                <NoSsr fallback={<StaticHeader />}>
                     <Header />
                 </NoSsr>
 
                 {children}
 
-                <NoSsr>
+                <NoSsr fallback={<StaticFooter />}>
                     <Footer subscribeBlockId="footer-email" />
                 </NoSsr>
             </div>
