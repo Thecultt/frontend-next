@@ -38,24 +38,8 @@
 			width: 100%
 
 	&__share
-		cursor: pointer
-
-		display: inline-flex
-		align-items: center
-
-		border: none
-		background-color: $lightBackgroundColor
-		font-size: 14px
-		padding: 15px
-
-		border-radius: 8px
-
-		margin-bottom: 25px
-
-		+ManropeRegular
-
-		& > svg
-			margin-right: 8px
+		max-width: fit-content
+		margin-bottom: 24px
 
 	&-blocks-wrapper
 		display: flex
@@ -75,8 +59,7 @@
 @media screen and (max-width: 900px)
 	.cabinet-favorites
 		&__share
-			justify-content: center
-			width: 100%
+			max-width: 100%
 
 		&-blocks-wrapper
 			justify-content: space-between

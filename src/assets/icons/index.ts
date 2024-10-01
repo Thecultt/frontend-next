@@ -13,3 +13,4 @@ export { ReactComponent as ShoesIcon, default as shoesIconPath } from './shoes.s
 export { ReactComponent as WalletIcon, default as walletIconPath } from './wallet.svg';
 export { ReactComponent as InfoIcon, default as infoIconPath } from './info.svg';
 export { ReactComponent as CheckIcon, default as checkIconPath } from './check.svg';
+export { ReactComponent as ShareIcon, default as shareIconPath } from './share.svg';

@@ -41,7 +41,7 @@ export const Popup: React.FC<Props> = ({ isOpen, title, content, btn, onClose, c
                         exit={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.2 }}
-                    ></motion.div>
+                    />
 
                     <motion.div
                         key="popup"
