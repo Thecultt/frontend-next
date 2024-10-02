@@ -169,7 +169,7 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, 
                     обработки персональных данных
                 </a>{' '}
                 и{' '}
-                <Link href={APP_ROUTE.help.sellers} target="_blank" rel="noopener noreferrer">
+                <Link href={APP_ROUTE.help.theCultt} target="_blank" rel="noopener noreferrer">
                     условия продажи
                 </Link>
             </p>

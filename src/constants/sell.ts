@@ -1,4 +1,4 @@
-import { CabinetSellTypes } from '@/redux/types/ICabinetSell';
+import { CabinetSellStepKeys, CabinetSellTypes } from '@/redux/types/ICabinetSell';
 
 export const CATEGORY_NAMES = {
     watch: 'Часы',
@@ -36,3 +36,40 @@ export enum DeliveryTypes {
     courier = 'Курьер',
     office = 'Лично в офис',
 }
+
+export const SELL_STEPS: {
+    title: string;
+    key: CabinetSellStepKeys;
+    types: CabinetSellTypes[];
+}[] = [
+    {
+        title: 'Вариант сотрудничества',
+        key: CabinetSellStepKeys.COOPERATION,
+        types: [CabinetSellTypes.SELL, CabinetSellTypes.EXCHANGE],
+    },
+    {
+        title: 'Информация о товаре',
+        key: CabinetSellStepKeys.INFO,
+        types: [CabinetSellTypes.SELL, CabinetSellTypes.EXCHANGE],
+    },
+    {
+        title: 'Фотографии',
+        key: CabinetSellStepKeys.IMAGES,
+        types: [CabinetSellTypes.SELL, CabinetSellTypes.EXCHANGE],
+    },
+    {
+        title: 'Товар для обмена',
+        key: CabinetSellStepKeys.PRODUCT,
+        types: [CabinetSellTypes.EXCHANGE],
+    },
+    {
+        title: 'Контактные данные',
+        key: CabinetSellStepKeys.CONTACT,
+        types: [CabinetSellTypes.SELL, CabinetSellTypes.EXCHANGE],
+    },
+    {
+        title: 'Способ отправки товара',
+        key: CabinetSellStepKeys.DELIVERY,
+        types: [CabinetSellTypes.SELL, CabinetSellTypes.EXCHANGE],
+    },
+];
