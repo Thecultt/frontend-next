@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, formValueSelector, Field } from 'redux-form';
@@ -6,26 +8,19 @@ import Link from 'next/link';
 import { CabinetSellStepKeys } from '@/redux/types/ICabinetSell';
 import { setCabinetSellCurrentStep } from '@/redux/actions/cabinet_sell';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { Popup, RenderInput, RenderInputHints, RenderSelect, RenderSelectArray, SellBackBtn } from '@/components';
+import { RenderInput, RenderInputHints, RenderSelect, RenderSelectArray, SellBackBtn } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
-
 import { APP_ROUTE } from '@/constants/routes';
 import { CATEGORY_NAMES } from '@/constants/sell';
+import { usePopupInfo } from '@/hooks/usePopupInfo';
 
 import validate from './validate';
 
-const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
-    handleSubmit,
-    invalid,
-    submitting,
-    initialize,
-    initialized,
-}) => {
+const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, submitting, initialize }) => {
     const dispatch = useDispatch();
+    const { openPopupInfo } = usePopupInfo();
 
     const data: any = JSON.parse(localStorage.getItem('sell-info-form') as any);
-
-    const [isVisibleJewelryPopup, setIsVisibleJewelryPopup] = React.useState(false);
 
     const [currentCategory, setCurrentCategory] = React.useState('');
     const [currentBrand, setCurrentBrand] = React.useState('');
@@ -36,28 +31,55 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     const { parameters } = useTypedSelector(({ cabinet_sell }) => cabinet_sell);
     const selector = formValueSelector('sell-info-form');
 
-    const { brandValue, conditionValue, defectsValue, categoryValue, modelValue, priceValue, boughtInCulttValue } =
-        useTypedSelector((state) => {
-            const { brand, condition, defects, category, model, price, bought_in_cultt } = selector(
-                state,
-                'brand',
-                'condition',
-                'defects',
-                'category',
-                'model',
-                'price',
-                'bought_in_cultt',
-            );
-            return {
-                brandValue: brand,
-                conditionValue: condition,
-                defectsValue: defects,
-                categoryValue: category,
-                modelValue: model,
-                priceValue: price,
-                boughtInCulttValue: bought_in_cultt,
-            };
-        });
+    const {
+        brandValue,
+        conditionValue,
+        defectsValue,
+        categoryValue,
+        modelValue,
+        priceValue,
+        boughtInCulttValue,
+        preciousStonesInKitValue,
+        clientKitValue,
+        sizeValue,
+    } = useTypedSelector((state) => {
+        const {
+            brand,
+            condition,
+            defects,
+            category,
+            model,
+            price,
+            bought_in_cultt,
+            precious_stones_in_kit,
+            client_kit,
+            size,
+        } = selector(
+            state,
+            'brand',
+            'condition',
+            'defects',
+            'category',
+            'model',
+            'price',
+            'bought_in_cultt',
+            'precious_stones_in_kit',
+            'client_kit',
+            'size',
+        );
+        return {
+            brandValue: brand,
+            conditionValue: condition,
+            defectsValue: defects,
+            categoryValue: category,
+            modelValue: model,
+            priceValue: price,
+            boughtInCulttValue: bought_in_cultt,
+            preciousStonesInKitValue: precious_stones_in_kit,
+            clientKitValue: client_kit,
+            sizeValue: size,
+        };
+    });
 
     React.useEffect(() => {
         if (data) {
@@ -84,9 +106,23 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 model: modelValue,
                 price: priceValue,
                 bought_in_cultt: boughtInCulttValue,
+                precious_stones_in_kit: preciousStonesInKitValue,
+                client_kit: clientKitValue,
+                size: sizeValue,
             }),
         );
-    }, [brandValue, conditionValue, defectsValue, categoryValue, modelValue, priceValue, boughtInCulttValue]);
+    }, [
+        brandValue,
+        conditionValue,
+        defectsValue,
+        categoryValue,
+        modelValue,
+        priceValue,
+        boughtInCulttValue,
+        preciousStonesInKitValue,
+        clientKitValue,
+        sizeValue,
+    ]);
 
     React.useEffect(() => {
         if (parameters[currentCategory]) {
@@ -110,7 +146,29 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
         }
 
         if (currentCategory === CATEGORY_NAMES.jewelry) {
-            setIsVisibleJewelryPopup(true);
+            openPopupInfo({
+                title: 'Ювелирные изделия',
+                content: (
+                    <div className="sell-jewelry-popup">
+                        <p className="sell-jewelry-popup__subtitle">
+                            Ювелирные изделия — это украшения из драгоценных металлов: золота, серебра или платины. Все
+                            ювелирные изделия перед продажей в РФ должны быть промаркированы. THE CULTT JEWELRY берет
+                            это на себя.
+                        </p>
+                        <p className="sell-jewelry-popup__text">
+                            <b>№ 41-ФЗ «О драгоценных металлах и драгоценных камнях»</b>
+                            <br />
+                            «Находящиеся в продаже ювелирные изделия из драгоценных металлов и драгоценных камней,
+                            которые произвели в России или ввезли в страну, с 1 марта 2024 года должны быть
+                            промаркированы двухмерным штриховым кодом рядом с клеймом. Такое требование закреплено в
+                            постановлении Правительства России от 26.02.2021 № 270»
+                        </p>
+                    </div>
+                ),
+                btn: {
+                    label: 'Понятно',
+                },
+            });
         }
     }, [currentCategory]);
 
@@ -130,6 +188,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 client_kit: '',
                 price: '',
                 bought_in_cultt: '',
+                precious_stones_in_kit: '',
             });
 
             localStorage.removeItem('sell-images-form');
@@ -191,259 +250,215 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     };
 
     return (
-        <>
-            <Popup state={isVisibleJewelryPopup} setState={() => setIsVisibleJewelryPopup(false)} center>
-                <div className="sell-jewelry-popup">
-                    <h3 className="sell-jewelry-popup__title">Ювелирные изделия</h3>
-                    <p className="sell-jewelry-popup__description">
-                        Ювелирные изделия — это украшения из драгоценных металлов: золота, серебра или платины. Все
-                        ювелирные изделия перед продажей в РФ должны быть промаркированы. THE CULTT JEWELRY берет это на
-                        себя.
-                        <br />
-                        <b>№ 41-ФЗ «О драгоценных металлах и драгоценных камнях»</b>
-                        <br />
-                        «Находящиеся в продаже ювелирные изделия из драгоценных металлов и драгоценных камней, которые
-                        произвели в России или ввезли в страну, с 1 марта 2024 года должны быть промаркированы
-                        двухмерным штриховым кодом рядом с клеймом. Такое требование закреплено в постановлении
-                        Правительства России от 26.02.2021 № 270»
-                    </p>
+        <form onSubmit={handleSubmit} className="sell-block sell-block-info">
+            <SellBackBtn onClick={onClickBack} />
 
-                    <button className="btn sell-jewelry-popup__btn" onClick={() => setIsVisibleJewelryPopup(false)}>
-                        Понятно
-                    </button>
+            <h3 className="sell-block__title">Информация о товаре</h3>
+
+            <p className="sell-block__subtitle">Заполните детальную информацию о продаваемом товаре.</p>
+
+            <div className="sell-block-input-wrapper-wrapper">
+                <div className="sell-block-select">
+                    <h4 className="sell-block-select__title">Категория товара</h4>
+
+                    <Field
+                        component={RenderSelect}
+                        name="category"
+                        label="Категория товара"
+                        items={Object.keys(parameters)}
+                        onChangeCutsom={onChangeCategory}
+                    />
                 </div>
-            </Popup>
 
-            <form onSubmit={handleSubmit} className="sell-block sell-block-info">
-                <SellBackBtn onClick={onClickBack} />
-
-                <h3 className="sell-block__title">Информация о товаре</h3>
-
-                <p className="sell-block__subtitle">Заполните детальную информацию о продаваемом товаре.</p>
-
-                <div className="sell-block-input-wrapper-wrapper">
+                {(currentCategory === CATEGORY_NAMES.jewelry || currentCategory === CATEGORY_NAMES.watch) && (
                     <div className="sell-block-select">
-                        <h4 className="sell-block-select__title">Категория товара</h4>
+                        <h4 className="sell-block-select__title">В украшении есть драгоценные камни</h4>
 
                         <Field
                             component={RenderSelect}
-                            name="category"
-                            label="Категория товара"
-                            items={Object.keys(parameters)}
-                            onChangeCutsom={onChangeCategory}
+                            name="precious_stones_in_kit"
+                            label="В украшении есть драгоценные камни"
+                            items={['Да', 'Нет']}
                         />
                     </div>
+                )}
 
-                    {(currentCategory === CATEGORY_NAMES.jewelry || currentCategory === CATEGORY_NAMES.watch) && (
-                        <div className="sell-block-select">
-                            <h4 className="sell-block-select__title">В украшении есть драгоценные камни</h4>
+                <div className="sell-block-select">
+                    <h4 className="sell-block-select__title">Бренд товара</h4>
 
-                            <Field
-                                component={RenderSelect}
-                                name="precious_stones_in_kit"
-                                label="В украшении есть драгоценные камни"
-                                items={['Да', 'Нет']}
-                            />
-                        </div>
-                    )}
+                    <Field
+                        component={RenderInputHints}
+                        name="brand"
+                        label="Бренд товара"
+                        hints={brands}
+                        disabled={parameters[currentCategory] ? false : true}
+                        onChangeCustom={(value: string) => onChangeInputBrand(value)}
+                        bgWhite
+                        ifFreeField
+                    />
+                </div>
 
+                {(currentCategory === CATEGORY_NAMES.mensBags || currentCategory === CATEGORY_NAMES.womensBags) && (
                     <div className="sell-block-select">
-                        <h4 className="sell-block-select__title">Бренд товара</h4>
+                        <h4 className="sell-block-select__title">Модель товара</h4>
 
                         <Field
                             component={RenderInputHints}
-                            name="brand"
-                            label="Бренд товара"
-                            hints={brands}
-                            disabled={parameters[currentCategory] ? false : true}
-                            onChangeCustom={(value: string) => onChangeInputBrand(value)}
+                            name="model"
+                            label="Модель товара"
+                            hints={models}
+                            disabled={currentBrand !== '' ? false : true}
+                            onChangeCustom={(value: string) => onChangeInputModel(value)}
                             bgWhite
                             ifFreeField
                         />
                     </div>
+                )}
 
-                    {(currentCategory === CATEGORY_NAMES.mensBags || currentCategory === CATEGORY_NAMES.womensBags) && (
-                        <div className="sell-block-select">
-                            <h4 className="sell-block-select__title">Модель товара</h4>
-
-                            <Field
-                                component={RenderInputHints}
-                                name="model"
-                                label="Модель товара"
-                                hints={models}
-                                disabled={currentBrand !== '' ? false : true}
-                                onChangeCustom={(value: string) => onChangeInputModel(value)}
-                                bgWhite
-                                ifFreeField
+                <div className="sell-block-select">
+                    <h4 className="sell-block-select__title">
+                        Состояние товара
+                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z"
+                                stroke="#202020"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
-                        </div>
-                    )}
-
-                    <div className="sell-block-select">
-                        <h4 className="sell-block-select__title">
-                            Состояние товара
-                            <svg
-                                width="17"
-                                height="17"
-                                viewBox="0 0 17 17"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z"
-                                    stroke="#202020"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                            <span className="message-info-wrapper">
-                                <span className="message-info">
-                                    <ul>
-                                        <li>
-                                            <span>Новое</span>: лот не был в носке и не имеет повреждений или нюансов.
-                                            Форма аксессуара сохранена.
-                                        </li>
-                                        <li>
-                                            <span>Отличное</span>: лот внешне выглядит отлично, аксессуар носился мало и
-                                            бережно. Могут присутствовать следующие нюансы: минимальное изменение формы
-                                            у сумки, потертость без конкретных видимых дефектов, локальные небольшие
-                                            восстановления.
-                                        </li>
-                                        <li>
-                                            <span>Хорошее</span>: присутствуют значительные следы носки. Могут
-                                            присутствовать следующие нюансы: отсутствие элементов полного комплекта,
-                                            загар, потертости или царапины на коже, пятна на материале, следы носки на
-                                            подкладке, потертости на фурнитуре, сумка была в спа
-                                        </li>
-                                    </ul>
-                                </span>
+                        </svg>
+                        <span className="message-info-wrapper">
+                            <span className="message-info">
+                                <ul>
+                                    <li>
+                                        <span>Новое</span>: лот не был в носке и не имеет повреждений или нюансов. Форма
+                                        аксессуара сохранена.
+                                    </li>
+                                    <li>
+                                        <span>Отличное</span>: лот внешне выглядит отлично, аксессуар носился мало и
+                                        бережно. Могут присутствовать следующие нюансы: минимальное изменение формы у
+                                        сумки, потертость без конкретных видимых дефектов, локальные небольшие
+                                        восстановления.
+                                    </li>
+                                    <li>
+                                        <span>Хорошее</span>: присутствуют значительные следы носки. Могут
+                                        присутствовать следующие нюансы: отсутствие элементов полного комплекта, загар,
+                                        потертости или царапины на коже, пятна на материале, следы носки на подкладке,
+                                        потертости на фурнитуре, сумка была в спа
+                                    </li>
+                                </ul>
                             </span>
-                        </h4>
+                        </span>
+                    </h4>
 
-                        <Field
-                            component={RenderSelect}
-                            name="condition"
-                            label="Состояние товара"
-                            items={
-                                parameters[currentCategory]
-                                    ? parameters[currentCategory].conditions.map((condition) => condition.name)
-                                    : []
-                            }
-                            disabled={!parameters[currentCategory]}
-                        />
-                    </div>
-
-                    <div className="sell-block-select">
-                        <h4 className="sell-block-select__title">Наличие дефектов</h4>
-
-                        <Field
-                            component={RenderSelectArray}
-                            name="defects"
-                            label="Наличие дефектов"
-                            items={
-                                parameters[currentCategory]
-                                    ? parameters[currentCategory].defects.map((defect) => defect.name)
-                                    : []
-                            }
-                            disabled={!parameters[currentCategory]}
-                        />
-                    </div>
-
-                    {currentCategory === CATEGORY_NAMES.shoes && (
-                        <div className="sell-block-select">
-                            <h4 className="sell-block-select__title">Размер</h4>
-
-                            <Field component={RenderInput} name="size" label="Размер" bgWhite />
-                        </div>
-                    )}
-
-                    <div className="sell-block-select">
-                        <h4 className="sell-block-select__title">Комплект</h4>
-
-                        <Field
-                            component={RenderSelectArray}
-                            name="client_kit"
-                            label="Комплект"
-                            items={
-                                parameters[currentCategory]
-                                    ? parameters[currentCategory].kits.map((kit) => kit.name)
-                                    : []
-                            }
-                            disabled={!parameters[currentCategory]}
-                        />
-                    </div>
-
-                    <div className="sell-block-select">
-                        <h4 className="sell-block-select__title">
-                            Ожидание по цене
-                            <svg
-                                width="17"
-                                height="17"
-                                viewBox="0 0 17 17"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z"
-                                    stroke="#202020"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                            <span className="message-info-wrapper">
-                                <span className="message-info">
-                                    Напишите цену, которую хотели бы получить на руки при продаже товара.
-                                </span>
-                            </span>
-                        </h4>
-
-                        <Field component={RenderInput} name="price" label="Ожидание по цене" bgWhite />
-                    </div>
-
-                    <div className="sell-block-select">
-                        <h4 className="sell-block-select__title">
-                            Товар приобретен в THE CULTT
-                            <svg
-                                width="17"
-                                height="17"
-                                viewBox="0 0 17 17"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z"
-                                    stroke="#202020"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                            <span className="message-info-wrapper">
-                                <span className="message-info">
-                                    Укажите, если ранее товар был приобретен на нашей платформе, на него будут
-                                    действовать особые условия. <Link href={APP_ROUTE.exchange}>Подробнее</Link>
-                                </span>
-                            </span>
-                        </h4>
-
-                        <Field
-                            component={RenderSelect}
-                            name="bought_in_cultt"
-                            label="Товар приобретен в THE CULTT"
-                            items={['Да', 'Нет']}
-                        />
-                    </div>
+                    <Field
+                        component={RenderSelect}
+                        name="condition"
+                        label="Состояние товара"
+                        items={
+                            parameters[currentCategory]
+                                ? parameters[currentCategory].conditions.map((condition) => condition.name)
+                                : []
+                        }
+                        disabled={!parameters[currentCategory]}
+                    />
                 </div>
 
-                <button
-                    className={getClassNames('btn sell-block__btn', {
-                        disabled: submitting,
-                    })}
-                    disabled={submitting}
-                >
-                    Продолжить
-                </button>
-            </form>
-        </>
+                <div className="sell-block-select">
+                    <h4 className="sell-block-select__title">Наличие дефектов</h4>
+
+                    <Field
+                        component={RenderSelectArray}
+                        name="defects"
+                        label="Наличие дефектов"
+                        items={
+                            parameters[currentCategory]
+                                ? parameters[currentCategory].defects.map((defect) => defect.name)
+                                : []
+                        }
+                        disabled={!parameters[currentCategory]}
+                    />
+                </div>
+
+                {currentCategory === CATEGORY_NAMES.shoes && (
+                    <div className="sell-block-select">
+                        <h4 className="sell-block-select__title">Размер</h4>
+
+                        <Field component={RenderInput} name="size" label="Размер" bgWhite />
+                    </div>
+                )}
+
+                <div className="sell-block-select">
+                    <h4 className="sell-block-select__title">Комплект</h4>
+
+                    <Field
+                        component={RenderSelectArray}
+                        name="client_kit"
+                        label="Комплект"
+                        items={
+                            parameters[currentCategory] ? parameters[currentCategory].kits.map((kit) => kit.name) : []
+                        }
+                        disabled={!parameters[currentCategory]}
+                    />
+                </div>
+
+                <div className="sell-block-select">
+                    <h4 className="sell-block-select__title">
+                        Ожидание по цене
+                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z"
+                                stroke="#202020"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
+                        <span className="message-info-wrapper">
+                            <span className="message-info">
+                                Напишите цену, которую хотели бы получить на руки при продаже товара.
+                            </span>
+                        </span>
+                    </h4>
+
+                    <Field component={RenderInput} name="price" label="Ожидание по цене" bgWhite />
+                </div>
+
+                <div className="sell-block-select">
+                    <h4 className="sell-block-select__title">
+                        Товар приобретен в THE CULTT
+                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z"
+                                stroke="#202020"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
+                        <span className="message-info-wrapper">
+                            <span className="message-info">
+                                Укажите, если ранее товар был приобретен на нашей платформе, на него будут действовать
+                                особые условия. <Link href={APP_ROUTE.exchange}>Подробнее</Link>
+                            </span>
+                        </span>
+                    </h4>
+
+                    <Field
+                        component={RenderSelect}
+                        name="bought_in_cultt"
+                        label="Товар приобретен в THE CULTT"
+                        items={['Да', 'Нет']}
+                    />
+                </div>
+            </div>
+
+            <button
+                className={getClassNames('btn sell-block__btn', {
+                    disabled: submitting,
+                })}
+                disabled={submitting}
+            >
+                Продолжить
+            </button>
+        </form>
     );
 };
 

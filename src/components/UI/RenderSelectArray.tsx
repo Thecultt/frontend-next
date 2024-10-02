@@ -75,10 +75,10 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({
     }, [initial]);
 
     React.useEffect(() => {
-        if (input.value === '' && Object.keys(currentItems).length) {
+        if (!initial && input.value === '' && Object.keys(currentItems).length) {
             setCurrentItems({});
         }
-    }, [input.value]);
+    }, [initial, input.value]);
 
     React.useEffect(() => {
         dispatch(
