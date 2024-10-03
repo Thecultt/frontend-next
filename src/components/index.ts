@@ -1,6 +1,3 @@
-// NoSsr
-export { default as NoSsr } from './NoSsr/NoSsr';
-
 // UI
 export { default as Checkbox } from './UI/Checkbox';
 export { default as Input } from './UI/Input';

@@ -2,7 +2,8 @@
 
 import React from 'react';
 
-import { NoSsr, CinemaArtisticExhibits, CinemaArtisticAuction } from '@/components';
+import { NoSsr } from '@/shared/ui';
+import { CinemaArtisticExhibits, CinemaArtisticAuction } from '@/components';
 import { scrollToBlock } from '@/functions/scrollToBlock';
 
 import CinemaArtisticRedImage from '@/assets/images/cinema-artistic/cinema-artistic-red.jpg';

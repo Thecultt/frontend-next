@@ -5,7 +5,7 @@ import { BottomSheet } from 'react-spring-bottom-sheet';
 import 'react-spring-bottom-sheet/dist/style.css';
 
 import { ProductPage } from '@/models/IProduct';
-import NoSsr from '@/components/NoSsr/NoSsr';
+import { NoSsr } from '@/shared/ui';
 import { ProductInfoDescription, ProductInfoParameters, ProductInfoState } from '@/components';
 
 interface Props {

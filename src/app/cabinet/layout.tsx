@@ -1,7 +1,7 @@
 'use client';
 
 import { CabinetMenu } from '@/components';
-import NoSsr from '@/components/NoSsr/NoSsr';
+import { NoSsr } from '@/shared/ui';
 
 const CabinetLayout = ({ children }: { children: React.ReactNode }) => (
     <section className="cabinet">
