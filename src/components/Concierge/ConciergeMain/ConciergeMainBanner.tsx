@@ -1,9 +1,10 @@
+'use client';
+
 import React from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
 import { MEDIA_SIZES } from '@/constants/styles';
 import { getClassNames } from '@/functions/getClassNames';
-
 import ConciergeMainImage from '@/assets/images/concierge/concierge-main.jpg';
 
 interface Props {
@@ -11,14 +12,18 @@ interface Props {
 }
 
 const ConciergeMainBanner: React.FC<Props> = ({ scrollToForm }) => {
-    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`, { initializeWithValue: false });
 
     return (
         <div
             className="concierge-main"
-            style={{
-                backgroundImage: `url("${isMobile ? ConciergeMainImage.src : ''}")`,
-            }}
+            style={
+                isMobile
+                    ? {
+                          backgroundImage: `url("${ConciergeMainImage.src}")`,
+                      }
+                    : undefined
+            }
         >
             <div className="concierge-main-text">
                 <h2 className="title mb concierge-main-text__title">Вы выберете, мы доставим</h2>
@@ -39,9 +44,13 @@ const ConciergeMainBanner: React.FC<Props> = ({ scrollToForm }) => {
 
             <div
                 className="concierge-main-image"
-                style={{
-                    backgroundImage: `url("${!isMobile ? ConciergeMainImage.src : ''}")`,
-                }}
+                style={
+                    !isMobile
+                        ? {
+                              backgroundImage: `url("${ConciergeMainImage.src}")`,
+                          }
+                        : undefined
+                }
             ></div>
         </div>
     );

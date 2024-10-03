@@ -13,7 +13,8 @@ import { changeCheckCartItem, checkAvailabilityCartItems, removeCartItem } from 
 import { sendCreateOrder } from '@/redux/actions/order';
 import { sendUpdateUser } from '@/redux/actions/user';
 import { sendOrderApplyPromocode } from '@/redux/actions/order';
-import { CartProductItem, Loader, NewCheckbox, OrderProductsPromocode } from '@/components';
+import { CartProductItem, Loader, OrderProductsPromocode } from '@/components';
+import { Checkbox } from '@/shared/ui';
 import { getClassNames } from '@/functions/getClassNames';
 import { sendMindbox } from '@/functions/mindbox';
 import { pushDataLayer } from '@/functions/pushDataLayer';
@@ -21,8 +22,7 @@ import { formatMoney } from '@/functions/formatMoney';
 import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
 import { useOrder } from '@/hooks/order/useOrder';
 import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
-
-import orderPay from '../orderPay';
+import { orderPay } from '@/functions/orderPay';
 
 const OrderProducts: React.FC = () => {
     const dispatch = useDispatch();
@@ -415,14 +415,14 @@ const OrderProducts: React.FC = () => {
         <div className="order-products">
             <h3 className="order-products__title">Ваш заказ:</h3>
 
-            <NewCheckbox
+            <Checkbox
                 className="order-products-check-all"
                 checked={isCheckedAll}
                 onChange={isCheckedAll ? uncheckAllItems : checkAllItems}
                 disabled={availableCartItems.length === 0}
             >
                 <p className="order-products-check-all__title">Выделить все</p>
-            </NewCheckbox>
+            </Checkbox>
 
             <div className="order-products-items-wrapper">
                 {cartItems.map((item) => (

@@ -6,7 +6,8 @@ import { useParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { fetchOrder } from '@/redux/actions/order';
-import { OrderStatusSuccess, OrderStatusError, PageLoader } from '@/components';
+import { OrderStatusSuccess, OrderStatusError } from '@/components';
+import { PageLoader } from '@/shared/ui';
 
 const OrderStatus: React.FC = () => {
     const dispatch = useDispatch();

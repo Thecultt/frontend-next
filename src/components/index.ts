@@ -1,11 +1,8 @@
-// NoSsr
-export { default as NoSsr } from './NoSsr/NoSsr';
-
 // UI
 export { default as Checkbox } from './UI/Checkbox';
 export { default as Input } from './UI/Input';
+// TODO delete Loader
 export { default as Loader } from './UI/Loader';
-export { default as PageLoader } from './UI/PageLoader';
 export { default as Popup } from './UI/Popup';
 export { default as RadioSelect } from './UI/RadioSelect';
 export { default as RenderCheckbox } from './UI/RenderCheckbox';
@@ -17,28 +14,7 @@ export { default as RenderSelectArray } from './UI/RenderSelectArray';
 export { default as RenderTextarea } from './UI/RenderTextarea';
 export { default as Select } from './UI/Select';
 export { default as Textarea } from './UI/Textarea';
-
-// New UI
-
-// TODO
-export { Checkbox as NewCheckbox } from './UI/Checkbox/Checkbox';
 export { BackButton } from './UI/BackButton';
-export { Spinner } from './UI/Spinner';
-export { NavLink } from './UI/NavLink/NavLink';
-export { BaseImage } from './UI/BaseImage/BaseImage';
-export { Badge } from './UI/Badge/Badge';
-export { Skeleton } from './UI/Skeleton/Skeleton';
-export { Button } from './UI/Button/Button';
-export { Input as NewInput } from './UI/Input/Input';
-export { Textarea as NewTextarea } from './UI/Textarea/Textarea';
-export { Popup as NewPopup } from './UI/Popup/Popup';
-export { Select as NewSelect } from './UI/Select/Select';
-
-// Formik
-
-export { FormikInput } from './formik/FormikInput/FormikInput';
-export { FormikTextarea } from './formik/FormikTextarea/FormikTextarea';
-export { FormikSelect } from './formik/FormikSelect/FormikSelect';
 
 // Notifications
 export { default as NotificationsServer } from './UI/NotificationsServer/NotificationsServer';

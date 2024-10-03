@@ -9,8 +9,8 @@ import {
     CinemaAuctionProductCarousel,
     CinemaAuctionProductForm,
     CinemaAuctionProductProperty,
-    PageLoader,
 } from '@/components';
+import { PageLoader } from '@/shared/ui';
 import { getCinemaAuctionProductById } from '@/redux/actions/cinema_artistic';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { APP_ROUTE } from '@/constants/routes';

@@ -16,22 +16,72 @@ export const Input: React.FC<InputProps> = ({
     label,
     error,
     info,
+    disabled,
+    maskProps,
+    value,
     className = '',
     type = 'text',
     theme = 'white',
     placeholder = label,
-    maskProps,
+    hints = [],
+    onFocus,
+    onChange,
     ...inputProps
 }) => {
+    const mainRef = React.useRef<HTMLDivElement>(null);
     const infoRef = React.useRef<HTMLDivElement>(null);
     const infoButtonRef = React.useRef<HTMLButtonElement>(null);
 
     const [infoIsVisible, toggleInfoVisible, setInfoVisible] = useToggle(false);
+    const [hintsIsVisible, _toggleHintsVisible, setHintsVisible] = useToggle(false);
+
+    const filteredHints = React.useMemo(() => {
+        if (!value) {
+            return hints;
+        }
+
+        return hints.filter((x) => x.toLowerCase().indexOf(value.toString().toLowerCase()) >= 0);
+    }, [value, hints]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        onChange?.(e.target.value);
+    };
+
+    const handleHintClick = (hint: string) => {
+        setHintsVisible(false);
+        onChange?.(hint);
+    };
+
+    const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+        if (hints.length > 0) {
+            setHintsVisible(true);
+        }
+
+        onFocus?.(e);
+    };
+
+    const commonProps = {
+        value,
+        type,
+        placeholder,
+        disabled,
+        className: 'tc-input__field',
+        onChange: handleChange,
+        onFocus: handleFocus,
+    };
 
     useOnClickOutside<HTMLDivElement | HTMLButtonElement>([infoRef, infoButtonRef], () => setInfoVisible(false));
+    useOnClickOutside(mainRef, () => setHintsVisible(false));
+
+    React.useEffect(() => {
+        if (infoIsVisible) {
+            setHintsVisible(false);
+        }
+    }, [infoIsVisible]);
 
     return (
         <div
+            ref={mainRef}
             className={getClassNames(`tc-input tc-input--theme-${theme} ${className}`, {
                 'tc-input--error': !!error,
             })}
@@ -39,19 +89,39 @@ export const Input: React.FC<InputProps> = ({
             <div className="tc-input__wrapper">
                 <label className="tc-input__l-wrapper">
                     {maskProps ? (
-                        <MaskInput
-                            type={type}
-                            className="tc-input__field"
-                            placeholder={placeholder}
-                            {...maskProps}
-                            {...inputProps}
-                        />
+                        <MaskInput {...commonProps} {...maskProps} {...inputProps} />
                     ) : (
-                        <input type={type} className="tc-input__field" placeholder={placeholder} {...inputProps} />
+                        <input {...commonProps} {...inputProps} />
                     )}
 
                     <span className="tc-input__label">{label}</span>
                 </label>
+
+                <AnimatePresence>
+                    {hintsIsVisible && filteredHints.length > 0 && !disabled && (
+                        <motion.div
+                            key="input-hints"
+                            className="tc-input-hints"
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={DEFAULT_TRANSITION}
+                        >
+                            <div className="tc-input-hints__wrapper">
+                                {filteredHints.map((hint) => (
+                                    <button
+                                        key={hint}
+                                        type="button"
+                                        className="tc-input-hints__button"
+                                        onClick={() => handleHintClick(hint)}
+                                    >
+                                        {hint}
+                                    </button>
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 {!!info && (
                     <>

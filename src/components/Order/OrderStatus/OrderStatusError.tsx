@@ -10,8 +10,7 @@ import { COUNT_MINUTES_RESERVED_ORDER } from '@/constants/order';
 import { APP_ROUTE } from '@/constants/routes';
 import { useOrder } from '@/hooks/order/useOrder';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-
-import orderPay from '../orderPay';
+import { orderPay } from '@/functions/orderPay';
 
 const OrderStatusError: React.FC = () => {
     const { submitOrder } = useOrder();

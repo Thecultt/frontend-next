@@ -1,8 +1,11 @@
 import React from 'react';
-import { Spinner } from '@/components/UI/Spinner';
 
-export const FullscreenLoader = () => (
-    <div className="fullscreen-loader">
+import { Spinner } from '@/shared/ui/Spinner/Spinner';
+
+import './styles.sass';
+
+export const FullscreenLoader: React.FC = () => (
+    <div className="tc-fullscreen-loader">
         <Spinner />
     </div>
 );

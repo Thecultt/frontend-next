@@ -8,7 +8,8 @@ import { useMediaQuery } from 'usehooks-ts';
 
 import { MEDIA_SIZES } from '@/constants/styles';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { HeaderTopMessage, HeaderCart, HeaderUser, HeaderSearchBox, HeaderMedia, BaseImage } from '@/components';
+import { HeaderTopMessage, HeaderCart, HeaderUser, HeaderSearchBox, HeaderMedia } from '@/components';
+import { BaseImage } from '@/shared/ui';
 import { setHeaderSearchValue, fetchHeaderSearchItems, setHeaderCatalogMenuIsVisible } from '@/redux/actions/header';
 import { useDebounce } from '@/hooks/useDebounce';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';

@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next/types';
 
 import type { ProductPage } from '@/models/IProduct';
-import NoSsr from '@/components/NoSsr/NoSsr';
+import { NoSsr } from '@/shared/ui';
 import { Product } from '@/screens';
 import $api from '@/http';
 import { APP_PROD_DOMAIN } from '@/constants/app';

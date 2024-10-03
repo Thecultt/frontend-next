@@ -10,7 +10,8 @@ import {
     sendConciergeProductApplication,
     setConciergeProductIsSendFormProductPage,
 } from '@/redux/actions/concierge';
-import { ConciergeProductInfo, ConciergeProductForm, PageLoader, Popup } from '@/components';
+import { ConciergeProductInfo, ConciergeProductForm, Popup } from '@/components';
+import { PageLoader } from '@/shared/ui';
 
 const ConciergeProduct: React.FC = () => {
     const dispatch = useDispatch();

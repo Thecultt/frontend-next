@@ -12,8 +12,8 @@ import {
     ProductInfo,
     CatalogProductsSection,
     ProductExchange,
-    PageLoader,
 } from '@/components';
+import { PageLoader } from '@/shared/ui';
 import { NotFound } from '@/screens';
 import { usePopupInfo } from '@/hooks/usePopupInfo';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';

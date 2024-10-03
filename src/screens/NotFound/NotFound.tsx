@@ -4,7 +4,7 @@ import React from 'react';
 
 import notfoundImage from '@/assets/images/not-found.png';
 import { APP_ROUTE } from '@/constants/routes';
-import { BaseImage } from '@/components';
+import { BaseImage } from '@/shared/ui';
 
 const NotFound: React.FC = () => (
     <section className="not-found">

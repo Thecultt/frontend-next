@@ -3,6 +3,7 @@
 import React from 'react';
 import Link, { LinkProps } from 'next/link';
 import { usePathname } from 'next/navigation';
+
 import { getClassNames } from '@/functions/getClassNames';
 
 interface Props extends React.PropsWithChildren, LinkProps {

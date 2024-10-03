@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { GetCatalogResponse } from '@/types/api';
-import NoSsr from '@/components/NoSsr/NoSsr';
+import { NoSsr } from '@/shared/ui';
 
 import ClientCatalog from './ClientCatalog';
 import ServerCatalog from './ServerCatalog';

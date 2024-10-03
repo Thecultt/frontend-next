@@ -12,7 +12,7 @@ import { fetchFirstProductsCatalog } from '@/redux/actions/products';
 import { fetchProductsFilters } from '@/redux/actions/products_filters';
 import { fetchSelections } from '@/redux/actions/selections';
 import { fetchUser } from '@/redux/actions/user';
-import NoSsr from '@/components/NoSsr/NoSsr';
+import { NoSsr } from '@/shared/ui';
 import { StaticHeader } from '@/components/static/StaticHeader';
 import { StaticFooter } from '@/components/static/StaticFooter';
 import {

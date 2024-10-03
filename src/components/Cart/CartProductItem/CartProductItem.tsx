@@ -3,9 +3,9 @@
 import React from 'react';
 import Link from 'next/link';
 
+import { Checkbox } from '@/shared/ui';
 import { CartItem } from '@/models/ICartItem';
 import { Noop } from '@/types/functions';
-import { NewCheckbox } from '@/components';
 import { formatMoney } from '@/functions/formatMoney';
 import { getClassNames } from '@/functions/getClassNames';
 import { YANDEX_SPLIT_MERCHANT_ID } from '@/constants/env';
@@ -36,7 +36,7 @@ export const CartProductItem: React.FC<Props> = ({
 
     return (
         <div className="cart-product-item">
-            <NewCheckbox disabled={checkDisabled || (!checked && !canBuy)} checked={checked} onChange={onCheck} />
+            <Checkbox disabled={checkDisabled || (!checked && !canBuy)} checked={checked} onChange={onCheck} />
             <Link href={`${APP_ROUTE.product}/${article}`} className="cart-product-item-image">
                 <div
                     className="cart-product-item-image__background"

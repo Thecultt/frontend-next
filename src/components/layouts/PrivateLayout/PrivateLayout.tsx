@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { APP_ROUTE } from '@/constants/routes';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
-import { PageLoader } from '@/components';
+import { PageLoader } from '@/shared/ui';
 
 interface Props extends React.PropsWithChildren {
     withRedirect?: boolean;

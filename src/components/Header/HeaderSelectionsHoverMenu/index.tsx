@@ -1,7 +1,9 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 
-import { Spinner } from '@/components';
+import { Spinner } from '@/shared/ui';
 import { getClassNames } from '@/functions/getClassNames';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
