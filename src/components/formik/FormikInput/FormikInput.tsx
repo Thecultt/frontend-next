@@ -11,7 +11,11 @@ interface Props extends Omit<InputProps, 'value' | 'onChange' | 'name'> {
 }
 
 export const FormikInput: React.FC<Props> = ({ name, error: errorMessage, ...props }) => {
-    const [field, { error, touched }] = useField(name);
+    const [field, { error, touched }, { setValue }] = useField<string>(name);
 
-    return <NewInput {...field} {...props} error={touched && error ? error : errorMessage} />;
+    const handleChange = (value: string) => {
+        setValue(value);
+    };
+
+    return <NewInput {...field} {...props} onChange={handleChange} error={touched && error ? error : errorMessage} />;
 };
