@@ -14,7 +14,7 @@ import 'swiper/css/navigation';
 import { getClassNames } from '@/functions/getClassNames';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { ProductPage } from '@/models/IProduct';
-import { Badge } from '@/components';
+import { Badge } from '@/shared/ui';
 import { Noop } from '@/types/functions';
 
 interface Props {

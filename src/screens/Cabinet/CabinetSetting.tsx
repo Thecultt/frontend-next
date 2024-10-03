@@ -9,8 +9,8 @@ import {
     CabinetSettingContactBlock,
     CabinetSettingAddressBlock,
     CabinetSettingPaymentBlock,
-    Button,
 } from '@/components';
+import { Button } from '@/shared/ui';
 import { sendUpdateUser } from '@/redux/actions/user';
 import { useAuthUser } from '@/hooks/useAuthUser';
 

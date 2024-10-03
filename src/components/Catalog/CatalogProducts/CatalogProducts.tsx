@@ -2,7 +2,8 @@
 
 import React from 'react';
 
-import { CatalogProductsPagination, CatalogProductsNull, ProductCard, Skeleton } from '@/components';
+import { CatalogProductsPagination, CatalogProductsNull, ProductCard } from '@/components';
+import { Skeleton } from '@/shared/ui';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { createFakeArray } from '@/functions/createFakeArray';
 import { CATALOG_PRODUCTS_LIMIT } from '@/constants/catalog';

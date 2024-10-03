@@ -10,5 +10,5 @@ interface Props {
 }
 
 export const Skeleton: React.FC<Props> = ({ radius = 8, className = '' }) => (
-    <div className={`skeleton ${className}`} style={{ borderRadius: radius === 'full' ? 999 : radius }} />
+    <div className={`tc-skeleton ${className}`} style={{ borderRadius: radius === 'full' ? 999 : radius }} />
 );

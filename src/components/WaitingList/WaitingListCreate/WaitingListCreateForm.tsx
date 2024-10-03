@@ -6,7 +6,8 @@ import Link from 'next/link';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useAuthUser } from '@/hooks/useAuthUser';
-import { RenderInput, RenderSelect, RenderInputHints, Spinner } from '@/components';
+import { Spinner } from '@/shared/ui';
+import { RenderInput, RenderSelect, RenderInputHints } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { useWaitingData } from '@/hooks/catalog/useWaitingData';
 import { CATEGORY_NAMES } from '@/constants/catalog';

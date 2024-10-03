@@ -7,13 +7,11 @@ import { EXTERNAL_LINKS } from '@/constants/routes';
 
 import { default as splitLogoPath } from '@/assets/images/logo-split.svg';
 
-interface ProductInfoTitleSplitPopupProps {
+interface Props {
     price: number;
-    onClosePopup: () => void;
-    state: boolean;
 }
 
-const ProductInfoTitleSplitPopup: React.FC<ProductInfoTitleSplitPopupProps> = ({ price, onClosePopup, state }) => {
+const ProductInfoTitleSplitPopup: React.FC<Props> = ({ price }) => {
     React.useEffect(() => {
         const YaPay = window.YaPay;
 
@@ -43,9 +41,8 @@ const ProductInfoTitleSplitPopup: React.FC<ProductInfoTitleSplitPopupProps> = ({
             })
             .catch((err: any) => {
                 console.log(err);
-                // Не получилось создать платежную сессию.
             });
-    }, [state]);
+    }, []);
 
     return (
         <div className="product-content-info-split-popup">
@@ -68,7 +65,7 @@ const ProductInfoTitleSplitPopup: React.FC<ProductInfoTitleSplitPopupProps> = ({
                 Узнать свой лимит
             </a>
 
-            <div className="product-content-info-split-popup-widget" id="product-content-info-split-popup-widget"></div>
+            <div className="product-content-info-split-popup-widget" id="product-content-info-split-popup-widget" />
 
             <div className="product-content-info-split-popup-greater-split">
                 <h3 className="product-content-info-split-popup-greater-split__title">Улучшенный сплит</h3>
@@ -84,10 +81,6 @@ const ProductInfoTitleSplitPopup: React.FC<ProductInfoTitleSplitPopupProps> = ({
                     Оформить Улучшенный Сплит
                 </a>
             </div>
-
-            <button className="btn product-content-info-split-popup__btn" onClick={onClosePopup}>
-                Вернутся к товару
-            </button>
         </div>
     );
 };

@@ -4,10 +4,11 @@ import React from 'react';
 import { useScrollLock, useOnClickOutside } from 'usehooks-ts';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { Button } from '@/shared/ui/Button/Button';
 import { Popup as PopupModel } from '@/models/IPopup';
-import { Button } from '@/components';
 import { XIcon } from '@/assets/icons';
 import { Noop } from '@/types/functions';
+import { DEFAULT_TRANSITION } from '@/constants/animation';
 
 import './styles.sass';
 
@@ -40,7 +41,7 @@ export const Popup: React.FC<Props> = ({ isOpen, title, content, btn, onClose, c
                         initial={{ opacity: 0 }}
                         exit={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ duration: 0.2 }}
+                        transition={DEFAULT_TRANSITION}
                     />
 
                     <motion.div
@@ -49,12 +50,14 @@ export const Popup: React.FC<Props> = ({ isOpen, title, content, btn, onClose, c
                         initial={{ opacity: 0, y: 30 }}
                         exit={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.2 }}
+                        transition={DEFAULT_TRANSITION}
+                        role="dialog"
+                        aria-modal="true"
                     >
                         <div className="tc-popup-content" ref={PopupRef}>
                             <XIcon className="tc-popup-content-close" onClick={onCloseWrapper} />
 
-                            <h3 className="tc-popup-content__title">{title}</h3>
+                            {title && <h3 className="tc-popup-content__title">{title}</h3>}
 
                             <div className="tc-popup-content__content">
                                 {typeof content === 'string' || typeof content === 'number' ? (

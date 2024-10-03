@@ -2,8 +2,8 @@
 
 import React from 'react';
 
+import { Popup } from '@/shared/ui';
 import { usePopupInfo } from '@/hooks/usePopupInfo';
-import { NewPopup } from '@/components';
 
 export const PopupInfo: React.FC = () => {
     const {
@@ -12,7 +12,7 @@ export const PopupInfo: React.FC = () => {
     } = usePopupInfo();
 
     return (
-        <NewPopup
+        <Popup
             isOpen={isOpen}
             onClose={closePopupInfo}
             callbackClose={callbackClose}

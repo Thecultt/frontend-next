@@ -5,6 +5,8 @@ import React from 'react';
 import { getClassNames } from '@/functions/getClassNames';
 import { Noop } from '@/types/functions';
 
+import './styles.sass';
+
 interface Props extends React.PropsWithChildren {
     className?: string;
     isGreen?: boolean;

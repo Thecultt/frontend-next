@@ -19,9 +19,9 @@ import {
     CatalogFiltersSelections,
     CatalogFiltersGlassFrame,
     CatalogFiltersPriceDrop,
-    Skeleton,
     CatalogFiltersMetalType,
 } from '@/components';
+import { Skeleton } from '@/shared/ui';
 import { getClassNames } from '@/functions/getClassNames';
 import { CATEGORY_NAMES, CATEGORY_SLUGS, FILTER_CATEGORY_SLUGS } from '@/constants/catalog';
 import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';

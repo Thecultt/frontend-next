@@ -3,10 +3,11 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import { RenderRadioSelect, Popup, ProductInfoTitleSplitPopup } from '@/components';
+import { RenderRadioSelect, ProductInfoTitleSplitPopup } from '@/components';
 import { PAYMENTS_NAMES, PAYMENTS_METHODS } from '@/constants/pay';
 import { YANDEX_SPLIT_LIMIT } from '@/constants/app';
 import { useOrder } from '@/hooks/order/useOrder';
+import { usePopupInfo } from '@/hooks/usePopupInfo';
 
 interface OrderFormPaymentsProps {
     paymentValue: string;
@@ -16,8 +17,17 @@ const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) =
     const { cartSum: totalPrice, isJewelry } = useOrder();
 
     const [initWidget, setInitWidget] = React.useState(false);
-    const [isStateSplitPopup, setIsStateSplitPopup] = React.useState(false);
 
+    const { openPopupInfo } = usePopupInfo();
+
+    const openSplitPopup = () => {
+        openPopupInfo({
+            content: <ProductInfoTitleSplitPopup price={totalPrice} />,
+            btn: { label: 'Вернуться к выбору оплаты' },
+        });
+    };
+
+    // TODO это нужно?
     React.useEffect(() => {
         if (!initWidget && paymentValue === PAYMENTS_NAMES.yandexSplit) {
             const YaPay = window.YaPay;
@@ -54,56 +64,47 @@ const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) =
     }, [paymentValue]);
 
     return (
-        <>
-            <Popup state={isStateSplitPopup} setState={() => setIsStateSplitPopup(!isStateSplitPopup)}>
-                <ProductInfoTitleSplitPopup
-                    price={totalPrice}
-                    onClosePopup={() => setIsStateSplitPopup(!isStateSplitPopup)}
-                    state={isStateSplitPopup}
-                />
-            </Popup>
+        <div className="order-form-block order-form-block-payments">
+            <h3 className="order-form-block__title">Варианты оплаты</h3>
 
-            <div className="order-form-block order-form-block-payments">
-                <h3 className="order-form-block__title">Варианты оплаты</h3>
+            <div className="order-form-block-checkboxs-wrapper">
+                {isJewelry ? (
+                    <div className="order-form-block-checkbox">
+                        <Field
+                            component={RenderRadioSelect}
+                            label={PAYMENTS_METHODS.card.title}
+                            description={PAYMENTS_METHODS.card.description}
+                            type="radio"
+                            name="payment"
+                            value={PAYMENTS_METHODS.card.title}
+                            defaultChecked
+                        />
+                    </div>
+                ) : (
+                    Object.keys(PAYMENTS_METHODS).map((method, index) =>
+                        totalPrice > YANDEX_SPLIT_LIMIT &&
+                        PAYMENTS_METHODS[method].title === PAYMENTS_NAMES.yandexSplit ? null : (
+                            <div className="order-form-block-checkbox" key={`order-form-block-checkbox-${index}`}>
+                                <Field
+                                    component={RenderRadioSelect}
+                                    label={PAYMENTS_METHODS[method].title}
+                                    description={PAYMENTS_METHODS[method].description}
+                                    type="radio"
+                                    name="payment"
+                                    value={PAYMENTS_METHODS[method].title}
+                                    onClickInfoTag={
+                                        PAYMENTS_METHODS[method].title === PAYMENTS_NAMES.yandexSplit
+                                            ? openSplitPopup
+                                            : null
+                                    }
+                                />
+                            </div>
+                        ),
+                    )
+                )}
+            </div>
 
-                <div className="order-form-block-checkboxs-wrapper">
-                    {isJewelry ? (
-                        <div className="order-form-block-checkbox">
-                            <Field
-                                component={RenderRadioSelect}
-                                label={PAYMENTS_METHODS.card.title}
-                                description={PAYMENTS_METHODS.card.description}
-                                type="radio"
-                                name="payment"
-                                value={PAYMENTS_METHODS.card.title}
-                                defaultChecked
-                            />
-                        </div>
-                    ) : (
-                        Object.keys(PAYMENTS_METHODS).map((method, index) =>
-                            totalPrice > YANDEX_SPLIT_LIMIT &&
-                            PAYMENTS_METHODS[method].title === PAYMENTS_NAMES.yandexSplit ? null : (
-                                <div className="order-form-block-checkbox" key={`order-form-block-checkbox-${index}`}>
-                                    <Field
-                                        component={RenderRadioSelect}
-                                        label={PAYMENTS_METHODS[method].title}
-                                        description={PAYMENTS_METHODS[method].description}
-                                        type="radio"
-                                        name="payment"
-                                        value={PAYMENTS_METHODS[method].title}
-                                        onClickInfoTag={
-                                            PAYMENTS_METHODS[method].title === PAYMENTS_NAMES.yandexSplit
-                                                ? () => setIsStateSplitPopup(true)
-                                                : null
-                                        }
-                                    />
-                                </div>
-                            ),
-                        )
-                    )}
-                </div>
-
-                {/* {paymentValue === PAYMENTS_NAMES.yandexSplit && totalPrice <= YANDEX_SPLIT_LIMIT ? (
+            {/* {paymentValue === PAYMENTS_NAMES.yandexSplit && totalPrice <= YANDEX_SPLIT_LIMIT ? (
 				<div className="order-form-block-payments-split">
 					<div
 						className="order-form-block-payments-split-widget"
@@ -111,8 +112,7 @@ const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) =
 					></div>
 				</div>
 			) : null} */}
-            </div>
-        </>
+        </div>
     );
 };
 

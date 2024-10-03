@@ -17,22 +17,13 @@ export { default as RenderSelectArray } from './UI/RenderSelectArray';
 export { default as RenderTextarea } from './UI/RenderTextarea';
 export { default as Select } from './UI/Select';
 export { default as Textarea } from './UI/Textarea';
+export { BackButton } from './UI/BackButton';
 
 // New UI
 
 // TODO
-export { Checkbox as NewCheckbox } from './UI/Checkbox/Checkbox';
-export { BackButton } from './UI/BackButton';
-export { Spinner } from './UI/Spinner';
 export { NavLink } from './UI/NavLink/NavLink';
 export { BaseImage } from './UI/BaseImage/BaseImage';
-export { Badge } from './UI/Badge/Badge';
-export { Skeleton } from './UI/Skeleton/Skeleton';
-export { Button } from './UI/Button/Button';
-export { Input as NewInput } from './UI/Input/Input';
-export { Textarea as NewTextarea } from './UI/Textarea/Textarea';
-export { Popup as NewPopup } from './UI/Popup/Popup';
-export { Select as NewSelect } from './UI/Select/Select';
 
 // Formik
 

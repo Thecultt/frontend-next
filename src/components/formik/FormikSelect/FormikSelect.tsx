@@ -3,7 +3,7 @@
 import React from 'react';
 import { useField } from 'formik';
 
-import { NewSelect } from '@/components';
+import { Select } from '@/shared/ui/Select/Select';
 import { SelectProps } from '@/types/ui';
 
 interface Props extends Omit<SelectProps, 'value' | 'onChange'> {
@@ -22,7 +22,7 @@ export const FormikSelect: React.FC<Props> = ({ name, error: errorMessage, ...pr
 
     return (
         // @ts-ignore
-        <NewSelect
+        <Select
             {...props}
             value={field.value}
             error={touched && error ? error : errorMessage}

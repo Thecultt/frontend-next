@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { Badge } from '@/components';
+import { Badge } from '@/shared/ui';
 import { Product } from '@/models/IProduct';
 
 interface Props {

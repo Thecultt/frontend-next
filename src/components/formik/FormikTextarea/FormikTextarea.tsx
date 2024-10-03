@@ -3,8 +3,8 @@
 import React from 'react';
 import { useField } from 'formik';
 
+import { Textarea } from '@/shared/ui/Textarea/Textarea';
 import { TextareaProps } from '@/types/ui';
-import { NewTextarea } from '@/components';
 
 interface Props extends Omit<TextareaProps, 'value' | 'onChange' | 'name'> {
     name: string;
@@ -13,5 +13,5 @@ interface Props extends Omit<TextareaProps, 'value' | 'onChange' | 'name'> {
 export const FormikTextarea: React.FC<Props> = ({ name, error: errorMessage, ...props }) => {
     const [field, { error, touched }] = useField(name);
 
-    return <NewTextarea {...field} {...props} error={touched && error ? error : errorMessage} />;
+    return <Textarea {...field} {...props} error={touched && error ? error : errorMessage} />;
 };
