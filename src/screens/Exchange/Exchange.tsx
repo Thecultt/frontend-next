@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { APP_ROUTE } from '@/constants/routes';
 import { CabinetSellTypes } from '@/redux/types/ICabinetSell';
-import { BaseImage } from '@/components';
+import { BaseImage } from '@/shared/ui';
 
 import ExchangeMainImage from '@/assets/images/exchange/exchange-main-image.png';
 import ExchangeStepsImage1 from '@/assets/images/exchange/exchange-steps-image-1.png';

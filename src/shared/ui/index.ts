@@ -8,3 +8,4 @@ export { Skeleton } from './Skeleton/Skeleton';
 export { Spinner } from './Spinner/Spinner';
 export { FullscreenLoader } from './FullscreenLoader/FullscreenLoader';
 export { Popup } from './Popup/Popup';
+export { BaseImage } from './BaseImage/BaseImage';

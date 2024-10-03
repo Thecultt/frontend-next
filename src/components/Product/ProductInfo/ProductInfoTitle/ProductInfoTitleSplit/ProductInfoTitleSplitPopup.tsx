@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { BaseImage } from '@/components';
+import { BaseImage } from '@/shared/ui';
 import { EXTERNAL_LINKS } from '@/constants/routes';
 
 import { default as splitLogoPath } from '@/assets/images/logo-split.svg';

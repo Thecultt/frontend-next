@@ -23,7 +23,6 @@ export { BackButton } from './UI/BackButton';
 
 // TODO
 export { NavLink } from './UI/NavLink/NavLink';
-export { BaseImage } from './UI/BaseImage/BaseImage';
 
 // Formik
 

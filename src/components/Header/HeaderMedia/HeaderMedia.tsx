@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { getClassNames } from '@/functions/getClassNames';
-import { BaseImage } from '@/components';
+import { BaseImage } from '@/shared/ui';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { useScrollPoint } from '@/hooks/useScrollPoint';
 import { APP_ROUTE } from '@/constants/routes';

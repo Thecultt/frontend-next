@@ -3,7 +3,7 @@
 import React from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
-import { BaseImage } from '@/components';
+import { BaseImage } from '@/shared/ui';
 import { MEDIA_SIZES } from '@/constants/styles';
 
 import CinemaArtisticExhibit1Cover from '@/assets/images/cinema-artistic/cinema-artistic-exhibit-1-cover.jpg';
