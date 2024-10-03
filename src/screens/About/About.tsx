@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { BaseImage } from '@/components';
+import { BaseImage } from '@/shared/ui';
 
 import AboutMainImage from '@/assets/images/about/about-image-1.jpg';
 import AboutCulttImage from '@/assets/images/about/about-image-2.jpg';

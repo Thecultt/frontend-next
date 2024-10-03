@@ -7,9 +7,14 @@ interface CommonInputProps {
     theme?: 'white' | 'grey' | 'green';
 }
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, CommonInputProps {
+export interface InputProps
+    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>,
+        CommonInputProps {
     info?: React.ReactNode;
     maskProps?: Pick<MaskInputProps, 'mask' | 'maskChar' | 'alwaysShowMask'>;
+    hints?: string[];
+    value: string;
+    onChange?: (value: string) => void;
 }
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement>, CommonInputProps {}

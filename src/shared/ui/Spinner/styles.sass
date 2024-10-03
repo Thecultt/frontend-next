@@ -1,0 +1,16 @@
+@import "/src/assets/sass/variables"
+@import "/src/assets/sass/animations"
+@import "/src/assets/sass/mixin"
+
+.tc-spinner
+    width: 100%
+    +flexCenter
+
+    &__item
+        width: 40px
+        height: 40px
+        border: 3px solid $mainColor
+        border-bottom-color: transparent
+        border-radius: 50%
+        display: inline-block
+        animation: rotation 1s linear infinite

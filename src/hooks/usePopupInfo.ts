@@ -3,7 +3,6 @@
 import { useDispatch } from 'react-redux';
 
 import { PopupContent } from '@/models/IPopup';
-
 import { setOpenInfoPopup, setCloseInfoPopup } from '@/redux/actions/popup_info';
 
 import { useTypedSelector } from './useTypedSelector';

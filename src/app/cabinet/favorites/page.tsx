@@ -1,8 +1,8 @@
 import React from 'react';
 
-import NoSsr from '@/components/NoSsr/NoSsr';
-import { CabinetFavorites } from '@/screens';
+import { NoSsr } from '@/shared/ui';
 import { PrivateLayout } from '@/components/layouts/PrivateLayout/PrivateLayout';
+import { CabinetFavorites } from '@/screens';
 
 const CabinetFavoritesPage = () => (
     <NoSsr>

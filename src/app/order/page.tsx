@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NoSsr from '@/components/NoSsr/NoSsr';
+import { NoSsr } from '@/shared/ui';
 import { Order } from '@/screens';
 
 const OrderPage = () => (

@@ -1,9 +1,11 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 
 import { ISelection } from '@/models/ISelection';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { BaseImage } from '@/components';
+import { BaseImage } from '@/shared/ui';
 
 import './styles.sass';
 

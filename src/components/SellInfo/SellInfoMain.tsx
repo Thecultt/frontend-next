@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import CountUp from 'react-countup';
@@ -5,7 +7,8 @@ import { useMediaQuery } from 'usehooks-ts';
 
 import { MEDIA_SIZES } from '@/constants/styles';
 import { APP_ROUTE } from '@/constants/routes';
-import { BaseImage, Select } from '@/components';
+import { Select } from '@/components';
+import { BaseImage } from '@/shared/ui';
 import { Conditions } from '@/types/product';
 import { logoPath } from '@/assets/icons';
 

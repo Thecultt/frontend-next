@@ -248,7 +248,7 @@ const Contact: React.FC = () => (
                             />
                         </svg>
                     </a>
-                    <div className="contact-block-office hover-scale">
+                    {/* <div className="contact-block-office hover-scale">
                         <h3 className="contact-block-office__title">Адрес офиса</h3>
                         <p className="contact-block-office__description">
                             Мы находимся по адресу {CONTACTS.address} (3 этаж, офис THE CULTT) ежедневно с 10:00 до
@@ -262,7 +262,7 @@ const Contact: React.FC = () => (
                         >
                             Выбрать время
                         </a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

@@ -1,8 +1,8 @@
 import { Noop } from '@/types/functions';
 
 export interface PopupContent {
-    title: React.ReactNode;
     content: React.ReactNode;
+    title?: React.ReactNode;
     btn?: {
         label: string;
         href?: string;

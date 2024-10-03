@@ -1,9 +1,11 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 
 import { getClassNames } from '@/functions/getClassNames';
 import { useAuthUser } from '@/hooks/useAuthUser';
-import { NavLink } from '@/components';
+import { NavLink } from '@/shared/ui';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
 import { APP_ROUTE } from '@/constants/routes';
 

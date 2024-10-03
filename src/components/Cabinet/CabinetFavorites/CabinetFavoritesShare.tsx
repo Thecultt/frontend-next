@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { Button } from '@/components';
+import { Button } from '@/shared/ui';
 import { ShareIcon } from '@/assets/icons';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { APP_PROD_DOMAIN } from '@/constants/app';

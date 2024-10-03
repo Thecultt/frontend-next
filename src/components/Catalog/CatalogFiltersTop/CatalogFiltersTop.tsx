@@ -7,7 +7,8 @@ import { checkDeclension } from '@/functions/checkDeclension';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useCatalogFiltersTitle } from '@/hooks/catalog/useCatalogFiltersTitle';
 import { MEDIA_SIZES } from '@/constants/styles';
-import { CatalogFiltersTopBoutique, CatalogFiltersTopSort, CatalogFiltersTopSortMedia, Skeleton } from '@/components';
+import { CatalogFiltersTopBoutique, CatalogFiltersTopSort, CatalogFiltersTopSortMedia } from '@/components';
+import { Skeleton } from '@/shared/ui';
 
 interface Props {
     isOpenFiltersMedia: boolean;

@@ -1,4 +1,6 @@
+import { APP_PROD_DOMAIN } from '@/constants/app';
 import { PAYMENTS_NAMES } from '@/constants/pay';
+import { APP_ROUTE } from '@/constants/routes';
 
 interface orderPayParams {
     type: string;
@@ -10,7 +12,7 @@ interface orderPayParams {
     onSuccessCallback: () => void;
 }
 
-const orderPay = ({
+export const orderPay = ({
     type,
     orderId,
     totalPrice,
@@ -35,7 +37,7 @@ const orderPay = ({
                 { name: 'Доставка', price: deliveryPrice, quantity: 1 },
             ],
             sum: totalPrice,
-            successURL: `https://thecultt.com/order/${orderId}`,
+            successURL: `${APP_PROD_DOMAIN}/${orderId}`,
         };
 
         if (type === PAYMENTS_NAMES.installmentTinkoff) {
@@ -66,7 +68,7 @@ const orderPay = ({
         },
         {
             onFail: () => {
-                window.location.href = `/order/${orderId}`;
+                window.location.href = `${APP_ROUTE.order}/${orderId}`;
             },
             onComplete: (paymentResult: any) => {
                 if (paymentResult.success) {
@@ -78,8 +80,6 @@ const orderPay = ({
 
     // Закрываем окно через 15 минут
     setTimeout(() => {
-        window.location.href = `/order/${orderId}`;
+        window.location.href = `${APP_ROUTE.order}/${orderId}`;
     }, 900000);
 };
-
-export default orderPay;

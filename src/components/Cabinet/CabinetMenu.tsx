@@ -3,7 +3,8 @@
 import React from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
-import { CabinetMenuMedia, NavLink } from '@/components';
+import { CabinetMenuMedia } from '@/components';
+import { NavLink } from '@/shared/ui';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { APP_ROUTE } from '@/constants/routes';
 

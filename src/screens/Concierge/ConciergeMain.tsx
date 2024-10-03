@@ -13,8 +13,6 @@ import {
     ConciergeMainApplication,
 } from '@/components';
 
-import NoSsr from '@/components/NoSsr/NoSsr';
-
 const ConciergeMain: React.FC = () => {
     const dispatch = useDispatch();
 
@@ -53,14 +51,9 @@ const ConciergeMain: React.FC = () => {
         <section className="concierge">
             <div className="container">
                 <div className="concierge-wrapper">
-                    <NoSsr>
-                        <ConciergeMainBanner scrollToForm={scrollToForm} />
-                    </NoSsr>
-
+                    <ConciergeMainBanner scrollToForm={scrollToForm} />
                     <ConciergeMainCatalog scrollToForm={scrollToForm} />
-
                     <ConciergeMainService />
-
                     <ConciergeMainApplication />
                 </div>
             </div>

@@ -5,8 +5,9 @@ import { useMediaQuery } from 'usehooks-ts';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
+import { BaseImage } from '@/shared/ui';
+import { FooterMenuBlock, FooterEmailSubscribe } from '@/components';
 import { logoPath } from '@/assets/icons';
-import { FooterMenuBlock, FooterEmailSubscribe, BaseImage } from '@/components';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { getClassNames } from '@/functions/getClassNames';
 import { WaitingPopupType } from '@/types/waiting';

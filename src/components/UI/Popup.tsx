@@ -2,7 +2,7 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 
 import { getClassNames } from '@/functions/getClassNames';
-import NoSsr from '@/components/NoSsr/NoSsr';
+import { NoSsr } from '@/shared/ui';
 
 interface Props {
     state: boolean;

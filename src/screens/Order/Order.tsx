@@ -3,7 +3,8 @@
 import React from 'react';
 
 import { useAuthUser } from '@/hooks/useAuthUser';
-import { PageLoader, OrderForm, OrderProducts } from '@/components';
+import { OrderForm, OrderProducts } from '@/components';
+import { PageLoader } from '@/shared/ui';
 import { pushDataLayer } from '@/functions/pushDataLayer';
 import { useOrder } from '@/hooks/order/useOrder';
 

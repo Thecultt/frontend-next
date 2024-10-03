@@ -1,9 +1,11 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 
+import { BaseImage } from '@/shared/ui';
 import { APP_ROUTE } from '@/constants/routes';
 import ExchangeMainImage from '@/assets/images/exchange/exchange-main-image.png';
-import { BaseImage } from '../UI/BaseImage/BaseImage';
 
 const ProductExchange: React.FC = () => {
     return (
@@ -22,7 +24,11 @@ const ProductExchange: React.FC = () => {
                     </Link>
                 </div>
 
-                <BaseImage alt="" src={ExchangeMainImage.src} className="product-exchange__image" />
+                <BaseImage
+                    src={ExchangeMainImage.src}
+                    className="product-exchange__image"
+                    alt="Запускай Круговорот сумок с THE CULTT"
+                />
             </div>
         </div>
     );
