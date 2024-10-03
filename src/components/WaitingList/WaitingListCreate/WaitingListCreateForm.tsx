@@ -191,8 +191,13 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                                 </p>
 
                                 <p className="cabinet-waiting-list-form-auth-message-text__link">
-                                    <Link href={`#${ReglogStateTypesNotLogin.REGLOG}`}>Войдите</Link> или{' '}
-                                    <Link href={`#${ReglogStateTypesNotLogin.REGLOG}`}>Зарегистрируйтесь</Link>
+                                    <Link href={`#${ReglogStateTypesNotLogin.REGLOG}`} scroll={false} prefetch={false}>
+                                        Войдите
+                                    </Link>{' '}
+                                    или{' '}
+                                    <Link href={`#${ReglogStateTypesNotLogin.REGLOG}`} scroll={false} prefetch={false}>
+                                        Зарегистрируйтесь
+                                    </Link>
                                 </p>
                             </div>
                         </div>

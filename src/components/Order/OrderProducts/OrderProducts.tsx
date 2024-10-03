@@ -22,8 +22,7 @@ import { formatMoney } from '@/functions/formatMoney';
 import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
 import { useOrder } from '@/hooks/order/useOrder';
 import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
-
-import orderPay from '../orderPay';
+import { orderPay } from '@/functions/orderPay';
 
 const OrderProducts: React.FC = () => {
     const dispatch = useDispatch();

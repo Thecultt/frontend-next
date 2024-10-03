@@ -6,8 +6,9 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useOrder } from '@/hooks/order/useOrder';
 import { fetchHistoryOrders } from '@/redux/actions/history_orders';
-import { CabinetHistoryOrdersItem, CabinetHistoryOrdersNull, PageLoader } from '@/components';
-import orderPay from '@/components/Order/orderPay';
+import { CabinetHistoryOrdersItem, CabinetHistoryOrdersNull } from '@/components';
+import { PageLoader } from '@/shared/ui';
+import { orderPay } from '@/functions/orderPay';
 
 const CabinetHistoryOrders: React.FC = () => {
     const dispatch = useDispatch();

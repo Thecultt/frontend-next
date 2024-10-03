@@ -168,7 +168,9 @@ const OrderFormDelivery: React.FC = () => {
                               {!isLoggedIn && item.title === 'Доставка с примеркой (по Москве)' && (
                                   <p className="order-form-block-checkbox__login">
                                       Доступно только авторизованным пользователям -{' '}
-                                      <Link href={`#${ReglogStateTypesNotLogin.LOGIN}`}>Войти в аккаунт</Link>
+                                      <Link href={`#${ReglogStateTypesNotLogin.LOGIN}`} scroll={false} prefetch={false}>
+                                          Войти в аккаунт
+                                      </Link>
                                   </p>
                               )}
                           </div>

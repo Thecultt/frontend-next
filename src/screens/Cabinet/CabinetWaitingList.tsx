@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'usehooks-ts';
 
-import { CabinetWaitingListItem, PageLoader } from '@/components';
+import { CabinetWaitingListItem } from '@/components';
+import { PageLoader } from '@/shared/ui';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { fetchWaitingList } from '@/redux/actions/waiting';
 import { useTypedSelector } from '@/hooks/useTypedSelector';

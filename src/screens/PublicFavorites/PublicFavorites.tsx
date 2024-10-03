@@ -5,7 +5,8 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { PageLoader, CabinetFavoritesNull, ProductCard } from '@/components';
+import { CabinetFavoritesNull, ProductCard } from '@/components';
+import { PageLoader } from '@/shared/ui';
 import { fetchPublicFavorites } from '@/redux/actions/public_favorites';
 
 type PageParams = {

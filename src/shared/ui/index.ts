@@ -7,5 +7,7 @@ export { Badge } from './Badge/Badge';
 export { Skeleton } from './Skeleton/Skeleton';
 export { Spinner } from './Spinner/Spinner';
 export { FullscreenLoader } from './FullscreenLoader/FullscreenLoader';
+export { PageLoader } from './PageLoader/PageLoader';
 export { Popup } from './Popup/Popup';
 export { BaseImage } from './BaseImage/BaseImage';
+export { NavLink } from './NavLink/NavLink';

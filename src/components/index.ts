@@ -4,8 +4,8 @@ export { default as NoSsr } from './NoSsr/NoSsr';
 // UI
 export { default as Checkbox } from './UI/Checkbox';
 export { default as Input } from './UI/Input';
+// TODO delete Loader
 export { default as Loader } from './UI/Loader';
-export { default as PageLoader } from './UI/PageLoader';
 export { default as Popup } from './UI/Popup';
 export { default as RadioSelect } from './UI/RadioSelect';
 export { default as RenderCheckbox } from './UI/RenderCheckbox';
@@ -18,17 +18,6 @@ export { default as RenderTextarea } from './UI/RenderTextarea';
 export { default as Select } from './UI/Select';
 export { default as Textarea } from './UI/Textarea';
 export { BackButton } from './UI/BackButton';
-
-// New UI
-
-// TODO
-export { NavLink } from './UI/NavLink/NavLink';
-
-// Formik
-
-export { FormikInput } from './formik/FormikInput/FormikInput';
-export { FormikTextarea } from './formik/FormikTextarea/FormikTextarea';
-export { FormikSelect } from './formik/FormikSelect/FormikSelect';
 
 // Notifications
 export { default as NotificationsServer } from './UI/NotificationsServer/NotificationsServer';

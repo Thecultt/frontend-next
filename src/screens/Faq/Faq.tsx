@@ -3,7 +3,8 @@
 import React from 'react';
 import { redirect, useParams } from 'next/navigation';
 
-import { FaqAll, FaqBuyers, FaqSellers, FaqTheCultt, NavLink } from '@/components';
+import { FaqAll, FaqBuyers, FaqSellers, FaqTheCultt } from '@/components';
+import { NavLink } from '@/shared/ui';
 import FaqMainBannerImage from '@/assets/images/faq/faq-main-image.jpg';
 import { APP_ROUTE } from '@/constants/routes';
 

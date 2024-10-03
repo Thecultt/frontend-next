@@ -1,13 +1,8 @@
 import React from 'react';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-
-import {
-    PageLoader,
-    ConciergeMainCatalogCategories,
-    ConciergeMainCatalogBrand,
-    ConciergeMainCatalogProduct,
-} from '@/components';
+import { ConciergeMainCatalogCategories, ConciergeMainCatalogBrand, ConciergeMainCatalogProduct } from '@/components';
+import { PageLoader } from '@/shared/ui';
 
 interface Props {
     scrollToForm: () => void;

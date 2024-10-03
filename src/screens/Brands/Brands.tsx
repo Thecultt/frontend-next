@@ -5,7 +5,8 @@ import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { fetchBrands } from '@/redux/actions/brands';
-import { BrandsSearch, BrandsList, PageLoader } from '@/components';
+import { BrandsSearch, BrandsList } from '@/components';
+import { PageLoader } from '@/shared/ui';
 
 const Brands: React.FC = () => {
     const dispatch = useDispatch();

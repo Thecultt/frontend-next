@@ -5,7 +5,8 @@ import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { fetchFavorites } from '@/redux/actions/favorites';
-import { CabinetFavoritesShare, CabinetFavoritesNull, PageLoader, ProductCard } from '@/components';
+import { CabinetFavoritesShare, CabinetFavoritesNull, ProductCard } from '@/components';
+import { PageLoader } from '@/shared/ui';
 
 const CabinetFavorites: React.FC = () => {
     const dispatch = useDispatch();

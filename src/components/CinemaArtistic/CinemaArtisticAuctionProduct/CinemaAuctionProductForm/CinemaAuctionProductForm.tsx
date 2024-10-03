@@ -10,7 +10,8 @@ import { useAuthUser } from '@/hooks/useAuthUser';
 import { sendFormAuctionProduct } from '@/redux/actions/cinema_artistic';
 import { EXTERNAL_LINKS } from '@/constants/routes';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { Loader, FormikInput } from '@/components';
+import { Loader } from '@/components';
+import { FormikInput } from '@/shared/form';
 
 import { AuctionFieldName, getValidationSchema, IAuctionForm, INITIAL_VALUES } from './validate';
 
