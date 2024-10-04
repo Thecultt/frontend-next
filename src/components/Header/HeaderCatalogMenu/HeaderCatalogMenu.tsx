@@ -68,8 +68,8 @@ export const HeaderCatalogMenu = () => {
                         ref={ref}
                         key="menu"
                         className="header-catalog-menu"
-                        initial={{ opacity: 0, y: -30 }}
-                        exit={{ opacity: 0, y: -30 }}
+                        initial={{ opacity: 0, y: -10 }}
+                        exit={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={DEFAULT_TRANSITION}
                         style={style}

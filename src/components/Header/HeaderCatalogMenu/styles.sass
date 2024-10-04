@@ -1,26 +1,26 @@
 @import "/src/assets/sass/mixin"
 @import "/src/assets/sass/variables"
 
-.header-catalog-menu-backdrop
+@mixin catalogMenuMixin
+    $catalogMenuOffset: 46px
+
     position: fixed
-    top: calc(#{$headerHeight} + var(--top-message-height))
+    top: calc(#{$headerHeight} + var(--top-message-height) - #{$catalogMenuOffset})
     left: 0
     right: 0
     width: 100%
-    height: calc(100% - #{$headerHeight} - var(--top-message-height))
+    height: calc(100% - #{$headerHeight} - var(--top-message-height) + #{$catalogMenuOffset})
+
+.header-catalog-menu-backdrop
+    +catalogMenuMixin
     background-color: $blackTransparent
-    z-index: $catalogMenuZIndex
+    z-index: $headerZIndex + 1
 
 .header-catalog-menu
-    position: fixed
-    top: calc(#{$headerHeight} + var(--top-message-height))
-    left: 0
-    right: 0
-    width: 100%
-    height: calc(100% - #{$headerHeight} - var(--top-message-height))
+    +catalogMenuMixin
     max-height: 616px
     background-color: $white
-    z-index: $catalogMenuZIndex + 1
+    z-index: $headerZIndex + 2
 
     &__wrapper
         width: 100%
