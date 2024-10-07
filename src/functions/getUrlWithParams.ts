@@ -5,4 +5,5 @@ export const getUrlWithParams = (root: string, params: object) =>
         arrayFormat: 'comma',
         skipNulls: true,
         addQueryPrefix: true,
+        encodeValuesOnly: true,
     })}`;

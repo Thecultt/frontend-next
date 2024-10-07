@@ -11,18 +11,16 @@ import {
     FILTER_CATEGORY_SLUGS,
 } from '@/constants/catalog';
 import { APP_PROD_DOMAIN } from '@/constants/app';
-import { CATALOG_NEW_META, CATALOG_POPULAR_META, CATALOG_SALE_META, MAIN_META } from '@/constants/meta';
+import {
+    CATALOG_NEW_META,
+    CATALOG_POPULAR_META,
+    CATALOG_SALE_META,
+    CATEGORIES_META_DICTIONARY,
+    MAIN_META,
+} from '@/constants/meta';
 import { ICatalogPageProps } from '@/types/catalog';
 import { catalogAPI } from '@/services/api';
 import { parseCatalogSearchParams } from '@/functions/parseCatalogSearchParams';
-
-const CATEGORIES_DICTIONARY = {
-    [CATEGORY_SLUGS.bags]: 'брендовых сумок',
-    [CATEGORY_SLUGS.shoes]: 'брендовой обуви',
-    [CATEGORY_SLUGS.accessories]: 'брендовых аксессуаров',
-    [CATEGORY_SLUGS.decorations]: 'брендовых украшений',
-    [CATEGORY_SLUGS.jewelry]: 'ювелирных изделий',
-};
 
 const CATEGORIES_IMAGE_DICTIONARY = {
     [CATEGORY_SLUGS.bags]: `${APP_PROD_DOMAIN}/images/seo/category-bags.jpg`,
@@ -54,7 +52,7 @@ export const generateMetadata = ({ params }: ICatalogPageProps) => {
             throw new Error();
         }
 
-        const title = `Продажа ${CATEGORIES_DICTIONARY[category_slug] ?? ''} на ресейл платформе THE CULTT.`;
+        const title = `Продажа ${CATEGORIES_META_DICTIONARY[category_slug] ?? ''} на ресейл платформе THE CULTT.`;
         const description = `${CATEGORY_SLUG_NAMES[category_slug] ?? ''} мировых брендов на ресейл платформе THE CULTT, 100% подлинность гарантирована, самый большой ассортимент, доставка по России.`;
         const images = CATEGORIES_IMAGE_DICTIONARY[category_slug] ?? '';
 
