@@ -138,7 +138,6 @@ const CatalogFiltersBrands: React.FC = () => {
         setSearch(value);
     };
 
-    // TODO
     const onChangeSetBrand = (brand: string) => {
         const [brandTitle, brandSlug] = splitBrandValue(brand);
 
@@ -146,14 +145,7 @@ const CatalogFiltersBrands: React.FC = () => {
             ? selectedBrands.filter((selectedBrand) => selectedBrand !== brandTitle)
             : [...selectedBrands, brandTitle];
 
-        if (!category_slug) {
-            updateFilters({
-                brands: newBrands,
-            });
-            return;
-        }
-
-        if (brand_slug) {
+        if (category_slug && brand_slug) {
             if (brandSlug === brand_slug) {
                 router.push(
                     getCatalogFiltersUrl({
@@ -175,22 +167,12 @@ const CatalogFiltersBrands: React.FC = () => {
                 );
                 return;
             }
-        }
 
-        if (newBrands.length === 0 || newBrands.length > 1) {
-            updateFilters({
-                brands: newBrands,
-            });
-            return;
-        }
-
-        const foundBrand = brands.find((item) => splitBrandValue(item)[BRAND_TITLE_INDEX] === newBrands[0]);
-        if (foundBrand && splitBrandValue(foundBrand)[BRAND_SLUG_INDEX]) {
             router.push(
                 getCatalogFiltersUrl({
                     ...selectedFilters,
                     category_slug,
-                    brand_slug: splitBrandValue(foundBrand)[BRAND_SLUG_INDEX],
+                    brand_slug: brandSlug,
                 }),
             );
             return;

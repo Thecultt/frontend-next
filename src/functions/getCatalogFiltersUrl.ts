@@ -16,6 +16,7 @@ export const getCatalogFiltersUrl = (allFilters: ICatalogFilters) => {
         arrayFormat: 'comma',
         skipNulls: true,
         addQueryPrefix: true,
+        encodeValuesOnly: true,
     });
 
     let catalogUrl: string = APP_ROUTE.catalog;
