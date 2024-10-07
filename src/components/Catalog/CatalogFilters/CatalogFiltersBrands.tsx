@@ -2,19 +2,27 @@
 
 import React from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
+// @ts-ignore
+import { useRouter } from 'nextjs-toploader/app';
 
 import { CatalogFiltersBlockWrapper, Checkbox } from '@/components';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 import { CATEGORY_SLUG_NAMES } from '@/constants/catalog';
+import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
+
+const splitBrandValue = (value: string): [string, string] => value.split('|') as [string, string];
+const BRAND_TITLE_INDEX = 0;
+const BRAND_SLUG_INDEX = 1;
 
 interface FilterModelListProps {
     brands: string[];
     selectedBrands: string[];
+    selectedSlug?: string;
     onChange: (brands: string) => void;
 }
 
-const FilterBrandList: React.FC<FilterModelListProps> = ({ brands, selectedBrands, onChange }) => {
+const FilterBrandList: React.FC<FilterModelListProps> = ({ brands, selectedBrands, selectedSlug, onChange }) => {
     const scrollBlockRef = React.useRef(null);
 
     const rowVirtualizer = useVirtualizer({
@@ -33,29 +41,33 @@ const FilterBrandList: React.FC<FilterModelListProps> = ({ brands, selectedBrand
                     position: 'relative',
                 }}
             >
-                {rowVirtualizer.getVirtualItems().map((row) => (
-                    <div
-                        className="catalog-filters-block-content-row"
-                        key={row.index}
-                        style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: `${row.size}px`,
-                            transform: `translateY(${row.start}px)`,
-                            overflow: 'hidden',
-                        }}
-                    >
-                        <Checkbox
-                            id={`catalog-filters-block-content-brands-checkbox-${row.index}`}
-                            label={brands[row.index]}
-                            onChange={() => onChange(brands[row.index])}
-                            checked={selectedBrands.includes(brands[row.index])}
-                            textEllipsis
-                        />
-                    </div>
-                ))}
+                {rowVirtualizer.getVirtualItems().map((row) => {
+                    const [brandTitle, brandSlug] = splitBrandValue(brands[row.index]);
+
+                    return (
+                        <div
+                            className="catalog-filters-block-content-row"
+                            key={row.index}
+                            style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: `${row.size}px`,
+                                transform: `translateY(${row.start}px)`,
+                                overflow: 'hidden',
+                            }}
+                        >
+                            <Checkbox
+                                id={`catalog-filters-block-content-brands-checkbox-${row.index}`}
+                                label={brandTitle}
+                                onChange={() => onChange(brands[row.index])}
+                                checked={selectedBrands.includes(brandTitle) || selectedSlug === brandSlug}
+                                textEllipsis
+                            />
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );
@@ -63,9 +75,16 @@ const FilterBrandList: React.FC<FilterModelListProps> = ({ brands, selectedBrand
 
 const CatalogFiltersBrands: React.FC = () => {
     const [search, setSearch] = React.useState('');
+    const router = useRouter();
 
     const {
-        filters: { category_slug, categories: selectedCategories, brands: selectedBrands },
+        filters: {
+            category_slug,
+            brand_slug,
+            categories: selectedCategories,
+            brands: selectedBrands,
+            ...selectedFilters
+        },
         updateFilters,
     } = useCatalogFilters();
 
@@ -84,19 +103,26 @@ const CatalogFiltersBrands: React.FC = () => {
 
         const brandsSet = new Set<string>([]);
 
-        items.map((category) => {
+        items.forEach((category) => {
             if (fetchedCategories[category] && fetchedCategories[category].subsubcategories) {
-                Object.keys(fetchedCategories[category].subsubcategories).map((subsubcategory) => {
-                    Object.keys(fetchedCategories[category].subsubcategories[subsubcategory].manufacturers).map(
+                Object.keys(fetchedCategories[category].subsubcategories).forEach((subsubcategory) => {
+                    Object.keys(fetchedCategories[category].subsubcategories[subsubcategory].manufacturers).forEach(
                         (brand) => {
-                            brandsSet.add(brand);
+                            brandsSet.add(
+                                `${brand}|${
+                                    fetchedCategories[category].subsubcategories[subsubcategory].manufacturers[brand]
+                                        .slug ?? ''
+                                }`,
+                            );
                         },
                     );
                 });
             }
         });
 
-        return Array.from(brandsSet).sort((a, b) => a.localeCompare(b));
+        return Array.from(brandsSet).sort((a, b) =>
+            splitBrandValue(a)[BRAND_TITLE_INDEX].localeCompare(splitBrandValue(b)[BRAND_TITLE_INDEX]),
+        );
     }, [category_slug, fetchedCategories, selectedCategories]);
 
     const visibleBrands = React.useMemo(() => {
@@ -104,7 +130,7 @@ const CatalogFiltersBrands: React.FC = () => {
             return brands;
         }
 
-        return brands.filter((brand) => brand.toLowerCase().indexOf(search) !== -1);
+        return brands.filter((brand) => splitBrandValue(brand)[BRAND_TITLE_INDEX].toLowerCase().indexOf(search) !== -1);
     }, [brands, search]);
 
     const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,16 +138,75 @@ const CatalogFiltersBrands: React.FC = () => {
         setSearch(value);
     };
 
+    // TODO
     const onChangeSetBrand = (brand: string) => {
+        const [brandTitle, brandSlug] = splitBrandValue(brand);
+
+        const newBrands = selectedBrands.includes(brandTitle)
+            ? selectedBrands.filter((selectedBrand) => selectedBrand !== brandTitle)
+            : [...selectedBrands, brandTitle];
+
+        if (!category_slug) {
+            updateFilters({
+                brands: newBrands,
+            });
+            return;
+        }
+
+        if (brand_slug) {
+            if (brandSlug === brand_slug) {
+                router.push(
+                    getCatalogFiltersUrl({
+                        ...selectedFilters,
+                        category_slug,
+                    }),
+                );
+                return;
+            }
+
+            const foundBrand = brands.find((item) => splitBrandValue(item)[BRAND_SLUG_INDEX] === brand_slug);
+            if (foundBrand && splitBrandValue(foundBrand)[BRAND_TITLE_INDEX]) {
+                router.push(
+                    getCatalogFiltersUrl({
+                        ...selectedFilters,
+                        category_slug,
+                        brands: [splitBrandValue(foundBrand)[BRAND_TITLE_INDEX], brandTitle],
+                    }),
+                );
+                return;
+            }
+        }
+
+        if (newBrands.length === 0 || newBrands.length > 1) {
+            updateFilters({
+                brands: newBrands,
+            });
+            return;
+        }
+
+        const foundBrand = brands.find((item) => splitBrandValue(item)[BRAND_TITLE_INDEX] === newBrands[0]);
+        if (foundBrand && splitBrandValue(foundBrand)[BRAND_SLUG_INDEX]) {
+            router.push(
+                getCatalogFiltersUrl({
+                    ...selectedFilters,
+                    category_slug,
+                    brand_slug: splitBrandValue(foundBrand)[BRAND_SLUG_INDEX],
+                }),
+            );
+            return;
+        }
+
         updateFilters({
-            brands: selectedBrands.includes(brand)
-                ? selectedBrands.filter((selectedBrand) => selectedBrand !== brand)
-                : [...selectedBrands, brand],
+            brands: newBrands,
         });
     };
 
     return (
-        <CatalogFiltersBlockWrapper title="Бренды" disabled={!brands.length}>
+        <CatalogFiltersBlockWrapper
+            title="Бренды"
+            disabled={!brands.length}
+            defaultVisible={!!brand_slug || selectedBrands.length > 0}
+        >
             <div className="catalog-filters-block-content-brands-search">
                 <input
                     type="text"
@@ -145,7 +230,12 @@ const CatalogFiltersBrands: React.FC = () => {
                 </svg>
             </div>
 
-            <FilterBrandList brands={visibleBrands} selectedBrands={selectedBrands} onChange={onChangeSetBrand} />
+            <FilterBrandList
+                brands={visibleBrands}
+                selectedBrands={selectedBrands}
+                selectedSlug={brand_slug}
+                onChange={onChangeSetBrand}
+            />
         </CatalogFiltersBlockWrapper>
     );
 };
