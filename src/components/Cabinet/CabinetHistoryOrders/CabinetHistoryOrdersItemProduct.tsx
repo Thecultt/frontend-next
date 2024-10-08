@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { OrderProduct } from '@/models/IOrder';
 import { APP_ROUTE } from '@/constants/routes';
+import { formatMoney } from '@/functions/formatMoney';
 
 const CabinetHistoryOrdersItemProduct: React.FC<OrderProduct> = ({
     article,
@@ -57,9 +58,7 @@ const CabinetHistoryOrdersItemProduct: React.FC<OrderProduct> = ({
                     </span>
                 </div>
 
-                <p className="cabinet-history-orders-item-info-product-text-state__price">
-                    {price && price.toLocaleString('ru-RU')}₽
-                </p>
+                <p className="cabinet-history-orders-item-info-product-text-state__price">{formatMoney(price)}</p>
             </div>
         </Link>
     );
