@@ -1,37 +1,36 @@
 import React from 'react';
 import { Metadata } from 'next/types';
+import { notFound } from 'next/navigation';
 
-import type { ProductPage } from '@/models/IProduct';
-import { NoSsr } from '@/shared/ui';
 import { Product } from '@/screens';
-import $api from '@/http';
 import { APP_PROD_DOMAIN } from '@/constants/app';
 import { CATEGORY_NAMES } from '@/constants/catalog';
 import { MAIN_META } from '@/constants/meta';
-
-interface PageProps {
-    params: { article?: string };
-}
+import { catalogAPI } from '@/services/api';
+import { IProductPageProps } from '@/types/product';
 
 const CATEGORIES_DICTIONARY = {
     [CATEGORY_NAMES.bags]: 'сумку',
     [CATEGORY_NAMES.shoes]: 'обувь',
     [CATEGORY_NAMES.accessories]: 'аксессуар',
     [CATEGORY_NAMES.decorations]: 'украшение',
+    [CATEGORY_NAMES.jewelry]: 'ювелирное изделие',
 };
 
-export const generateMetadata = async ({ params }: PageProps) => {
+export const revalidate = 0;
+
+export const generateMetadata = async ({ params }: IProductPageProps) => {
     try {
         const { article } = params;
 
         if (!article) {
-            throw new Error();
+            throw new Error('Article not found');
         }
 
-        const { data } = await $api.get<ProductPage>(`/product/${article}`);
+        const data = await catalogAPI.getProductByArticle(article);
 
         if (!data) {
-            throw new Error();
+            throw new Error('Product data is empty');
         }
 
         const category = CATEGORIES_DICTIONARY[data.category] ?? '';
@@ -63,12 +62,20 @@ export const generateMetadata = async ({ params }: PageProps) => {
     }
 };
 
-export const revalidate = 0;
+const ProductDetailsPage = async ({ params }: IProductPageProps) => {
+    const { article } = params;
 
-const ProductDetailsPage = () => (
-    <NoSsr>
-        <Product />
-    </NoSsr>
-);
+    if (!article) {
+        return notFound();
+    }
+
+    const data = await catalogAPI.getProductByArticle(article);
+
+    if (!data) {
+        return notFound();
+    }
+
+    return <Product serverProductData={data} />;
+};
 
 export default ProductDetailsPage;

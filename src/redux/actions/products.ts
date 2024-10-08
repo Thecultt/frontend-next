@@ -191,6 +191,60 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
         });
 };
 
+export const viewProductPageWithData = (data: ProductPage) => async (dispatch: Dispatch<ProductTypes>) => {
+    const similarData = await catalogAPI.getProductSimilarByArticle(data.article);
+
+    if (similarData && similarData.items.length > 0) {
+        dispatch({
+            type: ProductActionTypes.SET_PRODUCTS_SIMILAR,
+            payload: similarData.items,
+        });
+    }
+
+    pushDataLayer('view_item', {
+        items: [
+            {
+                item_name: data.name,
+                item_id: `${data.article}`,
+                price: `${data.price}`,
+                item_brand: data.manufacturer,
+                item_category: data.category,
+                item_category2: data.subcategory,
+                item_category3: '-',
+                item_category4: '-',
+                item_list_name: 'Search Results',
+                item_list_id: data.article,
+                index: 1,
+                quantity: 1,
+            },
+        ],
+    });
+
+    try {
+        sendMindbox('Website.ViewProduct', {
+            viewProduct: {
+                product: {
+                    ids: {
+                        website: `${data.id}`,
+                    },
+                },
+                price: `${data.price}`,
+                customerAction: {
+                    customFields: {
+                        brand: `${data.manufacturer}`,
+                        coctoyanie: `${data.condition}`,
+                        defecti: `${data.nuances}`,
+                        kategoria: `${data.category}`,
+                        model: `${data.name}`,
+                    },
+                },
+            },
+        });
+    } catch (e) {
+        console.log(e);
+    }
+};
+
 export const setProductsTypeFetch = (type: CatalogFetchType) => ({
     type: ProductActionTypes.SET_PRODUCTS_TYPE_FETCH,
     payload: type,

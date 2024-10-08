@@ -33,6 +33,7 @@ export enum ProductActionTypes {
     SET_PRODUCTS_ITEMS = 'SET_PRODUCTS_ITEMS',
     SET_PRODUCTS_ITEM_BY_ARTICLE = 'SET_PRODUCTS_ITEM_BY_ARTICLE',
     SET_PRODUCTS_ITEM_BY_ARTICLE_IS_LOADED = 'SET_PRODUCTS_ITEM_BY_ARTICLE_IS_LOADED',
+    SET_PRODUCTS_SIMILAR = 'SET_PRODUCTS_SIMILAR',
     SET_PRODUCTS_ITEMS_MORE = 'SET_PRODUCTS_ITEMS_MORE',
     SET_PRODUCTS_ITEMS_PAGE = 'SET_PRODUCTS_ITEMS_PAGE',
     SET_PRODUCTS_IS_LOADED = 'SET_PRODUCTS_IS_LOADED',
@@ -120,6 +121,11 @@ interface setProductsScroll {
     payload: number;
 }
 
+interface setProductSimilar {
+    type: ProductActionTypes.SET_PRODUCTS_SIMILAR;
+    payload: Product[];
+}
+
 export type ProductTypes =
     | setProductsItems
     | setProductsItemByArticle
@@ -134,4 +140,5 @@ export type ProductTypes =
     | setProductsPageCount
     | setProductsItemsCount
     | setProductsLastSearchString
-    | setProductsScroll;
+    | setProductsScroll
+    | setProductSimilar;
