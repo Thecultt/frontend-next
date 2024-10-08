@@ -16,6 +16,7 @@ export const getCatalogFiltersUrl = (allFilters: ICatalogFilters) => {
         arrayFormat: 'comma',
         skipNulls: true,
         addQueryPrefix: true,
+        encodeValuesOnly: true,
     });
 
     let catalogUrl: string = APP_ROUTE.catalog;
@@ -25,6 +26,10 @@ export const getCatalogFiltersUrl = (allFilters: ICatalogFilters) => {
 
         if (subcategories_slug) {
             catalogUrl = `${catalogUrl}/${subcategories_slug}`;
+        }
+
+        if (brand_slug) {
+            catalogUrl = `${catalogUrl}/${brand_slug}`;
         }
     } else if (selection) {
         catalogUrl = `${APP_ROUTE.selections}/${selection}`;

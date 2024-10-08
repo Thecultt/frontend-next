@@ -87,7 +87,7 @@ const CatalogFilters: React.FC<Props> = ({ isOpenFiltersMedia, setIsOpenFiltersM
                 {(category_slug === CATEGORY_SLUGS.jewelry || selectedCategories.includes(CATEGORY_NAMES.jewelry)) && (
                     <CatalogFiltersMetalType />
                 )}
-                {!brand_slug && <CatalogFiltersBrands />}
+                {(!brand_slug || (category_slug && brand_slug)) && <CatalogFiltersBrands />}
                 {(!category_slug || ![CATEGORY_SLUGS.accessories, CATEGORY_SLUGS.shoes].includes(category_slug)) && (
                     <CatalogFiltersModels />
                 )}
