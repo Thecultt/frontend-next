@@ -27,8 +27,10 @@ const cart = (state = initialState, action: CartActions): CartState => {
     }
 
     if (action.type === CartActionTypes.ADD_CART_ITEMS) {
-        const newItems = state.items;
-        newItems[action.payload.article] = action.payload;
+        const newItems: ICartItemsState = {
+            ...state.items,
+            [action.payload.article]: action.payload,
+        };
         localStorageService?.setItem(LS_KEYS.cart, newItems);
 
         return {
@@ -38,8 +40,10 @@ const cart = (state = initialState, action: CartActions): CartState => {
     }
 
     if (action.type === CartActionTypes.CHANGE_CART_ITEMS) {
-        const newItems = state.items;
-        newItems[action.payload.article] = action.payload.data;
+        const newItems: ICartItemsState = {
+            ...state.items,
+            [action.payload.article]: action.payload.data,
+        };
         localStorageService?.setItem(LS_KEYS.cart, newItems);
 
         return {
@@ -49,13 +53,10 @@ const cart = (state = initialState, action: CartActions): CartState => {
     }
 
     if (action.type === CartActionTypes.CHANGE_CHECK_CART_ITEMS) {
-        const newItems = state.items;
-
-        newItems[action.payload.article] = {
-            ...newItems[action.payload.article],
-            checked: action.payload.status,
+        const newItems: ICartItemsState = {
+            ...state.items,
+            [action.payload.article]: { ...state.items[action.payload.article], checked: action.payload.status },
         };
-
         localStorageService?.setItem(LS_KEYS.cart, newItems);
 
         return {
@@ -65,9 +66,7 @@ const cart = (state = initialState, action: CartActions): CartState => {
     }
 
     if (action.type === CartActionTypes.REMOVE_CART_ITEMS) {
-        const newItems = state.items;
-        delete newItems[action.payload];
-
+        const { [action.payload]: _removedArticle, ...newItems } = state.items;
         localStorageService?.setItem(LS_KEYS.cart, newItems);
 
         return {

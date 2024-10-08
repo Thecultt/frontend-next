@@ -4,9 +4,10 @@ import React from 'react';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
 
+import { useAppSelector } from '@/hooks/redux/useAppSelector';
+import { selectSelectionsIsLoaded, selectSelectionsItems } from '@/redux/slices/selections/selectors';
 import { SELECTIONS_IDS } from '@/constants/catalog';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { MEDIA_SIZES_NUMBERS } from '@/constants/styles';
 
 import { SelectionSliderCard } from '../SelectionSliderCard/SelectionSliderCard';
@@ -17,7 +18,8 @@ import './styles.sass';
 export const SelectionsSlider = () => {
     const sliderRef = React.useRef<SwiperRef>(null);
 
-    const { items, isLoaded } = useTypedSelector(({ selections }) => selections);
+    const items = useAppSelector(selectSelectionsItems);
+    const isLoaded = useAppSelector(selectSelectionsIsLoaded);
 
     const onClickPrev = () => {
         sliderRef.current?.swiper.slidePrev();

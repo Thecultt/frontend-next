@@ -10,7 +10,6 @@ import { checkAvailabilityCartItems } from '@/redux/actions/cart';
 import { fetchFavorites } from '@/redux/actions/favorites';
 import { fetchFirstProductsCatalog } from '@/redux/actions/products';
 import { fetchProductsFilters } from '@/redux/actions/products_filters';
-import { fetchSelections } from '@/redux/actions/selections';
 import { fetchUser } from '@/redux/actions/user';
 import { NoSsr } from '@/shared/ui';
 import { StaticHeader } from '@/components/static/StaticHeader';
@@ -27,17 +26,23 @@ import {
 import { useReplaceLS } from '@/hooks/useReplaceLS';
 import { CATALOG_PAGES } from '@/constants/routes';
 import { useCart } from '@/hooks/catalog/useCart';
+import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
+import { useAppSelector } from '@/hooks/redux/useAppSelector';
+import { fetchSelections } from '@/redux/slices/selections/asyncActions';
+import { selectSelectionsIsLoaded } from '@/redux/slices/selections/selectors';
 
 import { ClientOnly } from './ClientOnly';
 import { Preloader } from './Preloader';
 
 export const App = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useDispatch();
+    // TODO rename dispatch
+    const appDispatch = useAppDispatch();
     const pathname = usePathname();
 
     const isLoadedFilters = useTypedSelector(({ products_filters }) => products_filters.isLoaded);
     const isLoadedProducts = useTypedSelector(({ products }) => products.isLoaded);
-    const isLoadedSelections = useTypedSelector(({ selections }) => selections.isLoaded);
+    const isLoadedSelections = useAppSelector(selectSelectionsIsLoaded);
 
     const { allCart } = useCart();
 
@@ -60,7 +65,7 @@ export const App = ({ children }: { children: React.ReactNode }) => {
         }
 
         if (!isLoadedSelections) {
-            dispatch(fetchSelections() as any);
+            appDispatch(fetchSelections());
         }
 
         dispatch(checkAvailabilityCartItems(allCart) as any);
