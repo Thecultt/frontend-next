@@ -1,7 +1,8 @@
 import $api from '@/http';
 import { AVAILABILITY_IDS, SORT } from '@/constants/catalog';
-import { ICatalogFilters } from '@/types/catalog';
-import { GetCatalogResponse } from '@/types/api';
+import type { ICatalogFilters } from '@/types/catalog';
+import type { GetCatalogResponse } from '@/types/api';
+import type { Product, ProductPage } from '@/models/IProduct';
 
 const MIN_PRICE_FROM = 1000;
 
@@ -80,6 +81,28 @@ const getCatalog = async (filters: ICatalogFilters): Promise<GetCatalogResponse>
     }
 };
 
+const getProductByArticle = async (article: string) => {
+    try {
+        const { data } = await $api.get<ProductPage>(`/product/${article}`);
+        return data;
+    } catch (e) {
+        console.error('getProductByArticle', e);
+        return null;
+    }
+};
+
+const getProductSimilarByArticle = async (article: string) => {
+    try {
+        const { data } = await $api.get<{ items: Product[] }>(`/product/${article}/similar`);
+        return data;
+    } catch (e) {
+        console.error('getProductSimilarByArticle', e);
+        return null;
+    }
+};
+
 export const catalogAPI = {
     getCatalog,
+    getProductByArticle,
+    getProductSimilarByArticle,
 };

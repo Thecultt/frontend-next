@@ -8,23 +8,21 @@ import { useMediaQuery } from 'usehooks-ts';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { APP_ROUTE } from '@/constants/routes';
 import { MEDIA_SIZES } from '@/constants/styles';
-import { CATEGORY_NAME_SLUGS } from '@/constants/catalog';
 
 interface Props {
     category: string;
+    categorySlug: string;
     brand: string;
+    brandSlug: string;
     model: string;
 }
 
-const ProductInfoBreadCrumbs: React.FC<Props> = ({ category, brand, model }) => {
+const ProductInfoBreadCrumbs: React.FC<Props> = ({ category, categorySlug, brand, brandSlug, model }) => {
     const router = useRouter();
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
 
-    const categorySlug: string | undefined = CATEGORY_NAME_SLUGS[category];
-    const categoryFilterParam = categorySlug ? { category_slug: categorySlug } : { categories: [category] };
-
     return (
-        <div className="product-content-info-bread-crumbs">
+        <nav className="product-content-info-bread-crumbs">
             {isMobile ? (
                 <button type="button" className="product-content-info-bread-crumbs-media-button" onClick={router.back}>
                     <svg
@@ -72,7 +70,7 @@ const ProductInfoBreadCrumbs: React.FC<Props> = ({ category, brand, model }) => 
                     </svg>
 
                     <Link
-                        href={getCatalogFiltersUrl(categoryFilterParam)}
+                        href={getCatalogFiltersUrl({ category_slug: categorySlug })}
                         className="product-content-info-bread-crumbs__item"
                     >
                         {category}
@@ -89,8 +87,8 @@ const ProductInfoBreadCrumbs: React.FC<Props> = ({ category, brand, model }) => 
 
                     <Link
                         href={getCatalogFiltersUrl({
-                            ...categoryFilterParam,
-                            brands: [brand],
+                            category_slug: categorySlug,
+                            brand_slug: brandSlug,
                         })}
                         className="product-content-info-bread-crumbs__item"
                     >
@@ -108,8 +106,8 @@ const ProductInfoBreadCrumbs: React.FC<Props> = ({ category, brand, model }) => 
 
                     <Link
                         href={getCatalogFiltersUrl({
-                            ...categoryFilterParam,
-                            brands: [brand],
+                            category_slug: categorySlug,
+                            brand_slug: brandSlug,
                             models: [model],
                         })}
                         className="product-content-info-bread-crumbs__item"
@@ -118,7 +116,7 @@ const ProductInfoBreadCrumbs: React.FC<Props> = ({ category, brand, model }) => 
                     </Link>
                 </>
             )}
-        </div>
+        </nav>
     );
 };
 

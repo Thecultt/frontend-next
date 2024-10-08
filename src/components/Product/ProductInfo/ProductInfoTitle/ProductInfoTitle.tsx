@@ -38,7 +38,9 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
         id,
         article,
         manufacturer,
+        manufacturer_slug,
         category,
+        category_slug,
         name,
         price,
         old_price,
@@ -66,9 +68,6 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
 
     const inCart = !!allCart.find((item) => item.id === id);
     const canBuy = !!availability && !is_trial;
-
-    const categorySlug: string | undefined = CATEGORY_NAME_SLUGS[category];
-    const categoryFilterParam = categorySlug ? { category_slug: categorySlug } : { categories: [category] };
 
     const handleAddClick = () => {
         if (inCart) {
@@ -124,8 +123,8 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
 
             <Link
                 href={getCatalogFiltersUrl({
-                    ...categoryFilterParam,
-                    brands: [manufacturer],
+                    category_slug,
+                    brand_slug: manufacturer_slug,
                 })}
                 className="product-content-info-title__brand"
             >
