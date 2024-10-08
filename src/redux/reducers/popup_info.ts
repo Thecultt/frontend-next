@@ -5,7 +5,7 @@ const initialState: PopupInfoState = {
     title: '',
     content: '',
     btn: undefined,
-    callbackClose: () => {},
+    callbackClose: undefined,
 };
 
 const popup_info = (state = initialState, action: PopupInfoActions): PopupInfoState => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import store from '@/redux/store';
+import { store } from '@/redux/store';
 import { setIsNotificationServerError } from '@/redux/actions/notifications_server';
 import { localStorageService } from '@/services/storage';
 import { LS_KEYS } from '@/constants/keys';
