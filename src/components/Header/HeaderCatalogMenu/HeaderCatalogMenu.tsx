@@ -167,12 +167,12 @@ export const HeaderCatalogMenu = () => {
                                                 key={index}
                                                 href={getCatalogFiltersUrl({
                                                     category_slug: selectedCategory.slug,
-                                                    brands: [brand],
+                                                    brand_slug: brand.slug,
                                                 })}
                                                 className="header-catalog-menu-nesting__link"
                                                 onClick={closeCatalogMenu}
                                             >
-                                                {brand}
+                                                {brand.title}
                                             </Link>
                                         ))}
                                     </div>

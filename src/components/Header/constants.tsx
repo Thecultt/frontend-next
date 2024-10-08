@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { CATEGORY_NAMES, CATEGORY_SLUGS } from '@/constants/catalog';
+import { BRAND_DICTIONARY } from '@/constants/brands';
 import { BagIcon, DiamondIcon, RingIcon, ShoesIcon, WalletIcon } from '@/assets/icons';
 
 import headerHoverImageBag from '@/assets/images/header/header-image-hover-menu-bag.jpg';
@@ -8,12 +9,17 @@ import headerHoverImageAccessories from '@/assets/images/header/header-image-hov
 import headerHoverImageShoes from '@/assets/images/header/header-image-hover-menu-shoes.jpg';
 import headerHoverImageDecoration from '@/assets/images/header/header-image-hover-menu-decoration.jpg';
 
+interface IHeaderMenuCategoryBrand {
+    title: string;
+    slug: string;
+}
+
 interface IHeaderMenuCategory {
     title: string;
     slug: string;
     image: string;
     types: string[];
-    brands: string[];
+    brands: IHeaderMenuCategoryBrand[];
     fullText: string;
     icon: React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>;
 }
@@ -33,23 +39,74 @@ export const HEADER_MENU_CATEGORIES: IHeaderMenuCategory[] = [
             'Сумка с ручками',
         ],
         brands: [
-            'Acne Studios',
-            'Balenciaga',
-            'Bottega Veneta',
-            'Burberry',
-            'Celine',
-            'Chanel',
-            'Chloe',
-            'Christian Dior',
-            'Fendi',
-            'Gucci',
-            'Hermes',
-            'Jil Sander',
-            'Loewe',
-            'Louis Vuitton',
-            'Prada',
-            'Saint Laurent',
-            'Wandler',
+            {
+                title: BRAND_DICTIONARY.acneStudios.title,
+                slug: BRAND_DICTIONARY.acneStudios.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.balenciaga.title,
+                slug: BRAND_DICTIONARY.balenciaga.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.bottegaVeneta.title,
+                slug: BRAND_DICTIONARY.bottegaVeneta.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.burberry.title,
+                slug: BRAND_DICTIONARY.burberry.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.celine.title,
+                slug: BRAND_DICTIONARY.celine.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.chanel.title,
+                slug: BRAND_DICTIONARY.chanel.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.chloe.title,
+                slug: BRAND_DICTIONARY.chloe.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.christianDior.title,
+                slug: BRAND_DICTIONARY.christianDior.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.fendi.title,
+                slug: BRAND_DICTIONARY.fendi.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.gucci.title,
+                slug: BRAND_DICTIONARY.gucci.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.hermes.title,
+                slug: BRAND_DICTIONARY.hermes.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.jilSander.title,
+                slug: BRAND_DICTIONARY.jilSander.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.loewe.title,
+                slug: BRAND_DICTIONARY.loewe.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.louisVuitton.title,
+                slug: BRAND_DICTIONARY.louisVuitton.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.prada.title,
+                slug: BRAND_DICTIONARY.prada.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.saintLaurent.title,
+                slug: BRAND_DICTIONARY.saintLaurent.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.wandler.title,
+                slug: BRAND_DICTIONARY.wandler.slug,
+            },
         ],
         fullText: 'Все сумки',
         icon: BagIcon,
@@ -71,23 +128,74 @@ export const HEADER_MENU_CATEGORIES: IHeaderMenuCategory[] = [
             'Туфли',
         ],
         brands: [
-            'Acne Studios',
-            'Alaia',
-            'Alexander Wang',
-            'Bottega Veneta',
-            'Celine',
-            'Chanel',
-            'Chloe',
-            'Ganni',
-            'Gia Borghini',
-            'Hereu',
-            'Hermes',
-            'Isabel Marant',
-            'JW Anderson',
-            'Mach & Mach',
-            'Maison Margiela',
-            'Manolo Blahnik',
-            'Proenza Schouler',
+            {
+                title: BRAND_DICTIONARY.acneStudios.title,
+                slug: BRAND_DICTIONARY.acneStudios.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.alaia.title,
+                slug: BRAND_DICTIONARY.alaia.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.alexanderWang.title,
+                slug: BRAND_DICTIONARY.alexanderWang.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.bottegaVeneta.title,
+                slug: BRAND_DICTIONARY.bottegaVeneta.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.celine.title,
+                slug: BRAND_DICTIONARY.celine.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.chanel.title,
+                slug: BRAND_DICTIONARY.chanel.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.chloe.title,
+                slug: BRAND_DICTIONARY.chloe.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.ganni.title,
+                slug: BRAND_DICTIONARY.ganni.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.giaBorghini.title,
+                slug: BRAND_DICTIONARY.giaBorghini.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.hereu.title,
+                slug: BRAND_DICTIONARY.hereu.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.hermes.title,
+                slug: BRAND_DICTIONARY.hermes.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.isabelMarant.title,
+                slug: BRAND_DICTIONARY.isabelMarant.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.jwAnderson.title,
+                slug: BRAND_DICTIONARY.jwAnderson.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.machMach.title,
+                slug: BRAND_DICTIONARY.machMach.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.maisonMargiela.title,
+                slug: BRAND_DICTIONARY.maisonMargiela.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.manoloBlahnik.title,
+                slug: BRAND_DICTIONARY.manoloBlahnik.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.proenzaSchouler.title,
+                slug: BRAND_DICTIONARY.proenzaSchouler.slug,
+            },
         ],
         fullText: 'Вся обувь',
         icon: ShoesIcon,
@@ -108,21 +216,66 @@ export const HEADER_MENU_CATEGORIES: IHeaderMenuCategory[] = [
             'Обложки и футляры',
         ],
         brands: [
-            'Balenciaga',
-            'Bottega Veneta',
-            'Brunello Cucinelli',
-            'Loro Piana',
-            'Celine',
-            'Chanel',
-            'Christian Dior',
-            'Fendi',
-            'Gucci',
-            'Hermes',
-            'Jil Sander',
-            'Louis Vuitton',
-            'Marni',
-            'Miu Miu',
-            'Prada',
+            {
+                title: BRAND_DICTIONARY.balenciaga.title,
+                slug: BRAND_DICTIONARY.balenciaga.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.bottegaVeneta.title,
+                slug: BRAND_DICTIONARY.bottegaVeneta.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.brunelloCucinelli.title,
+                slug: BRAND_DICTIONARY.brunelloCucinelli.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.loroPiana.title,
+                slug: BRAND_DICTIONARY.loroPiana.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.celine.title,
+                slug: BRAND_DICTIONARY.celine.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.chanel.title,
+                slug: BRAND_DICTIONARY.chanel.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.christianDior.title,
+                slug: BRAND_DICTIONARY.christianDior.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.fendi.title,
+                slug: BRAND_DICTIONARY.fendi.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.gucci.title,
+                slug: BRAND_DICTIONARY.gucci.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.hermes.title,
+                slug: BRAND_DICTIONARY.hermes.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.jilSander.title,
+                slug: BRAND_DICTIONARY.jilSander.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.louisVuitton.title,
+                slug: BRAND_DICTIONARY.louisVuitton.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.marni.title,
+                slug: BRAND_DICTIONARY.marni.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.miuMiu.title,
+                slug: BRAND_DICTIONARY.miuMiu.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.prada.title,
+                slug: BRAND_DICTIONARY.prada.slug,
+            },
         ],
         fullText: 'Все аксессуары',
         icon: WalletIcon,
@@ -133,21 +286,66 @@ export const HEADER_MENU_CATEGORIES: IHeaderMenuCategory[] = [
         image: headerHoverImageDecoration.src,
         types: ['Браслеты', 'Колье и подвески', 'Кольца', 'Часы', 'Броши'],
         brands: [
-            'Balenciaga',
-            'Bottega Veneta',
-            'Bulgari',
-            'Cartier',
-            'Celine',
-            'Chanel',
-            'Christian Dior',
-            'Gucci',
-            'Hermes',
-            'Jil Sander',
-            'Louis Vuitton',
-            'Miu Miu',
-            'Prada',
-            'Tiffany & Co.',
-            'Van Cleef & Arpels',
+            {
+                title: BRAND_DICTIONARY.balenciaga.title,
+                slug: BRAND_DICTIONARY.balenciaga.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.bottegaVeneta.title,
+                slug: BRAND_DICTIONARY.bottegaVeneta.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.bulgari.title,
+                slug: BRAND_DICTIONARY.bulgari.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.cartier.title,
+                slug: BRAND_DICTIONARY.cartier.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.celine.title,
+                slug: BRAND_DICTIONARY.celine.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.chanel.title,
+                slug: BRAND_DICTIONARY.chanel.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.christianDior.title,
+                slug: BRAND_DICTIONARY.christianDior.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.gucci.title,
+                slug: BRAND_DICTIONARY.gucci.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.hermes.title,
+                slug: BRAND_DICTIONARY.hermes.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.jilSander.title,
+                slug: BRAND_DICTIONARY.jilSander.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.louisVuitton.title,
+                slug: BRAND_DICTIONARY.louisVuitton.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.miuMiu.title,
+                slug: BRAND_DICTIONARY.miuMiu.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.prada.title,
+                slug: BRAND_DICTIONARY.prada.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.tiffanyCo.title,
+                slug: BRAND_DICTIONARY.tiffanyCo.slug,
+            },
+            {
+                title: BRAND_DICTIONARY.vanCleefArpels.title,
+                slug: BRAND_DICTIONARY.vanCleefArpels.slug,
+            },
         ],
         fullText: 'Все украшения',
         icon: RingIcon,

@@ -40,16 +40,20 @@ export const useCatalogFiltersTitle = () => {
             return filters.search;
         }
 
-        if (filters.category_slug) {
-            return CATEGORY_SLUG_NAMES[filters.category_slug];
-        }
-
         if (filters.brand_slug) {
             const foundBrand = getBrandNameBySlug(allBrands, filters.brand_slug);
 
             if (foundBrand) {
+                if (filters.category_slug) {
+                    return `${CATEGORY_SLUG_NAMES[filters.category_slug]} ${foundBrand.word}`;
+                }
+
                 return foundBrand.word;
             }
+        }
+
+        if (filters.category_slug) {
+            return CATEGORY_SLUG_NAMES[filters.category_slug];
         }
 
         if (filters.brands.length > 0) {
