@@ -58,7 +58,7 @@ const CabinetHistoryOrdersItemProduct: React.FC<OrderProduct> = ({
                 </div>
 
                 <p className="cabinet-history-orders-item-info-product-text-state__price">
-                    {price.toLocaleString('ru-RU')}₽
+                    {price && price.toLocaleString('ru-RU')}₽
                 </p>
             </div>
         </Link>
