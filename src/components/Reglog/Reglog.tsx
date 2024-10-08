@@ -40,7 +40,6 @@ const Reglog: React.FC = () => {
     const [state, setState] = React.useState(false);
     const [isChange, setIsChange] = React.useState(false);
 
-    const [_lsEmail, setLsEmail] = useLS(LS_KEYS.email, '');
     const [_lsRedirectReglog, setLsRedirectReglog, removeLsRedirectReglog] = useLS(LS_KEYS.redirectReglog, '');
 
     const { email } = useTypedSelector(({ check_email }) => check_email);
@@ -83,7 +82,6 @@ const Reglog: React.FC = () => {
     };
 
     const onSubmitCheckEmail = (data: any) => {
-        setLsEmail(data.email as string);
         dispatch(sendCheckEmail(data.email, checkEmailNavigate) as any);
     };
 

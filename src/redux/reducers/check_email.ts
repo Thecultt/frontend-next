@@ -5,7 +5,7 @@ import { CheckEmailState, CheckEmailActions, CheckEmailActionTypes } from '../ty
 
 const initialState: CheckEmailState = {
     isSend: false,
-    email: localStorageService?.getItem<string>(LS_KEYS.email, '') || '',
+    email: '',
     isExisting: false,
 };
 

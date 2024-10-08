@@ -47,7 +47,7 @@ const OrderProducts: React.FC = () => {
         const item = cartItems.find((item) => item.article === article);
 
         if (item) {
-            dispatch(removeCartItem(item));
+            dispatch(removeCartItem(item, user.email));
         }
 
         if (promocode.name) {

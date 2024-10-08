@@ -9,7 +9,7 @@ import { sendReachGoal } from '@/functions/yandex';
 
 import { LoginActions, LoginActionTypes } from '../types/ILogin';
 
-export const sendLogin = (data: { username: string | null; password: string }) => {
+export const sendLogin = (body: { username: string | null; password: string }) => {
     return async (dispatch: Dispatch<LoginActions>) => {
         dispatch({
             type: LoginActionTypes.SET_LOGIN_IS_SEND,
@@ -17,7 +17,7 @@ export const sendLogin = (data: { username: string | null; password: string }) =
         });
 
         return axios
-            .post(`${process.env.NEXT_PUBLIC_API_DOMEN}/login/`, data)
+            .post(`${process.env.NEXT_PUBLIC_API_DOMEN}/login/`, body)
             .then(({ data }) => {
                 localStorageService?.setItem(LS_KEYS.accessToken, data.access as string, { value: 1, unit: 'month' });
                 localStorageService?.setItem(LS_KEYS.refreshToken, data.refresh as string, { value: 1, unit: 'month' });
@@ -34,53 +34,11 @@ export const sendLogin = (data: { username: string | null; password: string }) =
 
                 try {
                     sendMindbox('Website.AuthorizeCustomer', {
-                        // "customerAction": {
-                        // 	"customFields": {
-                        // 		"brand": "<Бренд>",
-                        // 		"coctoyanie": "<Состояние>",
-                        // 		"defecti": "<Дефекты>",
-                        // 		"kategoria": "<Категория>",
-                        // 		"model": "<Модель>",
-                        // 		"ojidaniePoTcene": "<Ожидание по цене>",
-                        // 		"otpravilAnketyNaProdazy": "<Отправил анкету на продажу>",
-                        // 		"photo1": "<Фото 1>",
-                        // 		"photo2": "<Фото 2>",
-                        // 		"photo3": "<Фото 3>",
-                        // 		"photo4": "<Фото 4>",
-                        // 		"tovarIzKulta": "<Товар приобретен в Культе>",
-                        // 		"visitNaProdat": "<Визит на страницу Продать>"
-                        // 	}
-                        // },
                         customer: {
                             ids: {
                                 websiteID: `${data.id}`,
                             },
-                            // "discountCard": {
-                            // 	"ids": {
-                            // 		"number": "<Номер дисконтной карты>"
-                            // 	}
-                            // },
-                            // "birthDate": "<Дата рождения>",
-                            // "sex": "<Пол>",
-                            // "timeZone": "<Часовой пояс>",
-                            // "lastName": "<Фамилия>",
-                            // "firstName": "<Имя>",
-                            // "middleName": "<Отчество>",
-                            // "fullName": "<ФИО>",
-                            // "area": {
-                            // 	"ids": {
-                            // 		"externalId": "<Внешний идентификатор зоны>"
-                            // 	}
-                            // },
-                            email: `${localStorageService?.getItem<string>(LS_KEYS.email)}`,
-                            // "mobilePhone": "<Мобильный телефон>",
-                            // "customFields": {
-                            // 	"tipKlienta": "<Тип клиента>",
-                            // 	"gorod": "<Город>",
-                            // 	"istochnikPodpiski": "<Источник подписки>"
-                            // },
-                            // "subscriptions": [
-                            // ]
+                            email: `${body.username}`,
                         },
                         executionDateTimeUtc: new Date(),
                     });
