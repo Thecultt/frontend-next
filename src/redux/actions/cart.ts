@@ -5,7 +5,6 @@ import { ProductPage } from '@/models/IProduct';
 import { CartItem } from '@/models/ICartItem';
 import { sendMindbox } from '@/functions/mindbox';
 import { localStorageService } from '@/services/storage';
-import { LS_KEYS } from '@/constants/keys';
 import { pushDataLayer } from '@/functions/pushDataLayer';
 
 import { CartActionTypes, CartActions, ICartItemsState } from '../types/ICart';
@@ -50,7 +49,7 @@ export const checkAvailabilityCartItems = (items: CartItem[]) => async (dispatch
                         image: images[0],
                         manufacturer,
                         name,
-                        price,
+                        price: price ?? 0,
                         old_price,
                         availability,
                         is_trial,
@@ -68,7 +67,7 @@ export const checkAvailabilityCartItems = (items: CartItem[]) => async (dispatch
     });
 };
 
-export const addCartItem = (item: CartItem) => {
+export const addCartItem = (item: CartItem, email?: string) => {
     pushDataLayer('add_to_cart', {
         items: [
             {
@@ -98,7 +97,7 @@ export const addCartItem = (item: CartItem) => {
             pricePerItem: item.price,
         },
         customer: {
-            email: `${localStorageService?.getItem<string>(LS_KEYS.email, '')}`,
+            email: email ? email : '',
         },
     });
 
@@ -113,7 +112,7 @@ export const changeCheckCartItem = (article: string, status: boolean) => ({
     payload: { article, status },
 });
 
-export const removeCartItem = (item: CartItem) => {
+export const removeCartItem = (item: CartItem, email?: string) => {
     pushDataLayer('remove_from_cart', {
         items: [
             {
@@ -135,7 +134,7 @@ export const removeCartItem = (item: CartItem) => {
 
     sendMindbox('Website.ClearCart', {
         customer: {
-            email: `${localStorageService?.getItem<string>(LS_KEYS.email, '')}`,
+            email: email ? email : '',
         },
         removeProductFromList: {
             product: {

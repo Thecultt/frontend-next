@@ -118,6 +118,13 @@ const products = (state = initialState, action: ProductTypes): ProductsState => 
         };
     }
 
+    if (action.type === ProductActionTypes.SET_PRODUCTS_SIMILAR) {
+        return {
+            ...state,
+            itemByArticleSimilar: action.payload,
+        };
+    }
+
     return state;
 };
 

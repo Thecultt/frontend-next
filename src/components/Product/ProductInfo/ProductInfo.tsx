@@ -52,7 +52,7 @@ const ProductInfo: React.FC<Props> = ({ product, onBoutiquePopupVisible, onPartn
 
             <ProductInfoExchange canBuy={!!product.availability && !product.is_trial} />
 
-            {product.price >= 500000 && (!product.availability || product.is_trial) && (
+            {(product.price ?? 0) >= 500000 && (!product.availability || product.is_trial) && (
                 <ProductInfoConcierge article={product.article} />
             )}
 

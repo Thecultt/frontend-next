@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
 import { createTextMask } from 'redux-form-input-masks';
 import axios from 'axios';
@@ -12,12 +13,15 @@ import { useOrder } from '@/hooks/order/useOrder';
 import { RenderInput, RenderCheckbox } from '@/components';
 import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
 import { APP_ROUTE } from '@/constants/routes';
+import { setCheckEmailValue } from '@/redux/actions/check_email';
 
 interface Props {
     emailValue: string;
 }
 
 const OrderFormContact: React.FC<Props> = ({ emailValue }) => {
+    const dispatch = useDispatch();
+
     const { isLoggedIn, user } = useAuthUser();
     const { isJewelry, cartSum } = useOrder();
 
@@ -40,6 +44,8 @@ const OrderFormContact: React.FC<Props> = ({ emailValue }) => {
                     setIsExistsEmail(true);
                     setIsSending(false);
                 });
+
+            dispatch(setCheckEmailValue(emailValue));
         }
     }, [emailValueDebounce]);
 
@@ -97,7 +103,7 @@ const OrderFormContact: React.FC<Props> = ({ emailValue }) => {
                                             <div className="order-form-block-loggedin-text">
                                                 <h4 className="order-form-block-loggedin-text__title">
                                                     У вас уже есть учетная запись,{' '}
-                                                    <Link href={`${APP_ROUTE.order}?redirect=/order#reglog`}>
+                                                    <Link href={`${APP_ROUTE.order}?redirect=/order#login`}>
                                                         авторизоваться
                                                     </Link>
                                                 </h4>

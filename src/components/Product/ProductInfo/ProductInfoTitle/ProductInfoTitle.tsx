@@ -22,7 +22,7 @@ import { getUrlWithParams } from '@/functions/getUrlWithParams';
 import { formatMoney } from '@/functions/formatMoney';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { APP_ROUTE } from '@/constants/routes';
-import { CATEGORY_NAME_SLUGS, CATEGORY_NAMES } from '@/constants/catalog';
+import { CATEGORY_NAMES } from '@/constants/catalog';
 import { Noop } from '@/types/functions';
 
 import { ProductInfoTitleFavorites } from './ProductInfoTitleFavorites';
@@ -38,7 +38,9 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
         id,
         article,
         manufacturer,
+        manufacturer_slug,
         category,
+        category_slug,
         name,
         price,
         old_price,
@@ -67,9 +69,6 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
     const inCart = !!allCart.find((item) => item.id === id);
     const canBuy = !!availability && !is_trial;
 
-    const categorySlug: string | undefined = CATEGORY_NAME_SLUGS[category];
-    const categoryFilterParam = categorySlug ? { category_slug: categorySlug } : { categories: [category] };
-
     const handleAddClick = () => {
         if (inCart) {
             const orderPath = !is_jewelry
@@ -94,7 +93,7 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
             subcategory,
             name,
             image: images[0],
-            price,
+            price: price ?? 0,
             old_price,
             availability,
             is_trial,
@@ -124,8 +123,8 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
 
             <Link
                 href={getCatalogFiltersUrl({
-                    ...categoryFilterParam,
-                    brands: [manufacturer],
+                    category_slug,
+                    brand_slug: manufacturer_slug,
                 })}
                 className="product-content-info-title__brand"
             >
@@ -160,7 +159,7 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
             </div>
 
             {/* TODO to const */}
-            {!is_jewelry && price <= 150000 && <ProductInfoTitleSplit price={price} disabled={!canBuy} />}
+            {!is_jewelry && (price ?? 0) <= 150000 && <ProductInfoTitleSplit price={price ?? 0} disabled={!canBuy} />}
 
             <div className="product-content-info-title-btn">
                 {canBuy ? (

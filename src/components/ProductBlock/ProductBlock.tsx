@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { getClassNames } from '@/functions/getClassNames';
+import { formatMoney } from '@/functions/formatMoney';
 import { useWaitingData } from '@/hooks/catalog/useWaitingData';
 import { Product } from '@/models/IProduct';
 import { WaitingPopupType } from '@/types/waiting';
@@ -204,12 +205,10 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
                             </div>
 
                             <div className="product-block-text-price">
-                                <h3 className="product-block-text-price__price">{price.toLocaleString('ru-RU')}₽</h3>
+                                <h3 className="product-block-text-price__price">{formatMoney(price)}</h3>
 
                                 {old_price ? (
-                                    <p className="product-block-text-price__oldprice">
-                                        {old_price.toLocaleString('ru-RU')}₽
-                                    </p>
+                                    <p className="product-block-text-price__oldprice">{formatMoney(old_price)}</p>
                                 ) : null}
                             </div>
 

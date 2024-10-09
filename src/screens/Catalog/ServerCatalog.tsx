@@ -2,26 +2,37 @@ import React from 'react';
 import type { ItemList as SchemaItemList, Product as SchemaProduct, WithContext } from 'schema-dts';
 
 import { FullscreenLoader } from '@/shared/ui';
-import CatalogProductsNull from '@/components/Catalog/CatalogProducts/CatalogProductsNull';
 import { GetCatalogResponse } from '@/types/api';
 import { APP_ROUTE } from '@/constants/routes';
 import { APP_PROD_DOMAIN } from '@/constants/app';
 import { CATALOG_PRODUCTS_LIMIT, CATEGORY_SLUG_NAMES, CATEGORY_SLUGS } from '@/constants/catalog';
 
 interface Props {
-    serverCatalogData?: GetCatalogResponse;
+    serverCatalogData?: GetCatalogResponse | null;
     mainTitle?: string;
 }
 
-const ServerCatalog: React.FC<Props> = ({ serverCatalogData, mainTitle }) => {
+const ServerCatalogNotFound = () => (
+    <>
+        <FullscreenLoader />
+        <div className="static-catalog-not-found">
+            <h2 className="static-catalog-not-found__title">Подходящих результатов не найдено</h2>
+            <p className="static-catalog-not-found__description">
+                Проверьте, правильно ли введен запрос или воспользуйтесь фильтрами
+            </p>
+        </div>
+    </>
+);
+
+export const ServerCatalog: React.FC<Props> = ({ serverCatalogData, mainTitle }) => {
     if (!serverCatalogData) {
-        return null;
+        return <ServerCatalogNotFound />;
     }
 
     const { items, current_page } = serverCatalogData;
 
     if (!items.length) {
-        return <CatalogProductsNull />;
+        return <ServerCatalogNotFound />;
     }
 
     const productsJsonLd: WithContext<SchemaItemList> = {
@@ -110,5 +121,3 @@ const ServerCatalog: React.FC<Props> = ({ serverCatalogData, mainTitle }) => {
         </>
     );
 };
-
-export default ServerCatalog;

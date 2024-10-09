@@ -86,9 +86,12 @@ const CatalogCategoryPage = async (props: ICatalogPageProps) => {
         return notFound();
     }
 
-    const data = await catalogAPI.getCatalog(parseCatalogSearchParams(props));
-
-    return <Catalog serverCatalogData={data} mainTitle={CATEGORY_SLUG_NAMES[category_slug]} />;
+    try {
+        const { data } = await catalogAPI.getCatalog(parseCatalogSearchParams(props));
+        return <Catalog serverCatalogData={data} mainTitle={CATEGORY_SLUG_NAMES[category_slug]} />;
+    } catch (e) {
+        return <Catalog mainTitle={CATEGORY_SLUG_NAMES[category_slug]} />;
+    }
 };
 
 export default CatalogCategoryPage;

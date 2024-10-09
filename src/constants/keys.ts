@@ -21,7 +21,6 @@ export const LS_KEYS = {
     utm: 'utm',
     headerVisitMessage: 'header_visit_message',
     headerSubscribeMessage: 'header_subscribe_message',
-    email: 'email',
     waiting: 'waiting',
     redirectReglog: 'redirect_reglog',
 };

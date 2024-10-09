@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { formatMoney } from '@/functions/formatMoney';
 import { OrderProduct } from '@/models/IOrder';
 
 const OrderStatusProduct: React.FC<OrderProduct> = ({ images, manufacturer, model_name, condition, price }) => {
@@ -37,7 +38,7 @@ const OrderStatusProduct: React.FC<OrderProduct> = ({ images, manufacturer, mode
                         {condition}
                     </span>
                 </div>
-                <p className="order-status-content-good-text__price">{price.toLocaleString('ru-RU')}₽</p>
+                <p className="order-status-content-good-text__price">{formatMoney(price)}</p>
             </div>
         </div>
     );

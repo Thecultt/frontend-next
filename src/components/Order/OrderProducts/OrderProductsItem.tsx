@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { APP_ROUTE } from '@/constants/routes';
 import { getClassNames } from '@/functions/getClassNames';
+import { formatMoney } from '@/functions/formatMoney';
 import { CartItem } from '@/models/ICartItem';
 
 interface OrderProductsItemProps extends CartItem {
@@ -88,9 +89,7 @@ const OrderProductsItem: React.FC<OrderProductsItemProps> = ({
                             is_trial ? (
                                 <p className="order-products-item-content-text__availability">На примерке</p>
                             ) : (
-                                <p className="order-products-item-content-text__sum">
-                                    {price.toLocaleString('ru-RU')}₽
-                                </p>
+                                <p className="order-products-item-content-text__sum">{formatMoney(price)}</p>
                             )
                         ) : (
                             <p className="order-products-item-content-text__availability">Нет в наличии</p>
