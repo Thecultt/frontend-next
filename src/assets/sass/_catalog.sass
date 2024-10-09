@@ -604,6 +604,27 @@
 				&:hover .product-block-cover
 					padding-top: calc(150% - 60px)
 
+		&-concierge-block-wrapper
+			height: auto
+
+		&-concierge-block
+			display: flex
+			justify-content: center
+			align-items: center
+			flex-direction: column
+			text-align: center
+
+			height: 88%
+
+			background-color: $grey1
+			border-radius: 12px
+
+			margin-bottom: 12px
+
+			&__title
+				margin-top: 15px
+				font-size: 14px
+
 		&-null
 			width: 100%
 
@@ -819,6 +840,12 @@
 				// 	width: 75%
 
 		&-product
+			&-concierge-block
+				height: 83%
+
+				&__title
+					font-size: 12px
+
 			&-pagination
 				&-pages
 					&-item

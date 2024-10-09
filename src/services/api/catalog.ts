@@ -3,10 +3,11 @@ import { AVAILABILITY_IDS, SORT } from '@/constants/catalog';
 import type { ICatalogFilters } from '@/types/catalog';
 import type { GetCatalogResponse } from '@/types/api';
 import type { Product, ProductPage } from '@/models/IProduct';
+import { CatalogFetchType } from '@/redux/types/IProducts';
 
 const MIN_PRICE_FROM = 1000;
 
-const getCatalog = async (filters: ICatalogFilters) => {
+const getCatalog = async (filters: ICatalogFilters, typeFetch?: CatalogFetchType) => {
     const params = new URLSearchParams();
 
     if (filters.search) {
@@ -65,7 +66,14 @@ const getCatalog = async (filters: ICatalogFilters) => {
     }
 
     params.append('sort_by', filters.sort ?? SORT.shuffle);
+
     params.append('page', String(filters.page ?? 1));
+
+    if (typeFetch === CatalogFetchType.Page) {
+        params.append('page_size', '19');
+    } else {
+        params.append('page_size', '20');
+    }
 
     return $api.get<GetCatalogResponse>('/catalog_v2', { params });
 };
