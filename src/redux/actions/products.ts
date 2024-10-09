@@ -67,7 +67,10 @@ export const fetchProductsCatalog =
 
             const {
                 data: { total_pages, total_items, items },
-            } = await catalogAPI.getCatalog(filters, typeFetch);
+            } = await catalogAPI.getCatalog({
+                ...filters,
+                page_size: typeFetch === CatalogFetchType.Page ? 19 : 20,
+            });
 
             pushDataLayer('view_item_list', {
                 items: items.map((item, index) => ({

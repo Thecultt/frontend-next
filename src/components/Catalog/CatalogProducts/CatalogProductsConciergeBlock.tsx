@@ -2,11 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 
 import { Button } from '@/shared/ui';
+import { APP_ROUTE } from '@/constants/routes';
 
 const CatalogProductsConciergeBlock: React.FC = () => {
     return (
         <Link
-            href={'/concierge?source=website&medium=catalog&campaign=concierge_snippet'}
+            href={`${APP_ROUTE.concierge}?utm_source=website&utm_medium=catalog&utm_campaign=concierge_snippet`}
             className="catalog-product-concierge-block-wrapper"
         >
             <div className="catalog-product-concierge-block">
