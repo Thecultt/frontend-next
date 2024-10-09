@@ -6,6 +6,7 @@ import { localStorageService } from '@/services/storage';
 import { LS_KEYS } from '@/constants/keys';
 import { sendMindbox } from '@/functions/mindbox';
 import { sendReachGoal } from '@/functions/yandex';
+import { pushDataLayer } from '@/functions/pushDataLayer';
 
 import { LoginActions, LoginActionTypes } from '../types/ILogin';
 
@@ -22,17 +23,9 @@ export const sendLogin = (body: { username: string | null; password: string }) =
                 localStorageService?.setItem(LS_KEYS.accessToken, data.access as string, { value: 1, unit: 'month' });
                 localStorageService?.setItem(LS_KEYS.refreshToken, data.refresh as string, { value: 1, unit: 'month' });
 
-                window?.dataLayer?.push({ ecommerce: null }); // Clear the previous ecommerce object.
-                window?.dataLayer?.push({
-                    event: 'login',
-                    ecommerce: {
-                        timestamp: Math.floor(Date.now() / 1000),
-                    },
-                });
-
-                sendReachGoal('login_password');
-
                 try {
+                    pushDataLayer('login');
+                    sendReachGoal('login_password');
                     sendMindbox('Website.AuthorizeCustomer', {
                         customer: {
                             ids: {
