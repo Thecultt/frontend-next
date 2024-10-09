@@ -224,8 +224,8 @@ const OrderProducts: React.FC = () => {
                     : 0,
         };
 
-        if (isJewelry && cartPrice >= JEWELRY_PASSPORT_SUM) {
-            requestData.passport = passportValue;
+        if (isJewelry && cartPrice >= JEWELRY_PASSPORT_SUM && passportValue) {
+            requestData.passport_data = passportValue;
         }
 
         dispatch(sendCreateOrder(requestData, (orderId: number, orderNum: string) => pay(orderId, orderNum)) as any);
