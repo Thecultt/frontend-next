@@ -2,7 +2,12 @@
 
 import React from 'react';
 
-import { CatalogProductsPagination, CatalogProductsNull, ProductCard } from '@/components';
+import {
+    CatalogProductsPagination,
+    CatalogProductsNull,
+    ProductCard,
+    CatalogProductsConciergeBlock,
+} from '@/components';
 import { Skeleton } from '@/shared/ui';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { createFakeArray } from '@/functions/createFakeArray';
@@ -19,7 +24,15 @@ const CatalogProducts = () => {
             ) : (
                 <>
                     <div className="catalog-product-blocks-wrapper">
-                        {!isFetchPage && items.map((item, index) => <ProductCard key={index} productData={item} />)}
+                        {!isFetchPage && (
+                            <>
+                                {items.map((item, index) => (
+                                    <ProductCard key={index} productData={item} />
+                                ))}
+
+                                <CatalogProductsConciergeBlock />
+                            </>
+                        )}
 
                         {isFetch &&
                             createFakeArray(CATALOG_PRODUCTS_LIMIT).map((_, index) => (

@@ -126,6 +126,7 @@ export { default as CatalogFiltersMetalType } from './Catalog/CatalogFilters/Cat
 export { default as CatalogProducts } from './Catalog/CatalogProducts/CatalogProducts';
 export { default as CatalogProductsNull } from './Catalog/CatalogProducts/CatalogProductsNull';
 export { default as CatalogProductsPagination } from './Catalog/CatalogProducts/CatalogProductsPagination';
+export { default as CatalogProductsConciergeBlock } from './Catalog/CatalogProducts/CatalogProductsConciergeBlock';
 export { CatalogProductsSection } from './Catalog/CatalogProductsSection/CatalogProductsSection';
 
 // Product

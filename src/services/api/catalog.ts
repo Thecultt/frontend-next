@@ -65,7 +65,9 @@ const getCatalog = async (filters: ICatalogFilters) => {
     }
 
     params.append('sort_by', filters.sort ?? SORT.shuffle);
+
     params.append('page', String(filters.page ?? 1));
+    params.append('page_size', String(filters.page_size));
 
     return $api.get<GetCatalogResponse>('/catalog_v2', { params });
 };
