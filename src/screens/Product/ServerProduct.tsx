@@ -37,7 +37,7 @@ export const ServerProduct: React.FC<Props> = ({ data }) => {
             '@type': 'Offer',
             url: `${APP_PROD_DOMAIN}${APP_ROUTE.product}/${data.article}`,
             priceCurrency: 'RUB',
-            price: data.price,
+            price: data.price ?? 0,
             availability:
                 !!data.availability && !data.is_trial ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
         },

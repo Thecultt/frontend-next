@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { getClassNames } from '@/functions/getClassNames';
+import { formatMoney } from '@/functions/formatMoney';
 import { CartItem } from '@/models/ICartItem';
 import { APP_ROUTE } from '@/constants/routes';
 
@@ -86,7 +87,7 @@ const CartItemBlock: React.FC<CartItemBlockProps> = ({
                             is_trial ? (
                                 <p className="cart-item-content-text__availability">На примерке</p>
                             ) : (
-                                <p className="cart-item-content-text__sum">{price.toLocaleString('ru-RU')}₽</p>
+                                <p className="cart-item-content-text__sum">{formatMoney(price)}</p>
                             )
                         ) : (
                             <p className="cart-item-content-text__availability">Нет в наличии</p>

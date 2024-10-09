@@ -16,7 +16,9 @@ export const generateMetadata = async ({ params }: ICatalogPageProps) => {
             throw new Error();
         }
 
-        const { selections } = await selectionsAPI.getSelections();
+        const {
+            data: { selections },
+        } = await selectionsAPI.getSelections();
         const foundSelection = selections.find((item) => item.id === +selection_id);
 
         if (!foundSelection) {
@@ -24,7 +26,7 @@ export const generateMetadata = async ({ params }: ICatalogPageProps) => {
         }
 
         return {
-            title: foundSelection.title,
+            title: `${foundSelection.title} на ресейл платформе THE CULTT.`,
             description: foundSelection.description,
         } satisfies Metadata;
     } catch (e) {
@@ -33,18 +35,28 @@ export const generateMetadata = async ({ params }: ICatalogPageProps) => {
 };
 
 const SelectionPage = async (props: ICatalogPageProps) => {
-    const data = await catalogAPI.getCatalog(parseCatalogSearchParams(props));
+    try {
+        const { data } = await catalogAPI.getCatalog(parseCatalogSearchParams(props));
 
-    let mainTitle: string | undefined;
-    const selectionId = props.params.selection_id;
+        let mainTitle: string | undefined;
+        const selectionId = props.params.selection_id;
 
-    if (selectionId) {
-        const { selections } = await selectionsAPI.getSelections();
-        const foundSelection = selections.find((item) => item.id === +selectionId);
-        mainTitle = foundSelection?.title ?? '';
+        if (selectionId) {
+            try {
+                const {
+                    data: { selections },
+                } = await selectionsAPI.getSelections();
+                const foundSelection = selections.find((item) => item.id === +selectionId);
+                mainTitle = foundSelection?.title ?? '';
+            } catch (e) {
+                mainTitle = 'Подборки';
+            }
+        }
+
+        return <Catalog serverCatalogData={data} mainTitle={mainTitle} />;
+    } catch (e) {
+        return <Catalog />;
     }
-
-    return <Catalog serverCatalogData={data} mainTitle={mainTitle} />;
 };
 
 export default SelectionPage;

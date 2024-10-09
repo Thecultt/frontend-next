@@ -10,7 +10,7 @@ import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 import { fetchProductsCatalog, setLastSearchString } from '@/redux/actions/products';
 import { CatalogBanner, CatalogFiltersTop, CatalogFilters, CatalogProducts } from '@/components';
 
-const ClientCatalog: React.FC = () => {
+export const ClientCatalog: React.FC = () => {
     const dispatch = useDispatch();
 
     const pathname = usePathname();
@@ -67,5 +67,3 @@ const ClientCatalog: React.FC = () => {
         </section>
     );
 };
-
-export default ClientCatalog;

@@ -27,7 +27,7 @@ export const generateMetadata = async ({ params }: IProductPageProps) => {
             throw new Error('Article not found');
         }
 
-        const data = await catalogAPI.getProductByArticle(article);
+        const { data } = await catalogAPI.getProductByArticle(article);
 
         if (!data) {
             throw new Error('Product data is empty');
@@ -36,7 +36,7 @@ export const generateMetadata = async ({ params }: IProductPageProps) => {
         const category = CATEGORIES_DICTIONARY[data.category] ?? '';
 
         const title = `Купить ${category} ${data.name} на ресейл платформе THE CULTT.`;
-        const description = `Купить ${category} ${data.name} за ${data.price} руб. на ресейл платформе THE CULTT, 100% подлинность гарантирована, доставка по России.`;
+        const description = `Купить ${category} ${data.name} за ${data.price ?? 0} руб. на ресейл платформе THE CULTT, 100% подлинность гарантирована, доставка по России.`;
         const images = data.images[0] || '';
 
         return {
@@ -63,19 +63,19 @@ export const generateMetadata = async ({ params }: IProductPageProps) => {
 };
 
 const ProductDetailsPage = async ({ params }: IProductPageProps) => {
-    const { article } = params;
+    try {
+        const { article } = params;
 
-    if (!article) {
+        if (!article) {
+            return new Error('Article not found');
+        }
+
+        const { data } = await catalogAPI.getProductByArticle(article);
+
+        return <Product serverProductData={data} />;
+    } catch (e) {
         return notFound();
     }
-
-    const data = await catalogAPI.getProductByArticle(article);
-
-    if (!data) {
-        return notFound();
-    }
-
-    return <Product serverProductData={data} />;
 };
 
 export default ProductDetailsPage;
