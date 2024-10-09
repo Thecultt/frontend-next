@@ -605,7 +605,8 @@
 					padding-top: calc(150% - 60px)
 
 		&-concierge-block-wrapper
-			height: auto
+			display: flex
+			flex-direction: column
 
 		&-concierge-block
 			display: flex
@@ -613,8 +614,7 @@
 			align-items: center
 			flex-direction: column
 			text-align: center
-
-			height: 88%
+			flex: 1
 
 			background-color: $grey1
 			border-radius: 12px
@@ -836,13 +836,8 @@
 			&-text
 				padding: 45px 0
 
-				// &__description
-				// 	width: 75%
-
 		&-product
 			&-concierge-block
-				height: 83%
-
 				&__title
 					font-size: 12px
 
