@@ -3,11 +3,11 @@ import React from 'react';
 import { GetCatalogResponse } from '@/types/api';
 import { NoSsr } from '@/shared/ui';
 
-import ClientCatalog from './ClientCatalog';
-import ServerCatalog from './ServerCatalog';
+import { ClientCatalog } from './ClientCatalog';
+import { ServerCatalog } from './ServerCatalog';
 
 interface Props {
-    serverCatalogData?: GetCatalogResponse;
+    serverCatalogData?: GetCatalogResponse | null;
     mainTitle?: string;
 }
 
