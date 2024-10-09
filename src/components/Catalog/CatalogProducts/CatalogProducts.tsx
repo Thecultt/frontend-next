@@ -2,7 +2,12 @@
 
 import React from 'react';
 
-import { CatalogProductsPagination, CatalogProductsNull, ProductCard } from '@/components';
+import {
+    CatalogProductsPagination,
+    CatalogProductsNull,
+    ProductCard,
+    CatalogProductsConciergeBlock,
+} from '@/components';
 import { Skeleton } from '@/shared/ui';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { createFakeArray } from '@/functions/createFakeArray';
@@ -25,6 +30,8 @@ const CatalogProducts = () => {
                             createFakeArray(CATALOG_PRODUCTS_LIMIT).map((_, index) => (
                                 <Skeleton key={index} className="product-card-skeleton" />
                             ))}
+
+                        <CatalogProductsConciergeBlock />
                     </div>
 
                     {itemsCount > CATALOG_PRODUCTS_LIMIT && <CatalogProductsPagination />}

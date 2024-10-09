@@ -42,6 +42,7 @@ export interface ICatalogFilters {
     price_drop?: boolean;
     sort?: SortType;
     page?: number;
+    page_size?: number;
     search?: string;
 
     category_slug?: string;
