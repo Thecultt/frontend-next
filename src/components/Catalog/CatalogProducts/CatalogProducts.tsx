@@ -24,14 +24,20 @@ const CatalogProducts = () => {
             ) : (
                 <>
                     <div className="catalog-product-blocks-wrapper">
-                        {!isFetchPage && items.map((item, index) => <ProductCard key={index} productData={item} />)}
+                        {!isFetchPage && (
+                            <>
+                                {items.map((item, index) => (
+                                    <ProductCard key={index} productData={item} />
+                                ))}
+
+                                <CatalogProductsConciergeBlock />
+                            </>
+                        )}
 
                         {isFetch &&
                             createFakeArray(CATALOG_PRODUCTS_LIMIT).map((_, index) => (
                                 <Skeleton key={index} className="product-card-skeleton" />
                             ))}
-
-                        <CatalogProductsConciergeBlock />
                     </div>
 
                     {itemsCount > CATALOG_PRODUCTS_LIMIT && <CatalogProductsPagination />}
