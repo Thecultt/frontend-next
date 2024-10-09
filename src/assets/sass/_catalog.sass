@@ -605,25 +605,42 @@
 					padding-top: calc(150% - 60px)
 
 		&-concierge-block-wrapper
-			height: auto
+			width: 100%
+
+			display: flex
+			justify-content: space-between
+			flex-direction: column
+
+			overflow: hidden
 
 		&-concierge-block
-			display: flex
-			justify-content: center
-			align-items: center
-			flex-direction: column
-			text-align: center
-
-			height: 88%
-
-			background-color: $grey1
+			width: 100%
+			position: relative
+			padding-top: $productImageAspectRatio
 			border-radius: 12px
+			background-color: $lightBackgroundColor
+			overflow: hidden
 
 			margin-bottom: 12px
 
-			&__title
-				margin-top: 15px
-				font-size: 14px
+			&-content
+				position: absolute
+
+				width: 100%
+				height: 100%
+
+				top: 0
+				left: 0
+
+				display: flex
+				justify-content: center
+				align-items: center
+				flex-direction: column
+				text-align: center
+
+				&__title
+					margin-top: 15px
+					font-size: 14px
 
 		&-null
 			width: 100%
@@ -836,13 +853,8 @@
 			&-text
 				padding: 45px 0
 
-				// &__description
-				// 	width: 75%
-
 		&-product
 			&-concierge-block
-				height: 83%
-
 				&__title
 					font-size: 12px
 
