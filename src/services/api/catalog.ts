@@ -6,7 +6,7 @@ import type { Product, ProductPage } from '@/models/IProduct';
 
 const MIN_PRICE_FROM = 1000;
 
-const getCatalog = async (filters: ICatalogFilters): Promise<GetCatalogResponse> => {
+const getCatalog = async (filters: ICatalogFilters) => {
     const params = new URLSearchParams();
 
     if (filters.search) {
@@ -67,39 +67,13 @@ const getCatalog = async (filters: ICatalogFilters): Promise<GetCatalogResponse>
     params.append('sort_by', filters.sort ?? SORT.shuffle);
     params.append('page', String(filters.page ?? 1));
 
-    try {
-        const { data } = await $api.get<GetCatalogResponse>('/catalog_v2', { params });
-        return data;
-    } catch (e) {
-        console.error('getCatalog', e);
-        return {
-            total_pages: 0,
-            current_page: 0,
-            total_items: 0,
-            items: [],
-        };
-    }
+    return $api.get<GetCatalogResponse>('/catalog_v2', { params });
 };
 
-const getProductByArticle = async (article: string) => {
-    try {
-        const { data } = await $api.get<ProductPage>(`/product/${article}`);
-        return data;
-    } catch (e) {
-        console.error('getProductByArticle', e);
-        return null;
-    }
-};
+const getProductByArticle = async (article: string) => $api.get<ProductPage>(`/product/${article}`);
 
-const getProductSimilarByArticle = async (article: string) => {
-    try {
-        const { data } = await $api.get<{ items: Product[] }>(`/product/${article}/similar`);
-        return data;
-    } catch (e) {
-        console.error('getProductSimilarByArticle', e);
-        return null;
-    }
-};
+const getProductSimilarByArticle = async (article: string) =>
+    $api.get<{ items: Product[] }>(`/product/${article}/similar`);
 
 export const catalogAPI = {
     getCatalog,

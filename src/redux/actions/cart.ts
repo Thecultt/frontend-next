@@ -49,7 +49,7 @@ export const checkAvailabilityCartItems = (items: CartItem[]) => async (dispatch
                         image: images[0],
                         manufacturer,
                         name,
-                        price,
+                        price: price ?? 0,
                         old_price,
                         availability,
                         is_trial,

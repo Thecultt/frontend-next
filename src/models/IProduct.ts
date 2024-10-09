@@ -33,7 +33,7 @@ export interface ProductPage {
     model_name: string;
     model_name_slug: string;
 
-    price: number;
+    price: number | null;
     old_price: number | null;
     store_price: number;
     condition: string;

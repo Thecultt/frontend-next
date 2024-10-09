@@ -21,8 +21,8 @@ export const generateMetadata = async ({ params }: ICatalogPageProps) => {
             throw new Error();
         }
 
-        const { brands } = await brandsAPI.getBrands();
-        const foundBrand = getBrandNameBySlug(brands, brand_slug);
+        const { data } = await brandsAPI.getBrands();
+        const foundBrand = getBrandNameBySlug(data.brands, brand_slug);
 
         if (!foundBrand) {
             throw new Error();
@@ -59,20 +59,26 @@ const CatalogCategoryBrandPage = async (props: ICatalogPageProps) => {
         return notFound();
     }
 
-    const data = await catalogAPI.getCatalog(parseCatalogSearchParams(props));
-    const { brands } = await brandsAPI.getBrands();
-    const foundBrand = getBrandNameBySlug(brands, brand_slug);
+    try {
+        const { data } = await catalogAPI.getCatalog(parseCatalogSearchParams(props));
 
-    return (
-        <Catalog
-            serverCatalogData={data}
-            mainTitle={
-                foundBrand
-                    ? `${CATEGORY_SLUG_NAMES[category_slug]} ${foundBrand.word}`
-                    : CATEGORY_SLUG_NAMES[category_slug]
-            }
-        />
-    );
+        let mainTitle: string | undefined;
+        try {
+            const {
+                data: { brands },
+            } = await brandsAPI.getBrands();
+            const foundBrand = getBrandNameBySlug(brands, brand_slug);
+            mainTitle = foundBrand
+                ? `${CATEGORY_SLUG_NAMES[category_slug]} ${foundBrand.word}`
+                : CATEGORY_SLUG_NAMES[category_slug];
+        } catch (e) {
+            mainTitle = CATEGORY_SLUG_NAMES[category_slug];
+        }
+
+        return <Catalog serverCatalogData={data} mainTitle={mainTitle} />;
+    } catch (e) {
+        return <Catalog />;
+    }
 };
 
 export default CatalogCategoryBrandPage;

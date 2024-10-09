@@ -61,7 +61,7 @@ export const ProductInfoTitleFavorites: React.FC<Props> = ({ productData }) => {
                 sendRemoveFavorite({
                     id,
                     article,
-                    price,
+                    price: price ?? 0,
                     old_price: old_price ?? 0,
                     store_price,
                     condition,
@@ -88,7 +88,7 @@ export const ProductInfoTitleFavorites: React.FC<Props> = ({ productData }) => {
             sendSaveFavorite({
                 id,
                 article,
-                price,
+                price: price ?? 0,
                 old_price: old_price ?? 0,
                 store_price,
                 condition,
