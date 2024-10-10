@@ -62,85 +62,71 @@ const Visit: React.FC = () => (
                         )}
 
                         <p className="visit-main-text__description">{description}</p>
-
-                        {VISIT_AVAILABLE && (
-                            <div className="visit-main-text-btn">
-                                <a
-                                    href={EXTERNAL_LINKS.clientVisit}
-                                    className="btn visit-main-text-btn__btn"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    Хочу купить
-                                </a>
-
-                                <a
-                                    href={EXTERNAL_LINKS.sellerVisit}
-                                    className="btn-regular visit-main-text-btn__btn"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    Хочу продать
-                                </a>
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>
         </div>
 
-        {VISIT_AVAILABLE && (
-            <div className="container">
-                <div className="visit-wrapper">
-                    <div className="visit-service">
-                        <div className="visit-service-block">
-                            <h2 className="visit-service-block__title">Для покупателя</h2>
-                            <p className="visit-service-block__subtitle">
-                                Если вы покупатель - примерьте сумки и аксессуары лучших дизайнеров из коллекции THE
-                                CULTT.
-                            </p>
-                            <p className="visit-service-block__description">
-                                *Для примерки доступно до 5 аксессуаров из актуального на момент визита наличия
-                            </p>
-                        </div>
+        <div className="container">
+            <div className="visit-wrapper">
+                <div className="visit-office">
+                    <div className="visit-office-block">
+                        <h2 className="visit-office-block__title">Адрес офиса</h2>
+                        <p className="visit-office-block__subtitle">
+                            Мы находимся по адресу <span>{CONTACTS.address}</span> с понедельника по пятницу с 10:00 до
+                            19:00.
+                            <br />
+                            Для посещения необходимо забронировать время!
+                        </p>
+                    </div>
+                </div>
 
-                        <div className="visit-service-block">
-                            <h2 className="visit-service-block__title">Для продавца</h2>
+                <div className="visit-service">
+                    <div className="visit-service-block">
+                        <h2 className="visit-service-block__title">Для покупателя</h2>
+                        <p className="visit-service-block__subtitle">
+                            Если вы покупатель - примерьте сумки и аксессуары лучших дизайнеров из коллекции THE CULTT.
+                        </p>
+                        <p className="visit-service-block__description">
+                            *Для примерки доступно до 5 аксессуаров из актуального на момент визита наличия
+                        </p>
+                    </div>
 
-                            <p className="visit-service-block__subtitle">
-                                <ul>
-                                    <li>
-                                        Обратите внимание на критерии отбора и{' '}
-                                        <Link href={APP_ROUTE.sell.infoBrands}>бренд-лист</Link> — какие аксессуары мы
-                                        принимаем.
-                                    </li>
+                    <div className="visit-service-block">
+                        <h2 className="visit-service-block__title">Для продавца</h2>
 
-                                    <li>
-                                        <a href={EXTERNAL_LINKS.clientVisit} target="_blank" rel="noreferrer">
-                                            Выберите время
-                                        </a>{' '}
-                                        для визита к нам в офис.
-                                    </li>
+                        <p className="visit-service-block__subtitle">
+                            <ul>
+                                <li>
+                                    Обратите внимание на критерии отбора и{' '}
+                                    <Link href={APP_ROUTE.sell.infoBrands}>бренд-лист</Link> — какие аксессуары мы
+                                    принимаем.
+                                </li>
 
-                                    <li>Возьмите с собой паспорт для оформления сделки.</li>
+                                <li>
+                                    <a href={EXTERNAL_LINKS.clientVisit} target="_blank" rel="noreferrer">
+                                        Выберите время
+                                    </a>{' '}
+                                    для визита к нам в офис.
+                                </li>
 
-                                    <li>
-                                        Наши эксперты оценят лоты, проведут аутентификацию и согласуют с вами условия.
-                                    </li>
+                                <li>Возьмите с собой паспорт для оформления сделки.</li>
 
-                                    <li>
-                                        Весь остальной процесс продажи мы возьмем на себя — вам останется только
-                                        получить деньги на карту.
-                                    </li>
-                                </ul>
-                            </p>
-                            {/* <p className="visit-service-block__subtitle">
+                                <li>Наши эксперты оценят лоты, проведут аутентификацию и согласуют с вами условия.</li>
+
+                                <li>
+                                    Весь остальной процесс продажи мы возьмем на себя — вам останется только получить
+                                    деньги на карту.
+                                </li>
+                            </ul>
+                        </p>
+                        {/* <p className="visit-service-block__subtitle">
                                 Если вы продавец - встретьтесь с нашим
                                 экспертом, чтобы узнать, сколько вы сможете
                                 заработать на своих аксессуарах, и оставьте их
                                 для продажи через наш сервис.
                             </p> */}
-                            {/* <p className="visit-service-block__description">
+                        {/* <p className="visit-service-block__description">
                                 Услуга доступна для передачи на продажу
                                 аксессуаров, соответсвующих нашему бренд-листу{" "}
                                 <a href="https://thecultt.com/prodat">
@@ -151,37 +137,10 @@ const Visit: React.FC = () => (
                                 **Для оформления сделки понадобятся паспортные
                                 данные
                             </p> */}
-                        </div>
-                    </div>
-
-                    <div className="visit-office">
-                        <div className="visit-office-block">
-                            <h2 className="visit-office-block__title">Адрес офиса</h2>
-                            <p className="visit-office-block__subtitle">
-                                Мы находимся по адресу {CONTACTS.address} (3 этаж, офис THE CULTT) ежедневно с 10:00 до
-                                21:00. Для посещения необходима регистрация!
-                            </p>
-
-                            <div className="visit-office-block-btn">
-                                <a
-                                    href="https://calendly.com/thecultt/visit?month=2024-06"
-                                    className="btn visit-office-block-btn__btn"
-                                >
-                                    Хочу купить
-                                </a>
-
-                                <a
-                                    href="https://calendly.com/thecultt_2023/visitsellers"
-                                    className="btn-regular visit-office-block-btn__btn"
-                                >
-                                    Хочу продать
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        )}
+        </div>
     </section>
 );
 

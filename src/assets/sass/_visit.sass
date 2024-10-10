@@ -39,37 +39,54 @@
 
 		&-text
 			width: 50%
-			padding: 60px 25px 60px 50px
+			padding: 60px 30px 60px 50px
 
 			&__title
-				font-size: 26px
+				font-size: 32px
 				margin-bottom: 15px
 
 			&__subtitle
-				font-size: 22px
+				font-size: 20px
 
 				margin-bottom: 10px
 
 				+ManropeSemiBold
 
 			&__description
-				font-size: 14px
-				margin-bottom: 25px
+				font-size: 16px
 
-			&-btn
-				&__btn
-					&:first-child
-						margin-right: 15px
+	&-office
+		margin-top: 25px
+
+		&-block
+			text-align: center
+			width: 100%
+			padding: 16px
+			background-color: $green1
+
+			+borderRadius
+
+			&__title
+				font-size: 20px
+				font-weight: 700
+				margin-bottom: 15px
+
+			&__subtitle
+				font-size: 16px
+
+				& > span
+					font-weight: 700
 
 	&-service
 		margin-top: 25px
 
-		&-block
-			width: 100%
-			padding: 40px 45px
-			background-color: $lightBackgroundColor
+		display: flex
+		justify-content: space-between
 
-			margin-bottom: 25px
+		&-block
+			width: calc( 50% - 12.5px )
+			padding: 16px
+			background-color: $green1
 
 			+borderRadius
 
@@ -77,8 +94,8 @@
 				margin-bottom: 0
 
 			&__title
-				font-size: 22px
-				margin-bottom: 20px
+				font-size: 20px
+				margin-bottom: 15px
 
 				+ManropeSemiBold
 
@@ -131,38 +148,6 @@
 
 				&:last-child
 					margin-bottom: 0
-
-	&-office
-		margin-top: 25px
-
-		&-block
-			text-align: center
-			width: 100%
-			padding: 40px 30px
-			background-color: #F6F5EF
-
-			+borderRadius
-
-			&__title
-				line-height: 120%
-				font-size: 28px
-				font-weight: 700
-				margin-bottom: 20px
-
-			&__subtitle
-				margin: 0 auto 25px auto
-				width: 610px
-
-				line-height: 180%
-				font-size: 16px
-
-				& > span
-					font-weight: 700
-
-			&-btn
-				&__btn
-					&:first-child
-						margin-right: 15px
 
 /* MEDIA */
 @media screen and (max-width: 1200px)
