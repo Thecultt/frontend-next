@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
 import { createTextMask } from 'redux-form-input-masks';
-import axios from 'axios';
 
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { useDebounce } from '@/hooks/useDebounce';
@@ -13,7 +12,9 @@ import { useOrder } from '@/hooks/order/useOrder';
 import { RenderInput, RenderCheckbox } from '@/components';
 import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
 import { APP_ROUTE } from '@/constants/routes';
-import { setCheckEmailValue } from '@/redux/actions/check_email';
+import { setEmail } from '@/redux/slices/auth/slice';
+import { authAPI } from '@/services/api';
+import { ReglogStateTypesNotLogin } from '@/types/reglog';
 
 interface Props {
     emailValue: string;
@@ -31,11 +32,11 @@ const OrderFormContact: React.FC<Props> = ({ emailValue }) => {
     const [isSending, setIsSending] = React.useState(false);
 
     React.useEffect(() => {
-        if (emailValueDebounce && emailValueDebounce !== '') {
+        if (emailValueDebounce) {
             setIsSending(true);
 
-            axios
-                .post(`${process.env.NEXT_PUBLIC_API_DOMEN}/email_check/`, { email: emailValue })
+            authAPI
+                .checkEmail(emailValueDebounce)
                 .then(() => {
                     setIsExistsEmail(false);
                     setIsSending(false);
@@ -45,7 +46,7 @@ const OrderFormContact: React.FC<Props> = ({ emailValue }) => {
                     setIsSending(false);
                 });
 
-            dispatch(setCheckEmailValue(emailValue));
+            dispatch(setEmail(emailValueDebounce));
         }
     }, [emailValueDebounce]);
 
@@ -66,7 +67,7 @@ const OrderFormContact: React.FC<Props> = ({ emailValue }) => {
 
                         {/* TODO: Отрефакторить */}
                         {!(/[А-Яа-яЁё]/i.test(emailValue) || /\s/.test(emailValue)) &&
-                            (emailValueDebounce && emailValueDebounce !== '' ? (
+                            (emailValueDebounce ? (
                                 !isSending ? (
                                     isExistsEmail ? (
                                         <div className="order-form-block-loggedin">
@@ -103,7 +104,7 @@ const OrderFormContact: React.FC<Props> = ({ emailValue }) => {
                                             <div className="order-form-block-loggedin-text">
                                                 <h4 className="order-form-block-loggedin-text__title">
                                                     У вас уже есть учетная запись,{' '}
-                                                    <Link href={`${APP_ROUTE.order}?redirect=/order#login`}>
+                                                    <Link href={`${APP_ROUTE.order}#${ReglogStateTypesNotLogin.LOGIN}`}>
                                                         авторизоваться
                                                     </Link>
                                                 </h4>

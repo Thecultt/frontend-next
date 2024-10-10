@@ -3,9 +3,12 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { Loader, RenderInput } from '@/components';
-import { getClassNames } from '@/functions/getClassNames';
+import { RenderInput } from '@/components';
+import { Button } from '@/shared/ui';
+import { useAppSelector } from '@/hooks/redux/useAppSelector';
+import { selectAuthEmail, selectRecoveryPasswordIsLoading } from '@/redux/slices/auth/selectors';
+import { useHash } from '@/hooks/useHash';
+import { ReglogStateTypesNotLogin } from '@/types/reglog';
 
 const ReglogRecoveryPassword: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
@@ -13,11 +16,19 @@ const ReglogRecoveryPassword: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     invalid,
     submitting,
 }) => {
-    const { email } = useTypedSelector(({ check_email }) => check_email);
-    const { isSend } = useTypedSelector(({ recovery_password }) => recovery_password);
+    const { changeHash } = useHash();
+
+    const email = useAppSelector(selectAuthEmail);
+    const recoveryPasswordIsLoading = useAppSelector(selectRecoveryPasswordIsLoading);
 
     React.useEffect(() => {
-        initialize({ email });
+        if (email) {
+            initialize({
+                email,
+            });
+        } else {
+            changeHash(ReglogStateTypesNotLogin.REGLOG);
+        }
     }, []);
 
     return (
@@ -38,20 +49,12 @@ const ReglogRecoveryPassword: React.FC<{} & InjectedFormProps<{}, {}>> = ({
             </div>
 
             <div className="reglog-content-form-btn">
-                {isSend ? (
-                    <button className="btn disabled loader reglog-content-form-btn__btn" disabled>
-                        <Loader />
-                    </button>
-                ) : (
-                    <button
-                        className={getClassNames('btn reglog-content-form-btn__btn', {
-                            disabled: invalid || submitting,
-                        })}
-                        disabled={invalid || submitting}
-                    >
-                        Отправить ссылку для сброса
-                    </button>
-                )}
+                <Button
+                    type="submit"
+                    label="Отправить ссылку для сброса"
+                    disabled={recoveryPasswordIsLoading || invalid || submitting}
+                    wide
+                />
             </div>
 
             <p className="reglog-content-form__subtitle">

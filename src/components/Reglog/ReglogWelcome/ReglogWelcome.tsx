@@ -1,14 +1,12 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { getPath } from '@/functions/getPath';
+
+import { useHash } from '@/hooks/useHash';
+import { Button } from '@/shared/ui';
 
 const ReglogWelcome: React.FC = () => {
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
-    const search = searchParams.toString();
+    const { removeHash } = useHash();
 
     return (
         <div className="reglog-content-text">
@@ -17,9 +15,7 @@ const ReglogWelcome: React.FC = () => {
                 Спасибо, что формируете КУЛЬТуру нового потребления вместе с нами! Продавайте, покупайте и обменивайте
                 люксовые сумки, обувь и аксессуары на платформе THE CULTT
             </p>
-            <Link href={getPath({ pathname, search })} className="btn reglog-content-text__link">
-                Начать пользоваться
-            </Link>
+            <Button label="Начать пользоваться" className="reglog-content-text__link" onClick={removeHash} wide />
         </div>
     );
 };

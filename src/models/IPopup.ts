@@ -11,6 +11,6 @@ export interface PopupContent {
     callbackClose?: Noop;
 }
 
-export interface Popup extends PopupContent {
+export interface IPopup extends PopupContent {
     isOpen: boolean;
 }

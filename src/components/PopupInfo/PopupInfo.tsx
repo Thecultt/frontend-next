@@ -12,13 +12,8 @@ export const PopupInfo: React.FC = () => {
     } = usePopupInfo();
 
     return (
-        <Popup
-            isOpen={isOpen}
-            onClose={closePopupInfo}
-            callbackClose={callbackClose}
-            title={title}
-            content={content}
-            btn={btn}
-        />
+        <Popup isOpen={isOpen} onClose={closePopupInfo} callbackClose={callbackClose} title={title} btn={btn}>
+            {content}
+        </Popup>
     );
 };

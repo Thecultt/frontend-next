@@ -3,14 +3,15 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { Loader, RenderInput } from '@/components';
-import { getClassNames } from '@/functions/getClassNames';
+import { RenderInput } from '@/components';
+import { Button } from '@/shared/ui';
+import { useAppSelector } from '@/hooks/redux/useAppSelector';
+import { selectRecoveryPasswordIsLoading } from '@/redux/slices/auth/selectors';
 
 import { validate } from './validate';
 
 const ReglogRecoveryPassword: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, invalid, submitting }) => {
-    const { isSend } = useTypedSelector(({ recovery_password }) => recovery_password);
+    const recoveryPasswordIsLoading = useAppSelector(selectRecoveryPasswordIsLoading);
 
     return (
         <form className="reglog-content-form reglog-content-form-login" onSubmit={handleSubmit}>
@@ -20,31 +21,35 @@ const ReglogRecoveryPassword: React.FC<{} & InjectedFormProps<{}, {}>> = ({ hand
                 <div className="reglog-content-form-input">
                     <h4 className="reglog-content-form-input__title">Новый пароль</h4>
 
-                    <Field component={RenderInput} label="Новый пароль" name="password" type="password" />
+                    <Field
+                        component={RenderInput}
+                        label="Новый пароль"
+                        name="password"
+                        type="password"
+                        autoComplete="new-password"
+                    />
                 </div>
 
                 <div className="reglog-content-form-input">
                     <h4 className="reglog-content-form-input__title">Повтор пароля</h4>
 
-                    <Field component={RenderInput} label="Повтор пароля" name="password_repeat" type="password" />
+                    <Field
+                        component={RenderInput}
+                        label="Повтор пароля"
+                        name="password_repeat"
+                        type="password"
+                        autoComplete="new-password"
+                    />
                 </div>
             </div>
 
             <div className="reglog-content-form-btn">
-                {isSend ? (
-                    <button className="btn disabled loader reglog-content-form-btn__btn" disabled>
-                        <Loader />
-                    </button>
-                ) : (
-                    <button
-                        className={getClassNames('btn reglog-content-form-btn__btn', {
-                            disabled: invalid || submitting,
-                        })}
-                        disabled={invalid || submitting}
-                    >
-                        Войти в учётную запись
-                    </button>
-                )}
+                <Button
+                    type="submit"
+                    label="Войти в учётную запись"
+                    disabled={recoveryPasswordIsLoading || invalid || submitting}
+                    wide
+                />
             </div>
 
             <p className="reglog-content-form__subtitle">

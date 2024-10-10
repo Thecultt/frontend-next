@@ -48,6 +48,7 @@ Disallow: /order
 Disallow: /*amp*
 Disallow: /*etext*
 Disallow: /*advert*
+Disallow: /*?*
 Allow: /*.js
 Allow: /*.css
 Allow: /*.ico

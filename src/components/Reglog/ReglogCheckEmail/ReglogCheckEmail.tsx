@@ -4,11 +4,12 @@ import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import { useSearchParams } from 'next/navigation';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { Loader, RenderInput } from '@/components';
-import { getClassNames } from '@/functions/getClassNames';
+import { useAppSelector } from '@/hooks/redux/useAppSelector';
+import { selectAuthEmail, selectCheckEmailIsLoading } from '@/redux/slices/auth/selectors';
 import { SEARCH_PARAMS_KEYS } from '@/constants/keys';
 import { APP_ROUTE } from '@/constants/routes';
+import { RenderInput } from '@/components';
+import { Button } from '@/shared/ui';
 
 import validate from './validate';
 
@@ -21,7 +22,8 @@ const ReglogCheckEmail: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     const searchParams = useSearchParams();
     const redirectParam = searchParams.get(SEARCH_PARAMS_KEYS.redirect);
 
-    const { isSend, email } = useTypedSelector(({ check_email }) => check_email);
+    const checkEmailIsLoading = useAppSelector(selectCheckEmailIsLoading);
+    const email = useAppSelector(selectAuthEmail);
 
     React.useEffect(() => {
         if (email) {
@@ -54,20 +56,7 @@ const ReglogCheckEmail: React.FC<{} & InjectedFormProps<{}, {}>> = ({
             </div>
 
             <div className="reglog-content-form-btn">
-                {isSend ? (
-                    <button className="btn disabled loader reglog-content-form-btn__btn" disabled>
-                        <Loader />
-                    </button>
-                ) : (
-                    <button
-                        className={getClassNames('btn reglog-content-form-btn__btn', {
-                            disabled: invalid || submitting,
-                        })}
-                        disabled={invalid || submitting}
-                    >
-                        Продолжить
-                    </button>
-                )}
+                <Button type="submit" label="Продолжить" disabled={checkEmailIsLoading || invalid || submitting} wide />
             </div>
 
             <p className="reglog-content-form__subtitle">
