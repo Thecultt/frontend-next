@@ -1,5 +1,5 @@
 import $api from '@/http';
-import { AVAILABILITY_IDS, SORT } from '@/constants/catalog';
+import { AVAILABILITY_IDS, CATALOG_PRODUCTS_LIMIT, SORT } from '@/constants/catalog';
 import type { ICatalogFilters } from '@/types/catalog';
 import type { GetCatalogResponse } from '@/types/api';
 import type { Product, ProductPage } from '@/models/IProduct';
@@ -65,7 +65,14 @@ const getCatalog = async (filters: ICatalogFilters) => {
     }
 
     params.append('sort_by', filters.sort ?? SORT.shuffle);
+
     params.append('page', String(filters.page ?? 1));
+
+    if (filters.page_size) {
+        params.append('page_size', String(filters.page_size));
+    } else {
+        params.append('page_size', String(CATALOG_PRODUCTS_LIMIT));
+    }
 
     return $api.get<GetCatalogResponse>('/catalog_v2', { params });
 };
