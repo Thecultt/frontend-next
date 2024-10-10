@@ -34,6 +34,8 @@ import { useAppSelector } from '@/hooks/redux/useAppSelector';
 import { selectAuthEmail } from '@/redux/slices/auth/selectors';
 import { useAuthUser } from '@/hooks/useAuthUser';
 
+import { ICheckEmailFormValues } from './types';
+
 const VISIBLE_BACK_TYPES = [
     ReglogStateTypesNotLogin.LOGIN,
     ReglogStateTypesNotLogin.REGISTER,
@@ -64,7 +66,7 @@ const Reglog: React.FC = () => {
         changeHash(type);
     };
 
-    const onSubmitCheckEmail = (data: any) => {
+    const onSubmitCheckEmail = (data: ICheckEmailFormValues) => {
         appDispatch(checkEmail({ email: data.email, callback: checkEmailNavigate }));
     };
 
@@ -153,6 +155,8 @@ const Reglog: React.FC = () => {
     if (isLoggedIn && type !== ReglogStateTypesNotLogin.WELCOME) {
         return null;
     }
+
+    // TODO dynamic titles by type
 
     return (
         <Popup maxWidth="520px" isOpen={state} contentKey={type} onClose={handleClose}>
