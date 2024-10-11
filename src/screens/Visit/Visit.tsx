@@ -32,7 +32,7 @@ const description = VISIT_AVAILABLE ? (
 );
 
 const Visit: React.FC = () => {
-    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`, { initializeWithValue: false });
 
     return (
         <section className="visit">
