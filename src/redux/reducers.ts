@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
-import check_email from './reducers/check_email';
-import register from './reducers/register';
-import login from './reducers/login';
+import auth from './slices/auth/slice';
+import selections from './slices/selections/slice';
+
 import products_filters from './reducers/products_filters';
 import products from './reducers/products';
 import cart from './reducers/cart';
@@ -14,22 +14,18 @@ import header from './reducers/header';
 import cabinet_sell from './reducers/cabinet_sell';
 import user from './reducers/user';
 import brands from './reducers/brands';
-import recovery_password from './reducers/recovery_password';
 import history_orders from './reducers/history_orders';
 import vipservice from './reducers/vipservice';
 import subscribe_email from './reducers/subscribe_email';
 import public_favorites from './reducers/public_favorites';
 import notifications_server from './reducers/notifications_server';
 import concierge from './reducers/concierge';
-import selections from './slices/selections/slice';
 import cinema_artistic from './reducers/cinema_artistic';
 import popup_info from './reducers/popup_info';
 
 export const rootReducer = combineReducers({
     form: formReducer,
-    check_email,
-    register,
-    login,
+    auth,
     products_filters,
     products,
     cart,
@@ -40,7 +36,6 @@ export const rootReducer = combineReducers({
     cabinet_sell,
     user,
     brands,
-    recovery_password,
     history_orders,
     vipservice,
     subscribe_email,

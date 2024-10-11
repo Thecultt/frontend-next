@@ -2,15 +2,15 @@
 .reglog
 	&-content
 		&-form
-			width: 420px
+			width: 100%
 
 			&-back
 				cursor: pointer
+				+flexCenter
 
-				position: absolute
-
-				top: 25px
-				left: 25px
+				&__icon
+					width: 24px
+					color: $black
 
 			&__title
 				text-align: center
@@ -49,11 +49,11 @@
 				margin-bottom: 25px
 
 			&-input
-				margin-top: 15px
-				margin-bottom: 15px
+				margin-top: 16px
+				margin-bottom: 16px
 
 				&:last-child
-					margin-bottom: 30px
+					margin-bottom: 24px
 
 				&__title
 					font-size: 16px
@@ -89,7 +89,7 @@
 				font-size: 14px
 
 		&-text
-			width: 520px
+			width: 100%
 			text-align: center
 
 			&__title

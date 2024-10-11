@@ -1,6 +1,8 @@
 import React from 'react';
 import { Props as MaskInputProps } from 'react-input-mask';
 
+import { Noop } from './functions';
+
 interface CommonInputProps {
     label: string;
     error?: string;
@@ -45,3 +47,15 @@ export interface MultiSelectProps extends BaseSelectProps {
 }
 
 export type SelectProps = SingleSelectProps | MultiSelectProps;
+
+export interface CheckboxProps extends React.PropsWithChildren {
+    name?: string;
+    checked?: boolean;
+    disabled?: boolean;
+    className?: string;
+    size?: 's' | 'm' | 'l';
+    defaultChildrenStyles?: boolean;
+    wide?: boolean;
+    error?: string;
+    onChange?: Noop;
+}

@@ -82,6 +82,15 @@
             font-size: 14px
             line-height: 16.8px
 
+    &--theme-white &__field
+        +fieldAutofill($white)
+
+    &--theme-grey &__field
+        +fieldAutofill($grey1)
+
+    &--theme-green &__field
+        +fieldAutofill($green1)
+
     &-hints
         position: absolute
         top: calc(100% + 8px)

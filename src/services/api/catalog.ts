@@ -6,7 +6,7 @@ import type { Product, ProductPage } from '@/models/IProduct';
 
 const MIN_PRICE_FROM = 1000;
 
-const getCatalog = async (filters: ICatalogFilters) => {
+const getCatalog = (filters: ICatalogFilters) => {
     const params = new URLSearchParams();
 
     if (filters.search) {
@@ -77,10 +77,9 @@ const getCatalog = async (filters: ICatalogFilters) => {
     return $api.get<GetCatalogResponse>('/catalog_v2', { params });
 };
 
-const getProductByArticle = async (article: string) => $api.get<ProductPage>(`/product/${article}`);
+const getProductByArticle = (article: string) => $api.get<ProductPage>(`/product/${article}`);
 
-const getProductSimilarByArticle = async (article: string) =>
-    $api.get<{ items: Product[] }>(`/product/${article}/similar`);
+const getProductSimilarByArticle = (article: string) => $api.get<{ items: Product[] }>(`/product/${article}/similar`);
 
 export const catalogAPI = {
     getCatalog,
