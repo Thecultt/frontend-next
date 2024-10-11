@@ -5,8 +5,9 @@ import Link from 'next/link';
 
 import { Spinner } from '@/shared/ui';
 import { getClassNames } from '@/functions/getClassNames';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
+import { useAppSelector } from '@/hooks/redux/useAppSelector';
+import { selectSelectionsIsLoaded, selectSelectionsItems } from '@/redux/slices/selections/selectors';
 
 import defaultImage from '@/assets/images/header/header-selection-default-image.jpg';
 
@@ -20,7 +21,8 @@ export const HeaderSelectionsHoverMenu: React.FC<Props> = ({ onOpen, onClose, is
     const timer = React.useRef<ReturnType<typeof setTimeout>>();
     const [selectedId, setSelectedId] = React.useState(-1);
 
-    const { items, isLoaded } = useTypedSelector(({ selections }) => selections);
+    const items = useAppSelector(selectSelectionsItems);
+    const isLoaded = useAppSelector(selectSelectionsIsLoaded);
 
     const firstColItems = items.slice(0, 5);
     const secondColItems = items.slice(5, 10);

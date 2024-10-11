@@ -3,7 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { useAppSelector } from '@/hooks/redux/useAppSelector';
+import { selectSelectionsItems } from '@/redux/slices/selections/selectors';
 import { SELECTIONS_IDS } from '@/constants/catalog';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 
@@ -12,14 +13,13 @@ import summerBagsImage from '@/assets/images/selections/summer-bags-selection.jp
 import './styles.sass';
 
 export const SelectionsBanners: React.FC = () => {
-    const { items } = useTypedSelector(({ selections }) => selections);
+    const items = useAppSelector(selectSelectionsItems);
 
     if (!items.length) {
         return null;
     }
 
     const influencerSelection = items.find((item) => item.id === SELECTIONS_IDS.juliaKatkalo);
-
     const autumnBagsSelection = items.find((item) => item.id === SELECTIONS_IDS.autumnBags);
     const investmentsBagsSelection = items.find((item) => item.id === SELECTIONS_IDS.investmentsBags);
     const iiBagsSelection = items.find((item) => item.id === SELECTIONS_IDS.itBags);

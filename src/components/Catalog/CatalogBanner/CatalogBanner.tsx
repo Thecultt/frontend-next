@@ -2,11 +2,12 @@
 
 import React from 'react';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { SELECTIONS_IDS, SORT, CATEGORY_SLUG_NAMES, CATEGORY_NAMES, CATEGORY_SLUGS } from '@/constants/catalog';
 import { APP_ROUTE } from '@/constants/routes';
 import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
+import { useAppSelector } from '@/hooks/redux/useAppSelector';
+import { selectSelectionsItems } from '@/redux/slices/selections/selectors';
 
 import CatalogBannerImagePriceDrop from '@/assets/images/catalog/catalog-banner-price-drop.jpg';
 import CatalogBannerImagePriceDrop2 from '@/assets/images/catalog/catalog-banner-price-drop2.jpg';
@@ -20,7 +21,7 @@ const CatalogBanner: React.FC = React.memo(() => {
     const {
         filters: { sort, selection: selectionId, price_drop, boutique, categories: selectedCategories, category_slug },
     } = useCatalogFilters();
-    const { items: selections } = useTypedSelector(({ selections }) => selections);
+    const selections = useAppSelector(selectSelectionsItems);
 
     const categories = category_slug ? [CATEGORY_SLUG_NAMES[category_slug]] : selectedCategories;
     const currentSelection = selectionId ? selections.find(({ id }) => id.toString() === selectionId) ?? null : null;

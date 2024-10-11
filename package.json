@@ -15,6 +15,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.8",
     "@sentry/react": "^7.92.0",
     "@tanstack/react-virtual": "^3.8.4",
     "@tcb-web/create-credit": "^1.0.5",
