@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { CONTACTS } from '@/constants/contacts';
-import { EXTERNAL_LINKS } from '@/constants/routes';
+import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
 import { Button } from '@/shared/ui';
 
 const Contact: React.FC = () => (
@@ -256,7 +256,7 @@ const Contact: React.FC = () => (
                             регистрация!
                         </p>
 
-                        <Button label="Выбрать время" href={EXTERNAL_LINKS.clientVisit} />
+                        <Button label="Выбрать время" href={APP_ROUTE.visit} />
                     </div>
                 </div>
             </div>
