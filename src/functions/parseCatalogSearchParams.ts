@@ -42,7 +42,7 @@ export const parseCatalogSearchParams = ({ params, searchParams }: ICatalogPageP
             )
             .parseServerSide(searchParams.availability),
         sort: parseAsStringLiteral(Object.values(SORT))
-            .withDefault(getDefaultPageSort({ categorySlug: params.category_slug }))
+            .withDefault(getDefaultPageSort(params))
             .parseServerSide(searchParams.sort),
         page: parseAsInteger.withDefault(1).parseServerSide(searchParams.page),
         search: parseAsString.withDefault('').parseServerSide(searchParams.search),
