@@ -82,7 +82,9 @@ const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
                                 <>
                                     Забронируйте дату и время для посещения нашего офиса.
                                     <br />
-                                    Мы находимся по адресу: {CONTACTS.address}, <br /> {CONTACTS.addressTime}
+                                    Мы находимся по адресу: {CONTACTS.address},
+                                    <br />
+                                    {CONTACTS.addressTime}
                                 </>
                             ) : (
                                 'В данный момент недоступно'
