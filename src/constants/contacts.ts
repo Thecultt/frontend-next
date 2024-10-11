@@ -7,4 +7,5 @@ export const CONTACTS = {
     whatsappPhone: '+7 995 788 46 50',
     email: 'hey@thecultt.com',
     address: 'Петровский бульвар, 5с1',
+    addressTime: 'ежедневно с 10:00 до 19:00',
 };
