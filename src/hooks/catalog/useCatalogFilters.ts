@@ -18,7 +18,8 @@ import { AVAILABILITY, CATEGORY_SLUGS, CONDITIONS, FILTER_CATEGORY_SLUGS, GENDER
 import { getDefaultPageSort } from '@/functions/getDefaultPageSort';
 
 export const useCatalogFilters = () => {
-    const { category_slug, subcategories_slug, selection_id, brand_slug } = useParams<CatalogPageParams>();
+    const params = useParams<CatalogPageParams>();
+    const { category_slug, subcategories_slug, selection_id, brand_slug } = params;
 
     const [state, setQueryState] = useQueryStates(
         {
@@ -26,9 +27,7 @@ export const useCatalogFilters = () => {
             types: parseAsArrayOf(parseAsString).withDefault([]),
             brands: parseAsArrayOf(parseAsString).withDefault([]),
             models: parseAsArrayOf(parseAsString).withDefault([]),
-            sort: parseAsStringLiteral(Object.values(SORT)).withDefault(
-                getDefaultPageSort({ categorySlug: category_slug }),
-            ),
+            sort: parseAsStringLiteral(Object.values(SORT)).withDefault(getDefaultPageSort(params)),
             page: parseAsInteger.withDefault(1),
             search: parseAsString.withDefault(''),
             minPrice: parseAsInteger.withDefault(0),
