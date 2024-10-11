@@ -20,12 +20,6 @@ const ReglogOldUserNewPassword: React.FC = () => {
 
     return (
         <div className="reglog-content-text">
-            <h3 className="reglog-content-text__title">Обновите пароль от аккаунта</h3>
-            <p className="reglog-content-text__description">
-                На указанную почту отправлено письмо для сброса пароля. Задайте новый пароль для обеспечения
-                безопасности ваших данных на новом сайте THE CULTT.
-            </p>
-
             {/*
 				Ваня, пока попросил скрыть этот функционал, из за проблем с доходом писем
 			*/}

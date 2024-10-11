@@ -3,23 +3,29 @@
 import React from 'react';
 
 import { CheckmarkIcon } from '@/assets/icons';
-import { Noop } from '@/types/functions';
+import { CheckboxProps } from '@/types/ui';
+import { getClassNames } from '@/functions/getClassNames';
 
 import './styles.sass';
 
-interface Props extends React.PropsWithChildren {
-    name?: string;
-    checked?: boolean;
-    disabled?: boolean;
-    className?: string;
-    size?: 's' | 'm' | 'l';
-    onChange?: Noop;
-}
-
-export const Checkbox: React.FC<Props> = ({ children, checked, className = '', size = 'l', ...props }) => (
-    <label className={`tc-checkbox tc-checkbox--size-${size} ${className}`}>
+export const Checkbox: React.FC<CheckboxProps> = ({
+    children,
+    checked,
+    error,
+    className = '',
+    size = 'l',
+    defaultChildrenStyles = false,
+    wide = false,
+    ...props
+}) => (
+    <label
+        className={getClassNames(`tc-checkbox tc-checkbox--size-${size} ${className}`, {
+            'tc-checkbox--error': !!error,
+            'tc-checkbox--wide': wide,
+        })}
+    >
         <input type="checkbox" className="tc-checkbox__input" checked={checked} {...props} />
         <div className="tc-checkbox__control">{checked && <CheckmarkIcon className="tc-checkbox__checkmark" />}</div>
-        {children}
+        {defaultChildrenStyles ? <p className="tc-checkbox__content">{children}</p> : children}
     </label>
 );

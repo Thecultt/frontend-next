@@ -64,18 +64,42 @@
             top: 14px
             right: 16px
 
+        &__header
+            width: 94%
+            display: flex
+            align-items: center
+            gap: 16px
+            margin-bottom: 12px
+
         &__title
-            width: 100%
             +ManropeExtraBold
             font-size: 24px
             color: $black3
             white-space: pre-wrap
-            margin-bottom: 12px
 
             +mediaMobile
-                width: 94%
                 +ManropeBold
                 font-size: 22px
+
+        &__subtitle
+            width: 100%
+            +ManropeSemiBold
+            font-size: 14px
+            line-height: 16.8px
+            text-align: left
+            color: $black3
+            white-space: pre-wrap
+            margin-bottom: 24px
+
+            a
+                +ManropeSemiBold
+                line-height: inherit
+                font-size: inherit
+                color: $mainColor
+                text-decoration: underline
+
+            b
+                +ManropeExtraBold
 
         &__content
             width: 100%

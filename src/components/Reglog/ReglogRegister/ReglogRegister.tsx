@@ -1,120 +1,123 @@
 'use client';
 
 import React from 'react';
-import { Field, reduxForm, InjectedFormProps } from 'redux-form';
+import Link from 'next/link';
+import { Form, Formik } from 'formik';
 
-import { RenderInput, RenderCheckbox } from '@/components';
 import { Button } from '@/shared/ui';
+import { FormikCheckbox, FormikInput } from '@/shared/form';
 import { useHash } from '@/hooks/useHash';
-import { EXTERNAL_LINKS } from '@/constants/routes';
 import { useAppSelector } from '@/hooks/redux/useAppSelector';
+import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
+import { register } from '@/redux/slices/auth/asyncActions';
 import { selectAuthEmail, selectRegisterIsLoading } from '@/redux/slices/auth/selectors';
+import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
 
-import { validate } from './validate';
+import { IRegisterFormValues } from '../types';
 
-const ReglogRegister: React.FC<{} & InjectedFormProps<{}, {}>> = ({
-    handleSubmit,
-    initialize,
-    invalid,
-    submitting,
-}) => {
+import { SCHEMA } from './validate';
+import { INITIAL_VALUES } from './constants';
+
+const ReglogRegister: React.FC = () => {
+    const dispatch = useAppDispatch();
     const { changeHash } = useHash();
 
     const email = useAppSelector(selectAuthEmail);
     const registerIsLoading = useAppSelector(selectRegisterIsLoading);
 
+    const initialValues: IRegisterFormValues = {
+        ...INITIAL_VALUES,
+        email,
+    };
+
+    const handleSubmit = ({ policyCheckbox: _, ...values }: IRegisterFormValues) => {
+        dispatch(register(values));
+    };
+
     React.useEffect(() => {
-        if (email) {
-            initialize({
-                email,
-                policyCheckbox: true,
-                promoCheckbox: true,
-            });
-        } else {
+        if (!email) {
             changeHash(ReglogStateTypesNotLogin.REGLOG);
         }
     }, []);
 
     return (
-        <form className="reglog-content-form reglog-content-form-register" onSubmit={handleSubmit}>
-            <h3 className="reglog-content-form__title">Завершить регистрацию</h3>
+        <Formik initialValues={initialValues} validationSchema={SCHEMA} onSubmit={handleSubmit} enableReinitialize>
+            {({ isValid, dirty }) => (
+                <Form className="reglog-content-form reglog-content-form-register">
+                    <div className="reglog-content-form-input-wrapper">
+                        <div className="reglog-content-form-input">
+                            <FormikInput label="Имя" placeholder="Ваше имя" name="name" theme="grey" />
+                        </div>
 
-            <p className="reglog-content-form__description">
-                Аккаунт, зарегистрированный на указанную почту, не найден. Завершите регистрацию для использования
-                платформы.
-            </p>
+                        <div className="reglog-content-form-input">
+                            <FormikInput label="Фамилия" placeholder="Ваша фамилия" name="lastname" theme="grey" />
+                        </div>
 
-            <div className="reglog-content-form-input-wrapper">
-                <div className="reglog-content-form-input">
-                    <h4 className="reglog-content-form-input__title">Имя</h4>
+                        <div className="reglog-content-form-input">
+                            <FormikInput
+                                label="Почта"
+                                placeholder="Ваша почта"
+                                name="email"
+                                type="email"
+                                theme="grey"
+                                readOnly
+                            />
+                        </div>
 
-                    <Field component={RenderInput} label="Ваше имя" name="name" type="text" />
-                </div>
+                        <div className="reglog-content-form-input">
+                            <FormikInput
+                                label="Пароль"
+                                placeholder="Придумайте пароль"
+                                name="password"
+                                type="password"
+                                theme="grey"
+                                autoComplete="new-password"
+                            />
+                        </div>
+                    </div>
 
-                <div className="reglog-content-form-input">
-                    <h4 className="reglog-content-form-input__title">Фамилия</h4>
+                    <div className="reglog-content-form-checkbox-wrapper">
+                        <div className="reglog-content-form-checkbox">
+                            <FormikCheckbox name="policyCheckbox" wide defaultChildrenStyles>
+                                Я принимаю{' '}
+                                <Link href={APP_ROUTE.help.theCultt} target="_blank">
+                                    условия продажи
+                                </Link>{' '}
+                                и даю свое согласие на{' '}
+                                <a href={EXTERNAL_LINKS.personalData} target="_blank" rel="noreferrer">
+                                    обработку персональных данных
+                                </a>
+                            </FormikCheckbox>
+                        </div>
 
-                    <Field component={RenderInput} label="Ваша фамилия" name="lastname" type="text" />
-                </div>
+                        <div className="reglog-content-form-checkbox">
+                            <FormikCheckbox name="promoCheckbox" wide defaultChildrenStyles>
+                                Согласен (-а){' '}
+                                <a href={EXTERNAL_LINKS.advertisingConsent} target="_blank" rel="noreferrer">
+                                    получать
+                                </a>{' '}
+                                информационные письма и персональные предложения на указанную почту
+                            </FormikCheckbox>
+                        </div>
+                    </div>
 
-                <div className="reglog-content-form-input">
-                    <h4 className="reglog-content-form-input__title">Почта</h4>
+                    <div className="reglog-content-form-btn">
+                        <Button
+                            type="submit"
+                            label="Продолжить"
+                            disabled={registerIsLoading || !isValid || !dirty}
+                            wide
+                        />
+                    </div>
 
-                    <Field component={RenderInput} label="Ваша почта" name="email" type="text" disabled />
-                </div>
-
-                <div className="reglog-content-form-input">
-                    <h4 className="reglog-content-form-input__title">Пароль</h4>
-
-                    <Field
-                        component={RenderInput}
-                        label="Придумайте пароль"
-                        name="password"
-                        type="password"
-                        autoComplete="new-password"
-                    />
-                </div>
-            </div>
-
-            <div className="reglog-content-form-checkbox-wrapper">
-                <div className="reglog-content-form-checkbox">
-                    <Field
-                        component={RenderCheckbox}
-                        type="checkbox"
-                        name="policyCheckbox"
-                        label={`
-								Я принимаю <a href="https://www.thecultt.com/help/thecultt">условия продажи</a> и даю свое согласие на <a href="https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/Положение_об_обработке_персональных_данных_с_Ботом.pdf">обработку персональных данных</a>.
-							`}
-                        small
-                    />
-                </div>
-
-                <div className="reglog-content-form-checkbox">
-                    <Field
-                        component={RenderCheckbox}
-                        type="checkbox"
-                        name="promoCheckbox"
-                        label={`
-								Согласен (-а) <a href="${EXTERNAL_LINKS.advertisingConsent}" target="_blank" rel="noreferrer">получать</a> информационные письма и персональные предложения на указанную почту
-							`}
-                        small
-                    />
-                </div>
-            </div>
-
-            <div className="reglog-content-form-btn">
-                <Button type="submit" label="Продолжить" disabled={registerIsLoading || invalid || submitting} wide />
-            </div>
-
-            <p className="reglog-content-form__subtitle">
-                В личном кабинете вы сможете отследить статус вашей продажи/заказа
-            </p>
-        </form>
+                    <p className="reglog-content-form__subtitle">
+                        В личном кабинете вы сможете отследить статус вашей продажи/заказа
+                    </p>
+                </Form>
+            )}
+        </Formik>
     );
 };
 
-export default reduxForm<{}, {}>({
-    form: 'reglog-register-form',
-    validate,
-})(ReglogRegister);
+export default ReglogRegister;

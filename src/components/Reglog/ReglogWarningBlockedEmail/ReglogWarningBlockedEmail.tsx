@@ -15,8 +15,6 @@ const ReglogWarningBlockedEmail: React.FC<Props> = ({ type }) => {
 
     return (
         <div className="reglog-content-text">
-            <h3 className="reglog-content-text__title">Важное уведомление!</h3>
-
             <p className="reglog-content-text__description">
                 При использовании электронных адресов:
                 <br />@<b>icloud</b>.com

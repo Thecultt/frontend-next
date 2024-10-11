@@ -1,65 +1,80 @@
 'use client';
 
 import React from 'react';
-import { Field, reduxForm, InjectedFormProps } from 'redux-form';
+import { useSearchParams } from 'next/navigation';
+import { Form, Formik } from 'formik';
 
-import { RenderInput } from '@/components';
 import { Button } from '@/shared/ui';
+import { FormikInput } from '@/shared/form';
+import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { useAppSelector } from '@/hooks/redux/useAppSelector';
 import { selectRecoveryPasswordIsLoading } from '@/redux/slices/auth/selectors';
+import { recoveryPasswordConfirm } from '@/redux/slices/auth/asyncActions';
+import { SEARCH_PARAMS_KEYS } from '@/constants/keys';
 
-import { validate } from './validate';
+import { IRecoveryPasswordFormValues } from '../types';
 
-const ReglogRecoveryPassword: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, invalid, submitting }) => {
+import { SCHEMA } from './validate';
+import { INITIAL_VALUES } from './constants';
+
+const ReglogRecoveryPassword: React.FC = () => {
+    const dispatch = useAppDispatch();
+
+    const searchParams = useSearchParams();
+    const code = searchParams.get(SEARCH_PARAMS_KEYS.code);
+
     const recoveryPasswordIsLoading = useAppSelector(selectRecoveryPasswordIsLoading);
 
+    const handleSubmit = (values: IRecoveryPasswordFormValues) => {
+        if (!code) {
+            return;
+        }
+
+        dispatch(recoveryPasswordConfirm({ password: values.password, code }));
+    };
+
     return (
-        <form className="reglog-content-form reglog-content-form-login" onSubmit={handleSubmit}>
-            <h3 className="reglog-content-form__title">Забыли пароль?</h3>
+        <Formik initialValues={INITIAL_VALUES} validationSchema={SCHEMA} onSubmit={handleSubmit}>
+            {({ isValid, dirty }) => (
+                <Form className="reglog-content-form reglog-content-form-login">
+                    <div className="reglog-content-form-input-wrapper">
+                        <div className="reglog-content-form-input">
+                            <FormikInput
+                                label="Новый пароль"
+                                name="password"
+                                type="password"
+                                theme="grey"
+                                autoComplete="new-password"
+                            />
+                        </div>
 
-            <div className="reglog-content-form-input-wrapper">
-                <div className="reglog-content-form-input">
-                    <h4 className="reglog-content-form-input__title">Новый пароль</h4>
+                        <div className="reglog-content-form-input">
+                            <FormikInput
+                                label="Повтор пароля"
+                                name="password_repeat"
+                                type="password"
+                                theme="grey"
+                                autoComplete="new-password"
+                            />
+                        </div>
+                    </div>
 
-                    <Field
-                        component={RenderInput}
-                        label="Новый пароль"
-                        name="password"
-                        type="password"
-                        autoComplete="new-password"
-                    />
-                </div>
+                    <div className="reglog-content-form-btn">
+                        <Button
+                            type="submit"
+                            label="Войти в учётную запись"
+                            disabled={recoveryPasswordIsLoading || !isValid || !dirty}
+                            wide
+                        />
+                    </div>
 
-                <div className="reglog-content-form-input">
-                    <h4 className="reglog-content-form-input__title">Повтор пароля</h4>
-
-                    <Field
-                        component={RenderInput}
-                        label="Повтор пароля"
-                        name="password_repeat"
-                        type="password"
-                        autoComplete="new-password"
-                    />
-                </div>
-            </div>
-
-            <div className="reglog-content-form-btn">
-                <Button
-                    type="submit"
-                    label="Войти в учётную запись"
-                    disabled={recoveryPasswordIsLoading || invalid || submitting}
-                    wide
-                />
-            </div>
-
-            <p className="reglog-content-form__subtitle">
-                В личном кабинете вы сможете отследить статус вашей продажи/заказа
-            </p>
-        </form>
+                    <p className="reglog-content-form__subtitle">
+                        В личном кабинете вы сможете отследить статус вашей продажи/заказа
+                    </p>
+                </Form>
+            )}
+        </Formik>
     );
 };
 
-export default reduxForm<{}, {}>({
-    form: 'recovery-password-form',
-    validate,
-})(ReglogRecoveryPassword);
+export default ReglogRecoveryPassword;

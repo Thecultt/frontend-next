@@ -2,22 +2,36 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Field, reduxForm, InjectedFormProps } from 'redux-form';
+import { Form, Formik, FormikHelpers } from 'formik';
 
 import { useAppSelector } from '@/hooks/redux/useAppSelector';
 import { useHash } from '@/hooks/useHash';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
 import { selectAuthEmail, selectLoginIsLoading } from '@/redux/slices/auth/selectors';
 import { Button } from '@/shared/ui';
-import { RenderInput } from '@/components';
+import { FormikInput } from '@/shared/form';
+import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
+import { login } from '@/redux/slices/auth/asyncActions';
 
-import validate from './validate';
+import { ILoginFormValues } from '../types';
 
-const ReglogLogin: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, invalid, submitting }) => {
+import { SCHEMA } from './validate';
+import { INITIAL_VALUES } from './constants';
+
+const ReglogLogin: React.FC = () => {
+    const dispatch = useAppDispatch();
     const { changeHash } = useHash();
 
     const loginIsLoading = useAppSelector(selectLoginIsLoading);
     const email = useAppSelector(selectAuthEmail);
+
+    const handleSubmit = (values: ILoginFormValues, { setFieldError }: FormikHelpers<ILoginFormValues>) => {
+        dispatch(login({ username: email, password: values.password }))
+            .unwrap()
+            .catch(() => {
+                setFieldError('password', 'Неверный пароль');
+            });
+    };
 
     React.useEffect(() => {
         if (!email) {
@@ -26,37 +40,40 @@ const ReglogLogin: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, i
     }, []);
 
     return (
-        <form className="reglog-content-form reglog-content-form-login" onSubmit={handleSubmit}>
-            <h3 className="reglog-content-form__title">Вход</h3>
+        <Formik initialValues={INITIAL_VALUES} validationSchema={SCHEMA} onSubmit={handleSubmit}>
+            {({ isValid, dirty }) => (
+                <Form className="reglog-content-form reglog-content-form-login">
+                    <div className="reglog-content-form-input-wrapper">
+                        <div className="reglog-content-form-input">
+                            <FormikInput
+                                label="Пароль"
+                                name="password"
+                                type="password"
+                                theme="grey"
+                                autoComplete="current-password"
+                            />
+                        </div>
+                    </div>
 
-            <div className="reglog-content-form-input-wrapper">
-                <div className="reglog-content-form-input">
-                    <h4 className="reglog-content-form-input__title">Пароль</h4>
+                    <div className="reglog-content-form-btn">
+                        <Button type="submit" label="Продолжить" disabled={loginIsLoading || !isValid || !dirty} wide />
+                        <Link
+                            href={`#${ReglogStateTypesNotLogin.RECOVERY_PASSWORD}`}
+                            className="reglog-content-form-btn__link"
+                            scroll={false}
+                            prefetch={false}
+                        >
+                            Забыли пароль?
+                        </Link>
+                    </div>
 
-                    <Field component={RenderInput} label="Пароль" name="password" type="password" />
-                </div>
-            </div>
-
-            <div className="reglog-content-form-btn">
-                <Button type="submit" label="Продолжить" disabled={loginIsLoading || invalid || submitting} wide />
-                <Link
-                    href={`#${ReglogStateTypesNotLogin.RECOVERY_PASSWORD}`}
-                    className="reglog-content-form-btn__link"
-                    scroll={false}
-                    prefetch={false}
-                >
-                    Забыли пароль?
-                </Link>
-            </div>
-
-            <p className="reglog-content-form__subtitle">
-                В личном кабинете вы сможете отследить статус вашей продажи/заказа
-            </p>
-        </form>
+                    <p className="reglog-content-form__subtitle">
+                        В личном кабинете вы сможете отследить статус вашей продажи/заказа
+                    </p>
+                </Form>
+            )}
+        </Formik>
     );
 };
 
-export default reduxForm<{}, {}>({
-    form: 'login-form',
-    validate,
-})(ReglogLogin);
+export default ReglogLogin;

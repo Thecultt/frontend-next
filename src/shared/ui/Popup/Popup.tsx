@@ -22,9 +22,11 @@ export const Popup: React.FC<Props> = ({
     children,
     isOpen,
     title,
+    subtitle,
     btn,
     maxWidth = '450px',
     contentKey,
+    beforeTitle,
     onClose,
     callbackClose,
 }) => {
@@ -69,7 +71,14 @@ export const Popup: React.FC<Props> = ({
                         <div className="tc-popup-content" style={{ maxWidth }} ref={PopupRef}>
                             <XIcon className="tc-popup-content-close" onClick={onCloseWrapper} />
 
-                            {title && <h3 className="tc-popup-content__title">{title}</h3>}
+                            {(!!beforeTitle || !!title) && (
+                                <div className="tc-popup-content__header">
+                                    {beforeTitle}
+                                    {title && <h3 className="tc-popup-content__title">{title}</h3>}
+                                </div>
+                            )}
+
+                            {subtitle && <p className="tc-popup-content__subtitle">{subtitle}</p>}
 
                             <div className="tc-popup-content__content">
                                 {typeof children === 'string' || typeof children === 'number' ? (

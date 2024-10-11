@@ -11,14 +11,6 @@ const ReglogRecoveryPasswordSuccess: React.FC = () => {
 
     return (
         <div className="reglog-content-text">
-            <h3 className="reglog-content-text__title">
-                Ссылка для восстановления пароля отправлена на указанную почту
-            </h3>
-            <p className="reglog-content-text__description">
-                В случае возникновения проблем с авторизацией на сайте, напишите нам в поддержку в телеграмм{' '}
-                <b>@thecultt_help_it</b>
-            </p>
-
             <div className="reglog-content-text-btns">
                 <div className="reglog-content-text-btns__btn">
                     <Button
