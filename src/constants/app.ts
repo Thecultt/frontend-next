@@ -1,6 +1,6 @@
 export const APP_PROD_DOMAIN = 'https://thecultt.com';
 
-export const VISIT_AVAILABLE = false;
+export const VISIT_AVAILABLE = true;
 
 export const YANDEX_SPLIT_LIMIT = 200000;
 
