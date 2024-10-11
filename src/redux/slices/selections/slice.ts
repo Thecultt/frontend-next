@@ -17,6 +17,9 @@ const selectionsSlice = createSlice({
             state.items = action.payload.selections.sort((a, b) => b.id - a.id);
             state.isLoaded = true;
         });
+        builder.addCase(fetchSelections.rejected, (state) => {
+            state.isLoaded = true;
+        });
     },
 });
 

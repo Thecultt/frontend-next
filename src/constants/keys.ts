@@ -32,4 +32,5 @@ export const KEYBOARD = {
 export const SEARCH_PARAMS_KEYS = {
     id: 'id',
     redirect: 'redirect',
+    code: 'code',
 };

@@ -78,10 +78,8 @@ export { default as ReglogRegister } from './Reglog/ReglogRegister/ReglogRegiste
 export { default as ReglogWelcome } from './Reglog/ReglogWelcome/ReglogWelcome';
 // ReglogOldUserNewPassword
 export { default as ReglogOldUserNewPassword } from './Reglog/ReglogOldUserNewPassword/ReglogOldUserNewPassword';
-// ReglogWarningBlockedEmailRegister
-export { default as ReglogWarningBlockedEmailRegister } from './Reglog/ReglogWarningBlockedEmailRegister/ReglogWarningBlockedEmailRegister';
-// ReglogWarningBlockedEmailLogin
-export { default as ReglogWarningBlockedEmailLogin } from './Reglog/ReglogWarningBlockedEmailLogin/ReglogWarningBlockedEmailLogin';
+// ReglogWarningBlockedEmail
+export { default as ReglogWarningBlockedEmail } from './Reglog/ReglogWarningBlockedEmail/ReglogWarningBlockedEmail';
 // ReglogRecoveryPassword
 export { default as ReglogRecoveryPassword } from './Reglog/ReglogRecoveryPassword/ReglogRecoveryPassword';
 export { default as ReglogRecoveryPasswordSuccess } from './Reglog/ReglogRecoveryPassword/ReglogRecoveryPasswordSuccess';

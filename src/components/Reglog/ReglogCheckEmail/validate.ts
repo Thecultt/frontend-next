@@ -1,30 +1,7 @@
-export interface validateInfoValues {
-    email: string;
-}
+import * as Yup from 'yup';
 
-interface validateInfoErrors {
-    email?: string;
-}
+import { YUP_REQUIRED_MIN_MAX_EMAIL } from '@/constants/validation';
 
-const validate = (values: validateInfoValues) => {
-    const errors: validateInfoErrors = {};
-
-    const defaultMin = 2;
-    const defaultMax = 100;
-
-    if (!values.email) {
-        errors.email = 'Поле не может быть пустым';
-    } else if (/[А-Яа-яЁё]/i.test(values.email)) {
-        errors.email = 'Некорректный email';
-    } else if (/\s/.test(values.email)) {
-        errors.email = 'Некорректный email';
-    } else if (values.email.length > defaultMax) {
-        errors.email = `Не более ${defaultMax} символов`;
-    } else if (values.email.length < defaultMin) {
-        errors.email = `Не менее ${defaultMin} символов`;
-    }
-
-    return errors;
-};
-
-export default validate;
+export const SCHEMA = Yup.object({
+    email: YUP_REQUIRED_MIN_MAX_EMAIL,
+});

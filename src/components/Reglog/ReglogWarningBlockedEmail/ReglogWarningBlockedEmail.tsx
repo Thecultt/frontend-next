@@ -1,13 +1,20 @@
+'use client';
+
 import React from 'react';
-import Link from 'next/link';
 
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
+import { Button } from '@/shared/ui';
+import { useHash } from '@/hooks/useHash';
 
-const ReglogWarningBlockedEmailLogin: React.FC = () => {
+interface Props {
+    type: ReglogStateTypesNotLogin.LOGIN | ReglogStateTypesNotLogin.REGISTER;
+}
+
+const ReglogWarningBlockedEmail: React.FC<Props> = ({ type }) => {
+    const { changeHash } = useHash();
+
     return (
         <div className="reglog-content-text">
-            <h3 className="reglog-content-text__title">Важное уведомление!</h3>
-
             <p className="reglog-content-text__description">
                 При использовании электронных адресов:
                 <br />@<b>icloud</b>.com
@@ -29,26 +36,15 @@ const ReglogWarningBlockedEmailLogin: React.FC = () => {
             </p>
 
             <div className="reglog-content-text-btns">
-                <Link
-                    href={`#${ReglogStateTypesNotLogin.REGLOG}`}
-                    className="btn reglog-content-text-btns__btn"
-                    scroll={false}
-                    prefetch={false}
-                >
-                    Назад
-                </Link>
-
-                <Link
-                    href={`#${ReglogStateTypesNotLogin.LOGIN}`}
-                    className="btn-regular reglog-content-text-btns__btn"
-                    scroll={false}
-                    prefetch={false}
-                >
-                    Согласен
-                </Link>
+                <div className="reglog-content-text-btns__btn">
+                    <Button label="Назад" onClick={() => changeHash(ReglogStateTypesNotLogin.REGLOG)} wide />
+                </div>
+                <div className="reglog-content-text-btns__btn">
+                    <Button label="Согласен" theme="light" onClick={() => changeHash(type)} wide />
+                </div>
             </div>
         </div>
     );
 };
 
-export default ReglogWarningBlockedEmailLogin;
+export default ReglogWarningBlockedEmail;

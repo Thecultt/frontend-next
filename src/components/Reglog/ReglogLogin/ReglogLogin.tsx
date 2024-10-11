@@ -2,71 +2,78 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Field, reduxForm, InjectedFormProps } from 'redux-form';
+import { Form, Formik, FormikHelpers } from 'formik';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { Loader, RenderInput } from '@/components';
-import { getClassNames } from '@/functions/getClassNames';
+import { useAppSelector } from '@/hooks/redux/useAppSelector';
+import { useHash } from '@/hooks/useHash';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
+import { selectAuthEmail, selectLoginIsLoading } from '@/redux/slices/auth/selectors';
+import { Button } from '@/shared/ui';
+import { FormikInput } from '@/shared/form';
+import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
+import { login } from '@/redux/slices/auth/asyncActions';
 
-import validate from './validate';
+import { ILoginFormValues } from '../types';
 
-const ReglogLogin: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, invalid, pristine, submitting }) => {
-    const { isSend } = useTypedSelector(({ login }) => login);
+import { SCHEMA } from './validate';
+import { INITIAL_VALUES } from './constants';
+
+const ReglogLogin: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const { changeHash } = useHash();
+
+    const loginIsLoading = useAppSelector(selectLoginIsLoading);
+    const email = useAppSelector(selectAuthEmail);
+
+    const handleSubmit = (values: ILoginFormValues, { setFieldError }: FormikHelpers<ILoginFormValues>) => {
+        dispatch(login({ username: email, password: values.password }))
+            .unwrap()
+            .catch(() => {
+                setFieldError('password', 'Неверный пароль');
+            });
+    };
+
+    React.useEffect(() => {
+        if (!email) {
+            changeHash(ReglogStateTypesNotLogin.REGLOG);
+        }
+    }, []);
 
     return (
-        <form className="reglog-content-form reglog-content-form-login" onSubmit={handleSubmit}>
-            <h3 className="reglog-content-form__title">Вход</h3>
-            {/*
-			<p className="reglog-content-form__message">
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M12 16V12M12 8H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-				</svg>
+        <Formik initialValues={INITIAL_VALUES} validationSchema={SCHEMA} onSubmit={handleSubmit}>
+            {({ isValid, dirty }) => (
+                <Form className="reglog-content-form reglog-content-form-login">
+                    <div className="reglog-content-form-input-wrapper">
+                        <div className="reglog-content-form-input">
+                            <FormikInput
+                                label="Пароль"
+                                name="password"
+                                type="password"
+                                theme="grey"
+                                autoComplete="current-password"
+                            />
+                        </div>
+                    </div>
 
-				При первичной авторизации на новой версии сайта воспользуйтесь функцией восстановления пароля через кнопку "Забыли пароль".
-			</p> */}
+                    <div className="reglog-content-form-btn">
+                        <Button type="submit" label="Продолжить" disabled={loginIsLoading || !isValid || !dirty} wide />
+                        <Link
+                            href={`#${ReglogStateTypesNotLogin.RECOVERY_PASSWORD}`}
+                            className="reglog-content-form-btn__link"
+                            scroll={false}
+                            prefetch={false}
+                        >
+                            Забыли пароль?
+                        </Link>
+                    </div>
 
-            <div className="reglog-content-form-input-wrapper">
-                <div className="reglog-content-form-input">
-                    <h4 className="reglog-content-form-input__title">Пароль</h4>
-
-                    <Field component={RenderInput} label="Пароль" name="password" type="password" />
-                </div>
-            </div>
-
-            <div className="reglog-content-form-btn">
-                {isSend ? (
-                    <button className="btn disabled loader reglog-content-form-btn__btn" disabled>
-                        <Loader />
-                    </button>
-                ) : (
-                    <button
-                        className={getClassNames('btn reglog-content-form-btn__btn', {
-                            disabled: invalid || submitting || pristine,
-                        })}
-                        disabled={invalid || submitting || pristine}
-                    >
-                        Продолжить
-                    </button>
-                )}
-                <Link
-                    href={`#${ReglogStateTypesNotLogin.RECOVERY_PASSWORD}`}
-                    className="reglog-content-form-btn__link"
-                    scroll={false}
-                    prefetch={false}
-                >
-                    Забыли пароль?
-                </Link>
-            </div>
-
-            <p className="reglog-content-form__subtitle">
-                В личном кабинете вы сможете отследить статус вашей продажи/заказа
-            </p>
-        </form>
+                    <p className="reglog-content-form__subtitle">
+                        В личном кабинете вы сможете отследить статус вашей продажи/заказа
+                    </p>
+                </Form>
+            )}
+        </Formik>
     );
 };
 
-export default reduxForm<{}, {}>({
-    form: 'login-form',
-    validate,
-})(ReglogLogin);
+export default ReglogLogin;

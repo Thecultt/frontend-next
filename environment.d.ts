@@ -1,6 +1,6 @@
 namespace NodeJS {
     interface ProcessEnv {
-        NEXT_PUBLIC_API_DOMEN: string;
+        NEXT_PUBLIC_API_DOMAIN: string;
         NEXT_PUBLIC_EMAIL_SUPPORT: string;
         NEXT_PUBLIC_DADATA_API_KEY: string;
         NEXT_PUBLIC_CLOUD_PAYMENTS_PUBLIC_ID: string;
