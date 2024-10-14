@@ -65,6 +65,8 @@ export { default as HomeSellPartners } from './Home/HomeSellPartners/HomeSellPar
 export { default as HomeAbout } from './Home/HomeAbout/HomeAbout';
 // HomeWaiting
 export { default as HomeWaiting } from './Home/HomeWaiting/HomeWaiting';
+// HomeNewProducts
+export { HomeNewProducts } from './Home/HomeNewProducts/HomeNewProducts';
 
 // Reglog
 export { default as Reglog } from './Reglog/Reglog';
@@ -132,6 +134,7 @@ export { ProductCard } from './Product/ProductCard/ProductCard';
 export { ProductCardFavorites } from './Product/ProductCard/ProductCardFavorites';
 export { default as ProductCover } from './Product/ProductCover';
 export { default as ProductExchange } from './Product/ProductExchange';
+export { ProductRecommendations } from './Product/ProductRecommendations/ProductRecommendations';
 // ProductInfo
 export { default as ProductInfo } from './Product/ProductInfo/ProductInfo';
 export { default as ProductInfoAuth } from './Product/ProductInfo/ProductInfoAuth';
