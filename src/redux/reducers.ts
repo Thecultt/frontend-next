@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 
 import auth from './slices/auth/slice';
 import selections from './slices/selections/slice';
+import catalog from './slices/catalog/slice';
 
 import products_filters from './reducers/products_filters';
 import products from './reducers/products';
@@ -25,7 +26,11 @@ import popup_info from './reducers/popup_info';
 
 export const rootReducer = combineReducers({
     form: formReducer,
+
     auth,
+    selections,
+    catalog,
+
     products_filters,
     products,
     cart,
@@ -42,7 +47,6 @@ export const rootReducer = combineReducers({
     public_favorites,
     notifications_server,
     concierge,
-    selections,
     cinema_artistic,
     popup_info,
 });

@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { ProductCard } from '@/components';
 import { APP_ROUTE } from '@/constants/routes';
 import { MEDIA_SIZES_NUMBERS } from '@/constants/styles';
@@ -16,19 +15,11 @@ import './styles.sass';
 interface Props {
     title: string;
     titleLink?: string;
-    products?: Product[];
+    products: Product[];
 }
 
 export const CatalogProductsSection: React.FC<Props> = ({ title, titleLink, products }) => {
     const SliderRef = React.useRef<SwiperRef>(null);
-
-    const { items, itemByArticleSimilar } = useTypedSelector(({ products }) => products);
-
-    const slides =
-        products ??
-        (itemByArticleSimilar.length ? itemByArticleSimilar : items).filter(
-            (item) => !!item.availability && !item.is_trial && !!item.images.length && !!item.price,
-        );
 
     const handleClickPrev = () => {
         SliderRef.current?.swiper.slidePrev();
@@ -38,7 +29,7 @@ export const CatalogProductsSection: React.FC<Props> = ({ title, titleLink, prod
         SliderRef.current?.swiper.slideNext();
     };
 
-    if (!slides.length) {
+    if (!products.length) {
         return null;
     }
 
@@ -68,7 +59,7 @@ export const CatalogProductsSection: React.FC<Props> = ({ title, titleLink, prod
                     loopAddBlankSlides={false}
                     loop
                 >
-                    {slides.map((item) => (
+                    {products.map((item) => (
                         <SwiperSlide key={item.id} className="catalog-products-section__slider-slide">
                             <ProductCard
                                 key={item.id}
