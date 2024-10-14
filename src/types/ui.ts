@@ -9,22 +9,25 @@ interface CommonInputProps {
     theme?: 'white' | 'grey' | 'green';
 }
 
-export interface InputProps
-    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>,
-        CommonInputProps {
-    info?: React.ReactNode;
-    maskProps?: Pick<MaskInputProps, 'mask' | 'maskChar' | 'alwaysShowMask'>;
-    hints?: string[];
-    value: string;
-    onChange?: (value: string) => void;
-}
-
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement>, CommonInputProps {}
-
 export interface IOption {
     label: string;
     value: string;
 }
+
+export interface InputProps
+    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>,
+        CommonInputProps {
+    value: string;
+    info?: React.ReactNode;
+    maskProps?: Pick<MaskInputProps, 'mask' | 'maskChar' | 'alwaysShowMask'>;
+    hints?: Array<string | IOption>;
+    needFilterHints?: boolean;
+    hintsIsLoading?: boolean;
+    renderHint?: (hint: IOption) => React.ReactNode;
+    onChange?: (value: string) => void;
+}
+
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement>, CommonInputProps {}
 
 export interface BaseSelectProps extends CommonInputProps {
     options: IOption[];
