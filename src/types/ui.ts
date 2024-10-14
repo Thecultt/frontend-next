@@ -1,28 +1,33 @@
 import React from 'react';
 import { Props as MaskInputProps } from 'react-input-mask';
 
+import { Noop } from './functions';
+
 interface CommonInputProps {
     label: string;
     error?: string;
     theme?: 'white' | 'grey' | 'green';
 }
 
-export interface InputProps
-    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>,
-        CommonInputProps {
-    info?: React.ReactNode;
-    maskProps?: Pick<MaskInputProps, 'mask' | 'maskChar' | 'alwaysShowMask'>;
-    hints?: string[];
-    value: string;
-    onChange?: (value: string) => void;
-}
-
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement>, CommonInputProps {}
-
 export interface IOption {
     label: string;
     value: string;
 }
+
+export interface InputProps
+    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>,
+        CommonInputProps {
+    value: string;
+    info?: React.ReactNode;
+    maskProps?: Pick<MaskInputProps, 'mask' | 'maskChar' | 'alwaysShowMask'>;
+    hints?: Array<string | IOption>;
+    needFilterHints?: boolean;
+    hintsIsLoading?: boolean;
+    renderHint?: (hint: IOption) => React.ReactNode;
+    onChange?: (value: string) => void;
+}
+
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement>, CommonInputProps {}
 
 export interface BaseSelectProps extends CommonInputProps {
     options: IOption[];
@@ -45,3 +50,15 @@ export interface MultiSelectProps extends BaseSelectProps {
 }
 
 export type SelectProps = SingleSelectProps | MultiSelectProps;
+
+export interface CheckboxProps extends React.PropsWithChildren {
+    name?: string;
+    checked?: boolean;
+    disabled?: boolean;
+    className?: string;
+    size?: 's' | 'm' | 'l';
+    defaultChildrenStyles?: boolean;
+    wide?: boolean;
+    error?: string;
+    onChange?: Noop;
+}

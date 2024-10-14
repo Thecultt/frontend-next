@@ -8,6 +8,7 @@ import { useMediaQuery } from 'usehooks-ts';
 
 import { MEDIA_SIZES } from '@/constants/styles';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { useAppSelector } from '@/hooks/redux/useAppSelector';
 import { HeaderTopMessage, HeaderCart, HeaderUser, HeaderSearchBox, HeaderMedia } from '@/components';
 import { BaseImage } from '@/shared/ui';
 import { setHeaderSearchValue, fetchHeaderSearchItems, setHeaderCatalogMenuIsVisible } from '@/redux/actions/header';
@@ -19,6 +20,7 @@ import { CATEGORY_SLUGS, SORT } from '@/constants/catalog';
 import { APP_ROUTE } from '@/constants/routes';
 import { pushDataLayer } from '@/functions/pushDataLayer';
 import { logoPath } from '@/assets/icons';
+import { selectSelectionsItems } from '@/redux/slices/selections/selectors';
 
 import { HeaderSearchInput } from './HeaderSearchInput';
 import { HeaderSelectionsHoverMenu } from './HeaderSelectionsHoverMenu';
@@ -38,7 +40,7 @@ const Header: React.FC = () => {
     const [isOpenSearch, setIsOpenSearch] = React.useState(false);
     const [isSelectionsMenuVisible, setIsSelectionsMenuVisible] = React.useState(false);
 
-    const selections = useTypedSelector(({ selections }) => selections.items);
+    const selections = useAppSelector(selectSelectionsItems);
 
     const { search } = useTypedSelector(({ header }) => header);
     const debouncedValue = useDebounce(search.value);

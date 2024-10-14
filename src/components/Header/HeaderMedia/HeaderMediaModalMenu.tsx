@@ -13,6 +13,8 @@ import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
 import { Noop } from '@/types/functions';
 import { pushDataLayer } from '@/functions/pushDataLayer';
+import { useAppSelector } from '@/hooks/redux/useAppSelector';
+import { selectSelectionsItems } from '@/redux/slices/selections/selectors';
 
 import conciergeBannerMediaImage from '@/assets/images/header/header-concierge-media-banner.jpg';
 
@@ -30,7 +32,7 @@ interface Props {
 export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVisible }) => {
     const { isLoggedIn } = useAuthUser();
 
-    const { items: selections } = useTypedSelector(({ selections }) => selections);
+    const selections = useAppSelector(selectSelectionsItems);
     const { categories: filtersCategories, isLoaded: filtersIsLoaded } = useTypedSelector(
         ({ products_filters }) => products_filters,
     );

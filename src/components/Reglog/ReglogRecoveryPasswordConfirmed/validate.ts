@@ -1,34 +1,8 @@
-export interface validateValues {
-    password: string;
-    password_repeat: string;
-}
+import * as Yup from 'yup';
 
-interface validateErrors {
-    password?: string;
-    password_repeat?: string;
-}
+import { YUP_PASSWORD } from '@/constants/validation';
 
-export const validate = (values: validateValues) => {
-    const errors: validateErrors = {};
-
-    const defaultMin = 2;
-    const defaultMax = 100;
-
-    if (!values.password) {
-        errors.password = 'Поле не может быть пустым';
-    } else if (/[А-Яа-яЁё]/i.test(values.password)) {
-        errors.password = 'Пароль не может содержать кириллицу';
-    } else if (values.password.length > defaultMax) {
-        errors.password = `Не более ${defaultMax} символов`;
-    } else if (values.password.length < defaultMin) {
-        errors.password = `Не менее ${defaultMin} символов`;
-    }
-
-    if (!values.password_repeat) {
-        errors.password_repeat = 'Поле не может быть пустым';
-    } else if (values.password !== values.password_repeat) {
-        errors.password_repeat = 'Пароли не равны';
-    }
-
-    return errors;
-};
+export const SCHEMA = Yup.object({
+    password: YUP_PASSWORD,
+    password_repeat: YUP_PASSWORD.oneOf([Yup.ref('password')], 'Пароли не равны'),
+});

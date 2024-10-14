@@ -1,7 +1,16 @@
 import React from 'react';
 import { getClassNames } from '@/functions/getClassNames';
 
-const RenderInput: React.FC<any> = ({ label, type, input, meta: { touched, error }, bgWhite, white, disabled }) => {
+const RenderInput: React.FC<any> = ({
+    label,
+    type,
+    input,
+    meta: { touched, error },
+    bgWhite,
+    white,
+    disabled,
+    ...props
+}) => {
     const [isVisible, setIsVisible] = React.useState<boolean>(false);
 
     const toggleVisible = () => {
@@ -30,6 +39,8 @@ const RenderInput: React.FC<any> = ({ label, type, input, meta: { touched, error
                     className="input__field"
                     id={input.name}
                     placeholder={label}
+                    disabled={disabled}
+                    {...props}
                 />
 
                 {type === 'password' ? (

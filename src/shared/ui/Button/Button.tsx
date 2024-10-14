@@ -53,6 +53,7 @@ export const Button: React.FC<Props> = ({
                 target={target}
                 onClick={disabled ? (e) => e.preventDefault() : onClick}
                 aria-disabled={disabled}
+                rel={target === '_blank' ? 'noreferrer' : undefined}
             >
                 {icon && iconPosition === 'left' && <span className="tc-button__icon">{icon}</span>}
                 {label && <span className="tc-button__label">{label}</span>}

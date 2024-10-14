@@ -1,66 +1,61 @@
 'use client';
 
 import React from 'react';
-import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
-import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { Loader, RenderInput } from '@/components';
-import { getClassNames } from '@/functions/getClassNames';
+import { Button, Input } from '@/shared/ui';
+import { useAppSelector } from '@/hooks/redux/useAppSelector';
+import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
+import { useHash } from '@/hooks/useHash';
+import { selectAuthEmail, selectRecoveryPasswordIsLoading } from '@/redux/slices/auth/selectors';
+import { recoveryPassword } from '@/redux/slices/auth/asyncActions';
+import { ReglogStateTypesNotLogin } from '@/types/reglog';
 
-const ReglogRecoveryPassword: React.FC<{} & InjectedFormProps<{}, {}>> = ({
-    handleSubmit,
-    initialize,
-    invalid,
-    submitting,
-}) => {
-    const { email } = useTypedSelector(({ check_email }) => check_email);
-    const { isSend } = useTypedSelector(({ recovery_password }) => recovery_password);
+const ReglogRecoveryPassword: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const { changeHash } = useHash();
+
+    const email = useAppSelector(selectAuthEmail);
+    const recoveryPasswordIsLoading = useAppSelector(selectRecoveryPasswordIsLoading);
+
+    const handleClick = () => {
+        dispatch(
+            recoveryPassword({
+                email,
+                callback: () => {
+                    changeHash(ReglogStateTypesNotLogin.RECOVERY_PASSWORD_SUCCESS);
+                },
+            }),
+        );
+    };
 
     React.useEffect(() => {
-        initialize({ email });
+        if (!email) {
+            changeHash(ReglogStateTypesNotLogin.REGLOG);
+        }
     }, []);
 
     return (
-        <form className="reglog-content-form reglog-content-form-login" onSubmit={handleSubmit}>
-            <h3 className="reglog-content-form__title">Забыли пароль?</h3>
-
-            <p className="reglog-content-form__description">
-                Подтвердите адрес эл. почты, связанный с вашим аккаунтом, на который мы вышлем ссылку для изменения
-                пароля.
-            </p>
-
+        <div className="reglog-content-form reglog-content-form-login">
             <div className="reglog-content-form-input-wrapper">
                 <div className="reglog-content-form-input">
-                    <h4 className="reglog-content-form-input__title">Ваша почта</h4>
-
-                    <Field component={RenderInput} label="Ваша почта" name="email" type="text" disabled />
+                    <Input label="Ваша почта" theme="grey" value={email} readOnly />
                 </div>
             </div>
 
             <div className="reglog-content-form-btn">
-                {isSend ? (
-                    <button className="btn disabled loader reglog-content-form-btn__btn" disabled>
-                        <Loader />
-                    </button>
-                ) : (
-                    <button
-                        className={getClassNames('btn reglog-content-form-btn__btn', {
-                            disabled: invalid || submitting,
-                        })}
-                        disabled={invalid || submitting}
-                    >
-                        Отправить ссылку для сброса
-                    </button>
-                )}
+                <Button
+                    label="Отправить ссылку для сброса"
+                    disabled={recoveryPasswordIsLoading || !email}
+                    onClick={handleClick}
+                    wide
+                />
             </div>
 
             <p className="reglog-content-form__subtitle">
                 В личном кабинете вы сможете отследить статус вашей продажи/заказа
             </p>
-        </form>
+        </div>
     );
 };
 
-export default reduxForm<{}, {}>({
-    form: 'recovery-password-form',
-})(ReglogRecoveryPassword);
+export default ReglogRecoveryPassword;

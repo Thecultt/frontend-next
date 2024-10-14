@@ -5,18 +5,31 @@ import { useScrollLock, useOnClickOutside } from 'usehooks-ts';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { Button } from '@/shared/ui/Button/Button';
-import { Popup as PopupModel } from '@/models/IPopup';
+import { IPopup } from '@/models/IPopup';
 import { XIcon } from '@/assets/icons';
 import { Noop } from '@/types/functions';
 import { DEFAULT_TRANSITION } from '@/constants/animation';
 
 import './styles.sass';
 
-interface Props extends PopupModel {
+interface Props extends React.PropsWithChildren, Omit<IPopup, 'content'> {
     onClose: Noop;
+    maxWidth?: string;
+    contentKey?: React.Key;
 }
 
-export const Popup: React.FC<Props> = ({ isOpen, title, content, btn, onClose, callbackClose }) => {
+export const Popup: React.FC<Props> = ({
+    children,
+    isOpen,
+    title,
+    subtitle,
+    btn,
+    maxWidth = '450px',
+    contentKey,
+    beforeTitle,
+    onClose,
+    callbackClose,
+}) => {
     const PopupRef = React.useRef(null);
 
     const { lock, unlock } = useScrollLock();
@@ -37,6 +50,7 @@ export const Popup: React.FC<Props> = ({ isOpen, title, content, btn, onClose, c
             {isOpen && (
                 <>
                     <motion.div
+                        key="popup-backdrop"
                         className="tc-popup-backdrop"
                         initial={{ opacity: 0 }}
                         exit={{ opacity: 0 }}
@@ -45,7 +59,7 @@ export const Popup: React.FC<Props> = ({ isOpen, title, content, btn, onClose, c
                     />
 
                     <motion.div
-                        key="popup"
+                        key={contentKey ?? 'popup'}
                         className="tc-popup"
                         initial={{ opacity: 0, y: 30 }}
                         exit={{ opacity: 0, y: 30 }}
@@ -54,16 +68,23 @@ export const Popup: React.FC<Props> = ({ isOpen, title, content, btn, onClose, c
                         role="dialog"
                         aria-modal="true"
                     >
-                        <div className="tc-popup-content" ref={PopupRef}>
+                        <div className="tc-popup-content" style={{ maxWidth }} ref={PopupRef}>
                             <XIcon className="tc-popup-content-close" onClick={onCloseWrapper} />
 
-                            {title && <h3 className="tc-popup-content__title">{title}</h3>}
+                            {(!!beforeTitle || !!title) && (
+                                <div className="tc-popup-content__header">
+                                    {beforeTitle}
+                                    {title && <h3 className="tc-popup-content__title">{title}</h3>}
+                                </div>
+                            )}
+
+                            {subtitle && <p className="tc-popup-content__subtitle">{subtitle}</p>}
 
                             <div className="tc-popup-content__content">
-                                {typeof content === 'string' || typeof content === 'number' ? (
-                                    <p className="tc-popup-content__text">{content}</p>
+                                {typeof children === 'string' || typeof children === 'number' ? (
+                                    <p className="tc-popup-content__text">{children}</p>
                                 ) : (
-                                    content
+                                    children
                                 )}
                             </div>
 

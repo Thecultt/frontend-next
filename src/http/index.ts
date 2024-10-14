@@ -1,14 +1,16 @@
 import axios from 'axios';
 
-import store from '@/redux/store';
+import { store } from '@/redux/store';
 import { setIsNotificationServerError } from '@/redux/actions/notifications_server';
 import { localStorageService } from '@/services/storage';
 import { LS_KEYS } from '@/constants/keys';
 import { APP_ROUTE } from '@/constants/routes';
+import { API_DOMAIN } from '@/constants/env';
+import { authAPI } from '@/services/api';
 
 const $api = axios.create({
+    baseURL: API_DOMAIN,
     withCredentials: false,
-    baseURL: process.env.NEXT_PUBLIC_API_DOMEN,
 });
 
 $api.interceptors.request.use((config: any) => {
@@ -18,9 +20,7 @@ $api.interceptors.request.use((config: any) => {
 });
 
 $api.interceptors.response.use(
-    (config: any) => {
-        return config;
-    },
+    (config: any) => config,
     async (error: any) => {
         const originalRequest = error.config;
 
@@ -33,15 +33,16 @@ $api.interceptors.response.use(
                 originalRequest._isRetry = true;
 
                 try {
-                    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_DOMEN}/api/token/refresh/`, {
-                        refresh: localStorageService?.getItem(LS_KEYS.refreshToken),
-                    });
+                    const refresh = localStorageService?.getItem<string>(LS_KEYS.refreshToken);
 
-                    localStorageService?.setItem(LS_KEYS.accessToken, response.data.access);
+                    if (refresh) {
+                        const { data } = await authAPI.refreshToken(refresh);
+                        localStorageService?.setItem(LS_KEYS.accessToken, data.access);
 
-                    return $api.request(originalRequest);
+                        return $api.request(originalRequest);
+                    }
                 } catch (e) {
-                    if (localStorageService?.getItem(LS_KEYS.accessToken)) {
+                    if (localStorageService?.hasItem(LS_KEYS.accessToken)) {
                         localStorageService?.removeItem(LS_KEYS.accessToken);
                         window.location.href = APP_ROUTE.home;
                     }

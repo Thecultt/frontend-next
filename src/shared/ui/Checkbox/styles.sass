@@ -2,9 +2,13 @@
 @import "/src/assets/sass/mixin"
 
 .tc-checkbox
-    display: flex
     width: fit-content
+    display: flex
+    align-items: center
     gap: 8px
+
+    &--wide
+        width: 100%
 
     &__input
         position: absolute
@@ -63,3 +67,34 @@
 
     &--size-s &__checkmark
         width: 7.5px
+
+    &--error &__control
+        border-color: $red
+
+    &__content
+        +ManropeMedium
+        line-height: normal
+        color: $black3
+        text-align: left
+
+        a
+            +ManropeMedium
+            line-height: normal
+            font-size: inherit
+            color: $mainColor
+            text-decoration: underline
+
+    &--size-l &__content
+        font-size: 14px
+
+        +mediaTablet
+            font-size: 12px
+
+    &--size-m &__content
+        font-size: 14px
+
+        +mediaTablet
+            font-size: 12px
+
+    &--size-s &__content
+        font-size: 12px

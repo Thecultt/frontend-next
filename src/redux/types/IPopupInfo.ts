@@ -1,6 +1,6 @@
-import { Popup, PopupContent } from '@/models/IPopup';
+import { IPopup, PopupContent } from '@/models/IPopup';
 
-export interface PopupInfoState extends Popup {}
+export interface PopupInfoState extends IPopup {}
 
 export enum PopupInfoActionTypes {
     SET_OPEN_INFO_POPUP = 'SET_OPEN_INFO_POPUP',
