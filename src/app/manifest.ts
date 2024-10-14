@@ -6,7 +6,7 @@ const manifest = (): MetadataRoute.Manifest => {
         name: 'Ресейл-платформа культовых сумок | THECULTT',
         start_url: '.',
         display: 'standalone',
-        theme_color: '#000000',
+        theme_color: '#285141',
         background_color: '#ffffff',
         icons: [
             {
