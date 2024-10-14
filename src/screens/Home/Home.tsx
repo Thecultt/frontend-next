@@ -10,28 +10,20 @@ import {
     HomeSellPartners,
     HomeAbout,
     HomeWaiting,
-    CatalogProductsSection,
     SelectionsSlider,
     SelectionsBanners,
+    HomeNewProducts,
 } from '@/components';
-import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { CATEGORY_SLUGS } from '@/constants/catalog';
 
 const Home: React.FC = () => (
     <>
         <HomeMainBanner />
-
         <section className="home">
             <div className="container">
                 <div className="home-wrapper">
                     <HomeCategories />
                     <SelectionsSlider />
-                    <CatalogProductsSection
-                        title="Новинки"
-                        titleLink={getCatalogFiltersUrl({
-                            category_slug: CATEGORY_SLUGS.new,
-                        })}
-                    />
+                    <HomeNewProducts />
                     <SelectionsBanners />
                     <HomeVisit />
                     <HomeSell />

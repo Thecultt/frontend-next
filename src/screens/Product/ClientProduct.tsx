@@ -8,8 +8,8 @@ import {
     ProductInfoBreadCrumbs,
     ProductCover,
     ProductInfo,
-    CatalogProductsSection,
     ProductExchange,
+    ProductRecommendations,
 } from '@/components';
 import { usePopupInfo } from '@/hooks/usePopupInfo';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
@@ -80,11 +80,7 @@ export const ClientProduct: React.FC<Props> = ({ serverProductData }) => {
                     </div>
                 </div>
             </section>
-
-            <div className="container">
-                <CatalogProductsSection title="Может быть интересно" />
-            </div>
-
+            <ProductRecommendations />
             <ProductExchange />
         </>
     );
