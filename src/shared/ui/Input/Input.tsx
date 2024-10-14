@@ -8,9 +8,13 @@ import MaskInput from 'react-input-mask';
 import { getClassNames } from '@/functions/getClassNames';
 import { InfoIcon } from '@/assets/icons';
 import { DEFAULT_TRANSITION } from '@/constants/animation';
-import { InputProps } from '@/types/ui';
+import { InputProps, IOption } from '@/types/ui';
 
+import { Spinner } from '../Spinner/Spinner';
 import './styles.sass';
+
+const getHintValue = (hint: string | IOption) => (typeof hint === 'string' ? hint : hint.value);
+const getHintLabel = (hint: string | IOption) => (typeof hint === 'string' ? hint : hint.label);
 
 export const Input: React.FC<InputProps> = ({
     label,
@@ -24,6 +28,9 @@ export const Input: React.FC<InputProps> = ({
     theme = 'white',
     placeholder = label,
     hints = [],
+    needFilterHints = true,
+    hintsIsLoading = false,
+    renderHint,
     onFocus,
     onChange,
     ...inputProps
@@ -36,12 +43,12 @@ export const Input: React.FC<InputProps> = ({
     const [hintsIsVisible, _toggleHintsVisible, setHintsVisible] = useToggle(false);
 
     const filteredHints = React.useMemo(() => {
-        if (!value) {
+        if (!value || !needFilterHints) {
             return hints;
         }
 
-        return hints.filter((x) => x.toLowerCase().indexOf(value.toString().toLowerCase()) >= 0);
-    }, [value, hints]);
+        return hints.filter((x) => getHintLabel(x).toLowerCase().indexOf(value.toString().toLowerCase()) >= 0);
+    }, [value, hints, needFilterHints]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChange?.(e.target.value);
@@ -53,10 +60,7 @@ export const Input: React.FC<InputProps> = ({
     };
 
     const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-        if (hints.length > 0) {
-            setHintsVisible(true);
-        }
-
+        setHintsVisible(true);
         onFocus?.(e);
     };
 
@@ -98,7 +102,7 @@ export const Input: React.FC<InputProps> = ({
                 </label>
 
                 <AnimatePresence>
-                    {hintsIsVisible && filteredHints.length > 0 && !disabled && (
+                    {hintsIsVisible && (filteredHints.length > 0 || hintsIsLoading) && !disabled && (
                         <motion.div
                             key="input-hints"
                             className="tc-input-hints"
@@ -108,16 +112,24 @@ export const Input: React.FC<InputProps> = ({
                             transition={DEFAULT_TRANSITION}
                         >
                             <div className="tc-input-hints__wrapper">
-                                {filteredHints.map((hint) => (
-                                    <button
-                                        key={hint}
-                                        type="button"
-                                        className="tc-input-hints__button"
-                                        onClick={() => handleHintClick(hint)}
-                                    >
-                                        {hint}
-                                    </button>
-                                ))}
+                                {hintsIsLoading ? (
+                                    <div className="tc-input-hints__loading">
+                                        <Spinner />
+                                    </div>
+                                ) : (
+                                    filteredHints.map((hint) => (
+                                        <button
+                                            key={getHintValue(hint)}
+                                            type="button"
+                                            className="tc-input-hints__button"
+                                            onClick={() => handleHintClick(getHintValue(hint))}
+                                        >
+                                            {typeof hint !== 'string' && !!renderHint
+                                                ? renderHint(hint)
+                                                : getHintLabel(hint)}
+                                        </button>
+                                    ))
+                                )}
                             </div>
                         </motion.div>
                     )}

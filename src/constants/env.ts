@@ -3,3 +3,5 @@ export const MINDBOX_SECRET_KEY = process.env.NEXT_PUBLIC_MINDBOX_SECRET_KEY;
 export const YANDEX_SPLIT_MERCHANT_ID = process.env.NEXT_PUBLIC_YANDEX_SPLIT_MERCHANT_ID;
 export const YANDEX_METRIC_ID = +process.env.NEXT_PUBLIC_YANDEX_METRIC_ID;
 export const GOOGLE_TAG_ID = process.env.NEXT_PUBLIC_GOOGLE_TAG_ID;
+export const DADATA_API_URL = process.env.NEXT_PUBLIC_DADATA_API_URL;
+export const DADATA_API_KEY = process.env.NEXT_PUBLIC_DADATA_API_KEY;
