@@ -3,6 +3,7 @@ import { AVAILABILITY_IDS, CATALOG_PRODUCTS_LIMIT, SORT } from '@/constants/cata
 import type { ICatalogFilters } from '@/types/catalog';
 import type { GetCatalogResponse } from '@/types/api';
 import type { Product, ProductPage } from '@/models/IProduct';
+import type { IProductFilters } from '@/models/IProductFilters';
 
 const MIN_PRICE_FROM = 1000;
 
@@ -71,12 +72,15 @@ const getCatalog = (filters: ICatalogFilters) => {
     return $api.get<GetCatalogResponse>('/catalog_v2', { params });
 };
 
+const getCatalogFilters = () => $api.get<IProductFilters>('/filters_v2');
+
 const getProductByArticle = (article: string) => $api.get<ProductPage>(`/product/${article}`);
 
 const getProductSimilarByArticle = (article: string) => $api.get<{ items: Product[] }>(`/product/${article}/similar`);
 
 export const catalogAPI = {
     getCatalog,
+    getCatalogFilters,
     getProductByArticle,
     getProductSimilarByArticle,
 };
