@@ -2,6 +2,7 @@ import React from 'react';
 
 import { VISIT_AVAILABLE } from '@/constants/app';
 import { DeliveryTypes } from '@/constants/sell';
+import { CONTACTS } from '@/constants/contacts';
 
 import { getClassNames } from '@/functions/getClassNames';
 
@@ -77,9 +78,17 @@ const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
                         <h5 className="sell-block-delivery-types-block__title">Лично в офис</h5>
 
                         <p className="sell-block-delivery-types-block__subtitle">
-                            {VISIT_AVAILABLE
-                                ? 'Забронируйте дату и время для посещения нашего офиса.'
-                                : 'В данный момент недоступно'}
+                            {VISIT_AVAILABLE ? (
+                                <>
+                                    Забронируйте дату и время для посещения нашего офиса.
+                                    <br />
+                                    Мы находимся по адресу: {CONTACTS.address},
+                                    <br />
+                                    {CONTACTS.addressTime}
+                                </>
+                            ) : (
+                                'В данный момент недоступно'
+                            )}
                         </p>
                     </div>
                 </>
