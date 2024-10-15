@@ -1,11 +1,13 @@
 import { formatNumber } from './formatNumber';
 
 /**
+ * Return pluralize value
  * @param {Number} n
  * @param {Array<String>} forms
+ * @param {Boolean} join
  * @returns {String}
  */
-export const pluralize = (n: number, forms: [string, string, string]): string => {
+export const pluralize = (n: number, forms: [string, string, string], join: boolean = true): string => {
     const getForm = () => {
         if (n % 10 === 1 && n % 100 !== 11) {
             return forms[0] ?? '';
@@ -18,5 +20,7 @@ export const pluralize = (n: number, forms: [string, string, string]): string =>
         return forms[2] ?? '';
     };
 
-    return `${formatNumber(n)} ${getForm()}`;
+    const form = getForm();
+
+    return join ? `${formatNumber(n)} ${getForm()}` : form;
 };

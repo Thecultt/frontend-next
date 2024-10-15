@@ -379,3 +379,5 @@ export const HEADER_MENU_CATEGORIES: IHeaderMenuCategory[] = [
 ];
 
 export const MAX_TYPES_COUNT = 11;
+
+export const SEARCH_BRANDS = ['Сумка Louis Vuitton', 'Hermes Birkin', 'Сумка Gucci', 'Prada'];

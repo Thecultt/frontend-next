@@ -143,7 +143,7 @@ const tabs: { title: string; description: string }[] = [
 		</tr>
 		<tr>
 		<td>
-		<p align="center">Hermes Birkin и Kelly в состоянии "Из бутика" </p>
+		<p align="center">Hermes Birkin и Kelly в состоянии "Новое от брендов" </p>
 		</td>
 		<td>
 		<p align="center">10%</p>

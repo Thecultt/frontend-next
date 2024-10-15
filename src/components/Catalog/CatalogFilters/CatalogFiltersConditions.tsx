@@ -9,7 +9,7 @@ import { ConditionType } from '@/types/catalog';
 
 const CatalogFiltersConditions: React.FC = () => {
     const {
-        filters: { conditions: selectedConditions, boutique },
+        filters: { conditions: selectedConditions, brandnew },
         updateFilters,
     } = useCatalogFilters();
 
@@ -33,7 +33,7 @@ const CatalogFiltersConditions: React.FC = () => {
 					<li><span>Хорошее</span>: присутствуют значительные следы носки. Могут присутствовать следующие нюансы: отсутствие элементов полного комплекта,  загар, потертости или царапины на коже, пятна на материале, следы носки на подкладке, потертости на фурнитуре, сумка была в спа</li>
 				</ul>
 			`}
-            disabled={boutique || !conditions.length}
+            disabled={brandnew || !conditions.length}
         >
             {conditions.map(({ condition, slug }) => (
                 <div className="catalog-filters-block-content-checkbox" key={slug}>

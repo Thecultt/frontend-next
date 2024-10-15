@@ -72,7 +72,7 @@ export const MAIN_BANNER_SLIDES: IMainBannerSlide[] = [
     // 			categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
     // 			availability: ['Доступно', 'На примерке', 'Нет в наличии'],
     // 			price_drop: false,
-    // 			boutique: true,
+    // 			brandnew: true,
     // 			page: 1,
     // 			sort: SORT.a,
     // 		}),

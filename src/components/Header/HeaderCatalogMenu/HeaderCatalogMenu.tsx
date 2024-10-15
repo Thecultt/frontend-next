@@ -99,7 +99,7 @@ export const HeaderCatalogMenu = () => {
 
                                 <Link
                                     href={getCatalogFiltersUrl({
-                                        boutique: true,
+                                        brandnew: true,
                                     })}
                                     className="header-catalog-menu-boutique"
                                     onClick={closeCatalogMenu}

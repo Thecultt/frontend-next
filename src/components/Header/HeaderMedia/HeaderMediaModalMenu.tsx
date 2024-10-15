@@ -147,7 +147,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                             <Link
                                 href={getCatalogFiltersUrl({
                                     category_slug: category.slug,
-                                    boutique: true,
+                                    brandnew: true,
                                 })}
                                 className="header-media-modal-menu-links-boutique"
                                 onClick={toggleVisible}

@@ -34,7 +34,7 @@ export const ProductInfoBadges: React.FC<Props> = ({ product, className, onNewBr
                     },
                     {
                         title: 'Цена снизилась',
-                        theme: 'black',
+                        theme: 'green',
                     },
                 ];
             }
@@ -67,7 +67,7 @@ export const ProductInfoBadges: React.FC<Props> = ({ product, className, onNewBr
             return [
                 {
                     title: 'Цена снизилась',
-                    theme: 'black',
+                    theme: 'green',
                 },
             ];
         }

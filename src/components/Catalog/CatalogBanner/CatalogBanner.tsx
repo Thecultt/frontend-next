@@ -1,13 +1,15 @@
 'use client';
 
 import React from 'react';
+import { useParams } from 'next/navigation';
 
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
-import { SELECTIONS_IDS, SORT, CATEGORY_SLUG_NAMES, CATEGORY_NAMES, CATEGORY_SLUGS } from '@/constants/catalog';
+import { SELECTIONS_IDS, SORT, CATEGORY_NAMES, CATEGORY_SLUGS } from '@/constants/catalog';
 import { APP_ROUTE } from '@/constants/routes';
 import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 import { useAppSelector } from '@/hooks/redux/useAppSelector';
 import { selectSelectionsItems } from '@/redux/slices/selections/selectors';
+import { CatalogPageParams } from '@/types/catalog';
 
 import CatalogBannerImagePriceDrop from '@/assets/images/catalog/catalog-banner-price-drop.jpg';
 import CatalogBannerImagePriceDrop2 from '@/assets/images/catalog/catalog-banner-price-drop2.jpg';
@@ -18,19 +20,58 @@ import CatalogBannerImageConcierge from '@/assets/images/concierge/concierge-mai
 import { CatalogBannerTemplate } from './CatalogBannerTemplate';
 
 const CatalogBanner: React.FC = React.memo(() => {
+    const { category_slug } = useParams<CatalogPageParams>();
     const {
-        filters: { sort, selection: selectionId, price_drop, boutique, categories: selectedCategories, category_slug },
+        filters: { sort, selection: selectionId, price_drop, brandnew, categories },
     } = useCatalogFilters();
-    const selections = useAppSelector(selectSelectionsItems);
 
-    const categories = category_slug ? [CATEGORY_SLUG_NAMES[category_slug]] : selectedCategories;
+    const selections = useAppSelector(selectSelectionsItems);
     const currentSelection = selectionId ? selections.find(({ id }) => id.toString() === selectionId) ?? null : null;
+
+    if (brandnew) {
+        return (
+            <CatalogBannerTemplate
+                image={CatalogBannerImageBoutique.src}
+                title="Новое от брендов"
+                description="Это лоты, полученные от брендов напрямую или из бутиков-партнеров. Все аксессуары в подборке новые и никогда не были в использовании — в таком состоянии, в котором вы бы купили их в магазине бренда."
+            />
+        );
+    }
+
+    if (price_drop) {
+        return (
+            <CatalogBannerTemplate
+                image={CatalogBannerImagePriceDrop.src}
+                title="THE CULTT SALE"
+                description="Цена на эти лоты была недавно снижена. Успейте забрать их, пока это не сделал кто-то ещё."
+            />
+        );
+    }
+
+    if (currentSelection) {
+        return (
+            <CatalogBannerTemplate
+                image={currentSelection.background_image ?? ''}
+                title={currentSelection.title ?? ''}
+                description={currentSelection.description ?? ''}
+            />
+        );
+    }
+
+    if (sort === SORT.popular) {
+        return (
+            <CatalogBannerTemplate
+                image={CatalogBannerImagePopular.src}
+                title="Горячие лоты"
+                description="Успейте заказать: лоты в единственном экземпляре и с максимумом «сердечек»"
+            />
+        );
+    }
 
     if (
         (category_slug &&
             [CATEGORY_SLUGS.new, CATEGORY_SLUGS.shoes, CATEGORY_SLUGS.accessories].includes(category_slug)) ||
-        (categories.length === 1 &&
-            (categories[0] === CATEGORY_NAMES.shoes || categories[0] === CATEGORY_NAMES.accessories))
+        (categories.length === 1 && [CATEGORY_NAMES.shoes, CATEGORY_NAMES.accessories].includes(categories[0]))
     ) {
         return (
             <CatalogBannerTemplate
@@ -49,8 +90,7 @@ const CatalogBanner: React.FC = React.memo(() => {
 
     if (
         (category_slug && [CATEGORY_SLUGS.bags, CATEGORY_SLUGS.decorations].includes(category_slug)) ||
-        (categories.length === 1 &&
-            (categories[0] === CATEGORY_NAMES.bags || categories[0] === CATEGORY_NAMES.decorations))
+        (categories.length === 1 && [CATEGORY_NAMES.bags, CATEGORY_NAMES.decorations].includes(categories[0]))
     ) {
         return (
             <CatalogBannerTemplate
@@ -76,31 +116,7 @@ const CatalogBanner: React.FC = React.memo(() => {
         );
     }
 
-    return price_drop ? (
-        <CatalogBannerTemplate
-            image={CatalogBannerImagePriceDrop.src}
-            title="THE CULTT SALE"
-            description="Цена на эти лоты была недавно снижена. Успейте забрать их, пока это не сделал кто-то ещё."
-        />
-    ) : boutique ? (
-        <CatalogBannerTemplate
-            image={CatalogBannerImageBoutique.src}
-            title="Новое от брендов"
-            description="Это лоты, полученные от брендов напрямую или из бутиков-партнеров. Все аксессуары в подборке новые и никогда не были в использовании — в таком состоянии, в котором вы бы купили их в магазине бренда."
-        />
-    ) : currentSelection ? (
-        <CatalogBannerTemplate
-            image={currentSelection.background_image ?? ''}
-            title={currentSelection.title ?? ''}
-            description={currentSelection.description ?? ''}
-        />
-    ) : sort === SORT.popular ? (
-        <CatalogBannerTemplate
-            image={CatalogBannerImagePopular.src}
-            title="Горячие лоты"
-            description="Успейте заказать: лоты в единственном экземпляре и с максимумом «сердечек»"
-        />
-    ) : (
+    return (
         <CatalogBannerTemplate
             image={CatalogBannerImagePriceDrop2.src}
             title="THE CULTT SALE"

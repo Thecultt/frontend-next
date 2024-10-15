@@ -31,7 +31,7 @@ export const ClientProduct: React.FC<Props> = ({ serverProductData }) => {
                 'Это лоты, полученные от брендов напрямую или из бутиков-партнеров. Все аксессуары в подборке новые и никогда не были в использовании — в таком состоянии, в котором вы бы купили их в магазине бренда.',
             btn: {
                 label: 'Смотреть все',
-                href: getCatalogFiltersUrl({ boutique: true }),
+                href: getCatalogFiltersUrl({ brandnew: true }),
             },
         });
     };
