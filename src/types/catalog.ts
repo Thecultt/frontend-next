@@ -38,7 +38,7 @@ export interface ICatalogFilters {
     metal_types?: string[];
 
     selection?: string;
-    boutique?: boolean;
+    brandnew?: boolean;
     price_drop?: boolean;
     sort?: SortType;
     page?: number;

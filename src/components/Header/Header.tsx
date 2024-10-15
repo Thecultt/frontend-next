@@ -64,14 +64,14 @@ const Header: React.FC = () => {
     const goToCatalog = (withSearchValue = true) => {
         handleSearchClose();
         inputRef.current?.blur();
-        router.push(
-            withSearchValue
-                ? getCatalogFiltersUrl({
-                      search: search.value,
-                      sort: SORT.a,
-                  })
-                : APP_ROUTE.catalog,
-        );
+
+        const url = withSearchValue
+            ? getCatalogFiltersUrl({
+                  search: search.value,
+                  sort: SORT.a,
+              })
+            : getCatalogFiltersUrl({ category_slug: CATEGORY_SLUGS.new });
+        router.push(url);
     };
 
     const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

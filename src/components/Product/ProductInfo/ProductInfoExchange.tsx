@@ -6,6 +6,8 @@ import { useMediaQuery } from 'usehooks-ts';
 
 import { APP_ROUTE } from '@/constants/routes';
 import { MEDIA_SIZES } from '@/constants/styles';
+import { Button } from '@/shared/ui';
+import { RefreshIcon } from '@/assets/icons';
 
 interface Props {
     canBuy: boolean;
@@ -20,18 +22,14 @@ const ProductInfoExchange: React.FC<Props> = ({ canBuy }) => {
 
     if (isMobile) {
         return (
-            <Link href={APP_ROUTE.exchange} className="btn-light-green product-content-info-exchange-mobile">
-                <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M14.6613 4.99947C14.3231 4.04375 13.7483 3.18927 12.9906 2.51577C12.2328 1.84227 11.3168 1.3717 10.328 1.14797C9.33916 0.924237 8.30979 0.954638 7.33591 1.23633C6.36203 1.51803 5.47538 2.04184 4.7587 2.75888L1.66455 5.66632M1.66455 5.66632V1.66455M1.66455 5.66632L5.6656 5.6656M16.3351 8.33368L13.2409 11.2411C12.5242 11.9582 11.6376 12.482 10.6637 12.7637C9.68983 13.0454 8.66046 13.0758 7.67165 12.852C6.68285 12.6283 5.76683 12.1577 5.00907 11.4842C4.25132 10.8107 3.67652 9.95625 3.33832 9.00053M16.3355 12.3365V8.33545H12.3344"
-                        stroke="#285141"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    />
-                </svg>
-                Обмен на эту модель
-            </Link>
+            <Button
+                href={APP_ROUTE.exchange}
+                theme="light"
+                className="product-content-info-exchange-mobile"
+                label="Обмен на эту модель"
+                icon={<RefreshIcon />}
+                wide
+            />
         );
     }
 

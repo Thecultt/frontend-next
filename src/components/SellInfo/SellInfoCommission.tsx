@@ -134,7 +134,8 @@ const SellInfoCommission: React.FC = () => {
                                 </div>
                                 <div className="sell-info-commission-blocks-block-table-block-body-item">
                                     <p className="sell-info-commission-blocks-block-table-block-body-item__title">
-                                        Hermes Birkin и&nbsp;Kelly в&nbsp;состоянии <br /> &laquo;Из&nbsp;бутика&raquo;{' '}
+                                        Hermes Birkin и&nbsp;Kelly в&nbsp;состоянии <br />{' '}
+                                        &laquo;Новое&nbsp;от&nbsp;брендов&raquo;{' '}
                                     </p>
 
                                     <p className="sell-info-commission-blocks-block-table-block-body-item__title">
