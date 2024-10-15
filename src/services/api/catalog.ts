@@ -48,8 +48,8 @@ const getCatalog = (filters: ICatalogFilters) => {
     filters.glass_frame?.map((glass_frame) => params.append('glass_frame', glass_frame));
     filters.size?.map((size) => params.append('size', size.toString()));
 
-    if (filters.boutique) {
-        params.append('from_boutique', String(filters.boutique));
+    if (filters.brandnew) {
+        params.append('from_boutique', String(filters.brandnew));
     }
     if (filters.price_drop) {
         params.append('price_drop', String(filters.price_drop));

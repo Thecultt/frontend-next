@@ -3,12 +3,12 @@
 import React from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
-import { checkDeclension } from '@/functions/checkDeclension';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useCatalogFiltersTitle } from '@/hooks/catalog/useCatalogFiltersTitle';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { CatalogFiltersTopBoutique, CatalogFiltersTopSort, CatalogFiltersTopSortMedia } from '@/components';
 import { Skeleton } from '@/shared/ui';
+import { pluralize } from '@/functions/pluralize';
 
 interface Props {
     isOpenFiltersMedia: boolean;
@@ -36,9 +36,8 @@ const CatalogFiltersTop: React.FC<Props> = React.memo(({ isOpenFiltersMedia, set
         <div className="catalog-filters-top">
             <div className="catalog-filters-top-title">
                 <p className="catalog-filters-top-title__title">{title}</p>
-
                 <p className="catalog-filters-top-title__count">
-                    {checkDeclension(itemsCount, ['товар', 'товара', 'товаров']).title}
+                    Найдено: {pluralize(itemsCount, ['товар', 'товара', 'товаров'])}
                 </p>
             </div>
 

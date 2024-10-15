@@ -53,5 +53,5 @@ export const parseCatalogSearchParams = ({ params, searchParams }: ICatalogPageP
         price_drop: parseAsBoolean
             .withDefault(params.category_slug === CATEGORY_SLUGS.sale)
             .parseServerSide(searchParams.price_drop),
-        boutique: parseAsBoolean.withDefault(false).parseServerSide(searchParams.boutique),
+        brandnew: parseAsBoolean.withDefault(false).parseServerSide(searchParams.brandnew),
     }) satisfies ICatalogFilters;

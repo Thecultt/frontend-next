@@ -27,9 +27,6 @@ export { default as MenuMedia } from './MenuMedia/MenuMedia';
 // PopupInfo
 export { PopupInfo } from './PopupInfo/PopupInfo';
 
-// ProductBlock
-export { default as ProductBlock } from './ProductBlock/ProductBlock';
-
 // Header
 export { default as Header } from './Header/Header';
 // HeaderTopMessage
@@ -149,20 +146,14 @@ export { default as ProductInfoConcierge } from './Product/ProductInfo/ProductIn
 export { default as ProductInfoConciergeForm } from './Product/ProductInfo/ProductInfoConcierge/ProductInfoConciergeForm';
 // ProductInfoTitle
 export { default as ProductInfoTitle } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitle';
-// ProductInfoTitleBoutique
-export { default as ProductInfoTitleBoutique } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleBoutique/ProductInfoTitleBoutique';
-export { default as ProductInfoTitleBoutiquePopup } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleBoutique/ProductInfoTitleBoutiquePopup';
-// ProductInfoTitlePartner
-export { default as ProductInfoTitlePartner } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitlePartner/ProductInfoTitlePartner';
-export { default as ProductInfoTitlePartnerPopup } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitlePartner/ProductInfoTitlePartnerPopup';
 // ProductInfoTitleSplit
 export { default as ProductInfoTitleSplit } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleSplit/ProductInfoTitleSplit';
 export { default as ProductInfoTitleSplitPopup } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleSplit/ProductInfoTitleSplitPopup';
-// ProductInfoTitleSale
-export { default as ProductInfoTitleSale } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleSale/ProductInfoTitleSale';
 // ProductInfoTabs
 export { default as ProductInfoTabs } from './Product/ProductInfo/ProductInfoTabs/ProductInfoTabs';
 export { default as ProductInfoTabsItem } from './Product/ProductInfo/ProductInfoTabs/ProductInfoTabsItem';
+// ProductInfoBadges
+export { ProductInfoBadges } from './Product/ProductInfo/ProductInfoBadges/ProductInfoBadges';
 
 // SubscribeEmail
 export { default as SubscribeEmailForm } from './SubscribeEmail/SubscribeEmailForm';

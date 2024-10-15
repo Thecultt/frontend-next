@@ -7,12 +7,13 @@ import { useOnClickOutside } from 'usehooks-ts';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { setHeaderSearchValue } from '@/redux/actions/header';
-import { checkDeclension } from '@/functions/checkDeclension';
 import { getClassNames } from '@/functions/getClassNames';
 import { ProductCard } from '@/components';
 import { APP_ROUTE } from '@/constants/routes';
+import { pluralize } from '@/functions/pluralize';
 
 import { HeaderSearchInput } from '../HeaderSearchInput';
+import { SEARCH_BRANDS } from '../constants';
 
 interface HeaderSearchBoxProps {
     state: boolean;
@@ -68,7 +69,7 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose, goToC
                         <p className="header-search-box-history-often__title">Часто ищут</p>
 
                         <div className="header-search-box-history-often-items">
-                            {['Сумка Louis Vuitton', 'Hermes Birkin', 'Сумка Gucci', 'Prada'].map((search, index) => (
+                            {SEARCH_BRANDS.map((search, index) => (
                                 <div
                                     className="header-search-box-history-often-items-item"
                                     onClick={() => dispatch(setHeaderSearchValue(search))}
@@ -137,7 +138,7 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose, goToC
                     <div className="header-search-box-products__head">
                         <h3 className="header-search-box-products__title">
                             {search.value
-                                ? `${checkDeclension(search.totalCount, ['Найден', 'Найдено', 'Найдено']).text}: ${checkDeclension(search.totalCount, ['товар', 'товара', 'товаров']).title}`
+                                ? `Найдено: ${pluralize(search.totalCount, ['товар', 'товара', 'товаров'])}`
                                 : 'Новинки'}
                         </h3>
 

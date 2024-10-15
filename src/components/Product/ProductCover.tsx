@@ -11,10 +11,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
+import { ProductInfoBadges } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { MEDIA_SIZES } from '@/constants/styles';
 import { ProductPage } from '@/models/IProduct';
-import { Badge } from '@/shared/ui';
 import { Noop } from '@/types/functions';
 
 interface Props {
@@ -314,21 +314,12 @@ const ProductCover: React.FC<Props> = ({ product, onBoutiquePopupVisible, onPart
                 </div>
             )}
 
-            {(from_boutique || from_parnter || price_drop) && (
-                <div className="product-content-cover-media__badges">
-                    {from_boutique && (
-                        <Badge isGreen onClick={onBoutiquePopupVisible}>
-                            Из бутика
-                        </Badge>
-                    )}
-                    {from_parnter && (
-                        <Badge isGreen onClick={onPartnerPopupVisible}>
-                            От партнеров
-                        </Badge>
-                    )}
-                    {price_drop && <Badge isGreen>Цена снизилась</Badge>}
-                </div>
-            )}
+            <ProductInfoBadges
+                className="product-content-cover-media__badges"
+                product={product}
+                onNewBrandClick={onBoutiquePopupVisible}
+                onFromPartnerClick={onPartnerPopupVisible}
+            />
         </div>
     );
 };
