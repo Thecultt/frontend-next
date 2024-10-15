@@ -31,7 +31,7 @@ const CatalogFiltersTopBoutique: React.FC = React.memo(() => {
                 })}
                 onClick={() => onClickSetBoutique(true)}
             >
-                Из бутика
+                Новое от брендов
             </button>
 
             <div className="catalog-filters-top-boutique-info">
@@ -47,9 +47,9 @@ const CatalogFiltersTopBoutique: React.FC = React.memo(() => {
 
                 <div className="catalog-filters-top-boutique-info-message-wrapper message-info-wrapper">
                     <p className="message-info center catalog-filters-top-boutique-info__message">
-                        <span className="message-info__title">Подборка лотов из бутика</span>
-                        Коллекция лотов, которые мы получили напрямую из бутиков-партнеров или от частных байеров. Все
-                        аксессуары в подборке — новые и никогда не были в использовании.
+                        <span className="message-info__title">Новое от брендов</span>
+                        Это лоты, полученные от брендов напрямую или из бутиков-партнеров. Все аксессуары в подборке
+                        новые — вы их первый владелец.
                     </p>
                 </div>
             </div>

@@ -27,10 +27,10 @@ const CatalogBanner: React.FC = React.memo(() => {
     const currentSelection = selectionId ? selections.find(({ id }) => id.toString() === selectionId) ?? null : null;
 
     if (
-        (category_slug && [CATEGORY_SLUGS.shoes, CATEGORY_SLUGS.accessories].includes(category_slug)) ||
+        (category_slug &&
+            [CATEGORY_SLUGS.new, CATEGORY_SLUGS.shoes, CATEGORY_SLUGS.accessories].includes(category_slug)) ||
         (categories.length === 1 &&
-            (categories[0] === CATEGORY_NAMES.shoes || categories[0] === CATEGORY_NAMES.accessories)) ||
-        sort === SORT.a
+            (categories[0] === CATEGORY_NAMES.shoes || categories[0] === CATEGORY_NAMES.accessories))
     ) {
         return (
             <CatalogBannerTemplate
@@ -85,8 +85,8 @@ const CatalogBanner: React.FC = React.memo(() => {
     ) : boutique ? (
         <CatalogBannerTemplate
             image={CatalogBannerImageBoutique.src}
-            title="Из бутика"
-            description="Коллекция лотов, которые мы получили напрямую из бутиков-партнеров или от частных байеров. Все аксессуары в этой подборке — новые и никогда не были в использовании."
+            title="Новое от брендов"
+            description="Это лоты, полученные от брендов напрямую или из бутиков-партнеров. Все аксессуары в подборке новые и никогда не были в использовании — в таком состоянии, в котором вы бы купили их в магазине бренда."
         />
     ) : currentSelection ? (
         <CatalogBannerTemplate

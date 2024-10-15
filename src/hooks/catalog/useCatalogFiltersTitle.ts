@@ -25,7 +25,7 @@ export const useCatalogFiltersTitle = () => {
 
     return React.useMemo(() => {
         if (filters.boutique) {
-            return 'Из бутика';
+            return 'Новое от брендов';
         }
 
         if (filters.price_drop) {

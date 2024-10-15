@@ -15,3 +15,5 @@ export { ReactComponent as WalletIcon, default as walletIconPath } from './walle
 export { ReactComponent as InfoIcon, default as infoIconPath } from './info.svg';
 export { ReactComponent as CheckIcon, default as checkIconPath } from './check.svg';
 export { ReactComponent as ShareIcon, default as shareIconPath } from './share.svg';
+export { ReactComponent as HeartIcon, default as heartIconPath } from './heart.svg';
+export { ReactComponent as RefreshIcon, default as refreshIconPath } from './refresh.svg';

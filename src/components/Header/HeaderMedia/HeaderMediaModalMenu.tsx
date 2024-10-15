@@ -152,7 +152,7 @@ export const HeaderMediaModalMenu: React.FC<Props> = memo(({ isVisible, toggleVi
                                 className="header-media-modal-menu-links-boutique"
                                 onClick={toggleVisible}
                             >
-                                <span className="header-media-modal-menu-links-boutique__badge">Из бутика</span>
+                                <span className="header-media-modal-menu-links-boutique__badge">Новое от брендов</span>
                                 <p className="header-media-modal-menu-links-boutique__subtitle">
                                     Лоты от брендов и из бутиков-партнеров
                                 </p>

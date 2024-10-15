@@ -31,7 +31,7 @@ const CatalogFiltersBoutiqueMedia: React.FC = () => {
                 })}
                 onClick={() => onClickSetBoutique(true)}
             >
-                Из бутика
+                Новое от брендов
             </button>
         </div>
     );
