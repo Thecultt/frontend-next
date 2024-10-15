@@ -5,12 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMediaQuery } from 'usehooks-ts';
 
-import {
-    ProductInfoTitleBoutique,
-    ProductInfoTitlePartner,
-    ProductInfoTitleSplit,
-    ProductInfoTitleSale,
-} from '@/components';
+import { ProductInfoTitleSplit, ProductInfoBadges } from '@/components';
 import { ProductPage } from '@/models/IProduct';
 import { WaitingPopupType } from '@/types/waiting';
 import { useWaitingData } from '@/hooks/catalog/useWaitingData';
@@ -24,6 +19,7 @@ import { MEDIA_SIZES } from '@/constants/styles';
 import { APP_ROUTE } from '@/constants/routes';
 import { CATEGORY_NAMES } from '@/constants/catalog';
 import { Noop } from '@/types/functions';
+import { Button } from '@/shared/ui';
 
 import { ProductInfoTitleFavorites } from './ProductInfoTitleFavorites';
 
@@ -44,15 +40,12 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
         name,
         price,
         old_price,
-        price_drop,
         availability,
         subcategory,
         shoe_size,
         size,
         is_trial,
         images,
-        from_boutique,
-        from_parnter,
         condition,
         is_jewelry,
     } = product;
@@ -132,11 +125,12 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
             </Link>
 
             {!isMobile && (
-                <div className="product-content-info-title-badges">
-                    {from_boutique && <ProductInfoTitleBoutique onClick={onBoutiquePopupVisible} />}
-                    {from_parnter && <ProductInfoTitlePartner onClick={onPartnerPopupVisible} />}
-                    {price_drop && <ProductInfoTitleSale />}
-                </div>
+                <ProductInfoBadges
+                    className="product-content-info-title-badges"
+                    product={product}
+                    onNewBrandClick={onBoutiquePopupVisible}
+                    onFromPartnerClick={onPartnerPopupVisible}
+                />
             )}
 
             {canBuy && isMobile && (
@@ -163,19 +157,20 @@ const ProductInfoTitle: React.FC<Props> = ({ product, onBoutiquePopupVisible, on
 
             <div className="product-content-info-title-btn">
                 {canBuy ? (
-                    <button
-                        type="button"
-                        className={getClassNames('btn product-content-info-title-btn__btn add', {
+                    <Button
+                        className={getClassNames('product-content-info-title-btn__btn add', {
                             'in-cart': inCart,
                         })}
+                        label={inCart ? 'Перейти в корзину' : isMobile ? 'В корзину' : 'Добавить в корзину'}
                         onClick={handleAddClick}
-                    >
-                        {inCart ? 'Перейти в корзину' : isMobile ? 'В корзину' : 'Добавить в корзину'}
-                    </button>
+                    />
                 ) : (
-                    <button className="btn product-content-info-title-btn__btn subscribe" onClick={subscribeGood}>
-                        Подписаться на модель
-                    </button>
+                    <Button
+                        className="product-content-info-title-btn__btn subscribe"
+                        theme="light"
+                        label="Подписаться на модель"
+                        onClick={subscribeGood}
+                    />
                 )}
 
                 <ProductInfoTitleFavorites productData={product} />

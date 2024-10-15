@@ -1,13 +1,21 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 
 import { Button } from '@/shared/ui';
 import { APP_ROUTE } from '@/constants/routes';
+import { sendReachGoal } from '@/functions/yandex';
 
 const CatalogProductsConciergeBlock: React.FC = () => {
+    const handleClick = () => {
+        sendReachGoal('concierge_snippet');
+    };
+
     return (
         <Link
             href={`${APP_ROUTE.concierge.root}?utm_source=website&utm_medium=catalog&utm_campaign=concierge_snippet`}
+            onClick={handleClick}
             className="catalog-product-concierge-block-wrapper"
         >
             <div className="catalog-product-concierge-block">

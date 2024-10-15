@@ -7,7 +7,7 @@ import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const CatalogFiltersPriceDrop: React.FC = () => {
     const {
-        filters: { price_drop, boutique },
+        filters: { price_drop, brandnew },
         updateFilters,
     } = useCatalogFilters();
 
@@ -18,7 +18,7 @@ const CatalogFiltersPriceDrop: React.FC = () => {
     };
 
     return (
-        <CatalogFiltersBlockWrapper title="Снижение цены" disabled={boutique}>
+        <CatalogFiltersBlockWrapper title="Снижение цены" disabled={brandnew}>
             <div className="catalog-filters-block-content-checkbox">
                 <Checkbox
                     id="catalog-filters-block-content-price-drop-checkbox-true"
