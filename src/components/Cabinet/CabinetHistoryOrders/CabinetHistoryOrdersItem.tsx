@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import AnimateHeight from 'react-animate-height';
 import Countdown from 'react-countdown';
@@ -7,7 +9,6 @@ import { Order } from '@/models/IOrder';
 import { CabinetHistoryOrdersItemProduct } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { COUNT_MINUTES_RESERVED_ORDER, ORDER_STATUSES, ORDER_STATUSES_COLORS } from '@/constants/order';
-import { APP_ROUTE } from '@/constants/routes';
 
 interface Props extends Order {
     onClickPay?: () => void;
@@ -183,30 +184,36 @@ const CabinetHistoryOrdersItem: React.FC<Props> = ({
                         </div>
 
                         {/* TODO: Вынести в отдельный компонент */}
-                        {(status === 'Ожидает оплаты' ||
-                            dayjs().isBefore(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm'))) && (
-                            <>
-                                <p className="cabinet-history-orders-item-info__subtextbtn">
-                                    Завершите платеж в течение
-                                    <Countdown
-                                        date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
-                                        renderer={({ minutes, seconds }) =>
-                                            ` ${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`
-                                        }
-                                    />
-                                </p>
+                        {status === 'Ожидает оплаты' &&
+                            dayjs().isBefore(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm')) && (
+                                <>
+                                    <p className="cabinet-history-orders-item-info__subtextbtn">
+                                        Завершите платеж в течение
+                                        <Countdown
+                                            date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
+                                            renderer={({ minutes, seconds }) =>
+                                                ` ${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`
+                                            }
+                                        />
+                                    </p>
 
-                                {yandex_split_link ? (
-                                    <a href={yandex_split_link} className="btn cabinet-history-orders-item-info__btn">
-                                        Оплатить еще раз
-                                    </a>
-                                ) : (
-                                    <button className="btn cabinet-history-orders-item-info__btn" onClick={onClickPay}>
-                                        Оплатить еще раз
-                                    </button>
-                                )}
-                            </>
-                        )}
+                                    {yandex_split_link ? (
+                                        <a
+                                            href={yandex_split_link}
+                                            className="btn cabinet-history-orders-item-info__btn"
+                                        >
+                                            Оплатить еще раз
+                                        </a>
+                                    ) : (
+                                        <button
+                                            className="btn cabinet-history-orders-item-info__btn"
+                                            onClick={onClickPay}
+                                        >
+                                            Оплатить еще раз
+                                        </button>
+                                    )}
+                                </>
+                            )}
                     </div>
                 </AnimateHeight>
             </div>
