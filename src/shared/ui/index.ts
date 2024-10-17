@@ -4,6 +4,7 @@ export { Input } from './Input/Input';
 export { Textarea } from './Textarea/Textarea';
 export { Select } from './Select/Select';
 export { Checkbox } from './Checkbox/Checkbox';
+export { Radio } from './Radio/Radio';
 export { Badge } from './Badge/Badge';
 export { Skeleton } from './Skeleton/Skeleton';
 export { Spinner } from './Spinner/Spinner';

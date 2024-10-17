@@ -183,30 +183,36 @@ const CabinetHistoryOrdersItem: React.FC<Props> = ({
                         </div>
 
                         {/* TODO: Вынести в отдельный компонент */}
-                        {(status === 'Ожидает оплаты' ||
-                            dayjs().isBefore(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm'))) && (
-                            <>
-                                <p className="cabinet-history-orders-item-info__subtextbtn">
-                                    Завершите платеж в течение
-                                    <Countdown
-                                        date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
-                                        renderer={({ minutes, seconds }) =>
-                                            ` ${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`
-                                        }
-                                    />
-                                </p>
+                        {status === ORDER_STATUSES.awaitingPayment &&
+                            dayjs().isBefore(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm')) && (
+                                <>
+                                    <p className="cabinet-history-orders-item-info__subtextbtn">
+                                        Завершите платеж в течение
+                                        <Countdown
+                                            date={dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm').valueOf()}
+                                            renderer={({ minutes, seconds }) =>
+                                                ` ${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`
+                                            }
+                                        />
+                                    </p>
 
-                                {yandex_split_link ? (
-                                    <a href={yandex_split_link} className="btn cabinet-history-orders-item-info__btn">
-                                        Оплатить еще раз
-                                    </a>
-                                ) : (
-                                    <button className="btn cabinet-history-orders-item-info__btn" onClick={onClickPay}>
-                                        Оплатить еще раз
-                                    </button>
-                                )}
-                            </>
-                        )}
+                                    {yandex_split_link ? (
+                                        <a
+                                            href={yandex_split_link}
+                                            className="btn cabinet-history-orders-item-info__btn"
+                                        >
+                                            Оплатить еще раз
+                                        </a>
+                                    ) : (
+                                        <button
+                                            className="btn cabinet-history-orders-item-info__btn"
+                                            onClick={onClickPay}
+                                        >
+                                            Оплатить еще раз
+                                        </button>
+                                    )}
+                                </>
+                            )}
                     </div>
                 </AnimateHeight>
             </div>
