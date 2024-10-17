@@ -39,7 +39,7 @@ const CatalogProductsPagination: React.FC = () => {
 
     return (
         <div className="catalog-product-pagination">
-            {currentPage !== pageCount && (
+            {currentPage < pageCount && (
                 <button
                     type="button"
                     className={getClassNames('btn catalog-product-pagination__btn', {

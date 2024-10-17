@@ -1,3 +1,5 @@
+import { Nullable } from '@/types/utils';
+
 export interface ConciergeProduct {
     id: number;
     title: string;
@@ -5,6 +7,7 @@ export interface ConciergeProduct {
     description: string;
     image: string;
     brand: string;
+    condition?: Nullable<string>;
 }
 
 export interface ConciergeCategory {
