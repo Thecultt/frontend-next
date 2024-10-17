@@ -39,37 +39,59 @@
 
 		&-text
 			width: 50%
-			padding: 60px 25px 60px 50px
+			padding: 60px 30px 60px 50px
 
 			&__title
-				font-size: 26px
+				font-size: 32px
 				margin-bottom: 15px
 
 			&__subtitle
-				font-size: 22px
+				font-size: 20px
 
 				margin-bottom: 10px
 
 				+ManropeSemiBold
 
 			&__description
-				font-size: 14px
-				margin-bottom: 25px
+				font-size: 16px
 
-			&-btn
-				&__btn
-					&:first-child
-						margin-right: 15px
-
-	&-service
-		margin-top: 25px
+	&-office
+		margin-top: 24px
 
 		&-block
+			text-align: center
 			width: 100%
-			padding: 40px 45px
-			background-color: $lightBackgroundColor
+			padding: 16px
+			background-color: $green1
 
-			margin-bottom: 25px
+			+borderRadius
+
+			&__title
+				font-size: 20px
+				font-weight: 700
+				margin-bottom: 16px
+
+			&__subtitle
+				font-size: 16px
+
+				& > span
+					font-weight: 700
+
+	&-service
+		margin-top: 24px
+
+		display: flex
+		justify-content: space-between
+
+		&-block
+			width: calc( 50% - 12px )
+
+			display: flex
+			flex-direction: column
+			justify-content: space-between
+
+			padding: 16px
+			background-color: $grey1
 
 			+borderRadius
 
@@ -77,14 +99,16 @@
 				margin-bottom: 0
 
 			&__title
-				font-size: 22px
-				margin-bottom: 20px
+				font-size: 20px
+				font-weight: 800
+
+				margin-bottom: 16px
 
 				+ManropeSemiBold
 
 			&__subtitle
-				font-size: 18px
-				margin-bottom: 12px
+				font-size: 16px
+				margin-bottom: 16px
 
 				+ManropeRegular
 
@@ -97,11 +121,17 @@
 					padding-left: 25px
 					list-style: none
 
+					margin-bottom: 16px
+
 				& > ul > li
 					position: relative
-					margin-bottom: 10px
+
+					margin-bottom: 5px
 
 					+ManropeRegular
+
+					&:last-child
+						margin-bottom: 0
 
 					&::before
 						content: ""
@@ -112,9 +142,7 @@
 						width: 4px
 						height: 4px
 
-						top: 50%
-						transform: translateY(-50%)
-
+						top: 8px
 						left: -15px
 
 						background-color: $black
@@ -123,46 +151,14 @@
 
 			&__description
 				font-size: 14px
+				color: $grey6
 				margin-bottom: 12px
-				color: $gray
 
 				& > a
-					color: $gray
+					color: $grey6
 
-				&:last-child
-					margin-bottom: 0
-
-	&-office
-		margin-top: 25px
-
-		&-block
-			text-align: center
-			width: 100%
-			padding: 40px 30px
-			background-color: #F6F5EF
-
-			+borderRadius
-
-			&__title
-				line-height: 120%
-				font-size: 28px
-				font-weight: 700
-				margin-bottom: 20px
-
-			&__subtitle
-				margin: 0 auto 25px auto
-				width: 610px
-
-				line-height: 180%
-				font-size: 16px
-
-				& > span
-					font-weight: 700
-
-			&-btn
-				&__btn
-					&:first-child
-						margin-right: 15px
+			&__btn
+				margin-top: auto
 
 /* MEDIA */
 @media screen and (max-width: 1200px)
@@ -178,10 +174,10 @@
 			margin-bottom: 25px
 
 			&-text
-				width: 95%
+				width: 100%
 				margin: 0 auto
 
-				padding: 15px
+				padding: 11px
 				order: 2
 
 				&__title
@@ -209,26 +205,6 @@
 
 				height: 300px
 
-		&-service
-			&-block
-				padding: 15px
-				margin-bottom: 15px
-
-				&__title
-					font-size: 17px
-					margin-bottom: 5px
-
-				&__subtitle
-					font-size: 14px
-					margin-bottom: 5px
-
-					& > ul > li
-						font-size: 12px
-						margin-bottom: 2px
-
-				&__description
-					font-size: 12px
-
 		&-office
 			margin-top: 15px
 
@@ -251,3 +227,27 @@
 						&:first-child
 							margin-right: 0
 							margin-bottom: 15px
+
+		&-service
+			flex-direction: column
+
+			&-block
+				width: 100%
+
+				padding: 15px
+				margin-bottom: 15px
+
+				&__title
+					font-size: 17px
+					margin-bottom: 5px
+
+				&__subtitle
+					font-size: 14px
+					margin-bottom: 5px
+
+					// & > ul > li
+					// 	font-size: 12px
+					// 	margin-bottom: 2px
+
+				&__description
+					font-size: 12px

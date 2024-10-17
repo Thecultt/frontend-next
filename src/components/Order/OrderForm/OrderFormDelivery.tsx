@@ -9,6 +9,7 @@ import { useAuthUser } from '@/hooks/useAuthUser';
 import { getClassNames } from '@/functions/getClassNames';
 import { RenderRadioSelect } from '@/components';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
+import { CONTACTS } from '@/constants/contacts';
 
 const deliveryItemsRussiaMoscow: {
     title: string;
@@ -36,8 +37,7 @@ const deliveryItemsRussiaMoscow: {
     },
     {
         title: 'Самовывоз',
-        description:
-            'Самовывоз из офиса осуществляется по адресу: Трубная 23с2, (3 этаж, офис THE CULTT) ежедневно с 10:00 до 20:00. Оплаченный заказ может храниться до 7 дней.',
+        description: `Самовывоз из офиса осуществляется по адресу: ${CONTACTS.address}, ${CONTACTS.addressTime}. Оплаченный заказ может храниться до 7 дней.`,
         price: 0,
         id: 1,
     },

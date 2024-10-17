@@ -8,8 +8,8 @@ import {
     ProductInfoBreadCrumbs,
     ProductCover,
     ProductInfo,
-    CatalogProductsSection,
     ProductExchange,
+    ProductRecommendations,
 } from '@/components';
 import { usePopupInfo } from '@/hooks/usePopupInfo';
 import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
@@ -26,12 +26,12 @@ export const ClientProduct: React.FC<Props> = ({ serverProductData }) => {
 
     const showBoutiquePopup = () => {
         openPopupInfo({
-            title: 'Лот из бутика',
+            title: 'Новое от брендов',
             content:
-                'Этот лот новый и не был в использовании. Мы получили его напрямую из бутика-партнера или от частного байера — в таком состоянии, в каком вы бы купили его в бутике бренда.',
+                'Это лоты, полученные от брендов напрямую или из бутиков-партнеров. Все аксессуары в подборке новые и никогда не были в использовании — в таком состоянии, в котором вы бы купили их в магазине бренда.',
             btn: {
                 label: 'Смотреть все',
-                href: getCatalogFiltersUrl({ boutique: true }),
+                href: getCatalogFiltersUrl({ brandnew: true }),
             },
         });
     };
@@ -80,11 +80,7 @@ export const ClientProduct: React.FC<Props> = ({ serverProductData }) => {
                     </div>
                 </div>
             </section>
-
-            <div className="container">
-                <CatalogProductsSection title="Может быть интересно" />
-            </div>
-
+            <ProductRecommendations />
             <ProductExchange />
         </>
     );

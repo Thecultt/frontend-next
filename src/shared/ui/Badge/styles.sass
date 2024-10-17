@@ -5,20 +5,36 @@
     width: fit-content
     +flexCenter
     text-align: center
-    padding: 2px 12px
-    background-color: $lightBackgroundColor
-    color: $grey9
+    padding: 6px 8px
     +ManropeSemiBold
+    color: $grey9
     font-size: 12px
-    line-height: 24px
+    line-height: 16.4px
     border-radius: 6px
 
-    @media screen and (max-width: 1200px)
+    &__icon
+        width: 14px
+        color: inherit
+        margin-left: 4px
+
+    +mediaTablet
         padding: 4px 8px
         line-height: 16px
 
+        &__icon
+            display: none
+
+    &--default
+        background-color: $white
+        color: $grey9
+
     &--green
+        background-color: $green1
         color: $mainColor
+
+    &--black
+        background-color: $black3
+        color: $white
 
     &--clickable
         user-select: none

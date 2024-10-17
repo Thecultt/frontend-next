@@ -6,5 +6,6 @@ export const CONTACTS = {
     whatsappLink: 'https://api.whatsapp.com/send/?phone=79957884650&text&type=phone_number&app_absent=0',
     whatsappPhone: '+7 995 788 46 50',
     email: 'hey@thecultt.com',
-    address: 'Трубная 23с2',
+    address: 'Петровский бульвар, 5с1',
+    addressTime: 'ежедневно с 10:00 до 19:00',
 };

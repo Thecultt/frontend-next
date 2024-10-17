@@ -110,10 +110,6 @@ const ReglogRegister: React.FC = () => {
                             wide
                         />
                     </div>
-
-                    <p className="reglog-content-form__subtitle">
-                        В личном кабинете вы сможете отследить статус вашей продажи/заказа
-                    </p>
                 </Form>
             )}
         </Formik>

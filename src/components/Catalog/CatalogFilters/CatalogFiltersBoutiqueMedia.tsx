@@ -7,19 +7,19 @@ import { useCatalogFilters } from '@/hooks/catalog/useCatalogFilters';
 
 const CatalogFiltersBoutiqueMedia: React.FC = () => {
     const {
-        filters: { boutique },
+        filters: { brandnew },
         updateFilters,
     } = useCatalogFilters();
 
     const onClickSetBoutique = (status: boolean) => {
-        updateFilters({ boutique: status });
+        updateFilters({ brandnew: status });
     };
 
     return (
         <div className="catalog-filters-boutique">
             <button
                 className={getClassNames('catalog-filters-boutique__btn all', {
-                    active: !boutique,
+                    active: !brandnew,
                 })}
                 onClick={() => onClickSetBoutique(false)}
             >
@@ -27,11 +27,11 @@ const CatalogFiltersBoutiqueMedia: React.FC = () => {
             </button>
             <button
                 className={getClassNames('catalog-filters-boutique__btn boutique', {
-                    active: boutique,
+                    active: brandnew,
                 })}
                 onClick={() => onClickSetBoutique(true)}
             >
-                Из бутика
+                Новое от брендов
             </button>
         </div>
     );

@@ -75,3 +75,5 @@ export interface RadioProps extends React.PropsWithChildren {
     error?: string;
     onChange?: Noop;
 }
+
+export type BadgeTheme = 'default' | 'green' | 'black';

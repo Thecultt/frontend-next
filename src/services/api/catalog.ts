@@ -3,6 +3,7 @@ import { AVAILABILITY_IDS, CATALOG_PRODUCTS_LIMIT, SORT } from '@/constants/cata
 import type { ICatalogFilters } from '@/types/catalog';
 import type { GetCatalogResponse } from '@/types/api';
 import type { Product, ProductPage } from '@/models/IProduct';
+import type { IProductFilters } from '@/models/IProductFilters';
 
 const MIN_PRICE_FROM = 1000;
 
@@ -47,8 +48,8 @@ const getCatalog = (filters: ICatalogFilters) => {
     filters.glass_frame?.map((glass_frame) => params.append('glass_frame', glass_frame));
     filters.size?.map((size) => params.append('size', size.toString()));
 
-    if (filters.boutique) {
-        params.append('from_boutique', String(filters.boutique));
+    if (filters.brandnew) {
+        params.append('from_boutique', String(filters.brandnew));
     }
     if (filters.price_drop) {
         params.append('price_drop', String(filters.price_drop));
@@ -71,12 +72,15 @@ const getCatalog = (filters: ICatalogFilters) => {
     return $api.get<GetCatalogResponse>('/catalog_v2', { params });
 };
 
+const getCatalogFilters = () => $api.get<IProductFilters>('/filters_v2');
+
 const getProductByArticle = (article: string) => $api.get<ProductPage>(`/product/${article}`);
 
 const getProductSimilarByArticle = (article: string) => $api.get<{ items: Product[] }>(`/product/${article}/similar`);
 
 export const catalogAPI = {
     getCatalog,
+    getCatalogFilters,
     getProductByArticle,
     getProductSimilarByArticle,
 };
