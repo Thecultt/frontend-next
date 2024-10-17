@@ -188,6 +188,7 @@ export { default as CabinetWaitingListItem } from './Cabinet/CabinetWaitingList/
 export { default as CabinetSettingBrandBlock } from './Cabinet/CabinetSetting/CabinetSettingBrandBlock';
 // CabinetSettingForm
 export { default as CabinetSettingForm } from './Cabinet/CabinetSetting/CabinetSettingForm/CabinetSettingForm';
+export { default as CabinetSettingFormEditButtons } from './Cabinet/CabinetSetting/CabinetSettingForm/CabinetSettingFormEditButtons';
 // CabinetSettingFormInfo
 export { default as CabinetSettingFormInfo } from './Cabinet/CabinetSetting/CabinetSettingForm/CabinetSettingFormInfo/CabinetSettingFormInfo';
 export { default as CabinetSettingFormContact } from './Cabinet/CabinetSetting/CabinetSettingForm/CabinetSettingFormContact/CabinetSettingFormContact';

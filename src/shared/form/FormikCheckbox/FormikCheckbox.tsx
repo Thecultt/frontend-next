@@ -3,7 +3,7 @@
 import React from 'react';
 import { useField } from 'formik';
 
-import { Checkbox } from '@/shared/ui';
+import { Checkbox } from '@/shared/ui/Checkbox/Checkbox';
 import { CheckboxProps } from '@/types/ui';
 
 interface Props extends Omit<CheckboxProps, 'name' | 'checked' | 'onChange'> {

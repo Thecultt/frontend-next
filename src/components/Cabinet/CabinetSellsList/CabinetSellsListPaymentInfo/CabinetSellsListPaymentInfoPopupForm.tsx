@@ -15,7 +15,6 @@ const CabinetSellsListPaymentInfoPopupForm: React.FC<{} & InjectedFormProps<{}, 
     submitting,
     initialize,
 }) => {
-    // const { user, isLoaded, isSending } = useTypedSelector(({ user }) => user);
     const { isLoaded, user } = useAuthUser();
 
     React.useEffect(() => {

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Formik } from 'formik';
@@ -8,6 +10,7 @@ import { useAuthUser } from '@/hooks/useAuthUser';
 import { updateClientAttributes } from '@/redux/slices/user/asyncActions';
 import { setIsNotificationServerSuccess } from '@/redux/actions/notifications_server';
 import { FormikInput } from '@/shared/form';
+import { CabinetSettingFormEditButtons } from '@/components';
 
 import { ICabinetSettingFormContactValues } from '../types';
 import { INITIAL_VALUES } from './constants';
@@ -19,7 +22,7 @@ const CabinetSettingFormContact: React.FC = () => {
 
     const { user } = useAuthUser();
 
-    const [isEdit, setIsEdit] = React.useState<boolean>(false);
+    const [isEdit, setIsEdit] = React.useState(false);
 
     const handleSubmit = (data: ICabinetSettingFormContactValues) => {
         appDispatch(updateClientAttributes(data))
@@ -48,38 +51,14 @@ const CabinetSettingFormContact: React.FC = () => {
                         active: isEdit,
                     })}
                 >
-                    <div className="cabinet-setting-block-title">
-                        <h3 className="cabinet-setting-block-title__title">Контактные данные</h3>
+                    <CabinetSettingFormEditButtons
+                        title="Контактные данные"
+                        isValid={isValid}
+                        dirty={dirty}
+                        isEdit={isEdit}
+                        setIsEdit={setIsEdit}
+                    />
 
-                        {isEdit ? (
-                            dirty ? (
-                                <button
-                                    type="submit"
-                                    className={getClassNames('cabinet-setting-block-title__btn', {
-                                        disabled: !isValid,
-                                    })}
-                                >
-                                    Сохранить
-                                </button>
-                            ) : (
-                                <button
-                                    type="button"
-                                    className="cabinet-setting-block-title__btn"
-                                    onClick={() => setIsEdit(false)}
-                                >
-                                    Отменить
-                                </button>
-                            )
-                        ) : (
-                            <button
-                                type="button"
-                                className="cabinet-setting-block-title__btn"
-                                onClick={() => setIsEdit(true)}
-                            >
-                                Изменить
-                            </button>
-                        )}
-                    </div>
                     <div
                         className={getClassNames('cabinet-setting-block-form', {
                             active: isEdit,

@@ -16,7 +16,7 @@ interface Props {
     icon?: React.ReactNode;
     iconPosition?: 'left' | 'right';
     disabled?: boolean;
-    theme?: 'dark' | 'light' | 'transparent';
+    theme?: 'dark' | 'light' | 'transparent' | 'inline';
     size?: 'm' | 'l';
     wide?: boolean;
     onClick?: Noop;

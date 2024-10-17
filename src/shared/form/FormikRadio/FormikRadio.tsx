@@ -3,7 +3,7 @@
 import React from 'react';
 import { useField } from 'formik';
 
-import { Radio } from '@/shared/ui';
+import { Radio } from '@/shared/ui/Radio/Radio';
 import { RadioProps } from '@/types/ui';
 
 interface Props extends Omit<RadioProps, 'name' | 'checked' | 'onChange'> {
