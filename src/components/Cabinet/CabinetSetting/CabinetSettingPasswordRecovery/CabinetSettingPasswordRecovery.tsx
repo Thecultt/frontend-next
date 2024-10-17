@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Popup, CabinetSettingPasswordRecoveryForm } from '@/components';
+import { Popup } from '@/components';
 
 const CabinetSettingPasswordRecovery: React.FC = () => {
     const [stateAdd, setStateAdd] = React.useState(false);
@@ -11,9 +11,11 @@ const CabinetSettingPasswordRecovery: React.FC = () => {
 
     return (
         <>
-            <Popup state={stateAdd} setState={() => setStateAdd(false)}>
+            {/* TODO - Доработать смену пароля в ЛК */}
+
+            {/* <Popup state={stateAdd} setState={() => setStateAdd(false)}>
                 <CabinetSettingPasswordRecoveryForm />
-            </Popup>
+            </Popup> */}
 
             <div className="cabinet-setting-password-recovery">
                 <h4 className="cabinet-setting-password-recovery__title">Забыли или хотите поменять пароль?</h4>

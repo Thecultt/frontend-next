@@ -31,7 +31,7 @@ export const DadataAddressInput: React.FC<Props> = ({
     const [suggestions, setSuggestions] = React.useState<string[]>([]);
 
     React.useEffect(() => {
-        if (debouncedValue.length > 2) {
+        if (debouncedValue && debouncedValue.length > 2) {
             setIsLoading(true);
 
             axios
@@ -57,10 +57,15 @@ export const DadataAddressInput: React.FC<Props> = ({
                     },
                 )
                 .then(({ data }) => {
-                    setSuggestions(data.suggestions.map((item) => item.value));
+                    setSuggestions(
+                        data.suggestions.map((item) =>
+                            filterToBound === 'city' ? item.data.city ?? item.value : item.value,
+                        ),
+                    );
                 })
                 .catch((e) => {
                     console.error('Dadata Address', e);
+
                     setSuggestions([]);
                 })
                 .finally(() => {
