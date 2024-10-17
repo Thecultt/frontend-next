@@ -16,7 +16,7 @@ const CabinetSellsListPaymentInfoPopupForm: React.FC<{} & InjectedFormProps<{}, 
     initialize,
 }) => {
     // const { user, isLoaded, isSending } = useTypedSelector(({ user }) => user);
-    const { isLoaded, isSending, user } = useAuthUser();
+    const { isLoaded, user } = useAuthUser();
 
     React.useEffect(() => {
         if (isLoaded) {
@@ -168,11 +168,10 @@ const CabinetSellsListPaymentInfoPopupForm: React.FC<{} & InjectedFormProps<{}, 
                 <button
                     className={getClassNames('btn cabinet-sells-list-payment-info-popup-btn__btn', {
                         disabled: invalid || pristine || submitting,
-                        loader: isSending,
                     })}
                     disabled={invalid || pristine || submitting}
                 >
-                    {isSending ? <Loader /> : 'Сохранить данные'}
+                    'Сохранить данные'
                 </button>
             </div>
         </form>

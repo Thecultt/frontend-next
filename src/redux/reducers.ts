@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 
 import auth from './slices/auth/slice';
 import selections from './slices/selections/slice';
+import user from './slices/user/slice';
 
 import products_filters from './reducers/products_filters';
 import products from './reducers/products';
@@ -12,7 +13,6 @@ import favorites from './reducers/favorites';
 import waiting from './reducers/waiting';
 import header from './reducers/header';
 import cabinet_sell from './reducers/cabinet_sell';
-import user from './reducers/user';
 import brands from './reducers/brands';
 import history_orders from './reducers/history_orders';
 import vipservice from './reducers/vipservice';

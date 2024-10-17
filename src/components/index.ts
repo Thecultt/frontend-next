@@ -192,17 +192,13 @@ export { default as CabinetWaitingListItem } from './Cabinet/CabinetWaitingList/
 
 // CabinetSetting
 export { default as CabinetSettingBrandBlock } from './Cabinet/CabinetSetting/CabinetSettingBrandBlock';
-// CabinetSettingInfoBlock
-export { default as CabinetSettingInfoBlock } from './Cabinet/CabinetSetting/CabinetSettingInfoBlock/CabinetSettingInfoBlock';
-// CabinetSettingContactBlock
-export { default as CabinetSettingContactBlock } from './Cabinet/CabinetSetting/CabinetSettingContactBlock/CabinetSettingContactBlock';
-// CabinetSettingPasswordRecovery
-export { default as CabinetSettingPasswordRecovery } from './Cabinet/CabinetSetting/CabinetSettingPasswordRecovery/CabinetSettingPasswordRecovery';
-export { default as CabinetSettingPasswordRecoveryForm } from './Cabinet/CabinetSetting/CabinetSettingPasswordRecovery/CabinetSettingPasswordRecoveryForm';
-// CabinetSettingAddressBlock
-export { default as CabinetSettingAddressBlock } from './Cabinet/CabinetSetting/CabinetSettingAddressBlock/CabinetSettingAddressBlock';
-// CabinetSettingPaymentBlock
-export { default as CabinetSettingPaymentBlock } from './Cabinet/CabinetSetting/CabinetSettingPaymentBlock/CabinetSettingPaymentBlock';
+// CabinetSettingForm
+export { default as CabinetSettingForm } from './Cabinet/CabinetSetting/CabinetSettingForm/CabinetSettingForm';
+// CabinetSettingFormInfo
+export { default as CabinetSettingFormInfo } from './Cabinet/CabinetSetting/CabinetSettingForm/CabinetSettingFormInfo/CabinetSettingFormInfo';
+export { default as CabinetSettingFormContact } from './Cabinet/CabinetSetting/CabinetSettingForm/CabinetSettingFormContact/CabinetSettingFormContact';
+export { default as CabinetSettingFormAddress } from './Cabinet/CabinetSetting/CabinetSettingForm/CabinetSettingFormAddress/CabinetSettingFormAddress';
+export { default as CabinetSettingFormPayment } from './Cabinet/CabinetSetting/CabinetSettingForm/CabinetSettingFormPayment/CabinetSettingFormPayment';
 
 // Order
 // OrderForm

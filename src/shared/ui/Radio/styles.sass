@@ -1,7 +1,7 @@
 @import "/src/assets/sass/variables"
 @import "/src/assets/sass/mixin"
 
-.tc-checkbox
+.tc-radio
     width: fit-content
     display: flex
     align-items: center
@@ -19,7 +19,7 @@
     &__control
         +flexCenter
         flex-shrink: 0
-        border-radius: 4px
+        border-radius: 50%
         border: 1px solid $black3
         transition: background-color .2s linear, border-color .2s linear
 
@@ -41,13 +41,12 @@
         background-color: $green5
 
     &--size-l &__control
-        width: 16px
-        height: 16px
+        width: 20px
+        height: 20px
 
         +mediaTablet
             width: 20px
             height: 20px
-            border-radius: 6px
 
     &--size-m &__control
         width: 14px

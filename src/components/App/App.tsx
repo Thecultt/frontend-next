@@ -10,7 +10,6 @@ import { checkAvailabilityCartItems } from '@/redux/actions/cart';
 import { fetchFavorites } from '@/redux/actions/favorites';
 import { fetchFirstProductsCatalog } from '@/redux/actions/products';
 import { fetchProductsFilters } from '@/redux/actions/products_filters';
-import { fetchUser } from '@/redux/actions/user';
 import { NoSsr } from '@/shared/ui';
 import { StaticHeader } from '@/components/static/StaticHeader';
 import { StaticFooter } from '@/components/static/StaticFooter';
@@ -29,6 +28,7 @@ import { useCart } from '@/hooks/catalog/useCart';
 import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { useAppSelector } from '@/hooks/redux/useAppSelector';
 import { fetchSelections } from '@/redux/slices/selections/asyncActions';
+import { fetchClientAttributes } from '@/redux/slices/user/asyncActions';
 import { selectSelectionsIsLoaded } from '@/redux/slices/selections/selectors';
 
 import { ClientOnly } from './ClientOnly';
@@ -51,7 +51,8 @@ export const App = ({ children }: { children: React.ReactNode }) => {
     React.useEffect(() => {
         if (isLoggedIn) {
             dispatch(fetchFavorites() as any);
-            dispatch(fetchUser() as any);
+
+            appDispatch(fetchClientAttributes());
         }
     }, [isLoggedIn]);
 
