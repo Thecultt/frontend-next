@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 
 import $api from '@/http';
 import { Product, ProductPage } from '@/models/IProduct';
-import { SORT } from '@/constants/catalog';
+import { AVAILABILITY, SORT } from '@/constants/catalog';
 import { sendMindbox } from '@/functions/mindbox';
 import { pushDataLayer } from '@/functions/pushDataLayer';
 import { ICatalogFilters } from '@/types/catalog';
@@ -13,14 +13,11 @@ import { CatalogFetchType, ProductActionTypes, ProductTypes } from '../types/IPr
 export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<ProductTypes>) => {
     const {
         data: { total_pages, total_items, items },
-    } = await $api.get<{
-        total_pages: number;
-        current_page: number;
-        total_items: number;
-        items: Product[];
-    }>(`/catalog_v2?availability=1&sort_by=${SORT.a}`);
+    } = await catalogAPI.getCatalog({
+        availability: [AVAILABILITY.available],
+        sort: SORT.a,
+    });
 
-    // Measure product views / impressions
     pushDataLayer('view_item_list', {
         items: items.map((item, index) => ({
             item_name: item.name,
@@ -67,10 +64,7 @@ export const fetchProductsCatalog =
 
             const {
                 data: { total_pages, total_items, items },
-            } = await catalogAPI.getCatalog({
-                ...filters,
-                page_size: typeFetch === CatalogFetchType.Page ? 19 : 20,
-            });
+            } = await catalogAPI.getCatalog(filters);
 
             pushDataLayer('view_item_list', {
                 items: items.map((item, index) => ({

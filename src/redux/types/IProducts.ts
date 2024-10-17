@@ -9,6 +9,7 @@ export enum CatalogFetchType {
 
 export interface ProductsState {
     items: Product[];
+    itemsWithNulls: Array<Product | null>;
     isLoaded: boolean;
 
     itemByArticle: ProductPage | null;

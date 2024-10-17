@@ -1,7 +1,9 @@
+import { concatProductsWithNulls } from '@/functions/concatProductsWithNulls';
 import { ProductsState, ProductTypes, ProductActionTypes, CatalogFetchType } from '../types/IProducts';
 
 const initialState: ProductsState = {
     items: [],
+    itemsWithNulls: [],
     isLoaded: false,
     itemByArticle: null,
     itemByArticleSimilar: [],
@@ -45,6 +47,7 @@ const products = (state = initialState, action: ProductTypes): ProductsState => 
         return {
             ...state,
             items: [...state.items, ...action.payload],
+            itemsWithNulls: [...state.itemsWithNulls, ...concatProductsWithNulls(action.payload)],
         };
     }
 
@@ -52,6 +55,7 @@ const products = (state = initialState, action: ProductTypes): ProductsState => 
         return {
             ...state,
             items: action.payload,
+            itemsWithNulls: concatProductsWithNulls(action.payload),
         };
     }
 

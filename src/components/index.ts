@@ -121,6 +121,7 @@ export { default as CatalogFiltersMetalType } from './Catalog/CatalogFilters/Cat
 
 // CatalogProducts
 export { default as CatalogProducts } from './Catalog/CatalogProducts/CatalogProducts';
+export { CatalogConciergeShuffleProducts } from './Catalog/CatalogProducts/CatalogConciergeShuffleProducts';
 export { default as CatalogProductsNull } from './Catalog/CatalogProducts/CatalogProductsNull';
 export { default as CatalogProductsPagination } from './Catalog/CatalogProducts/CatalogProductsPagination';
 export { default as CatalogProductsConciergeBlock } from './Catalog/CatalogProducts/CatalogProductsConciergeBlock';

@@ -1,0 +1,74 @@
+@import "/src/assets/sass/mixin"
+@import "/src/assets/sass/variables"
+
+.catalog-concierge-product-card
+    width: 100%
+    overflow: hidden
+
+.catalog-concierge-product-card-cover
+    width: 100%
+    position: relative
+    padding-top: $productImageAspectRatio
+    border-radius: 8px
+    background-color: $lightBackgroundColor
+    overflow: hidden
+
+    &__badge
+        position: absolute
+        top: 8px
+        left: 8px
+        z-index: 1
+
+    &__image
+        width: 100%
+        height: 100%
+        background-position: center
+        background-size: cover
+        background-repeat: no-repeat
+        position: absolute
+        inset: 0
+        z-index: 0
+
+.catalog-concierge-product-card-info
+    width: 100%
+    display: flex
+    flex-direction: column
+
+    &__name
+        +ManropeMedium
+        +textEllipsis
+        font-size: 14px
+        line-height: 19.6px
+        color: $black3
+        margin-top: 2px
+
+        +mediaTablet
+            +ManropeSemiBold
+            line-height: 16.8px
+
+    &__condition
+        +ManropeMedium
+        +textEllipsis
+        color: $black3
+        font-size: 14px
+        line-height: 19.6px
+        margin-top: 2px
+
+        &-value
+            +ManropeBold
+
+            +mediaTablet
+                +ManropeMedium
+                color: $mainColor
+
+    &__price
+        +ManropeBold
+        font-size: 16px
+        line-height: 19.2px
+        color: $black3
+        margin-top: 4px
+        white-space: pre-wrap
+
+        @media screen and (max-width: 1200px)
+            +ManropeMedium
+            line-height: 22.4px
