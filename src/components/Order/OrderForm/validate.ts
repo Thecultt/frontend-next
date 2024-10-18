@@ -1,4 +1,5 @@
 import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
+import { DELIVERY_VALUES } from '@/constants/delivery';
 import { MIN_INPUT_SYMBOLS, MAX_INPUT_SYMBOLS, PASSPORT_REGEXP } from '@/constants/validation';
 
 export interface Values {
@@ -68,8 +69,7 @@ const validate = (values: Values) => {
         errors.delivery = 'Поле не может быть пустым';
     }
 
-    // TODO Самовывоз в enum/const
-    if (values.delivery !== 'Самовывоз') {
+    if (values.delivery !== DELIVERY_VALUES.pickup) {
         if (!values.street) {
             errors.street = 'Поле не может быть пустым';
         }

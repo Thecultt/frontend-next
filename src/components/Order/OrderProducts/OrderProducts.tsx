@@ -24,6 +24,8 @@ import { APP_ROUTE, EXTERNAL_LINKS } from '@/constants/routes';
 import { useOrder } from '@/hooks/order/useOrder';
 import { JEWELRY_PASSPORT_SUM } from '@/constants/app';
 import { orderPay } from '@/functions/orderPay';
+import { DELIVERY_VALUES } from '@/constants/delivery';
+import { PAYMENTS_NAMES } from '@/constants/pay';
 
 const OrderProducts: React.FC = () => {
     const dispatch = useDispatch();
@@ -146,9 +148,9 @@ const OrderProducts: React.FC = () => {
     const isPromocode = () => {
         if (
             promocode.isActive &&
-            paymentValue !== 'Рассрочка от Тинькофф' &&
-            paymentValue !== 'Кредит' &&
-            paymentValue !== 'Яндекс Сплит'
+            paymentValue !== PAYMENTS_NAMES.installmentTinkoff &&
+            paymentValue !== PAYMENTS_NAMES.creditTinkoff &&
+            paymentValue !== PAYMENTS_NAMES.yandexSplit
         ) {
             return true;
         }
@@ -189,13 +191,13 @@ const OrderProducts: React.FC = () => {
 
         let paymentId;
 
-        if (currentDelivery.title === 'Доставка с примеркой (по Москве)') {
+        if (currentDelivery.title === DELIVERY_VALUES.withFittingMoscow) {
             paymentId = 1;
-        } else if (paymentValue === 'Кредит') {
+        } else if (paymentValue === PAYMENTS_NAMES.creditTinkoff) {
             paymentId = 7;
-        } else if (paymentValue === 'Рассрочка от Тинькофф') {
+        } else if (paymentValue === PAYMENTS_NAMES.installmentTinkoff) {
             paymentId = 4;
-        } else if (paymentValue === 'Яндекс Сплит') {
+        } else if (paymentValue === PAYMENTS_NAMES.yandexSplit) {
             paymentId = 9;
         } else {
             paymentId = 6;
@@ -221,7 +223,7 @@ const OrderProducts: React.FC = () => {
             payment_type: paymentId,
 
             coupon_id:
-                paymentValue === 'На сайте' || currentDelivery.title === 'Доставка с примеркой (по Москве)'
+                paymentValue === PAYMENTS_NAMES.card || currentDelivery.title === DELIVERY_VALUES.withFittingMoscow
                     ? promocode.id
                     : 0,
         };
@@ -350,7 +352,7 @@ const OrderProducts: React.FC = () => {
     };
 
     const pay = (orderId: number, orderNum: string) => {
-        if (currentDelivery.title === 'Доставка с примеркой (по Москве)') {
+        if (currentDelivery.title === DELIVERY_VALUES.withFittingMoscow) {
             successPayment(orderId);
         } else {
             orderPay({
@@ -440,9 +442,9 @@ const OrderProducts: React.FC = () => {
 
             <OrderProductsPromocode
                 disabled={
-                    paymentValue === 'Рассрочка от Тинькофф' ||
-                    paymentValue === 'Кредит' ||
-                    paymentValue === 'Яндекс Сплит'
+                    paymentValue === PAYMENTS_NAMES.installmentTinkoff ||
+                    paymentValue === PAYMENTS_NAMES.creditTinkoff ||
+                    paymentValue === PAYMENTS_NAMES.yandexSplit
                 }
                 totalPrice={cartPrice + currentDelivery.price}
             />
@@ -491,7 +493,7 @@ const OrderProducts: React.FC = () => {
                 >
                     {isDisableSendBtn ? (
                         <Loader />
-                    ) : currentDelivery.title === 'Доставка с примеркой (по Москве)' ? (
+                    ) : currentDelivery.title === DELIVERY_VALUES.withFittingMoscow ? (
                         'Оформить заказ'
                     ) : (
                         'Перейти к оплате'

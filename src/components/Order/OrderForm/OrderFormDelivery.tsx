@@ -1,7 +1,9 @@
+'use client';
+
 import React from 'react';
+import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
-import Link from 'next/link';
 
 import { setOrderCurrentDelivery } from '@/redux/actions/order';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
@@ -9,112 +11,22 @@ import { useAuthUser } from '@/hooks/useAuthUser';
 import { getClassNames } from '@/functions/getClassNames';
 import { RenderRadioSelect } from '@/components';
 import { ReglogStateTypesNotLogin } from '@/types/reglog';
-import { CONTACTS } from '@/constants/contacts';
+import {
+    DELIVERY_ITEM,
+    DELIVERY_VALUES,
+    GLOBAL_DELIVERY_ITEMS,
+    IDeliveryItem,
+    RUSSIA_DELIVERY_ITEMS,
+    RUSSIA_MOSCOW_DELIVERY_ITEMS,
+    SNG_COUNTRIES,
+    SNG_DELIVERY_ITEMS,
+} from '@/constants/delivery';
 
-const deliveryItemsRussiaMoscow: {
-    title: string;
-    description: string;
-    price: number;
-    id: number;
-}[] = [
-    {
-        title: 'Доставка с примеркой (по Москве)',
-        description: `
-				<span style="color: #838383;">Стоимость доставки — бесплатно до&nbsp;13&nbsp;ноября</span>
-				Вы можете заказать доставку лотов(не более 2 сумок или не более 2 пар обуви или 4 аксессуаров) по Москве в пределах МКАД и принять решение о покупке после примерки.Курьер заранее согласует с вами время доставки в промежутке с 11 до 20 с понедельника по воскресенье.Время ожидания курьера во время примерки - 15 минут.
-			`,
-        price: 0,
-        id: 4,
-    },
-    {
-        title: 'Бесплатная доставка (без примерки)',
-        description: `
-				<span style="color: #838383;">Стоимость доставки — бесплатно</span>
-				Мы бесплатно доставим оплаченный вами заказ по Москве в пределах МКАД. Курьер заранее согласует с вами время доставки в промежутке 11 до 20 с пн по пт. Доставка будет осуществлена в течение 24 часов.
-			`,
-        price: 0,
-        id: 2,
-    },
-    {
-        title: 'Самовывоз',
-        description: `Самовывоз из офиса осуществляется по адресу: ${CONTACTS.address}, ${CONTACTS.addressTime}. Оплаченный заказ может храниться до 7 дней.`,
-        price: 0,
-        id: 1,
-    },
-];
+interface Props {
+    onChange: (type: string) => void;
+}
 
-const deliveryItemsRussia: {
-    title: string;
-    description: string;
-    price: number;
-    id: number;
-}[] = [
-    {
-        title: 'Бесплатная доставка по России',
-        description:
-            'Мы бесплатно доставим оплаченный вами заказ с помощью курьерской службы СДЭК или Boxberry, срок доставки от 2 дней в зависимости от региона. Примерка для регионов недоступна.',
-        price: 0,
-        id: 3,
-    },
-];
-
-const deliveryItemsSng: {
-    title: string;
-    description: string;
-    price: number;
-    id: number;
-}[] = [
-    {
-        title: 'Доставка по странам СНГ',
-        description: `
-			<span style="color: #838383;">Стоимость доставки — 2000₽</span>
-
-			Доставка осуществляется службой СДЭК/EMS. 
-
-			Важно: размер таможенных пошлин определяется законодательством той страны, в которую осуществляется доставка. 
-			
-			Заказы, оформленные международной доставкой, возврату и обмену не подлежат.	
-		`,
-        price: 2000,
-        id: 5,
-    },
-];
-
-const sngCountrys = [
-    'азербайджан',
-    'армения',
-    'беларусь',
-    'казахстан',
-    'кырзызстан',
-    'молдова',
-    'таджикистан',
-    'туркмения',
-    'туркменистан',
-    'узбекистан',
-    'грузия',
-];
-
-const deliveryItemsGlobal: {
-    title: string;
-    description: string;
-    price: number;
-    id: number;
-}[] = [
-    {
-        title: 'Международная доставка',
-        description: `
-			<span style="color: #838383;">Стоимость доставки — 6000₽</span>
-		
-			Международная доставка осуществляется службой EMS. 
-
-			Важно: условия оплаты и размер таможенных пошлин определяются таможенным законодательством страны, в которую осуществляется доставка.
-		`,
-        price: 6000,
-        id: 6,
-    },
-];
-
-const OrderFormDelivery: React.FC = () => {
+const OrderFormDelivery: React.FC<Props> = ({ onChange }) => {
     const dispatch = useDispatch();
 
     const { isLoggedIn } = useAuthUser();
@@ -123,134 +35,115 @@ const OrderFormDelivery: React.FC = () => {
         address: { country, city },
     } = useTypedSelector(({ order }) => order);
 
-    const [currentCountry_lowerCase, setCurrentCountry_lowerCase] = React.useState<string>('');
-    const [currentCity_lowerCase, setCurrentCity_lowerCase] = React.useState<string>('');
+    const [deliveryItems, setDeliveryItems] = React.useState<IDeliveryItem[]>([]);
 
-    React.useEffect(() => {
-        setCurrentCountry_lowerCase(country.title.toLocaleLowerCase());
-        setCurrentCity_lowerCase(city.title.toLocaleLowerCase());
-    }, [country, city]);
+    const currentCountry_lowerCase = country.title.toLocaleLowerCase();
+    const currentCity_lowerCase = city.title.toLocaleLowerCase();
 
     const onClickSetCurrentDelivery = (delivery: { title: string; price: number; id: number }) => {
         dispatch(setOrderCurrentDelivery(delivery));
     };
+
+    React.useEffect(() => {
+        if (!currentCountry_lowerCase || !currentCity_lowerCase) {
+            return;
+        }
+
+        if (currentCountry_lowerCase === 'россия') {
+            if (currentCity_lowerCase.indexOf('москва') !== -1) {
+                setDeliveryItems(RUSSIA_MOSCOW_DELIVERY_ITEMS);
+                onChange(DELIVERY_VALUES.pickup);
+                dispatch(
+                    setOrderCurrentDelivery({
+                        id: DELIVERY_ITEM.pickup.id,
+                        title: DELIVERY_ITEM.pickup.title,
+                        price: DELIVERY_ITEM.pickup.price,
+                    }),
+                );
+                return;
+            }
+
+            setDeliveryItems(RUSSIA_DELIVERY_ITEMS);
+            onChange(DELIVERY_VALUES.russiaFree);
+            dispatch(
+                setOrderCurrentDelivery({
+                    id: DELIVERY_ITEM.russiaFree.id,
+                    title: DELIVERY_ITEM.russiaFree.title,
+                    price: DELIVERY_ITEM.russiaFree.price,
+                }),
+            );
+
+            return;
+        }
+
+        if (SNG_COUNTRIES.includes(currentCountry_lowerCase)) {
+            setDeliveryItems(SNG_DELIVERY_ITEMS);
+            onChange(DELIVERY_VALUES.sng);
+            dispatch(
+                setOrderCurrentDelivery({
+                    id: DELIVERY_ITEM.sng.id,
+                    title: DELIVERY_ITEM.sng.title,
+                    price: DELIVERY_ITEM.sng.price,
+                }),
+            );
+            return;
+        }
+
+        if (!['россия', ...SNG_COUNTRIES].includes(currentCountry_lowerCase)) {
+            setDeliveryItems(GLOBAL_DELIVERY_ITEMS);
+            onChange(DELIVERY_VALUES.global);
+            dispatch(
+                setOrderCurrentDelivery({
+                    id: DELIVERY_ITEM.global.id,
+                    title: DELIVERY_ITEM.global.title,
+                    price: DELIVERY_ITEM.global.price,
+                }),
+            );
+            return;
+        }
+    }, [currentCity_lowerCase, currentCountry_lowerCase]);
 
     return (
         <div className="order-form-block order-form-block-delivery">
             <h3 className="order-form-block__title">Варианты доставки</h3>
 
             <div className="order-form-block-checkboxs-wrapper">
-                {currentCountry_lowerCase === 'россия' && currentCity_lowerCase.indexOf('москва') !== -1
-                    ? deliveryItemsRussiaMoscow.map((item, index) => (
-                          <div
-                              className={getClassNames('order-form-block-checkbox', {
-                                  hidden: !isLoggedIn && item.title === 'Доставка с примеркой (по Москве)',
-                              })}
-                              key={`order-form-block-checkbox-${currentCountry_lowerCase}-${index}`}
-                              onClick={() =>
-                                  onClickSetCurrentDelivery({
-                                      title: item.title,
-                                      price: item.price,
-                                      id: item.id,
-                                  })
-                              }
-                          >
-                              <Field
-                                  component={RenderRadioSelect}
-                                  label={item.title}
-                                  description={item.description}
-                                  type="radio"
-                                  name="delivery"
-                                  value={item.title}
-                              />
+                {deliveryItems.map((item, index) => (
+                    <div
+                        className={getClassNames('order-form-block-checkbox', {
+                            hidden: !isLoggedIn && item.title === DELIVERY_VALUES.withFittingMoscow,
+                        })}
+                        key={`order-form-block-checkbox-${currentCountry_lowerCase}-${index}`}
+                        onClick={() =>
+                            onClickSetCurrentDelivery({
+                                title: item.title,
+                                price: item.price,
+                                id: item.id,
+                            })
+                        }
+                    >
+                        <Field
+                            component={RenderRadioSelect}
+                            label={item.title}
+                            description={item.description}
+                            type="radio"
+                            name="delivery"
+                            value={item.title}
+                        />
 
-                              {/* TODO: Вынести в cost */}
-                              {!isLoggedIn && item.title === 'Доставка с примеркой (по Москве)' && (
-                                  <p className="order-form-block-checkbox__login">
-                                      Доступно только авторизованным пользователям -{' '}
-                                      <Link href={`#${ReglogStateTypesNotLogin.LOGIN}`} scroll={false} prefetch={false}>
-                                          Войти в аккаунт
-                                      </Link>
-                                  </p>
-                              )}
-                          </div>
-                      ))
-                    : null}
-
-                {currentCountry_lowerCase === 'россия' && currentCity_lowerCase.indexOf('москва') == -1
-                    ? deliveryItemsRussia.map((item, index) => (
-                          <div
-                              className="order-form-block-checkbox"
-                              key={`order-form-block-checkbox-${currentCountry_lowerCase}-${index}`}
-                              onClick={() =>
-                                  onClickSetCurrentDelivery({
-                                      title: item.title,
-                                      price: item.price,
-                                      id: item.id,
-                                  })
-                              }
-                          >
-                              <Field
-                                  component={RenderRadioSelect}
-                                  label={item.title}
-                                  description={item.description}
-                                  type="radio"
-                                  name="delivery"
-                                  value={item.title}
-                              />
-                          </div>
-                      ))
-                    : null}
-
-                {sngCountrys.find((country) => country == currentCountry_lowerCase)
-                    ? deliveryItemsSng.map((item, index) => (
-                          <div
-                              className="order-form-block-checkbox"
-                              key={`order-form-block-checkbox-${currentCountry_lowerCase}-${index}`}
-                              onClick={() =>
-                                  onClickSetCurrentDelivery({
-                                      title: item.title,
-                                      price: item.price,
-                                      id: item.id,
-                                  })
-                              }
-                          >
-                              <Field
-                                  component={RenderRadioSelect}
-                                  label={item.title}
-                                  description={item.description}
-                                  type="radio"
-                                  name="delivery"
-                                  value={item.title}
-                              />
-                          </div>
-                      ))
-                    : null}
-
-                {['россия', ...sngCountrys].find((country) => country === currentCountry_lowerCase)
-                    ? null
-                    : deliveryItemsGlobal.map((item, index) => (
-                          <div
-                              className="order-form-block-checkbox"
-                              key={`order-form-block-checkbox-${currentCountry_lowerCase}-${index}`}
-                              onClick={() =>
-                                  onClickSetCurrentDelivery({
-                                      title: item.title,
-                                      price: item.price,
-                                      id: item.id,
-                                  })
-                              }
-                          >
-                              <Field
-                                  component={RenderRadioSelect}
-                                  label={item.title}
-                                  description={item.description}
-                                  type="radio"
-                                  name="delivery"
-                                  value={item.title}
-                              />
-                          </div>
-                      ))}
+                        {currentCountry_lowerCase === 'россия' &&
+                            currentCity_lowerCase.indexOf('москва') !== -1 &&
+                            !isLoggedIn &&
+                            item.title === DELIVERY_VALUES.withFittingMoscow && (
+                                <p className="order-form-block-checkbox__login">
+                                    Доступно только авторизованным пользователям -{' '}
+                                    <Link href={`#${ReglogStateTypesNotLogin.LOGIN}`} scroll={false} prefetch={false}>
+                                        Войти в аккаунт
+                                    </Link>
+                                </p>
+                            )}
+                    </div>
+                ))}
             </div>
         </div>
     );
