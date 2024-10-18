@@ -1,15 +1,15 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
-import { sendUpdateUser } from '@/redux/actions/user';
+import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
+import { updateClientAttributes } from '@/redux/slices/user/asyncActions';
 
 const CabinetSellsListPaymentInfoMessage: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const [isOpenPopup, setIsOpenPopup] = React.useState<boolean>(false);
 
     const onSubmit = (data: any) => {
-        dispatch(sendUpdateUser({ ...data }, () => setIsOpenPopup(false)) as any);
+        dispatch(updateClientAttributes({ ...data, callbackSuccess: () => setIsOpenPopup(false) }) as any);
     };
 
     return (

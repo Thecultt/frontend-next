@@ -9,9 +9,10 @@ import isEqual from 'lodash.isequal';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useAuthUser } from '@/hooks/useAuthUser';
+import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { changeCheckCartItem, checkAvailabilityCartItems, removeCartItem } from '@/redux/actions/cart';
 import { sendCreateOrder } from '@/redux/actions/order';
-import { sendUpdateUser } from '@/redux/actions/user';
+import { updateClientAttributes } from '@/redux/slices/user/asyncActions';
 import { sendOrderApplyPromocode } from '@/redux/actions/order';
 import { CartProductItem, Loader, OrderProductsPromocode } from '@/components';
 import { Checkbox } from '@/shared/ui';
@@ -26,6 +27,7 @@ import { orderPay } from '@/functions/orderPay';
 
 const OrderProducts: React.FC = () => {
     const dispatch = useDispatch();
+    const appDispatch = useAppDispatch();
 
     const [isDisableSendBtn, setIsDisableSendBtn] = React.useState(false);
 
@@ -183,7 +185,7 @@ const OrderProducts: React.FC = () => {
             newUserName.lastname = lastname;
         }
 
-        dispatch(sendUpdateUser(newUserName) as any);
+        appDispatch(updateClientAttributes(newUserName));
 
         let paymentId;
 
