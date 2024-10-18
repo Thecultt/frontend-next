@@ -6,6 +6,8 @@ import { reduxForm, InjectedFormProps, formValueSelector } from 'redux-form';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { setOrderIsValid } from '@/redux/actions/order';
+import { PAYMENTS_METHODS } from '@/constants/pay';
+import { DELIVERY_VALUES } from '@/constants/delivery';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { useOrder } from '@/hooks/order/useOrder';
 import {
@@ -61,6 +63,10 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
         };
     });
 
+    const handleSelectDeliveryType = (type: any) => {
+        change('delivery', type);
+    };
+
     React.useEffect(() => {
         if (nameValue && phoneValue) {
             setIndexForm(1);
@@ -90,10 +96,18 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     React.useEffect(() => {
         if (isLoggedIn && isLoaded) {
             initialize({
-                email: user.email || '',
-                name: [user.lastname, user.name, user.middlename].filter(Boolean).join(' '),
-                phone: user.phone || '',
-                passport: user.pasport || '',
+                email: user.email ?? '',
+                name: user.fullname ?? '',
+                phone: user.phone ?? '',
+                passport: user.pasport ?? '',
+                country: user.country ?? '',
+                city: user.city ?? '',
+                delivery: '', // TODO откуда это брать?
+                street: user.street ?? '',
+                house: user.house ?? '',
+                flat: user.flat ?? '',
+                comment: user.comment ?? '',
+                payment: PAYMENTS_METHODS.card.title,
             });
         } else {
             initialize({
@@ -116,15 +130,15 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
             {indexForm >= 1 && <OrderFormCountry />}
 
-            {indexForm >= 2 && <OrderFormDelivery />}
+            {indexForm >= 2 && <OrderFormDelivery onChange={handleSelectDeliveryType} />}
 
-            {indexForm >= 3 && deliveryValue !== 'Самовывоз' && <OrderFormAddress />}
+            {indexForm >= 3 && deliveryValue !== DELIVERY_VALUES.pickup && <OrderFormAddress />}
 
             {indexForm >= 4
-                ? deliveryValue !== 'Доставка с примеркой (по Москве)' && (
+                ? deliveryValue !== DELIVERY_VALUES.withFittingMoscow && (
                       <OrderFormPayments paymentValue={paymentValue} />
                   )
-                : deliveryValue == 'Самовывоз' && <OrderFormPayments paymentValue={paymentValue} />}
+                : deliveryValue == DELIVERY_VALUES.pickup && <OrderFormPayments paymentValue={paymentValue} />}
         </form>
     );
 };

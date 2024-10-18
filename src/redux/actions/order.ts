@@ -115,7 +115,7 @@ export const setOrderPromocodeSaleSum = (sum: number) => ({
     payload: sum,
 });
 
-export const setOrderCurrentDelivery = (delivery: { title: string; price: number }) => ({
+export const setOrderCurrentDelivery = (delivery: { id: number; title: string; price: number }) => ({
     type: OrderStateActionTypes.SET_ORDER_CURRENT_DELIVERY,
     payload: delivery,
 });
