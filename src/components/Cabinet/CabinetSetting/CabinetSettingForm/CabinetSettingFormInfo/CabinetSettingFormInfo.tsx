@@ -8,7 +8,7 @@ import { getClassNames } from '@/functions/getClassNames';
 import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { updateClientAttributes } from '@/redux/slices/user/asyncActions';
-import { setIsNotificationServerSuccess } from '@/redux/actions/notifications_server';
+import { setIsNotificationServerError, setIsNotificationServerSuccess } from '@/redux/actions/notifications_server';
 import { GENDERS, GENDER_IDS } from '@/constants/catalog';
 import { FormikInput, FormikRadio } from '@/shared/form';
 import { CabinetSettingFormEditButtons } from '@/components';
@@ -22,23 +22,26 @@ const CabinetSettingFormInfo: React.FC = () => {
     const appDispatch = useAppDispatch();
 
     const [isEdit, setIsEdit] = React.useState(false);
+    const { user, updateIsLoading } = useAuthUser();
 
-    const { user } = useAuthUser();
+    const formIsDisabled = !isEdit || updateIsLoading;
 
     const handleSubmit = (data: ICabinetSettingFormInfoValues) => {
         appDispatch(updateClientAttributes(data))
             .unwrap()
             .then(() => {
+                // TODO - Вынести в slice
+                dispatch(setIsNotificationServerSuccess(true, 'Изменения сохранены успешно') as any);
                 setIsEdit(false);
+            })
+            .catch(() => {
+                // TODO - Вынести в slice
+                dispatch(setIsNotificationServerError(true, 'Не удалось сохранить изменения') as any);
             });
-
-        // TODO - Вынести в slice
-        dispatch(setIsNotificationServerSuccess(true, 'Изменения сохранены успешно') as any);
     };
 
     const initialValues: ICabinetSettingFormInfoValues = {
         ...INITIAL_VALUES,
-
         name: user.name ?? '',
         middlename: user.middlename ?? '',
         lastname: user.lastname ?? '',
@@ -48,32 +51,42 @@ const CabinetSettingFormInfo: React.FC = () => {
 
     return (
         <Formik initialValues={initialValues} validationSchema={SCHEMA} onSubmit={handleSubmit} enableReinitialize>
-            {({ isValid, dirty }) => (
-                <Form
-                    className={getClassNames('cabinet-setting-block', {
-                        active: isEdit,
-                    })}
-                >
+            {({ isValid, dirty, resetForm }) => (
+                <Form className="cabinet-setting-block">
                     <CabinetSettingFormEditButtons
                         title="Основные данные"
                         isValid={isValid}
                         dirty={dirty}
                         isEdit={isEdit}
+                        isLoading={updateIsLoading}
                         setIsEdit={setIsEdit}
+                        onReset={resetForm}
                     />
 
                     <div
                         className={getClassNames('cabinet-setting-block-form', {
-                            active: isEdit,
+                            active: !formIsDisabled,
                         })}
                     >
                         <div className="cabinet-setting-block-form-input-wrapper">
                             <div className="cabinet-setting-block-form-input" style={{ width: '49%' }}>
-                                <FormikInput label="Имя" placeholder="Ваше имя" name="name" theme="grey" />
+                                <FormikInput
+                                    label="Имя"
+                                    placeholder="Ваше имя"
+                                    name="name"
+                                    theme="grey"
+                                    disabled={formIsDisabled}
+                                />
                             </div>
 
                             <div className="cabinet-setting-block-form-input" style={{ width: '49%' }}>
-                                <FormikInput label="Фамилия" placeholder="Ваша фамилия" name="lastname" theme="grey" />
+                                <FormikInput
+                                    label="Фамилия"
+                                    placeholder="Ваша фамилия"
+                                    name="lastname"
+                                    theme="grey"
+                                    disabled={formIsDisabled}
+                                />
                             </div>
 
                             <div className="cabinet-setting-block-form-input" style={{ width: '49%' }}>
@@ -82,6 +95,7 @@ const CabinetSettingFormInfo: React.FC = () => {
                                     placeholder="Ваше отчество"
                                     name="middlename"
                                     theme="grey"
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -96,18 +110,29 @@ const CabinetSettingFormInfo: React.FC = () => {
                                         alwaysShowMask: false,
                                         maskChar: '',
                                     }}
+                                    disabled={formIsDisabled}
                                 />
                             </div>
                         </div>
 
                         <div className="cabinet-setting-block-form-radio-wrapper">
                             <div className="cabinet-setting-block-form-radio">
-                                <FormikRadio value={GENDER_IDS.female} name="gender" defaultChildrenStyles>
+                                <FormikRadio
+                                    value={GENDER_IDS.female}
+                                    name="gender"
+                                    disabled={formIsDisabled}
+                                    defaultChildrenStyles
+                                >
                                     {GENDERS.female}
                                 </FormikRadio>
                             </div>
                             <div className="cabinet-setting-block-form-radio">
-                                <FormikRadio value={GENDER_IDS.male} name="gender" defaultChildrenStyles>
+                                <FormikRadio
+                                    value={GENDER_IDS.male}
+                                    name="gender"
+                                    disabled={formIsDisabled}
+                                    defaultChildrenStyles
+                                >
                                     {GENDERS.male}
                                 </FormikRadio>
                             </div>

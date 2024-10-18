@@ -7,7 +7,7 @@
     +flexCenter
     gap: 8px
     border-radius: 12px
-    transition: background-color 0.2s linear, color 0.2s linear
+    transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear
     user-select: none
 
     &__label
@@ -91,3 +91,6 @@
         color: $mainColor
         height: auto
         padding: 0
+
+        &.tc-button--disabled
+            opacity: .5

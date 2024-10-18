@@ -8,11 +8,11 @@ import { getClassNames } from '@/functions/getClassNames';
 import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { updateClientAttributes } from '@/redux/slices/user/asyncActions';
-import { setIsNotificationServerSuccess } from '@/redux/actions/notifications_server';
+import { setIsNotificationServerError, setIsNotificationServerSuccess } from '@/redux/actions/notifications_server';
 import { FormikDadataCountryInput, FormikDadataAddressInput, FormikInput, FormikTextarea } from '@/shared/form';
 import { CabinetSettingFormEditButtons } from '@/components';
 
-import { ICabinetSettingFormAdressValues } from '../types';
+import { ICabinetSettingFormAddressValues } from '../types';
 import { INITIAL_VALUES } from './constants';
 import { SCHEMA } from './validate';
 
@@ -20,24 +20,27 @@ const CabinetSettingFormAddress: React.FC = () => {
     const dispatch = useDispatch();
     const appDispatch = useAppDispatch();
 
-    const { user } = useAuthUser();
-
     const [isEdit, setIsEdit] = React.useState(false);
+    const { user, updateIsLoading } = useAuthUser();
 
-    const handleSubmit = (data: ICabinetSettingFormAdressValues) => {
+    const formIsDisabled = !isEdit || updateIsLoading;
+
+    const handleSubmit = (data: ICabinetSettingFormAddressValues) => {
         appDispatch(updateClientAttributes(data))
             .unwrap()
             .then(() => {
+                // TODO - Вынести в slice
+                dispatch(setIsNotificationServerSuccess(true, 'Изменения сохранены успешно') as any);
                 setIsEdit(false);
+            })
+            .catch(() => {
+                // TODO - Вынести в slice
+                dispatch(setIsNotificationServerError(true, 'Не удалось сохранить изменения') as any);
             });
-
-        // TODO - Вынести в slice
-        dispatch(setIsNotificationServerSuccess(true, 'Изменения сохранены успешно') as any);
     };
 
-    const initialValues: ICabinetSettingFormAdressValues = {
+    const initialValues: ICabinetSettingFormAddressValues = {
         ...INITIAL_VALUES,
-
         country: user.country ?? '',
         city: user.city ?? '',
         street: user.street ?? '',
@@ -48,23 +51,21 @@ const CabinetSettingFormAddress: React.FC = () => {
 
     return (
         <Formik initialValues={initialValues} validationSchema={SCHEMA} onSubmit={handleSubmit} enableReinitialize>
-            {({ isValid, dirty, values: { country, city } }) => (
-                <Form
-                    className={getClassNames('cabinet-setting-block', {
-                        active: isEdit,
-                    })}
-                >
+            {({ isValid, dirty, values: { country, city }, resetForm }) => (
+                <Form className="cabinet-setting-block">
                     <CabinetSettingFormEditButtons
                         title="Адрес"
                         isValid={isValid}
                         dirty={dirty}
                         isEdit={isEdit}
+                        isLoading={updateIsLoading}
                         setIsEdit={setIsEdit}
+                        onReset={resetForm}
                     />
 
                     <div
                         className={getClassNames('cabinet-setting-block-form', {
-                            active: isEdit,
+                            active: !formIsDisabled,
                         })}
                     >
                         <div className="cabinet-setting-block-form-input-wrapper">
@@ -74,6 +75,7 @@ const CabinetSettingFormAddress: React.FC = () => {
                                     placeholder="Ваша страна"
                                     name="country"
                                     theme="grey"
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -86,6 +88,7 @@ const CabinetSettingFormAddress: React.FC = () => {
                                     filterToBound="city"
                                     filterLocations={[{ country }]}
                                     theme="grey"
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -98,15 +101,28 @@ const CabinetSettingFormAddress: React.FC = () => {
                                     filterToBound="street"
                                     filterLocations={[{ country, city }]}
                                     theme="grey"
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
                             <div className="cabinet-setting-block-form-input" style={{ width: '32%' }}>
-                                <FormikInput label="Дом" placeholder="Ваш дом" name="house" theme="grey" />
+                                <FormikInput
+                                    label="Дом"
+                                    placeholder="Ваш дом"
+                                    name="house"
+                                    theme="grey"
+                                    disabled={formIsDisabled}
+                                />
                             </div>
 
                             <div className="cabinet-setting-block-form-input" style={{ width: '32%' }}>
-                                <FormikInput label="Квартира" placeholder="Ваша квартира" name="flat" theme="grey" />
+                                <FormikInput
+                                    label="Квартира"
+                                    placeholder="Ваша квартира"
+                                    name="flat"
+                                    theme="grey"
+                                    disabled={formIsDisabled}
+                                />
                             </div>
 
                             <div className="cabinet-setting-block-form-input" style={{ width: '100%' }}>
@@ -115,6 +131,7 @@ const CabinetSettingFormAddress: React.FC = () => {
                                     placeholder="Комментарий"
                                     name="comment"
                                     theme="grey"
+                                    disabled={formIsDisabled}
                                 />
                             </div>
                         </div>

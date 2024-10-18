@@ -4,7 +4,12 @@ import { useCallback } from 'react';
 
 import { LS_KEYS } from '@/constants/keys';
 import { useAppSelector } from '@/hooks/redux/useAppSelector';
-import { selectUser, selectUserIsLoaded } from '@/redux/slices/user/selectors';
+import {
+    selectUser,
+    selectUserFetchIsLoading,
+    selectUserIsLoaded,
+    selectUserUpdateIsLoading,
+} from '@/redux/slices/user/selectors';
 
 import { useLS } from './useLS';
 
@@ -13,6 +18,8 @@ export const useAuthUser = () => {
 
     const userState = useAppSelector(selectUser);
     const isLoaded = useAppSelector(selectUserIsLoaded);
+    const fetchIsLoading = useAppSelector(selectUserFetchIsLoading);
+    const updateIsLoading = useAppSelector(selectUserUpdateIsLoading);
 
     const logout = useCallback(() => {
         removeAccessToken();
@@ -23,6 +30,8 @@ export const useAuthUser = () => {
         user: userState,
         isLoaded,
         isLoggedIn: !!accessToken,
+        fetchIsLoading,
+        updateIsLoading,
         logout,
     };
 };

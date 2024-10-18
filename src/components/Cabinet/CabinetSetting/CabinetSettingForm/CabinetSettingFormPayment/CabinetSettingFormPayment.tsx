@@ -8,7 +8,7 @@ import { getClassNames } from '@/functions/getClassNames';
 import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { updateClientAttributes } from '@/redux/slices/user/asyncActions';
-import { setIsNotificationServerSuccess } from '@/redux/actions/notifications_server';
+import { setIsNotificationServerError, setIsNotificationServerSuccess } from '@/redux/actions/notifications_server';
 import { FormikDadataBankInput, FormikInput } from '@/shared/form';
 import { CabinetSettingFormEditButtons } from '@/components';
 
@@ -20,25 +20,28 @@ const CabinetSettingFormPayment: React.FC = () => {
     const dispatch = useDispatch();
     const appDispatch = useAppDispatch();
 
-    const { user } = useAuthUser();
-
     const [isEdit, setIsEdit] = React.useState(false);
+    const { user, updateIsLoading } = useAuthUser();
+
+    const formIsDisabled = !isEdit || updateIsLoading;
 
     const handleSubmit = (data: ICabinetSettingFormPaymentValues) => {
         appDispatch(updateClientAttributes(data))
             .unwrap()
             .then(() => {
+                // TODO - Вынести в slice
+                dispatch(setIsNotificationServerSuccess(true, 'Изменения сохранены успешно') as any);
                 setIsEdit(false);
+            })
+            .catch(() => {
+                // TODO - Вынести в slice
+                dispatch(setIsNotificationServerError(true, 'Не удалось сохранить изменения') as any);
             });
-
-        // TODO - Вынести в slice
-        dispatch(setIsNotificationServerSuccess(true, 'Изменения сохранены успешно') as any);
     };
 
     const initialValues: ICabinetSettingFormPaymentValues = {
         ...INITIAL_VALUES,
-
-        pasport: user.passport ?? '',
+        pasport: user.pasport ?? '',
         bik: user.bik ?? '',
         inn: user.inn ?? '',
         rs: user.rs ?? '',
@@ -52,24 +55,22 @@ const CabinetSettingFormPayment: React.FC = () => {
     };
 
     return (
-        <Formik initialValues={initialValues} validationSchema={SCHEMA} onSubmit={handleSubmit}>
-            {({ isValid, dirty }) => (
-                <Form
-                    className={getClassNames('cabinet-setting-block', {
-                        active: isEdit,
-                    })}
-                >
+        <Formik initialValues={initialValues} validationSchema={SCHEMA} onSubmit={handleSubmit} enableReinitialize>
+            {({ isValid, dirty, resetForm }) => (
+                <Form className="cabinet-setting-block">
                     <CabinetSettingFormEditButtons
                         title="Реквизиты получателя"
                         isValid={isValid}
                         dirty={dirty}
                         isEdit={isEdit}
+                        isLoading={updateIsLoading}
                         setIsEdit={setIsEdit}
+                        onReset={resetForm}
                     />
 
                     <div
                         className={getClassNames('cabinet-setting-block-form', {
-                            active: isEdit,
+                            active: !formIsDisabled,
                         })}
                     >
                         <div className="cabinet-setting-block-form-input-wrapper">
@@ -84,6 +85,7 @@ const CabinetSettingFormPayment: React.FC = () => {
                                         alwaysShowMask: false,
                                         maskChar: '',
                                     }}
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -93,6 +95,7 @@ const CabinetSettingFormPayment: React.FC = () => {
                                     placeholder="БИК банка"
                                     name="bik"
                                     theme="grey"
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -107,6 +110,7 @@ const CabinetSettingFormPayment: React.FC = () => {
                                         alwaysShowMask: false,
                                         maskChar: '',
                                     }}
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -121,6 +125,7 @@ const CabinetSettingFormPayment: React.FC = () => {
                                         alwaysShowMask: false,
                                         maskChar: '',
                                     }}
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -130,6 +135,7 @@ const CabinetSettingFormPayment: React.FC = () => {
                                     placeholder="Кем выдан паспорт"
                                     name="issued_by"
                                     theme="grey"
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -144,6 +150,7 @@ const CabinetSettingFormPayment: React.FC = () => {
                                         alwaysShowMask: false,
                                         maskChar: '',
                                     }}
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -158,6 +165,7 @@ const CabinetSettingFormPayment: React.FC = () => {
                                         alwaysShowMask: false,
                                         maskChar: '',
                                     }}
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -167,6 +175,7 @@ const CabinetSettingFormPayment: React.FC = () => {
                                     placeholder="Место рождения"
                                     name="place_of_birth"
                                     theme="grey"
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -181,6 +190,7 @@ const CabinetSettingFormPayment: React.FC = () => {
                                         alwaysShowMask: false,
                                         maskChar: '',
                                     }}
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -190,6 +200,7 @@ const CabinetSettingFormPayment: React.FC = () => {
                                     placeholder="Гражданство"
                                     name="citizenship"
                                     theme="grey"
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -199,6 +210,7 @@ const CabinetSettingFormPayment: React.FC = () => {
                                     placeholder="Адрес регистрации"
                                     name="registration_address"
                                     theme="grey"
+                                    disabled={formIsDisabled}
                                 />
                             </div>
                         </div>

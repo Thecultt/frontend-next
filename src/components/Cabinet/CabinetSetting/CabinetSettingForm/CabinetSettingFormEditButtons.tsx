@@ -2,49 +2,62 @@
 
 import React from 'react';
 
-import { getClassNames } from '@/functions/getClassNames';
 import { Button } from '@/shared/ui';
+import { Noop } from '@/types/functions';
 
 interface Props {
     title: string;
     isValid: boolean;
     dirty: boolean;
-
     isEdit: boolean;
+    isLoading: boolean;
+    onReset: Noop;
     setIsEdit: (value: boolean) => void;
 }
 
-const CabinetSettingFormEditButtons: React.FC<Props> = ({ title, isValid, dirty, isEdit, setIsEdit }) => {
+const CabinetSettingFormEditButtons: React.FC<Props> = ({
+    title,
+    isValid,
+    dirty,
+    isEdit,
+    isLoading,
+    onReset,
+    setIsEdit,
+}) => {
+    const handleReset = () => {
+        onReset();
+        setIsEdit(false);
+    };
+
     return (
         <div className="cabinet-setting-block-title">
             <h3 className="cabinet-setting-block-title__title">{title}</h3>
 
             {isEdit ? (
-                dirty ? (
+                <div className="cabinet-setting-block-title__buttons">
                     <Button
-                        label="Сохранить"
                         type="submit"
-                        className={getClassNames('cabinet-setting-block-title__btn', {
-                            disabled: !isValid,
-                        })}
+                        label="Сохранить"
+                        className="cabinet-setting-block-title__btn"
                         theme="inline"
+                        disabled={!isValid || !dirty || isLoading}
                     />
-                ) : (
+
                     <Button
                         label="Отменить"
-                        type="button"
                         className="cabinet-setting-block-title__btn"
-                        onClick={() => setIsEdit(false)}
                         theme="inline"
+                        disabled={isLoading}
+                        onClick={handleReset}
                     />
-                )
+                </div>
             ) : (
                 <Button
                     label="Изменить"
-                    type="button"
                     className="cabinet-setting-block-title__btn"
-                    onClick={() => setIsEdit(true)}
                     theme="inline"
+                    disabled={isLoading}
+                    onClick={() => setIsEdit(true)}
                 />
             )}
         </div>
