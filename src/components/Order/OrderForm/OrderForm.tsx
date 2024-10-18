@@ -102,7 +102,6 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 passport: user.pasport ?? '',
                 country: user.country ?? '',
                 city: user.city ?? '',
-                delivery: '', // TODO откуда это брать?
                 street: user.street ?? '',
                 house: user.house ?? '',
                 flat: user.flat ?? '',
