@@ -20,6 +20,11 @@ export const YUP_REQUIRED_MIN_MAX_STRING = Yup.string()
     .min(MIN_INPUT_SYMBOLS, `Не менее ${MIN_INPUT_SYMBOLS} символов`)
     .max(MAX_INPUT_SYMBOLS, `Не более ${MAX_INPUT_SYMBOLS} символов`);
 
+export const YUP_NOT_REQUIRED_MIN_MAX_STRING = Yup.string()
+    .notRequired()
+    .min(MIN_INPUT_SYMBOLS, `Не менее ${MIN_INPUT_SYMBOLS} символов`)
+    .max(MAX_INPUT_SYMBOLS, `Не более ${MAX_INPUT_SYMBOLS} символов`);
+
 export const YUP_REQUIRED_MIN_MAX_EMAIL = Yup.string()
     .required(REQUIRED_VALIDATION_MESSAGE)
     .min(MIN_INPUT_SYMBOLS, `Не менее ${MIN_INPUT_SYMBOLS} символов`)
