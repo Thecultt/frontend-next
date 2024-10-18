@@ -11,7 +11,7 @@ interface Props extends Omit<RadioProps, 'name' | 'checked' | 'onChange'> {
 }
 
 export const FormikRadio: React.FC<Props> = ({ name, value, ...props }) => {
-    const [{ onChange: _, ...field }, { error, touched }, { setValue }] = useField({
+    const [{ onChange: _, ...field }, { error: _e }, { setValue }] = useField({
         name,
         value,
         type: 'radio',

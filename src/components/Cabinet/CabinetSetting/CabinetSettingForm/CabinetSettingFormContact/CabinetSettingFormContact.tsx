@@ -8,7 +8,7 @@ import { getClassNames } from '@/functions/getClassNames';
 import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { updateClientAttributes } from '@/redux/slices/user/asyncActions';
-import { setIsNotificationServerSuccess } from '@/redux/actions/notifications_server';
+import { setIsNotificationServerError, setIsNotificationServerSuccess } from '@/redux/actions/notifications_server';
 import { FormikInput } from '@/shared/form';
 import { CabinetSettingFormEditButtons } from '@/components';
 
@@ -20,24 +20,27 @@ const CabinetSettingFormContact: React.FC = () => {
     const dispatch = useDispatch();
     const appDispatch = useAppDispatch();
 
-    const { user } = useAuthUser();
-
     const [isEdit, setIsEdit] = React.useState(false);
+    const { user, updateIsLoading } = useAuthUser();
+
+    const formIsDisabled = !isEdit || updateIsLoading;
 
     const handleSubmit = (data: ICabinetSettingFormContactValues) => {
         appDispatch(updateClientAttributes(data))
             .unwrap()
             .then(() => {
+                // TODO - Вынести в slice
+                dispatch(setIsNotificationServerSuccess(true, 'Изменения сохранены успешно') as any);
                 setIsEdit(false);
+            })
+            .catch(() => {
+                // TODO - Вынести в slice
+                dispatch(setIsNotificationServerError(true, 'Не удалось сохранить изменения') as any);
             });
-
-        // TODO - Вынести в slice
-        dispatch(setIsNotificationServerSuccess(true, 'Изменения сохранены успешно') as any);
     };
 
     const initialValues: ICabinetSettingFormContactValues = {
         ...INITIAL_VALUES,
-
         email: user.email ?? '',
         phone: user.phone ?? '',
         username_telegram: user.username_telegram ?? '',
@@ -45,23 +48,21 @@ const CabinetSettingFormContact: React.FC = () => {
 
     return (
         <Formik initialValues={initialValues} validationSchema={SCHEMA} onSubmit={handleSubmit} enableReinitialize>
-            {({ isValid, dirty }) => (
-                <Form
-                    className={getClassNames('cabinet-setting-block', {
-                        active: isEdit,
-                    })}
-                >
+            {({ isValid, dirty, resetForm }) => (
+                <Form className="cabinet-setting-block">
                     <CabinetSettingFormEditButtons
                         title="Контактные данные"
                         isValid={isValid}
                         dirty={dirty}
                         isEdit={isEdit}
+                        isLoading={updateIsLoading}
                         setIsEdit={setIsEdit}
+                        onReset={resetForm}
                     />
 
                     <div
                         className={getClassNames('cabinet-setting-block-form', {
-                            active: isEdit,
+                            active: !formIsDisabled,
                         })}
                     >
                         <div className="cabinet-setting-block-form-input-wrapper">
@@ -71,6 +72,7 @@ const CabinetSettingFormContact: React.FC = () => {
                                     placeholder="Ваша почта"
                                     name="email"
                                     theme="grey"
+                                    disabled={formIsDisabled}
                                     readOnly
                                 />
                             </div>
@@ -81,6 +83,7 @@ const CabinetSettingFormContact: React.FC = () => {
                                     placeholder="Ваш номер телефона"
                                     name="phone"
                                     theme="grey"
+                                    disabled={formIsDisabled}
                                 />
                             </div>
 
@@ -90,6 +93,7 @@ const CabinetSettingFormContact: React.FC = () => {
                                     placeholder="Укажите ваш ник в Telegram"
                                     name="username_telegram"
                                     theme="grey"
+                                    disabled={formIsDisabled}
                                 />
                             </div>
                         </div>
