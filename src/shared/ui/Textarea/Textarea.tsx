@@ -14,6 +14,7 @@ export const Textarea: React.FC<TextareaProps> = ({
     error,
     className = '',
     theme = 'white',
+    placeholder = label,
     ...textareaProps
 }) => (
     <div
@@ -22,7 +23,7 @@ export const Textarea: React.FC<TextareaProps> = ({
         })}
     >
         <label className="tc-textarea__wrapper">
-            <textarea className="tc-textarea__field" {...textareaProps} />
+            <textarea className="tc-textarea__field" placeholder={placeholder} {...textareaProps} />
             <span className="tc-textarea__label">{label}</span>
         </label>
 

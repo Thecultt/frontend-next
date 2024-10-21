@@ -63,4 +63,8 @@ export interface CheckboxProps extends React.PropsWithChildren {
     onChange?: Noop;
 }
 
+export interface RadioProps extends CheckboxProps {
+    value: string | number;
+}
+
 export type BadgeTheme = 'default' | 'green' | 'black';

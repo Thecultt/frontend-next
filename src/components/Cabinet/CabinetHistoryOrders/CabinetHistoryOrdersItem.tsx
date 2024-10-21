@@ -184,7 +184,7 @@ const CabinetHistoryOrdersItem: React.FC<Props> = ({
                         </div>
 
                         {/* TODO: Вынести в отдельный компонент */}
-                        {status === 'Ожидает оплаты' &&
+                        {status === ORDER_STATUSES.awaitingPayment &&
                             dayjs().isBefore(dayjs(createdon).add(COUNT_MINUTES_RESERVED_ORDER, 'm')) && (
                                 <>
                                     <p className="cabinet-history-orders-item-info__subtextbtn">

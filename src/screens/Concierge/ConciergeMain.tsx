@@ -34,12 +34,16 @@ const ConciergeMain: React.FC = () => {
             openPopupInfo({
                 title: (
                     <>
-                        Спасибо! <br /> Ваша заявка принята
+                        Спасибо!
+                        <br />
+                        Ваша заявка принята
                     </>
                 ),
                 content: (
                     <p className="concierge-product-success__subtitle">
-                        Скоро мы свяжемся с вами в WhatsApp <br /> по указанному номеру телефона.
+                        Скоро мы свяжемся с вами в WhatsApp
+                        <br />
+                        по указанному номеру телефона.
                     </p>
                 ),
                 callbackClose: () => dispatch(setConciergeProductIsSendFormCustomProduct(false)),

@@ -19,7 +19,7 @@ export const DadataCountryInput: React.FC<Props> = ({ value, ...props }) => {
     const [suggestions, setSuggestions] = React.useState<string[]>([]);
 
     React.useEffect(() => {
-        if (debouncedValue.length > 2) {
+        if (debouncedValue && debouncedValue.length > 2) {
             setIsLoading(true);
 
             axios
