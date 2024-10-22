@@ -7,9 +7,16 @@
     align-items: center
     gap: 8px
     cursor: pointer
+    user-select: none
 
     &--wide
         width: 100%
+
+    &--disabled
+        cursor: not-allowed
+
+    &--start
+        align-items: flex-start
 
     &__input
         position: absolute
@@ -39,6 +46,9 @@
 
     &__input:disabled:checked + &__control
         background-color: $green5
+
+    &__input:disabled ~ &__content
+        color: $grey6
 
     &--size-l &__control
         width: 20px
@@ -91,3 +101,7 @@
 
     &--size-s &__content
         font-size: 12px
+
+    &__info
+        width: 24px
+        color: $black3

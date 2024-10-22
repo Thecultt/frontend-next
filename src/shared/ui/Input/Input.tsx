@@ -44,10 +44,10 @@ export const Input: React.FC<InputProps> = ({
 
     const filteredHints = React.useMemo(() => {
         if (!value || !needFilterHints) {
-            return hints;
+            return hints.filter((h) => h !== value);
         }
 
-        return hints.filter((x) => getHintLabel(x).toLowerCase().indexOf(value.toString().toLowerCase()) >= 0);
+        return hints.filter((h) => getHintLabel(h).toLowerCase().indexOf(value.toString().toLowerCase()) >= 0);
     }, [value, hints, needFilterHints]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

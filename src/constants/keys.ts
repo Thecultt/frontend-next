@@ -1,3 +1,5 @@
+export const STORAGE_PREFIX = 'tc_';
+
 export const UTM_KEYS = {
     source: 'utm_source',
     medium: 'utm_medium',
@@ -23,6 +25,10 @@ export const LS_KEYS = {
     headerSubscribeMessage: 'header_subscribe_message',
     waiting: 'waiting',
     redirectReglog: 'redirect_reglog',
+};
+
+export const SS_KEYS = {
+    country: 'country',
 };
 
 export const KEYBOARD = {
