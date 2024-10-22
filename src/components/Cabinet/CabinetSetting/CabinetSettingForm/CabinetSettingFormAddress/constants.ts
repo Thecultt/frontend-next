@@ -1,6 +1,6 @@
-import { ICabinetSettingFormAdressValues } from '../types';
+import { ICabinetSettingFormAddressValues } from '../types';
 
-export const INITIAL_VALUES: ICabinetSettingFormAdressValues = {
+export const INITIAL_VALUES: ICabinetSettingFormAddressValues = {
     country: '',
     city: '',
     street: '',

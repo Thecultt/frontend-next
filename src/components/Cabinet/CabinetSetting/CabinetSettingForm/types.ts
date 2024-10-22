@@ -14,7 +14,7 @@ export interface ICabinetSettingFormContactValues {
     username_telegram: string;
 }
 
-export interface ICabinetSettingFormAdressValues {
+export interface ICabinetSettingFormAddressValues {
     country: string;
     city: string;
     street: string;

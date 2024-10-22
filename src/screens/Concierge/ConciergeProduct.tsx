@@ -5,18 +5,20 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import {
-    fetchConciergeProduct,
-    sendConciergeProductApplication,
-    setConciergeProductIsSendFormProductPage,
-} from '@/redux/actions/concierge';
-import { ConciergeProductInfo, ConciergeProductForm, Popup } from '@/components';
+import { usePopupInfo } from '@/hooks/usePopupInfo';
+import { fetchConciergeProduct, setConciergeProductIsSendFormProductPage } from '@/redux/actions/concierge';
+import { ConciergeProductInfo, ConciergeProductForm } from '@/components';
 import { PageLoader } from '@/shared/ui';
+
+type PageParams = {
+    id: string;
+};
 
 const ConciergeProduct: React.FC = () => {
     const dispatch = useDispatch();
+    const { id } = useParams<PageParams>();
 
-    const { id } = useParams();
+    const { openPopupInfo } = usePopupInfo();
 
     const { isLoadedProduct, product, isSendFormProductPageSuccess } = useTypedSelector(({ concierge }) => concierge);
 
@@ -24,24 +26,30 @@ const ConciergeProduct: React.FC = () => {
         dispatch(fetchConciergeProduct(id as string) as any);
     }, []);
 
-    const onSubmitProductApplication = (data: any) => {
-        dispatch(sendConciergeProductApplication(data, parseInt(id as string)) as any);
-    };
+    React.useEffect(() => {
+        if (isSendFormProductPageSuccess) {
+            openPopupInfo({
+                title: (
+                    <>
+                        Спасибо!
+                        <br />
+                        Ваша заявка принята
+                    </>
+                ),
+                content: (
+                    <p className="concierge-product-success__subtitle">
+                        Скоро мы свяжемся с вами в WhatsApp
+                        <br />
+                        по указанному номеру телефона.
+                    </p>
+                ),
+                callbackClose: () => dispatch(setConciergeProductIsSendFormProductPage(false)),
+            });
+        }
+    }, [isSendFormProductPageSuccess]);
 
     return (
         <section className="concierge-product">
-            <Popup
-                state={isSendFormProductPageSuccess}
-                setState={() => dispatch(setConciergeProductIsSendFormProductPage(false))}
-            >
-                <div className="concierge-product-success">
-                    <h4 className="concierge-product-success__title">Спасибо! Ваша заявка принята</h4>
-                    <p className="concierge-product-success__subtitle">
-                        Скоро мы свяжемся с вами в WhatsApp <br /> по указанному номеру телефона.
-                    </p>
-                </div>
-            </Popup>
-
             <div className="container">
                 <div className="concierge-product-wrapper">
                     <button className="concierge-product__back" onClick={() => window.history.back()}>
@@ -61,7 +69,7 @@ const ConciergeProduct: React.FC = () => {
                         <>
                             <ConciergeProductInfo {...product} />
 
-                            <ConciergeProductForm onSubmit={onSubmitProductApplication} />
+                            <ConciergeProductForm id={id} />
 
                             <div className="concierge-product-buyer-media">
                                 <h3 className="concierge-product-buyer-media__title">
