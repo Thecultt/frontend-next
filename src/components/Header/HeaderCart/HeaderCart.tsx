@@ -4,12 +4,12 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useOnClickOutside } from 'usehooks-ts';
 
-import { setCartIsVisibleMessage } from '@/redux/actions/cart';
 import { HeaderCartModal, HeaderCartModalAddMessage } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { useCart } from '@/hooks/catalog/useCart';
-import { setHeaderCartIsVisible } from '@/redux/actions/header';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { setCartIsVisibleMessage } from '@/redux/actions/cart';
+import { setHeaderCartIsVisible, setHeaderCatalogMenuIsVisible } from '@/redux/actions/header';
 
 const HeaderCart: React.FC = React.memo(() => {
     const dispatch = useDispatch();
@@ -26,7 +26,13 @@ const HeaderCart: React.FC = React.memo(() => {
     };
 
     const toggleClickModalCart = () => {
-        dispatch(setHeaderCartIsVisible(!cartIsVisible));
+        const nextCartIsVisible = !cartIsVisible;
+
+        if (nextCartIsVisible) {
+            dispatch(setHeaderCatalogMenuIsVisible(false));
+        }
+
+        dispatch(setHeaderCartIsVisible(nextCartIsVisible));
         dispatch(setCartIsVisibleMessage(false));
     };
 

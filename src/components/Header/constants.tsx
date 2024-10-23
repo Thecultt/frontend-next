@@ -4,10 +4,11 @@ import { CATEGORY_NAMES, CATEGORY_SLUGS } from '@/constants/catalog';
 import { BRAND_DICTIONARY } from '@/constants/brands';
 import { BagIcon, DiamondIcon, RingIcon, ShoesIcon, WalletIcon } from '@/assets/icons';
 
-import headerHoverImageBag from '@/assets/images/header/header-image-hover-menu-bag.jpg';
-import headerHoverImageAccessories from '@/assets/images/header/header-image-hover-menu-accessories.jpg';
-import headerHoverImageShoes from '@/assets/images/header/header-image-hover-menu-shoes.jpg';
-import headerHoverImageDecoration from '@/assets/images/header/header-image-hover-menu-decoration.jpg';
+import bagsImage from '@/assets/images/header/header-menu-bags.png';
+import shoesImage from '@/assets/images/header/header-menu-shoes.png';
+import accessoriesImage from '@/assets/images/header/header-menu-accessories.png';
+import decorationsImage from '@/assets/images/header/header-menu-decorations.png';
+// import jewelryImage from '@/assets/images/header/header-menu-jewelry.png';
 
 interface IHeaderMenuCategoryBrand {
     title: string;
@@ -28,7 +29,7 @@ export const HEADER_MENU_CATEGORIES: IHeaderMenuCategory[] = [
     {
         title: CATEGORY_NAMES.bags,
         slug: CATEGORY_SLUGS.bags,
-        image: headerHoverImageBag.src,
+        image: bagsImage.src,
         types: [
             'Дорожная сумка',
             'Клатч',
@@ -114,7 +115,7 @@ export const HEADER_MENU_CATEGORIES: IHeaderMenuCategory[] = [
     {
         title: CATEGORY_NAMES.shoes,
         slug: CATEGORY_SLUGS.shoes,
-        image: headerHoverImageShoes.src,
+        image: shoesImage.src,
         types: [
             'Балетки',
             'Ботильоны',
@@ -203,7 +204,7 @@ export const HEADER_MENU_CATEGORIES: IHeaderMenuCategory[] = [
     {
         title: CATEGORY_NAMES.accessories,
         slug: CATEGORY_SLUGS.accessories,
-        image: headerHoverImageAccessories.src,
+        image: accessoriesImage.src,
         types: [
             'Аксессуары для сумок',
             'Головные уборы',
@@ -283,7 +284,7 @@ export const HEADER_MENU_CATEGORIES: IHeaderMenuCategory[] = [
     {
         title: CATEGORY_NAMES.decorations,
         slug: CATEGORY_SLUGS.decorations,
-        image: headerHoverImageDecoration.src,
+        image: decorationsImage.src,
         types: ['Браслеты', 'Колье и подвески', 'Кольца', 'Часы', 'Броши'],
         brands: [
             {
@@ -354,24 +355,69 @@ export const HEADER_MENU_CATEGORIES: IHeaderMenuCategory[] = [
     // {
     //     title: CATEGORY_NAMES.jewelry,
     //     slug: CATEGORY_SLUGS.jewelry,
-    //     image: headerHoverImageDecoration.src,
+    //     image: jewelryImage.src,
     //     types: ['Браслеты', 'Колье и подвески', 'Кольца', 'Часы', 'Броши'],
     //     brands: [
-    //         'Balenciaga',
-    //         'Bottega Veneta',
-    //         'Bulgari',
-    //         'Cartier',
-    //         'Celine',
-    //         'Chanel',
-    //         'Christian Dior',
-    //         'Gucci',
-    //         'Hermes',
-    //         'Jil Sander',
-    //         'Louis Vuitton',
-    //         'Miu Miu',
-    //         'Prada',
-    //         'Tiffany & Co.',
-    //         'Van Cleef & Arpels',
+    //         {
+    //             title: BRAND_DICTIONARY.balenciaga.title,
+    //             slug: BRAND_DICTIONARY.balenciaga.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.bottegaVeneta.title,
+    //             slug: BRAND_DICTIONARY.bottegaVeneta.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.bulgari.title,
+    //             slug: BRAND_DICTIONARY.bulgari.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.cartier.title,
+    //             slug: BRAND_DICTIONARY.cartier.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.celine.title,
+    //             slug: BRAND_DICTIONARY.celine.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.chanel.title,
+    //             slug: BRAND_DICTIONARY.chanel.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.christianDior.title,
+    //             slug: BRAND_DICTIONARY.christianDior.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.gucci.title,
+    //             slug: BRAND_DICTIONARY.gucci.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.hermes.title,
+    //             slug: BRAND_DICTIONARY.hermes.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.jilSander.title,
+    //             slug: BRAND_DICTIONARY.jilSander.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.louisVuitton.title,
+    //             slug: BRAND_DICTIONARY.louisVuitton.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.miuMiu.title,
+    //             slug: BRAND_DICTIONARY.miuMiu.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.prada.title,
+    //             slug: BRAND_DICTIONARY.prada.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.tiffanyCo.title,
+    //             slug: BRAND_DICTIONARY.tiffanyCo.slug,
+    //         },
+    //         {
+    //             title: BRAND_DICTIONARY.vanCleefArpels.title,
+    //             slug: BRAND_DICTIONARY.vanCleefArpels.slug,
+    //         },
     //     ],
     //     fullText: 'Все ювелирные изделия',
     //     icon: DiamondIcon,
