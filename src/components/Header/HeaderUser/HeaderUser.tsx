@@ -1,40 +1,34 @@
+'use client';
+
 import React from 'react';
+import { useOnClickOutside } from 'usehooks-ts';
 
 import { HeaderUserMenu } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
+import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
+import { setHeaderCatalogMenuIsVisible } from '@/redux/actions/header';
 
 const HeaderUser: React.FC = () => {
-    const [state, setState] = React.useState(false);
+    const dispatch = useAppDispatch();
 
     const PopupRef = React.useRef<HTMLDivElement>(null);
-
-    React.useEffect(() => {
-        document.addEventListener('mousedown', togglePopup);
-        document.addEventListener('touchstart', togglePopup);
-
-        return () => {
-            document.removeEventListener('mousedown', togglePopup);
-            document.removeEventListener('touchstart', togglePopup);
-        };
-    }, [PopupRef]);
-
-    // React.useEffect(() => {
-    //     setState(false);
-    // }, [pathname]);
+    const [state, setState] = React.useState(false);
 
     const toggleClickModalUser = () => {
-        setState(!state);
+        const nextState = !state;
+
+        if (nextState) {
+            dispatch(setHeaderCatalogMenuIsVisible(false));
+        }
+
+        setState(nextState);
     };
 
     const closeModalUser = () => {
         setState(false);
     };
 
-    const togglePopup = (e: any) => {
-        if (PopupRef.current && !PopupRef.current.contains(e.target)) {
-            setState(false);
-        }
-    };
+    useOnClickOutside(PopupRef, closeModalUser);
 
     return (
         <div className="header-block-user" ref={PopupRef}>
