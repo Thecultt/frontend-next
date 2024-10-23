@@ -11,7 +11,7 @@ export const generateUUIDMindbox = () => {
 };
 
 export const sendMindbox = (operation: string, data: any) => {
-    const mindboxDeviceUUID = localStorageService?.getItem(MINDBOX_KEYS.deviceUUID);
+    const mindboxDeviceUUID = localStorage.getItem(MINDBOX_KEYS.deviceUUID);
 
     if (!mindboxDeviceUUID || !MINDBOX_SECRET_KEY) {
         console.error(
