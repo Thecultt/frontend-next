@@ -1,7 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
 
-import { Button } from '@/shared/ui';
+import { Button, BaseImage } from '@/shared/ui';
 import { WaitingPopupType } from '@/types/waiting';
 
 import HomeWaitingBg from '@/assets/images/home/home-waiting-media-bg.jpg';
@@ -13,7 +12,7 @@ const HomeWaitingMedia: React.FC = () => {
     return (
         <div className="home-waiting-media" style={{ backgroundImage: `url(${HomeWaitingBg.src})` }}>
             <div className="home-waiting-media-text">
-                <Image src={HomeWaitingImage} alt="" className="home-waiting-media-text__image" />
+                <BaseImage src={HomeWaitingImage.src} alt="" className="home-waiting-media-text__image" />
 
                 <h2 className="home-waiting-media-text__title">Не нашли аксессуар мечты?</h2>
 
