@@ -1,0 +1,89 @@
+@import "/src/assets/sass/variables"
+@import "/src/assets/sass/mixin"
+
+.home-about
+    display: flex
+
+    margin-bottom: 50px
+
+    overflow: hidden
+
+    +borderRadius
+
+    &-image
+        width: 50%
+        +backgroundSetting
+
+    &-text
+        background-color: $mainColor
+
+        padding: 110px 75px
+
+        width: 50%
+
+        color: $white
+
+        &__title
+            font-size: 26px
+            margin-bottom: 15px
+
+        &__description
+            font-size: 16px
+
+            margin-bottom: 25px
+
+        &__btn
+            width: 225px
+
+            cursor: pointer
+            display: inline-flex
+            align-items: center
+            justify-content: center
+            border: 1px solid $white
+            background-color: transparent
+            border-radius: 9px
+            color: $white
+            padding: 12px 25px
+            font-size: 16px
+
+            will-change: transform
+
+            +transition
+            +ManropeRegular
+
+            &:hover
+                +transformHover
+
+            &:active
+                +transformClick
+
+@media screen and ( max-width: 1200px )
+    .home-about
+        margin: 25px 0
+
+        display: flex
+        align-items: flex-end
+
+        padding: 5px
+
+        height: 500px
+
+        +backgroundSetting
+
+        &-text
+            width: 100%
+            background-color: transparent
+
+            padding: 12px 12px 25px 12px
+
+            &__title
+                font-size: 26px
+
+            &__description
+                font-size: 16px
+                margin-bottom: 0
+
+            &__btn
+                width: 100%
+                background-color: #fff
+                color: #000

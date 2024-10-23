@@ -1,0 +1,75 @@
+@import "/src/assets/sass/variables"
+@import "/src/assets/sass/mixin"
+
+.home-visit
+    display: flex
+    justify-content: space-between
+
+    background-color: $lightBackgroundColor
+
+    overflow: hidden
+
+    margin-bottom: 50px
+
+    +borderRadius
+
+    &-image
+        width: 45%
+
+        +backgroundSetting
+
+    &-text
+        width: 55%
+        padding: 60px
+
+        &__title
+            font-size: 26px
+            margin-bottom: 15px
+
+        &__description
+            font-size: 16px
+            margin-bottom: 25px
+
+        &__btn
+            width: 160px
+
+.home-visit-media
+    display: flex
+    align-items: flex-end
+
+    overflow: hidden
+
+    border-radius: 16px
+
+    padding: 35px 25px
+
+    margin-bottom: 50px
+
+    height: 600px
+
+    +backgroundSetting
+
+    &-text
+        color: $white
+        width: 75%
+
+        &__title
+            font-size: 26px
+            margin-bottom: 15px
+
+        &__description
+            font-size: 14px
+            margin-bottom: 25px
+
+        &__btn
+            width: 160px
+
+@media screen and ( max-width: 500px )
+    .home-visit
+        padding: 12px
+        height: 400px
+
+        margin-bottom: 25px
+
+        &-text
+            width: 100%

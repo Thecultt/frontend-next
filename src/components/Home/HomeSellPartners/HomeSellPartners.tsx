@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { APP_ROUTE } from '@/constants/routes';
 import { CabinetSellTypes } from '@/redux/types/ICabinetSell';
 
+import './styles.sass';
+
 const HomeSellPartners: React.FC = () => (
     <div className="home-sell-partners">
         <div className="home-sell-partners-block hover-scale">

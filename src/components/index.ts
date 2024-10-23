@@ -50,6 +50,11 @@ export { default as HeaderMediaLinkTab } from './Header/HeaderMedia/HeaderMediaL
 // HomeMainBanner
 export { default as HomeMainBanner } from './Home/HomeMainBanner/HomeMainBanner';
 // HomeCategories
+export { default as HomeBrands } from './Home/HomeBrands/HomeBrands';
+export { default as HomeBrandsItem } from './Home/HomeBrands/HomeBrandsItem';
+// HomeConciergeMobile
+export { default as HomeConciergeMobile } from './Home/HomeConciergeMobile/HomeConciergeMobile';
+// HomeCategories
 export { default as HomeCategories } from './Home/HomeCategories/HomeCategories';
 export { default as HomeCategoriesItem } from './Home/HomeCategories/HomeCategoriesItem';
 // HomeVisit
@@ -62,6 +67,8 @@ export { default as HomeSellPartners } from './Home/HomeSellPartners/HomeSellPar
 export { default as HomeAbout } from './Home/HomeAbout/HomeAbout';
 // HomeWaiting
 export { default as HomeWaiting } from './Home/HomeWaiting/HomeWaiting';
+// HomeWaitingMedia
+export { default as HomeWaitingMedia } from './Home/HomeWaitingMedia/HomeWaitingMedia';
 // HomeNewProducts
 export { HomeNewProducts } from './Home/HomeNewProducts/HomeNewProducts';
 

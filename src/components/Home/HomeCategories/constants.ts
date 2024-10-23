@@ -2,6 +2,7 @@ import { getCatalogFiltersUrl } from '@/functions/getCatalogFiltersUrl';
 import { CATEGORY_SLUGS } from '@/constants/catalog';
 
 import HomeCategoriesBagImage from '@/assets/images/home/home-categories-bag.jpg';
+import HomeCategoriesJewelryImage from '@/assets/images/home/home-categories-jewelry.jpg';
 import HomeCategoriesShoesImage from '@/assets/images/home/home-categories-shoes.jpg';
 import HomeCategoriesDecorationImage from '@/assets/images/home/home-categories-decoration.jpg';
 import HomeCategoriesClockImage from '@/assets/images/home/home-categories-clock.jpg';
@@ -22,6 +23,14 @@ export const HOME_CATEGORIES: IHomeCategoriesItem[] = [
             category_slug: CATEGORY_SLUGS.bags,
         }),
     },
+    // TODO jewelry on hold
+    // {
+    //     image: HomeCategoriesJewelryImage.src,
+    //     title: 'Ювелирные изделия',
+    //     url: getCatalogFiltersUrl({
+    //         category_slug: CATEGORY_SLUGS.jewelry,
+    //     }),
+    // },
     {
         image: HomeCategoriesShoesImage.src,
         title: 'Обувь',

@@ -1,14 +1,16 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import Slider from 'react-slick';
 import { useMediaQuery } from 'usehooks-ts';
 
 import { getClassNames } from '@/functions/getClassNames';
 import { MEDIA_SIZES } from '@/constants/styles';
+import { Button } from '@/shared/ui';
 
 import { MAIN_BANNER_SLIDES } from './constants';
+
+import './styles.sass';
 
 const HomeMainBanner: React.FC = () => {
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.mobile})`, { initializeWithValue: false });
@@ -83,15 +85,22 @@ const HomeMainBanner: React.FC = () => {
                                                 : slide.description}
                                         </p>
 
-                                        <Link
+                                        <Button
                                             href={slide.link.href}
+                                            className="home-main-banner-slider-item-text__btn"
+                                            theme="white"
+                                            label={slide.link.title}
+                                            wide
+                                        />
+                                        {/* <Link
+                                            
                                             className={getClassNames('home-main-banner-slider-item-text__btn', {
                                                 white: !!slide.link.isWhite && !isMobile,
                                                 color: !slide.link.isWhite,
                                             })}
                                         >
                                             {slide.link.title}
-                                        </Link>
+                                        </Link> */}
                                     </div>
                                 </div>
                             </div>
