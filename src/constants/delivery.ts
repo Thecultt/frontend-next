@@ -16,19 +16,21 @@ export const DELIVERY_VALUES = {
     global: 'Международная доставка',
 };
 
-export const DELIVERY_ITEM: Record<keyof typeof DELIVERY_VALUES, IDeliveryItem> = {
+type DeliveryItemKeys = 'withFittingMoscow' | 'withoutFittingFree' | 'pickup' | 'russiaFree' | 'sng' | 'global';
+
+export const DELIVERY_ITEM: Record<DeliveryItemKeys, IDeliveryItem> = {
     withFittingMoscow: {
         id: 4,
-        title: DELIVERY_VALUES.withFittingMoscow,
+        title: 'Доставка с примеркой (по Москве)',
         description: `
 				<span style="color: #838383;">Стоимость доставки — бесплатно до&nbsp;13&nbsp;ноября</span>
-				Вы можете заказать доставку лотов(не более 2 сумок или не более 2 пар обуви или 4 аксессуаров) по Москве в пределах МКАД и принять решение о покупке после примерки.Курьер заранее согласует с вами время доставки в промежутке с 11 до 20 с понедельника по воскресенье.Время ожидания курьера во время примерки - 15 минут.
+				Вы можете заказать доставку лотов(не более 2 сумок или не более 2 пар обуви или 4 аксессуаров) по Москве в пределах МКАД и принять решение о покупке после примерки. Курьер заранее согласует с вами время доставки в промежутке с 11 до 20 с понедельника по воскресенье. Время ожидания курьера во время примерки - 15 минут. Оплата возможна наличными или банковской картой.
 			`,
         price: 0,
     },
     withoutFittingFree: {
         id: 2,
-        title: DELIVERY_VALUES.withoutFittingFree,
+        title: 'Бесплатная доставка (без примерки)',
         description: `
 				<span style="color: #838383;">Стоимость доставки — бесплатно</span>
 				Мы бесплатно доставим оплаченный вами заказ по Москве в пределах МКАД. Курьер заранее согласует с вами время доставки в промежутке 11 до 20 с пн по пт. Доставка будет осуществлена в течение 24 часов.
@@ -37,20 +39,20 @@ export const DELIVERY_ITEM: Record<keyof typeof DELIVERY_VALUES, IDeliveryItem> 
     },
     pickup: {
         id: 1,
-        title: DELIVERY_VALUES.pickup,
+        title: 'Самовывоз',
         description: `Самовывоз из офиса осуществляется по адресу: ${CONTACTS.address}, ${CONTACTS.addressTime}. Оплаченный заказ может храниться до 7 дней.`,
         price: 0,
     },
     russiaFree: {
         id: 3,
-        title: DELIVERY_VALUES.russiaFree,
+        title: 'Бесплатная доставка по России',
         description:
             'Мы бесплатно доставим оплаченный вами заказ с помощью курьерской службы СДЭК или Boxberry, срок доставки от 2 дней в зависимости от региона. Примерка для регионов недоступна.',
         price: 0,
     },
     sng: {
         id: 5,
-        title: DELIVERY_VALUES.sng,
+        title: 'Доставка по странам СНГ',
         description: `
 			<span style="color: #838383;">Стоимость доставки — 2000₽</span>
 
@@ -64,7 +66,7 @@ export const DELIVERY_ITEM: Record<keyof typeof DELIVERY_VALUES, IDeliveryItem> 
     },
     global: {
         id: 6,
-        title: DELIVERY_VALUES.global,
+        title: 'Международная доставка',
         description: `
 			<span style="color: #838383;">Стоимость доставки — 6000₽</span>
 
@@ -99,5 +101,7 @@ export const SNG_COUNTRIES = [
     'узбекистан',
     'грузия',
 ];
+
+export const SNG_COUNTRIES_WITH_RU = ['россия', ...SNG_COUNTRIES];
 
 export const GLOBAL_DELIVERY_ITEMS: IDeliveryItem[] = [DELIVERY_ITEM.global];

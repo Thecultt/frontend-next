@@ -6,7 +6,16 @@
     100%
         background-color: $grey3
 
+@keyframes skeletonLoadingDark
+    0%
+        background-color: $grey2
+    100%
+        background-color: $grey4
+
 .tc-skeleton
     width: 100%
     background-color: $grey1
     animation: skeletonLoading 1s linear infinite alternate
+
+    &--dark
+        animation: skeletonLoadingDark 1s linear infinite alternate

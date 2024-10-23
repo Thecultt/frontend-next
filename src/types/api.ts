@@ -1,8 +1,15 @@
 import { Product } from '@/models/IProduct';
 import { ISelection } from '@/models/ISelection';
 
+import { IOrderCreateData } from './order';
+import { Nullable } from './utils';
+
 export interface IStatus {
     status: string;
+}
+
+export interface IMessage {
+    message: string;
 }
 
 export interface IAccessRefreshTokens {
@@ -57,3 +64,29 @@ export interface RegisterResponse extends IAccessRefreshTokens {
 export interface RefreshTokenResponse {
     access: string;
 }
+
+export interface CheckPromoCodeResponse {
+    id: number;
+    card_sum_from: Nullable<number>;
+    discount: number;
+    message: string;
+}
+
+export interface CheckPromoCodeErrorResponse extends IMessage {}
+
+export interface CreateOrderRequest extends IOrderCreateData {
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+    utm_content?: string;
+    utm_term?: string;
+    _ym_uid?: string;
+}
+
+export interface CreateOrderResponse {
+    order_id: number;
+    order_num: string;
+    link?: Nullable<string>;
+}
+
+export interface CreateOrderErrorResponse extends IMessage {}

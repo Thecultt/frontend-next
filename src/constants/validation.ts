@@ -19,6 +19,10 @@ export const YUP_NOT_REQUIRED_STRING = Yup.string()
     .notRequired()
     .max(MAX_INPUT_SYMBOLS, `Не более ${MAX_INPUT_SYMBOLS} символов`);
 
+export const YUP_REQUIRED_MAX_STRING = Yup.string()
+    .required(REQUIRED_VALIDATION_MESSAGE)
+    .max(MAX_INPUT_SYMBOLS, `Не более ${MAX_INPUT_SYMBOLS} символов`);
+
 export const YUP_REQUIRED_MIN_MAX_STRING = Yup.string()
     .required(REQUIRED_VALIDATION_MESSAGE)
     .min(MIN_INPUT_SYMBOLS, `Не менее ${MIN_INPUT_SYMBOLS} символов`)
@@ -42,3 +46,7 @@ export const YUP_PASSWORD = Yup.string()
     .matches(PASSWORD_REGEXP, 'Пароль не может содержать кириллицу или пробелы');
 
 export const YUP_REQUIRED_CHECKBOX = Yup.boolean().oneOf([true], REQUIRED_VALIDATION_MESSAGE);
+
+export const YUP_REQUIRED_NUMBER = Yup.number()
+    .required(REQUIRED_VALIDATION_MESSAGE)
+    .min(1, REQUIRED_VALIDATION_MESSAGE);

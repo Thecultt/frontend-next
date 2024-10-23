@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
 import { isUndefined } from '@/functions/isUndefined';
+import { STORAGE_PREFIX } from '@/constants/keys';
 
 interface IStorageItem<T> {
     value: T;
@@ -13,7 +14,7 @@ export interface IStorageExpiredOptions {
 }
 
 class StorageService {
-    private _prefix = 'tc_';
+    private _prefix = STORAGE_PREFIX;
 
     constructor(protected readonly storage: Storage) {}
 
@@ -91,4 +92,5 @@ class StorageService {
 }
 
 export const localStorageService = typeof window !== 'undefined' ? new StorageService(window.localStorage) : undefined;
-// export const sessionStorageService = new StorageService(window.sessionStorage);
+export const sessionStorageService =
+    typeof window !== 'undefined' ? new StorageService(window.sessionStorage) : undefined;
