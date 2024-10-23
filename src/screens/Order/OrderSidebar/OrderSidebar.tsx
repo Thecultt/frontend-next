@@ -1,16 +1,19 @@
 'use client';
 
 import React from 'react';
-import { useFormikContext } from 'formik';
 
-import { Button } from '@/shared/ui';
+import { OrderCart } from './OrderCart/OrderCart';
+import { OrderPromoCode } from './OrderPromoCode/OrderPromoCode';
+import { OrderSummary } from './OrderSummary/OrderSummary';
+import { OrderSubmit } from './OrderSubmit/OrderSubmit';
 
-export const OrderSidebar = () => {
-    const { submitForm } = useFormikContext();
+import './styles.sass';
 
-    return (
-        <div>
-            <Button label="Click" onClick={submitForm} />
-        </div>
-    );
-};
+export const OrderSidebar = () => (
+    <div className="order-sidebar">
+        <OrderCart />
+        <OrderPromoCode />
+        <OrderSummary />
+        <OrderSubmit />
+    </div>
+);

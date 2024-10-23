@@ -4,7 +4,6 @@ import $api from '@/http';
 import { ProductPage } from '@/models/IProduct';
 import { CartItem } from '@/models/ICartItem';
 import { sendMindbox } from '@/functions/mindbox';
-import { localStorageService } from '@/services/storage';
 import { pushDataLayer } from '@/functions/pushDataLayer';
 
 import { CartActionTypes, CartActions, ICartItemsState } from '../types/ICart';
@@ -134,7 +133,7 @@ export const removeCartItem = (item: CartItem, email?: string) => {
 
     sendMindbox('Website.ClearCart', {
         customer: {
-            email: email ? email : '',
+            email: email ?? '',
         },
         removeProductFromList: {
             product: {

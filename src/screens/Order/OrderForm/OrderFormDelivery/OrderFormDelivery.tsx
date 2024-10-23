@@ -22,6 +22,9 @@ import { isMoscow, isRussia } from '@/functions/locations';
 
 import { IOrderFormValues } from '../../types';
 
+const needChangeDelivery = (initialDelivery: number, items: IDeliveryItem[]) =>
+    !items.map((item) => item.id).includes(initialDelivery);
+
 export const OrderFormDelivery = () => {
     const { values, initialValues, setFieldValue } = useFormikContext<IOrderFormValues>();
     const { isLoggedIn } = useAuthUser();
@@ -32,31 +35,39 @@ export const OrderFormDelivery = () => {
     const currentCityLowerCase = values.city.toLocaleLowerCase();
 
     React.useEffect(() => {
-        if (!currentCountryLowerCase || !currentCityLowerCase) {
+        if (!currentCountryLowerCase) {
             return;
         }
 
         if (isRussia(currentCountryLowerCase)) {
             if (isMoscow(currentCityLowerCase)) {
                 setDeliveryItems(RUSSIA_MOSCOW_DELIVERY_ITEMS);
-                setFieldValue('delivery', DELIVERY_ITEM.pickup.id);
+                if (needChangeDelivery(initialValues.delivery, RUSSIA_MOSCOW_DELIVERY_ITEMS)) {
+                    setFieldValue('delivery', DELIVERY_ITEM.pickup.id);
+                }
                 return;
             }
 
             setDeliveryItems(RUSSIA_DELIVERY_ITEMS);
-            setFieldValue('delivery', DELIVERY_ITEM.russiaFree.id);
+            if (needChangeDelivery(initialValues.delivery, RUSSIA_DELIVERY_ITEMS)) {
+                setFieldValue('delivery', DELIVERY_ITEM.russiaFree.id);
+            }
             return;
         }
 
         if (SNG_COUNTRIES.includes(currentCountryLowerCase)) {
             setDeliveryItems(SNG_DELIVERY_ITEMS);
-            setFieldValue('delivery', DELIVERY_ITEM.sng.id);
+            if (needChangeDelivery(initialValues.delivery, SNG_DELIVERY_ITEMS)) {
+                setFieldValue('delivery', DELIVERY_ITEM.sng.id);
+            }
             return;
         }
 
         if (!SNG_COUNTRIES_WITH_RU.includes(currentCountryLowerCase)) {
             setDeliveryItems(GLOBAL_DELIVERY_ITEMS);
-            setFieldValue('delivery', DELIVERY_ITEM.global.id);
+            if (needChangeDelivery(initialValues.delivery, GLOBAL_DELIVERY_ITEMS)) {
+                setFieldValue('delivery', DELIVERY_ITEM.global.id);
+            }
             return;
         }
     }, [currentCountryLowerCase, currentCityLowerCase]);

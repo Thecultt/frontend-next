@@ -70,3 +70,9 @@ export const PAYMENT_ITEMS: IPaymentItem[] = [
     PAYMENT_ITEM.installmentTinkoff,
     PAYMENT_ITEM.creditTinkoff,
 ];
+
+export const PROMOCODE_NOT_AVAILABLE_PAYMENTS = [
+    PAYMENT_ITEM.installmentTinkoff.id,
+    PAYMENT_ITEM.creditTinkoff.id,
+    PAYMENT_ITEM.yandexSplit.id,
+];

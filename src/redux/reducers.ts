@@ -5,6 +5,7 @@ import auth from './slices/auth/slice';
 import selections from './slices/selections/slice';
 import user from './slices/user/slice';
 import catalog from './slices/catalog/slice';
+import orderNew from './slices/order/slice';
 
 import products_filters from './reducers/products_filters';
 import products from './reducers/products';
@@ -30,6 +31,7 @@ export const rootReducer = combineReducers({
     auth,
     selections,
     catalog,
+    orderNew,
 
     products_filters,
     products,

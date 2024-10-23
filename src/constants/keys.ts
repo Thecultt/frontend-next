@@ -39,4 +39,5 @@ export const SEARCH_PARAMS_KEYS = {
     id: 'id',
     redirect: 'redirect',
     code: 'code',
+    type: 'type',
 };
