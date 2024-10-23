@@ -228,8 +228,18 @@
 
 	transition: background-color .2s ease
 
+	& svg
+		fill: $black !important
+
 	&--transparent
 		background-color: rgba($backgroundColor, 0)
+
+	&--white
+		& svg
+			fill: $white !important
+
+	&--white &-icon.menu svg
+		stroke: $white !important
 
 	&-wrapper
 		width: 100%
@@ -250,6 +260,10 @@
 		height: 28px
 		+flexCenter
 		flex-shrink: 0
+
+		&.menu
+			& svg
+				stroke: $black !important
 
 		&__count
 			cursor: pointer

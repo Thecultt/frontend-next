@@ -30,7 +30,7 @@ import { HeaderCatalogMenu } from './HeaderCatalogMenu/HeaderCatalogMenu';
 const Header: React.FC = () => {
     const dispatch = useDispatch();
 
-    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`, { initializeWithValue: false });
 
     const pathname = usePathname();
     const router = useRouter();
@@ -211,7 +211,10 @@ const Header: React.FC = () => {
                     </>
                 ) : (
                     <HeaderMedia
-                        transparent={pathname.startsWith(APP_ROUTE.product)}
+                        transparent={
+                            (isMobile && pathname === APP_ROUTE.home) || pathname.startsWith(APP_ROUTE.product)
+                        }
+                        white={isMobile && pathname === APP_ROUTE.home}
                         isOpenSearch={isOpenSearch}
                         setIsOpenSearch={setIsOpenSearch}
                     />

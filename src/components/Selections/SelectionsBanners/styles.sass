@@ -6,7 +6,7 @@
     margin: 50px 0
 
     @media screen and (max-width: 1200px)
-        margin: 25px 0
+        margin: 20px 0
 
 .selections-banners-bestsellers
     width: 100%
@@ -104,7 +104,7 @@
 
     @media screen and (max-width: 1200px)
         width: 50%
-        min-width: 256px
+        min-width: 330px
         flex-direction: column
 
     &__cover
@@ -181,8 +181,9 @@
         box-shadow: none
         flex-direction: column-reverse
         align-items: center
-        padding: 8px
+        padding: 0
         border-radius: 24px
+        background-color: transparent
 
     &__bookmark
         position: absolute
@@ -190,8 +191,7 @@
         left: 66px
 
         @media screen and (max-width: 1200px)
-            left: unset
-            right: 10px
+            display: none
 
     &__content
         width: 100%
@@ -201,8 +201,8 @@
 
         @media screen and (max-width: 1200px)
             padding: 0
-            align-items: center
-            text-align: center
+            align-items: flex-start
+            text-align: left
 
     &__title
         +ManropeSemiBold
@@ -212,9 +212,9 @@
         margin-bottom: 16px
 
         @media screen and (max-width: 1200px)
+            font-size: 16px
+            line-height: 19px
             margin-bottom: 8px
-            font-size: 20px
-            line-height: 26px
 
     &__description
         +ManropeRegular
@@ -224,8 +224,8 @@
         margin-bottom: 66px
 
         @media screen and (max-width: 1200px)
-            margin-bottom: 16px
             font-size: 14px
+            margin-bottom: 0
 
     &__cover
         width: 345px
@@ -237,9 +237,9 @@
         background-repeat: no-repeat
 
         @media screen and (max-width: 1200px)
-            width: 170px
-            height: 170px
-            border-radius: 50%
+            width: 100%
+            height: 175px
+            border-radius: 12px
             overflow: hidden
             margin-bottom: 8px
 
@@ -247,7 +247,7 @@
         width: fit-content
 
         @media screen and (max-width: 1200px)
-            width: 100%
+            display: none
 
 .selection-it-bags-banner
     &__cover

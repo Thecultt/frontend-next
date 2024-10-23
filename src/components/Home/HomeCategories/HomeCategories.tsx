@@ -1,46 +1,51 @@
 'use client';
 
 import React from 'react';
-import Slider from 'react-slick';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
 import { HomeCategoriesItem } from '@/components';
+import { MEDIA_SIZES_NUMBERS } from '@/constants/styles';
+
 import { HOME_CATEGORIES } from './constants';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import 'swiper/css';
+
+import './styles.sass';
 
 const HomeCategories: React.FC = () => {
-    const SliderRef = React.useRef<any>(null);
-
-    const settings = {
-        arrows: false,
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                },
-            },
-        ],
-    };
+    const sliderRef = React.useRef<SwiperRef>(null);
 
     const onClickPrev = () => {
-        SliderRef.current.slickPrev();
+        sliderRef.current?.swiper.slidePrev();
     };
 
     const onClickNext = () => {
-        SliderRef.current.slickNext();
+        sliderRef.current?.swiper.slideNext();
     };
 
     return (
-        <div className="home-categories-wrapper">
+        <div className="home-categories">
             <h3 className="home-categories__title">Категории</h3>
+
+            <Swiper
+                ref={sliderRef}
+                className="home-categories-slider"
+                slidesPerView={4}
+                spaceBetween={8}
+                breakpoints={{
+                    [MEDIA_SIZES_NUMBERS.tablet]: {
+                        slidesPerView: 5,
+                        spaceBetween: 16,
+                    },
+                }}
+                loop
+            >
+                {HOME_CATEGORIES.map((category, index) => (
+                    <SwiperSlide key={index}>
+                        <HomeCategoriesItem {...category} key={`home-categories-slider-item-${index}`} />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
 
             <button className="home-categories-arrow prev" onClick={onClickPrev}>
                 <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,12 +58,6 @@ const HomeCategories: React.FC = () => {
                     />
                 </svg>
             </button>
-
-            <Slider {...settings} className="home-categories" ref={SliderRef}>
-                {HOME_CATEGORIES.map((category, index) => (
-                    <HomeCategoriesItem {...category} key={`home-categories-item-${index}`} />
-                ))}
-            </Slider>
 
             <button className="home-categories-arrow next" onClick={onClickNext}>
                 <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">

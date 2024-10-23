@@ -5,6 +5,8 @@ import { WaitingPopupType } from '@/types/waiting';
 
 import HomeWaitingImage from '@/assets/images/home/home-waiting.jpg';
 
+import './styles.sass';
+
 const HomeWaiting: React.FC = () => (
     <div className="home-waiting hover-scale">
         <div className="home-waiting-text">

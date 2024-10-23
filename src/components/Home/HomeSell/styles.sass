@@ -1,0 +1,76 @@
+@import "/src/assets/sass/variables"
+@import "/src/assets/sass/mixin"
+
+.home-sell
+    display: flex
+    justify-content: space-between
+
+    background-color: $lightBackgroundColor
+
+    overflow: hidden
+
+    margin-bottom: 50px
+
+    +borderRadius
+
+    &-image
+        width: 50%
+
+        +backgroundSetting
+
+    &-text
+        width: 50%
+        padding: 60px 25px 60px 50px
+
+        &__title
+            font-size: 26px
+            margin-bottom: 15px
+
+        &__subtitle
+            font-size: 22px
+
+            margin-bottom: 10px
+
+            +ManropeSemiBold
+
+        &__description
+            font-size: 16px
+            margin-bottom: 25px
+
+        &__btn
+            width: 300px
+
+@media screen and ( max-width: 1200px )
+    .home-sell
+        flex-direction: column
+
+        padding: 25px 15px
+
+        margin-bottom: 25px
+
+        &-image
+            display: none
+
+        &-text
+            width: 100%
+            padding: 0
+
+            &__title
+                font-size: 18px
+
+            &__description
+                font-size: 12px
+                margin-bottom: 15px
+
+            &__btn
+                display: inline-block
+                width: auto
+
+                background-color: transparent
+                padding: 0
+                color: $mainColor
+                font-size: 15px
+                border: none
+
+                text-decoration: underline
+                text-underline-offset: 2px

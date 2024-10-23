@@ -7,6 +7,8 @@ import { APP_ROUTE } from '@/constants/routes';
 import HomeSellImage from '@/assets/images/home/home-sell.jpg';
 import { pushDataLayer } from '@/functions/pushDataLayer';
 
+import './styles.sass';
+
 const HomeSell: React.FC = () => (
     <div className="home-sell hover-scale">
         <div
