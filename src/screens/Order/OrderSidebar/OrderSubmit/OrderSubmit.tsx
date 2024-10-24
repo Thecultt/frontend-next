@@ -224,7 +224,7 @@ export const OrderSubmit = () => {
 
         if (errorKeys.length > 0) {
             document
-                .querySelector(`input[name="${errorKeys[0]}"]`)
+                .querySelector(`.order-form input[name="${errorKeys[0]}"]`)
                 ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
