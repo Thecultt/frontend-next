@@ -1,29 +1,25 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useOnClickOutside } from 'usehooks-ts';
 
 import { HeaderCartModal, HeaderCartModalAddMessage } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
 import { useCart } from '@/hooks/catalog/useCart';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { setCartIsVisibleMessage } from '@/redux/actions/cart';
+import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { setHeaderCartIsVisible, setHeaderCatalogMenuIsVisible } from '@/redux/actions/header';
+import { setCartIsVisibleMessage } from '@/redux/slices/cart/slice';
 
-const HeaderCart: React.FC = React.memo(() => {
-    const dispatch = useDispatch();
+const HeaderCart: React.FC = () => {
+    const dispatch = useAppDispatch();
 
     const PopupRef = React.useRef<HTMLDivElement>(null);
 
     const { cartIsVisible } = useTypedSelector(({ header }) => header);
 
-    const { allCart, isVisibleMessage } = useCart();
+    const { allCart } = useCart();
     const cartCount = allCart.length;
-
-    const closeIsVisibleMessage = () => {
-        dispatch(setCartIsVisibleMessage(false));
-    };
 
     const toggleClickModalCart = () => {
         const nextCartIsVisible = !cartIsVisible;
@@ -49,6 +45,7 @@ const HeaderCart: React.FC = React.memo(() => {
         <div className="header-block-cart-wrapper" ref={PopupRef}>
             <div className="header-block-cart" onClick={toggleClickModalCart}>
                 <button
+                    type="button"
                     className={getClassNames('header-block-cart__icon', {
                         active: cartIsVisible,
                     })}
@@ -62,10 +59,10 @@ const HeaderCart: React.FC = React.memo(() => {
                 {cartCount > 0 && <span className="header-block-cart__count">{cartCount}</span>}
             </div>
 
-            <HeaderCartModalAddMessage state={isVisibleMessage} setState={closeIsVisibleMessage} />
+            <HeaderCartModalAddMessage />
             <HeaderCartModal />
         </div>
     );
-});
+};
 
 export default HeaderCart;

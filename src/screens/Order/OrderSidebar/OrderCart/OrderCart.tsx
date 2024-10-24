@@ -3,19 +3,15 @@
 import React from 'react';
 import isEqual from 'lodash.isequal';
 
-import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { useOrder } from '@/hooks/order/useOrder';
-import { useAuthUser } from '@/hooks/useAuthUser';
+import { useCart } from '@/hooks/catalog/useCart';
 import { Checkbox } from '@/shared/ui';
 import { CartProductItem } from '@/components';
-import { changeCheckCartItem, checkAvailabilityCartItems, removeCartItem } from '@/redux/actions/cart';
 
 import './styles.sass';
 
 export const OrderCart = () => {
-    const dispatch = useAppDispatch();
-
-    const { user } = useAuthUser();
+    const { toggleChecked, removeFromCart, checkAvailabilityCart } = useCart();
     const { cartItems, availableCartItems, checkedCartItems } = useOrder();
 
     const isCheckedAll =
@@ -29,30 +25,19 @@ export const OrderCart = () => {
     const checkAllItems = () => {
         availableCartItems.forEach((item) => {
             if (!item.checked) {
-                dispatch(changeCheckCartItem(item.article, true));
+                toggleChecked(item.article);
             }
         });
     };
 
     const uncheckAllItems = () => {
         checkedCartItems.forEach((item) => {
-            dispatch(changeCheckCartItem(item.article, false));
+            toggleChecked(item.article);
         });
     };
 
-    const changeCheck = (article: string, status: boolean) => {
-        dispatch(changeCheckCartItem(article, status));
-    };
-
-    const removeItem = (article: string) => {
-        const item = cartItems.find((item) => item.article === article);
-        if (item) {
-            dispatch(removeCartItem(item, user.email));
-        }
-    };
-
     React.useEffect(() => {
-        dispatch(checkAvailabilityCartItems(cartItems));
+        checkAvailabilityCart(cartItems);
     }, []);
 
     return (
@@ -77,8 +62,8 @@ export const OrderCart = () => {
                         key={item.id}
                         data={item}
                         removeDisabled={cartItems.length === 1 && !!item.availability && !item.is_trial}
-                        onCheck={() => changeCheck(item.article, !item.checked)}
-                        onRemove={() => removeItem(item.article)}
+                        onCheck={() => toggleChecked(item.article)}
+                        onRemove={() => removeFromCart(item.article)}
                     />
                 ))}
             </div>

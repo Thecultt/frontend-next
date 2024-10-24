@@ -1,41 +1,39 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { useDispatch } from 'react-redux';
 
-import { removeCartItem } from '@/redux/actions/cart';
-import { CartProductItem } from '@/components';
 import { getClassNames } from '@/functions/getClassNames';
+import { getUrlWithParams } from '@/functions/getUrlWithParams';
 import { CartItem } from '@/models/ICartItem';
 import { APP_ROUTE } from '@/constants/routes';
-import { XIcon } from '@/assets/icons';
-import { Noop } from '@/types/functions';
-import { useAuthUser } from '@/hooks/useAuthUser';
 import { useCart } from '@/hooks/catalog/useCart';
+import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { setHeaderCartIsVisible } from '@/redux/actions/header';
-import { getUrlWithParams } from '@/functions/getUrlWithParams';
+import { setCartIsVisibleMessage } from '@/redux/slices/cart/slice';
+import { CartProductItem } from '@/components';
+import { XIcon } from '@/assets/icons';
+import { Button } from '@/shared/ui';
 
-interface HeaderCartModalAddMessageProps {
-    state: boolean;
-    setState: Noop;
-}
+const HeaderCartModalAddMessage: React.FC = () => {
+    const dispatch = useAppDispatch();
 
-const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ state, setState }) => {
-    const dispatch = useDispatch();
+    const { allCart, isVisibleMessage, removeFromCart } = useCart();
+    const item: CartItem | undefined = allCart.slice(-1)[0];
 
-    const {
-        user: { email },
-    } = useAuthUser();
-    const { allCart } = useCart();
-    const item: CartItem | undefined = allCart[allCart.length - 1];
-
-    const removeItem = (item: CartItem) => {
-        dispatch(removeCartItem(item, email));
+    const closeIsVisibleMessage = () => {
+        dispatch(setCartIsVisibleMessage(false));
     };
 
-    const openCart = () => {
-        dispatch(setHeaderCartIsVisible(true));
+    const handleRemoveItem = (item: CartItem) => {
+        closeIsVisibleMessage();
+        removeFromCart(item.article);
+    };
+
+    const seeAllCart = () => {
+        closeIsVisibleMessage();
+        setTimeout(() => {
+            dispatch(setHeaderCartIsVisible(true));
+        }, 200);
     };
 
     if (!item) {
@@ -45,47 +43,31 @@ const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ s
     return (
         <div
             className={getClassNames('header-block-cart-modal', {
-                active: state,
+                active: isVisibleMessage,
             })}
         >
             <div className="header-block-cart-modal__header">
                 <p className="header-block-cart-modal__title">Добавлено:</p>
-                <button type="button" className="header-block-cart-modal__close" onClick={setState}>
+                <button type="button" className="header-block-cart-modal__close" onClick={closeIsVisibleMessage}>
                     <XIcon />
                 </button>
             </div>
 
             <div className="header-block-cart-modal__items">
-                {item && (
-                    <CartProductItem
-                        key={item.id}
-                        data={item}
-                        onRemove={() => {
-                            setState();
-                            setTimeout(() => {
-                                removeItem(item);
-                            }, 300);
-                        }}
-                        checkDisabled
-                    />
-                )}
+                <CartProductItem key={item.id} data={item} onRemove={() => handleRemoveItem(item)} checkDisabled />
             </div>
 
             <div className="header-block-cart-modal__more">
-                <button
-                    type="button"
-                    className="btn-regular gray header-block-cart-modal__more-btn"
-                    onClick={() => {
-                        setState();
-                        setTimeout(() => {
-                            openCart();
-                        }, 300);
-                    }}
-                >
-                    Посмотреть всё
-                </button>
+                <Button
+                    label="Посмотреть всё"
+                    className="header-block-cart-modal__more-btn"
+                    onClick={seeAllCart}
+                    theme="light"
+                    wide
+                />
 
-                <Link
+                <Button
+                    label="Оформить"
                     href={
                         !item.is_jewelry
                             ? APP_ROUTE.order
@@ -93,13 +75,10 @@ const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ s
                                   type: 'jewelry',
                               })
                     }
-                    className="btn header-block-cart-modal__more-btn"
-                    onClick={setState}
-                    scroll={false}
-                    prefetch={false}
-                >
-                    Оформить
-                </Link>
+                    className="header-block-cart-modal__more-btn"
+                    onClick={closeIsVisibleMessage}
+                    wide
+                />
             </div>
         </div>
     );
