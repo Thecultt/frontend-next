@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Button, BaseImage } from '@/shared/ui';
 import { WaitingPopupType } from '@/types/waiting';
+import { useHash } from '@/hooks/useHash';
 
 import HomeWaitingBg from '@/assets/images/home/home-waiting-media-bg.jpg';
 import HomeWaitingImage from '@/assets/images/home/home-waiting-media-image.jpg';
@@ -9,6 +10,8 @@ import HomeWaitingImage from '@/assets/images/home/home-waiting-media-image.jpg'
 import './styles.sass';
 
 const HomeWaitingMedia: React.FC = () => {
+    const { changeHash } = useHash();
+
     return (
         <div className="home-waiting-media" style={{ backgroundImage: `url(${HomeWaitingBg.src})` }}>
             <div className="home-waiting-media-text">
@@ -21,7 +24,12 @@ const HomeWaitingMedia: React.FC = () => {
                 </p>
             </div>
 
-            <Button href={`#${WaitingPopupType.Form}`} theme="white" label="Подписаться и быть в курсе" wide />
+            <Button
+                theme="white"
+                label="Подписаться и быть в курсе"
+                onClick={() => changeHash(WaitingPopupType.Form)}
+                wide
+            />
         </div>
     );
 };
