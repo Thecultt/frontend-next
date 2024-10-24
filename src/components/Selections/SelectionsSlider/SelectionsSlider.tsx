@@ -37,7 +37,7 @@ export const SelectionsSlider = () => {
         <div className="selections-slider">
             <Link
                 href={getCatalogFiltersUrl({
-                    selection: SELECTIONS_IDS.summerBags.toString(),
+                    selection: SELECTIONS_IDS.autumnBags.toString(),
                 })}
                 className="selections-slider__title"
             >
