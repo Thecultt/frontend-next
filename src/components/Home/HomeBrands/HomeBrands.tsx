@@ -25,25 +25,27 @@ const HomeBrands: React.FC = () => {
                 <ChevronRightIcon width={18} height={18} />
             </Link>
 
-            <Swiper
-                ref={sliderRef}
-                className="home-brands-slider"
-                slidesPerView={4}
-                spaceBetween={8}
-                breakpoints={{
-                    [MEDIA_SIZES_NUMBERS.tablet]: {
-                        slidesPerView: 5,
-                        spaceBetween: 16,
-                    },
-                }}
-                loop
-            >
-                {HOME_BRANDS.map((brand, index) => (
-                    <SwiperSlide key={index}>
-                        <HomeBrandsItem {...brand} key={`home-brands-slider-item-${index}`} />
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+            <div className="home-brands-slider-wrapper">
+                <Swiper
+                    className="home-brands-slider"
+                    ref={sliderRef}
+                    slidesPerView={4}
+                    spaceBetween={8}
+                    breakpoints={{
+                        [MEDIA_SIZES_NUMBERS.tablet]: {
+                            slidesPerView: 5,
+                            spaceBetween: 16,
+                        },
+                    }}
+                    loop
+                >
+                    {HOME_BRANDS.map((brand, index) => (
+                        <SwiperSlide key={index}>
+                            <HomeBrandsItem {...brand} key={`home-brands-slider-item-${index}`} />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
         </div>
     );
 };

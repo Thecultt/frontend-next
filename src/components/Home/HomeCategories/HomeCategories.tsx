@@ -27,25 +27,27 @@ const HomeCategories: React.FC = () => {
         <div className="home-categories">
             <h3 className="home-categories__title">Категории</h3>
 
-            <Swiper
-                ref={sliderRef}
-                className="home-categories-slider"
-                slidesPerView={4}
-                spaceBetween={8}
-                breakpoints={{
-                    [MEDIA_SIZES_NUMBERS.tablet]: {
-                        slidesPerView: 5,
-                        spaceBetween: 16,
-                    },
-                }}
-                loop
-            >
-                {HOME_CATEGORIES.map((category, index) => (
-                    <SwiperSlide key={index}>
-                        <HomeCategoriesItem {...category} key={`home-categories-slider-item-${index}`} />
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+            <div className="home-categories-slider-wrapper">
+                <Swiper
+                    className="home-categories-slider"
+                    ref={sliderRef}
+                    slidesPerView={4}
+                    spaceBetween={8}
+                    breakpoints={{
+                        [MEDIA_SIZES_NUMBERS.tablet]: {
+                            slidesPerView: 5,
+                            spaceBetween: 16,
+                        },
+                    }}
+                    loop
+                >
+                    {HOME_CATEGORIES.map((category, index) => (
+                        <SwiperSlide key={index}>
+                            <HomeCategoriesItem {...category} key={`home-categories-slider-item-${index}`} />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
 
             <button className="home-categories-arrow prev" onClick={onClickPrev}>
                 <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
