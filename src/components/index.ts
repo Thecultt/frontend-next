@@ -16,11 +16,6 @@ export { default as Select } from './UI/Select';
 export { default as Textarea } from './UI/Textarea';
 export { BackButton } from './UI/BackButton';
 
-// Notifications
-export { default as NotificationsServer } from './UI/NotificationsServer/NotificationsServer';
-export { default as NotificationsServerError } from './UI/NotificationsServer/NotificationsServerError';
-export { default as NotificationsServerSuccess } from './UI/NotificationsServer/NotificationsServerSuccess';
-
 // MenuMedia
 export { default as MenuMedia } from './MenuMedia/MenuMedia';
 

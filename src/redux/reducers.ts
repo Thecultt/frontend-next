@@ -20,7 +20,6 @@ import history_orders from './reducers/history_orders';
 import vipservice from './reducers/vipservice';
 import subscribe_email from './reducers/subscribe_email';
 import public_favorites from './reducers/public_favorites';
-import notifications_server from './reducers/notifications_server';
 import concierge from './reducers/concierge';
 import cinema_artistic from './reducers/cinema_artistic';
 import popup_info from './reducers/popup_info';
@@ -47,7 +46,6 @@ export const rootReducer = combineReducers({
     vipservice,
     subscribe_email,
     public_favorites,
-    notifications_server,
     concierge,
     cinema_artistic,
     popup_info,
