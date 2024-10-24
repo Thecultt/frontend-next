@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 import {
@@ -7,18 +9,16 @@ import {
     CabinetSettingFormPayment,
 } from '@/components/';
 
-const CabinetSettingForm: React.FC = () => {
-    return (
-        <>
-            {/* <CabinetSettingPasswordRecovery /> */}
-            {/* <CabinetSettingPaymentBlock onSubmit={onSubmit} /> */}
+const CabinetSettingForm: React.FC = () => (
+    <>
+        {/* <CabinetSettingPasswordRecovery /> */}
+        {/* <CabinetSettingPaymentBlock onSubmit={onSubmit} /> */}
 
-            <CabinetSettingFormInfo />
-            <CabinetSettingFormContact />
-            <CabinetSettingFormAddress />
-            <CabinetSettingFormPayment />
-        </>
-    );
-};
+        <CabinetSettingFormInfo />
+        <CabinetSettingFormContact />
+        <CabinetSettingFormAddress />
+        <CabinetSettingFormPayment />
+    </>
+);
 
 export default CabinetSettingForm;

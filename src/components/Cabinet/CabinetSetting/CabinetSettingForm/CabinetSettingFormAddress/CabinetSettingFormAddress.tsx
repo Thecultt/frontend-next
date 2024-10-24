@@ -1,14 +1,12 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Form, Formik } from 'formik';
 
 import { getClassNames } from '@/functions/getClassNames';
 import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { updateClientAttributes } from '@/redux/slices/user/asyncActions';
-import { setIsNotificationServerError, setIsNotificationServerSuccess } from '@/redux/actions/notifications_server';
 import { FormikDadataCountryInput, FormikDadataAddressInput, FormikInput, FormikTextarea } from '@/shared/form';
 import { CabinetSettingFormEditButtons } from '@/components';
 
@@ -17,8 +15,7 @@ import { INITIAL_VALUES } from './constants';
 import { SCHEMA } from './validate';
 
 const CabinetSettingFormAddress: React.FC = () => {
-    const dispatch = useDispatch();
-    const appDispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
 
     const [isEdit, setIsEdit] = React.useState(false);
     const { user, updateIsLoading } = useAuthUser();
@@ -26,16 +23,10 @@ const CabinetSettingFormAddress: React.FC = () => {
     const formIsDisabled = !isEdit || updateIsLoading;
 
     const handleSubmit = (data: ICabinetSettingFormAddressValues) => {
-        appDispatch(updateClientAttributes(data))
+        dispatch(updateClientAttributes(data))
             .unwrap()
             .then(() => {
-                // TODO - Вынести в slice
-                dispatch(setIsNotificationServerSuccess(true, 'Изменения сохранены успешно') as any);
                 setIsEdit(false);
-            })
-            .catch(() => {
-                // TODO - Вынести в slice
-                dispatch(setIsNotificationServerError(true, 'Не удалось сохранить изменения') as any);
             });
     };
 
