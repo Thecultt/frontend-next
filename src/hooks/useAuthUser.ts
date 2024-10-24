@@ -15,6 +15,7 @@ import { useLS } from './useLS';
 
 export const useAuthUser = () => {
     const [accessToken, _setAccessToken, removeAccessToken] = useLS<string | null>(LS_KEYS.accessToken, null);
+    const [_refreshToken, _setRefreshToken, removeRefreshToken] = useLS<string | null>(LS_KEYS.refreshToken, null);
 
     const userState = useAppSelector(selectUser);
     const isLoaded = useAppSelector(selectUserIsLoaded);
@@ -23,6 +24,7 @@ export const useAuthUser = () => {
 
     const logout = useCallback(() => {
         removeAccessToken();
+        removeRefreshToken();
         window.location.reload();
     }, []);
 

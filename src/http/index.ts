@@ -8,6 +8,11 @@ import { APP_ROUTE } from '@/constants/routes';
 import { API_DOMAIN } from '@/constants/env';
 import { authAPI } from '@/services/api';
 
+const clearTokens = () => {
+    localStorageService?.removeItem(LS_KEYS.accessToken);
+    localStorageService?.removeItem(LS_KEYS.refreshToken);
+};
+
 const $api = axios.create({
     baseURL: API_DOMAIN,
     withCredentials: false,
@@ -29,28 +34,28 @@ $api.interceptors.response.use(
                 store.dispatch(setIsNotificationServerError(true, 'Ошибка сервера') as any);
             }
 
-            if (error.response.status == 401 && error.config && !error.config._isRetry) {
+            if (error.response.status == 401 && !originalRequest._isRetry) {
                 originalRequest._isRetry = true;
 
                 try {
                     const refresh = localStorageService?.getItem<string>(LS_KEYS.refreshToken);
 
-                    if (refresh) {
-                        const { data } = await authAPI.refreshToken(refresh);
-                        localStorageService?.setItem(LS_KEYS.accessToken, data.access);
+                    if (!refresh) {
+                        throw new Error('Refresh token not found');
+                    }
 
-                        return $api.request(originalRequest);
-                    }
+                    const { data } = await authAPI.refreshToken(refresh);
+                    localStorageService?.setItem(LS_KEYS.accessToken, data.access);
+
+                    return $api.request(originalRequest);
                 } catch (e) {
-                    if (localStorageService?.hasItem(LS_KEYS.accessToken)) {
-                        localStorageService?.removeItem(LS_KEYS.accessToken);
-                        window.location.href = APP_ROUTE.home;
-                    }
+                    clearTokens();
+                    window.location.href = APP_ROUTE.home;
                 }
             }
         }
 
-        throw error;
+        return Promise.reject(error);
     },
 );
 

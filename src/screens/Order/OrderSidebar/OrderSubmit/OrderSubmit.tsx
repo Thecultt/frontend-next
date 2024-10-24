@@ -192,6 +192,10 @@ export const OrderSubmit = () => {
     };
 
     const updateUser = () => {
+        if (!isLoggedIn) {
+            return;
+        }
+
         const splitName = values.name.split(' ');
         const lastname = splitName[0];
         const name = splitName[1];
