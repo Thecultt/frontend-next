@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { XIcon } from '@/assets/icons';
-import { getClassNames } from '@/functions/getClassNames';
+import { DEFAULT_TRANSITION } from '@/constants/animation';
 import { pushDataLayer } from '@/functions/pushDataLayer';
 import { useCart } from '@/hooks/catalog/useCart';
 import { CartList, CartNull } from '@/components';
@@ -43,30 +44,44 @@ const HeaderCartModal: React.FC = () => {
     }, [cartIsVisible]);
 
     return (
-        <div
-            className={getClassNames('header-block-cart-modal', {
-                active: cartIsVisible,
-            })}
-        >
-            <div className="header-block-cart-modal__header">
-                <p className="header-block-cart-modal__title">Корзина:</p>
-                <button type="button" className="header-block-cart-modal__close" onClick={closeCart}>
-                    <XIcon />
-                </button>
-            </div>
+        <AnimatePresence mode="wait" initial={false}>
+            {cartIsVisible && (
+                <motion.div
+                    key="header-cart-modal"
+                    initial={{ opacity: 0, y: 20 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={DEFAULT_TRANSITION}
+                    className="header-block-cart-modal"
+                >
+                    <div className="header-block-cart-modal__header">
+                        <p className="header-block-cart-modal__title">Корзина:</p>
+                        <button type="button" className="header-block-cart-modal__close" onClick={closeCart}>
+                            <XIcon />
+                        </button>
+                    </div>
 
-            {allCart.length > 0 ? (
-                <>
-                    {jewelryCart.length > 0 && (
-                        <CartList cart={jewelryCart} hasTitle={isMoreOneCart} onLinkClick={closeCart} isJewelry />
+                    {allCart.length > 0 ? (
+                        <>
+                            {jewelryCart.length > 0 && (
+                                <CartList
+                                    cart={jewelryCart}
+                                    hasTitle={isMoreOneCart}
+                                    onLinkClick={closeCart}
+                                    isJewelry
+                                />
+                            )}
+
+                            {cart.length > 0 && (
+                                <CartList cart={cart} hasTitle={isMoreOneCart} onLinkClick={closeCart} />
+                            )}
+                        </>
+                    ) : (
+                        <CartNull />
                     )}
-
-                    {cart.length > 0 && <CartList cart={cart} hasTitle={isMoreOneCart} onLinkClick={closeCart} />}
-                </>
-            ) : (
-                <CartNull />
+                </motion.div>
             )}
-        </div>
+        </AnimatePresence>
     );
 };
 

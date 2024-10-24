@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
-import { getClassNames } from '@/functions/getClassNames';
 import { getUrlWithParams } from '@/functions/getUrlWithParams';
 import { CartItem } from '@/models/ICartItem';
 import { APP_ROUTE } from '@/constants/routes';
+import { DEFAULT_TRANSITION } from '@/constants/animation';
 import { useCart } from '@/hooks/catalog/useCart';
 import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { setHeaderCartIsVisible } from '@/redux/actions/header';
@@ -36,51 +37,63 @@ const HeaderCartModalAddMessage: React.FC = () => {
         }, 200);
     };
 
-    if (!item) {
-        return null;
-    }
-
     return (
-        <div
-            className={getClassNames('header-block-cart-modal', {
-                active: isVisibleMessage,
-            })}
-        >
-            <div className="header-block-cart-modal__header">
-                <p className="header-block-cart-modal__title">Добавлено:</p>
-                <button type="button" className="header-block-cart-modal__close" onClick={closeIsVisibleMessage}>
-                    <XIcon />
-                </button>
-            </div>
+        <AnimatePresence mode="wait" initial={false}>
+            {item && isVisibleMessage && (
+                <motion.div
+                    key="header-cart-message-modal"
+                    initial={{ opacity: 0, y: 20 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={DEFAULT_TRANSITION}
+                    className="header-block-cart-modal"
+                >
+                    <div className="header-block-cart-modal__header">
+                        <p className="header-block-cart-modal__title">Добавлено:</p>
+                        <button
+                            type="button"
+                            className="header-block-cart-modal__close"
+                            onClick={closeIsVisibleMessage}
+                        >
+                            <XIcon />
+                        </button>
+                    </div>
 
-            <div className="header-block-cart-modal__items">
-                <CartProductItem key={item.id} data={item} onRemove={() => handleRemoveItem(item)} checkDisabled />
-            </div>
+                    <div className="header-block-cart-modal__items">
+                        <CartProductItem
+                            key={item.id}
+                            data={item}
+                            onRemove={() => handleRemoveItem(item)}
+                            checkDisabled
+                        />
+                    </div>
 
-            <div className="header-block-cart-modal__more">
-                <Button
-                    label="Посмотреть всё"
-                    className="header-block-cart-modal__more-btn"
-                    onClick={seeAllCart}
-                    theme="light"
-                    wide
-                />
+                    <div className="header-block-cart-modal__more">
+                        <Button
+                            label="Посмотреть всё"
+                            className="header-block-cart-modal__more-btn"
+                            onClick={seeAllCart}
+                            theme="light"
+                            wide
+                        />
 
-                <Button
-                    label="Оформить"
-                    href={
-                        !item.is_jewelry
-                            ? APP_ROUTE.order
-                            : getUrlWithParams(APP_ROUTE.order, {
-                                  type: 'jewelry',
-                              })
-                    }
-                    className="header-block-cart-modal__more-btn"
-                    onClick={closeIsVisibleMessage}
-                    wide
-                />
-            </div>
-        </div>
+                        <Button
+                            label="Оформить"
+                            href={
+                                !item.is_jewelry
+                                    ? APP_ROUTE.order
+                                    : getUrlWithParams(APP_ROUTE.order, {
+                                          type: 'jewelry',
+                                      })
+                            }
+                            className="header-block-cart-modal__more-btn"
+                            onClick={closeIsVisibleMessage}
+                            wide
+                        />
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
 };
 
