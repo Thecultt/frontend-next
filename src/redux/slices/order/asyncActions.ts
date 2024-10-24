@@ -8,7 +8,7 @@ import { isAxiosError } from '@/functions/isAxiosError';
 import { formatMoney } from '@/functions/formatMoney';
 import { getUtm } from '@/functions/getUtm';
 import { YM_KEYS } from '@/constants/keys';
-import { setIsNotificationServerError } from '@/redux/actions/notifications_server';
+import { showToast } from '@/shared/ui';
 
 interface CheckPromoCodeParams {
     promoCode: string;
@@ -70,8 +70,7 @@ export const createOrder = createAsyncThunk(
             console.error('createOrder', e);
 
             if (isAxiosError<CreateOrderErrorResponse>(e) && e.response && e.response.data.message) {
-                // TODO toast
-                dispatch(setIsNotificationServerError(true, e.response.data.message));
+                showToast.error(e.response.data.message);
                 return rejectWithValue(e.response.data.message);
             }
 

@@ -6,9 +6,9 @@ import { Order } from '@/models/IOrder';
 import { YM_KEYS } from '@/constants/keys';
 import { getUtm } from '@/functions/getUtm';
 import { Noop } from '@/types/functions';
+import { showToast } from '@/shared/ui';
 
 import { OrderStateActionTypes, OrderStateActions } from '../types/IOrder';
-import { setIsNotificationServerError } from '../actions/notifications_server';
 
 export const sendOrderApplyPromocode =
     (promocode: string, totalPrice: number) => (dispatch: Dispatch<OrderStateActions>) => {
@@ -292,7 +292,9 @@ export const sendCreateOrder =
                 }
             })
             .catch(({ response }) => {
-                if (response?.data?.message) dispatch(setIsNotificationServerError(true, response.data.message) as any);
+                if (response?.data?.message) {
+                    showToast.error(response.data.message);
+                }
             });
     };
 

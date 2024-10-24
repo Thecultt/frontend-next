@@ -13,6 +13,7 @@ export { PageLoader } from './PageLoader/PageLoader';
 export { Popup } from './Popup/Popup';
 export { BaseImage } from './BaseImage/BaseImage';
 export { NavLink } from './NavLink/NavLink';
+export { Toaster, showToast } from './Toaster/Toaster';
 
 export { DadataCountryInput } from './dadata/DadataCountryInput/DadataCountryInput';
 export { DadataAddressInput } from './dadata/DadataAddressInput/DadataAddressInput';

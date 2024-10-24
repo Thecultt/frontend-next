@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-import { store } from '@/redux/store';
-import { setIsNotificationServerError } from '@/redux/actions/notifications_server';
 import { localStorageService } from '@/services/storage';
 import { LS_KEYS } from '@/constants/keys';
 import { APP_ROUTE } from '@/constants/routes';
 import { API_DOMAIN } from '@/constants/env';
 import { authAPI } from '@/services/api';
+import { showToast } from '@/shared/ui';
 
 const clearTokens = () => {
     localStorageService?.removeItem(LS_KEYS.accessToken);
@@ -31,7 +30,7 @@ $api.interceptors.response.use(
 
         if (error.response) {
             if (error.response.status == 500) {
-                store.dispatch(setIsNotificationServerError(true, 'Ошибка сервера') as any);
+                showToast.error('Ошибка сервера');
             }
 
             if (error.response.status == 401 && !originalRequest._isRetry) {

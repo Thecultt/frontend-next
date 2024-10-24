@@ -10,18 +10,10 @@ import { checkAvailabilityCartItems } from '@/redux/actions/cart';
 import { fetchFavorites } from '@/redux/actions/favorites';
 import { fetchFirstProductsCatalog } from '@/redux/actions/products';
 import { fetchProductsFilters } from '@/redux/actions/products_filters';
-import { NoSsr } from '@/shared/ui';
+import { NoSsr, Toaster } from '@/shared/ui';
 import { StaticHeader } from '@/components/static/StaticHeader';
 import { StaticFooter } from '@/components/static/StaticFooter';
-import {
-    Footer,
-    Header,
-    NotificationsServer,
-    PopupInfo,
-    Reglog,
-    WaitingListCreate,
-    WaitingListDelete,
-} from '@/components';
+import { Footer, Header, PopupInfo, Reglog, WaitingListCreate, WaitingListDelete } from '@/components';
 import { useReplaceLS } from '@/hooks/useReplaceLS';
 import { CATALOG_PAGES } from '@/constants/routes';
 import { useCart } from '@/hooks/catalog/useCart';
@@ -91,12 +83,13 @@ export const App = ({ children }: { children: React.ReactNode }) => {
 
             <NoSsr>
                 <ClientOnly />
-                <Reglog />
-                <NotificationsServer />
-                <WaitingListCreate />
-                <WaitingListDelete />
+                <Toaster />
 
                 <PopupInfo />
+
+                <Reglog />
+                <WaitingListCreate />
+                <WaitingListDelete />
             </NoSsr>
 
             <div className="wrapper" id="wrapper">
