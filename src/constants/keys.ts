@@ -1,3 +1,5 @@
+export const STORAGE_PREFIX = 'tc_';
+
 export const UTM_KEYS = {
     source: 'utm_source',
     medium: 'utm_medium',
@@ -25,6 +27,10 @@ export const LS_KEYS = {
     redirectReglog: 'redirect_reglog',
 };
 
+export const SS_KEYS = {
+    country: 'country',
+};
+
 export const KEYBOARD = {
     enter: 'Enter',
 };
@@ -33,4 +39,5 @@ export const SEARCH_PARAMS_KEYS = {
     id: 'id',
     redirect: 'redirect',
     code: 'code',
+    type: 'type',
 };

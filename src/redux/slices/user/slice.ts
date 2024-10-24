@@ -10,7 +10,7 @@ const initialState: IUserState = {
     updateIsLoading: false,
 };
 
-const selectionsSlice = createSlice({
+const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {},
@@ -42,4 +42,4 @@ const selectionsSlice = createSlice({
     },
 });
 
-export default selectionsSlice.reducer;
+export default userSlice.reducer;

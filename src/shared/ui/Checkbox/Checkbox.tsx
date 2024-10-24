@@ -16,12 +16,14 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     size = 'l',
     defaultChildrenStyles = false,
     wide = false,
+    start = false,
     ...props
 }) => (
     <label
         className={getClassNames(`tc-checkbox tc-checkbox--size-${size} ${className}`, {
             'tc-checkbox--error': !!error,
             'tc-checkbox--wide': wide,
+            'tc-radio--start': start,
         })}
     >
         <input type="checkbox" className="tc-checkbox__input" checked={checked} {...props} />

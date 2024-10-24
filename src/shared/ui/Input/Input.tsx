@@ -44,10 +44,10 @@ export const Input: React.FC<InputProps> = ({
 
     const filteredHints = React.useMemo(() => {
         if (!value || !needFilterHints) {
-            return hints;
+            return hints.filter((h) => h !== value);
         }
 
-        return hints.filter((x) => getHintLabel(x).toLowerCase().indexOf(value.toString().toLowerCase()) >= 0);
+        return hints.filter((h) => getHintLabel(h).toLowerCase().indexOf(value.toString().toLowerCase()) >= 0);
     }, [value, hints, needFilterHints]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,9 +117,9 @@ export const Input: React.FC<InputProps> = ({
                                         <Spinner />
                                     </div>
                                 ) : (
-                                    filteredHints.map((hint) => (
+                                    filteredHints.map((hint, index) => (
                                         <button
-                                            key={getHintValue(hint)}
+                                            key={`${getHintValue(hint)}-${index}`}
                                             type="button"
                                             className="tc-input-hints__button"
                                             onClick={() => handleHintClick(getHintValue(hint))}

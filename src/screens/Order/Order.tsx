@@ -1,16 +1,32 @@
 'use client';
 
 import React from 'react';
+import { Formik } from 'formik';
 
 import { useAuthUser } from '@/hooks/useAuthUser';
-import { OrderForm, OrderProducts } from '@/components';
-import { PageLoader } from '@/shared/ui';
-import { pushDataLayer } from '@/functions/pushDataLayer';
 import { useOrder } from '@/hooks/order/useOrder';
+import { useAppSelector } from '@/hooks/redux/useAppSelector';
+import { selectOrderTempForm } from '@/redux/slices/order/selectors';
+import { pushDataLayer } from '@/functions/pushDataLayer';
+import { Skeleton } from '@/shared/ui';
+
+import { OrderForm } from './OrderForm/OrderForm';
+import { OrderSidebar } from './OrderSidebar/OrderSidebar';
+
+import { INITIAL_VALUES } from './constants';
+import { getSchema } from './validate';
+
+import './styles.sass';
 
 const Order: React.FC = () => {
-    const { isLoggedIn, isLoaded: isLoadedUser } = useAuthUser();
-    const { cartItems, isJewelry } = useOrder();
+    const { isLoggedIn, isLoaded: isLoadedUser, user } = useAuthUser();
+    const { cartItems, cartSum, isJewelry } = useOrder();
+
+    const validationSchema = React.useMemo(() => getSchema({ isJewelry, cartSum }), [isJewelry, cartSum]);
+
+    const [initialValues, setInitialValues] = React.useState(INITIAL_VALUES);
+
+    const tempForm = useAppSelector(selectOrderTempForm);
 
     React.useEffect(() => {
         pushDataLayer('begin_checkout', {
@@ -31,20 +47,46 @@ const Order: React.FC = () => {
         });
     }, []);
 
-    return (
-        <section className="order" key={`${isJewelry}`}>
-            <div className="container">
-                <div className="order-wrapper">
-                    {isLoggedIn && !isLoadedUser ? (
-                        <div className="order-loader">
-                            <PageLoader />
-                        </div>
-                    ) : (
-                        <OrderForm />
-                    )}
+    React.useEffect(() => {
+        setInitialValues((state) => ({
+            ...INITIAL_VALUES,
+            ...state,
+            email: tempForm?.email ?? user.email ?? '',
+            name: tempForm?.name ?? user.fullname ?? '',
+            phone: tempForm?.phone ?? user.phone ?? '',
+            passport: tempForm?.passport ?? user.pasport ?? '',
+            promo: tempForm?.promo ?? !(isLoggedIn && isLoadedUser),
+            country: tempForm?.country ?? user.country ?? '',
+            city: tempForm?.city ?? user.city ?? '',
+            street: tempForm?.street ?? user.street ?? '',
+            house: tempForm?.house ?? user.house ?? '',
+            flat: tempForm?.flat ?? user.flat ?? '',
+            comment: tempForm?.comment ?? user.comment ?? '',
+            delivery: tempForm?.delivery ?? INITIAL_VALUES.delivery,
+            payment: tempForm?.payment ?? INITIAL_VALUES.payment,
+        }));
+    }, [isLoadedUser]);
 
-                    <OrderProducts />
-                </div>
+    return (
+        <section className="order" key={isJewelry ? 'jewelry' : 'default'}>
+            <div className="container">
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={() => {}}
+                    validateOnMount
+                    enableReinitialize
+                >
+                    <div className="order__wrapper">
+                        {isLoggedIn && !isLoadedUser ? (
+                            <Skeleton className="order__loader" radius={16} />
+                        ) : (
+                            <OrderForm />
+                        )}
+
+                        <OrderSidebar />
+                    </div>
+                </Formik>
             </div>
         </section>
     );

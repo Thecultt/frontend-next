@@ -61,9 +61,9 @@ export const orderPay = ({
             publicId: isJewelry
                 ? process.env.NEXT_PUBLIC_CLOUD_PAYMENTS_PUBLIC_ID_JEWELRY
                 : process.env.NEXT_PUBLIC_CLOUD_PAYMENTS_PUBLIC_ID,
-            description: `${orderNum}`,
+            description: orderNum,
             amount: totalPrice,
-            invoiceId: String(orderNum),
+            invoiceId: orderNum,
             currency: 'RUB',
         },
         {
