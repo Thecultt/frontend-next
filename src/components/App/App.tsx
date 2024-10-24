@@ -1,12 +1,10 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { usePathname } from 'next/navigation';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useAuthUser } from '@/hooks/useAuthUser';
-import { checkAvailabilityCartItems } from '@/redux/actions/cart';
 import { fetchFavorites } from '@/redux/actions/favorites';
 import { fetchFirstProductsCatalog } from '@/redux/actions/products';
 import { fetchProductsFilters } from '@/redux/actions/products_filters';
@@ -27,24 +25,21 @@ import { ClientOnly } from './ClientOnly';
 import { Preloader } from './Preloader';
 
 export const App = ({ children }: { children: React.ReactNode }) => {
-    const dispatch = useDispatch();
-    // TODO rename dispatch
-    const appDispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
     const pathname = usePathname();
 
     const isLoadedFilters = useTypedSelector(({ products_filters }) => products_filters.isLoaded);
     const isLoadedProducts = useTypedSelector(({ products }) => products.isLoaded);
     const isLoadedSelections = useAppSelector(selectSelectionsIsLoaded);
 
-    const { allCart } = useCart();
+    const { checkAvailabilityCart } = useCart();
 
     const { isLoggedIn, isLoaded: isLoadedUser, user } = useAuthUser();
 
     React.useEffect(() => {
         if (isLoggedIn) {
             dispatch(fetchFavorites() as any);
-
-            appDispatch(fetchClientAttributes());
+            dispatch(fetchClientAttributes());
         }
     }, [isLoggedIn]);
 
@@ -58,10 +53,10 @@ export const App = ({ children }: { children: React.ReactNode }) => {
         }
 
         if (!isLoadedSelections) {
-            appDispatch(fetchSelections());
+            dispatch(fetchSelections());
         }
 
-        dispatch(checkAvailabilityCartItems(allCart) as any);
+        checkAvailabilityCart();
     }, []);
 
     React.useEffect(() => {

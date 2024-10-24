@@ -3,7 +3,6 @@
 import React from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { removeCartItemByArticle } from '@/redux/actions/cart';
 import { submitOrder as sendSubmitOrder } from '@/redux/slices/order/asyncActions';
 import {
     selectOrderCreateIsLoading,
@@ -34,7 +33,7 @@ export const useOrder = () => {
 
     const orderIsLoading = orderCreateIsLoading || orderSubmitIsLoading;
 
-    const { cart, jewelryCart, isLoading: cartIsLoading } = useCart();
+    const { cart, jewelryCart, isLoading: cartIsLoading, removeFromCart } = useCart();
 
     const cartItems = React.useMemo(() => (isJewelry ? jewelryCart : cart), [isJewelry, cart, jewelryCart]);
     const availableCartItems = React.useMemo(
@@ -51,7 +50,7 @@ export const useOrder = () => {
     const submitOrder = (orderId: number) => {
         const updateCart = () => {
             checkedCartItems.forEach((item) => {
-                dispatch(removeCartItemByArticle(item.article));
+                removeFromCart(item.article);
             });
         };
 

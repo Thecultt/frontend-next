@@ -6,10 +6,10 @@ import selections from './slices/selections/slice';
 import user from './slices/user/slice';
 import catalog from './slices/catalog/slice';
 import orderNew from './slices/order/slice';
+import cart from './slices/cart/slice';
 
 import products_filters from './reducers/products_filters';
 import products from './reducers/products';
-import cart from './reducers/cart';
 import order from './reducers/order';
 import favorites from './reducers/favorites';
 import waiting from './reducers/waiting';
@@ -31,10 +31,10 @@ export const rootReducer = combineReducers({
     selections,
     catalog,
     orderNew,
+    cart,
 
     products_filters,
     products,
-    cart,
     order,
     favorites,
     waiting,

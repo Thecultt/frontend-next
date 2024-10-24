@@ -1,23 +1,22 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { XIcon } from '@/assets/icons';
-import { getClassNames } from '@/functions/getClassNames';
+import { DEFAULT_TRANSITION } from '@/constants/animation';
 import { pushDataLayer } from '@/functions/pushDataLayer';
 import { useCart } from '@/hooks/catalog/useCart';
-import { CartList } from '@/components';
+import { CartList, CartNull } from '@/components';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
+import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { setHeaderCartIsVisible } from '@/redux/actions/header';
 
 const HeaderCartModal: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const { cartIsVisible } = useTypedSelector(({ header }) => header);
-
-    const { allCart, cart, jewelryCart } = useCart();
-    const hasTitles = jewelryCart.length > 0 && cart.length > 0;
+    const { allCart, cart, jewelryCart, isMoreOneCart } = useCart();
 
     const closeCart = () => {
         dispatch(setHeaderCartIsVisible(false));
@@ -45,35 +44,44 @@ const HeaderCartModal: React.FC = () => {
     }, [cartIsVisible]);
 
     return (
-        <div
-            className={getClassNames('header-block-cart-modal', {
-                active: cartIsVisible,
-            })}
-        >
-            <div className="header-block-cart-modal__header">
-                <p className="header-block-cart-modal__title">Корзина:</p>
-                <button type="button" className="header-block-cart-modal__close" onClick={closeCart}>
-                    <XIcon />
-                </button>
-            </div>
+        <AnimatePresence mode="wait" initial={false}>
+            {cartIsVisible && (
+                <motion.div
+                    key="header-cart-modal"
+                    initial={{ opacity: 0, y: 20 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={DEFAULT_TRANSITION}
+                    className="header-block-cart-modal"
+                >
+                    <div className="header-block-cart-modal__header">
+                        <p className="header-block-cart-modal__title">Корзина:</p>
+                        <button type="button" className="header-block-cart-modal__close" onClick={closeCart}>
+                            <XIcon />
+                        </button>
+                    </div>
 
-            {allCart.length > 0 ? (
-                <>
-                    {jewelryCart.length > 0 && (
-                        <CartList cart={jewelryCart} hasTittle={hasTitles} onLinkClick={closeCart} isJewelry />
+                    {allCart.length > 0 ? (
+                        <>
+                            {jewelryCart.length > 0 && (
+                                <CartList
+                                    cart={jewelryCart}
+                                    hasTitle={isMoreOneCart}
+                                    onLinkClick={closeCart}
+                                    isJewelry
+                                />
+                            )}
+
+                            {cart.length > 0 && (
+                                <CartList cart={cart} hasTitle={isMoreOneCart} onLinkClick={closeCart} />
+                            )}
+                        </>
+                    ) : (
+                        <CartNull />
                     )}
-
-                    {cart.length > 0 && <CartList cart={cart} hasTittle={hasTitles} onLinkClick={closeCart} />}
-                </>
-            ) : (
-                <div className="header-block-cart-modal-null">
-                    <p className="header-block-cart-modal-null__title">Ваша корзина пока пуста</p>
-                    <button className="btn disabled header-block-cart-modal-null__btn" disabled>
-                        Перейти к оформлению
-                    </button>
-                </div>
+                </motion.div>
             )}
-        </div>
+        </AnimatePresence>
     );
 };
 
