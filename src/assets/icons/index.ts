@@ -18,3 +18,4 @@ export { ReactComponent as CheckIcon, default as checkIconPath } from './check.s
 export { ReactComponent as ShareIcon, default as shareIconPath } from './share.svg';
 export { ReactComponent as HeartIcon, default as heartIconPath } from './heart.svg';
 export { ReactComponent as RefreshIcon, default as refreshIconPath } from './refresh.svg';
+export { ReactComponent as UserIcon, default as userIconPath } from './user.svg';

@@ -13,6 +13,7 @@ import { pushDataLayer } from '@/functions/pushDataLayer';
 import { sendMindbox } from '@/functions/mindbox';
 import { orderPay } from '@/functions/orderPay';
 import { checkPromoCodeIsAvailable } from '@/functions/checkPromoCodeIsAvailable';
+import { prepareFormikFiledTouched } from '@/functions/prepareFormikFiledTouched';
 import { useAppDispatch } from '@/hooks/redux/useAppDispatch';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { useOrder } from '@/hooks/order/useOrder';
@@ -27,7 +28,7 @@ import './styles.sass';
 export const OrderSubmit = () => {
     const dispatch = useAppDispatch();
 
-    const { values, isValid } = useFormikContext<IOrderFormValues>();
+    const { values, setTouched, validateForm } = useFormikContext<IOrderFormValues>();
 
     const { user, isLoggedIn } = useAuthUser();
     const {
@@ -51,8 +52,7 @@ export const OrderSubmit = () => {
         [promoCodeIsAvailable, promoCode, cartSum, deliveryPrice],
     );
 
-    const buttonIsAvailable =
-        isValid && checkedCartItems.length > 0 && cartSum > 0 && !cartIsLoading && !orderIsLoading;
+    const buttonIsAvailable = checkedCartItems.length > 0 && cartSum > 0 && !cartIsLoading && !orderIsLoading;
 
     const successPayment = (orderId: number) => {
         try {
@@ -215,8 +215,17 @@ export const OrderSubmit = () => {
         dispatch(updateClientAttributes(newUserName));
     };
 
-    const handleSubmit = () => {
-        if (!buttonIsAvailable) {
+    const handleSubmit = async () => {
+        const validationErrors = await validateForm();
+        const errorKeys = Object.keys(validationErrors);
+
+        const errorFieldTouched = prepareFormikFiledTouched(validationErrors);
+        await setTouched(errorFieldTouched);
+
+        if (errorKeys.length > 0) {
+            document
+                .querySelector(`input[name="${errorKeys[0]}"]`)
+                ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
 

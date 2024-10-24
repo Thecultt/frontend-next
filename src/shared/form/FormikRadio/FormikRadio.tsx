@@ -21,5 +21,5 @@ export const FormikRadio: React.FC<Props> = ({ name, value, ...props }) => {
         setValue(value);
     };
 
-    return <Radio {...props} value={value} onChange={handleChange} checked={field.checked} />;
+    return <Radio {...props} name={name} checked={field.checked} value={value} onChange={handleChange} />;
 };

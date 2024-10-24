@@ -117,9 +117,9 @@ export const Input: React.FC<InputProps> = ({
                                         <Spinner />
                                     </div>
                                 ) : (
-                                    filteredHints.map((hint) => (
+                                    filteredHints.map((hint, index) => (
                                         <button
-                                            key={getHintValue(hint)}
+                                            key={`${getHintValue(hint)}-${index}`}
                                             type="button"
                                             className="tc-input-hints__button"
                                             onClick={() => handleHintClick(getHintValue(hint))}
